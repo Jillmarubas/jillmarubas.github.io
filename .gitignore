@@ -1,0 +1,23 @@
+# Windows / OneDrive noise
+desktop.ini
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+*.lnk
+
+# macOS, in case the folder ever travels
+.DS_Store
+
+# editor + scratch
+.vscode/
+.idea/
+*.swp
+*.tmp
+*.bak
+~$*
+
+# nothing here needs a build step, but just in case
+node_modules/
+dist/
+.env
+.env.*

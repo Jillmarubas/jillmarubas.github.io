@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jillmar Ubas — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#16130f;
+    --ink-soft:#4a423a;
+    --ink-faint:#7c7268;
+    --rule:#ded6cc;
+    --rule-soft:#efe9e1;
+    --accent:#c2450a;
+    --accent-bright:#fa5a05;
+    --paper:#ffffff;
+    --page:#e8e3db;
+    --font-display:'Archivo','Arial Black',sans-serif;
+    --font-body:'IBM Plex Sans','Segoe UI',sans-serif;
+    --font-mono:'IBM Plex Mono','Consolas',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--page);
+    font-family:var(--font-body);color:var(--ink);
+    font-size:10.5pt;line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{
+    max-width:210mm;margin:24px auto;background:var(--paper);
+    padding:16mm 16mm 14mm;
+    box-shadow:0 8px 40px rgba(0,0,0,.14);
+  }
+  h1,h2,h3{margin:0;font-family:var(--font-display);}
+
+  /* header */
+  .head{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;align-items:flex-end;
+        border-bottom:2.5px solid var(--accent);padding-bottom:10px;}
+  .head h1{font-size:27pt;font-weight:900;letter-spacing:-.02em;line-height:1;}
+  .head .role{
+    font-family:var(--font-mono);font-size:9.5pt;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin-top:6px;
+  }
+  .head ul{list-style:none;margin:0;padding:0;text-align:right;font-size:9pt;color:var(--ink-soft);}
+  .head ul li + li{margin-top:2px;}
+  .head a{color:var(--ink-soft);text-decoration:none;}
+
+  section{margin-top:16px;}
+  section > h2{
+    font-family:var(--font-mono);font-size:8.5pt;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+    border-bottom:1px solid var(--rule);padding-bottom:4px;margin-bottom:9px;
+  }
+  .summary{font-size:10.5pt;color:var(--ink-soft);max-width:64em;}
+  .summary strong{color:var(--ink);font-weight:600;}
+
+  /* entries */
+  .entry{margin-bottom:11px;break-inside:avoid;}
+  .entry:last-child{margin-bottom:0;}
+  .entry-top{display:flex;flex-wrap:wrap;gap:2px 16px;justify-content:space-between;align-items:baseline;}
+  .entry-top h3{font-family:var(--font-body);font-size:11pt;font-weight:600;}
+  .entry-top .when{font-family:var(--font-mono);font-size:8.5pt;color:var(--ink-faint);white-space:nowrap;}
+  .entry .where{font-size:9.5pt;color:var(--accent);margin-top:1px;}
+  .entry ul{margin:5px 0 0;padding-left:15px;}
+  .entry li{margin-bottom:2px;color:var(--ink-soft);}
+  .entry li::marker{color:var(--rule);}
+  .entry li strong{color:var(--ink);font-weight:600;}
+  .entry p.note{margin-top:4px;font-size:9.5pt;color:var(--ink-soft);}
+  .stackline{font-family:var(--font-mono);font-size:8.5pt;color:var(--ink-faint);margin-top:4px;}
+
+  /* skills */
+  .skills{margin:0;display:grid;grid-template-columns:130px minmax(0,1fr);gap:5px 16px;font-size:10pt;}
+  .skills dt{font-family:var(--font-mono);font-size:8.5pt;letter-spacing:.06em;
+             text-transform:uppercase;color:var(--ink-faint);padding-top:2px;}
+  .skills dd{margin:0;color:var(--ink-soft);}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:6px 32px;}
+  @media (max-width:700px){ .two{grid-template-columns:1fr;} .head ul{text-align:left;} }
+
+  @media print{
+    @page{size:A4;margin:12mm;}
+    body{background:#fff;font-size:9.7pt;}
+    .sheet{margin:0;padding:0;box-shadow:none;max-width:none;}
+    a{color:var(--ink-soft);}
+    section{margin-top:13px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="head">
+    <div>
+      <h1>Jillmar Ubas</h1>
+      <div class="role">AI, Automation &amp; Web Design</div>
+    </div>
+    <ul>
+      <li><a href="mailto:jillmar.automation@gmail.com">jillmar.automation@gmail.com</a></li>
+      <li><a href="https://wa.me/601133240261">WhatsApp +60 11 3324 0261</a></li>
+      <li>Based in Malaysia &middot; Filipino national</li>
+      <li><a href="https://jill-homebody.netlify.app/">jill-homebody.netlify.app</a></li>
+    </ul>
+  </header>
+
+  <section>
+    <h2>Summary</h2>
+    <p class="summary">Service supervisor turned automation builder. Five years with <strong>Gula Cakery Group</strong> maintaining floor standards and training staff on menu, allergen and hygiene compliance — and the reporting work there is what pushed me into automating things. I now design and ship <strong>AI agents and workflow automations</strong>: webhook-driven order systems in n8n that validate their own data and log every run, scheduled agents that read email and calendar and report to Telegram, and multi-step Zapier approvals. I also <strong>design and build the web front ends these systems sit behind</strong> — a live storefront of my own, designed, built and deployed end to end — so a project doesn't stall at the handoff between the automation and the interface. <strong>Four workflows published and running.</strong></p>
+  </section>
+
+  <section>
+    <h2>Automation, AI &amp; Web Projects</h2>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>Super Agent Daily Briefing — scheduled AI agent</h3>
+        <span class="when">Published</span>
+      </div>
+      <ul>
+        <li>Built an n8n agent that runs unattended on a schedule, reads the day's important emails, filters job alerts against saved criteria and checks tomorrow's calendar, then writes a prioritised briefing to Telegram.</li>
+        <li>Scoped each data source as a separate tool call rather than dumping whole inboxes into context — keeps output readable and token cost predictable.</li>
+      </ul>
+      <div class="stackline">n8n · GPT-5 Mini · Google Gemini · Gmail · Google Calendar · Telegram — last run 36.9s, ~9,270 tokens</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>HOMEBODY storefront — web design and front-end build</h3>
+        <span class="when">Live</span>
+      </div>
+      <ul>
+        <li>Designed and built a furniture storefront end to end — layout, type, product grid, checkout — and deployed it. Responsive, accessible contrast, reduced-motion path throughout.</li>
+        <li>Defined its motion system: one easing curve, three durations, hover and overlay only — so the whole site moves as one piece.</li>
+        <li>Checkout validates discounts server-side — checked before the total drops and again at order time, so a code can't be reused.</li>
+      </ul>
+      <div class="stackline">HTML · CSS · Responsive layout · Google Apps Script · Netlify</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>HOMEBODY order CRM</h3>
+        <span class="when">Published</span>
+      </div>
+      <ul>
+        <li>Wired the store to a 9-node n8n workflow that validates each order field by field, sends confirmation and first-buyer welcome emails, and appends every malformed order to a Sheets error log instead of failing silently.</li>
+      </ul>
+      <div class="stackline">n8n · Webhooks · Google Sheets · Gmail</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>Invoice intake and finance approval</h3>
+        <span class="when">Zapier</span>
+      </div>
+      <ul>
+        <li>Two linked Zaps: the first captures incoming invoices, routes them by currency and checks Google Sheets for duplicates; the second runs a finance review and approval loop through Google Forms.</li>
+      </ul>
+      <div class="stackline">Zapier · Google Sheets · Google Forms · Gmail</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>CRM pipeline and prompt-driven reporting</h3>
+        <span class="when">GoHighLevel</span>
+      </div>
+      <ul>
+        <li>Configured a sales pipeline with a 5-part welcome and follow-up email sequence triggered on stage change; connected Calendly to Google Calendar and Meet for discovery calls and onboarding.</li>
+        <li>Wrote structured prompts that read mobile-app attendance records and apply statutory overtime multipliers with 30-minute rounding directly into spreadsheets.</li>
+      </ul>
+      <div class="stackline">GoHighLevel · Calendly · Google Workspace · Prompt engineering</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technical Skills</h2>
+    <dl class="skills">
+      <dt>Automation</dt><dd>n8n (AI agents, webhooks, conditional branching, wait steps, execution logging), Zapier multi-step Zaps, GoHighLevel workflows</dd>
+      <dt>AI</dt><dd>Agent design with tool access and memory; prompt engineering for structured data extraction; GPT-5 Mini, Google Gemini, Claude</dd>
+      <dt>Integrations</dt><dd>Google Sheets, Forms, Calendar, Gmail, Google Apps Script, Telegram Bot, Calendly, REST webhooks</dd>
+      <dt>Web design</dt><dd>Layout and typography, design systems and tokens, responsive build, motion and interaction design, accessible contrast and reduced-motion support; HTML, CSS, Netlify deployment; Figma, Canva</dd>
+      <dt>Operations</dt><dd>Staff training, allergen and hygiene compliance, inventory and stock control, sales reporting</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Professional Experience</h2>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>Floor Staff</h3>
+        <span class="when">June 2020 — Present</span>
+      </div>
+      <div class="where">Gula Cakery Group, Malaysia</div>
+      <ul>
+        <li>Supervise restaurant cleanliness and hygiene to meet regulatory sanitation standards.</li>
+        <li>Train and brief staff on menu offerings, individual ingredients and allergen awareness, including how to raise these with customers.</li>
+        <li>Maintain service quality and consistency across shifts; ensure prompt, friendly customer service.</li>
+        <li>Awarded a Certificate of Appreciation for 5 Years of Service, December 2025.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>Floor Staff</h3>
+        <span class="when">December 2019 — March 2020</span>
+      </div>
+      <div class="where">Brotzeit, Mid Valley, Malaysia</div>
+      <ul>
+        <li>Served food and beverages and advised guests on menu items.</li>
+        <li>Applied safety and sanitation policies for food and beverage handling, and followed outlet procedures and service standards.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>Kitchen Assistant</h3>
+        <span class="when">January 2016 — November 2018</span>
+      </div>
+      <div class="where">Haru Café, Malaysia</div>
+      <ul>
+        <li>Assisted cooks with service preparation, prepared vegetables and meat, and produced sauces to recipe.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>Stock Clerk</h3>
+        <span class="when">January 2013 — December 2014</span>
+      </div>
+      <div class="where">Robinsons Place Bacolod, Philippines</div>
+      <ul>
+        <li>Received and verified incoming stock for completeness and damage, and produced written receiving reports — the same check-then-log discipline the order workflows above automate.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <h3>Sales Clerk</h3>
+        <span class="when">December 2011 — June 2012</span>
+      </div>
+      <div class="where">Robinsons Place Bacolod, Philippines</div>
+      <ul>
+        <li>Merchandised product displays, carried out inventory counts and compiled sales reports.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Certificates</h2>
+    <div class="two">
+      <div class="entry">
+        <div class="entry-top">
+          <h3>Prompt Engineering for ChatGPT</h3>
+          <span class="when">Aug 2026</span>
+        </div>
+        <div class="where">Vanderbilt University &middot; Coursera</div>
+      </div>
+      <div class="entry">
+        <div class="entry-top">
+          <h3>ChatGPT Work</h3>
+          <span class="when">Aug 2026</span>
+        </div>
+        <div class="where">Vanderbilt University &middot; Coursera</div>
+      </div>
+      <div class="entry">
+        <div class="entry-top">
+          <h3>Word Processing Applications: Word</h3>
+          <span class="when">Aug 2026</span>
+        </div>
+        <div class="where">SkillUp &middot; Coursera</div>
+      </div>
+      <div class="entry">
+        <div class="entry-top">
+          <h3>Mail &amp; Calendar Applications: Outlook</h3>
+          <span class="when">Jul 2026</span>
+        </div>
+        <div class="where">SkillUp &middot; Coursera</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Achievements</h2>
+    <div class="entry">
+      <ul>
+        <li><strong>Certificate of Appreciation — 5 Years of Service</strong>, Gula Cakery Group, December 2025.</li>
+        <li><strong>Self-taught automation practitioner</strong> — built and published four production workflows, two AI agents and a live storefront while working full time in hospitality.</li>
+        <li>Designed the HOMEBODY order pipeline so valid orders confirm, follow up and log themselves, with malformed orders written to an audit log rather than failing silently.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="two">
+      <div class="entry">
+        <div class="entry-top">
+          <h3>Basic Computer NC II</h3>
+          <span class="when">2007 — 2008</span>
+        </div>
+        <div class="where">TESDA, Philippines</div>
+      </div>
+      <div class="entry">
+        <div class="entry-top">
+          <h3>High School</h3>
+          <span class="when">2006</span>
+        </div>
+        <div class="where">Tanza National High School, Philippines</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- ===================================================================
+     Frost glass layer — CV.
+     Same orange field as the portfolio, but the sheet stays a LIGHT
+     frosted panel: this page is read as a document and printed as one.
+     Everything here is wrapped in @media screen, so print output is
+     untouched — solid white paper, black ink, no blur.
+     =================================================================== -->
+<style>
+  @media screen{
+    :root{
+      --glass-rim:rgba(255,255,255,.55);
+      --glass-rim-lit:rgba(255,255,255,.75);
+      /* the mono labels drop under 4.5:1 once the sheet turns translucent */
+      --ink-faint:#635a51;
+      /* the accent headings sit at 3.7:1 on a translucent sheet; deepened just enough
+         to clear 4.5:1. Print keeps the original #c2450a, which passes on solid white. */
+      --accent:#a93a06;
+    }
+
+    /* ---------- the field, matching the portfolio ---------- */
+    html{background:#0d0a08;}
+    body{background:transparent;}
+    body::before{
+      content:"";position:fixed;inset:-15%;z-index:-2;pointer-events:none;
+      background:
+        radial-gradient(44% 38% at 12% 8%, rgba(250,90,5,.62), rgba(250,90,5,0) 70%),
+        radial-gradient(40% 34% at 84% 12%, rgba(255,162,58,.44), rgba(255,162,58,0) 70%),
+        radial-gradient(42% 38% at 78% 54%, rgba(214,31,90,.42), rgba(214,31,90,0) 70%),
+        radial-gradient(40% 34% at 16% 60%, rgba(124,58,190,.36), rgba(124,58,190,0) 70%),
+        radial-gradient(46% 40% at 54% 92%, rgba(250,90,5,.44), rgba(250,90,5,0) 72%),
+        linear-gradient(160deg, #1a0d05 0%, #0d0a08 45%, #140a10 100%);
+      animation:cv-field 52s ease-in-out infinite alternate;
+    }
+    @keyframes cv-field{
+      from{transform:translate3d(0,0,0) scale(1);}
+      to{transform:translate3d(2.5%,-2.5%,0) scale(1.08);}
+    }
+    body::after{
+      content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+      opacity:.05;mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    /* ---------- the sheet: light frosted glass over the field ----------
+       Kept at 86% white: enough of the orange reads through to match the
+       portfolio, while every ink colour on it still clears 4.5:1. */
+    .sheet{
+      margin:40px auto;
+      background:rgba(255,255,255,.86);
+      -webkit-backdrop-filter:blur(24px) saturate(140%);
+      backdrop-filter:blur(24px) saturate(140%);
+      border:1px solid var(--glass-rim);
+      border-radius:20px;
+      box-shadow:0 24px 60px rgba(0,0,0,.45),
+                 inset 0 1px 0 rgba(255,255,255,.75),
+                 inset 0 -1px 0 rgba(0,0,0,.06);
+    }
+
+    /* rules and dividers inside the sheet, so they read against the lighter ground */
+    section > h2{border-bottom-color:rgba(22,19,15,.16);}
+    .head{border-bottom-color:var(--accent);}
+    a{text-underline-offset:2px;}
+
+    /* Phones: the sheet still carried A4 print padding (16mm ≈ 60px a side), which
+       left a 254px column of text on a 375px screen. Page margins only make sense
+       on paper, so on screen they shrink. Print is untouched — this whole block is
+       inside @media screen. */
+    @media (max-width:700px){
+      .sheet{margin:12px auto;padding:24px 18px 28px;border-radius:14px;}
+      /* label/value columns collapse: the value column was down to 106px */
+      .skills{grid-template-columns:1fr;gap:1px 0;}
+      .skills dt{padding-top:9px;}
+      .head ul{text-align:left;}
+      .head a{display:inline-block;padding:7px 0;}
+      .entry-top .when{padding-top:2px;}
+    }
+
+    /* ---------- fallbacks ---------- */
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      .sheet{background:rgba(255,255,255,.96);}
+    }
+    @media (prefers-reduced-transparency:reduce){
+      .sheet{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
+      body::after{display:none;}
+      body::before{opacity:.55;}
+    }
+    @media (prefers-reduced-motion:reduce){
+      body::before{animation:none;}
+    }
+  }
+
+  /* ---------- print: nothing above applies, but be explicit ---------- */
+  @media print{
+    html,body{background:#fff !important;}
+    body::before,body::after{display:none !important;}
+    .sheet{
+      background:#fff !important;border:0 !important;border-radius:0 !important;
+      box-shadow:none !important;margin:0 !important;
+      -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+    }
+  }
+</style>
+
+</body>
+</html>

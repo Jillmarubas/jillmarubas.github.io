@@ -1,0 +1,66 @@
+/* ===================================================================
+   SETTLE MOTION — v1.0
+   A motion system measured frame by frame from a 38.7-second fintech
+   scroll reel (Pinterest, "Scroll animation web design" by Egor).
+
+   Durations carry frame counts at 30 and 60 fps for After Effects work.
+   Full reference page: ../settle-motion/settle-motion.html
+   =================================================================== */
+
+:root {
+  /* ---- duration — ms · frames @30 / @60 ---- */
+  --dur-quick: 200ms;   /* 6f / 12f  — hover, press, menu open */
+  --dur-base: 360ms;    /* 11f / 22f — cards, morphs, counters, title swaps */
+  --dur-slow: 600ms;    /* 18f / 36f — panel rise, logo letters, chart draw */
+  --dur-hero: 900ms;    /* 27f / 54f — film open only, once per piece */
+  --dur-loop: 12s;      /* ambient orbit, one revolution */
+
+  /* ---- easing ---- */
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);   /* entrances · GSAP power4.out   · AE out 22% / in 64% */
+  --ease-glide: cubic-bezier(0.65, 0, 0.35, 1);    /* in-view moves · power2.inOut  · AE out 65% / in 65% */
+  --ease-depart: cubic-bezier(0.55, 0, 1, 0.45);   /* exits · circ.in               · AE out 55% / in 0.1% */
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);  /* success only · back.out(1.7)  · AE needs an expression */
+  /* scroll-driven reveals use linear + a 0.12 lerp, never a timed curve */
+
+  /* ---- choreography ---- */
+  --stagger-letter: 40ms;   /* between letters in the logo intro */
+  --stagger-word: 60ms;     /* between headline words — 9 words land in ~900ms */
+  --stagger-card: 80ms;     /* between cards in a row */
+  --max-in-flight: 3;       /* elements animating at once, at most */
+  --rise-nudge: 8px;        /* title swaps, delta chips */
+  --rise-sm: 24px;          /* text blocks, hero settle */
+  --rise-card: 48px;        /* cards and mockups */
+  --blur-in: 8px;           /* start blur for blur-in. Never more. */
+  --word-floor: 0.22;       /* opacity of words not yet revealed */
+  --panel-scale: 0.92;      /* night panels widen as they rise */
+  --press-scale: 0.96;      /* button press, 200ms there and back */
+  --scroll-lerp: 0.12;      /* per-frame smoothing toward scroll position */
+
+  /* ---- palette, sampled from the reel ---- */
+  --ink: #0A0C0B;        /* type on paper           · sampled 0:21 */
+  --paper: #FEFEFE;      /* light sections          · sampled 0:10 */
+  --mist: #F5F5F5;       /* cards on paper          · sampled 0:15 */
+  --graphite: #151515;   /* cards on night          · sampled 0:21 */
+  --glow: #121B15;       /* green haze on night     · sampled 0:35 */
+  --floor: #525252;      /* words not yet revealed  · sampled 0:03 */
+  --mint: #ABFEC1;       /* success state ONLY      · sampled 0:11 */
+}
+
+/* Entrances decelerate, exits accelerate and run one step shorter.
+   Linear is only for loops. Spring/snap is only for success. */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rise-nudge: 0px; --rise-sm: 0px; --rise-card: 0px;
+    --blur-in: 0px; --panel-scale: 1;
+  }
+}
+
+/* ---- GSAP equivalents ----
+gsap.defaults({ duration: 0.36, ease: "power4.out" });
+const settle = {
+  ease: { settle: "power4.out", glide: "power2.inOut", depart: "circ.in", snap: "back.out(1.7)" },
+  dur:  { quick: 0.2, base: 0.36, slow: 0.6, hero: 0.9, loop: 12 },
+  stagger: { letter: 0.04, word: 0.06, card: 0.08 },
+};
+*/

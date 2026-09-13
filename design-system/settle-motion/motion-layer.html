@@ -1,0 +1,254 @@
+<!-- ===================================================================
+     Settle Motion layer — added on top of the existing design.
+     Nothing above this block was restyled: this only adds movement.
+     Tokens: quick 200 / base 360 / slow 600 / hero 900 ms,
+     settle (entrances) · glide (in-view moves) · depart (exits) · snap (success).
+     =================================================================== -->
+<style>
+  :root{
+    --stl-quick:200ms; --stl-base:360ms; --stl-slow:600ms; --stl-hero:900ms;
+    --stl-settle:cubic-bezier(0.22,1,0.36,1);
+    --stl-glide:cubic-bezier(0.65,0,0.35,1);
+    --stl-depart:cubic-bezier(0.55,0,1,0.45);
+    --stl-snap:cubic-bezier(0.34,1.56,0.64,1);
+  }
+  /* words of a headline, dim until scroll brings them in */
+  .stl-w{display:inline-block;}
+  /* letters of the wordmark, rising out of a mask */
+  .brand .name .stl-m{display:inline-block;overflow:hidden;vertical-align:top;}
+  .brand .name .stl-m > span{display:inline-block;}
+  /* blur-in stagger — applied by script only to things still below the fold */
+  .stl [data-stl-rise]{opacity:0;transform:translateY(48px);filter:blur(8px);}
+  .stl [data-stl-rise].stl-in{
+    opacity:1;transform:none;filter:blur(0px);
+    transition:opacity var(--stl-slow) var(--stl-settle),
+               transform var(--stl-slow) var(--stl-settle),
+               filter var(--stl-slow) var(--stl-settle);
+    transition-delay:var(--stl-d,0ms);
+  }
+  /* copy-email button: pressed → working → done, in the site's own palette */
+  .stl-copy{
+    position:relative;width:212px;height:46px;border:0;cursor:pointer;
+    border-radius:var(--radius-sm);background:var(--surface-raised);color:var(--text-primary);
+    font-family:var(--font-body);font-size:14px;font-weight:600;
+    display:grid;place-items:center;overflow:hidden;
+  }
+  .stl-copy > *{grid-area:1/1;}
+  .stl-copy .stl-spin{opacity:0;width:20px;height:20px;}
+  .stl-copy .stl-done{opacity:0;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
+  .stl-copy:hover{background:var(--border);}
+  @media (prefers-reduced-motion:reduce){
+    .stl [data-stl-rise]{opacity:1;transform:none;filter:none;}
+  }
+</style>
+<script>
+(function(){
+  var R = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var E = { settle:'cubic-bezier(0.22,1,0.36,1)', glide:'cubic-bezier(0.65,0,0.35,1)',
+            depart:'cubic-bezier(0.55,0,1,0.45)', snap:'cubic-bezier(0.34,1.56,0.64,1)' };
+  var D = { quick:200, base:360, slow:600, hero:900 };
+  function $(s, r){ return (r || document).querySelector(s); }
+  function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  document.documentElement.classList.add('stl');
+
+  /* ---------- logo intro: letters rise from a mask, 40 ms apart ---------- */
+  var mark = $('.brand .name');
+  if(mark && !R){
+    var txt = mark.textContent;
+    mark.textContent = '';
+    txt.split('').forEach(function(ch){
+      if(ch === ' '){ mark.appendChild(document.createTextNode(' ')); return; }
+      var m = document.createElement('span'); m.className = 'stl-m';
+      var inner = document.createElement('span'); inner.textContent = ch;
+      m.appendChild(inner); mark.appendChild(m);
+    });
+    $$('.stl-m > span', mark).forEach(function(l, i){
+      l.animate([{ transform:'translateY(110%)' }, { transform:'none' }],
+                { duration:D.slow, delay:i*40, easing:E.settle, fill:'backwards' });
+    });
+  }
+
+  /* ---------- word scrub: headline words brighten with scroll, lerp 0.12 ---------- */
+  function wrapWords(el){
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var nodes = [], n;
+    while((n = walker.nextNode())) if(n.nodeValue.trim()) nodes.push(n);
+    nodes.forEach(function(node){
+      var frag = document.createDocumentFragment();
+      node.nodeValue.split(/(\s+)/).forEach(function(part){
+        if(!part) return;
+        if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+        var s = document.createElement('span'); s.className = 'stl-w'; s.textContent = part;
+        frag.appendChild(s);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+    return $$('.stl-w', el);
+  }
+
+  var heads = $$('.hero h1, .sec-head h2, .contact h2').map(function(el){
+    return { el: el, words: wrapWords(el), cur: 0, live: false };
+  });
+
+  if(R){
+    heads.forEach(function(h){ h.words.forEach(function(w){ w.style.opacity = 1; }); });
+  } else {
+    heads.forEach(function(h){ h.words.forEach(function(w){ w.style.opacity = .22; }); });
+    var raf = 0, lastTs = 0;
+    function progress(el){
+      var r = el.getBoundingClientRect(), vh = window.innerHeight || 800;
+      return Math.max(0, Math.min(1, (vh - r.top) / (vh * .55 + r.height)));
+    }
+    function frame(ts){
+      var dt = lastTs ? Math.min(64, ts - lastTs) : 16; lastTs = ts;
+      var busy = false, anyLive = false;
+      heads.forEach(function(h){
+        if(!h.live) return;
+        anyLive = true;
+        var target = progress(h.el);
+        h.cur += (target - h.cur) * (1 - Math.pow(.88, dt / 16.67));
+        if(Math.abs(target - h.cur) > .001) busy = true;
+        var n = h.words.length;
+        h.words.forEach(function(w, i){
+          var k = Math.min(1, Math.max(0, (h.cur - (i / n * .85)) / .15));
+          w.style.opacity = (.22 + .78 * k).toFixed(3);
+        });
+      });
+      if(busy || anyLive) raf = requestAnimationFrame(frame);
+      else { raf = 0; lastTs = 0; }
+    }
+    function kick(){ if(!raf){ lastTs = 0; raf = requestAnimationFrame(frame); } }
+    var headIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        heads.forEach(function(h){ if(h.el === e.target) h.live = e.isIntersecting; });
+      });
+      kick();
+    }, { rootMargin:'10% 0px 10% 0px' });
+    heads.forEach(function(h){ headIO.observe(h.el); });
+    window.addEventListener('scroll', kick, { passive:true });
+    window.addEventListener('resize', kick);
+    kick();
+  }
+
+  /* ---------- blur-in stagger: 48 px rise, 8 px blur, 80 ms apart ---------- */
+  if(!R){
+    var seen = new WeakMap();
+    var riseIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var el = e.target, parent = el.parentNode;
+        var i = seen.get(parent) || 0;
+        el.style.setProperty('--stl-d', Math.min(i, 5) * 80 + 'ms');
+        seen.set(parent, i + 1);
+        el.classList.add('stl-in');
+        riseIO.unobserve(el);
+      });
+    }, { threshold:.16, rootMargin:'0px 0px -8% 0px' });
+    $$('.case, .mini, .cap, .cred, .chip-row').forEach(function(el){
+      var vh = window.innerHeight || 800;
+      if(el.getBoundingClientRect().top < vh * .92) return;  /* already on screen: leave it alone */
+      el.setAttribute('data-stl-rise', '');
+      riseIO.observe(el);
+    });
+  }
+
+  /* ---------- counter tick: numbers count up once, on reveal ---------- */
+  function tick(el){
+    var raw = el.textContent.trim();
+    var m = raw.match(/^([^\d]*)([\d.,]+)(.*)$/);
+    if(!m) return;                                  /* "Stage", "Auto" and friends stay put */
+    var pre = m[1], suf = m[3];
+    var target = parseFloat(m[2].replace(/,/g, ''));
+    if(!isFinite(target)) return;
+    var dec = (m[2].split('.')[1] || '').length;
+    var group = m[2].indexOf(',') > -1;
+    function show(v){
+      var s = v.toFixed(dec);
+      if(group) s = Number(s).toLocaleString('en-US', { minimumFractionDigits:dec, maximumFractionDigits:dec });
+      el.textContent = pre + s + suf;
+    }
+    var t0 = null;
+    requestAnimationFrame(function step(ts){
+      if(t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / D.hero);
+      show(target * (1 - Math.pow(1 - p, 5)));
+      if(p < 1) requestAnimationFrame(step);
+      else el.textContent = raw;
+    });
+  }
+  if(!R){
+    var countIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ tick(e.target); countIO.unobserve(e.target); } });
+    }, { threshold:.6 });
+    $$('.stat b, .metrics b').forEach(function(el){ countIO.observe(el); });
+  }
+
+  /* ---------- button morph: copy the email address ---------- */
+  var row = $('#contact .mailrow');
+  if(row){
+    var email = 'jillmar.automation@gmail.com';
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'stl-copy';
+    btn.innerHTML = '<span class="stl-lbl">Copy email address</span>' +
+      '<svg class="stl-spin" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="2.4"/>' +
+      '<path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>' +
+      '<span class="stl-done"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">' +
+      '<path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<span class="stl-done-t">Copied</span></span>';
+    row.appendChild(btn);
+    var live = document.createElement('p');
+    live.setAttribute('role', 'status'); live.className = 'sr-only';
+    live.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;';
+    row.appendChild(live);
+
+    var lbl = $('.stl-lbl', btn), spin = $('.stl-spin', btn), dn = $('.stl-done', btn), busyCopy = false;
+    btn.addEventListener('click', async function(){
+      if(busyCopy) return; busyCopy = true;
+      var ok = true;
+      try{
+        if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(email); }
+        else{
+          /* file:// and other insecure contexts have no clipboard API */
+          var ta = document.createElement('textarea');
+          ta.value = email; ta.setAttribute('readonly', '');
+          ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+          document.body.appendChild(ta); ta.select();
+          ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+      }catch(err){ ok = false; }
+      live.textContent = ok ? ('Copied ' + email + ' to the clipboard') : ('Copy failed. The address is ' + email);
+      $('.stl-done-t', btn).textContent = ok ? 'Copied' : 'Copy failed';
+      if(R){
+        lbl.textContent = ok ? 'Copied' : 'Copy failed';
+        setTimeout(function(){ lbl.textContent = 'Copy email address'; busyCopy = false; }, 2200);
+        return;
+      }
+      var cs = getComputedStyle(btn), bg = cs.backgroundColor, fg = cs.color;
+      function A(el, kf, o){ return el.animate(kf, Object.assign({ fill:'both' }, o)); }
+      await A(btn, [{ transform:'scale(1)' }, { transform:'scale(.96)' }, { transform:'scale(1)' }],
+              { duration:D.quick, easing:E.glide }).finished;
+      A(lbl, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+      A(btn, [{ width:'212px' }, { width:'46px' }], { duration:D.base, easing:E.glide });
+      A(spin, [{ opacity:0 }, { opacity:1 }], { duration:D.quick, delay:260 });
+      A(spin, [{ transform:'rotate(0deg)' }, { transform:'rotate(360deg)' }],
+        { duration:700, delay:260, easing:'linear' });
+      await new Promise(function(r){ setTimeout(r, 900); });
+      A(spin, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+      A(btn, [{ width:'46px' }, { width:'212px' }], { duration:D.base, easing:E.snap });
+      if(ok) A(btn, [{ backgroundColor:bg, color:fg },
+                     { backgroundColor:'#3ddc84', color:'#0a0a0a' }], { duration:D.base, easing:E.settle });
+      await A(dn, [{ opacity:0, transform:'translateY(8px)' }, { opacity:1, transform:'none' }],
+              { duration:D.base, delay:120, easing:E.settle }).finished;
+      await new Promise(function(r){ setTimeout(r, 1600); });
+      A(dn, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+      if(ok) A(btn, [{ backgroundColor:'#3ddc84', color:'#0a0a0a' }, { backgroundColor:bg, color:fg }],
+               { duration:D.quick, delay:100, easing:E.glide });
+      await A(lbl, [{ opacity:0 }, { opacity:1 }], { duration:D.quick, delay:160, easing:E.settle }).finished;
+      btn.getAnimations({ subtree:true }).forEach(function(a){ a.cancel(); });
+      busyCopy = false;
+    });
+  }
+})();
+</script>

@@ -1,0 +1,102 @@
+<!-- ===================================================================
+     Frost glass layer — CV.
+     Same orange field as the portfolio, but the sheet stays a LIGHT
+     frosted panel: this page is read as a document and printed as one.
+     Everything here is wrapped in @media screen, so print output is
+     untouched — solid white paper, black ink, no blur.
+     =================================================================== -->
+<style>
+  @media screen{
+    :root{
+      --glass-rim:rgba(255,255,255,.55);
+      --glass-rim-lit:rgba(255,255,255,.75);
+      /* the mono labels drop under 4.5:1 once the sheet turns translucent */
+      --ink-faint:#635a51;
+      /* the accent headings sit at 3.7:1 on a translucent sheet; deepened just enough
+         to clear 4.5:1. Print keeps the original #c2450a, which passes on solid white. */
+      --accent:#a93a06;
+    }
+
+    /* ---------- the field, matching the portfolio ---------- */
+    html{background:#0d0a08;}
+    body{background:transparent;}
+    body::before{
+      content:"";position:fixed;inset:-15%;z-index:-2;pointer-events:none;
+      background:
+        radial-gradient(44% 38% at 12% 8%, rgba(250,90,5,.62), rgba(250,90,5,0) 70%),
+        radial-gradient(40% 34% at 84% 12%, rgba(255,162,58,.44), rgba(255,162,58,0) 70%),
+        radial-gradient(42% 38% at 78% 54%, rgba(214,31,90,.42), rgba(214,31,90,0) 70%),
+        radial-gradient(40% 34% at 16% 60%, rgba(124,58,190,.36), rgba(124,58,190,0) 70%),
+        radial-gradient(46% 40% at 54% 92%, rgba(250,90,5,.44), rgba(250,90,5,0) 72%),
+        linear-gradient(160deg, #1a0d05 0%, #0d0a08 45%, #140a10 100%);
+      animation:cv-field 52s ease-in-out infinite alternate;
+    }
+    @keyframes cv-field{
+      from{transform:translate3d(0,0,0) scale(1);}
+      to{transform:translate3d(2.5%,-2.5%,0) scale(1.08);}
+    }
+    body::after{
+      content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+      opacity:.05;mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    /* ---------- the sheet: light frosted glass over the field ----------
+       Kept at 86% white: enough of the orange reads through to match the
+       portfolio, while every ink colour on it still clears 4.5:1. */
+    .sheet{
+      margin:40px auto;
+      background:rgba(255,255,255,.86);
+      -webkit-backdrop-filter:blur(24px) saturate(140%);
+      backdrop-filter:blur(24px) saturate(140%);
+      border:1px solid var(--glass-rim);
+      border-radius:20px;
+      box-shadow:0 24px 60px rgba(0,0,0,.45),
+                 inset 0 1px 0 rgba(255,255,255,.75),
+                 inset 0 -1px 0 rgba(0,0,0,.06);
+    }
+
+    /* rules and dividers inside the sheet, so they read against the lighter ground */
+    section > h2{border-bottom-color:rgba(22,19,15,.16);}
+    .head{border-bottom-color:var(--accent);}
+    a{text-underline-offset:2px;}
+
+    /* Phones: the sheet still carried A4 print padding (16mm ≈ 60px a side), which
+       left a 254px column of text on a 375px screen. Page margins only make sense
+       on paper, so on screen they shrink. Print is untouched — this whole block is
+       inside @media screen. */
+    @media (max-width:700px){
+      .sheet{margin:12px auto;padding:24px 18px 28px;border-radius:14px;}
+      /* label/value columns collapse: the value column was down to 106px */
+      .skills{grid-template-columns:1fr;gap:1px 0;}
+      .skills dt{padding-top:9px;}
+      .head ul{text-align:left;}
+      .head a{display:inline-block;padding:7px 0;}
+      .entry-top .when{padding-top:2px;}
+    }
+
+    /* ---------- fallbacks ---------- */
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      .sheet{background:rgba(255,255,255,.96);}
+    }
+    @media (prefers-reduced-transparency:reduce){
+      .sheet{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
+      body::after{display:none;}
+      body::before{opacity:.55;}
+    }
+    @media (prefers-reduced-motion:reduce){
+      body::before{animation:none;}
+    }
+  }
+
+  /* ---------- print: nothing above applies, but be explicit ---------- */
+  @media print{
+    html,body{background:#fff !important;}
+    body::before,body::after{display:none !important;}
+    .sheet{
+      background:#fff !important;border:0 !important;border-radius:0 !important;
+      box-shadow:none !important;margin:0 !important;
+      -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+    }
+  }
+</style>

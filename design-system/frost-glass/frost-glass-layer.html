@@ -1,0 +1,350 @@
+<!-- ===================================================================
+     Frost glass layer.
+     The orange aurora moves behind the WHOLE page (fixed, drifting),
+     and every surface on top of it becomes dark frosted glass:
+     frost (backdrop blur) + translucency + a lit rim + layered depth.
+     Loaded after the original CSS, so these rules win on equal specificity.
+     =================================================================== -->
+<style>
+  :root{
+    /* fills are dark, not white — the page is a dark theme and text must stay legible
+       even where a bright orange bloom passes behind the glass */
+    /* a dark, almost neutral base keeps text legible where a bright bloom passes
+       behind the glass, while the lower alpha lets the orange read through */
+    --glass:rgba(12,10,8,.55);
+    --glass-strong:rgba(10,8,6,.62);
+    --glass-raised:rgba(26,22,18,.55);
+    --glass-hover:rgba(34,29,24,.60);
+    /* mono labels sat at 2.5:1 once glass went under them — lifted to stay readable */
+    --text-faint:#8a837a;
+    --glass-rim:rgba(255,255,255,.14);
+    --glass-rim-lit:rgba(255,255,255,.30);
+    --glass-blur:blur(20px) saturate(150%);
+    --glass-blur-sm:blur(10px) saturate(140%);
+    /* one switch for every repeated card. Set to `none` if scrolling ever feels heavy
+       on integrated graphics — the look barely changes, because the field behind is
+       a soft gradient with nothing sharp in it to blur. */
+    --glass-blur-card:blur(12px) saturate(140%);
+    --glass-depth:0 18px 46px rgba(0,0,0,.45),
+                  inset 0 1px 0 rgba(255,255,255,.13),
+                  inset 0 -1px 0 rgba(0,0,0,.28);
+    --glass-depth-sm:0 8px 22px rgba(0,0,0,.34),
+                     inset 0 1px 0 rgba(255,255,255,.12);
+  }
+
+  /* ---------- the field: orange gradients behind everything ---------- */
+  html{background:var(--ground);}
+  body{background:transparent;}
+  body::before{
+    content:"";position:fixed;inset:-15%;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(44% 38% at 12% 8%, rgba(250,90,5,.62), rgba(250,90,5,0) 70%),
+      radial-gradient(40% 34% at 84% 12%, rgba(255,162,58,.44), rgba(255,162,58,0) 70%),
+      radial-gradient(42% 38% at 78% 54%, rgba(214,31,90,.42), rgba(214,31,90,0) 70%),
+      radial-gradient(40% 34% at 16% 60%, rgba(124,58,190,.36), rgba(124,58,190,0) 70%),
+      radial-gradient(46% 40% at 54% 92%, rgba(250,90,5,.44), rgba(250,90,5,0) 72%),
+      radial-gradient(70% 60% at 50% 44%, rgba(250,90,5,.16), rgba(250,90,5,0) 78%),
+      /* a warm floor, so no part of the page ever sits at flat black */
+      linear-gradient(160deg, #1a0d05 0%, #0d0a08 45%, #140a10 100%);
+    animation:glass-field 52s ease-in-out infinite alternate;
+  }
+  @keyframes glass-field{
+    from{transform:translate3d(0,0,0) scale(1);}
+    to{transform:translate3d(2.5%,-2.5%,0) scale(1.08);}
+  }
+  /* grain, so the wide gradients never band into visible steps under blur */
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  /* the hero and contact auroras now sit on top of the page field — ease them back
+     so the two don't stack into a blown-out orange */
+  .aurora{opacity:.46;}
+
+  /* ---------- large surfaces: real frost ---------- */
+  .nav{
+    background:var(--glass-strong);
+    -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+    border-bottom:1px solid var(--glass-rim);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+  }
+  .case,.contact{
+    background:var(--glass-strong);
+    -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+    border:1px solid var(--glass-rim);
+    box-shadow:var(--glass-depth);
+  }
+  .case:hover{border-color:var(--glass-rim-lit);}
+  .lb-panel{
+    background:var(--glass-strong);
+    -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+    border:1px solid var(--glass-rim);
+    box-shadow:var(--glass-depth);
+  }
+  .lb-backdrop{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);background:rgba(6,5,4,.62);}
+
+  /* ---------- repeated cards ---------- */
+  .mini,.cap,.cred{
+    background:var(--glass);
+    -webkit-backdrop-filter:var(--glass-blur-card);backdrop-filter:var(--glass-blur-card);
+    border:1px solid var(--glass-rim);
+    box-shadow:var(--glass-depth-sm);
+  }
+  .mini:hover,.cap:hover,.cred:hover{
+    background:var(--glass-hover);
+    border-color:var(--glass-rim-lit);
+    box-shadow:0 16px 38px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.22);
+  }
+
+  /* ---------- chips and small tokens ---------- */
+  .chip{
+    background:var(--glass-raised);
+    -webkit-backdrop-filter:var(--glass-blur-sm);backdrop-filter:var(--glass-blur-sm);
+    border:1px solid var(--glass-rim);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .chip:hover{background:var(--glass-hover);border-color:var(--glass-rim-lit);}
+  .chip-accent{border-color:rgba(250,90,5,.45);}
+
+  /* ---------- buttons ---------- */
+  .btn{box-shadow:var(--glass-depth-sm);}
+  .btn-primary{
+    background:linear-gradient(180deg,rgba(250,90,5,.92),rgba(194,69,10,.88));
+    -webkit-backdrop-filter:var(--glass-blur-sm);backdrop-filter:var(--glass-blur-sm);
+    border-color:rgba(255,255,255,.26);
+    color:var(--ground);
+  }
+  .btn-primary:hover{
+    background:linear-gradient(180deg,rgba(255,122,46,.95),rgba(214,80,12,.92));
+    box-shadow:0 12px 30px rgba(250,90,5,.28),inset 0 1px 0 rgba(255,255,255,.32);
+  }
+  .btn-secondary{
+    background:rgba(255,255,255,.07);
+    -webkit-backdrop-filter:var(--glass-blur-sm);backdrop-filter:var(--glass-blur-sm);
+    border-color:var(--glass-rim);
+    color:var(--text-primary);
+  }
+  .btn-secondary:hover{background:rgba(255,255,255,.13);border-color:var(--glass-rim-lit);}
+  /* the copy-email button added by the motion layer */
+  .stl-copy{
+    background:rgba(255,255,255,.07);
+    -webkit-backdrop-filter:var(--glass-blur-sm);backdrop-filter:var(--glass-blur-sm);
+    border:1px solid var(--glass-rim);
+    box-shadow:var(--glass-depth-sm);
+  }
+  .stl-copy:hover{background:rgba(255,255,255,.13);}
+
+  /* ---------- boxes nested INSIDE glass: fill only, never a second blur ----------
+     Stacking backdrop-filter re-blurs an already blurred backdrop: quadratic cost,
+     and the inner box turns into a milky patch. These get the same look with a
+     translucent fill and a rim instead. */
+  .case .btn,.contact .btn,.lb-panel .btn,.case .chip,.case .tool,.cap .icon-box,
+  .case .icon-box,.contact .stl-copy{
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+  }
+  /* .path is deliberately NOT in this list: a fill here paints a slab behind the
+     flow chips, which is exactly what the outlined steps are meant to avoid. */
+  .icon-box,.tool,.shot-frame,.spec,.specs{
+    background:rgba(255,255,255,.05);
+    border-color:var(--glass-rim);
+  }
+  .path{background:none;}
+  .icon-box{box-shadow:inset 0 1px 0 rgba(255,255,255,.14);}
+  .shot-frame{box-shadow:inset 0 1px 0 rgba(255,255,255,.10);}
+  .stat{border-left-color:var(--glass-rim);}
+  .metrics{border-top-color:var(--glass-rim);}
+
+  /* ---------- flow paths ----------
+     Was a long mono sentence with arrows in it, which wrapped badly and read as
+     one blob. Now each node is a chip and the branch label is a status pill, so a
+     two-branch flow (HOMEBODY) is as easy to scan as a single-line one (Super Agent). */
+  .paths{margin-top:var(--space-5);display:grid;gap:var(--space-4);}
+  .path{
+    display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--space-3);
+    align-items:start;border-top:1px solid var(--glass-rim);padding-top:var(--space-4);
+  }
+  @media (max-width:560px){ .path{grid-template-columns:1fr;gap:var(--space-2);} }
+  .path-k{
+    display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+    font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    padding:6px 11px;border-radius:var(--radius-full);
+    background:rgba(250,90,5,.14);color:var(--accent-hover);border:1px solid rgba(250,90,5,.34);
+  }
+  .path-k::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none;}
+  .path.is-fail .path-k{
+    background:rgba(255,90,90,.12);color:#ff9c9c;border-color:rgba(255,90,90,.32);
+  }
+  .path-v{
+    display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+    font-family:var(--font-body);font-size:13px;line-height:1.3;color:var(--text-primary);
+  }
+  /* outlined steps: the box shape stays, but the fill behind it is transparent,
+     so the glass panel and the orange field show straight through each node */
+  .step{
+    display:inline-flex;align-items:baseline;gap:7px;padding:7px 12px;
+    border-radius:var(--radius-sm);background:transparent;
+    border:1px solid var(--glass-rim);box-shadow:none;
+    color:var(--text-primary);
+  }
+  .step i{font-style:normal;font-family:var(--font-mono);font-size:10px;color:var(--text-secondary);}
+  /* the two steps that aren't ordinary nodes, still outline-only */
+  .step.is-decision{border-color:rgba(250,90,5,.45);color:var(--accent-hover);}
+  .step.is-wait{border-style:dashed;}
+  .path-v{gap:8px;font-size:13px;}
+  .path .arrow{color:var(--text-faint);font-size:12px;line-height:1;}
+
+  /* ---------- portrait edges ----------
+     The cut-out itself is clean, but the subject's arms run off the bottom of the
+     source frame: below ~70% height the silhouette spans the full width, so it ends
+     in two hard vertical lines. The page already faded the bottom edge; this fades
+     the sides too and starts the bottom fade earlier, leaving no straight cut. */
+  .hero-figure img{
+    -webkit-mask-image:
+      linear-gradient(180deg,#000 68%,rgba(0,0,0,0) 99%),
+      linear-gradient(90deg,rgba(0,0,0,0) 0,#000 8%,#000 92%,rgba(0,0,0,0) 100%);
+    mask-image:
+      linear-gradient(180deg,#000 68%,rgba(0,0,0,0) 99%),
+      linear-gradient(90deg,rgba(0,0,0,0) 0,#000 8%,#000 92%,rgba(0,0,0,0) 100%);
+    -webkit-mask-composite:source-in;
+    mask-composite:intersect;
+  }
+
+  /* ---------- container transform (View Transitions API) ----------
+     The clicked card and the overlay panel share one view-transition-name, so the
+     browser morphs the card's box into the panel's box instead of cross-fading two
+     unrelated things. The name lives on the card before the DOM change and on the
+     panel after it — that pairing is what makes it a shared-element transition. */
+  ::view-transition-group(card-morph){
+    animation-duration:420ms;
+    animation-timing-function:cubic-bezier(.2,0,.2,1);
+  }
+  ::view-transition-old(card-morph),
+  ::view-transition-new(card-morph){
+    /* the card and the panel hold different content, so their pixels cross-fade
+       while the box morphs; height:100% + cover stops the two differently-shaped
+       snapshots from being letterboxed mid-flight */
+    animation-duration:420ms;
+    animation-timing-function:cubic-bezier(.2,0,.2,1);
+    height:100%;
+    object-fit:cover;
+    overflow:clip;
+  }
+  /* everything else just holds still behind the morph */
+  ::view-transition-old(root),
+  ::view-transition-new(root){animation-duration:260ms;}
+
+  /* the workflow screenshots are buttons now, so reset the UA button styling */
+  .shot-frame{
+    display:block;width:100%;padding:0;margin:0;font:inherit;color:inherit;
+    text-align:left;cursor:zoom-in;
+    transition:border-color var(--fast) var(--ease);
+  }
+  .shot-frame:hover{border-color:var(--accent-dim);}
+  .shot-frame:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  .cred:not([disabled]){cursor:zoom-in;}
+
+  /* a wide n8n canvas fits the panel on desktop; on a phone, fitting makes the node
+     labels unreadable, so it opens at a readable width and pans instead */
+  .lb-body.is-wide img{max-width:100%;}
+  @media (max-width:820px){
+    .lb-body.is-wide{overflow:auto;-webkit-overflow-scrolling:touch;}
+    .lb-body.is-wide img{max-width:none;width:900px;}
+  }
+
+  /* belt and braces: the script already skips the transition under reduced motion */
+  @media (prefers-reduced-motion:reduce){
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*){animation:none !important;}
+  }
+
+  /* ---------- small screens ----------
+     Phones and tablets, checked at 375 and 768. */
+
+  /* Section links were hidden below 980px, which left a phone or iPad with no way to
+     reach anything but the top. They now sit on their own scrollable row under the
+     brand, with tap targets tall enough to hit (≈44px). */
+  @media (max-width:980px){
+    .nav-in{flex-wrap:wrap;row-gap:2px;}
+    .nav-links{
+      display:flex;order:3;width:100%;gap:20px;
+      overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+      padding-bottom:2px;
+    }
+    .nav-links::-webkit-scrollbar{display:none;}
+    .nav-links a{white-space:nowrap;font-size:13px;padding:11px 0;}
+    .nav-links a::after{bottom:11px;}
+    .brand{padding:6px 0;}
+  }
+  /* on the narrowest phones the role chip pushed the CTA onto its own row */
+  @media (max-width:520px){
+    .brand .role{display:none;}
+  }
+
+  /* The portrait was dropped below 860px, which emptied out the hero on an iPad.
+     Tablets keep the two-column hero with a smaller portrait; phones still drop it,
+     where there genuinely isn't room. */
+  @media (min-width:640px) and (max-width:860px){
+    .hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);align-items:center;}
+    .hero-figure{display:block;max-width:260px;}
+  }
+
+  /* Touch targets: the contact lines were 25px tall. The underline is pinned back to
+     the text so the extra height doesn't leave it floating. */
+  @media (max-width:860px){
+    .contact .mailto-text{display:inline-block;padding:10px 0;}
+    .contact .mailto-text::after{bottom:10px;}
+    .btn{padding:14px 22px;}
+  }
+
+  /* Spec rows kept a 96px label column beside the value on phones, leaving the value
+     about 40% of the width: "POST /webhook/homebody-orders" broke across three lines
+     and the tool chips ran to the panel edge. Label now sits above its value with the
+     full width underneath, and long mono strings wrap at any character instead of
+     forcing an overflow. */
+  @media (max-width:640px){
+    /* Desktop padding was eating the screen: 32px of page gutter plus 48px of panel
+       padding left a 215px column inside a 375px phone. Halving both gives ~295px. */
+    .wrap{padding:0 var(--space-4);}
+    .case{padding:var(--space-5);}
+    .contact{padding:var(--space-6) var(--space-5);}
+    .mini,.cap,.cred{padding:var(--space-4);}
+
+    .spec{padding:var(--space-3) var(--space-4);}
+    .spec-row{grid-template-columns:1fr;gap:5px;padding:var(--space-3) 0;}
+    .spec-v{font-size:13.5px;}
+    .spec-v .mono{overflow-wrap:anywhere;}
+    .tool{max-width:100%;overflow-wrap:anywhere;}
+    .metrics{gap:var(--space-3) var(--space-4);}
+  }
+
+  /* Phones do the least work: the repeated cards and chips keep the glass fill and
+     rim but drop the backdrop blur. Over a soft gradient the difference is almost
+     invisible, and it removes ~35 blurred surfaces from a phone GPU. */
+  @media (max-width:820px){
+    :root{--glass-blur-card:none;}
+    .chip{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(30,26,22,.72);}
+    body::before{animation:none;}
+  }
+
+  /* ---------- fallbacks ---------- */
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    .nav,.case,.contact,.lb-panel{background:rgba(14,12,10,.92);}
+    .mini,.cap,.cred,.chip{background:rgba(20,18,16,.92);}
+    .btn-secondary,.stl-copy{background:rgba(255,255,255,.12);}
+  }
+  @media (prefers-reduced-transparency:reduce){
+    .nav,.case,.contact,.lb-panel,.mini,.cap,.cred,.chip,.btn-secondary,.stl-copy{
+      -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+    }
+    .nav,.case,.contact,.lb-panel{background:#100e0c;}
+    .mini,.cap,.cred{background:#151310;}
+    .chip{background:#1d1b18;}
+    body::after{display:none;}
+    body::before{opacity:.5;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    body::before{animation:none;}
+  }
+</style>
