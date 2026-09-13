@@ -24,3 +24,13 @@ dist/
 
 # reference file downloaded for the container-transform work, not my own code
 container-transform-demo.html
+
+# Source material for the site — CV originals, certificates, screenshots, screen
+# recordings, photos. They stay on my machine; the published copies live in site/.
+# Root level only, so site/ assets are unaffected.
+/*.jpg
+/*.jpeg
+/*.png
+/*.pdf
+/*.docx
+/*.mp4
