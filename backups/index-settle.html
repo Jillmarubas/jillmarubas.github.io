@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jillmar Ubas — AI Specialist</title>
+<meta name="description" content="AI Specialist building n8n agents, Zapier automations and CRM pipelines that validate their own inputs and log every run — plus the sites they plug into.">
+<meta property="og:title" content="Jillmar Ubas — AI Specialist">
+<meta property="og:description" content="n8n agents, automation workflows and web design. Built to run without supervision.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Martian+Mono:wght@400;500&display=swap">
+<style>
+  /* ---------------------------------------------------------------
+     Jillmar Ubas — portfolio, built on the Settle Motion system.
+     Durations, curves and choreography are that system's tokens;
+     nothing here invents a one-off value.
+     --------------------------------------------------------------- */
+  :root{
+    --ground:#F3F4F3; --paper:#FEFEFE; --ink:#0A0C0B; --ink-2:#5B605C;
+    --line:#E1E3E1; --chip:#EDEFED; --mist:#F5F5F5;
+    --btn-bg:#0A0C0B; --btn-fg:#FEFEFE;
+    --night:#000000; --night-2:#151615; --night-edge:transparent;
+    --on-night:#F2F3F2; --on-night-2:#9DA39F;
+    --mint:#ABFEC1; --mint-ink:#0A2A14;
+
+    --dur-quick:200ms; --dur-base:360ms; --dur-slow:600ms; --dur-hero:900ms;
+    --ease-settle:cubic-bezier(0.22,1,0.36,1);
+    --ease-glide:cubic-bezier(0.65,0,0.35,1);
+    --ease-depart:cubic-bezier(0.55,0,1,0.45);
+    --ease-snap:cubic-bezier(0.34,1.56,0.64,1);
+
+    --f-sans:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
+    --f-mono:'Martian Mono',ui-monospace,Consolas,monospace;
+    --r-panel:28px; --r-card:20px; --r-sm:14px;
+    --wrap:1200px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#0B0C0B; --paper:#141614; --ink:#ECEEEC; --ink-2:#A3A8A4;
+      --line:#262926; --chip:#1D201D; --mist:#191B19;
+      --btn-bg:#ECEEEC; --btn-fg:#0A0C0B; --night-edge:#222622;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0B0C0B; --paper:#141614; --ink:#ECEEEC; --ink-2:#A3A8A4;
+    --line:#262926; --chip:#1D201D; --mist:#191B19;
+    --btn-bg:#ECEEEC; --btn-fg:#0A0C0B; --night-edge:#222622;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4,p,figure{margin:0;}
+  h1,h2,h3,h4{font-weight:500;letter-spacing:-.03em;text-wrap:balance;}
+  ul{margin:0;padding:0;list-style:none;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  button{font:inherit;color:inherit;}
+  code,.mono{font-family:var(--f-mono);font-size:11px;letter-spacing:-.01em;}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:8px;}
+  .night :focus-visible{outline-color:var(--on-night);}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  ::selection{background:var(--mint);color:var(--mint-ink);}
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(12px,2.4vw,24px);}
+  .inner{padding:0 clamp(8px,3vw,40px);}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:40;background:var(--ground);border-bottom:1px solid transparent;transition:border-color var(--dur-quick) var(--ease-glide);}
+  .nav.stuck{border-bottom-color:var(--line);}
+  .nav-in{max-width:var(--wrap);margin:0 auto;padding:14px clamp(12px,3vw,40px);display:flex;align-items:center;justify-content:space-between;gap:18px;}
+  .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;}
+  .brand .name{font-weight:600;font-size:15px;letter-spacing:.06em;white-space:nowrap;}
+  .brand .name .m{display:inline-block;overflow:hidden;vertical-align:top;}
+  .brand .name .m > span{display:inline-block;}
+  .brand .role{font-family:var(--f-mono);font-size:9.5px;color:var(--ink-2);white-space:nowrap;}
+  .nav-links{display:flex;gap:clamp(10px,1.8vw,24px);}
+  .nav-links a{font-size:13px;color:var(--ink-2);text-decoration:none;transition:color var(--dur-quick) var(--ease-glide);}
+  .nav-links a:hover{color:var(--ink);}
+  .nav .btn{padding:9px 16px;font-size:13px;}
+  @media (max-width:980px){ .nav-links{display:none;} }
+
+  /* ---------- shared pieces ---------- */
+  .night{position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r-panel);background:var(--night);color:var(--on-night);border:1px solid var(--night-edge);}
+  .night::before{content:"";position:absolute;z-index:-1;width:70%;height:95%;left:-18%;top:-42%;border-radius:50%;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(171,254,193,.14),rgba(18,27,21,.5) 55%,rgba(0,0,0,0));}
+  .paper{border-radius:var(--r-panel);background:var(--paper);border:1px solid var(--line);}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:13px 22px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;
+       transition:background var(--dur-quick) var(--ease-glide),border-color var(--dur-quick) var(--ease-glide),transform var(--dur-base) var(--ease-settle),box-shadow var(--dur-base) var(--ease-settle);}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-ink{background:var(--btn-bg);color:var(--btn-fg);}
+  .btn-ink:hover{box-shadow:0 10px 26px rgba(0,0,0,.22);}
+  .btn-line{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-line:hover{border-color:var(--ink);}
+  .night .btn-frost{background:var(--on-night);color:#0A0C0B;}
+  .night .btn-line{color:var(--on-night);border-color:rgba(242,243,242,.34);}
+  .night .btn-line:hover{border-color:var(--on-night);}
+
+  .status{display:inline-flex;align-items:center;gap:8px;font-size:12px;padding:6px 13px 6px 11px;border-radius:999px;background:var(--chip);color:var(--ink);white-space:nowrap;}
+  .status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint);}
+  .night .status{background:var(--night-2);color:var(--on-night);}
+  .tok{display:inline-flex;font-family:var(--f-mono);font-size:10px;padding:4px 9px;border-radius:999px;background:var(--chip);color:var(--ink);white-space:nowrap;}
+  .night .tok{background:var(--night-2);color:var(--on-night);}
+  .toks{display:flex;flex-wrap:wrap;gap:6px;}
+  .eyebrow{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);}
+  .night .eyebrow{color:var(--on-night-2);}
+
+  .sec{padding-top:clamp(72px,9vw,116px);scroll-margin-top:76px;}
+  .sec-head{display:grid;gap:12px;max-width:760px;margin-bottom:clamp(28px,4vw,44px);}
+  .sec-head h2{font-size:clamp(32px,4.6vw,52px);line-height:1.03;}
+  .sec-head p{color:var(--ink-2);max-width:64ch;}
+  .night .sec-head p{color:var(--on-night-2);}
+  .w{display:inline-block;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:clamp(28px,4.6vw,60px) clamp(20px,4.4vw,60px) clamp(26px,3.4vw,44px);display:grid;gap:clamp(26px,3.6vw,40px);}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(24px,4vw,52px);align-items:center;}
+  @media (max-width:880px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero-copy{display:grid;gap:22px;align-content:start;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .hero h1{font-size:clamp(44px,7.4vw,96px);line-height:.98;letter-spacing:-.045em;max-width:13ch;}
+  .hero-sub{max-width:58ch;color:var(--on-night-2);font-size:17px;}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;}
+  /* the portrait PNG is already a cut-out, so it sits straight on the panel —
+     no plate, no border, nothing to give the photo an edge */
+  .hero-figure{background:none;border:0;align-self:end;}
+  .hero-figure img{width:100%;height:auto;filter:drop-shadow(0 24px 48px rgba(0,0,0,.55));}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 24px;padding-top:26px;border-top:1px solid rgba(242,243,242,.14);}
+  @media (max-width:760px){ .stats{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .stat b{display:block;font-size:clamp(30px,3.6vw,42px);font-weight:500;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums;}
+  .stat span{font-size:12.5px;color:var(--on-night-2);line-height:1.35;display:block;margin-top:6px;}
+
+  /* ---------- case panels ---------- */
+  .cases{display:grid;gap:clamp(20px,3vw,32px);}
+  .case{padding:clamp(22px,3.4vw,44px);display:grid;gap:clamp(20px,2.6vw,32px);}
+  .case-top{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:baseline;justify-content:space-between;}
+  .case-top h3{font-size:clamp(26px,3.2vw,38px);line-height:1.05;}
+  .case-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start;}
+  @media (max-width:880px){ .case-grid{grid-template-columns:1fr;} }
+  .case-copy{display:grid;gap:14px;}
+  .case-copy p{color:var(--ink-2);}
+  .night .case-copy p{color:var(--on-night-2);}
+  .flow{display:grid;gap:8px;padding:16px;border-radius:var(--r-sm);background:var(--mist);border:1px solid var(--line);}
+  .night .flow{background:var(--night-2);border-color:rgba(242,243,242,.1);}
+  .flow .lab{font-family:var(--f-mono);font-size:10px;color:var(--ink-2);}
+  .night .flow .lab{color:var(--on-night-2);}
+  .flow .steps{font-size:13.5px;line-height:1.5;}
+  .specs div{display:grid;grid-template-columns:minmax(84px,auto) minmax(0,1fr);gap:6px 18px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px;}
+  .night .specs div{border-color:rgba(242,243,242,.12);}
+  .specs dt{font-family:var(--f-mono);font-size:10px;color:var(--ink-2);padding-top:3px;}
+  .night .specs dt{color:var(--on-night-2);}
+  .specs dd{margin:0;}
+  .shot{border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--line);background:var(--mist);}
+  .night .shot{border-color:rgba(242,243,242,.12);background:var(--night-2);}
+  .shot img{width:100%;height:auto;}
+  .shot figcaption{font-size:12.5px;color:var(--ink-2);padding:12px 14px;border-top:1px solid var(--line);line-height:1.45;}
+  .night .shot figcaption{color:var(--on-night-2);border-color:rgba(242,243,242,.12);}
+  .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding-top:20px;border-top:1px solid var(--line);}
+  .night .metrics{border-color:rgba(242,243,242,.14);}
+  @media (max-width:620px){ .metrics{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .metrics b{display:block;font-size:24px;font-weight:500;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1;}
+  .metrics span{font-size:12px;color:var(--ink-2);display:block;margin-top:5px;}
+  .night .metrics span{color:var(--on-night-2);}
+
+  /* ---------- cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}
+  @media (max-width:900px){ .cards{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media (max-width:620px){ .cards{grid-template-columns:1fr;} }
+  .card{padding:22px;border-radius:var(--r-card);background:var(--paper);border:1px solid var(--line);display:grid;gap:10px;align-content:start;
+        transition:transform var(--dur-base) var(--ease-settle),box-shadow var(--dur-base) var(--ease-settle);}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.08);}
+  .card h3{font-size:19px;}
+  .card p{font-size:14px;color:var(--ink-2);line-height:1.5;}
+  .card .foot{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+
+  /* ---------- stack ---------- */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font-size:14px;}
+  .tag.is-ai{background:var(--mint);border-color:var(--mint);color:var(--mint-ink);font-weight:500;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,4vw,56px);}
+  @media (max-width:880px){ .about-grid{grid-template-columns:1fr;} }
+  .about-copy{display:grid;gap:16px;}
+  .about-copy p{color:var(--ink-2);max-width:60ch;}
+  .facts div{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:6px 18px;padding:13px 0;border-top:1px solid var(--line);font-size:14px;}
+  .facts dt{font-family:var(--f-mono);font-size:10px;color:var(--ink-2);padding-top:3px;}
+  .facts dd{margin:0;}
+
+  /* ---------- credentials ---------- */
+  .creds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+  @media (max-width:900px){ .creds{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media (max-width:620px){ .creds{grid-template-columns:1fr;} }
+  .cred{text-align:left;font-family:inherit;padding:20px;border-radius:var(--r-card);background:var(--paper);border:1px solid var(--line);display:grid;gap:8px;align-content:start;cursor:pointer;
+        transition:transform var(--dur-base) var(--ease-settle),border-color var(--dur-quick) var(--ease-glide);}
+  .cred[disabled]{cursor:default;}
+  .cred:not([disabled]):hover{transform:translateY(-3px);border-color:var(--ink);}
+  .cred .when{font-family:var(--f-mono);font-size:10px;color:var(--ink-2);}
+  .cred h3{font-size:16.5px;}
+  .cred .from{font-size:13.5px;color:var(--ink-2);}
+  .cred .view{font-size:12.5px;display:inline-flex;align-items:center;gap:6px;margin-top:2px;}
+
+  /* ---------- contact ---------- */
+  .contact{padding:clamp(26px,4vw,56px);display:grid;gap:24px;}
+  .contact h2{font-size:clamp(30px,4.2vw,48px);line-height:1.04;max-width:18ch;}
+  .contact p{color:var(--on-night-2);max-width:56ch;}
+  .contact-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+  .morph{position:relative;width:214px;height:48px;border-radius:999px;background:var(--on-night);color:#0A0C0B;display:grid;place-items:center;overflow:hidden;font-size:14px;font-weight:500;border:0;cursor:pointer;}
+  .morph > *{grid-area:1/1;}
+  .morph .spin{opacity:0;width:22px;height:22px;}
+  .morph .done{opacity:0;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
+  .contact-lines{display:flex;flex-wrap:wrap;gap:8px 28px;padding-top:20px;border-top:1px solid rgba(242,243,242,.14);font-size:14px;}
+  .contact-lines a{color:var(--on-night);text-decoration:none;text-underline-offset:4px;}
+  .contact-lines a:hover{text-decoration:underline;}
+
+  .foot{padding:44px clamp(8px,3vw,40px) 56px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--ink-2);}
+
+  /* ---------- lightbox ---------- */
+  .lb{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px;background:rgba(4,6,5,.72);}
+  .lb-panel{position:relative;max-width:min(940px,94vw);max-height:90vh;overflow:auto;border-radius:var(--r-card);background:var(--paper);border:1px solid var(--line);padding:16px;}
+  .lb-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:2px 4px 12px;}
+  .lb-head h3{font-size:16px;}
+  .lb-close{border:1px solid var(--line);background:transparent;border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:15px;line-height:1;}
+  .lb-panel img{border-radius:10px;}
+  .lb-panel img.is-rotated{transform:rotate(-90deg);transform-origin:center;max-height:78vh;width:auto;margin:0 auto;}
+
+  /* ---------- motion: reveal states, applied only once JS is running ---------- */
+  .js [data-rise]{opacity:0;transform:translateY(48px);filter:blur(8px);}
+  .js [data-rise].in{opacity:1;transform:none;filter:blur(0px);
+    transition:opacity var(--dur-slow) var(--ease-settle),transform var(--dur-slow) var(--ease-settle),filter var(--dur-slow) var(--ease-settle);
+    transition-delay:var(--d,0ms);}
+  .js [data-panel]{opacity:0;transform:translateY(64px) scaleX(.965);border-radius:34px;}
+  .js [data-panel].in{opacity:1;transform:none;border-radius:var(--r-panel);
+    transition:opacity var(--dur-slow) var(--ease-settle),transform var(--dur-slow) var(--ease-settle),border-radius var(--dur-slow) var(--ease-settle);}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .js [data-rise],.js [data-panel]{opacity:1;transform:none;filter:none;border-radius:var(--r-panel);}
+    .btn:hover,.card:hover,.cred:not([disabled]):hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+<script>document.documentElement.className += ' js';</script>
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <span class="name" id="brandName" aria-label="Jillmar Ubas">JILLMAR UBAS</span>
+      <span class="role">AI Specialist</span>
+    </a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#more">Also shipped</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#stack">Stack</a>
+      <a href="#about">About</a>
+      <a href="#credentials">Credentials</a>
+    </div>
+    <a class="btn btn-ink" href="#contact">Let's talk</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ===== hero ===== -->
+  <header class="night hero" id="top">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="hero-meta">
+          <span class="status">Open to work</span>
+          <span class="eyebrow">AI Specialist · Automation &amp; Web</span>
+        </div>
+        <h1 data-words><span class="w">Built</span> <span class="w">to</span> <span class="w">run</span> <span class="w">without</span> <span class="w">you.</span></h1>
+        <p class="hero-sub">I'm Jillmar Ubas. I build n8n agents, Zapier workflows and CRM pipelines that validate their own inputs, branch when the data is wrong, and write down what they did — so when something breaks, there's a log that says exactly where.</p>
+        <div class="hero-cta">
+          <a class="btn btn-frost" href="#work">See the work →</a>
+          <a class="btn btn-line" href="jillmar-ubas-cv.pdf" download>Download CV</a>
+        </div>
+      </div>
+      <figure class="hero-figure">
+        <img src="jillmar-ubas.png" alt="Jillmar Ubas" width="625" height="833" fetchpriority="high">
+      </figure>
+    </div>
+    <div class="stats">
+      <div class="stat"><b data-count="4">4</b><span>Published n8n workflows</span></div>
+      <div class="stat"><b data-count="170">170</b><span>Executions logged in n8n cloud</span></div>
+      <div class="stat"><b data-count="36.9" data-suffix="s" data-dec="1">36.9s</b><span>Last daily-briefing agent run</span></div>
+      <div class="stat"><b data-count="1">1</b><span>Live storefront, end to end</span></div>
+    </div>
+  </header>
+
+  <!-- ===== work ===== -->
+  <section class="sec inner" id="work" aria-labelledby="work-h">
+    <div class="sec-head">
+      <span class="eyebrow">Selected work</span>
+      <h2 id="work-h" data-words><span class="w">Three</span> <span class="w">systems,</span> <span class="w">running</span> <span class="w">now</span></h2>
+      <p>Each one is published and live. The flows below are the real node graphs — trigger, branch and output — not illustrations of them.</p>
+    </div>
+
+    <div class="cases">
+      <!-- case 1 -->
+      <article class="paper case" data-panel>
+        <div class="case-top">
+          <div>
+            <h3>Super Agent Daily Briefing</h3>
+            <span class="eyebrow">n8n · AI Agent · Telegram</span>
+          </div>
+          <span class="status">Published</span>
+        </div>
+        <div class="case-grid">
+          <div class="case-copy">
+            <p>Every morning a briefing is on my phone before I open a laptop. On a schedule, the agent reads the day's important emails, filters job alerts against saved criteria, checks tomorrow's calendar events, and writes a prioritised summary to Telegram.</p>
+            <p>It runs unattended with memory across runs, and each tool is a scoped call rather than a dump of the whole inbox — which is what keeps a briefing readable instead of a wall of text.</p>
+            <div class="flow">
+              <span class="lab">Flow</span>
+              <span class="steps">Schedule trigger → AI Agent (memory + 3 tools) → Telegram message</span>
+            </div>
+            <dl class="specs">
+              <div><dt>Trigger</dt><dd>Schedule — daily, unattended</dd></div>
+              <div><dt>Model</dt><dd>GPT-5 Mini / Gemini</dd></div>
+              <div><dt>Memory</dt><dd>Enabled</dd></div>
+              <div><dt>Tools</dt><dd><span class="toks"><span class="tok">get_important_emails</span><span class="tok">get_job_alerts</span><span class="tok">get_tomorrows_events</span></span></dd></div>
+              <div><dt>Last run</dt><dd>Success in 36.877s · ~9,270 tokens</dd></div>
+            </dl>
+          </div>
+          <figure class="shot" data-rise>
+            <img src="superagent-n8n.png" alt="The published Super Agent workflow in n8n: a schedule trigger feeding an AI agent node with memory and three scoped tools, output to Telegram." loading="lazy">
+            <figcaption>The published agent in n8n — schedule trigger, agent node with memory and three scoped tools, output to Telegram.</figcaption>
+          </figure>
+        </div>
+        <div class="metrics">
+          <div><b data-count="3">3</b><span>tools</span></div>
+          <div><b data-count="36.9" data-suffix="s" data-dec="1">36.9s</b><span>last run</span></div>
+          <div><b data-count="9.3" data-prefix="~" data-suffix="k" data-dec="1">~9.3k</b><span>tokens</span></div>
+          <div><b data-count="0">0</b><span>manual steps</span></div>
+        </div>
+      </article>
+
+      <!-- case 2 -->
+      <article class="paper case" data-panel>
+        <div class="case-top">
+          <div>
+            <h3>HOMEBODY Order CRM</h3>
+            <span class="eyebrow">n8n · Webhook · Gmail · Sheets</span>
+          </div>
+          <span class="status">Published</span>
+        </div>
+        <div class="case-grid">
+          <div class="case-copy">
+            <p>Orders from the HOMEBODY store hit a webhook and are validated field by field before anything else happens. Valid orders get a confirmation email, and first-time buyers also get a welcome note after a short wait.</p>
+            <p>Anything malformed doesn't fail silently — it's formatted into a readable entry and appended to a Google Sheets error log, so a bad order is a row you can read rather than a support ticket you can't reproduce.</p>
+            <div class="flow">
+              <span class="lab">Valid</span>
+              <span class="steps">Webhook → Validate → Confirmation email → First order? → Wait → Welcome note</span>
+              <span class="lab">Invalid</span>
+              <span class="steps">Format error log → Append row to Sheets</span>
+            </div>
+            <dl class="specs">
+              <div><dt>Trigger</dt><dd>POST /webhook/homebody-orders</dd></div>
+              <div><dt>Branches</dt><dd>Validation gate, then first-order check</dd></div>
+              <div><dt>Order IDs</dt><dd>HMB-…</dd></div>
+              <div><dt>Logging</dt><dd>Every run appended to Sheets</dd></div>
+              <div><dt>Backend</dt><dd>Google Apps Script web app</dd></div>
+            </dl>
+          </div>
+          <figure class="shot" data-rise>
+            <img src="homebody-n8n.png" alt="The published HOMEBODY Order CRM workflow in n8n: webhook intake, a validation gate, confirmation and first-buyer branches, and a failure path logging to Google Sheets." loading="lazy">
+            <figcaption>The published workflow in n8n — webhook intake, validation gate, confirmation and first-buyer branches, and the failure path logging to Sheets.</figcaption>
+          </figure>
+        </div>
+        <div class="metrics">
+          <div><b data-count="9">9</b><span>nodes</span></div>
+          <div><b data-count="2">2</b><span>branches</span></div>
+          <div><b data-count="100" data-suffix="%">100%</b><span>of runs logged</span></div>
+          <div><b data-count="0">0</b><span>silent failures</span></div>
+        </div>
+      </article>
+
+      <!-- case 3 -->
+      <article class="night case" data-panel>
+        <div class="case-top">
+          <div>
+            <h3>HOMEBODY Store</h3>
+            <span class="eyebrow">Web design · Netlify · Apps Script</span>
+          </div>
+          <span class="status">Live</span>
+        </div>
+        <div class="case-grid">
+          <div class="case-copy">
+            <p>A furniture storefront with checkout logic that actually holds. WELCOME20 isn't text in an email — the site asks the server whether the code is valid before it shows a reduced total, and the server checks again when the order is placed. One customer can't use it twice.</p>
+            <p>The front end runs on a deliberately small motion system: one easing curve and three durations, hover and overlay only, no scroll-triggered effects. Every order it takes is what feeds the Order CRM above.</p>
+            <div class="hero-cta">
+              <a class="btn btn-frost" href="https://jill-homebody.netlify.app/" target="_blank" rel="noopener">Visit the live site →</a>
+            </div>
+          </div>
+          <dl class="specs">
+            <div><dt>Discount</dt><dd>Server-validated, single use per customer</dd></div>
+            <div><dt>Data</dt><dd>Orders, Order Items, Customers tabs</dd></div>
+            <div><dt>Motion</dt><dd>200 / 300 / 700ms, one curve</dd></div>
+            <div><dt>Access</dt><dd>Responsive, reduced-motion aware</dd></div>
+          </dl>
+        </div>
+        <div class="metrics">
+          <div><b data-count="3">3</b><span>data tabs</span></div>
+          <div><b data-count="1">1</b><span>easing curve</span></div>
+          <div><b data-count="0">0</b><span>scroll gimmicks</span></div>
+          <div><b data-count="2">2</b><span>server-side checks</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== also shipped ===== -->
+  <section class="sec inner" id="more" aria-labelledby="more-h">
+    <div class="sec-head">
+      <span class="eyebrow">Also shipped</span>
+      <h2 id="more-h" data-words><span class="w">More</span> <span class="w">automation</span> <span class="w">work</span></h2>
+      <p>Smaller builds across n8n, Zapier, GoHighLevel and prompt design — each solving one specific handoff that used to be manual.</p>
+    </div>
+    <div class="cards">
+      <article class="card" data-rise>
+        <span class="eyebrow">n8n · Webhook</span>
+        <h3>UMBRELLA Corp Order CRM</h3>
+        <p>The same intake spine as HOMEBODY, extended with repeat-customer detection that fires a SECOND30 discount email and appends a structured execution log.</p>
+        <div class="foot"><span class="tok">11 nodes</span><span class="tok">30% repeat offer</span></div>
+      </article>
+      <article class="card" data-rise>
+        <span class="eyebrow">n8n · Agent</span>
+        <h3>Jill's Super Agent</h3>
+        <p>A personal Google Workspace assistant with its own skill and Telegram channel — answers on demand, backed by Gmail and Calendar tools on GPT-5 Mini.</p>
+        <div class="foot"><span class="tok">3 tools</span><span class="tok">1 custom skill</span></div>
+      </article>
+      <article class="card" data-rise>
+        <span class="eyebrow">Zapier · Sheets · Forms</span>
+        <h3>Invoice Intake &amp; Approval</h3>
+        <p>A two-part system: the first Zap captures invoices, routes by currency and checks Sheets for duplicates; the second runs a finance approval loop through Google Forms.</p>
+        <div class="foot"><span class="tok">2 linked Zaps</span><span class="tok">0 duplicate entries</span></div>
+      </article>
+      <article class="card" data-rise>
+        <span class="eyebrow">GoHighLevel · CRM</span>
+        <h3>BrightPath Sales Pipeline</h3>
+        <p>A configured sales pipeline wired to a 5-part welcome and follow-up email sequence, so a new lead is nurtured from the moment the stage changes.</p>
+        <div class="foot"><span class="tok">5 email steps</span><span class="tok">Stage triggered</span></div>
+      </article>
+      <article class="card" data-rise>
+        <span class="eyebrow">Calendly · Google Workspace</span>
+        <h3>Scheduling &amp; Onboarding</h3>
+        <p>Calendly connected end to end with Google Calendar and Meet, so discovery calls book, generate a link and follow up without anyone touching a calendar.</p>
+        <div class="foot"><span class="tok">3 apps linked</span><span class="tok">Auto follow-up</span></div>
+      </article>
+      <article class="card" data-rise>
+        <span class="eyebrow">Prompt engineering</span>
+        <h3>Overtime Calculation System</h3>
+        <p>Structured prompts that scan mobile-app attendance records and apply statutory overtime multipliers with 30-minute rounding, straight into spreadsheets.</p>
+        <div class="foot"><span class="tok">30 min rounding rule</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== capabilities ===== -->
+  <section class="sec inner" id="capabilities" aria-labelledby="cap-h">
+    <div class="sec-head">
+      <span class="eyebrow">What I build</span>
+      <h2 id="cap-h" data-words><span class="w">Capabilities</span></h2>
+      <p>From the agent logic down to the interface it reports into — I can take a workflow the whole way rather than handing off halfway.</p>
+    </div>
+    <div class="cards">
+      <article class="card" data-rise><h3>AI Agent Systems</h3><p>Scheduled n8n agents with memory and scoped tool access — reading Gmail and Calendar, reporting to Telegram on GPT-5 Mini and Gemini.</p></article>
+      <article class="card" data-rise><h3>n8n Workflow Automation</h3><p>Webhook-triggered systems with field validation, conditional branching, wait steps and an execution log for every run.</p></article>
+      <article class="card" data-rise><h3>Zapier Automation</h3><p>Multi-step Zaps for intake and approval — currency routing, duplicate checks against Sheets, and human sign-off where it belongs.</p></article>
+      <article class="card" data-rise><h3>CRM Pipelines</h3><p>Sales pipelines in GoHighLevel wired to nurture sequences, so a stage change starts the follow-up instead of a reminder to send one.</p></article>
+      <article class="card" data-rise><h3>Web Design</h3><p>Storefronts and sites like HOMEBODY — responsive layouts, real server-checked logic, accessible contrast and a defined motion language.</p></article>
+      <article class="card" data-rise><h3>Prompt Engineering</h3><p>Structured prompts that read messy records and apply real rules — statutory multipliers, rounding, thresholds — reliably enough to trust.</p></article>
+    </div>
+  </section>
+
+  <!-- ===== stack ===== -->
+  <section class="sec inner" id="stack" aria-labelledby="stack-h">
+    <div class="sec-head">
+      <span class="eyebrow">Stack</span>
+      <h2 id="stack-h" data-words><span class="w">Tools</span> <span class="w">I</span> <span class="w">work</span> <span class="w">in</span></h2>
+      <p>The mint tags are the AI layer; the rest is the surrounding tooling these systems connect.</p>
+    </div>
+    <div class="tags" data-rise>
+      <span class="tag is-ai">n8n</span>
+      <span class="tag is-ai">GPT-5 Mini</span>
+      <span class="tag is-ai">Google Gemini</span>
+      <span class="tag is-ai">Claude</span>
+      <span class="tag">Zapier</span>
+      <span class="tag">GoHighLevel</span>
+      <span class="tag">Calendly</span>
+      <span class="tag">Telegram</span>
+      <span class="tag">Gmail</span>
+      <span class="tag">Google Sheets</span>
+      <span class="tag">Apps Script</span>
+      <span class="tag">Webhooks</span>
+      <span class="tag">Higgsfield</span>
+      <span class="tag">Canva</span>
+      <span class="tag">Figma</span>
+    </div>
+  </section>
+
+  <!-- ===== about ===== -->
+  <section class="sec inner" id="about" aria-labelledby="about-h">
+    <div class="sec-head">
+      <span class="eyebrow">About</span>
+      <h2 id="about-h" data-words><span class="w">I</span> <span class="w">build</span> <span class="w">the</span> <span class="w">plumbing</span> <span class="w">between</span> <span class="w">the</span> <span class="w">tools</span> <span class="w">you</span> <span class="w">already</span> <span class="w">pay</span> <span class="w">for</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-copy" data-rise>
+        <p>Most of my work starts the same way. Someone is copying data from one screen into another, or opening a folder to check whether something arrived. It works until the day it doesn't, and then nobody can say what went wrong.</p>
+        <p>I replace that with a workflow that validates its own inputs, branches when the data is wrong, and writes down what it did. The logging matters as much as the automation — an order that fails should be a row you can read, not a mystery.</p>
+        <p>Lately most of that is agent work in n8n: scheduled runs with scoped tool access to Gmail, Calendar and Telegram, running on GPT-5 Mini and Gemini. I also design and build the front ends these systems sit behind, which means a project doesn't stall at the handoff between the automation and the interface.</p>
+      </div>
+      <dl class="facts" data-rise>
+        <div><dt>Focus</dt><dd>AI agents, workflow automation, web design</dd></div>
+        <div><dt>Platforms</dt><dd>n8n, Zapier, GoHighLevel, Google Workspace</dd></div>
+        <div><dt>Models</dt><dd>GPT-5 Mini, Google Gemini, Claude</dd></div>
+        <div><dt>Also</dt><dd>Brand and template design — The Open Studio</dd></div>
+        <div><dt>Status</dt><dd>Open to work</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== credentials ===== -->
+  <section class="sec inner" id="credentials" aria-labelledby="cred-h">
+    <div class="sec-head">
+      <span class="eyebrow">Credentials</span>
+      <h2 id="cred-h" data-words><span class="w">Certificates</span> <span class="w">&amp;</span> <span class="w">achievements</span></h2>
+      <p>Formal training in prompt engineering and AI-assisted work, alongside five years of recognised service in hospitality operations.</p>
+    </div>
+    <div class="creds">
+      <button class="cred" type="button" data-rise data-cert="certs/prompt-engineering-chatgpt.png" data-cert-title="Prompt Engineering for ChatGPT">
+        <span class="when">Aug 2026</span><h3>Prompt Engineering for ChatGPT</h3><span class="from">Vanderbilt University · Coursera</span><span class="view">View certificate →</span>
+      </button>
+      <button class="cred" type="button" data-rise data-cert="certs/chatgpt-work.png" data-cert-title="ChatGPT Work">
+        <span class="when">Aug 2026</span><h3>ChatGPT Work</h3><span class="from">Vanderbilt University · Coursera</span><span class="view">View certificate →</span>
+      </button>
+      <button class="cred" type="button" data-rise data-cert="certs/word-processing.png" data-cert-title="Word Processing Applications: Word">
+        <span class="when">Aug 2026</span><h3>Word Processing Applications: Word</h3><span class="from">SkillUp · Coursera</span><span class="view">View certificate →</span>
+      </button>
+      <button class="cred" type="button" data-rise data-cert="certs/mail-calendar.png" data-cert-title="Mail &amp; Calendar Applications: Outlook">
+        <span class="when">Jul 2026</span><h3>Mail &amp; Calendar Applications: Outlook</h3><span class="from">SkillUp · Coursera</span><span class="view">View certificate →</span>
+      </button>
+      <button class="cred" type="button" data-rise data-cert="certs/five-years-service.jpg" data-cert-rotated="true" data-cert-title="5 Years of Service — Gula Cakery Group">
+        <span class="when">Dec 2025</span><h3>5 Years of Service</h3><span class="from">Certificate of Appreciation · Gula Cakery Group</span><span class="view">View certificate →</span>
+      </button>
+      <button class="cred" type="button" data-rise disabled>
+        <span class="when">2008</span><h3>Basic Computer NC II</h3><span class="from">TESDA · Philippines</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== contact ===== -->
+  <section class="sec" id="contact" aria-labelledby="contact-h">
+    <div class="night contact" data-panel>
+      <span class="eyebrow">Let's work together</span>
+      <h2 id="contact-h" data-words><span class="w">Tell</span> <span class="w">me</span> <span class="w">what</span> <span class="w">should</span> <span class="w">be</span> <span class="w">running</span> <span class="w">itself</span></h2>
+      <p>If there's a handoff in your business that still needs a person to babysit it, describe it in a couple of sentences and I'll tell you whether it's worth automating.</p>
+      <div class="contact-row">
+        <button class="morph" type="button" id="copyEmail" data-email="jillmar.automation@gmail.com">
+          <span class="lbl">Copy email address</span>
+          <svg class="spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="2.4"/><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="#0A2A14" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <span class="done"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="done-t">Copied</span></span>
+        </button>
+        <a class="btn btn-line" href="mailto:jillmar.automation@gmail.com?subject=Automation%20enquiry">Email me</a>
+        <a class="btn btn-line" href="https://wa.me/601133240261" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="contact-lines">
+        <a href="mailto:jillmar.automation@gmail.com">jillmar.automation@gmail.com</a>
+        <a href="https://wa.me/601133240261" target="_blank" rel="noopener">+60 11 3324 0261</a>
+      </div>
+      <p class="sr" role="status" id="copyStatus"></p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© Jillmar Ubas 2026 · Built on the Settle Motion system</span>
+    <span>n8n agents · automation · web design</span>
+  </footer>
+</div>
+
+<div class="lb" id="lightbox" hidden>
+  <div class="lb-panel" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+    <div class="lb-head">
+      <h3 id="lb-title">Certificate</h3>
+      <button class="lb-close" type="button" data-close aria-label="Close">✕</button>
+    </div>
+    <div id="lb-body"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var E = { settle:'cubic-bezier(0.22,1,0.36,1)', glide:'cubic-bezier(0.65,0,0.35,1)', depart:'cubic-bezier(0.55,0,1,0.45)', snap:'cubic-bezier(0.34,1.56,0.64,1)' };
+  var D = { quick:200, base:360, slow:600, hero:900 };
+  function $(s, r){ return (r || document).querySelector(s); }
+  function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  /* ---------- logo intro: letters rise from a mask, 40 ms apart ---------- */
+  var brand = $('#brandName');
+  if(brand){
+    var text = brand.textContent;
+    brand.textContent = '';
+    text.split('').forEach(function(ch){
+      if(ch === ' '){ brand.appendChild(document.createTextNode(' ')); return; }
+      var m = document.createElement('span'); m.className = 'm';
+      var inner = document.createElement('span'); inner.textContent = ch;
+      m.appendChild(inner); brand.appendChild(m);
+    });
+    if(!reduce){
+      $$('.m > span', brand).forEach(function(l, i){
+        l.animate([{ transform:'translateY(110%)' }, { transform:'none' }], { duration:D.slow, delay:i*40, easing:E.settle, fill:'backwards' });
+      });
+    }
+  }
+
+  /* ---------- blur-in stagger: cards cascade 80 ms apart ---------- */
+  var groupSeen = new WeakMap();
+  var revealIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, parent = el.parentNode;
+      var n = groupSeen.get(parent) || 0;
+      if(el.hasAttribute('data-rise') && parent.children.length > 1){
+        el.style.setProperty('--d', Math.min(n, 5) * 80 + 'ms');
+        groupSeen.set(parent, n + 1);
+      }
+      el.classList.add('in');
+      revealIO.unobserve(el);
+    });
+  }, { threshold: .16, rootMargin: '0px 0px -8% 0px' });
+  $$('[data-rise], [data-panel]').forEach(function(el){ revealIO.observe(el); });
+
+  /* ---------- counter tick: numbers count up once, on reveal ---------- */
+  function runCounter(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var pre = el.getAttribute('data-prefix') || '', suf = el.getAttribute('data-suffix') || '';
+    if(reduce || !isFinite(target)){ return; }
+    var t0 = null;
+    function frame(ts){
+      if(t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / D.hero);
+      var eased = 1 - Math.pow(1 - p, 5);
+      el.textContent = pre + (target * eased).toFixed(dec) + suf;
+      if(p < 1) requestAnimationFrame(frame);
+      else el.textContent = pre + target.toFixed(dec) + suf;
+    }
+    requestAnimationFrame(frame);
+  }
+  var countIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ runCounter(e.target); countIO.unobserve(e.target); } });
+  }, { threshold: .6 });
+  $$('[data-count]').forEach(function(el){ countIO.observe(el); });
+
+  /* ---------- word scrub: headline opacity follows scroll, smoothed by lerp 0.12 ---------- */
+  var scrubEls = $$('[data-words]').map(function(el){ return { el: el, words: $$('.w', el), cur: 0, live: false }; });
+  if(reduce){ scrubEls.forEach(function(s){ s.words.forEach(function(w){ w.style.opacity = 1; }); }); }
+  else {
+    scrubEls.forEach(function(s){ s.words.forEach(function(w){ w.style.opacity = .22; }); });
+    var wordIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        scrubEls.forEach(function(s){ if(s.el === e.target) s.live = e.isIntersecting; });
+      });
+      kick();
+    }, { rootMargin: '10% 0px 10% 0px' });
+    scrubEls.forEach(function(s){ wordIO.observe(s.el); });
+
+    var raf = 0, lastTs = 0;
+    function progressFor(el){
+      var r = el.getBoundingClientRect(), vh = window.innerHeight || 800;
+      var span = vh * .55 + r.height;
+      return Math.max(0, Math.min(1, (vh - r.top) / span));
+    }
+    function frame(ts){
+      var dt = lastTs ? Math.min(64, ts - lastTs) : 16; lastTs = ts;
+      var busy = false;
+      scrubEls.forEach(function(s){
+        if(!s.live) return;
+        var target = progressFor(s.el);
+        s.cur += (target - s.cur) * (1 - Math.pow(.88, dt / 16.67));
+        if(Math.abs(target - s.cur) > .001) busy = true;
+        var n = s.words.length;
+        s.words.forEach(function(w, i){
+          var start = i / n * .85;
+          var k = Math.min(1, Math.max(0, (s.cur - start) / .15));
+          w.style.opacity = (.22 + .78 * k).toFixed(3);
+        });
+      });
+      if(busy || scrubEls.some(function(s){ return s.live; })){ raf = requestAnimationFrame(frame); }
+      else { raf = 0; lastTs = 0; }
+    }
+    function kick(){ if(!raf){ lastTs = 0; raf = requestAnimationFrame(frame); } }
+    window.addEventListener('scroll', kick, { passive:true });
+    window.addEventListener('resize', kick);
+    kick();
+  }
+
+  /* ---------- button morph: copy email — pressed, working, done ---------- */
+  var mb = $('#copyEmail');
+  if(mb){
+    var mLbl = $('.lbl', mb), mSpin = $('.spin', mb), mDone = $('.done', mb), mStatus = $('#copyStatus');
+    var busyCopy = false;
+    mb.addEventListener('click', async function(){
+      if(busyCopy) return; busyCopy = true;
+      var email = mb.getAttribute('data-email');
+      var okCopy = true;
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(email);
+        else okCopy = false;
+      }catch(err){ okCopy = false; }
+      mStatus.textContent = okCopy ? ('Copied ' + email + ' to the clipboard') : ('Copy failed. The address is ' + email);
+      if(reduce){
+        mLbl.textContent = okCopy ? 'Copied ✓' : email;
+        setTimeout(function(){ mLbl.textContent = 'Copy email address'; busyCopy = false; }, 2200);
+        return;
+      }
+      var bg = getComputedStyle(mb).backgroundColor, fg = getComputedStyle(mb).color;
+      function A(el, kf, o){ return el.animate(kf, Object.assign({ fill:'both' }, o)); }
+      await A(mb, [{ transform:'scale(1)' }, { transform:'scale(.96)' }, { transform:'scale(1)' }], { duration:D.quick, easing:E.glide }).finished;
+      A(mLbl, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+      A(mb, [{ width:'214px' }, { width:'48px' }], { duration:D.base, easing:E.glide });
+      A(mSpin, [{ opacity:0 }, { opacity:1 }], { duration:D.quick, delay:260 });
+      A(mSpin, [{ transform:'rotate(0deg)' }, { transform:'rotate(360deg)' }], { duration:700, delay:260, easing:'linear' });
+      await new Promise(function(r){ setTimeout(r, 900); });
+      $('.done-t', mb).textContent = okCopy ? 'Copied' : 'Press Ctrl+C';
+      A(mSpin, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+      A(mb, [{ width:'48px' }, { width:'214px' }], { duration:D.base, easing:E.snap });
+      A(mb, [{ backgroundColor:bg, color:fg }, { backgroundColor:'#ABFEC1', color:'#0A2A14' }], { duration:D.base, easing:E.settle });
+      await A(mDone, [{ opacity:0, transform:'translateY(8px)' }, { opacity:1, transform:'none' }], { duration:D.base, delay:120, easing:E.settle }).finished;
+      await new Promise(function(r){ setTimeout(r, 1600); });
+      A(mDone, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+      A(mb, [{ backgroundColor:'#ABFEC1', color:'#0A2A14' }, { backgroundColor:bg, color:fg }], { duration:D.quick, delay:100, easing:E.glide });
+      await A(mLbl, [{ opacity:0 }, { opacity:1 }], { duration:D.quick, delay:160, easing:E.settle }).finished;
+      mb.getAnimations({ subtree:true }).forEach(function(a){ a.cancel(); });
+      busyCopy = false;
+    });
+  }
+
+  /* ---------- nav hairline once the hero has scrolled under it ---------- */
+  var nav = $('#nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('stuck', window.scrollY > 12); }, { passive:true });
+
+  /* ---------- in-page nav, handled explicitly so it also works in embedded previews ---------- */
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if(!id || id.length < 2) return;
+      var target = document.querySelector(id);
+      if(!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'start' });
+      history.replaceState(null, '', id);
+    });
+  });
+
+  /* ---------- certificate lightbox ---------- */
+  var box = $('#lightbox'), lbBody = $('#lb-body'), lbTitle = $('#lb-title'), opener = null;
+  function openCert(btn){
+    opener = btn;
+    lbTitle.textContent = btn.getAttribute('data-cert-title') || 'Certificate';
+    lbBody.innerHTML = '';
+    var img = document.createElement('img');
+    img.src = btn.getAttribute('data-cert');
+    img.alt = lbTitle.textContent;
+    if(btn.getAttribute('data-cert-rotated') === 'true') img.className = 'is-rotated';
+    lbBody.appendChild(img);
+    box.hidden = false;
+    document.body.style.overflow = 'hidden';
+    $('.lb-close', box).focus();
+    if(!reduce){
+      $('.lb-panel', box).animate([{ opacity:0, transform:'translateY(16px) scale(.98)' }, { opacity:1, transform:'none' }], { duration:D.base, easing:E.settle });
+    }
+  }
+  function closeCert(){
+    if(box.hidden) return;
+    box.hidden = true; lbBody.innerHTML = '';
+    document.body.style.overflow = '';
+    if(opener){ opener.focus(); opener = null; }
+  }
+  $$('.cred[data-cert]').forEach(function(btn){ btn.addEventListener('click', function(){ openCert(btn); }); });
+  box.addEventListener('click', function(e){ if(e.target === box || e.target.hasAttribute('data-close')) closeCert(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeCert(); });
+})();
+</script>
+</body>
+</html>

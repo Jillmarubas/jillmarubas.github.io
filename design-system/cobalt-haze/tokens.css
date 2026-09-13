@@ -1,0 +1,84 @@
+/* ===================================================================
+   COBALT HAZE — v1.0
+   A glassmorphism system sampled pixel by pixel from a Freepik
+   landing-page template ("Clarity Engine", via Pinterest).
+
+   Glass only reads on the cobalt field — never over a flat colour.
+   Full reference page: ./cobalt-haze.html
+   =================================================================== */
+
+:root {
+  /* ---- field, sampled from the reference (x/y = position in the source image) ---- */
+  --cobalt-950: #041F5C;      /* derived — sheet tint, text on light surfaces */
+  --cobalt-800: #05348E;      /* x 45% · y 4%   — field anchor, frost-button label */
+  --cobalt-600: #18469C;      /* x 5%  · y 50%  — mid-field, left edge */
+  --azure-400: #4D71AD;       /* x 50% · y 50%  — active switch, field centre */
+  --periwinkle-200: #A9BAD4;  /* x 80% · y 45%  — transition bloom, data bars */
+  --ice-100: #B1C8E0;         /* x 95% · y 95%  — cool corner highlight */
+  --haze-100: #C9C6CD;        /* x 70% · y 80%  — the bloom. Never put text on it. */
+  --frost: #F4F6FB;           /* derived — all type, rims, the primary button */
+
+  /* ---- text on glass ---- */
+  --text-1: #F4F6FB;
+  --text-2: #D6DFF0;
+  --rule: rgba(255, 255, 255, 0.16);
+
+  /* ---- signal, tuned light so it reads on cobalt ---- */
+  --ok: #86E8C6;
+  --warn: #F7CD86;
+  --err: #FF9C9C;
+
+  /* ---- glass tiers (each fill pairs with its own blur) ---- */
+  --glass-chrome: rgba(255, 255, 255, 0.08); /* blur(10px) — nav, toolbars */
+  --glass-panel: rgba(255, 255, 255, 0.12);  /* blur(20px) — cards, frames */
+  --glass-modal: rgba(255, 255, 255, 0.18);  /* blur(36px) — dialogs, sign-in */
+  --glass-sheet: rgba(4, 31, 92, 0.60);      /* blur(28px) — anything with body text */
+  --rim: rgba(255, 255, 255, 0.26);
+  --rim-strong: rgba(244, 246, 251, 0.75);
+  --lit-top: inset 0 1px 0 rgba(255, 255, 255, 0.30);
+  --shade-bottom: inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  --float: 0 24px 60px rgba(2, 14, 48, 0.35);
+
+  /* ---- type ---- */
+  --f-sans: 'Geist', 'Segoe UI', system-ui, sans-serif;
+  --f-serif: 'Instrument Serif', Georgia, serif;   /* italic, ONE word per heading */
+  --f-mono: 'Geist Mono', ui-monospace, Consolas, monospace;
+  --t-display: clamp(64px, 10.5vw, 148px);         /* 500 · 0.88 · -0.055em, stepped */
+  --t-56: clamp(38px, 5vw, 56px);
+  --t-36: clamp(28px, 3vw, 36px);
+  --t-24: 24px; --t-17: 17px; --t-14: 14px; --t-12: 12px; --t-11: 11px;
+
+  /* ---- shape ---- */
+  --r-xs: 8px; --r-sm: 14px; --r-md: 20px; --r-frame: 28px; --r-full: 999px;
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px;  --s-4: 16px;  --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 72px;  --s-9: 112px;
+
+  /* ---- motion ---- */
+  --ease-glass: cubic-bezier(.16, 1, .3, 1);
+  --d-fast: 180ms; --d-mid: 360ms; --d-slow: 720ms; --d-drift: 48s;
+}
+
+/* The base glass surface: frost + translucency + a lit rim + layered depth.
+   Miss any one of the four and it reads as a plain translucent box. */
+.glass {
+  background: var(--glass-panel);
+  -webkit-backdrop-filter: blur(20px) saturate(155%);
+  backdrop-filter: blur(20px) saturate(155%);
+  border: 1px solid var(--rim);
+  border-radius: var(--r-md);
+  box-shadow: var(--float), var(--lit-top), var(--shade-bottom);
+}
+
+/* House rules:
+   - Glass sits on the cobalt field, never on a flat fill.
+   - Never stack glass on glass; a nested blur re-blurs the blur.
+   - Body text goes on --glass-sheet (60%+ cobalt) to hold 4.5:1 over the haze.
+   - One stepped headline per screen; the second line indents by 1.12em.
+   - Animate the glass, not the geometry: lift, rim and fill on hover, blur stays put. */
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass { background: #123E8E; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: rgba(18, 62, 142, 0.85); }
+}

@@ -1,0 +1,854 @@
+<title>Cobalt Haze</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  /* Cobalt Haze commits to one visual world: glass only reads on the cobalt field,
+     so the page is single-theme and paints every color explicitly. */
+  :root{
+    color-scheme:dark;
+
+    --cobalt-950:#041F5C;
+    --cobalt-800:#05348E;
+    --cobalt-600:#18469C;
+    --azure-400:#4D71AD;
+    --periwinkle-200:#A9BAD4;
+    --ice-100:#B1C8E0;
+    --haze-100:#C9C6CD;
+    --frost:#F4F6FB;
+
+    --text-1:#F4F6FB;
+    --text-2:#D6DFF0;
+    --rule:rgba(255,255,255,.16);
+
+    --ok:#86E8C6;
+    --warn:#F7CD86;
+    --err:#FF9C9C;
+
+    --glass-chrome:rgba(255,255,255,.08);
+    --glass-panel:rgba(255,255,255,.12);
+    --glass-modal:rgba(255,255,255,.18);
+    --glass-sheet:rgba(4,31,92,.60);
+    --rim:rgba(255,255,255,.26);
+    --rim-strong:rgba(244,246,251,.75);
+    --lit-top:inset 0 1px 0 rgba(255,255,255,.30);
+    --shade-bottom:inset 0 -1px 0 rgba(0,0,0,.12);
+    --float:0 24px 60px rgba(2,14,48,.35);
+
+    --f-sans:'Geist','Segoe UI',system-ui,sans-serif;
+    --f-serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+    --f-mono:'Geist Mono',ui-monospace,Consolas,monospace;
+    --t-display:clamp(64px,10.5vw,148px);
+    --t-56:clamp(38px,5vw,56px);
+    --t-36:clamp(28px,3vw,36px);
+    --t-24:24px;
+    --t-17:17px;
+    --t-14:14px;
+    --t-12:12px;
+    --t-11:11px;
+
+    --r-xs:8px; --r-sm:14px; --r-md:20px; --r-frame:28px; --r-full:999px;
+    --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px;
+    --s-6:32px; --s-7:48px; --s-8:72px; --s-9:112px;
+
+    --ease-glass:cubic-bezier(.16,1,.3,1);
+    --d-fast:180ms; --d-mid:360ms; --d-slow:720ms; --d-drift:48s;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;min-height:100vh;
+    background:var(--cobalt-950);
+    color:var(--text-1);
+    font-family:var(--f-sans);
+    font-size:var(--t-17);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,p{margin:0;}
+  h2,h3{text-wrap:balance;}
+  a{color:inherit;}
+  ul{margin:0;padding:0;list-style:none;}
+  code{font-family:var(--f-mono);}
+  :focus-visible{outline:2px solid var(--frost);outline-offset:3px;border-radius:6px;}
+  ::selection{background:var(--frost);color:var(--cobalt-800);}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+  /* ---------- the field ---------- */
+  .field{
+    position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;
+    background:linear-gradient(150deg,#041F5C 0%,#05348E 30%,#1E4C9E 52%,#6F8CC0 74%,#B9C3D9 90%,#C9C6CD 100%);
+  }
+  .field i{position:absolute;display:block;border-radius:50%;will-change:transform;}
+  .field .b1{width:72vmax;height:72vmax;right:-26vmax;bottom:-34vmax;
+    background:radial-gradient(circle,rgba(214,210,218,.95),rgba(201,198,205,0) 64%);
+    animation:drift-a var(--d-drift) ease-in-out infinite alternate;}
+  .field .b2{width:54vmax;height:54vmax;left:-14vmax;top:18vh;
+    background:radial-gradient(circle,rgba(77,113,173,.72),rgba(77,113,173,0) 64%);
+    animation:drift-b 56s ease-in-out infinite alternate;}
+  .field .b3{width:50vmax;height:50vmax;right:-10vmax;top:-26vmax;
+    background:radial-gradient(circle,rgba(4,31,92,.92),rgba(4,31,92,0) 64%);
+    animation:drift-c 62s ease-in-out infinite alternate;}
+  .field .b4{width:32vmax;height:32vmax;right:20vw;bottom:-8vmax;
+    background:radial-gradient(circle,rgba(177,200,224,.75),rgba(177,200,224,0) 64%);
+    animation:drift-b 44s ease-in-out infinite alternate-reverse;}
+  .field::after{
+    content:"";position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  @keyframes drift-a{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-8%,-6%,0) scale(1.08)}}
+  @keyframes drift-b{from{transform:translate3d(0,0,0)}to{transform:translate3d(10%,-8%,0)}}
+  @keyframes drift-c{from{transform:translate3d(0,0,0) scale(1.05)}to{transform:translate3d(-6%,8%,0) scale(1)}}
+
+  .wrap{
+    max-width:1180px;margin:0 auto;
+    padding:clamp(16px,3vw,32px) clamp(14px,3.5vw,40px) var(--s-9);
+    display:grid;gap:var(--s-5);
+  }
+
+  /* ---------- glass frame (hero) ---------- */
+  .frame{
+    position:relative;border-radius:var(--r-frame);
+    padding:clamp(20px,3vw,30px) clamp(20px,3.4vw,40px);
+    background:rgba(255,255,255,.06);
+    -webkit-backdrop-filter:blur(18px) saturate(150%);
+    backdrop-filter:blur(18px) saturate(150%);
+    border:1px solid rgba(255,255,255,.24);
+    box-shadow:var(--float),var(--lit-top),var(--shade-bottom);
+    display:grid;gap:clamp(48px,8vw,104px);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);flex-wrap:wrap;}
+  .wordmark{font-size:15px;font-weight:500;letter-spacing:-.01em;text-decoration:none;color:var(--text-1);}
+  .wordmark em{font-family:var(--f-serif);font-style:italic;font-weight:400;font-size:1.12em;letter-spacing:0;}
+
+  .capsule{
+    display:flex;gap:clamp(14px,2.4vw,30px);padding:10px 22px;max-width:100%;overflow-x:auto;
+    border-radius:var(--r-full);background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
+  }
+  .capsule a{
+    font-size:var(--t-11);font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+    white-space:nowrap;text-decoration:none;color:var(--text-1);
+    text-underline-offset:5px;
+  }
+  .capsule a:hover{text-decoration:underline;text-decoration-thickness:1px;}
+
+  .thesis{display:grid;gap:var(--s-6);}
+  .display{
+    font-weight:500;font-size:var(--t-display);line-height:.88;letter-spacing:-.055em;
+  }
+  .display .row1{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(12px,2vw,26px);}
+  .display .l2{padding-left:1.12em;}
+  .pill{
+    display:inline-block;font-family:var(--f-sans);font-size:clamp(10px,1vw,12px);font-weight:500;
+    letter-spacing:.06em;line-height:1.3;text-transform:uppercase;white-space:nowrap;
+    padding:.85em 1.6em;border:1px solid var(--rim-strong);border-radius:var(--r-full);color:var(--text-1);
+  }
+  .lede{max-width:40ch;font-size:var(--t-17);color:var(--text-1);text-shadow:0 1px 2px rgba(2,14,48,.35);}
+
+  .bar.bottom{justify-content:flex-start;align-items:center;gap:var(--s-5);}
+  .circle{
+    flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+    border:1.5px solid var(--text-1);color:var(--text-1);
+    transition:background var(--d-mid) var(--ease-glass),transform var(--d-mid) var(--ease-glass);
+  }
+  .circle:hover{background:rgba(255,255,255,.14);transform:translateX(3px);}
+  .meta{font-size:12px;line-height:1.4;color:var(--text-1);}
+  .foot{font-size:11px;color:var(--text-1);margin-left:clamp(0px,6vw,96px);}
+
+  /* ---------- reading sheets ---------- */
+  .sheet{
+    scroll-margin-top:24px;
+    border-radius:var(--r-frame);
+    padding:clamp(22px,4vw,48px);
+    background:var(--glass-sheet);
+    -webkit-backdrop-filter:blur(28px) saturate(140%);
+    backdrop-filter:blur(28px) saturate(140%);
+    border:1px solid var(--rim);
+    box-shadow:var(--float),var(--lit-top),var(--shade-bottom);
+    display:grid;grid-template-columns:minmax(170px,230px) minmax(0,1fr);gap:var(--s-5) var(--s-7);
+  }
+  .sheet-head{display:grid;gap:var(--s-3);align-content:start;}
+  .k{
+    font-family:var(--f-mono);font-size:var(--t-11);font-weight:500;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--text-2);
+  }
+  .sheet-head h2{font-size:var(--t-36);font-weight:500;line-height:1.08;letter-spacing:-.03em;}
+  em.accent,.sheet-head h2 em{font-family:var(--f-serif);font-style:italic;font-weight:400;letter-spacing:0;font-size:1.08em;}
+  .sheet-head p{font-size:var(--t-14);color:var(--text-2);line-height:1.55;}
+  .sheet-body{display:grid;gap:var(--s-7);min-width:0;}
+  .sub{display:grid;gap:var(--s-4);}
+  .sub > h3{font-size:var(--t-14);font-weight:500;color:var(--text-2);}
+  @media (max-width:860px){ .sheet{grid-template-columns:1fr;} }
+
+  /* ---------- color ---------- */
+  .ramp{
+    height:56px;border-radius:var(--r-sm);border:1px solid var(--rim);
+    background:linear-gradient(90deg,#041F5C,#05348E 18%,#18469C 34%,#4D71AD 52%,#A9BAD4 72%,#B1C8E0 86%,#C9C6CD);
+  }
+  .ramp-cap{font-family:var(--f-mono);font-size:var(--t-12);color:var(--text-2);}
+  .swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-6) var(--s-5);}
+  @media (max-width:620px){ .swatches{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .swatches li{display:grid;gap:6px;align-content:start;}
+  .chip{display:block;height:88px;border-radius:var(--r-sm);background:var(--c);border:1px solid rgba(255,255,255,.2);margin-bottom:6px;}
+  .sw-name{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:15px;font-weight:500;}
+  .sw-name code{font-size:var(--t-12);color:var(--text-2);font-variant-numeric:tabular-nums;}
+  .sw-role{font-size:13px;line-height:1.45;color:var(--text-2);}
+  .sw-src{font-family:var(--f-mono);font-size:var(--t-11);color:var(--text-2);font-variant-numeric:tabular-nums;}
+
+  .signals{display:flex;flex-wrap:wrap;gap:var(--s-3);}
+  .status{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 13px 6px 11px;border-radius:var(--r-full);
+    font-size:13px;font-weight:500;background:rgba(255,255,255,.08);border:1px solid var(--rule);
+  }
+  .status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--dot);box-shadow:0 0 10px var(--dot);}
+  .status code{font-size:var(--t-11);color:var(--text-2);}
+
+  /* ---------- type ---------- */
+  .specimens{display:grid;}
+  .spec{
+    display:grid;grid-template-columns:190px minmax(0,1fr);gap:var(--s-3) var(--s-5);align-items:baseline;
+    padding:var(--s-5) 0;border-top:1px solid var(--rule);
+  }
+  .spec:last-child{border-bottom:1px solid var(--rule);}
+  .spec .k{line-height:1.6;}
+  .spec .k span{display:block;color:var(--text-2);text-transform:none;letter-spacing:.02em;font-weight:400;}
+  @media (max-width:700px){ .spec{grid-template-columns:1fr;} }
+  .s-display{font-size:clamp(52px,7.4vw,104px);font-weight:500;line-height:.88;letter-spacing:-.055em;}
+  .s-display .l2{padding-left:1.12em;display:block;}
+  .s-h1{font-size:var(--t-56);font-weight:500;line-height:1.02;letter-spacing:-.04em;}
+  .s-h2{font-size:var(--t-36);font-weight:500;line-height:1.08;letter-spacing:-.03em;}
+  .s-h3{font-size:var(--t-24);font-weight:500;line-height:1.2;letter-spacing:-.015em;}
+  .s-body{font-size:var(--t-17);line-height:1.6;max-width:62ch;}
+  .s-label{font-size:var(--t-11);font-weight:500;letter-spacing:.08em;text-transform:uppercase;word-spacing:1.6em;}
+  .s-data{font-family:var(--f-mono);font-size:var(--t-12);font-variant-numeric:tabular-nums;color:var(--text-1);}
+  .s-serif{font-family:var(--f-serif);font-style:italic;font-size:48px;line-height:1;}
+
+  /* ---------- specimen field (opaque, so glass inside never stacks on glass) ---------- */
+  .specimen{
+    position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r-md);
+    border:1px solid var(--rule);
+    background:
+      radial-gradient(55% 75% at 84% 6%,rgba(214,210,218,.95),rgba(201,198,205,0) 70%),
+      radial-gradient(45% 65% at 10% 96%,rgba(77,113,173,.85),rgba(77,113,173,0) 70%),
+      radial-gradient(35% 55% at 52% 30%,rgba(169,186,212,.5),rgba(169,186,212,0) 70%),
+      linear-gradient(160deg,#041F5C,#05348E 45%,#18469C);
+  }
+  .orb{position:absolute;z-index:-1;border-radius:50%;}
+  .orb.o1{width:150px;height:150px;left:14%;top:-40px;background:var(--periwinkle-200);}
+  .orb.o2{width:110px;height:110px;left:56%;top:48%;border:10px solid var(--ice-100);}
+  .orb.o3{width:220px;height:14px;left:30%;top:36%;border-radius:8px;background:var(--haze-100);transform:rotate(-12deg);}
+  .orb.o4{width:70px;height:70px;right:6%;bottom:18%;background:var(--azure-400);}
+
+  .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-4);padding:clamp(18px,3vw,32px);}
+  @media (max-width:760px){ .tiles{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .tile{
+    min-height:190px;border-radius:var(--r-md);padding:var(--s-4);
+    display:flex;flex-direction:column;justify-content:flex-end;gap:4px;
+    border:1px solid var(--rim);box-shadow:0 12px 32px rgba(2,14,48,.28),var(--lit-top),var(--shade-bottom);
+    transition:transform var(--d-mid) var(--ease-glass),box-shadow var(--d-mid) var(--ease-glass);
+  }
+  .tile:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(2,14,48,.34),inset 0 1px 0 rgba(255,255,255,.5);}
+  .tile b{font-size:15px;font-weight:500;}
+  .tile code{font-size:var(--t-11);color:var(--text-1);opacity:.92;}
+  .t-chrome{background:var(--glass-chrome);-webkit-backdrop-filter:blur(10px) saturate(150%);backdrop-filter:blur(10px) saturate(150%);}
+  .t-panel{background:var(--glass-panel);-webkit-backdrop-filter:blur(20px) saturate(155%);backdrop-filter:blur(20px) saturate(155%);}
+  .t-modal{background:var(--glass-modal);-webkit-backdrop-filter:blur(36px) saturate(165%);backdrop-filter:blur(36px) saturate(165%);}
+  .t-sheet{background:var(--glass-sheet);-webkit-backdrop-filter:blur(28px) saturate(140%);backdrop-filter:blur(28px) saturate(140%);}
+
+  .ingredients{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-5);}
+  @media (max-width:760px){ .ingredients{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .ingredients div{display:grid;gap:6px;align-content:start;padding-top:var(--s-3);border-top:1px solid var(--rule);}
+  .ingredients b{font-size:15px;font-weight:500;}
+  .ingredients p{font-size:13px;line-height:1.5;color:var(--text-2);}
+  .ingredients code{font-size:var(--t-11);color:var(--text-2);}
+
+  /* tuner */
+  .tuner{display:grid;grid-template-columns:minmax(220px,280px) minmax(0,1fr);gap:var(--s-5);align-items:stretch;}
+  @media (max-width:760px){ .tuner{grid-template-columns:1fr;} }
+  .controls{display:grid;gap:var(--s-4);align-content:start;}
+  .ctl{display:grid;gap:6px;}
+  .ctl label{display:flex;justify-content:space-between;font-size:13px;color:var(--text-2);}
+  .ctl output{font-family:var(--f-mono);font-size:var(--t-12);color:var(--text-1);font-variant-numeric:tabular-nums;}
+  input[type=range]{width:100%;accent-color:var(--frost);}
+  .seg{display:inline-flex;padding:3px;border-radius:var(--r-full);background:rgba(255,255,255,.08);border:1px solid var(--rule);width:max-content;}
+  .seg label{position:relative;cursor:pointer;}
+  .seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;}
+  .seg span{display:block;padding:6px 14px;border-radius:var(--r-full);font-size:13px;color:var(--text-2);transition:background var(--d-fast),color var(--d-fast);}
+  .seg input:checked + span{background:var(--frost);color:var(--cobalt-800);}
+  .seg input:focus-visible + span{outline:2px solid var(--frost);outline-offset:2px;}
+  .tune-field{min-height:260px;display:grid;place-items:center;padding:var(--s-6);}
+  .tune-tile{
+    width:min(100%,300px);min-height:170px;border-radius:var(--r-md);padding:var(--s-4);
+    display:flex;flex-direction:column;justify-content:flex-end;gap:2px;
+    box-shadow:0 12px 32px rgba(2,14,48,.28),var(--lit-top),var(--shade-bottom);
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);
+    -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);
+  }
+  .tune-tile b{font-size:15px;font-weight:500;}
+  .tune-tile span{font-size:12px;}
+
+  .code{position:relative;}
+  .code pre{
+    margin:0;padding:var(--s-5);border-radius:var(--r-sm);overflow:auto;max-height:460px;
+    background:rgba(2,14,48,.5);border:1px solid var(--rule);
+    font-family:var(--f-mono);font-size:12.5px;line-height:1.7;color:var(--text-1);tab-size:2;
+  }
+  .code .btn{position:absolute;top:10px;right:10px;padding:8px 14px;font-size:12px;}
+
+  .rules{display:grid;gap:0;}
+  .rules li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:var(--s-3);padding:var(--s-3) 0;border-top:1px solid var(--rule);font-size:15px;line-height:1.5;}
+  .rules li::before{content:"";width:8px;height:8px;margin-top:.55em;border-radius:50%;border:1.5px solid var(--frost);}
+  .rules li span{color:var(--text-2);}
+
+  /* ---------- components ---------- */
+  .cells{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-7) var(--s-6);}
+  @media (max-width:700px){ .cells{grid-template-columns:1fr;} }
+  .cell{display:grid;gap:var(--s-4);align-content:start;padding-top:var(--s-4);border-top:1px solid var(--rule);min-width:0;}
+  .cell .row{display:flex;flex-wrap:wrap;gap:var(--s-3);align-items:center;}
+  .cell .note{font-size:13px;color:var(--text-2);line-height:1.5;}
+
+  .btn{
+    font:500 14px/1 var(--f-sans);padding:13px 22px;border-radius:var(--r-full);border:1px solid transparent;
+    display:inline-flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none;
+    transition:background var(--d-fast) var(--ease-glass),border-color var(--d-fast) var(--ease-glass),
+               box-shadow var(--d-mid) var(--ease-glass),transform var(--d-mid) var(--ease-glass);
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-frost{background:var(--frost);color:var(--cobalt-800);}
+  .btn-frost:hover{background:#fff;box-shadow:0 8px 24px rgba(2,14,48,.35);}
+  .btn-glass{background:var(--glass-panel);color:var(--text-1);border-color:rgba(255,255,255,.28);box-shadow:var(--lit-top);}
+  .btn-glass:hover{background:var(--glass-modal);}
+  .btn-ghost{background:transparent;color:var(--text-1);border-color:rgba(244,246,251,.55);}
+  .btn-ghost:hover{border-color:var(--frost);}
+
+  .input{display:grid;gap:8px;max-width:360px;}
+  .input label{font-size:13px;color:var(--text-2);}
+  .input input{
+    font:400 15px/1.3 var(--f-sans);color:var(--text-1);padding:12px 16px;border-radius:var(--r-sm);
+    background:var(--glass-chrome);border:1px solid rgba(255,255,255,.24);
+    transition:border-color var(--d-fast),box-shadow var(--d-fast);
+  }
+  .input input:focus{outline:none;border-color:var(--frost);box-shadow:0 0 0 4px rgba(244,246,251,.16);}
+  .input small{font-size:12px;color:var(--text-2);}
+
+  .switch-row{display:flex;align-items:center;gap:var(--s-3);font-size:14px;}
+  .switch{
+    width:46px;height:26px;border-radius:var(--r-full);padding:2px;cursor:pointer;flex:none;
+    background:rgba(255,255,255,.14);border:1px solid var(--rim);position:relative;
+    transition:background var(--d-mid) var(--ease-glass);
+  }
+  .switch::after{
+    content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--frost);
+    box-shadow:0 2px 6px rgba(2,14,48,.4);transition:transform var(--d-mid) var(--ease-glass);
+  }
+  .switch[aria-checked="true"]{background:var(--azure-400);}
+  .switch[aria-checked="true"]::after{transform:translateX(20px);}
+
+  .card{
+    display:grid;gap:10px;padding:22px;border-radius:var(--r-md);max-width:380px;
+    background:var(--glass-chrome);border:1px solid var(--rim);box-shadow:var(--lit-top);
+    transition:transform var(--d-mid) var(--ease-glass),background var(--d-mid) var(--ease-glass);
+  }
+  .card:hover{transform:translateY(-3px);background:var(--glass-panel);}
+  .card .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;}
+  .card h3{font-size:20px;font-weight:500;letter-spacing:-.015em;}
+  .card p{font-size:14px;line-height:1.55;color:var(--text-2);}
+
+  /* ---------- shape & motion ---------- */
+  .radii{display:flex;flex-wrap:wrap;gap:var(--s-5);}
+  .radii figure{margin:0;display:grid;gap:8px;}
+  .radii .shape{width:96px;height:64px;border:1.5px solid rgba(244,246,251,.6);background:rgba(255,255,255,.06);}
+  .radii figcaption{font-family:var(--f-mono);font-size:var(--t-11);color:var(--text-2);}
+  .spacing{display:grid;gap:8px;}
+  .spacing li{display:grid;grid-template-columns:64px 52px minmax(0,1fr);gap:var(--s-3);align-items:center;font-family:var(--f-mono);font-size:var(--t-12);font-variant-numeric:tabular-nums;color:var(--text-2);}
+  .spacing i{display:block;height:10px;border-radius:3px;background:var(--periwinkle-200);width:var(--w);max-width:100%;}
+  .motion{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:10px var(--s-5);align-items:baseline;font-size:14px;}
+  .motion code{font-size:var(--t-12);}
+  .motion .v{font-family:var(--f-mono);font-size:var(--t-12);color:var(--text-2);}
+  .motion span:not(.v){color:var(--text-2);}
+  @media (max-width:560px){ .motion{grid-template-columns:1fr;gap:2px;} .motion span:not(.v){margin-bottom:10px;} }
+
+  /* ---------- in use ---------- */
+  .use{padding:clamp(12px,3vw,32px);}
+  .use .frame{box-shadow:0 18px 44px rgba(2,14,48,.32),var(--lit-top),var(--shade-bottom);gap:clamp(36px,6vw,72px);}
+  .use .display{font-size:clamp(44px,7.2vw,104px);}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .field i{animation:none;}
+    *,*::before,*::after{transition-duration:0s !important;}
+  }
+  @media (prefers-reduced-transparency:reduce){
+    .sheet{background:#0A2A6E;-webkit-backdrop-filter:none;backdrop-filter:none;}
+    .frame{background:rgba(5,52,142,.92);-webkit-backdrop-filter:none;backdrop-filter:none;}
+    .tile,.tune-tile{background:#123E8E !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;}
+    .field::after{display:none;}
+  }
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    .sheet{background:rgba(6,32,96,.9);}
+    .frame{background:rgba(5,52,142,.72);}
+    .tile{background:rgba(18,62,142,.8);}
+  }
+</style>
+
+<div class="field" aria-hidden="true"><i class="b3"></i><i class="b2"></i><i class="b4"></i><i class="b1"></i></div>
+
+<div class="wrap">
+
+  <!-- ===== hero: the reference composition, restated as the system's title ===== -->
+  <header class="frame" id="top">
+    <div class="bar">
+      <a class="wordmark" href="#top">Cobalt <em>Haze</em></a>
+      <nav class="capsule" aria-label="Sections">
+        <a href="#color">Color</a><a href="#type">Type</a><a href="#glass">Glass</a><a href="#components">Components</a><a href="#in-use">In use</a><a href="#tokens">Tokens</a>
+      </nav>
+    </div>
+    <div class="thesis">
+      <h1 class="sr">Cobalt Haze, a glass UI design system, version 1.0</h1>
+      <div class="display" aria-hidden="true">
+        <div class="row1"><span>Cobalt</span><span class="pill">Glass UI system<br>Version 1.0</span></div>
+        <div class="l2">Haze</div>
+      </div>
+      <p class="lede">A cobalt field, frosted surfaces with lit rims, and one stepped headline per screen. Every value here was sampled from the reference or derived from it.</p>
+    </div>
+    <div class="bar bottom">
+      <a class="circle" href="#color" aria-label="Start with color">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg>
+      </a>
+      <p class="meta">Reference: Clarity Engine template<br>Freepik, via Pinterest<br>Sampled 11 Sept 2026</p>
+      <p class="foot">© Jillmar Ubas 2026</p>
+    </div>
+  </header>
+
+  <!-- ===== color ===== -->
+  <section class="sheet" id="color" aria-labelledby="color-h">
+    <div class="sheet-head">
+      <span class="k">Color</span>
+      <h2 id="color-h">Four blues and a haze, <em>sampled</em></h2>
+      <p>Picked by pixel from the 740 × 493 reference image. Positions are given as a percentage of its width and height. Two tokens are derived rather than sampled, and are labelled that way.</p>
+    </div>
+    <div class="sheet-body">
+      <div class="sub">
+        <div class="ramp" role="img" aria-label="Gradient from Cobalt 950 through Azure 400 to Haze 100"></div>
+        <p class="ramp-cap">The field, flattened. The reference runs it diagonally at about 150°, deep at top-left and hazy at bottom-right.</p>
+      </div>
+      <ul class="swatches">
+        <li><span class="chip" style="--c:#041F5C"></span><span class="sw-name">Cobalt 950 <code>#041F5C</code></span><span class="sw-role">Sheet tint, text on light surfaces</span><span class="sw-src">derived from 800</span></li>
+        <li><span class="chip" style="--c:#05348E"></span><span class="sw-name">Cobalt 800 <code>#05348E</code></span><span class="sw-role">Field anchor, frost-button label</span><span class="sw-src">x 45% · y 4%</span></li>
+        <li><span class="chip" style="--c:#18469C"></span><span class="sw-name">Cobalt 600 <code>#18469C</code></span><span class="sw-role">Mid-field, left edge</span><span class="sw-src">x 5% · y 50%</span></li>
+        <li><span class="chip" style="--c:#4D71AD"></span><span class="sw-name">Azure 400 <code>#4D71AD</code></span><span class="sw-role">Active switch, the field's centre</span><span class="sw-src">x 50% · y 50%</span></li>
+        <li><span class="chip" style="--c:#A9BAD4"></span><span class="sw-name">Periwinkle 200 <code>#A9BAD4</code></span><span class="sw-role">Transition bloom, data bars</span><span class="sw-src">x 80% · y 45%</span></li>
+        <li><span class="chip" style="--c:#B1C8E0"></span><span class="sw-name">Ice 100 <code>#B1C8E0</code></span><span class="sw-role">Cool corner highlight</span><span class="sw-src">x 95% · y 95%</span></li>
+        <li><span class="chip" style="--c:#C9C6CD"></span><span class="sw-name">Haze 100 <code>#C9C6CD</code></span><span class="sw-role">The bloom. Never put text directly on it.</span><span class="sw-src">x 70% · y 80%</span></li>
+        <li><span class="chip" style="--c:#F4F6FB"></span><span class="sw-name">Frost <code>#F4F6FB</code></span><span class="sw-role">All type, rims, the primary button</span><span class="sw-src">derived, blue-biased white</span></li>
+      </ul>
+      <div class="sub">
+        <h3>Signal colors, tuned light so they read on cobalt</h3>
+        <div class="signals">
+          <span class="status" style="--dot:#86E8C6">Run logged <code>--ok #86E8C6</code></span>
+          <span class="status" style="--dot:#F7CD86">Retrying <code>--warn #F7CD86</code></span>
+          <span class="status" style="--dot:#FF9C9C">Input rejected <code>--err #FF9C9C</code></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== type ===== -->
+  <section class="sheet" id="type" aria-labelledby="type-h">
+    <div class="sheet-head">
+      <span class="k">Type</span>
+      <h2 id="type-h">A tight grotesk with <em>one</em> italic word</h2>
+      <p>Geist does the work. Instrument Serif italic is the reference's “Brand <em class="accent">Name</em>” move: one word per heading, never in body copy. Geist Mono handles data and run logs.</p>
+    </div>
+    <div class="sheet-body">
+      <div class="specimens">
+        <div class="spec">
+          <span class="k">Display<span>Geist 500 · 148 max · 0.88 · −0.055em</span></span>
+          <p class="s-display" aria-label="Quiet Systems">Quiet<span class="l2">Systems</span></p>
+        </div>
+        <div class="spec">
+          <span class="k">Heading 1<span>Geist 500 · 56 · 1.02 · −0.04em</span></span>
+          <p class="s-h1">Automations that log every run</p>
+        </div>
+        <div class="spec">
+          <span class="k">Heading 2<span>Geist 500 · 36 · 1.08 · −0.03em</span></span>
+          <p class="s-h2">Built to run <em class="accent">unsupervised</em></p>
+        </div>
+        <div class="spec">
+          <span class="k">Heading 3<span>Geist 500 · 24 · 1.2</span></span>
+          <p class="s-h3">Lead intake agent</p>
+        </div>
+        <div class="spec">
+          <span class="k">Body<span>Geist 400 · 17 · 1.6 · 62ch max</span></span>
+          <p class="s-body">n8n agents, Zapier automations and CRM pipelines that validate their own inputs before they write anything, and leave a log line behind for every run.</p>
+        </div>
+        <div class="spec">
+          <span class="k">Label<span>Geist 500 · 11 · +0.08em · caps</span></span>
+          <p class="s-label">Home Portfolio Creators Contact</p>
+        </div>
+        <div class="spec">
+          <span class="k">Data<span>Geist Mono 400 · 12 · tabular</span></span>
+          <p class="s-data">run_2291 · 14:02:17 · 842 ms · 14 nodes · ok</p>
+        </div>
+        <div class="spec">
+          <span class="k">Accent<span>Instrument Serif italic · 1.08× host</span></span>
+          <p class="s-serif">Name</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== glass ===== -->
+  <section class="sheet" id="glass" aria-labelledby="glass-h">
+    <div class="sheet-head">
+      <span class="k">Glass</span>
+      <h2 id="glass-h">Four frosts, and <em>one</em> rule: glass needs a field</h2>
+      <p>Blur only shows up when there's something busy behind it. Each tier sets frost, fill and rim together. Hover a tile to see it lift.</p>
+    </div>
+    <div class="sheet-body">
+      <div class="specimen">
+        <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span>
+        <div class="tiles">
+          <div class="tile t-chrome"><b>Chrome</b><code>blur 10 · fill 8%</code><code>nav, toolbars</code></div>
+          <div class="tile t-panel"><b>Panel</b><code>blur 20 · fill 12%</code><code>cards, frames</code></div>
+          <div class="tile t-modal"><b>Modal</b><code>blur 36 · fill 18%</code><code>dialogs, sign-in</code></div>
+          <div class="tile t-sheet"><b>Sheet</b><code>blur 28 · cobalt 60%</code><code>anything with body text</code></div>
+        </div>
+      </div>
+
+      <div class="ingredients">
+        <div><b>Frost</b><p>Backdrop blur plus saturation, so the field keeps its blue.</p><code>blur() saturate(150%)</code></div>
+        <div><b>Translucency</b><p>A fill between 8% and 18%. Never opaque, never clear.</p><code>--glass-panel</code></div>
+        <div><b>Rim</b><p>A 1px border brighter than the fill, so the edge catches light.</p><code>--rim</code></div>
+        <div><b>Depth</b><p>A drop shadow to float the panel, and an inset line lighting the top edge.</p><code>--float, --lit-top</code></div>
+      </div>
+
+      <div class="sub">
+        <h3>Tune a surface and copy its CSS</h3>
+        <div class="tuner" id="tuner">
+          <div class="controls">
+            <div class="ctl"><label for="tBlur">Blur <output id="oBlur" for="tBlur">18px</output></label><input id="tBlur" type="range" min="0" max="40" value="18"></div>
+            <div class="ctl"><label for="tFill">Fill <output id="oFill" for="tFill">12%</output></label><input id="tFill" type="range" min="0" max="60" value="12"></div>
+            <div class="ctl"><label for="tRim">Rim <output id="oRim" for="tRim">28%</output></label><input id="tRim" type="range" min="0" max="70" value="28"></div>
+            <div class="ctl">
+              <span class="sr" id="tintLabel">Fill color</span>
+              <div class="seg" role="radiogroup" aria-labelledby="tintLabel">
+                <label><input type="radio" name="tint" value="clear" checked><span>Clear</span></label>
+                <label><input type="radio" name="tint" value="cobalt"><span>Cobalt</span></label>
+              </div>
+            </div>
+          </div>
+          <div class="specimen tune-field">
+            <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
+            <div class="tune-tile" id="tuneTile"><b>Your surface</b><span id="tuneSum">Panel tier</span></div>
+          </div>
+        </div>
+        <div class="code">
+          <pre id="tuneCss"></pre>
+          <button class="btn btn-glass" type="button" data-copy="tuneCss">Copy CSS</button>
+        </div>
+      </div>
+
+      <div class="sub">
+        <h3>House rules</h3>
+        <ul class="rules">
+          <li><p>Glass sits on the field, never on a flat fill. <span>Over a single color, backdrop blur does nothing you can see.</span></p></li>
+          <li><p>Don't stack glass on glass. <span>A nested blur blurs the blur again, and scrolling slows down.</span></p></li>
+          <li><p>Body text goes on a Sheet. <span>A cobalt fill of 60% or more keeps text at 4.5:1 even over the haze bloom.</span></p></li>
+          <li><p>One stepped headline per screen. <span>The second line indents by 1.12em. That's the reference's signature, so don't dilute it.</span></p></li>
+          <li><p>Animate the glass, not the geometry. <span>Lift, rim and fill change on hover. The blur radius stays put.</span></p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== components ===== -->
+  <section class="sheet" id="components" aria-labelledby="comp-h">
+    <div class="sheet-head">
+      <span class="k">Components</span>
+      <h2 id="comp-h">Pulled from the <em>reference</em>, extended for real screens</h2>
+      <p>The first four come straight from the template. The rest follow its rules: capsule shapes, frost type, and rims instead of fills.</p>
+    </div>
+    <div class="sheet-body">
+      <div class="cells">
+        <div class="cell">
+          <span class="k">Wordmark</span>
+          <div class="row"><span class="wordmark" style="font-size:22px">Jillmar <em>Ubas</em></span></div>
+          <p class="note">Geist 500 for the first word and serif italic for the second, at 1.12× size.</p>
+        </div>
+        <div class="cell">
+          <span class="k">Nav capsule</span>
+          <div class="row"><nav class="capsule" aria-label="Example navigation"><a href="#components">Work</a><a href="#components">Agents</a><a href="#components">CV</a><a href="#components">Contact</a></nav></div>
+          <p class="note">Chrome tier. Links underline on hover, and the capsule itself never changes.</p>
+        </div>
+        <div class="cell">
+          <span class="k">Tag pill</span>
+          <div class="row"><span class="pill">AI specialist<br>n8n · Zapier · CRM</span><span class="pill">Future-ready<br>visual studio</span></div>
+          <p class="note">A 1px frost outline and two uppercase lines. It sits beside the display type and never inside a paragraph.</p>
+        </div>
+        <div class="cell">
+          <span class="k">Circle action</span>
+          <div class="row">
+            <a class="circle" href="#components" aria-label="Next project"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></a>
+            <span class="meta">Next: CRM sync<br>Airtable → HubSpot</span>
+          </div>
+          <p class="note">44px, a 1.5px rim, and it nudges 3px on hover. Always pair it with a short caption.</p>
+        </div>
+        <div class="cell">
+          <span class="k">Buttons</span>
+          <div class="row">
+            <button class="btn btn-frost" type="button">Book a call</button>
+            <button class="btn btn-glass" type="button">See workflows</button>
+            <button class="btn btn-ghost" type="button">Download CV</button>
+          </div>
+          <p class="note">Use Frost once per view, for the main action. Glass is for secondary actions and Ghost is for tertiary.</p>
+        </div>
+        <div class="cell">
+          <span class="k">Text field</span>
+          <div class="input">
+            <label for="wfName">Workflow name</label>
+            <input id="wfName" type="text" value="Lead intake → HubSpot">
+            <small>Shown at the top of every run log.</small>
+          </div>
+        </div>
+        <div class="cell">
+          <span class="k">Switch and status</span>
+          <div class="switch-row"><button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="swLabel"></button><span id="swLabel">Retry failed runs automatically</span></div>
+          <div class="signals">
+            <span class="status" style="--dot:#86E8C6">Run logged</span>
+            <span class="status" style="--dot:#F7CD86">Retrying 2 of 3</span>
+          </div>
+        </div>
+        <div class="cell">
+          <span class="k">Project card</span>
+          <article class="card">
+            <div class="top"><span class="s-data">n8n · 14 nodes</span><span class="status" style="--dot:#86E8C6">Live</span></div>
+            <h3>Lead intake agent</h3>
+            <p>Checks every form submission against the CRM schema before writing anything, then logs the run with its timing.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== shape & motion ===== -->
+  <section class="sheet" id="shape" aria-labelledby="shape-h">
+    <div class="sheet-head">
+      <span class="k">Shape &amp; motion</span>
+      <h2 id="shape-h">Soft corners, <em>slow</em> light</h2>
+      <p>Radii get larger as surfaces get larger. Spacing is built on a 4px base. Motion eases out long, the way light settles on glass.</p>
+    </div>
+    <div class="sheet-body">
+      <div class="sub">
+        <h3>Radius</h3>
+        <div class="radii">
+          <figure><div class="shape" style="border-radius:8px"></div><figcaption>r-xs · 8 · chips</figcaption></figure>
+          <figure><div class="shape" style="border-radius:14px"></div><figcaption>r-sm · 14 · fields</figcaption></figure>
+          <figure><div class="shape" style="border-radius:20px"></div><figcaption>r-md · 20 · cards</figcaption></figure>
+          <figure><div class="shape" style="border-radius:28px"></div><figcaption>r-frame · 28 · frames</figcaption></figure>
+          <figure><div class="shape" style="border-radius:999px"></div><figcaption>r-full · pills</figcaption></figure>
+        </div>
+      </div>
+      <div class="sub">
+        <h3>Spacing</h3>
+        <ul class="spacing">
+          <li><span>s-1</span><span>4</span><i style="--w:4px"></i></li>
+          <li><span>s-2</span><span>8</span><i style="--w:8px"></i></li>
+          <li><span>s-3</span><span>12</span><i style="--w:12px"></i></li>
+          <li><span>s-4</span><span>16</span><i style="--w:16px"></i></li>
+          <li><span>s-5</span><span>24</span><i style="--w:24px"></i></li>
+          <li><span>s-6</span><span>32</span><i style="--w:32px"></i></li>
+          <li><span>s-7</span><span>48</span><i style="--w:48px"></i></li>
+          <li><span>s-8</span><span>72</span><i style="--w:72px"></i></li>
+          <li><span>s-9</span><span>112</span><i style="--w:112px"></i></li>
+        </ul>
+      </div>
+      <div class="sub">
+        <h3>Motion</h3>
+        <div class="motion">
+          <code>--ease-glass</code><span class="v">cubic-bezier(.16, 1, .3, 1)</span><span>Every lift, rim and fill change</span>
+          <code>--d-fast</code><span class="v">180ms</span><span>Button color, field focus</span>
+          <code>--d-mid</code><span class="v">360ms</span><span>Card lift, switch, circle nudge</span>
+          <code>--d-slow</code><span class="v">720ms</span><span>Panel entrance, frost resolving</span>
+          <code>--d-drift</code><span class="v">48s</span><span>Ambient field drift. It stops when reduced motion is on.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== in use ===== -->
+  <section class="sheet" id="in-use" aria-labelledby="use-h">
+    <div class="sheet-head">
+      <span class="k">In use</span>
+      <h2 id="use-h">Your portfolio, on the <em>field</em></h2>
+      <p>The hero from the reference, rebuilt with your own work: same frame, same step, same capsule. Only the words change.</p>
+    </div>
+    <div class="sheet-body">
+      <div class="specimen use">
+        <span class="orb o1" style="left:62%;top:30%;width:180px;height:180px;background:#A9BAD4"></span>
+        <div class="frame">
+          <div class="bar">
+            <span class="wordmark">Jillmar <em>Ubas</em></span>
+            <nav class="capsule" aria-label="Example portfolio navigation"><a href="#in-use">Work</a><a href="#in-use">Agents</a><a href="#in-use">CV</a><a href="#in-use">Contact</a></nav>
+          </div>
+          <div class="display" role="img" aria-label="Quiet Automations">
+            <div class="row1"><span>Quiet</span><span class="pill">AI specialist<br>n8n · Zapier · CRM</span></div>
+            <div class="l2">Automations</div>
+          </div>
+          <div class="bar bottom">
+            <span class="circle" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"/></svg></span>
+            <p class="meta">Agents that validate their inputs<br>and log every run</p>
+            <p class="foot">© Jillmar Ubas 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== tokens ===== -->
+  <section class="sheet" id="tokens" aria-labelledby="tokens-h">
+    <div class="sheet-head">
+      <span class="k">Tokens</span>
+      <h2 id="tokens-h">The <em>whole</em> system, in one block</h2>
+      <p>Paste it into any stylesheet. Fonts come from Google Fonts: Geist, Geist Mono and Instrument Serif.</p>
+    </div>
+    <div class="sheet-body">
+      <div class="code">
+<pre id="tokenCss">:root {
+  /* Field, sampled from the reference */
+  --cobalt-950: #041F5C;   /* derived */
+  --cobalt-800: #05348E;
+  --cobalt-600: #18469C;
+  --azure-400: #4D71AD;
+  --periwinkle-200: #A9BAD4;
+  --ice-100: #B1C8E0;
+  --haze-100: #C9C6CD;
+  --frost: #F4F6FB;        /* derived */
+
+  /* Text on glass */
+  --text-1: #F4F6FB;
+  --text-2: #D6DFF0;
+  --rule: rgba(255, 255, 255, 0.16);
+
+  /* Signal */
+  --ok: #86E8C6;
+  --warn: #F7CD86;
+  --err: #FF9C9C;
+
+  /* Glass tiers (pair each with its blur) */
+  --glass-chrome: rgba(255, 255, 255, 0.08); /* blur(10px) */
+  --glass-panel: rgba(255, 255, 255, 0.12);  /* blur(20px) */
+  --glass-modal: rgba(255, 255, 255, 0.18);  /* blur(36px) */
+  --glass-sheet: rgba(4, 31, 92, 0.60);      /* blur(28px), body text */
+  --rim: rgba(255, 255, 255, 0.26);
+  --rim-strong: rgba(244, 246, 251, 0.75);
+  --lit-top: inset 0 1px 0 rgba(255, 255, 255, 0.30);
+  --shade-bottom: inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  --float: 0 24px 60px rgba(2, 14, 48, 0.35);
+
+  /* Type */
+  --f-sans: 'Geist', 'Segoe UI', system-ui, sans-serif;
+  --f-serif: 'Instrument Serif', Georgia, serif;
+  --f-mono: 'Geist Mono', ui-monospace, Consolas, monospace;
+  --t-display: clamp(64px, 10.5vw, 148px); /* 500 · 0.88 · -0.055em */
+  --t-56: clamp(38px, 5vw, 56px);
+  --t-36: clamp(28px, 3vw, 36px);
+  --t-24: 24px;
+  --t-17: 17px;
+  --t-14: 14px;
+  --t-12: 12px;
+  --t-11: 11px;
+
+  /* Shape */
+  --r-xs: 8px;  --r-sm: 14px;  --r-md: 20px;
+  --r-frame: 28px;  --r-full: 999px;
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px;  --s-4: 16px;  --s-5: 24px;
+  --s-6: 32px;  --s-7: 48px;  --s-8: 72px;  --s-9: 112px;
+
+  /* Motion */
+  --ease-glass: cubic-bezier(.16, 1, .3, 1);
+  --d-fast: 180ms;  --d-mid: 360ms;  --d-slow: 720ms;  --d-drift: 48s;
+}
+
+.glass {
+  background: var(--glass-panel);
+  -webkit-backdrop-filter: blur(20px) saturate(155%);
+  backdrop-filter: blur(20px) saturate(155%);
+  border: 1px solid var(--rim);
+  border-radius: var(--r-md);
+  box-shadow: var(--float), var(--lit-top), var(--shade-bottom);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass { background: #123E8E; backdrop-filter: none; }
+}</pre>
+        <button class="btn btn-glass" type="button" data-copy="tokenCss">Copy CSS</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var blur=document.getElementById('tBlur'), fill=document.getElementById('tFill'), rim=document.getElementById('tRim');
+  var tile=document.getElementById('tuneTile'), out=document.getElementById('tuneCss'), sum=document.getElementById('tuneSum');
+  function tier(b){ return b<=12?'Chrome tier':b<=24?'Panel tier':'Modal tier'; }
+  function update(){
+    var b=+blur.value, f=+fill.value, r=+rim.value;
+    var cobalt=document.querySelector('input[name=tint]:checked').value==='cobalt';
+    var base=cobalt?'4, 31, 92':'255, 255, 255';
+    var fa=(f/100).toFixed(2), ra=(r/100).toFixed(2);
+    var filt='blur('+b+'px) saturate('+(cobalt?140:150)+'%)';
+    tile.style.background='rgba('+base+', '+fa+')';
+    tile.style.borderColor='rgba(255, 255, 255, '+ra+')';
+    tile.style.webkitBackdropFilter=filt; tile.style.backdropFilter=filt;
+    document.getElementById('oBlur').textContent=b+'px';
+    document.getElementById('oFill').textContent=f+'%';
+    document.getElementById('oRim').textContent=r+'%';
+    sum.textContent=(cobalt&&f>=60)?'Sheet tier, safe for body text':tier(b);
+    out.textContent='.glass {\n'+
+      '  background: rgba('+base+', '+fa+');\n'+
+      '  -webkit-backdrop-filter: '+filt+';\n'+
+      '  backdrop-filter: '+filt+';\n'+
+      '  border: 1px solid rgba(255, 255, 255, '+ra+');\n'+
+      '  border-radius: var(--r-md);\n'+
+      '  box-shadow: var(--float), var(--lit-top), var(--shade-bottom);\n'+
+      '}';
+  }
+  [blur,fill,rim].forEach(function(el){ el.addEventListener('input',update); });
+  document.querySelectorAll('input[name=tint]').forEach(function(el){
+    el.addEventListener('change',function(){
+      if(el.value==='cobalt'&&el.checked&&+fill.value<60){ fill.value=60; }
+      if(el.value==='clear'&&el.checked&&+fill.value>30){ fill.value=12; }
+      update();
+    });
+  });
+  update();
+
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=document.getElementById(btn.getAttribute('data-copy'));
+      var done=function(msg){ btn.textContent=msg; setTimeout(function(){ btn.textContent='Copy CSS'; },1800); };
+      var select=function(){
+        var range=document.createRange(); range.selectNodeContents(pre);
+        var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        done('Selected. Press Ctrl+C');
+      };
+      try{
+        if(navigator.clipboard&&navigator.clipboard.writeText){
+          navigator.clipboard.writeText(pre.textContent).then(function(){ done('Copied'); },select);
+        } else { select(); }
+      }catch(e){ select(); }
+    });
+  });
+
+  document.querySelectorAll('.switch').forEach(function(sw){
+    sw.addEventListener('click',function(){
+      sw.setAttribute('aria-checked', sw.getAttribute('aria-checked')==='true'?'false':'true');
+    });
+  });
+})();
+</script>

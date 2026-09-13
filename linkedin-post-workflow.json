@@ -1,0 +1,77 @@
+{
+  "name": "Portfolio → LinkedIn post",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a1000000-0000-4000-8000-000000000001",
+      "name": "Run to publish",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-160, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1",
+              "name": "portfolioUrl",
+              "value": "https://REPLACE-ME.netlify.app",
+              "type": "string"
+            },
+            {
+              "id": "f2",
+              "name": "postText",
+              "value": "I've spent the last stretch building things that run without me.\n\nFour n8n workflows, published and running:\n\n• A scheduled AI agent that reads the day's important emails, filters job alerts against my criteria and checks tomorrow's calendar, then writes me a briefing on Telegram. Last run: 36.9s.\n\n• Two webhook-driven order CRMs that validate every order field by field, confirm by email, and append anything malformed to an audit log instead of failing silently.\n\n• Invoice intake and finance approval across Zapier, Google Sheets and Forms, with currency routing and duplicate checks.\n\nPlus HOMEBODY — a storefront I designed, built and deployed end to end, where discount codes are validated server-side so one customer can't reuse them.\n\nIt's all in one place now:\n{{PORTFOLIO_URL}}\n\nOpen to automation, AI agent and web design work.\n\n#automation #n8n #AIagents #webdesign #promptengineering",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000002",
+      "name": "Post content",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [60, 0],
+      "notes": "Edit the post text and URL here. This is the only node you change for future announcements."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Drop the live URL into the post body. LinkedIn builds its own link preview\n// from a URL in the text, so no media fields are needed.\nconst item = $input.first().json;\nreturn [{\n  json: {\n    portfolioUrl: item.portfolioUrl,\n    postText: item.postText.replace('{{PORTFOLIO_URL}}', item.portfolioUrl)\n  }\n}];"
+      },
+      "id": "a1000000-0000-4000-8000-000000000003",
+      "name": "Build post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [280, 0]
+    },
+    {
+      "parameters": {
+        "postAs": "person",
+        "text": "={{ $json.postText }}",
+        "shareMediaCategory": "NONE",
+        "additionalFields": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000004",
+      "name": "Post to LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [500, 0],
+      "notes": "Pick your LinkedIn credential and your name under 'Person' after import."
+    }
+  ],
+  "connections": {
+    "Run to publish": {
+      "main": [[{ "node": "Post content", "type": "main", "index": 0 }]]
+    },
+    "Post content": {
+      "main": [[{ "node": "Build post", "type": "main", "index": 0 }]]
+    },
+    "Build post": {
+      "main": [[{ "node": "Post to LinkedIn", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "pinData": {}
+}

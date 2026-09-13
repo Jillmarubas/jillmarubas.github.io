@@ -1,0 +1,1137 @@
+<title>Settle Motion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Martian+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    /* surfaces: light theme */
+    --ground:#F3F4F3;
+    --paper:#FEFEFE;
+    --ink:#0A0C0B;
+    --ink-2:#5B605C;
+    --line:#E1E3E1;
+    --chip:#EDEFED;
+    --btn-bg:#0A0C0B;
+    --btn-fg:#FEFEFE;
+    --night:#000000;
+    --night-2:#151615;
+    --night-edge:transparent;
+    --on-night:#F2F3F2;
+    --on-night-2:#9DA39F;
+    --floor:#525252;
+    --mint:#ABFEC1;
+    --mint-ink:#0A2A14;
+    --glow:#121B15;
+
+    /* motion tokens */
+    --dur-quick:200ms;
+    --dur-base:360ms;
+    --dur-slow:600ms;
+    --dur-hero:900ms;
+    --ease-settle:cubic-bezier(0.22,1,0.36,1);
+    --ease-glide:cubic-bezier(0.65,0,0.35,1);
+    --ease-depart:cubic-bezier(0.55,0,1,0.45);
+    --ease-snap:cubic-bezier(0.34,1.56,0.64,1);
+
+    --f-sans:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
+    --f-mono:'Martian Mono',ui-monospace,Consolas,monospace;
+    --r-panel:28px;
+    --r-stage:20px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#0B0C0B; --paper:#141614; --ink:#ECEEEC; --ink-2:#A3A8A4; --line:#262926; --chip:#1D201D;
+      --btn-bg:#ECEEEC; --btn-fg:#0A0C0B; --night-edge:#222622;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0B0C0B; --paper:#141614; --ink:#ECEEEC; --ink-2:#A3A8A4; --line:#262926; --chip:#1D201D;
+    --btn-bg:#ECEEEC; --btn-fg:#0A0C0B; --night-edge:#222622;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,p,figure{margin:0;}
+  h1,h2,h3{font-weight:500;text-wrap:balance;}
+  ul,ol{margin:0;padding:0;list-style:none;}
+  a{color:inherit;}
+  button{font:inherit;color:inherit;}
+  code,.mono{font-family:var(--f-mono);font-size:11px;letter-spacing:-.01em;}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px;}
+  .night :focus-visible{outline-color:var(--on-night);}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(12px,2.4vw,24px) 120px;}
+  .inner{padding:0 clamp(8px,3vw,40px);}
+
+  /* nav */
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px clamp(8px,3vw,40px);flex-wrap:wrap;}
+  .brand{font-weight:600;font-size:17px;letter-spacing:.06em;text-decoration:none;}
+  .nav-links{display:flex;gap:clamp(12px,2vw,26px);flex-wrap:wrap;}
+  .nav-links a{font-size:13px;color:var(--ink-2);text-decoration:none;transition:color var(--dur-quick) var(--ease-glide);}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-ref{font-size:13px;padding:8px 14px;border-radius:999px;background:var(--btn-bg);color:var(--btn-fg);text-decoration:none;}
+
+  /* night panels */
+  .night{
+    position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r-panel);
+    background:var(--night);color:var(--on-night);border:1px solid var(--night-edge);
+  }
+  .night::before{
+    content:"";position:absolute;z-index:-1;width:70%;height:90%;left:-18%;top:-40%;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(171,254,193,.14),rgba(18,27,21,.5) 55%,rgba(0,0,0,0));
+    pointer-events:none;
+  }
+
+  /* hero */
+  .hero{padding:clamp(28px,5vw,64px) clamp(20px,5vw,64px) clamp(28px,4vw,48px);display:grid;gap:clamp(28px,4vw,44px);}
+  .pill{display:inline-flex;align-items:center;gap:8px;width:max-content;font-size:12px;padding:6px 12px;border-radius:999px;border:1px solid rgba(242,243,242,.22);color:var(--on-night-2);}
+  .hero h1{font-size:clamp(52px,9.4vw,124px);line-height:.96;letter-spacing:-.045em;font-weight:500;max-width:11ch;}
+  .hero h1 .w{display:inline-block;}
+  .hero-sub{max-width:56ch;font-size:18px;line-height:1.55;color:var(--on-night-2);}
+  .hero-sub b{color:var(--on-night);font-weight:500;}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:10px 28px;padding-top:20px;border-top:1px solid rgba(242,243,242,.12);}
+  .hero-stats div{display:grid;gap:2px;}
+  .hero-stats b{font-size:28px;font-weight:500;letter-spacing:-.03em;font-variant-numeric:tabular-nums;}
+  .hero-stats span{font-size:12px;color:var(--on-night-2);}
+
+  /* sections */
+  .sec{padding-top:clamp(72px,9vw,112px);display:grid;gap:clamp(28px,4vw,44px);scroll-margin-top:12px;}
+  .sec-head{display:grid;gap:12px;max-width:720px;}
+  .eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2);}
+  .sec-head h2{font-size:clamp(32px,4.4vw,48px);line-height:1.04;letter-spacing:-.035em;}
+  .sec-head p{color:var(--ink-2);max-width:62ch;}
+  .night .eyebrow,.night .sec-head p{color:var(--on-night-2);}
+  .sub-h{font-size:20px;letter-spacing:-.015em;}
+  .tok{display:inline-flex;align-items:center;font-family:var(--f-mono);font-size:10.5px;padding:4px 9px;border-radius:999px;background:var(--chip);color:var(--ink);white-space:nowrap;}
+  .night .tok{background:var(--night-2);color:var(--on-night);}
+  .toks{display:flex;flex-wrap:wrap;gap:6px;}
+
+  /* reel strip */
+  .reel{display:grid;gap:10px;}
+  .strip{display:flex;height:64px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--paper);}
+  .seg{position:relative;border-right:1px solid var(--line);transition:filter var(--dur-quick) var(--ease-glide),box-shadow var(--dur-quick) var(--ease-glide);}
+  .seg:last-child{border-right:0;}
+  .seg.is-night{background:var(--night);border-right-color:#222;}
+  .seg.is-paper{background:var(--paper);}
+  .seg.hot{box-shadow:inset 0 0 0 2px var(--mint);}
+  .axis{position:relative;height:18px;}
+  .axis span{position:absolute;top:0;transform:translateX(-50%);font-family:var(--f-mono);font-size:10px;color:var(--ink-2);font-variant-numeric:tabular-nums;}
+  .axis span:first-child{transform:none;}
+  .axis span:last-child{transform:translateX(-100%);}
+  .beats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px;}
+  @media (max-width:900px){.beats{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media (max-width:560px){.beats{grid-template-columns:1fr;}}
+  .beat{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;padding:16px 0;border-top:1px solid var(--line);cursor:default;}
+  .beat .tc{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:3px;}
+  .beat h3{font-size:16px;display:flex;align-items:center;gap:8px;}
+  .beat h3 i{width:10px;height:10px;border-radius:3px;border:1px solid var(--line);flex:none;}
+  .beat h3 i.n{background:#000;border-color:#000;}
+  .beat h3 i.p{background:var(--paper);}
+  .beat .toks{grid-column:2;}
+  .beat.hot h3{text-decoration:underline;text-decoration-color:var(--mint);text-decoration-thickness:3px;text-underline-offset:4px;}
+
+  /* principles */
+  .principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;}
+  @media (max-width:760px){.principles{grid-template-columns:1fr;}}
+  .pr{display:grid;gap:10px;padding:24px 0 28px;border-top:1px solid var(--ink);}
+  .pr h3{font-size:28px;letter-spacing:-.03em;line-height:1.1;}
+  .pr .rule{font-weight:500;}
+  .pr p{color:var(--ink-2);max-width:52ch;}
+
+  /* palette */
+  .palette{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:16px;}
+  @media (max-width:980px){.palette{grid-template-columns:repeat(4,minmax(0,1fr));}}
+  @media (max-width:520px){.palette{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  .sw{display:grid;gap:4px;align-content:start;}
+  .sw i{display:block;height:72px;border-radius:14px;background:var(--c);border:1px solid var(--line);margin-bottom:6px;}
+  .sw b{font-size:14px;font-weight:500;}
+  .sw code{color:var(--ink-2);}
+  .sw span{font-size:12px;color:var(--ink-2);line-height:1.4;}
+
+  /* durations */
+  .durs{display:grid;border-top:1px solid var(--line);overflow-x:auto;}
+  .drow{display:grid;grid-template-columns:120px 64px 56px 56px minmax(160px,1fr) minmax(160px,.9fr);gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);min-width:720px;}
+  .drow.head{font-family:var(--f-mono);font-size:10px;color:var(--ink-2);padding:10px 0;}
+  .drow .n{font-family:var(--f-mono);font-size:12px;}
+  .drow .v{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums;}
+  .drow .f{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;}
+  .drow .use{font-size:13px;color:var(--ink-2);line-height:1.4;}
+  .dtrack{position:relative;height:18px;}
+  .dtrack .bar{position:absolute;left:0;top:8px;height:2px;border-radius:2px;background:var(--line);width:var(--w);}
+  .dtrack .dot{position:absolute;left:0;top:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);}
+
+  /* easing panel */
+  .ease-panel{padding:clamp(24px,4vw,48px);display:grid;gap:32px;}
+  .curves{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;}
+  @media (max-width:1000px){.curves{grid-template-columns:repeat(2,minmax(0,1fr));} .curve:last-child{grid-column:1/-1;}}
+  @media (max-width:520px){.curves{grid-template-columns:1fr;}}
+  .curve{display:grid;gap:12px;align-content:start;padding:16px;border-radius:18px;background:var(--night-2);border:1px solid rgba(242,243,242,.08);}
+  .curve h3{font-size:18px;letter-spacing:-.02em;display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+  .curve h3 code{color:var(--on-night-2);font-size:10px;}
+  .curve svg{width:100%;height:auto;display:block;overflow:visible;}
+  .curve .box{fill:none;stroke:rgba(242,243,242,.14);stroke-width:.6;}
+  .curve .lin{fill:none;stroke:rgba(242,243,242,.18);stroke-width:.6;stroke-dasharray:2 2;}
+  .curve .cv{fill:none;stroke:var(--on-night);stroke-width:1.8;stroke-linecap:round;}
+  .curve .hd{stroke:var(--on-night-2);stroke-width:.6;}
+  .curve .hp{fill:var(--night-2);stroke:var(--on-night-2);stroke-width:.8;}
+  .trk{position:relative;height:22px;border-radius:999px;background:rgba(242,243,242,.06);}
+  .trk i{position:absolute;left:5px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--on-night);}
+  .trk i.ghost{background:transparent;border:1px solid rgba(242,243,242,.35);}
+  .curve dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;font-size:12px;}
+  .curve dt{font-family:var(--f-mono);font-size:10px;color:var(--on-night-2);padding-top:2px;}
+  .curve dd{margin:0;color:var(--on-night);word-break:break-word;}
+  .curve .use{font-size:13px;color:var(--on-night-2);line-height:1.45;}
+
+  .chor{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px;}
+  @media (max-width:860px){.chor{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  .chor div{display:grid;gap:4px;padding:16px 0;border-top:1px solid var(--line);}
+  .chor code{font-size:11px;color:var(--ink-2);}
+  .chor b{font-size:24px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .chor span{font-size:13px;color:var(--ink-2);line-height:1.45;}
+
+  /* library */
+  .group{display:grid;gap:18px;}
+  .tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 24px;}
+  @media (max-width:820px){.tiles{grid-template-columns:1fr;}}
+  .tile{display:grid;gap:14px;align-content:start;}
+  .stage{position:relative;height:260px;border-radius:var(--r-stage);overflow:hidden;isolation:isolate;}
+  .stage-paper{background:var(--paper);border:1px solid var(--line);color:var(--ink);}
+  .stage-night{background:var(--night);border:1px solid var(--night-edge);color:var(--on-night);}
+  .replay{
+    position:absolute;z-index:5;top:12px;right:12px;display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;padding:6px 11px 6px 9px;border-radius:999px;cursor:pointer;border:1px solid var(--line);
+    background:var(--paper);color:var(--ink);transition:transform var(--dur-quick) var(--ease-glide);
+  }
+  .replay:hover{transform:translateY(-1px);}
+  .stage-night .replay{background:var(--night-2);border-color:rgba(242,243,242,.14);color:var(--on-night);}
+  .tile-meta{display:grid;gap:8px;}
+  .tile-meta h3{font-size:20px;letter-spacing:-.02em;}
+  .tile-meta p{font-size:14px;color:var(--ink-2);max-width:56ch;line-height:1.5;}
+
+  /* demo: mini browser bar */
+  .mini-bar{position:absolute;left:18px;right:18px;top:14px;height:20px;display:flex;align-items:center;gap:10px;}
+  .mini-bar i{display:block;width:34px;height:5px;border-radius:3px;background:var(--line);}
+  .mini-bar b{display:block;width:44px;height:14px;border-radius:999px;background:var(--btn-bg);margin-left:auto;}
+  .mini-bar .slot{flex:1;}
+  .stage-night .mini-bar i{background:#262926;}
+
+  /* demo: logo */
+  .logo-mark{position:absolute;left:50%;top:10px;transform:translateX(-50%) scale(.42);transform-origin:50% 0;font-size:64px;font-weight:600;letter-spacing:.04em;line-height:1;white-space:nowrap;}
+  .logo-mark .m{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.04em;}
+  .logo-mark .m > span{display:inline-block;}
+
+  /* demo: panel rise */
+  .rise-panel{position:absolute;left:12px;right:12px;top:46px;bottom:12px;border-radius:18px;background:#000;overflow:hidden;transform-origin:50% 100%;display:grid;place-items:center;padding:20px;}
+  .rise-panel::before{content:"";position:absolute;width:70%;height:120%;left:-20%;top:-60%;border-radius:50%;background:radial-gradient(closest-side,rgba(171,254,193,.16),rgba(0,0,0,0));}
+  .rise-panel p{position:relative;color:#F2F3F2;font-size:clamp(26px,3.4vw,38px);font-weight:500;letter-spacing:-.035em;line-height:1.02;text-align:center;max-width:12ch;}
+  .rise-panel .w,.scrub-text .w{display:inline-block;}
+
+  /* demo: scrub */
+  .scrub-wrap{position:absolute;inset:0;display:grid;grid-template-rows:1fr auto;padding:22px 22px 18px;gap:12px;}
+  .scrub-text{align-self:center;font-size:clamp(26px,3.3vw,38px);font-weight:500;letter-spacing:-.035em;line-height:1.05;max-width:15ch;}
+  .scrub-ctl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:center;}
+  .scrub-ctl label{font-size:12px;color:var(--on-night-2);grid-column:1/-1;display:flex;justify-content:space-between;}
+  .scrub-ctl output{font-family:var(--f-mono);font-size:10.5px;color:var(--on-night);font-variant-numeric:tabular-nums;}
+  .scrub-ctl input{width:100%;accent-color:var(--on-night);grid-column:1/-1;}
+
+  /* demo: blur-in cards */
+  .mcards{position:absolute;inset:52px 18px 18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+  .mc{border-radius:14px;background:var(--ground);border:1px solid var(--line);padding:14px;display:grid;gap:10px;align-content:start;}
+  .mc .ic{width:26px;height:26px;border-radius:50%;background:var(--btn-bg);}
+  .mc b{font-size:15px;font-weight:500;letter-spacing:-.01em;}
+  .mc i{display:block;height:6px;border-radius:3px;background:var(--line);transform-origin:0 50%;}
+  .mc i:nth-of-type(2){width:70%;}
+
+  /* demo: counter */
+  .ctr-wrap{position:absolute;inset:0;display:grid;place-content:center;justify-items:start;gap:10px;padding:24px;}
+  .ctr-label{font-size:13px;color:var(--ink-2);display:flex;gap:10px;align-items:center;}
+  .ctr-label .tok{font-size:10px;}
+  .ctr{font-size:clamp(48px,6.4vw,72px);font-weight:500;letter-spacing:-.04em;line-height:1;display:flex;font-variant-numeric:tabular-nums;}
+  .ctr .col{display:inline-block;height:1em;overflow:hidden;}
+  .ctr .strip-d{display:flex;flex-direction:column;}
+  .ctr .strip-d span{height:1em;line-height:1;text-align:center;}
+  .ctr .sep{line-height:1;}
+  .ctr-delta{font-family:var(--f-mono);font-size:11px;padding:4px 9px;border-radius:999px;background:var(--chip);color:var(--ink);font-variant-numeric:tabular-nums;}
+
+  /* demo: button morph */
+  .morph-wrap{position:absolute;inset:0;display:grid;place-items:center;gap:0;padding:24px;}
+  .morph-card{width:min(100%,300px);display:grid;gap:14px;justify-items:center;padding:20px;border-radius:18px;background:var(--ground);border:1px solid var(--line);}
+  .morph-card .row{width:100%;display:flex;justify-content:space-between;font-size:13px;color:var(--ink-2);}
+  .morph-card .row b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums;}
+  .morph{position:relative;width:220px;height:48px;border-radius:999px;background:var(--btn-bg);color:var(--btn-fg);display:grid;place-items:center;overflow:hidden;font-size:15px;font-weight:500;}
+  .morph > *{grid-area:1/1;}
+  .morph .spin{opacity:0;width:22px;height:22px;}
+  .morph .done{opacity:0;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+  .morph .lbl{white-space:nowrap;}
+
+  /* demo: pinned index + chart */
+  .pin-wrap{position:absolute;inset:0;display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;padding:22px;}
+  .idx{position:relative;display:grid;gap:4px;align-content:start;padding-left:14px;border-left:1px solid var(--line);}
+  .idx li{font-size:13px;color:var(--ink-2);padding:5px 0;transition:color var(--dur-quick) var(--ease-glide);}
+  .idx li.on{color:var(--ink);font-weight:500;}
+  .idx .marker{position:absolute;left:-1.5px;top:0;width:2px;height:30px;border-radius:2px;background:var(--ink);}
+  .pane{border-radius:14px;background:var(--ground);border:1px solid var(--line);padding:16px;display:grid;grid-template-rows:auto 1fr;gap:10px;min-width:0;}
+  .pane-title{font-size:17px;font-weight:500;letter-spacing:-.015em;}
+  .pane svg{width:100%;height:100%;min-height:120px;display:block;}
+  .pane .grid-l{stroke:var(--line);stroke-width:1;}
+  .pane .area{fill:var(--mint);opacity:.55;}
+  .pane .line{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;}
+  @media (max-width:520px){.pin-wrap{grid-template-columns:1fr;}.idx{display:none;}}
+
+  /* demo: orbit */
+  .orbit{position:absolute;inset:0;}
+  .orbit svg{position:absolute;inset:0;width:100%;height:100%;}
+  .orbit .ring{fill:none;stroke:rgba(242,243,242,.16);stroke-width:1;}
+  .orbit .core{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;background:radial-gradient(closest-side,rgba(171,254,193,.14),rgba(0,0,0,0));}
+  .coin{position:absolute;left:0;top:0;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;display:grid;place-items:center;background:#151615;border:1px solid rgba(242,243,242,.16);color:#F2F3F2;font-size:20px;font-weight:500;will-change:transform;}
+  .orbit-cap{position:absolute;left:20px;bottom:16px;font-family:var(--f-mono);font-size:10.5px;color:var(--on-night-2);}
+
+  /* rules */
+  .logo-rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;}
+  @media (max-width:760px){.logo-rules{grid-template-columns:1fr;}}
+  .lr{display:grid;gap:0;align-content:start;}
+  .lr h3{font-size:14px;font-weight:500;padding-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .lr li{padding:12px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.5;}
+  .lr li code{color:var(--ink-2);}
+  .mark-yes,.mark-no{width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;font-size:11px;font-weight:600;flex:none;}
+  .mark-yes{background:var(--mint);color:var(--mint-ink);}
+  .mark-no{background:var(--btn-bg);color:var(--btn-fg);}
+  .dd{display:grid;border-top:1px solid var(--ink);}
+  .dd-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 40px;padding:18px 0;border-bottom:1px solid var(--line);}
+  @media (max-width:700px){.dd-row{grid-template-columns:1fr;}}
+  .dd-row p{display:grid;grid-template-columns:18px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.5;}
+  .dd-row p span:last-child{color:var(--ink-2);}
+  .dd-row p b{color:var(--ink);font-weight:500;}
+
+  /* access */
+  .acc{border-top:1px solid var(--ink);overflow-x:auto;}
+  .acc table{width:100%;border-collapse:collapse;min-width:620px;font-size:14px;}
+  .acc th{text-align:left;font-family:var(--f-mono);font-size:10px;font-weight:400;color:var(--ink-2);padding:12px 16px 12px 0;border-bottom:1px solid var(--line);}
+  .acc td{padding:14px 16px 14px 0;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  .acc td:first-child{font-weight:500;white-space:nowrap;}
+  .acc td:nth-child(2){color:var(--ink-2);}
+  .acc-rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px;}
+  @media (max-width:760px){.acc-rules{grid-template-columns:1fr;}}
+  .acc-rules div{padding:16px 0;border-top:1px solid var(--line);display:grid;gap:6px;}
+  .acc-rules b{font-weight:500;}
+  .acc-rules span{font-size:14px;color:var(--ink-2);line-height:1.5;}
+
+  /* export */
+  .export{padding:clamp(24px,4vw,48px);display:grid;gap:28px;}
+  .code{position:relative;}
+  .code pre{margin:0;padding:22px;border-radius:16px;overflow:auto;max-height:520px;background:var(--night-2);border:1px solid rgba(242,243,242,.08);font-family:var(--f-mono);font-size:11.5px;line-height:1.8;color:var(--on-night);}
+  .code pre .c{color:var(--on-night-2);}
+  .copy{position:absolute;top:12px;right:12px;font-size:12px;padding:8px 14px;border-radius:999px;border:0;cursor:pointer;background:var(--on-night);color:#0A0C0B;font-weight:500;}
+  .foot{padding:40px clamp(8px,3vw,40px) 0;font-size:13px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;}
+
+  /* floating dock (the reference's floating toggle, repurposed as playback control) */
+  .dock{
+    position:fixed;z-index:50;right:clamp(10px,2vw,24px);bottom:clamp(10px,2vw,24px);
+    display:flex;align-items:center;gap:10px;padding:6px 6px 6px 14px;border-radius:999px;
+    background:#000;color:#F2F3F2;box-shadow:0 12px 32px rgba(0,0,0,.28);border:1px solid #222622;
+  }
+  .dock .lbl{font-size:12px;color:#9DA39F;}
+  .dock .seg-c{display:flex;padding:2px;border-radius:999px;background:#151615;}
+  .dock button{border:0;background:transparent;color:#F2F3F2;font-size:12px;padding:6px 11px;border-radius:999px;cursor:pointer;font-variant-numeric:tabular-nums;}
+  .dock .seg-c button[aria-pressed="true"]{background:#F2F3F2;color:#0A0C0B;}
+  .dock .rm{display:flex;align-items:center;gap:8px;padding-right:10px;}
+  .dock .rm i{position:relative;width:30px;height:18px;border-radius:999px;background:#2A2E2A;transition:background var(--dur-quick) var(--ease-glide);}
+  .dock .rm i::after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#F2F3F2;transition:transform var(--dur-base) var(--ease-settle);}
+  .dock .rm[aria-checked="true"] i{background:var(--mint);}
+  .dock .rm[aria-checked="true"] i::after{transform:translateX(12px);background:#0A2A14;}
+  .dock :focus-visible{outline:2px solid #F2F3F2;outline-offset:2px;}
+  @media (max-width:560px){.dock{left:10px;right:10px;justify-content:space-between;}.dock .lbl{display:none;}}
+
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
+</style>
+
+<div class="wrap">
+
+  <nav class="nav" aria-label="Sections">
+    <a class="brand" href="#top">SETTLE</a>
+    <div class="nav-links">
+      <a href="#reel">Reference</a><a href="#principles">Principles</a><a href="#tokens">Tokens</a><a href="#library">Library</a><a href="#rules">Rules</a><a href="#access">Access</a><a href="#export">Export</a>
+    </div>
+    <a class="nav-ref" href="https://pin.it/yXhosP1J7" target="_blank" rel="noopener">Source reel ↗</a>
+  </nav>
+
+  <header class="night hero" id="top">
+    <span class="pill">Motion system · v1.0</span>
+    <h1 id="heroH"><span class="w">Motion</span> <span class="w">that</span> <span class="w">settles.</span></h1>
+    <p class="hero-sub">A motion system for scroll-driven product films and sites, measured frame by frame from a <b>38.7-second fintech reel</b>. Every duration and curve is a named token, with frame counts at 30 and 60 fps and the matching After Effects and GSAP values.</p>
+    <div class="hero-stats">
+      <div><b>38.7 s</b><span>reference reel</span></div>
+      <div><b>9</b><span>beats mapped</span></div>
+      <div><b>8</b><span>live patterns</span></div>
+      <div><b>5</b><span>easing curves</span></div>
+    </div>
+  </header>
+
+  <!-- ===== reference ===== -->
+  <section class="sec inner" id="reel" aria-labelledby="reel-h">
+    <div class="sec-head">
+      <span class="eyebrow">Reference</span>
+      <h2 id="reel-h">The reel, beat by beat</h2>
+      <p>The reel alternates white sections with black rounded panels that rise over them. Each block below is a beat, sized to its running time. The chips name the pattern from the library that reproduces it.</p>
+    </div>
+    <div class="reel">
+      <div class="strip" id="strip" aria-hidden="true">
+        <div class="seg is-paper" data-i="0" style="flex-grow:1.0"></div>
+        <div class="seg is-night" data-i="1" style="flex-grow:4.2"></div>
+        <div class="seg is-paper" data-i="2" style="flex-grow:7.6"></div>
+        <div class="seg is-paper" data-i="3" style="flex-grow:6.2"></div>
+        <div class="seg is-paper" data-i="4" style="flex-grow:2.0"></div>
+        <div class="seg is-night" data-i="5" style="flex-grow:2.0"></div>
+        <div class="seg is-paper" data-i="6" style="flex-grow:6.0"></div>
+        <div class="seg is-paper" data-i="7" style="flex-grow:6.0"></div>
+        <div class="seg is-night" data-i="8" style="flex-grow:3.7"></div>
+      </div>
+      <div class="axis" aria-hidden="true"><span style="left:0">0:00</span><span style="left:25.84%">0:10</span><span style="left:51.68%">0:20</span><span style="left:77.52%">0:30</span><span style="left:100%">0:38.7</span></div>
+    </div>
+    <ol class="beats" id="beats">
+      <li class="beat" data-i="0"><span class="tc">0:00–0:01</span><h3><i class="p"></i>Logo intro</h3><div class="toks"><span class="tok">Logo intro</span><span class="tok">Panel rise</span></div></li>
+      <li class="beat" data-i="1"><span class="tc">0:01–0:05</span><h3><i class="n"></i>Hero</h3><div class="toks"><span class="tok">Word scrub</span><span class="tok">Blur-in</span><span class="tok">Menu drop</span></div></li>
+      <li class="beat" data-i="2"><span class="tc">0:05–0:13</span><h3><i class="p"></i>Payment form</h3><div class="toks"><span class="tok">Counter tick</span><span class="tok">Button morph</span><span class="tok">Blur-in</span></div></li>
+      <li class="beat" data-i="3"><span class="tc">0:13–0:19</span><h3><i class="p"></i>Pinned features</h3><div class="toks"><span class="tok">Pinned index</span><span class="tok">Chart draw</span></div></li>
+      <li class="beat" data-i="4"><span class="tc">0:19–0:21</span><h3><i class="p"></i>Card in hand</h3><div class="toks"><span class="tok">Blur-in</span><span class="tok">Scale reveal</span></div></li>
+      <li class="beat" data-i="5"><span class="tc">0:21–0:23</span><h3><i class="n"></i>Card features</h3><div class="toks"><span class="tok">Panel rise</span><span class="tok">Blur-in</span></div></li>
+      <li class="beat" data-i="6"><span class="tc">0:23–0:29</span><h3><i class="p"></i>Bento grid</h3><div class="toks"><span class="tok">Blur-in</span><span class="tok">Word scrub</span></div></li>
+      <li class="beat" data-i="7"><span class="tc">0:29–0:35</span><h3><i class="p"></i>Crypto</h3><div class="toks"><span class="tok">Orbit</span><span class="tok">Pinned index</span></div></li>
+      <li class="beat" data-i="8"><span class="tc">0:35–0:39</span><h3><i class="n"></i>Pricing</h3><div class="toks"><span class="tok">Panel rise</span><span class="tok">Blur-in</span></div></li>
+    </ol>
+  </section>
+
+  <!-- ===== principles ===== -->
+  <section class="sec inner" id="principles" aria-labelledby="pr-h">
+    <div class="sec-head">
+      <span class="eyebrow">Principles</span>
+      <h2 id="pr-h">Four beliefs, each with a rule you can check</h2>
+    </div>
+    <div class="principles">
+      <div class="pr">
+        <h3>Arrive, then settle</h3>
+        <p class="rule">Every entrance decelerates on <code>settle</code>. Exits use <code>depart</code> and run one step shorter.</p>
+        <p>Nothing in the reel lands at constant speed. Panels, cards and words come in fast and slow down into place, which is where the system gets its name.</p>
+      </div>
+      <div class="pr">
+        <h3>Scroll is the playhead</h3>
+        <p class="rule">Section reveals are scrubbed to scroll with a lerp of 0.12. Timed motion is only for feedback.</p>
+        <p>The headline words brighten as you scroll, and reverse when you scroll back. The viewer sets the speed, so there's no sequence to wait out.</p>
+      </div>
+      <div class="pr">
+        <h3>One thing moves at a time</h3>
+        <p class="rule">No more than 3 elements in flight. Stagger words by 60 ms and cards by 80 ms.</p>
+        <p>Groups cascade instead of arriving all at once, so the eye follows the order the reader should follow.</p>
+      </div>
+      <div class="pr">
+        <h3>Mint means done</h3>
+        <p class="rule"><code>#ABFEC1</code> appears only when something has completed or is live. Never use it on hover.</p>
+        <p>In the reel, the only saturated color is the payment's success state. The faint green haze on black panels is the one ambient exception, kept under 14% opacity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== tokens ===== -->
+  <section class="sec inner" id="tokens" aria-labelledby="tok-h">
+    <div class="sec-head">
+      <span class="eyebrow">Tokens</span>
+      <h2 id="tok-h">Named once, used everywhere</h2>
+      <p>Tokens are named by purpose, not value, so the numbers can change without renaming anything. Frame counts are rounded to the nearest whole frame.</p>
+    </div>
+
+    <div class="group">
+      <h3 class="sub-h">Palette, sampled from the reel</h3>
+      <ul class="palette">
+        <li class="sw"><i style="--c:#0A0C0B"></i><b>Ink</b><code>#0A0C0B</code><span>Type on paper. Sampled at 0:21.</span></li>
+        <li class="sw"><i style="--c:#FEFEFE"></i><b>Paper</b><code>#FEFEFE</code><span>Light sections. Sampled at 0:10.</span></li>
+        <li class="sw"><i style="--c:#F5F5F5"></i><b>Mist</b><code>#F5F5F5</code><span>Cards on paper. Sampled at 0:15.</span></li>
+        <li class="sw"><i style="--c:#151515"></i><b>Graphite</b><code>#151515</code><span>Cards on night. Sampled at 0:21.</span></li>
+        <li class="sw"><i style="--c:#121B15"></i><b>Glow</b><code>#121B15</code><span>Green haze on night panels. Sampled at 0:35.</span></li>
+        <li class="sw"><i style="--c:#525252"></i><b>Floor</b><code>#525252</code><span>Words not yet revealed. Sampled at 0:03.</span></li>
+        <li class="sw"><i style="--c:#ABFEC1"></i><b>Mint</b><code>#ABFEC1</code><span>Success state only. Sampled at 0:11.</span></li>
+      </ul>
+    </div>
+
+    <div class="group">
+      <h3 class="sub-h">Duration</h3>
+      <div class="durs" id="durs">
+        <div class="drow head"><span>token</span><span>ms</span><span>@30</span><span>@60</span><span>to scale</span><span>use</span></div>
+        <div class="drow"><span class="n">--dur-quick</span><span class="v">200</span><span class="f">6f</span><span class="f">12f</span><span class="dtrack" style="--w:22.2%"><span class="bar"></span><span class="dot" data-ms="200"></span></span><span class="use">Hover, press, menu open</span></div>
+        <div class="drow"><span class="n">--dur-base</span><span class="v">360</span><span class="f">11f</span><span class="f">22f</span><span class="dtrack" style="--w:40%"><span class="bar"></span><span class="dot" data-ms="360"></span></span><span class="use">Cards, morphs, counters, title swaps</span></div>
+        <div class="drow"><span class="n">--dur-slow</span><span class="v">600</span><span class="f">18f</span><span class="f">36f</span><span class="dtrack" style="--w:66.7%"><span class="bar"></span><span class="dot" data-ms="600"></span></span><span class="use">Panel rise, logo letters, chart draw</span></div>
+        <div class="drow"><span class="n">--dur-hero</span><span class="v">900</span><span class="f">27f</span><span class="f">54f</span><span class="dtrack" style="--w:100%"><span class="bar"></span><span class="dot" data-ms="900"></span></span><span class="use">Film open only, once per piece</span></div>
+        <div class="drow"><span class="n">--dur-loop</span><span class="v">12000</span><span class="f">360f</span><span class="f">720f</span><span class="dtrack" style="--w:100%"><span class="bar" style="background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 10px)"></span></span><span class="use">Ambient orbit, one revolution. Not to scale.</span></div>
+      </div>
+    </div>
+
+    <div class="night ease-panel" id="curves">
+      <div class="sec-head">
+        <span class="eyebrow">Easing</span>
+        <h3 class="sub-h" style="font-size:clamp(26px,3vw,34px);letter-spacing:-.03em;line-height:1.1">Five curves, each with one job</h3>
+        <p>All five run at 900 ms here so you can compare them. The outlined dot moves linearly for reference. The vertical axis is compressed so <code>snap</code>'s overshoot fits.</p>
+      </div>
+      <div class="curves">
+        <article class="curve">
+          <h3>settle <code>entrances</code></h3>
+          <svg viewBox="-6 -50 112 138" aria-hidden="true"><rect class="box" x="0" y="0" width="100" height="80"/><path class="lin" d="M0 80 L100 0"/><line class="hd" x1="0" y1="80" x2="22" y2="0"/><line class="hd" x1="100" y1="0" x2="36" y2="0"/><path class="cv" d="M0 80 C22 0 36 0 100 0"/><circle class="hp" cx="22" cy="0" r="2.4"/><circle class="hp" cx="36" cy="0" r="2.4"/></svg>
+          <div class="trk"><i class="ghost"></i><i data-ease="settle"></i></div>
+          <dl><dt>css</dt><dd>cubic-bezier(.22, 1, .36, 1)</dd><dt>gsap</dt><dd>power4.out</dd><dt>ae</dt><dd>out 22% · in 64%</dd></dl>
+          <p class="use">Panels, cards, words and letters arriving.</p>
+        </article>
+        <article class="curve">
+          <h3>glide <code>in view</code></h3>
+          <svg viewBox="-6 -50 112 138" aria-hidden="true"><rect class="box" x="0" y="0" width="100" height="80"/><path class="lin" d="M0 80 L100 0"/><line class="hd" x1="0" y1="80" x2="65" y2="80"/><line class="hd" x1="100" y1="0" x2="35" y2="0"/><path class="cv" d="M0 80 C65 80 35 0 100 0"/><circle class="hp" cx="65" cy="80" r="2.4"/><circle class="hp" cx="35" cy="0" r="2.4"/></svg>
+          <div class="trk"><i class="ghost"></i><i data-ease="glide"></i></div>
+          <dl><dt>css</dt><dd>cubic-bezier(.65, 0, .35, 1)</dd><dt>gsap</dt><dd>power2.inOut</dd><dt>ae</dt><dd>out 65% · in 65%</dd></dl>
+          <p class="use">Index markers, button width, counter digits and the logo docking into the nav.</p>
+        </article>
+        <article class="curve">
+          <h3>depart <code>exits</code></h3>
+          <svg viewBox="-6 -50 112 138" aria-hidden="true"><rect class="box" x="0" y="0" width="100" height="80"/><path class="lin" d="M0 80 L100 0"/><line class="hd" x1="0" y1="80" x2="55" y2="80"/><line class="hd" x1="100" y1="0" x2="100" y2="44"/><path class="cv" d="M0 80 C55 80 100 44 100 0"/><circle class="hp" cx="55" cy="80" r="2.4"/><circle class="hp" cx="100" cy="44" r="2.4"/></svg>
+          <div class="trk"><i class="ghost"></i><i data-ease="depart"></i></div>
+          <dl><dt>css</dt><dd>cubic-bezier(.55, 0, 1, .45)</dd><dt>gsap</dt><dd>circ.in</dd><dt>ae</dt><dd>out 55% · in 0.1%</dd></dl>
+          <p class="use">Anything leaving: old titles, labels, closing menus.</p>
+        </article>
+        <article class="curve">
+          <h3>snap <code>success</code></h3>
+          <svg viewBox="-6 -50 112 138" aria-hidden="true"><rect class="box" x="0" y="0" width="100" height="80"/><path class="lin" d="M0 80 L100 0"/><line class="hd" x1="0" y1="80" x2="34" y2="-44.8"/><line class="hd" x1="100" y1="0" x2="64" y2="0"/><path class="cv" d="M0 80 C34 -44.8 64 0 100 0"/><circle class="hp" cx="34" cy="-44.8" r="2.4"/><circle class="hp" cx="64" cy="0" r="2.4"/></svg>
+          <div class="trk"><i class="ghost"></i><i data-ease="snap"></i></div>
+          <dl><dt>css</dt><dd>cubic-bezier(.34, 1.56, .64, 1)</dd><dt>gsap</dt><dd>back.out(1.7)</dd><dt>ae</dt><dd>overshoot expression</dd></dl>
+          <p class="use">Only the success pill. AE influence can't overshoot, so use an expression.</p>
+        </article>
+        <article class="curve">
+          <h3>scrub <code>scroll</code></h3>
+          <svg viewBox="-6 -50 112 138" aria-hidden="true"><rect class="box" x="0" y="0" width="100" height="80"/><path class="cv" d="M0 80 L100 0"/></svg>
+          <div class="trk"><i class="ghost"></i><i data-ease="linear"></i></div>
+          <dl><dt>css</dt><dd>linear + lerp 0.12</dd><dt>gsap</dt><dd>scrub: 1 · none</dd><dt>ae</dt><dd>linear, then smooth()</dd></dl>
+          <p class="use">Scroll-mapped reveals and the orbit loop. Smoothing does the easing here.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="group">
+      <h3 class="sub-h">Choreography</h3>
+      <div class="chor">
+        <div><code>--stagger-letter</code><b>40 ms</b><span>Between letters in the logo intro</span></div>
+        <div><code>--stagger-word</code><b>60 ms</b><span>Between headline words. 9 words finish in about 900 ms.</span></div>
+        <div><code>--stagger-card</code><b>80 ms</b><span>Between cards in a row</span></div>
+        <div><code>--max-in-flight</code><b>3</b><span>Elements animating at once, at most</span></div>
+        <div><code>--rise-nudge</code><b>8 px</b><span>Title swaps, delta chips</span></div>
+        <div><code>--rise-sm</code><b>24 px</b><span>Text blocks, hero settle</span></div>
+        <div><code>--rise-card</code><b>48 px</b><span>Cards and mockups</span></div>
+        <div><code>--blur-in</code><b>8 px</b><span>Start blur for blur-in. Never more.</span></div>
+        <div><code>--word-floor</code><b>0.22</b><span>Opacity of words not yet revealed</span></div>
+        <div><code>--panel-scale</code><b>0.92 → 1</b><span>Night panels widen as they rise</span></div>
+        <div><code>--press-scale</code><b>0.96</b><span>Button press, 200 ms there and back</span></div>
+        <div><code>--scroll-lerp</code><b>0.12</b><span>Per-frame smoothing toward scroll</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== library ===== -->
+  <section class="sec inner" id="library" aria-labelledby="lib-h">
+    <div class="sec-head">
+      <span class="eyebrow">Library</span>
+      <h2 id="lib-h">Eight patterns, running live</h2>
+      <p>Each pattern loops while it's on screen and rests on its final frame. Use the dock in the corner to slow everything to ¼ speed, or to preview the reduced-motion version.</p>
+    </div>
+
+    <div class="group">
+      <h3 class="sub-h">Entrances &amp; transitions</h3>
+      <div class="tiles">
+        <div class="tile">
+          <div class="stage stage-paper" data-demo="logo" role="img" aria-label="Logo letters rise from a mask, then the wordmark shrinks into the navigation bar">
+            <button class="replay" type="button" data-replay>Replay</button>
+            <div class="mini-bar"><i></i><i></i><span class="slot"></span><i></i><b></b></div>
+            <div class="logo-mark"><span class="m"><span>S</span></span><span class="m"><span>E</span></span><span class="m"><span>T</span></span><span class="m"><span>T</span></span><span class="m"><span>L</span></span><span class="m"><span>E</span></span></div>
+          </div>
+          <div class="tile-meta">
+            <h3>Logo intro</h3>
+            <div class="toks"><span class="tok">slow</span><span class="tok">settle</span><span class="tok">stagger-letter 40</span><span class="tok">glide to dock</span></div>
+            <p>Letters rise out of a mask one after another. After a 250 ms hold, the wordmark glides up and shrinks to 42% in the nav. Total: 1.65 s.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="stage stage-paper" data-demo="rise" role="img" aria-label="A black rounded panel rises from the bottom and widens, then its headline words brighten one by one">
+            <button class="replay" type="button" data-replay>Replay</button>
+            <div class="mini-bar"><i></i><i></i><span class="slot"></span><i></i><b></b></div>
+            <div class="rise-panel"><p><span class="w">Everything,</span> <span class="w">in</span> <span class="w">one</span> <span class="w">place.</span></p></div>
+          </div>
+          <div class="tile-meta">
+            <h3>Panel rise</h3>
+            <div class="toks"><span class="tok">slow</span><span class="tok">settle</span><span class="tok">panel-scale .92 → 1</span><span class="tok">radius 32 → 18</span></div>
+            <p>The reel's signature section change. A night panel rises from 105% below, widening and tightening its corners as it comes. Its words start 420 ms in.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="stage stage-night" data-demo="scrub">
+            <button class="replay" type="button" data-replay>Replay</button>
+            <div class="scrub-wrap">
+              <p class="scrub-text" id="scrubText"><span class="w">Money</span> <span class="w">moves</span> <span class="w">as</span> <span class="w">fast</span> <span class="w">as</span> <span class="w">you</span> <span class="w">scroll,</span> <span class="w">word</span> <span class="w">by word.</span></p>
+              <div class="scrub-ctl">
+                <label for="scrubIn"><span>Drag to scroll</span><output id="scrubOut" for="scrubIn">100% · lerp 0.12</output></label>
+                <input id="scrubIn" type="range" min="0" max="1000" value="1000">
+              </div>
+            </div>
+          </div>
+          <div class="tile-meta">
+            <h3>Word scrub</h3>
+            <div class="toks"><span class="tok">scrub</span><span class="tok">word-floor .22</span><span class="tok">scroll-lerp .12</span></div>
+            <p>Word opacity is tied to scroll position, not a clock. Drag the slider: the text follows with a little lag, and runs backwards when you scroll up.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="stage stage-paper" data-demo="blur" role="img" aria-label="Three cards rise and sharpen from a blur in sequence">
+            <button class="replay" type="button" data-replay>Replay</button>
+            <div class="mini-bar"><i></i><i></i><span class="slot"></span><i></i><b></b></div>
+            <div class="mcards">
+              <div class="mc"><span class="ic"></span><b>Analytics</b><i></i><i></i></div>
+              <div class="mc"><span class="ic"></span><b>Budgets</b><i></i><i></i></div>
+              <div class="mc"><span class="ic"></span><b>Accounts</b><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="tile-meta">
+            <h3>Blur-in stagger</h3>
+            <div class="toks"><span class="tok">slow</span><span class="tok">settle</span><span class="tok">rise-card 48</span><span class="tok">blur-in 8</span><span class="tok">stagger-card 80</span></div>
+            <p>Cards rise 48 px while sharpening from an 8 px blur. Their content lines draw in afterwards, 60 ms apart, so no more than three things move at once.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <h3 class="sub-h">Feedback</h3>
+      <div class="tiles">
+        <div class="tile">
+          <div class="stage stage-paper" data-demo="counter" role="img" aria-label="An amount counter whose changed digits roll to the new value">
+            <button class="replay" type="button" data-replay>Replay</button>
+            <div class="ctr-wrap">
+              <span class="ctr-label">Amount to send <span class="tok">EUR</span></span>
+              <div class="ctr" id="ctr" aria-hidden="true"></div>
+              <span class="ctr-delta" id="ctrDelta">+14.50</span>
+            </div>
+          </div>
+          <div class="tile-meta">
+            <h3>Counter tick</h3>
+            <div class="toks"><span class="tok">base</span><span class="tok">glide</span><span class="tok">30 ms per column, right to left</span></div>
+            <p>Only the digits that change roll, each column on its own strip. Tabular figures keep the width steady so nothing around the number shifts.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="stage stage-paper" data-demo="morph" role="img" aria-label="A confirm button shrinks to a spinner, then expands into a mint success pill">
+            <button class="replay" type="button" data-replay>Replay</button>
+            <div class="morph-wrap">
+              <div class="morph-card">
+                <div class="row"><span>Recipient</span><b>Studio Norte</b></div>
+                <div class="row"><span>Amount</span><b>€2,384.50</b></div>
+                <div class="morph" id="morph">
+                  <span class="lbl">Confirm and send</span>
+                  <svg class="spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="2.4"/><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="#ABFEC1" stroke-width="2.4" stroke-linecap="round"/></svg>
+                  <span class="done"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Sent</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tile-meta">
+            <h3>Button morph</h3>
+            <div class="toks"><span class="tok">press .96 · quick</span><span class="tok">collapse · base glide</span><span class="tok">spin · linear</span><span class="tok">success · base snap</span></div>
+            <p>A single element tells the whole story: pressed, working, done. The label leaves on <code>depart</code>. Mint and the snap overshoot only appear once the payment has actually gone through.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <h3 class="sub-h">Scroll &amp; ambient</h3>
+      <div class="tiles">
+        <div class="tile">
+          <div class="stage stage-paper" data-demo="pin" role="img" aria-label="A pinned index whose marker slides to the next item while the chart panel swaps its title and redraws its line">
+            <button class="replay" type="button" data-replay>Replay</button>
+            <div class="pin-wrap">
+              <ul class="idx" id="idx">
+                <li class="on">Analytics</li><li>Multicurrency</li><li>Budgets</li><li>Cards</li>
+                <span class="marker" id="idxMarker"></span>
+              </ul>
+              <div class="pane">
+                <p class="pane-title" id="paneTitle">Analytics</p>
+                <svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true">
+                  <line class="grid-l" x1="0" y1="30" x2="300" y2="30"/><line class="grid-l" x1="0" y1="60" x2="300" y2="60"/><line class="grid-l" x1="0" y1="90" x2="300" y2="90"/>
+                  <path class="area" id="chartArea" d=""/>
+                  <path class="line" id="chartLine" d=""/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="tile-meta">
+            <h3>Pinned index &amp; chart draw</h3>
+            <div class="toks"><span class="tok">marker · base glide</span><span class="tok">title · depart / settle</span><span class="tok">line · slow settle</span></div>
+            <p>The section stays pinned while scroll advances the index. The old title leaves 8 px up, the new one arrives 8 px from below, and the line redraws from left to right.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="stage stage-night" data-demo="orbit" role="img" aria-label="Three currency coins orbit a tilted ring, growing as they pass in front">
+            <button class="replay" type="button" data-replay>Replay</button>
+            <div class="orbit" id="orbit">
+              <svg viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><ellipse class="ring" cx="200" cy="130" rx="150" ry="58"/></svg>
+              <span class="core"></span>
+              <span class="coin">€</span><span class="coin">£</span><span class="coin">¥</span>
+              <span class="orbit-cap">1 revolution · 12 s · linear</span>
+            </div>
+          </div>
+          <div class="tile-meta">
+            <h3>Orbit</h3>
+            <div class="toks"><span class="tok">loop 12 s</span><span class="tok">linear</span><span class="tok">depth scale .7 → 1.1</span></div>
+            <p>The one loop in the system. Coins travel a tilted ellipse and scale with depth to fake perspective. It stops completely under reduced motion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== rules ===== -->
+  <section class="sec inner" id="rules" aria-labelledby="rules-h">
+    <div class="sec-head">
+      <span class="eyebrow">Rules</span>
+      <h2 id="rules-h">The logo, and the pairs that settle arguments</h2>
+    </div>
+    <div class="logo-rules">
+      <div class="lr">
+        <h3><span class="mark-yes" aria-hidden="true">✓</span>Logo: allowed</h3>
+        <ul>
+          <li>Letters rise from a mask with a 40 ms stagger, on <code>slow + settle</code>.</li>
+          <li>Hold 250 ms, then glide to the nav at 42% scale.</li>
+          <li>Once per film, or once per session on the web.</li>
+          <li>The whole intro stays under 1.65 s.</li>
+        </ul>
+      </div>
+      <div class="lr">
+        <h3><span class="mark-no" aria-hidden="true">✕</span>Logo: never</h3>
+        <ul>
+          <li>Rotate, skew or stretch letters.</li>
+          <li>Blur the wordmark in. Blur is for content, not identity.</li>
+          <li>Color it mint, because mint means done.</li>
+          <li>Replay it on every page or section.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dd">
+      <div class="dd-row"><p><span class="mark-yes" aria-hidden="true">✓</span><span><b>Open a menu in 200 ms on settle, and close it in 140 ms on depart.</b></span></p><p><span class="mark-no" aria-hidden="true">✕</span><span>Close it in the same 360 ms it took to open.</span></p></div>
+      <div class="dd-row"><p><span class="mark-yes" aria-hidden="true">✓</span><span><b>Stagger words by 60 ms, so a 9-word headline lands in about 900 ms.</b></span></p><p><span class="mark-no" aria-hidden="true">✕</span><span>Stagger by 150 ms, so the last word arrives after 1.5 s and the reader waits.</span></p></div>
+      <div class="dd-row"><p><span class="mark-yes" aria-hidden="true">✓</span><span><b>Blur in from 8 px, together with a 48 px rise.</b></span></p><p><span class="mark-no" aria-hidden="true">✕</span><span>Blur in from 30 px. It reads as a loading fault and drops frames.</span></p></div>
+      <div class="dd-row"><p><span class="mark-yes" aria-hidden="true">✓</span><span><b>Tie section reveals to scroll with a lerp of 0.12.</b></span></p><p><span class="mark-no" aria-hidden="true">✕</span><span>Start a 3 s timed sequence when a section comes into view.</span></p></div>
+      <div class="dd-row"><p><span class="mark-yes" aria-hidden="true">✓</span><span><b>Use snap for the success pill only.</b></span></p><p><span class="mark-no" aria-hidden="true">✕</span><span>Bounce every card entrance. When everything overshoots, nothing reads as special.</span></p></div>
+      <div class="dd-row"><p><span class="mark-yes" aria-hidden="true">✓</span><span><b>Use mint for completed, live or active data.</b></span></p><p><span class="mark-no" aria-hidden="true">✕</span><span>Use mint on hover, on idle buttons or for decoration.</span></p></div>
+    </div>
+  </section>
+
+  <!-- ===== access ===== -->
+  <section class="sec inner" id="access" aria-labelledby="acc-h">
+    <div class="sec-head">
+      <span class="eyebrow">Accessibility</span>
+      <h2 id="acc-h">Reduced motion keeps the meaning</h2>
+      <p>When the viewer turns on reduced motion, travel, blur, scale and loops are removed. Everything else becomes a 200 ms fade or an instant change. Try it with the dock's Reduce switch.</p>
+    </div>
+    <div class="acc">
+      <table>
+        <thead><tr><th>pattern</th><th>full motion</th><th>reduced motion</th></tr></thead>
+        <tbody>
+          <tr><td>Logo intro</td><td>Mask rise, then glide to nav</td><td>Shown docked in the nav, with no animation</td></tr>
+          <tr><td>Panel rise</td><td>Rise 105%, widen, words brighten</td><td>Panel in place. A 200 ms fade on the words.</td></tr>
+          <tr><td>Word scrub</td><td>Opacity tied to scroll, smoothed</td><td>All words at full opacity, no scrub</td></tr>
+          <tr><td>Blur-in stagger</td><td>48 px rise, 8 px blur, 80 ms stagger</td><td>A 200 ms opacity fade. No blur, no travel.</td></tr>
+          <tr><td>Counter tick</td><td>Digits roll on glide</td><td>Value swaps instantly, announced politely to screen readers</td></tr>
+          <tr><td>Button morph</td><td>Collapse, spin, snap to success</td><td>Label text changes: “Sending…”, then “Sent ✓”</td></tr>
+          <tr><td>Pinned index</td><td>Marker glides, title swaps, line draws</td><td>A 200 ms crossfade. Chart drawn instantly.</td></tr>
+          <tr><td>Orbit</td><td>12 s linear loop</td><td>Stopped at rest positions</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="acc-rules">
+      <div><b>Never more than 3 flashes per second</b><span>Night and paper panels never alternate faster than once every 600 ms, and there are no full-screen strobes.</span></div>
+      <div><b>State is never shown by motion or color alone</b><span>The success pill always carries a check mark and the word “Sent”.</span></div>
+      <div><b>Focus stays visible</b><span>Focus rings are never animated away, and focused elements are never hidden during a transition.</span></div>
+    </div>
+  </section>
+
+  <!-- ===== export ===== -->
+  <section class="sec" id="export" aria-labelledby="exp-h">
+    <div class="night export">
+      <div class="sec-head">
+        <span class="eyebrow">Export</span>
+        <h2 id="exp-h">The whole system, in one block</h2>
+        <p>CSS custom properties first, then the same values as a GSAP defaults object. For After Effects, use the influence values on the easing cards above.</p>
+      </div>
+      <div class="code">
+<pre id="exportCode"><span class="c">/* Settle Motion · v1.0 */</span>
+:root {
+  <span class="c">/* duration — ms · frames @30 / @60 */</span>
+  --dur-quick: 200ms;   <span class="c">/* 6f / 12f  — hover, press, menu */</span>
+  --dur-base: 360ms;    <span class="c">/* 11f / 22f — cards, morphs, counters */</span>
+  --dur-slow: 600ms;    <span class="c">/* 18f / 36f — panel rise, logo, chart */</span>
+  --dur-hero: 900ms;    <span class="c">/* 27f / 54f — film open only */</span>
+  --dur-loop: 12s;      <span class="c">/* ambient orbit */</span>
+
+  <span class="c">/* easing */</span>
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);   <span class="c">/* entrances */</span>
+  --ease-glide: cubic-bezier(0.65, 0, 0.35, 1);    <span class="c">/* in-view moves */</span>
+  --ease-depart: cubic-bezier(0.55, 0, 1, 0.45);   <span class="c">/* exits */</span>
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);  <span class="c">/* success only */</span>
+
+  <span class="c">/* choreography */</span>
+  --stagger-letter: 40ms;
+  --stagger-word: 60ms;
+  --stagger-card: 80ms;
+  --rise-nudge: 8px;
+  --rise-sm: 24px;
+  --rise-card: 48px;
+  --blur-in: 8px;
+  --word-floor: 0.22;
+  --panel-scale: 0.92;
+  --press-scale: 0.96;
+  --scroll-lerp: 0.12;
+
+  <span class="c">/* palette */</span>
+  --ink: #0A0C0B;
+  --paper: #FEFEFE;
+  --mist: #F5F5F5;
+  --graphite: #151515;
+  --glow: #121B15;
+  --floor: #525252;
+  --mint: #ABFEC1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --rise-nudge: 0px; --rise-sm: 0px; --rise-card: 0px; --blur-in: 0px; --panel-scale: 1; }
+}
+
+<span class="c">// GSAP</span>
+gsap.defaults({ duration: 0.36, ease: "power4.out" });
+const settle = {
+  ease: { settle: "power4.out", glide: "power2.inOut", depart: "circ.in", snap: "back.out(1.7)" },
+  dur: { quick: 0.2, base: 0.36, slow: 0.6, hero: 0.9, loop: 12 },
+  stagger: { letter: 0.04, word: 0.06, card: 0.08 },
+};</pre>
+        <button class="copy" type="button" id="copyBtn">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Measured from “Scroll animation web design” by Egor, via Pinterest. Frames sampled at 0.4–38.2 s.</span>
+    <span>Settle Motion · v1.0 · Sept 2026</span>
+  </footer>
+</div>
+
+<div class="dock" role="group" aria-label="Playback">
+  <span class="lbl">Speed</span>
+  <div class="seg-c" id="speed">
+    <button type="button" data-speed="1" aria-pressed="true">1×</button>
+    <button type="button" data-speed="0.5" aria-pressed="false">½×</button>
+    <button type="button" data-speed="0.25" aria-pressed="false">¼×</button>
+  </div>
+  <button type="button" class="rm" id="rmToggle" role="switch" aria-checked="false"><i></i>Reduce</button>
+</div>
+
+<script>
+(function(){
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var S = { speed: 1, reduced: mq.matches };
+  var E = { settle:'cubic-bezier(0.22,1,0.36,1)', glide:'cubic-bezier(0.65,0,0.35,1)', depart:'cubic-bezier(0.55,0,1,0.45)', snap:'cubic-bezier(0.34,1.56,0.64,1)', linear:'linear' };
+  var D = { quick:200, base:360, slow:600, hero:900 };
+  function $(s, r){ return (r || document).querySelector(s); }
+  function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function A(el, kf, o){ var a = el.animate(kf, Object.assign({ fill:'both' }, o)); a.playbackRate = S.speed; return a; }
+  function done(a){ return a.finished.catch(function(){}); }
+  function wait(ms){ return new Promise(function(r){ setTimeout(r, ms / S.speed); }); }
+
+  /* ---------- demo runner: loops while visible, rests on the final frame ---------- */
+  var demos = [];
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var d = e.target.__d; if(!d) return;
+      if(e.isIntersecting){
+        if(!d.visible){ d.visible = true; if(!S.reduced){ d.timer = setTimeout(function(){ if(d.visible) d.start(); }, 300); } }
+      } else { d.visible = false; clearTimeout(d.timer); d.stop(); }
+    });
+  }, { threshold: .35 });
+
+  function demo(root, play, opts){
+    opts = opts || {};
+    var d = { root: root, visible: false, gen: 0 };
+    d.clear = function(){ root.getAnimations({ subtree:true }).forEach(function(a){ a.cancel(); }); if(opts.reset) opts.reset(); };
+    d.start = async function(){
+      var g = ++d.gen; d.clear();
+      var ok = function(){ return g === d.gen; };
+      if(S.reduced){
+        if(opts.reduced){ await opts.reduced(ok); }
+        else { $$(':scope > :not(.replay)', root).forEach(function(el){ A(el, [{ opacity:.3 }, { opacity:1 }], { duration:200 }); }); }
+        return;
+      }
+      while(ok()){
+        await play(ok);
+        if(!ok() || !d.visible) return;
+        await wait(opts.hold || 1400);
+        if(!ok() || !d.visible) return;
+        d.clear();
+      }
+    };
+    d.stop = function(){ d.gen++; d.clear(); };
+    root.__d = d; io.observe(root); demos.push(d);
+    var rb = $('[data-replay]', root);
+    if(rb) rb.addEventListener('click', function(){ d.visible = true; d.start(); });
+    return d;
+  }
+
+  /* ---------- hero: settle + word reveal on load ---------- */
+  if(!S.reduced){
+    A($('#top'), [{ transform:'translateY(24px)' }, { transform:'none' }], { duration:D.slow, easing:E.settle });
+    $$('#heroH .w').forEach(function(w, i){ A(w, [{ opacity:.22 }, { opacity:1 }], { duration:D.base, delay:250 + i*60, easing:E.settle }); });
+  }
+
+  /* ---------- reel: hover links strip and beats ---------- */
+  function hot(i){ $$('.seg, .beat').forEach(function(e){ e.classList.toggle('hot', e.getAttribute('data-i') === i); }); }
+  $$('.seg[data-i], .beat[data-i]').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ hot(el.getAttribute('data-i')); });
+    el.addEventListener('mouseleave', function(){ hot(null); });
+  });
+
+  /* ---------- duration rows: dots travel their bar at one shared speed ---------- */
+  demo($('#durs'), async function(){
+    var last;
+    $$('.dtrack .dot').forEach(function(dot){
+      var w = dot.parentNode.querySelector('.bar').getBoundingClientRect().width - 12;
+      last = A(dot, [{ transform:'translateX(0)' }, { transform:'translateX(' + w + 'px)' }], { duration:+dot.getAttribute('data-ms'), easing:E.linear });
+    });
+    await done(last);
+  }, { hold: 1000 });
+
+  /* ---------- easing tracks ---------- */
+  demo($('#curves'), async function(){
+    var last;
+    $$('.trk', $('#curves')).forEach(function(t){
+      var w = (t.clientWidth - 22) * .88;
+      var ghost = $('.ghost', t), dot = $('[data-ease]', t);
+      A(ghost, [{ transform:'translateX(0)' }, { transform:'translateX(' + w + 'px)' }], { duration:900, easing:E.linear });
+      last = A(dot, [{ transform:'translateX(0)' }, { transform:'translateX(' + w + 'px)' }], { duration:900, easing:E[dot.getAttribute('data-ease')] });
+    });
+    await done(last);
+  }, { hold: 800 });
+
+  /* ---------- logo intro ---------- */
+  var logoStage = $('[data-demo="logo"]');
+  demo(logoStage, async function(){
+    var mark = $('.logo-mark', logoStage), letters = $$('.m > span', logoStage), bar = $$('.mini-bar > *', logoStage);
+    var dy = logoStage.clientHeight / 2 - 10 - 32;
+    var from = 'translateX(-50%) translateY(' + dy + 'px) scale(1)', to = 'translateX(-50%) scale(.42)';
+    var m = A(mark, [{ transform:from, offset:0 }, { transform:from, offset:.636, easing:E.glide }, { transform:to, offset:1 }], { duration:1650 });
+    letters.forEach(function(l, i){ A(l, [{ transform:'translateY(110%)' }, { transform:'none' }], { duration:D.slow, delay:i*40, easing:E.settle }); });
+    bar.forEach(function(b){ A(b, [{ opacity:0, offset:0 }, { opacity:0, offset:.8 }, { opacity:1, offset:1 }], { duration:1650 }); });
+    await done(m);
+  }, { hold: 1600 });
+
+  /* ---------- panel rise ---------- */
+  var riseStage = $('[data-demo="rise"]');
+  demo(riseStage, async function(){
+    A($('.rise-panel', riseStage), [{ transform:'translateY(105%) scaleX(.92)', borderRadius:'32px' }, { transform:'none', borderRadius:'18px' }], { duration:D.slow, easing:E.settle });
+    var last;
+    $$('.w', riseStage).forEach(function(w, i){ last = A(w, [{ opacity:.22 }, { opacity:1 }], { duration:D.base, delay:420 + i*60, easing:E.settle }); });
+    await done(last);
+  }, { hold: 1800 });
+
+  /* ---------- blur-in stagger ---------- */
+  var blurStage = $('[data-demo="blur"]');
+  demo(blurStage, async function(){
+    var last;
+    $$('.mc', blurStage).forEach(function(c, i){
+      A(c, [{ opacity:0, transform:'translateY(48px)', filter:'blur(8px)' }, { opacity:1, transform:'none', filter:'blur(0px)' }], { duration:D.slow, delay:i*80, easing:E.settle });
+      $$('i', c).forEach(function(l, j){ last = A(l, [{ transform:'scaleX(0)' }, { transform:'none' }], { duration:D.base, delay:i*80 + 320 + j*60, easing:E.settle }); });
+    });
+    await done(last);
+  }, { hold: 1600 });
+
+  /* ---------- counter tick ---------- */
+  var ctr = $('#ctr'), delta = $('#ctrDelta');
+  var vals = [2370.00, 2384.50, 2412.75, 2398.20], vi = 1, strips = [];
+  function fmt(v){ return v.toLocaleString('en-US', { minimumFractionDigits:2, maximumFractionDigits:2 }); }
+  (function build(){
+    var eu = document.createElement('span'); eu.className = 'sep'; eu.textContent = '€'; ctr.appendChild(eu);
+    fmt(vals[vi]).split('').forEach(function(ch){
+      if(/\d/.test(ch)){
+        var c = document.createElement('span'); c.className = 'col';
+        var s = document.createElement('span'); s.className = 'strip-d';
+        for(var k = 0; k < 10; k++){ var n = document.createElement('span'); n.textContent = k; s.appendChild(n); }
+        s.style.transform = 'translateY(' + (-ch) + 'em)'; s.setAttribute('data-d', ch);
+        c.appendChild(s); ctr.appendChild(c); strips.push(s);
+      } else { var sp = document.createElement('span'); sp.className = 'sep'; sp.textContent = ch; ctr.appendChild(sp); }
+    });
+  })();
+  function stepCounter(animate){
+    var prev = vals[vi]; vi = (vi + 1) % vals.length; var next = vals[vi];
+    var digits = fmt(next).replace(/\D/g, '').split(''), last = null;
+    strips.forEach(function(s, idx){
+      var o = +s.getAttribute('data-d'), n = +digits[idx];
+      s.setAttribute('data-d', n); s.style.transform = 'translateY(' + (-n) + 'em)';
+      if(animate && o !== n){ last = A(s, [{ transform:'translateY(' + (-o) + 'em)' }, { transform:'translateY(' + (-n) + 'em)' }], { duration:D.base, delay:(strips.length - 1 - idx) * 30, easing:E.glide }); }
+    });
+    var dv = next - prev; delta.textContent = (dv >= 0 ? '+' : '−') + Math.abs(dv).toFixed(2);
+    if(animate) A(delta, [{ opacity:0, transform:'translateY(8px)' }, { opacity:1, transform:'none' }], { duration:D.base, delay:120, easing:E.settle });
+    return last;
+  }
+  demo($('[data-demo="counter"]'), async function(){
+    var last = stepCounter(true); if(last) await done(last); else await wait(D.base);
+  }, { hold: 1300, reduced: async function(){ stepCounter(false); } });
+
+  /* ---------- button morph ---------- */
+  var morphStage = $('[data-demo="morph"]'), mb = $('#morph'), mLbl = $('.lbl', mb), mSpin = $('.spin', mb), mDone = $('.done', mb);
+  demo(morphStage, async function(ok){
+    var bg = getComputedStyle(mb).backgroundColor, fg = getComputedStyle(mb).color;
+    await done(A(mb, [{ transform:'scale(1)' }, { transform:'scale(.96)' }, { transform:'scale(1)' }], { duration:D.quick, easing:E.glide }));
+    if(!ok()) return;
+    A(mLbl, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+    A(mb, [{ width:'220px' }, { width:'48px' }], { duration:D.base, easing:E.glide });
+    A(mSpin, [{ opacity:0 }, { opacity:1 }], { duration:D.quick, delay:260 });
+    A(mSpin, [{ transform:'rotate(0deg)' }, { transform:'rotate(720deg)' }], { duration:1400, delay:260, easing:E.linear });
+    await wait(1460); if(!ok()) return;
+    A(mSpin, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+    A(mb, [{ width:'48px' }, { width:'220px' }], { duration:D.base, easing:E.snap });
+    A(mb, [{ backgroundColor:bg, color:fg }, { backgroundColor:'#ABFEC1', color:'#0A2A14' }], { duration:D.base, easing:E.settle });
+    await done(A(mDone, [{ opacity:0, transform:'translateY(8px)' }, { opacity:1, transform:'none' }], { duration:D.base, delay:120, easing:E.settle }));
+    if(!ok()) return;
+    await wait(1300); if(!ok()) return;
+    A(mDone, [{ opacity:1 }, { opacity:0 }], { duration:140, easing:E.depart });
+    A(mb, [{ backgroundColor:'#ABFEC1', color:'#0A2A14' }, { backgroundColor:bg, color:fg }], { duration:D.quick, delay:100, easing:E.glide });
+    await done(A(mLbl, [{ opacity:0 }, { opacity:1 }], { duration:D.quick, delay:160, easing:E.settle }));
+  }, {
+    hold: 900,
+    reset: function(){ mLbl.textContent = 'Confirm and send'; },
+    reduced: async function(ok){
+      mLbl.textContent = 'Sending…'; await new Promise(function(r){ setTimeout(r, 900); });
+      if(!ok()) return; mLbl.textContent = 'Sent ✓'; await new Promise(function(r){ setTimeout(r, 1600); });
+      if(ok()) mLbl.textContent = 'Confirm and send';
+    }
+  });
+
+  /* ---------- pinned index + chart draw ---------- */
+  var pinStage = $('[data-demo="pin"]'), idxItems = $$('#idx li'), marker = $('#idxMarker'), title = $('#paneTitle'), cLine = $('#chartLine'), cArea = $('#chartArea');
+  var names = ['Analytics', 'Multicurrency', 'Budgets', 'Cards'];
+  var series = [[62,58,66,54,60,48,52,40,44,34,38,26],[80,74,76,64,66,58,50,52,44,40,32,30],[40,52,46,58,50,62,56,60,54,64,58,66],[90,82,70,72,60,54,56,44,38,40,30,22]];
+  var pi = 0;
+  function pathFor(s){
+    var step = 300 / (s.length - 1), d = 'M0 ' + s[0];
+    for(var i = 1; i < s.length; i++){ var x0 = (i-1)*step, x1 = i*step, cx = (x0 + x1) / 2; d += ' C' + cx + ' ' + s[i-1] + ' ' + cx + ' ' + s[i] + ' ' + x1 + ' ' + s[i]; }
+    return d;
+  }
+  function setChart(i){ var d = pathFor(series[i]); cLine.setAttribute('d', d); cArea.setAttribute('d', d + ' L300 120 L0 120 Z'); }
+  function markerY(i){ return idxItems[i].offsetTop + (idxItems[i].offsetHeight - 30) / 2; }
+  function placeMarker(){ marker.style.transform = 'translateY(' + markerY(pi) + 'px)'; }
+  cLine.setAttribute('pathLength', '1'); cLine.style.strokeDasharray = '1px'; cLine.style.strokeDashoffset = '0px';
+  setChart(0); placeMarker();
+  demo(pinStage, async function(ok){
+    var prev = pi; pi = (pi + 1) % names.length;
+    A(marker, [{ transform:'translateY(' + markerY(prev) + 'px)' }, { transform:'translateY(' + markerY(pi) + 'px)' }], { duration:D.base, easing:E.glide });
+    placeMarker();
+    idxItems.forEach(function(li, i){ li.classList.toggle('on', i === pi); });
+    await done(A(title, [{ opacity:1, transform:'none' }, { opacity:0, transform:'translateY(-8px)' }], { duration:140, easing:E.depart }));
+    if(!ok()) return;
+    title.textContent = names[pi]; setChart(pi);
+    A(title, [{ opacity:0, transform:'translateY(8px)' }, { opacity:1, transform:'none' }], { duration:D.base, easing:E.settle });
+    A(cArea, [{ opacity:0 }, { opacity:.55 }], { duration:D.base, delay:300, easing:E.settle });
+    await done(A(cLine, [{ strokeDashoffset:'1px' }, { strokeDashoffset:'0px' }], { duration:D.slow, easing:E.settle }));
+  }, {
+    hold: 1500,
+    reset: function(){ title.textContent = names[pi]; setChart(pi); idxItems.forEach(function(li, i){ li.classList.toggle('on', i === pi); }); placeMarker(); }
+  });
+
+  /* ---------- rAF-driven: word scrub + orbit ---------- */
+  var scrub = { root:$('[data-demo="scrub"]'), words:$$('#scrubText .w'), input:$('#scrubIn'), out:$('#scrubOut'), cur:1, target:1, auto:true, clock:3800, visible:false };
+  var orbit = { root:$('[data-demo="orbit"]'), el:$('#orbit'), coins:$$('#orbit .coin'), t:0, visible:false };
+  $('#orbit .ring').setAttribute('vector-effect', 'non-scaling-stroke');
+
+  function scrubRender(){
+    var n = scrub.words.length;
+    scrub.words.forEach(function(w, i){ var s = i / n * .85, k = Math.min(1, Math.max(0, (scrub.cur - s) / .15)); w.style.opacity = (.22 + .78 * k).toFixed(3); });
+    scrub.out.textContent = Math.round(scrub.cur * 100) + '% · lerp 0.12';
+  }
+  function scrubAutoTarget(c){
+    c = c % 5200;
+    if(c < 2400) return c / 2400;
+    if(c < 3800) return 1;
+    if(c < 4600) return 1 - (c - 3800) / 800;
+    return 0;
+  }
+  function orbitRender(){
+    var W = orbit.el.clientWidth, H = orbit.el.clientHeight, cx = W/2, cy = H/2, rx = W*150/400, ry = H*58/260;
+    orbit.coins.forEach(function(c, i){
+      var a = orbit.t / 12000 * Math.PI * 2 + i * Math.PI * 2 / 3;
+      var depth = (Math.sin(a) + 1) / 2;
+      c.style.transform = 'translate(' + (cx + rx*Math.cos(a)).toFixed(1) + 'px,' + (cy + ry*Math.sin(a)).toFixed(1) + 'px) scale(' + (.7 + .4*depth).toFixed(3) + ')';
+      c.style.zIndex = String(1 + Math.round(depth * 10));
+      c.style.opacity = (.55 + .45 * depth).toFixed(2);
+    });
+  }
+  var raf = 0, lastTs = 0;
+  function frame(ts){
+    var dt = lastTs ? Math.min(64, ts - lastTs) : 16; lastTs = ts;
+    var any = false;
+    if(scrub.visible && !S.reduced){
+      any = true;
+      if(scrub.auto){ scrub.clock += dt * S.speed; scrub.target = scrubAutoTarget(scrub.clock); scrub.input.value = Math.round(scrub.target * 1000); }
+      scrub.cur += (scrub.target - scrub.cur) * (1 - Math.pow(.88, dt * S.speed / 16.67));
+      scrubRender();
+    }
+    if(orbit.visible && !S.reduced){ any = true; orbit.t += dt * S.speed; orbitRender(); }
+    if(any){ raf = requestAnimationFrame(frame); } else { raf = 0; lastTs = 0; }
+  }
+  function kick(){ if(!raf){ lastTs = 0; raf = requestAnimationFrame(frame); } }
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var o = e.target === scrub.root ? scrub : orbit;
+      var was = o.visible; o.visible = e.isIntersecting;
+      if(o === scrub && o.visible && !was){ scrub.auto = true; scrub.clock = 3800; }
+      if(o.visible) kick();
+    });
+  }, { threshold: .35 });
+  io2.observe(scrub.root); io2.observe(orbit.root);
+  scrub.input.addEventListener('input', function(){
+    scrub.auto = false; scrub.target = scrub.input.value / 1000;
+    if(S.reduced){ scrub.cur = scrub.target; scrubRender(); } else kick();
+  });
+  $('[data-replay]', scrub.root).addEventListener('click', function(){ scrub.auto = true; scrub.clock = 0; scrub.visible = true; if(S.reduced){ scrub.cur = scrub.target = 1; scrubRender(); } else kick(); });
+  $('[data-replay]', orbit.root).addEventListener('click', function(){ orbit.t = 0; orbitRender(); orbit.visible = true; kick(); });
+  scrubRender(); orbitRender();
+
+  window.addEventListener('resize', function(){ orbitRender(); placeMarker(); });
+
+  /* ---------- dock ---------- */
+  $$('#speed button').forEach(function(b){
+    b.addEventListener('click', function(){
+      S.speed = +b.getAttribute('data-speed');
+      $$('#speed button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      document.getAnimations().forEach(function(a){ a.playbackRate = S.speed; });
+    });
+  });
+  var rm = $('#rmToggle');
+  function applyReduced(){
+    rm.setAttribute('aria-checked', S.reduced ? 'true' : 'false');
+    demos.forEach(function(d){ d.stop(); if(d.visible && !S.reduced) d.start(); });
+    if(S.reduced){ scrub.cur = scrub.target = 1; scrub.input.value = 1000; scrubRender(); }
+    else { scrub.auto = true; scrub.clock = 3800; kick(); }
+  }
+  rm.addEventListener('click', function(){ S.reduced = !S.reduced; applyReduced(); });
+  if(mq.addEventListener) mq.addEventListener('change', function(){ S.reduced = mq.matches; applyReduced(); });
+  rm.setAttribute('aria-checked', S.reduced ? 'true' : 'false');
+
+  /* ---------- copy ---------- */
+  var copyBtn = $('#copyBtn'), pre = $('#exportCode');
+  copyBtn.addEventListener('click', function(){
+    var reset = function(msg){ copyBtn.textContent = msg; setTimeout(function(){ copyBtn.textContent = 'Copy'; }, 1800); };
+    var select = function(){ var r = document.createRange(); r.selectNodeContents(pre); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); reset('Selected. Press Ctrl+C'); };
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(pre.textContent).then(function(){ reset('Copied'); }, select); }
+      else select();
+    }catch(e){ select(); }
+  });
+})();
+</script>
