@@ -117,13 +117,25 @@ def poll(task_id, veo, key, timeout, interval):
 
 
 def download(urls, out_dir):
+    """Best effort: a URL we cannot fetch is reported, not fatal.
+
+    kie.ai serves results from a CDN that a restricted network may block, so
+    the caller has already been given the URLs before we get here.
+    """
     os.makedirs(out_dir, exist_ok=True)
     saved = []
     for i, url in enumerate(urls):
         ext = os.path.splitext(urllib.parse.urlparse(url).path)[1] or ".mp4"
         dest = os.path.join(out_dir, "kie-video-%d%s" % (i, ext))
-        with urllib.request.urlopen(url, timeout=300) as resp, open(dest, "wb") as fh:
-            fh.write(resp.read())
+        try:
+            with urllib.request.urlopen(url, timeout=300) as resp, open(dest, "wb") as fh:
+                fh.write(resp.read())
+        except (urllib.error.URLError, OSError) as err:
+            reason = getattr(err, "reason", err)
+            print("  could not download %s (%s)" % (url, reason), file=sys.stderr)
+            print("  the video is fine — fetch that URL from a machine that can reach it",
+                  file=sys.stderr)
+            continue
         saved.append(dest)
     return saved
 
@@ -153,6 +165,12 @@ def main():
     print("task %s accepted" % task_id, flush=True)
 
     urls = poll(task_id, veo, key, args.timeout, args.poll)
+
+    # Print these before downloading: kie.ai keeps no task history, so a URL
+    # lost to a failed download cannot be asked for again.
+    for url in urls:
+        print("video: %s" % url, flush=True)
+
     for path in download(urls, args.out):
         print("saved %s" % path)
 
