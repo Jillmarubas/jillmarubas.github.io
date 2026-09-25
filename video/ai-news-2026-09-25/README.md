@@ -46,6 +46,21 @@ a licensed image in `public/people/` and list it in `src/data/portraits.json` un
 
 Put the credits above in the YouTube description as well.
 
+## Background photos
+
+Story plates behind the glass (`src/components/Plates.tsx`), all from Wikimedia Commons,
+shown in the orange duotone at 30% with a slow push-in, credited on screen while they're up.
+
+| Story | File | Author | License |
+|---|---|---|---|
+| Price war | [Datacenter Server Racks (22370909788).jpg](https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg) | Carl Lender | CC BY 2.0 |
+| Enzyme | [Enterobacteria phage T2 transmission electron micrograph.jpg](https://commons.wikimedia.org/wiki/File:Enterobacteria_phage_T2_transmission_electron_micrograph.jpg) | SnaxMikn | CC BY-SA 4.0 |
+| Enzyme (lab) | [Pipetting culture medium.jpg](https://commons.wikimedia.org/wiki/File:Pipetting_culture_medium.jpg) | Bill Branson, National Cancer Institute | Public domain |
+| Meta | [Ray-Ban Meta Gen 1 smart glasses with charging case.jpg](https://commons.wikimedia.org/wiki/File:Ray-Ban_Meta_Gen_1_smart_glasses_with_charging_case.jpg) | CCadio | CC BY 4.0 |
+| Gemini | [Google-Deep Mind headquarters in London, 6 Pancras Square.jpg](https://commons.wikimedia.org/wiki/File:Google-Deep_Mind_headquarters_in_London,_6_Pancras_Square.jpg) | Gciriani | CC BY-SA 4.0 |
+| Island | [Cybersecurity.png](https://commons.wikimedia.org/wiki/File:Cybersecurity.png) | jaydeep_ | CC0 |
+| UN | [United Nations Headquarters - Security Council chamber, angled view.jpg](https://commons.wikimedia.org/wiki/File:United_Nations_Headquarters_-_Security_Council_chamber,_angled_view.jpg) | Jdforrester | CC BY 4.0 |
+
 ## Re-render
 
 ```bash

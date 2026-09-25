@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig} from 'remotion';
 import {Field} from './components/Field';
+import {PlateCredit, Plates} from './components/Plates';
 import {Captions} from './components/Captions';
 import {StoryMarks, TopBar} from './components/Chrome';
 import {Hook} from './scenes/Hook';
@@ -56,11 +57,13 @@ export const Video: React.FC = () => {
   return (
     <AbsoluteFill style={{background: '#0a0a0a'}}>
       <Field />
+      <Plates />
       <StoryMarks layer="back" />
       <Scenes />
       <StoryMarks layer="front" />
       <Captions />
       <TopBar />
+      <PlateCredit />
 
       <Audio src={staticFile('audio/vo-spaced.wav')} />
       <Audio src={staticFile('audio/music-bed.wav')} />
