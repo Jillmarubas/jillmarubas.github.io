@@ -5,7 +5,7 @@ portfolio's **frost glass** design system and **Settle Motion** curves.
 
 | | |
 |---|---|
-| Final video | `out/ai-news-short-2026-09-25.mp4` (H.264, −14 LUFS) |
+| Final video | `out/ai-news-short-2026-09-25.mp4` (H.264, 2:50, ≈ −14 LUFS, 92 MB) |
 | Script (short cut) | `script-short.md` |
 | Voice | ElevenLabs, **Joey – Upbeat Popular News Host**, `eleven_multilingual_v2` |
 | Music + SFX | ElevenLabs sound generation (30 s seamless loop, whoosh, impact, pop, riser, glitch) |
