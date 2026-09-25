@@ -1,1 +1,5 @@
-{}
+{
+  "altman": {"file": "altman.jpg", "credit": "TechCrunch · CC BY 2.0 · edited"},
+  "amodei": {"file": "amodei.jpg", "credit": "UK Prime Minister · CC BY 2.0 · edited"},
+  "zuckerberg": {"file": "zuckerberg.jpg", "credit": "Anthony Quintano · CC BY 2.0 · edited"}
+}

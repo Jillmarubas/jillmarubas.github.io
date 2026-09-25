@@ -30,16 +30,21 @@ portfolio's **frost glass** design system and **Settle Motion** curves.
 
 ## People on screen
 
-Name tiles (initials) stand in for photos: this environment couldn't reach Wikimedia
-Commons, and generated faces of real people aren't an option. To use real photos, drop
-licensed images in `public/people/` and list them in `src/data/portraits.json`:
+Photos from Wikimedia Commons, cropped to head and shoulders and shown in the piece's
+orange duotone (so all three are marked "edited"). Each carries its credit on screen.
 
-```json
-{"altman": {"file": "altman.jpg", "credit": "Photo: Name / CC BY-SA 4.0"}}
-```
+| Person | File | Author | License |
+|---|---|---|---|
+| Sam Altman | [Sam Altman CropEdit James Tamim.jpg](https://commons.wikimedia.org/wiki/File:Sam_Altman_CropEdit_James_Tamim.jpg) | TechCrunch (crop by James Tamim) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| Dario Amodei | [Dario Amodei in 2023.jpg](https://commons.wikimedia.org/wiki/File:Dario_Amodei_in_2023.jpg) | UK Prime Minister | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| Mark Zuckerberg | [Mark Zuckerberg F8 2019 Keynote (32830578717) (cropped).jpg](https://commons.wikimedia.org/wiki/File:Mark_Zuckerberg_F8_2019_Keynote_(32830578717)_(cropped).jpg) | Anthony Quintano | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
 
-Ids used: `altman`, `amodei`, `zuckerberg`, `qi`, `blake`, `kavukcuoglu`. They're shown in
-the same orange duotone as the rest of the piece, with the credit on the image.
+Commons has no photos of Stanley Qi, Kevin Blake or Koray Kavukcuoglu, so they keep
+initials tiles. Generated faces of real people are not an option. To add one later, drop
+a licensed image in `public/people/` and list it in `src/data/portraits.json` under its id
+(`qi`, `blake`, `kavukcuoglu`).
+
+Put the credits above in the YouTube description as well.
 
 ## Re-render
 
