@@ -1,0 +1,2426 @@
+[
+{
+"text": "Two",
+"para": 0,
+"start": 0.0,
+"end": 0.37
+},
+{
+"text": "AI",
+"para": 0,
+"start": 0.37,
+"end": 0.7
+},
+{
+"text": "giants",
+"para": 0,
+"start": 0.7,
+"end": 1.17
+},
+{
+"text": "just",
+"para": 0,
+"start": 1.17,
+"end": 1.38
+},
+{
+"text": "dropped",
+"para": 0,
+"start": 1.38,
+"end": 1.7
+},
+{
+"text": "new",
+"para": 0,
+"start": 1.7,
+"end": 1.93
+},
+{
+"text": "flagship",
+"para": 0,
+"start": 1.93,
+"end": 2.42
+},
+{
+"text": "models,",
+"para": 0,
+"start": 2.42,
+"end": 2.94
+},
+{
+"text": "minutes",
+"para": 0,
+"start": 3.11,
+"end": 3.48
+},
+{
+"text": "apart.",
+"para": 0,
+"start": 3.48,
+"end": 3.92
+},
+{
+"text": "Claude",
+"para": 0,
+"start": 4.37,
+"end": 4.74
+},
+{
+"text": "may",
+"para": 0,
+"start": 4.74,
+"end": 4.89
+},
+{
+"text": "have",
+"para": 0,
+"start": 4.89,
+"end": 5.03
+},
+{
+"text": "found",
+"para": 0,
+"start": 5.03,
+"end": 5.28
+},
+{
+"text": "something",
+"para": 0,
+"start": 5.28,
+"end": 5.66
+},
+{
+"text": "hidden",
+"para": 0,
+"start": 5.66,
+"end": 5.97
+},
+{
+"text": "in",
+"para": 0,
+"start": 5.97,
+"end": 6.09
+},
+{
+"text": "bacterial",
+"para": 0,
+"start": 6.09,
+"end": 6.68
+},
+{
+"text": "DNA.",
+"para": 0,
+"start": 6.68,
+"end": 7.68
+},
+{
+"text": "And",
+"para": 0,
+"start": 7.97,
+"end": 8.12
+},
+{
+"text": "at",
+"para": 0,
+"start": 8.12,
+"end": 8.25
+},
+{
+"text": "the",
+"para": 0,
+"start": 8.25,
+"end": 8.33
+},
+{
+"text": "UN,",
+"para": 0,
+"start": 8.33,
+"end": 9.02
+},
+{
+"text": "the",
+"para": 0,
+"start": 9.29,
+"end": 9.38
+},
+{
+"text": "CEOs",
+"para": 0,
+"start": 9.38,
+"end": 10.44
+},
+{
+"text": "of",
+"para": 0,
+"start": 10.44,
+"end": 10.53
+},
+{
+"text": "OpenAI",
+"para": 0,
+"start": 10.53,
+"end": 11.34
+},
+{
+"text": "and",
+"para": 0,
+"start": 11.34,
+"end": 11.49
+},
+{
+"text": "Anthropic",
+"para": 0,
+"start": 11.49,
+"end": 12.13
+},
+{
+"text": "warned",
+"para": 0,
+"start": 12.3,
+"end": 12.64
+},
+{
+"text": "that",
+"para": 0,
+"start": 12.64,
+"end": 12.87
+},
+{
+"text": "AI",
+"para": 0,
+"start": 12.87,
+"end": 13.27
+},
+{
+"text": "could",
+"para": 0,
+"start": 13.27,
+"end": 13.44
+},
+{
+"text": "be",
+"para": 0,
+"start": 13.44,
+"end": 13.59
+},
+{
+"text": "a",
+"para": 0,
+"start": 13.59,
+"end": 13.62
+},
+{
+"text": "risk",
+"para": 0,
+"start": 13.62,
+"end": 14.0
+},
+{
+"text": "to",
+"para": 0,
+"start": 14.0,
+"end": 14.1
+},
+{
+"text": "humanity.",
+"para": 0,
+"start": 14.1,
+"end": 14.78
+},
+{
+"text": "Here's",
+"para": 0,
+"start": 15.16,
+"end": 15.41
+},
+{
+"text": "your",
+"para": 0,
+"start": 15.41,
+"end": 15.54
+},
+{
+"text": "AI",
+"para": 0,
+"start": 15.54,
+"end": 15.86
+},
+{
+"text": "week,",
+"para": 0,
+"start": 15.86,
+"end": 16.27
+},
+{
+"text": "in",
+"para": 0,
+"start": 16.46,
+"end": 16.6
+},
+{
+"text": "under",
+"para": 0,
+"start": 16.6,
+"end": 16.82
+},
+{
+"text": "three",
+"para": 0,
+"start": 16.82,
+"end": 17.11
+},
+{
+"text": "minutes.",
+"para": 0,
+"start": 17.11,
+"end": 17.64
+},
+{
+"text": "On",
+"para": 1,
+"start": 17.99,
+"end": 18.13
+},
+{
+"text": "September",
+"para": 1,
+"start": 18.13,
+"end": 18.61
+},
+{
+"text": "twenty-second,",
+"para": 1,
+"start": 18.61,
+"end": 19.36
+},
+{
+"text": "Anthropic",
+"para": 1,
+"start": 19.56,
+"end": 20.16
+},
+{
+"text": "launched",
+"para": 1,
+"start": 20.16,
+"end": 20.55
+},
+{
+"text": "Claude",
+"para": 1,
+"start": 20.55,
+"end": 20.88
+},
+{
+"text": "Opus",
+"para": 1,
+"start": 20.88,
+"end": 21.33
+},
+{
+"text": "5.5,",
+"para": 1,
+"start": 21.33,
+"end": 22.35
+},
+{
+"text": "its",
+"para": 1,
+"start": 22.62,
+"end": 22.85
+},
+{
+"text": "strongest",
+"para": 1,
+"start": 22.85,
+"end": 23.36
+},
+{
+"text": "model",
+"para": 1,
+"start": 23.36,
+"end": 23.66
+},
+{
+"text": "yet,",
+"para": 1,
+"start": 23.66,
+"end": 24.07
+},
+{
+"text": "and",
+"para": 1,
+"start": 24.3,
+"end": 24.45
+},
+{
+"text": "cut",
+"para": 1,
+"start": 24.45,
+"end": 24.72
+},
+{
+"text": "output",
+"para": 1,
+"start": 24.72,
+"end": 25.12
+},
+{
+"text": "prices",
+"para": 1,
+"start": 25.12,
+"end": 25.56
+},
+{
+"text": "twenty",
+"para": 1,
+"start": 25.56,
+"end": 25.86
+},
+{
+"text": "percent,",
+"para": 1,
+"start": 25.86,
+"end": 26.38
+},
+{
+"text": "to",
+"para": 1,
+"start": 26.59,
+"end": 26.72
+},
+{
+"text": "twenty",
+"para": 1,
+"start": 26.72,
+"end": 27.05
+},
+{
+"text": "dollars",
+"para": 1,
+"start": 27.05,
+"end": 27.47
+},
+{
+"text": "per",
+"para": 1,
+"start": 27.47,
+"end": 27.63
+},
+{
+"text": "million",
+"para": 1,
+"start": 27.63,
+"end": 28.03
+},
+{
+"text": "tokens.",
+"para": 1,
+"start": 28.03,
+"end": 28.64
+},
+{
+"text": "Minutes",
+"para": 1,
+"start": 29.05,
+"end": 29.43
+},
+{
+"text": "later,",
+"para": 1,
+"start": 29.43,
+"end": 29.87
+},
+{
+"text": "OpenAI",
+"para": 1,
+"start": 30.14,
+"end": 30.74
+},
+{
+"text": "fired",
+"para": 1,
+"start": 30.74,
+"end": 31.15
+},
+{
+"text": "back",
+"para": 1,
+"start": 31.15,
+"end": 31.44
+},
+{
+"text": "with",
+"para": 1,
+"start": 31.44,
+"end": 31.61
+},
+{
+"text": "GPT-6",
+"para": 1,
+"start": 31.61,
+"end": 32.78
+},
+{
+"text": "Sol",
+"para": 1,
+"start": 32.78,
+"end": 33.05
+},
+{
+"text": "and",
+"para": 1,
+"start": 33.05,
+"end": 33.15
+},
+{
+"text": "Luna.",
+"para": 1,
+"start": 33.15,
+"end": 33.51
+},
+{
+"text": "Sol's",
+"para": 1,
+"start": 33.91,
+"end": 34.31
+},
+{
+"text": "price",
+"para": 1,
+"start": 34.31,
+"end": 34.65
+},
+{
+"text": "was",
+"para": 1,
+"start": 34.65,
+"end": 34.81
+},
+{
+"text": "cut",
+"para": 1,
+"start": 34.81,
+"end": 35.01
+},
+{
+"text": "in",
+"para": 1,
+"start": 35.01,
+"end": 35.07
+},
+{
+"text": "half,",
+"para": 1,
+"start": 35.07,
+"end": 35.45
+},
+{
+"text": "to",
+"para": 1,
+"start": 35.45,
+"end": 35.61
+},
+{
+"text": "two",
+"para": 1,
+"start": 35.61,
+"end": 35.85
+},
+{
+"text": "dollars",
+"para": 1,
+"start": 35.85,
+"end": 36.21
+},
+{
+"text": "per",
+"para": 1,
+"start": 36.21,
+"end": 36.34
+},
+{
+"text": "million",
+"para": 1,
+"start": 36.34,
+"end": 36.71
+},
+{
+"text": "input",
+"para": 1,
+"start": 36.71,
+"end": 37.08
+},
+{
+"text": "tokens.",
+"para": 1,
+"start": 37.08,
+"end": 37.71
+},
+{
+"text": "Luna?",
+"para": 1,
+"start": 37.98,
+"end": 38.48
+},
+{
+"text": "Just",
+"para": 1,
+"start": 38.74,
+"end": 39.02
+},
+{
+"text": "ten",
+"para": 1,
+"start": 39.02,
+"end": 39.24
+},
+{
+"text": "cents.",
+"para": 1,
+"start": 39.24,
+"end": 39.77
+},
+{
+"text": "OpenAI",
+"para": 1,
+"start": 40.04,
+"end": 40.58
+},
+{
+"text": "claims",
+"para": 1,
+"start": 40.58,
+"end": 40.99
+},
+{
+"text": "Sol",
+"para": 1,
+"start": 40.99,
+"end": 41.31
+},
+{
+"text": "matches",
+"para": 1,
+"start": 41.31,
+"end": 41.74
+},
+{
+"text": "Claude",
+"para": 1,
+"start": 41.74,
+"end": 42.13
+},
+{
+"text": "Opus",
+"para": 1,
+"start": 42.13,
+"end": 42.5
+},
+{
+"text": "5",
+"para": 1,
+"start": 42.5,
+"end": 42.88
+},
+{
+"text": "on",
+"para": 1,
+"start": 42.88,
+"end": 43.05
+},
+{
+"text": "computer-use",
+"para": 1,
+"start": 43.05,
+"end": 43.74
+},
+{
+"text": "tasks,",
+"para": 1,
+"start": 43.74,
+"end": 44.27
+},
+{
+"text": "at",
+"para": 1,
+"start": 44.47,
+"end": 44.59
+},
+{
+"text": "about",
+"para": 1,
+"start": 44.59,
+"end": 44.9
+},
+{
+"text": "eighty",
+"para": 1,
+"start": 44.9,
+"end": 45.14
+},
+{
+"text": "percent",
+"para": 1,
+"start": 45.14,
+"end": 45.5
+},
+{
+"text": "lower",
+"para": 1,
+"start": 45.5,
+"end": 45.79
+},
+{
+"text": "cost.",
+"para": 1,
+"start": 45.79,
+"end": 46.41
+},
+{
+"text": "So",
+"para": 1,
+"start": 46.58,
+"end": 46.76
+},
+{
+"text": "the",
+"para": 1,
+"start": 46.76,
+"end": 46.84
+},
+{
+"text": "race",
+"para": 1,
+"start": 46.84,
+"end": 47.18
+},
+{
+"text": "isn't",
+"para": 1,
+"start": 47.18,
+"end": 47.48
+},
+{
+"text": "just",
+"para": 1,
+"start": 47.48,
+"end": 47.71
+},
+{
+"text": "about",
+"para": 1,
+"start": 47.71,
+"end": 47.96
+},
+{
+"text": "who's",
+"para": 1,
+"start": 47.96,
+"end": 48.14
+},
+{
+"text": "smartest",
+"para": 1,
+"start": 48.14,
+"end": 48.68
+},
+{
+"text": "anymore.",
+"para": 1,
+"start": 48.68,
+"end": 49.17
+},
+{
+"text": "It's",
+"para": 1,
+"start": 49.44,
+"end": 49.61
+},
+{
+"text": "who's",
+"para": 1,
+"start": 49.61,
+"end": 49.86
+},
+{
+"text": "cheapest",
+"para": 1,
+"start": 49.86,
+"end": 50.34
+},
+{
+"text": "near",
+"para": 1,
+"start": 50.34,
+"end": 50.48
+},
+{
+"text": "the",
+"para": 1,
+"start": 50.48,
+"end": 50.61
+},
+{
+"text": "top.",
+"para": 1,
+"start": 50.61,
+"end": 51.08
+},
+{
+"text": "Next,",
+"para": 2,
+"start": 51.43,
+"end": 52.0
+},
+{
+"text": "the",
+"para": 2,
+"start": 52.11,
+"end": 52.2
+},
+{
+"text": "strangest",
+"para": 2,
+"start": 52.2,
+"end": 52.76
+},
+{
+"text": "story",
+"para": 2,
+"start": 52.76,
+"end": 53.07
+},
+{
+"text": "of",
+"para": 2,
+"start": 53.07,
+"end": 53.17
+},
+{
+"text": "the",
+"para": 2,
+"start": 53.17,
+"end": 53.24
+},
+{
+"text": "week.",
+"para": 2,
+"start": 53.24,
+"end": 53.68
+},
+{
+"text": "About",
+"para": 2,
+"start": 53.95,
+"end": 54.24
+},
+{
+"text": "nine",
+"para": 2,
+"start": 54.24,
+"end": 54.53
+},
+{
+"text": "hundred",
+"para": 2,
+"start": 54.53,
+"end": 54.81
+},
+{
+"text": "fifty",
+"para": 2,
+"start": 54.81,
+"end": 55.14
+},
+{
+"text": "Claude",
+"para": 2,
+"start": 55.14,
+"end": 55.47
+},
+{
+"text": "agents",
+"para": 2,
+"start": 55.47,
+"end": 55.93
+},
+{
+"text": "searched",
+"para": 2,
+"start": 55.93,
+"end": 56.23
+},
+{
+"text": "a",
+"para": 2,
+"start": 56.23,
+"end": 56.31
+},
+{
+"text": "massive",
+"para": 2,
+"start": 56.31,
+"end": 56.8
+},
+{
+"text": "DNA",
+"para": 2,
+"start": 56.8,
+"end": 57.42
+},
+{
+"text": "database",
+"para": 2,
+"start": 57.42,
+"end": 57.96
+},
+{
+"text": "for",
+"para": 2,
+"start": 57.96,
+"end": 58.1
+},
+{
+"text": "twenty-one",
+"para": 2,
+"start": 58.1,
+"end": 58.63
+},
+{
+"text": "hours.",
+"para": 2,
+"start": 58.63,
+"end": 59.21
+},
+{
+"text": "They",
+"para": 2,
+"start": 59.44,
+"end": 59.6
+},
+{
+"text": "narrowed",
+"para": 2,
+"start": 59.6,
+"end": 60.02
+},
+{
+"text": "two",
+"para": 2,
+"start": 60.02,
+"end": 60.28
+},
+{
+"text": "hundred",
+"para": 2,
+"start": 60.28,
+"end": 60.58
+},
+{
+"text": "thousand",
+"para": 2,
+"start": 60.58,
+"end": 60.95
+},
+{
+"text": "candidates",
+"para": 2,
+"start": 60.95,
+"end": 61.49
+},
+{
+"text": "down",
+"para": 2,
+"start": 61.49,
+"end": 61.73
+},
+{
+"text": "to",
+"para": 2,
+"start": 61.73,
+"end": 61.82
+},
+{
+"text": "just",
+"para": 2,
+"start": 61.82,
+"end": 62.1
+},
+{
+"text": "twenty,",
+"para": 2,
+"start": 62.1,
+"end": 62.51
+},
+{
+"text": "and",
+"para": 2,
+"start": 62.75,
+"end": 62.88
+},
+{
+"text": "flagged",
+"para": 2,
+"start": 62.88,
+"end": 63.25
+},
+{
+"text": "a",
+"para": 2,
+"start": 63.25,
+"end": 63.29
+},
+{
+"text": "new,",
+"para": 2,
+"start": 63.29,
+"end": 63.7
+},
+{
+"text": "CRISPR-like",
+"para": 2,
+"start": 63.7,
+"end": 64.45
+},
+{
+"text": "enzyme",
+"para": 2,
+"start": 64.45,
+"end": 64.9
+},
+{
+"text": "system.",
+"para": 2,
+"start": 64.9,
+"end": 65.45
+},
+{
+"text": "Scientists",
+"para": 2,
+"start": 65.94,
+"end": 66.55
+},
+{
+"text": "confirmed",
+"para": 2,
+"start": 66.55,
+"end": 66.99
+},
+{
+"text": "it",
+"para": 2,
+"start": 66.99,
+"end": 67.09
+},
+{
+"text": "in",
+"para": 2,
+"start": 67.09,
+"end": 67.18
+},
+{
+"text": "the",
+"para": 2,
+"start": 67.18,
+"end": 67.25
+},
+{
+"text": "lab,",
+"para": 2,
+"start": 67.25,
+"end": 67.69
+},
+{
+"text": "and",
+"para": 2,
+"start": 67.87,
+"end": 67.99
+},
+{
+"text": "named",
+"para": 2,
+"start": 67.99,
+"end": 68.24
+},
+{
+"text": "it",
+"para": 2,
+"start": 68.24,
+"end": 68.36
+},
+{
+"text": "ART.",
+"para": 2,
+"start": 68.73,
+"end": 69.09
+},
+{
+"text": "The",
+"para": 2,
+"start": 69.09,
+"end": 69.44
+},
+{
+"text": "catch?",
+"para": 2,
+"start": 69.81,
+"end": 70.44
+},
+{
+"text": "Nobody",
+"para": 2,
+"start": 70.68,
+"end": 70.98
+},
+{
+"text": "knows",
+"para": 2,
+"start": 70.98,
+"end": 71.25
+},
+{
+"text": "what",
+"para": 2,
+"start": 71.25,
+"end": 71.37
+},
+{
+"text": "it",
+"para": 2,
+"start": 71.37,
+"end": 71.46
+},
+{
+"text": "does",
+"para": 2,
+"start": 71.46,
+"end": 71.72
+},
+{
+"text": "yet.",
+"para": 2,
+"start": 71.72,
+"end": 71.97
+},
+{
+"text": "Stanford's",
+"para": 2,
+"start": 72.25,
+"end": 72.82
+},
+{
+"text": "Stanley",
+"para": 2,
+"start": 72.82,
+"end": 73.26
+},
+{
+"text": "Qi",
+"para": 2,
+"start": 73.26,
+"end": 73.63
+},
+{
+"text": "calls",
+"para": 2,
+"start": 73.63,
+"end": 73.95
+},
+{
+"text": "it",
+"para": 2,
+"start": 73.95,
+"end": 74.03
+},
+{
+"text": "incredibly",
+"para": 2,
+"start": 74.03,
+"end": 74.7
+},
+{
+"text": "exciting.",
+"para": 2,
+"start": 74.7,
+"end": 75.24
+},
+{
+"text": "Microbiologist",
+"para": 2,
+"start": 75.71,
+"end": 76.68
+},
+{
+"text": "Kevin",
+"para": 2,
+"start": 76.68,
+"end": 77.02
+},
+{
+"text": "Blake",
+"para": 2,
+"start": 77.02,
+"end": 77.33
+},
+{
+"text": "says",
+"para": 2,
+"start": 77.33,
+"end": 77.63
+},
+{
+"text": "CRISPR-like",
+"para": 2,
+"start": 77.63,
+"end": 78.25
+},
+{
+"text": "sequences",
+"para": 2,
+"start": 78.25,
+"end": 78.87
+},
+{
+"text": "aren't",
+"para": 2,
+"start": 78.87,
+"end": 79.19
+},
+{
+"text": "that",
+"para": 2,
+"start": 79.19,
+"end": 79.39
+},
+{
+"text": "rare.",
+"para": 2,
+"start": 79.39,
+"end": 79.88
+},
+{
+"text": "A",
+"para": 2,
+"start": 80.23,
+"end": 80.32
+},
+{
+"text": "cool",
+"para": 2,
+"start": 80.32,
+"end": 80.69
+},
+{
+"text": "proof",
+"para": 2,
+"start": 80.69,
+"end": 80.97
+},
+{
+"text": "of",
+"para": 2,
+"start": 80.97,
+"end": 81.07
+},
+{
+"text": "concept.",
+"para": 2,
+"start": 81.07,
+"end": 81.72
+},
+{
+"text": "Not",
+"para": 2,
+"start": 82.17,
+"end": 82.45
+},
+{
+"text": "gene",
+"para": 2,
+"start": 82.45,
+"end": 82.75
+},
+{
+"text": "editing",
+"para": 2,
+"start": 82.75,
+"end": 83.17
+},
+{
+"text": "two-point-oh.",
+"para": 2,
+"start": 83.17,
+"end": 84.02
+},
+{
+"text": "Not",
+"para": 2,
+"start": 84.22,
+"end": 84.46
+},
+{
+"text": "yet.",
+"para": 2,
+"start": 84.46,
+"end": 84.85
+},
+{
+"text": "Meta",
+"para": 3,
+"start": 85.34,
+"end": 85.62
+},
+{
+"text": "went",
+"para": 3,
+"start": 85.62,
+"end": 85.86
+},
+{
+"text": "all",
+"para": 3,
+"start": 85.86,
+"end": 86.19
+},
+{
+"text": "in",
+"para": 3,
+"start": 86.19,
+"end": 86.32
+},
+{
+"text": "on",
+"para": 3,
+"start": 86.32,
+"end": 86.43
+},
+{
+"text": "wearables",
+"para": 3,
+"start": 86.43,
+"end": 86.99
+},
+{
+"text": "at",
+"para": 3,
+"start": 86.99,
+"end": 87.07
+},
+{
+"text": "Connect.",
+"para": 3,
+"start": 87.07,
+"end": 87.55
+},
+{
+"text": "Its",
+"para": 3,
+"start": 87.99,
+"end": 88.2
+},
+{
+"text": "AI",
+"para": 3,
+"start": 88.26,
+"end": 88.7
+},
+{
+"text": "agent,",
+"para": 3,
+"start": 88.7,
+"end": 89.22
+},
+{
+"text": "Muse,",
+"para": 3,
+"start": 89.22,
+"end": 89.84
+},
+{
+"text": "can",
+"para": 3,
+"start": 89.84,
+"end": 90.16
+},
+{
+"text": "book",
+"para": 3,
+"start": 90.16,
+"end": 90.36
+},
+{
+"text": "a",
+"para": 3,
+"start": 90.36,
+"end": 90.4
+},
+{
+"text": "restaurant,",
+"para": 3,
+"start": 90.4,
+"end": 90.99
+},
+{
+"text": "order",
+"para": 3,
+"start": 91.12,
+"end": 91.39
+},
+{
+"text": "groceries,",
+"para": 3,
+"start": 91.39,
+"end": 91.99
+},
+{
+"text": "and",
+"para": 3,
+"start": 92.12,
+"end": 92.28
+},
+{
+"text": "plan",
+"para": 3,
+"start": 92.28,
+"end": 92.55
+},
+{
+"text": "a",
+"para": 3,
+"start": 92.55,
+"end": 92.61
+},
+{
+"text": "trip.",
+"para": 3,
+"start": 92.61,
+"end": 92.99
+},
+{
+"text": "Then",
+"para": 3,
+"start": 93.55,
+"end": 93.88
+},
+{
+"text": "came",
+"para": 3,
+"start": 93.88,
+"end": 94.14
+},
+{
+"text": "Muse",
+"para": 3,
+"start": 94.14,
+"end": 94.45
+},
+{
+"text": "Charm,",
+"para": 3,
+"start": 94.45,
+"end": 94.89
+},
+{
+"text": "a",
+"para": 3,
+"start": 95.09,
+"end": 95.17
+},
+{
+"text": "keychain-sized",
+"para": 3,
+"start": 95.17,
+"end": 96.07
+},
+{
+"text": "gadget,",
+"para": 3,
+"start": 96.07,
+"end": 96.64
+},
+{
+"text": "no",
+"para": 3,
+"start": 96.84,
+"end": 97.08
+},
+{
+"text": "glasses",
+"para": 3,
+"start": 97.08,
+"end": 97.56
+},
+{
+"text": "needed,",
+"para": 3,
+"start": 97.56,
+"end": 97.96
+},
+{
+"text": "launching",
+"para": 3,
+"start": 98.2,
+"end": 98.61
+},
+{
+"text": "in",
+"para": 3,
+"start": 98.61,
+"end": 98.69
+},
+{
+"text": "December.",
+"para": 3,
+"start": 98.69,
+"end": 99.33
+},
+{
+"text": "New",
+"para": 3,
+"start": 99.8,
+"end": 100.09
+},
+{
+"text": "Ray-Ban",
+"para": 3,
+"start": 100.09,
+"end": 100.56
+},
+{
+"text": "Meta",
+"para": 3,
+"start": 100.56,
+"end": 100.78
+},
+{
+"text": "Audio",
+"para": 3,
+"start": 100.78,
+"end": 101.24
+},
+{
+"text": "glasses",
+"para": 3,
+"start": 101.24,
+"end": 101.75
+},
+{
+"text": "start",
+"para": 3,
+"start": 101.75,
+"end": 102.07
+},
+{
+"text": "at",
+"para": 3,
+"start": 102.07,
+"end": 102.21
+},
+{
+"text": "three",
+"para": 3,
+"start": 102.21,
+"end": 102.49
+},
+{
+"text": "hundred",
+"para": 3,
+"start": 102.49,
+"end": 102.83
+},
+{
+"text": "forty-nine",
+"para": 3,
+"start": 102.83,
+"end": 103.43
+},
+{
+"text": "dollars.",
+"para": 3,
+"start": 103.43,
+"end": 104.06
+},
+{
+"text": "And",
+"para": 3,
+"start": 104.46,
+"end": 104.66
+},
+{
+"text": "Zuckerberg",
+"para": 3,
+"start": 104.66,
+"end": 105.28
+},
+{
+"text": "pushed",
+"para": 3,
+"start": 105.28,
+"end": 105.6
+},
+{
+"text": "back",
+"para": 3,
+"start": 105.6,
+"end": 105.87
+},
+{
+"text": "on",
+"para": 3,
+"start": 105.87,
+"end": 106.03
+},
+{
+"text": "AI",
+"para": 3,
+"start": 106.03,
+"end": 106.38
+},
+{
+"text": "doom:",
+"para": 3,
+"start": 106.38,
+"end": 106.8
+},
+{
+"text": "“We",
+"para": 3,
+"start": 107.23,
+"end": 107.42
+},
+{
+"text": "are",
+"para": 3,
+"start": 107.42,
+"end": 107.57
+},
+{
+"text": "optimists,",
+"para": 3,
+"start": 107.57,
+"end": 108.4
+},
+{
+"text": "because",
+"para": 3,
+"start": 108.47,
+"end": 108.8
+},
+{
+"text": "we",
+"para": 3,
+"start": 108.8,
+"end": 109.01
+},
+{
+"text": "believe",
+"para": 3,
+"start": 109.01,
+"end": 109.39
+},
+{
+"text": "in",
+"para": 3,
+"start": 109.39,
+"end": 109.52
+},
+{
+"text": "people.”",
+"para": 3,
+"start": 109.52,
+"end": 110.03
+},
+{
+"text": "Over",
+"para": 4,
+"start": 110.52,
+"end": 110.83
+},
+{
+"text": "at",
+"para": 4,
+"start": 110.83,
+"end": 110.9
+},
+{
+"text": "Google,",
+"para": 4,
+"start": 110.9,
+"end": 111.42
+},
+{
+"text": "DeepMind's",
+"para": 4,
+"start": 111.7,
+"end": 112.31
+},
+{
+"text": "new",
+"para": 4,
+"start": 112.31,
+"end": 112.52
+},
+{
+"text": "senior",
+"para": 4,
+"start": 112.52,
+"end": 112.94
+},
+{
+"text": "VP",
+"para": 4,
+"start": 112.94,
+"end": 113.59
+},
+{
+"text": "says",
+"para": 4,
+"start": 113.62,
+"end": 113.9
+},
+{
+"text": "Gemini",
+"para": 4,
+"start": 113.9,
+"end": 114.3
+},
+{
+"text": "4",
+"para": 4,
+"start": 114.3,
+"end": 114.67
+},
+{
+"text": "is",
+"para": 4,
+"start": 114.67,
+"end": 114.82
+},
+{
+"text": "now",
+"para": 4,
+"start": 114.82,
+"end": 115.04
+},
+{
+"text": "in",
+"para": 4,
+"start": 115.04,
+"end": 115.13
+},
+{
+"text": "post-training,",
+"para": 4,
+"start": 115.13,
+"end": 115.91
+},
+{
+"text": "and",
+"para": 4,
+"start": 116.18,
+"end": 116.35
+},
+{
+"text": "they",
+"para": 4,
+"start": 116.35,
+"end": 116.5
+},
+{
+"text": "want",
+"para": 4,
+"start": 116.5,
+"end": 116.83
+},
+{
+"text": "an",
+"para": 4,
+"start": 116.83,
+"end": 116.91
+},
+{
+"text": "early",
+"para": 4,
+"start": 116.91,
+"end": 117.27
+},
+{
+"text": "version",
+"para": 4,
+"start": 117.27,
+"end": 117.7
+},
+{
+"text": "out",
+"para": 4,
+"start": 117.7,
+"end": 118.0
+},
+{
+"text": "as",
+"para": 4,
+"start": 118.0,
+"end": 118.1
+},
+{
+"text": "soon",
+"para": 4,
+"start": 118.1,
+"end": 118.34
+},
+{
+"text": "as",
+"para": 4,
+"start": 118.34,
+"end": 118.46
+},
+{
+"text": "possible.",
+"para": 4,
+"start": 118.46,
+"end": 119.09
+},
+{
+"text": "Expect",
+"para": 4,
+"start": 119.52,
+"end": 119.95
+},
+{
+"text": "a",
+"para": 4,
+"start": 119.95,
+"end": 119.99
+},
+{
+"text": "heavy",
+"para": 4,
+"start": 119.99,
+"end": 120.34
+},
+{
+"text": "focus",
+"para": 4,
+"start": 120.34,
+"end": 120.78
+},
+{
+"text": "on",
+"para": 4,
+"start": 120.78,
+"end": 120.9
+},
+{
+"text": "coding",
+"para": 4,
+"start": 120.9,
+"end": 121.36
+},
+{
+"text": "and",
+"para": 4,
+"start": 121.36,
+"end": 121.49
+},
+{
+"text": "long-running",
+"para": 4,
+"start": 121.49,
+"end": 122.07
+},
+{
+"text": "agents.",
+"para": 4,
+"start": 122.07,
+"end": 122.64
+},
+{
+"text": "Money",
+"para": 5,
+"start": 122.93,
+"end": 123.21
+},
+{
+"text": "check:",
+"para": 5,
+"start": 123.21,
+"end": 123.59
+},
+{
+"text": "cybersecurity",
+"para": 5,
+"start": 123.81,
+"end": 124.65
+},
+{
+"text": "startup",
+"para": 5,
+"start": 124.65,
+"end": 125.09
+},
+{
+"text": "Island",
+"para": 5,
+"start": 125.09,
+"end": 125.49
+},
+{
+"text": "raised",
+"para": 5,
+"start": 125.49,
+"end": 125.84
+},
+{
+"text": "four",
+"para": 5,
+"start": 125.84,
+"end": 126.17
+},
+{
+"text": "hundred",
+"para": 5,
+"start": 126.17,
+"end": 126.53
+},
+{
+"text": "million",
+"para": 5,
+"start": 126.53,
+"end": 126.89
+},
+{
+"text": "dollars,",
+"para": 5,
+"start": 126.89,
+"end": 127.41
+},
+{
+"text": "at",
+"para": 5,
+"start": 127.63,
+"end": 127.79
+},
+{
+"text": "a",
+"para": 5,
+"start": 127.79,
+"end": 127.83
+},
+{
+"text": "six-point-four",
+"para": 5,
+"start": 127.83,
+"end": 128.86
+},
+{
+"text": "billion",
+"para": 5,
+"start": 128.86,
+"end": 129.34
+},
+{
+"text": "dollar",
+"para": 5,
+"start": 129.34,
+"end": 129.64
+},
+{
+"text": "valuation.",
+"para": 5,
+"start": 129.64,
+"end": 130.43
+},
+{
+"text": "AI,",
+"para": 5,
+"start": 130.88,
+"end": 131.49
+},
+{
+"text": "defending",
+"para": 5,
+"start": 131.75,
+"end": 132.3
+},
+{
+"text": "against",
+"para": 5,
+"start": 132.3,
+"end": 132.71
+},
+{
+"text": "AI.",
+"para": 5,
+"start": 132.71,
+"end": 133.26
+},
+{
+"text": "And",
+"para": 6,
+"start": 133.68,
+"end": 133.81
+},
+{
+"text": "finally,",
+"para": 6,
+"start": 133.81,
+"end": 134.5
+},
+{
+"text": "the",
+"para": 6,
+"start": 134.75,
+"end": 134.84
+},
+{
+"text": "UN.",
+"para": 6,
+"start": 134.84,
+"end": 135.45
+},
+{
+"text": "Anthropic's",
+"para": 6,
+"start": 135.61,
+"end": 136.25
+},
+{
+"text": "Dario",
+"para": 6,
+"start": 136.25,
+"end": 136.75
+},
+{
+"text": "Amodei",
+"para": 6,
+"start": 136.75,
+"end": 137.18
+},
+{
+"text": "warned:",
+"para": 6,
+"start": 137.18,
+"end": 137.76
+},
+{
+"text": "“If",
+"para": 6,
+"start": 138.22,
+"end": 138.38
+},
+{
+"text": "managed",
+"para": 6,
+"start": 138.38,
+"end": 138.86
+},
+{
+"text": "poorly,",
+"para": 6,
+"start": 138.86,
+"end": 139.45
+},
+{
+"text": "I",
+"para": 6,
+"start": 139.7,
+"end": 139.82
+},
+{
+"text": "even",
+"para": 6,
+"start": 139.82,
+"end": 140.11
+},
+{
+"text": "believe",
+"para": 6,
+"start": 140.11,
+"end": 140.43
+},
+{
+"text": "AI",
+"para": 6,
+"start": 140.52,
+"end": 140.87
+},
+{
+"text": "could",
+"para": 6,
+"start": 140.87,
+"end": 141.05
+},
+{
+"text": "be",
+"para": 6,
+"start": 141.05,
+"end": 141.19
+},
+{
+"text": "a",
+"para": 6,
+"start": 141.19,
+"end": 141.22
+},
+{
+"text": "risk",
+"para": 6,
+"start": 141.22,
+"end": 141.58
+},
+{
+"text": "to",
+"para": 6,
+"start": 141.58,
+"end": 141.67
+},
+{
+"text": "humanity",
+"para": 6,
+"start": 141.67,
+"end": 142.29
+},
+{
+"text": "as",
+"para": 6,
+"start": 142.29,
+"end": 142.42
+},
+{
+"text": "a",
+"para": 6,
+"start": 142.42,
+"end": 142.46
+},
+{
+"text": "whole.”",
+"para": 6,
+"start": 142.46,
+"end": 142.94
+},
+{
+"text": "OpenAI's",
+"para": 6,
+"start": 143.51,
+"end": 144.12
+},
+{
+"text": "Sam",
+"para": 6,
+"start": 144.12,
+"end": 144.48
+},
+{
+"text": "Altman",
+"para": 6,
+"start": 144.48,
+"end": 144.91
+},
+{
+"text": "said",
+"para": 6,
+"start": 144.91,
+"end": 145.18
+},
+{
+"text": "these",
+"para": 6,
+"start": 145.18,
+"end": 145.38
+},
+{
+"text": "decisions",
+"para": 6,
+"start": 145.38,
+"end": 145.94
+},
+{
+"text": "“cannot",
+"para": 6,
+"start": 145.94,
+"end": 146.26
+},
+{
+"text": "be",
+"para": 6,
+"start": 146.26,
+"end": 146.38
+},
+{
+"text": "made",
+"para": 6,
+"start": 146.38,
+"end": 146.61
+},
+{
+"text": "by",
+"para": 6,
+"start": 146.61,
+"end": 146.77
+},
+{
+"text": "labs",
+"para": 6,
+"start": 146.77,
+"end": 147.23
+},
+{
+"text": "in",
+"para": 6,
+"start": 147.23,
+"end": 147.32
+},
+{
+"text": "San",
+"para": 6,
+"start": 147.32,
+"end": 147.55
+},
+{
+"text": "Francisco",
+"para": 6,
+"start": 147.55,
+"end": 148.1
+},
+{
+"text": "alone.”",
+"para": 6,
+"start": 148.1,
+"end": 148.62
+},
+{
+"text": "But",
+"para": 6,
+"start": 149.04,
+"end": 149.18
+},
+{
+"text": "the",
+"para": 6,
+"start": 149.18,
+"end": 149.26
+},
+{
+"text": "U.S.",
+"para": 6,
+"start": 149.26,
+"end": 149.77
+},
+{
+"text": "rejected",
+"para": 6,
+"start": 149.77,
+"end": 150.29
+},
+{
+"text": "what",
+"para": 6,
+"start": 150.29,
+"end": 150.45
+},
+{
+"text": "it",
+"para": 6,
+"start": 150.45,
+"end": 150.53
+},
+{
+"text": "called",
+"para": 6,
+"start": 150.53,
+"end": 150.86
+},
+{
+"text": "centralised",
+"para": 6,
+"start": 150.86,
+"end": 151.54
+},
+{
+"text": "control",
+"para": 6,
+"start": 151.54,
+"end": 152.18
+},
+{
+"text": "and",
+"para": 6,
+"start": 152.18,
+"end": 152.31
+},
+{
+"text": "global",
+"para": 6,
+"start": 152.31,
+"end": 152.74
+},
+{
+"text": "governance",
+"para": 6,
+"start": 152.74,
+"end": 153.24
+},
+{
+"text": "of",
+"para": 6,
+"start": 153.24,
+"end": 153.35
+},
+{
+"text": "AI.",
+"para": 6,
+"start": 153.35,
+"end": 153.83
+},
+{
+"text": "The",
+"para": 6,
+"start": 154.4,
+"end": 154.49
+},
+{
+"text": "builders",
+"para": 6,
+"start": 154.49,
+"end": 154.97
+},
+{
+"text": "want",
+"para": 6,
+"start": 154.97,
+"end": 155.17
+},
+{
+"text": "guardrails.",
+"para": 6,
+"start": 155.17,
+"end": 155.91
+},
+{
+"text": "Governments",
+"para": 6,
+"start": 156.24,
+"end": 156.75
+},
+{
+"text": "are",
+"para": 6,
+"start": 156.75,
+"end": 156.82
+},
+{
+"text": "saying:",
+"para": 6,
+"start": 156.82,
+"end": 157.25
+},
+{
+"text": "not",
+"para": 6,
+"start": 157.46,
+"end": 157.7
+},
+{
+"text": "right",
+"para": 6,
+"start": 157.7,
+"end": 157.9
+},
+{
+"text": "now.",
+"para": 6,
+"start": 157.9,
+"end": 158.29
+},
+{
+"text": "Which",
+"para": 7,
+"start": 158.66,
+"end": 158.86
+},
+{
+"text": "story",
+"para": 7,
+"start": 158.86,
+"end": 159.19
+},
+{
+"text": "matters",
+"para": 7,
+"start": 159.19,
+"end": 159.55
+},
+{
+"text": "most?",
+"para": 7,
+"start": 159.55,
+"end": 160.01
+},
+{
+"text": "Tell",
+"para": 7,
+"start": 160.43,
+"end": 160.65
+},
+{
+"text": "me",
+"para": 7,
+"start": 160.65,
+"end": 160.77
+},
+{
+"text": "in",
+"para": 7,
+"start": 160.77,
+"end": 160.87
+},
+{
+"text": "the",
+"para": 7,
+"start": 160.87,
+"end": 160.94
+},
+{
+"text": "comments,",
+"para": 7,
+"start": 160.94,
+"end": 161.54
+},
+{
+"text": "and",
+"para": 7,
+"start": 161.63,
+"end": 161.76
+},
+{
+"text": "subscribe",
+"para": 7,
+"start": 161.76,
+"end": 162.33
+},
+{
+"text": "for",
+"para": 7,
+"start": 162.33,
+"end": 162.47
+},
+{
+"text": "next",
+"para": 7,
+"start": 162.47,
+"end": 162.76
+},
+{
+"text": "week's",
+"para": 7,
+"start": 162.76,
+"end": 163.0
+},
+{
+"text": "roundup.",
+"para": 7,
+"start": 163.0,
+"end": 163.55
+}
+]

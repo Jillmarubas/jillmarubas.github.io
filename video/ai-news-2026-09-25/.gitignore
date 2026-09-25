@@ -1,0 +1,7 @@
+node_modules/
+build/
+out/*
+!out/ai-news-short-2026-09-25.mp4
+# derived from vo.mp3 and music-loop.mp3 by tools/space_vo.py and tools/music_bed.sh
+public/audio/vo-spaced.wav
+public/audio/music-bed.wav
