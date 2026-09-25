@@ -8,7 +8,7 @@ portfolio's **frost glass** design system and **Settle Motion** curves.
 | Final video | `out/ai-news-short-2026-09-25.mp4` (H.264, 2:50, ≈ −14 LUFS, 92 MB) |
 | Script (short cut) | `script-short.md` |
 | Voice | ElevenLabs, **Joey – Upbeat Popular News Host**, `eleven_multilingual_v2` |
-| Music + SFX | ElevenLabs sound generation (30 s seamless loop, whoosh, impact, pop, riser, glitch) |
+| Music + SFX | ElevenLabs sound generation (30 s seamless loop; whoosh, impact, pop, low-passed at 7 kHz by `tools/sfx_soft.sh` and kept well under the voice) |
 | Type | Archivo (display), IBM Plex Sans, IBM Plex Mono, bundled locally in `public/fonts` |
 
 ## How it's built
@@ -72,6 +72,9 @@ npm run studio        # preview
 npm run render        # writes out/master.mp4
 tools/finish.sh ffmpeg
 ```
+
+Audio-only change? `node tools/audio.mjs build out/audio.wav` renders just the soundtrack in
+a few minutes; mux it onto `out/master.mp4` and run `tools/finish.sh` again.
 
 Rendering without a GPU uses SwANGLE (set in `remotion.config.ts`): about 0.4 s a frame on
 4 cores, ~40 minutes for the whole Short.
