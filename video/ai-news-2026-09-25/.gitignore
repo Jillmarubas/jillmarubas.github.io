@@ -5,3 +5,4 @@ out/*
 # derived from vo.mp3 and music-loop.mp3 by tools/space_vo.py and tools/music_bed.sh
 public/audio/vo-spaced.wav
 public/audio/music-bed.wav
+!out/thumbnails/
