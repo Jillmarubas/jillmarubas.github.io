@@ -15,6 +15,7 @@
     "@fontsource/ibm-plex-sans": "^5.3.0",
     "@remotion/cli": "^4.0.528",
     "@remotion/fonts": "^4.0.528",
+    "@remotion/lambda": "^4.0.528",
     "@remotion/layout-utils": "^4.0.528",
     "@remotion/media-utils": "^4.0.528",
     "@remotion/motion-blur": "^4.0.528",
