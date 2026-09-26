@@ -34,7 +34,7 @@ These are Jillmar's requirements. Every video must meet all of them.
 
 | What | Where it lives | How it is used |
 |---|---|---|
-| **AWS access key** (IAM user `remotion-user`) | Cloud environment settings: session title bar → environment menu → **Edit → API credentials** | Injected by the sandbox proxy into requests to `*.amazonaws.com`. Inside the sandbox, `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` are **placeholders**. Scripts must preload `scripts/aws-proxy.cjs`. |
+| **AWS access key** (IAM user `remotion-user`) | claude.ai cloud environment **`REMOTION`** (session title bar → environment menu → **Edit**) → **API credentials** → credential **`REMOTION`**, scoped to **`*.amazonaws.com`**. Values can't be viewed after saving; to rotate, delete it (bin icon) and use **+ Add credential** again. | Injected by the sandbox proxy into requests to `*.amazonaws.com`. Inside the sandbox, `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` are **placeholders**. Scripts must preload `scripts/aws-proxy.cjs`. |
 | **AWS account (root)** | Sign in at `signin.aws.amazon.com` → **Root user** → `jillmar1988@gmail.com`. Password in Jillmar's password manager; reset with *Forgot password?* | Console only: downloads and presigned links. Keep MFA on. |
 | **AWS region** | `us-east-1` | Lambda function, S3 bucket, Agent Toolkit |
 | **Remotion Lambda function** | `remotion-render-4-0-529-mem3008mb-disk10240mb-900sec` | Created by `npm run lambda:deploy` |
@@ -42,6 +42,13 @@ These are Jillmar's requirements. Every video must meet all of them.
 | **ElevenLabs** | claude.ai **Settings → Connectors → ElevenLabs** | The voice-over (Joey) |
 | **GitHub** | claude.ai GitHub connection, repo `Jillmarubas/jillmarubas.github.io` (**public**) | Code only |
 | **AWS MCP connector** (optional) | claude.ai **Settings → Connectors → AWS**. Needs re-authorising when it says "sign in again". | Lets Claude make presigned download links |
+
+### The `REMOTION` cloud environment (as configured)
+
+- **Network access:** Full.
+- **API credentials:** `REMOTION` → `*.amazonaws.com`. This is the **only** place secrets belong.
+- **Environment variables:** visible to anyone using the environment. **Never put keys here.**
+- **Setup script:** runs when a session starts.
 
 ### AWS account limits (discovered 26 Sep 2026)
 
@@ -227,4 +234,4 @@ Then upload the master to S3 as `final/<episode>.mp4`. Keep it **private**.
 | A render dies mid-way | The process was paused (SIGSTOP) | Never pause a running render |
 | Visual on the wrong line | Beat anchored to the first occurrence of a repeated word | Set `nth`; the ordering guard throws |
 | Commons HTTP 429 | Rate limit | Use `scripts/commons.py` (retries with a User-Agent) |
-| `awscli.amazonaws.com` HTTP 502 in the sandbox | Network policy | Run the AWS Agent Toolkit setup on your own computer, not in the cloud sandbox |
+| `awscli.amazonaws.com` HTTP 502 in the sandbox | The `REMOTION` credential covers **all** `*.amazonaws.com`, so the proxy also signs the AWS CLI download, which breaks it. Network access is Full, so the host isn't blocked. | Run the AWS Agent Toolkit setup on your own computer, not in the cloud sandbox |
