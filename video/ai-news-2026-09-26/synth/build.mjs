@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {buildBlocks} from '../src/runningOrder.ts';
-import {normalizePeak, writeWav} from './dsp.mjs';
+import {musicGainAt} from '../src/musicDuck.ts';
+import {SR, dbToGain, normalizePeak, writeWav} from './dsp.mjs';
 import {BPM, renderMusic} from './score.mjs';
 import * as SFX from './sfx.mjs';
 
@@ -33,21 +34,27 @@ console.timeEnd('sfx');
 console.time('music');
 const music = renderMusic(blocks, total);
 normalizePeak(music, -3);
-const tmp = path.join(root, 'out', 'music-raw.wav');
-fs.mkdirSync(path.dirname(tmp), {recursive: true});
-writeWav(tmp, music);
+fs.mkdirSync(path.join(root, 'out'), {recursive: true});
+const raw = path.join(root, 'out', 'music-raw.wav');
+writeWav(raw, music);
 console.timeEnd('music');
 
-// two-pass loudness normalisation to -16 LUFS / -1.5 dBTP, then MP3 for the repo
-const measure = ffmpeg(['-i', tmp, '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-']);
+// measure the un-ducked bed, bring it to -16 LUFS with a static gain, then bake in the
+// ducking (src/musicDuck.ts) so Remotion can play it at a fixed volume
+const measure = ffmpeg(['-i', raw, '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-']);
 const m = JSON.parse(measure.slice(measure.lastIndexOf('{'), measure.lastIndexOf('}') + 1));
-ffmpeg([
-  '-i', tmp,
-  '-af', `loudnorm=I=-16:TP=-1.5:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,aresample=48000`,
-  '-c:a', 'libmp3lame', '-b:a', '256k', path.join(out, 'music.mp3'),
-]);
-fs.rmSync(tmp);
-console.log(`music: ${total.toFixed(2)} s, measured ${m.input_i} LUFS → -16 LUFS`);
+const gain = dbToGain(-16 - Number(m.input_i));
+for (let i = 0; i < music[0].length; i++) {
+  const g = gain * musicGainAt(i / SR, blocks, total);
+  music[0][i] *= g;
+  music[1][i] *= g;
+}
+const ducked = path.join(root, 'out', 'music-ducked.wav');
+writeWav(ducked, music);
+ffmpeg(['-i', ducked, '-c:a', 'libmp3lame', '-b:a', '256k', path.join(out, 'music.mp3')]);
+fs.rmSync(raw);
+fs.rmSync(ducked);
+console.log(`music: ${total.toFixed(2)} s, bed measured ${m.input_i} LUFS, set to -16 LUFS, ducking baked in`);
 
 fs.writeFileSync(
   path.join(out, 'manifest.json'),

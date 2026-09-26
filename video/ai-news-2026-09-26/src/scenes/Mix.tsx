@@ -1,17 +1,15 @@
 import React from 'react';
-import {Audio, Sequence, interpolate, staticFile} from 'remotion';
+import {Audio, Sequence, staticFile} from 'remotion';
 import {resolveBeats} from '../beats';
 import {isCountable} from '../components/Kinetic';
 import {FPS} from '../theme';
 import manifest from '../../public/audio/manifest.json';
-import {BLOCKS, TOTAL_FRAMES, sec, wi} from '../timeline';
+import {BLOCKS, sec, wi} from '../timeline';
 
-// Music and SFX are synthesised in code by synth/ (`npm run audio`), not sourced.
-// Gains come from ebur128 measurements: VO is -16 LUFS (momentary median -16.5); the bed
-// is -16 LUFS; each SFX gain puts its loudest 400 ms window where noted.
+// Music and SFX are synthesised in code by synth/ (`npm run audio`), not sourced. The
+// music's level curve is baked in (src/musicDuck.ts). Gains come from ebur128: VO is
+// -16 LUFS (momentary median -16.5); each SFX gain puts its loudest 400 ms window where noted.
 export const LEVELS = {
-  musicUnderVoice: 0.16, // -16 dB  → bed ≈ -32 LUFS under speech
-  musicOpen: 0.45, // -7 dB   → ≈ -23 LUFS on cards, stings and the end card
   impact: 0.32, // -7.1 → ≈ -17 LUFS, on cards where the voice is silent
   riser: 0.2, // -8.9 → ≈ -23 LUFS, into each card
   whoosh: 0.17, // -10.5 → ≈ -26 LUFS
@@ -73,26 +71,10 @@ const cues = (): Cue[] => {
 
 export const CUES = cues();
 
-// Music level: ducked while Joey speaks, lifted in the gaps, with 0.4 s ramps.
-const musicVolume = (frame: number) => {
-  const t = frame / FPS;
-  let duck = 0;
-  for (const b of BLOCKS) {
-    if (b.kind !== 'vo') continue;
-    const a0 = b.start - 0.35;
-    const a1 = b.start + b.len + 0.15;
-    const d = interpolate(t, [a0 - 0.4, a0, a1, a1 + 0.5], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-    duck = Math.max(duck, d);
-  }
-  const level = LEVELS.musicOpen + (LEVELS.musicUnderVoice - LEVELS.musicOpen) * duck;
-  const fadeIn = interpolate(frame, [0, FPS], [0, 1], {extrapolateRight: 'clamp'});
-  const fadeOut = interpolate(frame, [TOTAL_FRAMES - 3 * FPS, TOTAL_FRAMES - 4], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  return level * fadeIn * fadeOut;
-};
-
 export const Mix: React.FC = () => (
   <>
-    <Audio src={staticFile('audio/music.mp3')} volume={musicVolume} />
+    {/* ducking is baked into the file by the synth (src/musicDuck.ts) */}
+    <Audio src={staticFile('audio/music.mp3')} />
     {BLOCKS.filter((b) => b.kind === 'vo').map((b) =>
       b.kind === 'vo' ? (
         <Sequence key={b.id} from={Math.round(b.start * FPS)} durationInFrames={Math.ceil((b.len + 0.3) * FPS)} name={`VO ${b.id}`}>
