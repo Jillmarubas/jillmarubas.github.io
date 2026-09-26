@@ -9,7 +9,7 @@ const region = process.env.REMOTION_REGION || 'us-east-1';
 const {functionName, alreadyExisted} = await deployFunction({
   region,
   timeoutInSeconds: 900,
-  memorySizeInMb: 3009,
+  memorySizeInMb: 3008, // newer AWS accounts cap Lambda memory at 3008 MB
   diskSizeInMb: 10240,
   createCloudWatchLogGroup: true,
 });

@@ -2,7 +2,8 @@
 import {getFunctions, getRenderProgress, getSites, renderMediaOnLambda, downloadMedia} from '@remotion/lambda';
 
 const region = process.env.REMOTION_REGION || 'us-east-1';
-const [fn] = await getFunctions({region, compatibleOnly: true});
+// more than one compatible function may exist: use the one with the most headroom
+const [fn] = (await getFunctions({region, compatibleOnly: true})).sort((a, b) => b.timeoutInSeconds - a.timeoutInSeconds || b.memorySizeInMb - a.memorySizeInMb);
 if (!fn) throw new Error('No compatible Remotion Lambda function. Run `npm run lambda:deploy` first.');
 const {sites} = await getSites({region});
 const site = sites.find((s) => s.id === 'ai-news-2026-09-26');
@@ -19,10 +20,11 @@ const {renderId, bucketName} = await renderMediaOnLambda({
   audioBitrate: '320k',
   imageFormat: 'jpeg',
   jpegQuality: 92,
-  framesPerLambda: 600,
+  // newer AWS accounts allow ~10 concurrent Lambdas: 8 chunks + the orchestrator stays under that
+  framesPerLambda: Math.ceil(17930 / 8),
   downloadBehavior: {type: 'download', fileName: 'ai-news-2026-09-26.mp4'},
 });
-console.log(`render ${renderId} started`);
+console.log(`render ${renderId} started on ${fn.functionName}`);
 
 for (;;) {
   await new Promise((r) => setTimeout(r, 5000));

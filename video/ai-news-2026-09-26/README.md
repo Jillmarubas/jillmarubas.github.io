@@ -76,7 +76,16 @@ music is out of date, the composition refuses to render, so it can't drift out o
 
 ## Remotion Lambda
 
-`scripts/lambda-deploy.mjs` and `scripts/lambda-render.mjs` read
-`REMOTION_AWS_ACCESS_KEY_ID` / `REMOTION_AWS_SECRET_ACCESS_KEY` (or the standard
-`AWS_*` pair) and `REMOTION_REGION` (default `us-east-1`). The IAM user needs the
-policy printed by `npx remotion lambda policies user`.
+`npm run lambda:deploy` creates (or reuses) the render function
+`remotion-render-4-0-529-mem3008mb-disk10240mb-900sec` and uploads the site.
+`npm run lambda:render` renders on it in 8 chunks and downloads the MP4 to `out/`.
+
+- **Credentials:** the scripts use the standard `AWS_ACCESS_KEY_ID` /
+  `AWS_SECRET_ACCESS_KEY` (or `REMOTION_AWS_*`) for an IAM user with the policy from
+  `npx remotion lambda policies user`. `REMOTION_REGION` defaults to `us-east-1`.
+- **Cloud sandbox:** there, credentials are injected by the outbound proxy. The AWS
+  SDK builds its own HTTPS agent and would skip that proxy, so the npm scripts preload
+  `scripts/aws-proxy.cjs` to route agents through `HTTPS_PROXY`. The preload does
+  nothing when no proxy is set.
+- **Account limits:** this account caps Lambda memory at 3008 MB and allows about 10
+  concurrent executions. Hence 3008 MB, and 8 chunks plus one orchestrator.

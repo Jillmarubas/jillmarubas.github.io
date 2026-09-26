@@ -8,8 +8,8 @@
     "studio": "remotion studio",
     "still": "remotion still",
     "render": "remotion render AINews out/ai-news-2026-09-26.mp4",
-    "lambda:deploy": "node scripts/lambda-deploy.mjs",
-    "lambda:render": "node scripts/lambda-render.mjs"
+    "lambda:deploy": "node -r ./scripts/aws-proxy.cjs scripts/lambda-deploy.mjs",
+    "lambda:render": "node -r ./scripts/aws-proxy.cjs scripts/lambda-render.mjs"
   },
   "dependencies": {
     "@remotion/cli": "4.0.529",
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/react": "19.1.8",
+    "https-proxy-agent": "^7.0.6",
     "typescript": "5.8.3"
   }
 }
