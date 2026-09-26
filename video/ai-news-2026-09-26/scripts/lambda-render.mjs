@@ -70,6 +70,7 @@ const render = async (label, file, options) => {
 // 1. the whole soundtrack, once
 await render('audio', path.join(PARTS_DIR, 'audio.wav'), {
   codec: 'wav',
+  inputProps: {audioOnly: true}, // same audio tags, no picture to lay out (src/Video.tsx)
   framesPerLambda: Math.ceil(TOTAL_FRAMES / CHUNKS),
 });
 
