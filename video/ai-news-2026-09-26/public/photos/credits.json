@@ -1,0 +1,74 @@
+{
+  "albanese": {
+    "title": "Anthony Albanese-CHOGM 2024.jpg",
+    "artist": "Number 10",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Anthony_Albanese-CHOGM_2024.jpg"
+  },
+  "altman": {
+    "title": "Sam Altman speaking at TED (cropped).jpg",
+    "artist": "Steve Jurvetson",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sam_Altman_speaking_at_TED_(cropped).jpg"
+  },
+  "amodei": {
+    "title": "Dario Amodei at TechCrunch Disrupt 2023 01.jpg",
+    "artist": "TechCrunch",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Dario_Amodei_at_TechCrunch_Disrupt_2023_01.jpg"
+  },
+  "whitehouse": {
+    "title": "The White House June 2024.jpg",
+    "artist": "DJTechYT",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:The_White_House_June_2024.jpg"
+  },
+  "whitehall": {
+    "title": "Cabinet Office, 70 Whitehall, London.jpg",
+    "artist": "Paul the Archivist",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cabinet_Office,_70_Whitehall,_London.jpg"
+  },
+  "westminster": {
+    "title": "Palace of Westminster at dusk from Westminster Bridge.jpg",
+    "artist": "Ambika Misra",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Palace_of_Westminster_at_dusk_from_Westminster_Bridge.jpg"
+  },
+  "canberra": {
+    "title": "Parliament House at dusk, Canberra ACT.jpg",
+    "artist": "Thennicke",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Parliament_House_at_dusk,_Canberra_ACT.jpg"
+  },
+  "newmexico": {
+    "title": "Near the Doña Ana Mountains - Flickr - aspidoscelis.jpg",
+    "artist": "Patrick Alexander from Las Cruces, NM",
+    "license": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:Near_the_Do%C3%B1a_Ana_Mountains_-_Flickr_-_aspidoscelis.jpg"
+  },
+  "bloom": {
+    "title": "Bloom Energy Servers at eBay HQ.jpg",
+    "artist": "Bloom Energy",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bloom_Energy_Servers_at_eBay_HQ.jpg"
+  },
+  "pipeline": {
+    "title": "Constructing natural gas pipe, Finland.jpg",
+    "artist": "Jukka Isokoski",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Constructing_natural_gas_pipe,_Finland.jpg"
+  },
+  "datacenter": {
+    "title": "Cern datacenter.jpg",
+    "artist": "Hugovanmeijeren",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cern_datacenter.jpg"
+  },
+  "oraclehq": {
+    "title": "Oracle Headquarters Redwood Shores.jpg",
+    "artist": "Håkan Dahlström",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Oracle_Headquarters_Redwood_Shores.jpg"
+  }
+}

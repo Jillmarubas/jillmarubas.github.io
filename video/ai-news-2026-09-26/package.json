@@ -1,0 +1,27 @@
+{
+  "name": "ai-news-2026-09-26",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AI News Daily — 26 Sep 2026. Remotion composition in the Frost Glass design system.",
+  "scripts": {
+    "studio": "remotion studio",
+    "still": "remotion still",
+    "render": "remotion render AINews out/ai-news-2026-09-26.mp4",
+    "lambda:deploy": "node scripts/lambda-deploy.mjs",
+    "lambda:render": "node scripts/lambda-render.mjs"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "@remotion/google-fonts": "4.0.529",
+    "@remotion/lambda": "4.0.529",
+    "@remotion/media-utils": "4.0.529",
+    "@remotion/transitions": "4.0.529",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
