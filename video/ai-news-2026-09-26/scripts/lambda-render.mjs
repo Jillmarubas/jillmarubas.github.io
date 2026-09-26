@@ -20,7 +20,10 @@ const {renderId, bucketName} = await renderMediaOnLambda({
   audioBitrate: '320k',
   imageFormat: 'jpeg',
   jpegQuality: 92,
-  // newer AWS accounts allow ~10 concurrent Lambdas: 8 chunks + the orchestrator stays under that
+  // This account allows ~10 concurrent Lambdas (18 chunks were throttled), so: 8 chunks
+  // plus the orchestrator. One frame at a time ran ~2.5 fps per Lambda and timed out at
+  // 900 s; a 3008 MB Lambda has 2 vCPUs, so render two frames at a time.
+  concurrencyPerLambda: 2,
   framesPerLambda: Math.ceil(17930 / 8),
   downloadBehavior: {type: 'download', fileName: 'ai-news-2026-09-26.mp4'},
 });
