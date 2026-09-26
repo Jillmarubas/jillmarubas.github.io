@@ -1,0 +1,26 @@
+{
+  "name": "jillmar-motion",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "sfx": "python3 scripts/make_promo_sfx.py && python3 scripts/make_space_sfx.py && python3 scripts/make_real_sfx.py",
+    "textures": "python3 scripts/prepare-nasa-textures.py"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.8.1",
+    "@remotion/cli": "4.0.529",
+    "@remotion/lambda": "4.0.529",
+    "@remotion/three": "4.0.529",
+    "global-agent": "^3.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.529",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@types/three": "0.180.0",
+    "typescript": "^5.6.0"
+  }
+}
