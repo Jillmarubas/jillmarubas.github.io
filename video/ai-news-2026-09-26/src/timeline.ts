@@ -1,5 +1,6 @@
 import data from './data/timeline.json';
 import {FPS} from './theme';
+import {Block, buildBlocks} from './runningOrder';
 
 export type Word = {t: string; s: number; e: number; k: boolean; n: boolean; q: boolean};
 export type Phrase = {a: number; b: number; s: number; e: number};
@@ -46,39 +47,9 @@ export const phraseStartOf = (id: string, i: number) => {
   return p.s;
 };
 
-// ---- the running order -------------------------------------------------------
-// Every block has a start (seconds, global) and a length. VO blocks point at a section.
-export type Block =
-  | {kind: 'vo'; id: string; start: number; len: number; story?: number}
-  | {kind: 'card'; story: number; start: number; len: number}
-  | {kind: 'sting'; start: number; len: number}
-  | {kind: 'recap'; start: number; len: number}
-  | {kind: 'end'; start: number; len: number};
-
-const CARD = 3.2;
-const blocks: Block[] = [];
-let t = 0.6;
-const vo = (id: string, story?: number, tail = 0.5) => {
-  const d = sec(id).duration;
-  blocks.push({kind: 'vo', id, start: t, len: d, story});
-  t += d + tail;
-};
-vo('01-hook', undefined, 0.3);
-blocks.push({kind: 'sting', start: t, len: 3.6});
-t += 3.8;
-vo('02-preview', undefined, 0.6);
-['03-story1', '04-story2', '05-story3', '06-story4', '07-story5'].forEach((id, i) => {
-  blocks.push({kind: 'card', story: i + 1, start: t, len: CARD});
-  t += CARD;
-  vo(id, i + 1, 0.8);
-});
-blocks.push({kind: 'recap', start: t, len: 2.0});
-t += 2.0;
-vo('08-wrap', undefined, 0.6);
-vo('09-outro', undefined, 0.4);
-blocks.push({kind: 'end', start: t, len: 9});
-t += 9;
-
+// ---- the running order (shared with the audio synth) -----------------------------
+export type {Block};
+const {blocks, total: t} = buildBlocks((id) => sec(id).duration);
 export const BLOCKS = blocks;
 export const TOTAL_SECONDS = t;
 export const TOTAL_FRAMES = Math.ceil(t * FPS);

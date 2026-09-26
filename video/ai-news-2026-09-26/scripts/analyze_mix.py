@@ -5,7 +5,7 @@ import re, subprocess, sys, json, statistics, os
 
 src = sys.argv[1]
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-out = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", src, "-af", "ebur128=peak=true:framelog=verbose", "-f", "null", "-"],
+out = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-v", "verbose", "-i", src, "-af", "ebur128=peak=true:framelog=verbose", "-f", "null", "-"],
                      capture_output=True, text=True).stderr
 rows = []
 for m in re.finditer(r"t:\s*([\d.]+)\s+TARGET:.*?M:\s*(-?[\d.]+|-inf)\s+S:\s*(-?[\d.]+|-inf)", out):

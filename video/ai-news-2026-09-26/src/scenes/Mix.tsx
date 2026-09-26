@@ -3,20 +3,31 @@ import {Audio, Sequence, interpolate, staticFile} from 'remotion';
 import {resolveBeats} from '../beats';
 import {isCountable} from '../components/Kinetic';
 import {FPS} from '../theme';
+import manifest from '../../public/audio/manifest.json';
 import {BLOCKS, TOTAL_FRAMES, sec, wi} from '../timeline';
 
-// Levels were measured with ebur128 (see README): VO is normalised to -16 LUFS, the
-// raw bed is -15.1 LUFS, and each SFX gets its own gain so it lands 6-12 dB under the voice.
+// Music and SFX are synthesised in code by synth/ (`npm run audio`), not sourced.
+// Gains come from ebur128 measurements: VO is -16 LUFS (momentary median -16.5); the bed
+// is -16 LUFS; each SFX gain puts its loudest 400 ms window where noted.
 export const LEVELS = {
-  musicUnderVoice: 0.14, // ≈ -17 dB → bed ≈ -32 LUFS under speech
-  musicOpen: 0.42, // ≈ -7.5 dB on cards, stings and the end card
-  impact: 0.19,
-  riser: 0.14,
-  whoosh: 0.3,
-  tick: 0.2,
-  glitch: 0.75,
-  shutter: 0.38,
+  musicUnderVoice: 0.16, // -16 dB  → bed ≈ -32 LUFS under speech
+  musicOpen: 0.45, // -7 dB   → ≈ -23 LUFS on cards, stings and the end card
+  impact: 0.32, // -7.1 → ≈ -17 LUFS, on cards where the voice is silent
+  riser: 0.2, // -8.9 → ≈ -23 LUFS, into each card
+  whoosh: 0.17, // -10.5 → ≈ -26 LUFS
+  tick: 0.26, // -18.3 → ≈ -30 LUFS, under every counted number
+  glitch: 0.12, // -5.7 → ≈ -24 LUFS, the breach moments only
+  shutter: 0.45, // -22.1 → ≈ -29 LUFS, photo reveals
 };
+
+// The synth arranges the music against the running order it was built with. If the edit
+// has changed since, fail loudly instead of drifting out of sync.
+BLOCKS.forEach((b, i) => {
+  const m = manifest.blocks[i];
+  if (!m || m.kind !== b.kind || Math.abs(m.start - b.start) > 0.002) {
+    throw new Error(`public/audio was synthesised for a different edit (block ${i}). Run \`npm run audio\`.`);
+  }
+});
 
 type Cue = {at: number; file: string; vol: number};
 
@@ -81,7 +92,7 @@ const musicVolume = (frame: number) => {
 
 export const Mix: React.FC = () => (
   <>
-    <Audio src={staticFile('music/bed.mp3')} volume={musicVolume} />
+    <Audio src={staticFile('audio/music.mp3')} volume={musicVolume} />
     {BLOCKS.filter((b) => b.kind === 'vo').map((b) =>
       b.kind === 'vo' ? (
         <Sequence key={b.id} from={Math.round(b.start * FPS)} durationInFrames={Math.ceil((b.len + 0.3) * FPS)} name={`VO ${b.id}`}>
@@ -91,7 +102,7 @@ export const Mix: React.FC = () => (
     )}
     {CUES.map((c, i) => (
       <Sequence key={i} from={Math.max(0, Math.round(c.at * FPS))} durationInFrames={3 * FPS} name={`sfx ${c.file}`}>
-        <Audio src={staticFile(`sfx/${c.file}.mp3`)} volume={c.vol} />
+        <Audio src={staticFile(`audio/sfx/${c.file}.wav`)} volume={c.vol} />
       </Sequence>
     ))}
   </>

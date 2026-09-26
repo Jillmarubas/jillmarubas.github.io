@@ -2,8 +2,9 @@
   "name": "ai-news-2026-09-26",
   "private": true,
   "version": "1.0.0",
-  "description": "AI News Daily — 26 Sep 2026. Remotion composition in the Frost Glass design system.",
+  "description": "AI News Daily \u2014 26 Sep 2026. Remotion composition in the Frost Glass design system.",
   "scripts": {
+    "audio": "node --experimental-strip-types --no-warnings synth/build.mjs",
     "studio": "remotion studio",
     "still": "remotion still",
     "render": "remotion render AINews out/ai-news-2026-09-26.mp4",

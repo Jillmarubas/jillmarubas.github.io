@@ -58,6 +58,8 @@ underneath. That handover is the moment people should remember.
 - At most three things move at once; panels and photos only change at phrase boundaries.
 
 ## Audio
+- Music and SFX are synthesised in code (`synth/`). Nothing is sampled, and nothing
+  comes from a generative model.
 - VO: about −16 LUFS integrated, never clipped.
 - Music bed: ducked to about −31 LUFS under speech, lifted about 9 dB on cards and
   stings, 1 s fade in and 3 s fade out.

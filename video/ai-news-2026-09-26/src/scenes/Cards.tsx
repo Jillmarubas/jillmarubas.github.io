@@ -204,7 +204,7 @@ export const EndCard: React.FC<{len: number}> = ({len}) => {
             );
           })}
           <div style={{fontFamily: F.mono, fontSize: 15, color: C.text2, marginTop: 18, lineHeight: 1.5}}>
-            Voice: ElevenLabs “Joey”. Music and sound: ElevenLabs. Reporting: Politico, Bloomberg, ABC News, Al Jazeera and company statements.
+            Voice: ElevenLabs “Joey”. Music and sound effects: synthesised in code for this video. Reporting: Politico, Bloomberg, ABC News, Al Jazeera and company statements.
           </div>
         </Glass>
       </div>
