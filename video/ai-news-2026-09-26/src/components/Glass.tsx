@@ -1,4 +1,5 @@
 import React from 'react';
+import {PERF} from '../perf';
 import {C, glassDepth} from '../theme';
 
 // A frosted surface: blur + translucent dark fill + lit rim + depth.
@@ -14,8 +15,8 @@ export const Glass: React.FC<{
       position: 'relative',
       borderRadius: radius,
       background: nested ? 'rgba(255,255,255,.05)' : C.glassStrong,
-      backdropFilter: nested ? undefined : 'blur(20px) saturate(150%)',
-      WebkitBackdropFilter: nested ? undefined : 'blur(20px) saturate(150%)',
+      backdropFilter: nested || PERF.noBackdrop ? undefined : 'blur(20px) saturate(150%)',
+      WebkitBackdropFilter: nested || PERF.noBackdrop ? undefined : 'blur(20px) saturate(150%)',
       border: `1px solid ${C.rim}`,
       boxShadow: nested ? 'inset 0 1px 0 rgba(255,255,255,.12)' : glassDepth,
       ...style,

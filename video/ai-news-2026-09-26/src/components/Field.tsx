@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
+import {PERF} from '../perf';
 
 // The Frost Glass field: six radial blooms over a warm floor, drifting slowly,
 // with grain on top so the gradients never band. Same stops as frost-glass-layer.html.
@@ -7,7 +8,7 @@ const GRAIN =
   "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")";
 
 export const Field: React.FC<{intensity?: number}> = ({intensity = 1}) => {
-  const frame = useCurrentFrame();
+  const frame = PERF.staticField ? 0 : useCurrentFrame();
   const t = frame / 30;
   // a 52 s alternate drift, as on the site, plus a slower second axis
   const p = (Math.sin((t / 52) * Math.PI) + 1) / 2;
@@ -48,6 +49,7 @@ export const Field: React.FC<{intensity?: number}> = ({intensity = 1}) => {
 
 export const Grain: React.FC<{opacity?: number}> = ({opacity = 0.07}) => {
   const frame = useCurrentFrame();
+  if (PERF.noGrain) return null;
   // shift the tile every other frame so the grain lives like film, not a static screen
   const k = Math.floor(frame / 2) % 7;
   const ox = (k * 53) % 240;

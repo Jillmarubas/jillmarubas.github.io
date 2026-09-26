@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {C, F, FPS, depart, settle, snap} from '../theme';
 import {Phrase, Section, Word, quotedMask} from '../timeline';
+import {PERF} from '../perf';
 
 export type Mode = 'stage' | 'split' | 'photo';
 
@@ -198,7 +199,7 @@ const PhraseView: React.FC<{
           lineHeight: 1.04,
           letterSpacing: '-0.018em',
           color: C.text,
-          textShadow: mode === 'photo' ? '0 4px 30px rgba(0,0,0,.55)' : '0 2px 24px rgba(0,0,0,.25)',
+          textShadow: PERF.noTextShadow ? undefined : mode === 'photo' ? '0 4px 30px rgba(0,0,0,.55)' : '0 2px 24px rgba(0,0,0,.25)',
           paddingLeft: isQuote ? '0.42em' : 0,
         }}
       >
