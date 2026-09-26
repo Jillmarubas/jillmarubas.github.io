@@ -8,10 +8,11 @@
 //   3. locally: join the parts without re-encoding and mux the audio, encoded once to AAC.
 // A single audio render means no joins in the sound; the picture joins are frame-exact
 // because every part starts on a keyframe. Finished parts are skipped on a re-run.
-import {downloadMedia, getRenderProgress, getSites, renderMediaOnLambda} from '@remotion/lambda';
+import {getAwsClient, getRenderProgress, getSites, renderMediaOnLambda} from '@remotion/lambda';
 import {speculateFunctionName} from '@remotion/lambda/client';
 import {spawnSync} from 'node:child_process';
 import fs from 'node:fs';
+import {pipeline} from 'node:stream/promises';
 import path from 'node:path';
 
 const region = process.env.REMOTION_REGION || 'us-east-1';
@@ -63,7 +64,13 @@ const render = async (label, file, options) => {
       break;
     }
   }
-  await downloadMedia({bucketName, region, renderId, outPath: file});
+  // A plain GetObject rather than downloadMedia(): that fetches a presigned URL, and in the
+  // cloud sandbox the credential-injecting proxy also adds an Authorization header, which S3
+  // rejects ("only one auth mechanism allowed").
+  const {client, sdk} = getAwsClient({region, service: 's3'});
+  const key = options.codec === 'wav' ? `renders/${renderId}/out.wav` : `renders/${renderId}/out.mp4`;
+  const obj = await client.send(new sdk.GetObjectCommand({Bucket: bucketName, Key: key}));
+  await pipeline(obj.Body, fs.createWriteStream(file));
   console.log(`\n${label}: done, ≈ $${cost.toFixed(3)} → ${path.relative(process.cwd(), file)}`);
 };
 
