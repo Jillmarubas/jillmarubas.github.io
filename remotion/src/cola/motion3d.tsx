@@ -29,7 +29,7 @@ const Registry = createContext<Set<Entry> | null>(null);
  */
 export type Exit = {start: number; d: number; z: number};
 export const ExitContext = createContext<Exit | null>(null);
-const exitEase = Easing.bezier(0.42, 0, 0.8, 0.55); // gentle start, still moving as it passes the lens
+export const exitEase = Easing.bezier(0.42, 0, 0.8, 0.55); // gentle start, still moving as it passes the lens
 const withExit = (track: Track, ex: Exit): Track => {
   const b = track(ex.start);
   const lag = Math.min(1, Math.max(0, (b.p[0] + 0.1) / 0.2)) * 8;

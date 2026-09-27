@@ -34,7 +34,7 @@ E = [
     ('s2.kola0', 2, 56, 16, [('swish', 'whoosh7', 0.35)]),
     ('s2.kola1', 2, 62, 16, []),
     ('s3.stamp', 3, 22, 12, [('swish', 'whoosh7', 0.6), ('hit', 'bottle_table', 1.0, {'from': 0.03, 'len': 0.45})]),
-    ('s3.knock', 3, 66, 10, [('swish', 'whoosh8', 0.8)]),
+    ('s3.knock', 3, 50, 28, [('at', 'whoosh1', 0.6, {'len': 1.4})]),
     ('s3.jug', 3, 80, 14, [('hit', 'cork', 1.0)]),
     ('s4.glass', 4, 10, 16, [('swish', 'whoosh7', 0.7), ('hit', 'bottle_table', 0.9)]),
     ('s4.pour', 4, 36, 80, [('at', 'soda_pour', 0.7, {'len': 4.2})]),

@@ -7,7 +7,7 @@ import {TypeText, WordRise} from '../promo/motion';
 import '../promo/fonts';
 import TL from './timeline.json';
 import {Assets, CabinetCard, CocaLeaf, FountainGlass, Globe, HutchinsonBottle, KolaNut, Model, Nickel, PourStream, ReleaseWhenDrawn, RubberStamp, TonicWineBottle, ghostTexture, inkTexture, liquidTop, paperTexture, useAssets} from './assets';
-import {CamPose, ExitContext, MotionBlurRenderer, MotionProvider, Mover, Pose, V3, backOut, enter, inOut, inQuad, mix3} from './motion3d';
+import {CamPose, ExitContext, MotionBlurRenderer, exitEase, MotionProvider, Mover, Pose, V3, backOut, enter, inOut, inQuad, mix3} from './motion3d';
 
 /*
  * ColaOrigin — see BRIEF.md (SOP step 1) and reference/breakdowns.md "Asset choreography".
@@ -334,13 +334,17 @@ const Station: React.FC<{i: number; f: number; a: Assets}> = ({i, f, a}) => {
             return {p: mix3([0.04, 0.44, 0.3], at, k), r: mix3([1.2, 0.4, -0.6], atR, k)};
           }
           if (t < hit + 5) return {p: at, r: atR};
-          const k = 1 - (1 - Math.min(1, (t - hit - 5) / 14)) ** 2;
-          return {p: mix3(at, [0.3, 0.36, 0.55], k), r: mix3(atR, [1.0, -0.4, 0.5], k)};
+          // lifts off the paper and eases toward the viewer, blurring past the lens like every exit
+          const x = (t - hit - 5) / 28;
+          const k = exitEase(Math.min(1, x));
+          return {p: mix3(at, [0.08, 0.2, CAM_Z - 0.14], k), r: mix3(atR, [1.3, 0.2, -0.4], k), s: x >= 1 ? 0 : 1};
         };
         const bottleTrack = (t: number): Pose => {
           if (t < kn.f) return still(bottleTo, 1, 7)(t);
-          const k = inQuad((t - kn.f) / kn.d);
-          return {p: mix3(bottleTo.p, [-0.5, 0.12, 0.08], k), r: mix3(bottleTo.r!, [1.2, 2.5, 3.0], k)};
+          // the ban takes the wine away: the bottle eases toward the viewer and blurs out
+          const x = (t - kn.f) / kn.d;
+          const k = exitEase(Math.min(1, x));
+          return {p: mix3(bottleTo.p, [-0.09, 0.02, CAM_Z - 0.14], k), r: mix3(bottleTo.r!, [0.5, 0.9, 0.7], k), s: x >= 1 ? 0 : 1};
         };
         return (
           <>
