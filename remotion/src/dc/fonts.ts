@@ -2,6 +2,10 @@
 import {continueRender, delayRender, staticFile} from 'remotion';
 
 const FONTS: [string, string, string, string][] = [
+  ['Fredoka', 'normal', '600', 'Fredoka-600-normal.woff2'],
+  ['Fredoka', 'normal', '700', 'Fredoka-700-normal.woff2'],
+  ['Nunito', 'normal', '700', 'Nunito-700-normal.woff2'],
+  ['Nunito', 'normal', '800', 'Nunito-800-normal.woff2'],
   ['Fraunces', 'normal', '600', 'Fraunces-600-normal.woff2'],
   ['Fraunces', 'normal', '900', 'Fraunces-900-normal.woff2'],
   ['Fraunces', 'italic', '600', 'Fraunces-600-italic.woff2'],

@@ -1,15 +1,16 @@
 import React from 'react';
-import {AbsoluteFill, Img, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Sequence, useCurrentFrame} from 'remotion';
 import TIMING from './timing.json';
 import './fonts';
-import {C, F, FPS, H, W} from './design';
+import {C, FPS} from './design';
+import {World} from './world';
 import {EXIT_LEN, SceneCtx} from './kit';
 import {SCENES} from './scenes';
 
 /*
  * "Why people hate data centres": a 16:9 Vox-style explainer (script: SCRIPT.md, design:
- * DESIGN.md). Every scene is keyed to the voiceover through timing.json, which
- * scripts/dc_timing.py builds from the ElevenLabs takes. The desk (paper) stays put; pieces enter
+ * DESIGN.md), colorful 2D vector edition. Every scene is keyed to the voiceover through timing.json, which
+ * scripts/dc_timing.py builds from the ElevenLabs takes. An animated vector world sits behind everything; pieces enter
  * from the sides and leave toward the viewer at each scene change.
  */
 type Line = {ch: number; i: number; start: number; end: number};
@@ -36,21 +37,48 @@ const windows: Win[] = (() => {
 })();
 
 /* ------------------------------------------------------------------ lens layers */
-const Lens: React.FC<{f: number}> = ({f}) => (
-  <>
-    {/* soft focus falling off toward the edges, so the eye stays in the middle; grain is static (animated grain triples the file size) */}
-    <AbsoluteFill style={{backdropFilter: 'blur(5px)', WebkitMaskImage: 'radial-gradient(ellipse 72% 70% at 50% 50%, transparent 64%, black 100%)', maskImage: 'radial-gradient(ellipse 72% 70% at 50% 50%, transparent 64%, black 100%)'}} />
-    <AbsoluteFill style={{background: 'radial-gradient(ellipse 80% 80% at 50% 48%, transparent 58%, rgba(60,44,28,0.20) 100%)'}} />
-    <AbsoluteFill style={{backgroundImage: `url(${staticFile('dc/grain.png')})`, backgroundPosition: '0 0', opacity: 0.05, mixBlendMode: 'multiply'}} />
-  </>
-);
+// Colorful vector edition: crisp edges, no grain; only a very light vignette to hold the eye.
+const Lens: React.FC = () => <AbsoluteFill style={{background: 'radial-gradient(ellipse 85% 85% at 50% 48%, transparent 62%, rgba(27,43,69,0.12) 100%)'}} />;
+
+/** The animated vector world, cross-fading to the next chapter's palette at each chapter start. */
+const Backdrop: React.FC<{f: number}> = ({f}) => {
+  let c = 0;
+  DC_CHAPTERS.forEach((ch, i) => {
+    if (f >= ch.from) c = i;
+  });
+  const into = Math.min(1, Math.max(0, (f - DC_CHAPTERS[c].from) / 24));
+  return (
+    <>
+      {c > 0 && into < 1 && <World theme={c - 1} f={f} />}
+      <AbsoluteFill style={{opacity: c > 0 ? into : 1}}>
+        <World theme={c} f={f} />
+      </AbsoluteFill>
+    </>
+  );
+};
 
 /* ------------------------------------------------------------------ the film */
+/**
+ * The camera: every scene gets a slow zoom in and back out (up to 9 %), each toward a different
+ * point of the frame, so the whole world (backdrop and pieces together) pushes and pulls.
+ */
+const camera = (f: number) => {
+  const w = windows.find((x) => f >= x.from && f < x.from + x.dur) ?? windows[windows.length - 1];
+  const u = Math.min(1, Math.max(0, (f - w.from) / Math.max(1, w.dur)));
+  const k = Math.sin(Math.PI * u) ** 2;
+  const idx = windows.indexOf(w);
+  const ox = [50, 38, 62, 45, 58, 50][idx % 6];
+  const oy = [50, 44, 56, 48, 42, 52][idx % 6];
+  return {scale: 1 + 0.09 * k, origin: `${ox}% ${oy}%`};
+};
+
 export const DCFilm: React.FC<{offset?: number}> = ({offset = 0}) => {
   const f = useCurrentFrame() + offset;
+  const cam = camera(f);
   return (
     <AbsoluteFill style={{background: C.paper, overflow: 'hidden'}}>
-      <Img src={staticFile('dc/paper.jpg')} style={{position: 'absolute', width: W, height: H}} />
+     <AbsoluteFill style={{transform: `scale(${cam.scale})`, transformOrigin: cam.origin}}>
+      <Backdrop f={f} />
       {windows.map((w) => {
         if (f < w.from - 2 || f > w.from + w.dur + EXIT_LEN + 12) return null;
         const exitAt = w.dur - 14;
@@ -64,7 +92,8 @@ export const DCFilm: React.FC<{offset?: number}> = ({offset = 0}) => {
           </Sequence>
         );
       })}
-      <Lens f={f} />
+     </AbsoluteFill>
+      <Lens />
     </AbsoluteFill>
   );
 };
@@ -73,10 +102,10 @@ export const DCFilm: React.FC<{offset?: number}> = ({offset = 0}) => {
 const Breathe: React.FC<{dur: number; exitAt: number; children: React.ReactNode}> = ({dur, exitAt, children}) => {
   const f = useCurrentFrame();
   const u = Math.min(1, Math.max(0, f / Math.max(1, dur)));
-  const s = 1 + 0.025 * Math.sin(Math.PI * u) ** 2;
+  void u;
   // pieces fly out toward the viewer on their own; this clears anything drawn straight on the desk
   const o = 1 - Math.min(1, Math.max(0, (f - exitAt - 8) / 16));
-  return <AbsoluteFill style={{transform: `scale(${s})`, opacity: o}}>{children}</AbsoluteFill>;
+  return <AbsoluteFill style={{opacity: o}}>{children}</AbsoluteFill>;
 };
 
 /** One chapter, for rendering the film in parts on Lambda (picture only; audio is muxed after). */

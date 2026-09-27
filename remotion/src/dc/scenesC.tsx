@@ -24,7 +24,7 @@ export const S4b: React.FC = () => {
   const night = e01(f, L(1), 30) * (1 - e01(f, L(2) + 10, 20));
   return (
     <>
-      <div style={{position: 'absolute', inset: 0, background: `rgba(29,27,24,${0.28 * night})`}} />
+      <div style={{position: 'absolute', inset: 0, background: `rgba(58,40,140,${0.35 * night})`}} />
       <Column at={0} y={200} width={900}>
         <Kicker text="Great Oak, Manassas, Virginia" at={2} />
         <Lead text="A constant, high-pitched whir from a nearby Amazon Web Services campus." at={10} size={40} />

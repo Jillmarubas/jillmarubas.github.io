@@ -60,9 +60,9 @@ export const Piece: React.FC<{
   // drift once landed
   const hold = Math.max(0, f - at - dur);
   const amp = Math.min(1, hold / 40);
-  const driftX = amp * 3 * Math.sin(hold / 37 + seed);
-  const driftY = amp * 2.5 * Math.sin(hold / 29 + seed * 2);
-  const driftR = amp * 0.35 * Math.sin(hold / 45 + seed);
+  const driftX = amp * 5 * Math.sin(hold / 37 + seed);
+  const driftY = amp * 7 * Math.sin(hold / 29 + seed * 2);
+  const driftR = amp * 1.1 * Math.sin(hold / 45 + seed);
   // exit toward the viewer
   const lag = Math.min(1, Math.max(0, x / W)) * 8;
   const ex0 = out ?? sc.exitAt;
@@ -74,7 +74,7 @@ export const Piece: React.FC<{
   const opacity = (from === 'rise' || from === 'none' ? e01(f, at, 12) : f < at ? 0 : 1) * (1 - Math.max(0, (ex - 0.8) / 0.2));
   if (f < at - 1 || opacity <= 0.001) return null;
   const l = lift * (1 + ex * 3);
-  const sh = shadow ? `drop-shadow(${4 + l * 0.35}px ${6 + l * 0.55}px ${8 + l * 0.9}px rgba(45,32,18,${0.26 * (1 - ex)}))` : '';
+  const sh = shadow ? `drop-shadow(${4 + l * 0.35}px ${6 + l * 0.55}px ${8 + l * 0.9}px rgba(27,43,69,${0.22 * (1 - ex)}))` : '';
   return (
     <div
       style={{
@@ -109,19 +109,19 @@ export const Kicker: React.FC<{text: string; at: number; color?: string}> = ({te
   const f = useCurrentFrame();
   const o = e01(f, at, 14);
   return (
-    <div style={{fontFamily: F.mono, fontWeight: 500, fontSize: 22, letterSpacing: '0.22em', color, opacity: o, textTransform: 'uppercase', transform: `translateX(${(1 - o) * -20}px)`}}>
+    <div style={{textShadow: '0 2px 14px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.9)', fontFamily: F.mono, fontWeight: 500, fontSize: 22, letterSpacing: '0.22em', color, opacity: o, textTransform: 'uppercase', transform: `translateX(${(1 - o) * -20}px)`}}>
       {text}
     </div>
   );
 };
 export const Lead: React.FC<{text: string; at: number; size?: number}> = ({text, at, size = 46}) => {
   const f = useCurrentFrame();
-  return <div style={{fontFamily: F.display, fontStyle: 'italic', fontWeight: 600, fontSize: size, color: C.ink2, lineHeight: 1.15}}>{wordsIn(text, at, f)}</div>;
+  return <div style={{textShadow: '0 2px 14px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.9)', fontFamily: F.sans, fontWeight: 800, fontSize: size * 0.92, color: C.blue, lineHeight: 1.15}}>{wordsIn(text, at, f)}</div>;
 };
 export const Key: React.FC<{text: string; at: number; size?: number; accent?: string}> = ({text, at, size = 104, accent}) => {
   const f = useCurrentFrame();
   return (
-    <div style={{fontFamily: F.display, fontWeight: 900, fontSize: size, color: C.ink, lineHeight: 0.98, letterSpacing: '-0.02em'}}>
+    <div style={{textShadow: '0 2px 14px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.9)', fontFamily: F.display, fontWeight: 700, fontSize: size, color: C.ink, lineHeight: 1.0, letterSpacing: '-0.01em'}}>
       {text.split(' ').map((w, i) => {
         const o = e01(f, at + i * 3, 16);
         return (
@@ -135,7 +135,7 @@ export const Key: React.FC<{text: string; at: number; size?: number; accent?: st
 };
 export const Body: React.FC<{text: string; at: number; size?: number; width?: number; color?: string}> = ({text, at, size = 34, width = 640, color = C.ink}) => {
   const f = useCurrentFrame();
-  return <div style={{fontFamily: F.sans, fontWeight: 500, fontSize: size, color, lineHeight: 1.35, maxWidth: width}}>{wordsIn(text, at, f, 1.4)}</div>;
+  return <div style={{textShadow: '0 2px 14px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.9)', fontFamily: F.sans, fontWeight: 700, fontSize: size, color, lineHeight: 1.35, maxWidth: width}}>{wordsIn(text, at, f, 1.4)}</div>;
 };
 export const Hand: React.FC<{text: string; at: number; size?: number; color?: string; rot?: number}> = ({text, at, size = 58, color = C.hum, rot = -3}) => {
   const f = useCurrentFrame();
@@ -147,7 +147,7 @@ export const Source: React.FC<{text: string; at: number}> = ({text, at}) => {
   const sc = useScene();
   const o = e01(f, at + 10, 14) * (1 - e01(f, sc.exitAt, 10));
   return (
-    <div style={{position: 'absolute', left: 120, bottom: 64, fontFamily: F.mono, fontWeight: 500, fontSize: 18, letterSpacing: '0.14em', color: C.ink2, opacity: o, textTransform: 'uppercase'}}>
+    <div style={{position: 'absolute', left: 110, bottom: 44, fontFamily: F.mono, fontWeight: 500, fontSize: 17, letterSpacing: '0.12em', color: C.ink2, opacity: o, textTransform: 'uppercase', background: 'rgba(255,255,255,0.85)', padding: '6px 14px', borderRadius: 20}}>
       Source · {text}
     </div>
   );
@@ -176,7 +176,7 @@ export const Counter: React.FC<{to: number; at: number; dur?: number; from?: num
   const v = from + (to - from) * settle((f - at) / dur);
   const s = v.toLocaleString('en-US', {minimumFractionDigits: decimals, maximumFractionDigits: decimals});
   return (
-    <div style={{fontFamily: F.display, fontWeight: 900, fontSize: size, color, lineHeight: 0.9, letterSpacing: '-0.03em', fontVariantNumeric: 'tabular-nums', opacity: e01(f, at, 8)}}>
+    <div style={{fontFamily: F.display, fontWeight: 700, fontSize: size, color, lineHeight: 0.95, letterSpacing: '-0.01em', fontVariantNumeric: 'tabular-nums', opacity: e01(f, at, 8)}}>
       {prefix}
       {s}
       {suffix}
@@ -251,8 +251,8 @@ export const Arrow: React.FC<{x1: number; y1: number; x2: number; y2: number; at
 
 /* ------------------------------------------------------------------ paper card */
 export const Card: React.FC<{w: number; h: number; children?: React.ReactNode; pad?: number; tape?: boolean; style?: React.CSSProperties}> = ({w, h, children, pad = 24, tape, style}) => (
-  <div style={{width: w, height: h, background: C.card, borderRadius: 3, padding: pad, boxSizing: 'border-box', position: 'relative', ...style}}>
-    {tape && <div style={{position: 'absolute', top: -14, left: '50%', width: 110, height: 30, marginLeft: -55, background: 'rgba(229,220,200,0.8)', transform: 'rotate(-3deg)'}} />}
+  <div style={{width: w, height: h, background: C.card, borderRadius: 26, padding: pad, boxSizing: 'border-box', position: 'relative', ...style}}>
+    {tape && <div style={{position: 'absolute', top: -12, left: '50%', width: 90, height: 24, marginLeft: -45, borderRadius: 12, background: C.yellow, transform: 'rotate(-3deg)'}} />}
     {children}
   </div>
 );

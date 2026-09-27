@@ -99,7 +99,7 @@ export const USMap: React.FC<{
             <path
               key={id}
               d={path(ft as Feature) ?? ''}
-              fill={col ? col : '#E9E4D9'}
+              fill={col ? col : '#EAF7EE'}
               fillOpacity={col ? 0.25 + 0.75 * fk : draw}
               stroke={C.ink2}
               strokeWidth={1.2}
@@ -168,7 +168,7 @@ export const VAMap: React.FC<{w: number; at: number; fill?: Record<string, strin
           const id = String(ft.id);
           const col = fill[id];
           const o = e01(f, at + (i % 20), 20);
-          return <path key={id} d={path(ft as Feature) ?? ''} fill={col ?? '#E9E4D9'} fillOpacity={col ? e01(f, fillAt ?? at + 20, 16) * 0.85 + 0.15 : o} stroke={C.ink2} strokeWidth={1.4} strokeOpacity={o} />;
+          return <path key={id} d={path(ft as Feature) ?? ''} fill={col ?? '#EAF7EE'} fillOpacity={col ? e01(f, fillAt ?? at + 20, 16) * 0.85 + 0.15 : o} stroke='#7F9BB5' strokeWidth={1.5} strokeOpacity={o} />;
         })}
       </svg>
       {labels.map((l) => {
@@ -215,7 +215,7 @@ export const WorldMap: React.FC<{w: number; h: number; at: number; focus: string
           const col = fill[id];
           const d = path(ft as Feature);
           if (!d) return null;
-          return <path key={id + (ft.properties?.name as string)} d={d} fill={col ?? '#E9E4D9'} fillOpacity={col ? 0.2 + 0.8 * e01(f, fillAt ?? at + 20, 16) : e01(f, at, 20)} stroke={C.ink2} strokeWidth={1.2} strokeOpacity={e01(f, at, 20)} />;
+          return <path key={id + (ft.properties?.name as string)} d={d} fill={col ?? '#EAF7EE'} fillOpacity={col ? 0.2 + 0.8 * e01(f, fillAt ?? at + 20, 16) : e01(f, at, 20)} stroke='#7F9BB5' strokeWidth={1.4} strokeOpacity={e01(f, at, 20)} />;
         })}
       </svg>
       {labels.map((l) => {
