@@ -21,6 +21,34 @@ export type CamPose = {pos: V3; look: V3};
 type Entry = {obj: THREE.Object3D; track: Track; radius: number};
 const Registry = createContext<Set<Entry> | null>(null);
 
+/**
+ * Scene exit: every object eases forward off the paper and past the viewer's eye, blurring
+ * as it nears the lens (the depth-of-field pass in MotionBlurRenderer does the blur).
+ * Objects leave left to right, a few frames apart, each drifting outward from the frame
+ * centre so it slips past the camera instead of clipping through it.
+ */
+export type Exit = {start: number; d: number; z: number};
+export const ExitContext = createContext<Exit | null>(null);
+const exitEase = Easing.bezier(0.42, 0, 0.8, 0.55); // gentle start, still moving as it passes the lens
+const withExit = (track: Track, ex: Exit): Track => {
+  const b = track(ex.start);
+  const lag = Math.min(1, Math.max(0, (b.p[0] + 0.1) / 0.2)) * 8;
+  let dx = b.p[0], dy = b.p[1] + 0.01;
+  const len = Math.hypot(dx, dy) || 1;
+  dx /= len;
+  dy /= len;
+  return (t) => {
+    const q = track(t);
+    const x = (t - ex.start - lag) / ex.d;
+    if (x <= 0) return q;
+    const k = exitEase(Math.min(1, x));
+    const p: V3 = [q.p[0] + dx * 0.11 * k, q.p[1] + dy * 0.11 * k, q.p[2] + (ex.z - q.p[2]) * k];
+    const r0 = q.r ?? [0, 0, 0];
+    const r: V3 = [r0[0] + 0.5 * k * dy, r0[1] + 0.7 * k * dx, r0[2] - 0.3 * k * dx];
+    return {p, r, s: x >= 1 ? 0 : q.s};
+  };
+};
+
 const apply = (o: THREE.Object3D, q: Pose) => {
   o.position.set(q.p[0], q.p[1], q.p[2]);
   if (q.r) o.rotation.set(q.r[0], q.r[1], q.r[2]);
@@ -29,8 +57,10 @@ const apply = (o: THREE.Object3D, q: Pose) => {
   o.visible = s > 0.001;
 };
 
-export const Mover: React.FC<{track: Track; f: number; radius?: number; children: React.ReactNode}> = ({track, f, radius = 0.05, children}) => {
+export const Mover: React.FC<{track: Track; f: number; radius?: number; noExit?: boolean; children: React.ReactNode}> = ({track: base, f, radius = 0.05, noExit, children}) => {
   const reg = useContext(Registry)!;
+  const ex = useContext(ExitContext);
+  const track = ex && !noExit ? withExit(base, ex) : base;
   const ref = useRef<THREE.Group>(null);
   useLayoutEffect(() => {
     const e = {obj: ref.current!, track, radius};
@@ -48,10 +78,47 @@ export const MotionProvider: React.FC<{children: React.ReactNode}> = ({children}
   return <Registry.Provider value={reg}>{children}</Registry.Provider>;
 };
 
+/* ------------------------------------------------------------------ depth of field (near field only) */
+const quadVS = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
+/** Blur amount 0..1 from depth: sharp on the paper and anything resting near it, fully soft close to the lens. */
+const cocFS = `#include <packing>
+uniform sampler2D depth; uniform float near, far, sharpAt, softAt; varying vec2 vUv;
+void main(){
+  float z = unpackRGBAToDepth(texture2D(depth, vUv));
+  float d = z >= 0.9999 ? far : -perspectiveDepthToViewZ(z, near, far);
+  gl_FragColor = vec4(smoothstep(sharpAt, softAt, d), 0.0, 0.0, 1.0);
+}`;
+/** Spread the near-field blur outward so a soft foreground object bleeds over the sharp paper behind it. */
+const dilateFS = `uniform sampler2D coc; uniform vec2 px; uniform float r; varying vec2 vUv;
+void main(){
+  float m = 0.0;
+  for (int i = -4; i <= 4; i++) for (int j = -4; j <= 4; j++) {
+    vec2 o = vec2(float(i), float(j)) / 4.0;
+    if (dot(o, o) > 1.0) continue;
+    float c = texture2D(coc, vUv + o * px * r).r;
+    m = max(m, c * (1.0 - 0.35 * length(o)));
+  }
+  gl_FragColor = vec4(max(m, texture2D(coc, vUv).r), 0.0, 0.0, 1.0);
+}`;
+/** Separable gather blur whose radius follows the (dilated) blur map. */
+const blurFS = `uniform sampler2D tex; uniform sampler2D coc; uniform vec2 dir; uniform float maxPx; varying vec2 vUv;
+void main(){
+  float c = texture2D(coc, vUv).r;
+  if (c < 0.004) { gl_FragColor = texture2D(tex, vUv); return; }
+  vec4 acc = vec4(0.0); float wsum = 0.0;
+  for (int i = -12; i <= 12; i++) {
+    float u = float(i) / 12.0;
+    float w = 1.0 - 0.5 * abs(u);
+    acc += texture2D(tex, vUv + dir * u * c * maxPx) * w; wsum += w;
+  }
+  gl_FragColor = acc / wsum;
+}`;
+
 const SHUTTER = 0.5; // fraction of a frame the shutter is open
 const PX_PER_SAMPLE = 3; // add a sample for every 3 px of travel during the shutter
 
-export const MotionBlurRenderer: React.FC<{f: number; cam: (t: number) => CamPose; maxSamples?: number}> = ({f, cam, maxSamples = 10}) => {
+export type Focus = {focus: number; sharp: number; soft: number; maxPx: number};
+export const MotionBlurRenderer: React.FC<{f: number; cam: (t: number) => CamPose; maxSamples?: number; dof?: Focus}> = ({f, cam, maxSamples = 10, dof}) => {
   const reg = useContext(Registry)!;
   const {gl, scene, camera} = useThree();
   const res = useMemo(() => {
@@ -73,7 +140,14 @@ export const MotionBlurRenderer: React.FC<{f: number; cam: (t: number) => CamPos
     );
     const output = new OutputPass();
     output.renderToScreen = true;
-    return {add, output, sample: null as THREE.WebGLRenderTarget | null, sampleFast: null as THREE.WebGLRenderTarget | null, accum: null as THREE.WebGLRenderTarget | null};
+    const mat = (fs: string, uniforms: Record<string, THREE.IUniform>) => new FullScreenQuad(new THREE.ShaderMaterial({uniforms, vertexShader: quadVS, fragmentShader: fs, depthTest: false, depthWrite: false}));
+    const coc = mat(cocFS, {depth: {value: null}, near: {value: 0.1}, far: {value: 100}, sharpAt: {value: 1}, softAt: {value: 0.2}});
+    const dilate = mat(dilateFS, {coc: {value: null}, px: {value: new THREE.Vector2()}, r: {value: 1}});
+    const blur = mat(blurFS, {tex: {value: null}, coc: {value: null}, dir: {value: new THREE.Vector2()}, maxPx: {value: 1}});
+    const depthMat = new THREE.MeshDepthMaterial({depthPacking: THREE.RGBADepthPacking});
+    const low = () => new THREE.WebGLRenderTarget(1, 1, {type: THREE.HalfFloatType});
+    const dofT = {depth: new THREE.WebGLRenderTarget(1, 1), coc: low(), cocD: low(), tmp: null as THREE.WebGLRenderTarget | null, out: null as THREE.WebGLRenderTarget | null};
+    return {add, output, coc, dilate, blur, depthMat, dofT, sample: null as THREE.WebGLRenderTarget | null, sampleFast: null as THREE.WebGLRenderTarget | null, accum: null as THREE.WebGLRenderTarget | null};
   }, []);
 
   useFrame(() => {
@@ -86,6 +160,14 @@ export const MotionBlurRenderer: React.FC<{f: number; cam: (t: number) => CamPos
       res.sample = new THREE.WebGLRenderTarget(size.x, size.y, {type: THREE.HalfFloatType, samples: 4});
       res.sampleFast = new THREE.WebGLRenderTarget(size.x, size.y, {type: THREE.HalfFloatType});
       res.accum = new THREE.WebGLRenderTarget(size.x, size.y, {type: THREE.HalfFloatType});
+      const qx = Math.ceil(size.x / 4), qy = Math.ceil(size.y / 4);
+      res.dofT.depth.setSize(qx, qy);
+      res.dofT.coc.setSize(qx, qy);
+      res.dofT.cocD.setSize(qx, qy);
+      res.dofT.tmp?.dispose();
+      res.dofT.out?.dispose();
+      res.dofT.tmp = new THREE.WebGLRenderTarget(size.x, size.y, {type: THREE.HalfFloatType});
+      res.dofT.out = new THREE.WebGLRenderTarget(size.x, size.y, {type: THREE.HalfFloatType});
     }
     const pcam = camera as THREE.PerspectiveCamera;
     const setAt = (t: number) => {
@@ -135,9 +217,50 @@ export const MotionBlurRenderer: React.FC<{f: number; cam: (t: number) => CamPos
       gl.setRenderTarget(res.accum);
       res.add.render(gl);
     }
-    gl.autoClear = autoClear;
     setAt(f);
-    res.output.render(gl, null as unknown as THREE.WebGLRenderTarget, res.accum!, 0, false);
+
+    // Depth of field, only while something is close to the lens (the scene exits)
+    let final = res.accum!;
+    const near = dof && [...reg].some((e) => e.obj.visible && e.obj.getWorldPosition(new THREE.Vector3()).distanceTo(pcam.position) < dof.sharp);
+    if (dof && near) {
+      const T = res.dofT;
+      const U = (q: FullScreenQuad) => (q.material as THREE.ShaderMaterial).uniforms;
+      const prevOverride = scene.overrideMaterial;
+      const prevShadow = gl.shadowMap.autoUpdate;
+      gl.shadowMap.autoUpdate = false;
+      scene.overrideMaterial = res.depthMat;
+      gl.setRenderTarget(T.depth);
+      gl.setClearColor(0xffffff, 1);
+      gl.clear();
+      gl.render(scene, pcam);
+      scene.overrideMaterial = prevOverride;
+      gl.shadowMap.autoUpdate = prevShadow;
+      U(res.coc).depth.value = T.depth.texture;
+      U(res.coc).near.value = pcam.near;
+      U(res.coc).far.value = pcam.far;
+      U(res.coc).sharpAt.value = dof.sharp;
+      U(res.coc).softAt.value = dof.soft;
+      gl.setRenderTarget(T.coc);
+      res.coc.render(gl);
+      U(res.dilate).coc.value = T.coc.texture;
+      U(res.dilate).px.value.set(1 / T.coc.width, 1 / T.coc.height);
+      U(res.dilate).r.value = (dof.maxPx * size.x) / 1080 / 4; // maxPx is measured at 1080 px wide
+      gl.setRenderTarget(T.cocD);
+      res.dilate.render(gl);
+      U(res.blur).coc.value = T.cocD.texture;
+      U(res.blur).maxPx.value = 1;
+      U(res.blur).tex.value = res.accum!.texture;
+      U(res.blur).dir.value.set(dof.maxPx / 1080, 0);
+      gl.setRenderTarget(T.tmp);
+      res.blur.render(gl);
+      U(res.blur).tex.value = T.tmp!.texture;
+      U(res.blur).dir.value.set(0, ((dof.maxPx / 1080) * size.x) / size.y);
+      gl.setRenderTarget(T.out);
+      res.blur.render(gl);
+      final = T.out!;
+    }
+    gl.autoClear = autoClear;
+    res.output.render(gl, null as unknown as THREE.WebGLRenderTarget, final, 0, false);
   }, 1);
   return null;
 };

@@ -13,6 +13,10 @@
   1800
  ],
  "whip": 8,
+ "exit": {
+  "d": 28,
+  "lead": 34
+ },
  "events": {
   "s0.glass": {
    "f": 6,
@@ -181,10 +185,18 @@
    "len": 4.2
   },
   {
+   "id": "exit0",
+   "file": "whoosh1",
+   "at": 154,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.4
+  },
+  {
    "id": "whip1",
    "file": "whoosh7",
    "at": 172.2,
-   "gain": 0.8,
+   "gain": 0.55,
    "from": 0.0,
    "len": 1.0
   },
@@ -229,10 +241,18 @@
    "len": 1.2
   },
   {
+   "id": "exit1",
+   "file": "whoosh1",
+   "at": 364,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.4
+  },
+  {
    "id": "whip2",
    "file": "whoosh8",
    "at": 383.4,
-   "gain": 0.8,
+   "gain": 0.55,
    "from": 0.0,
    "len": 1.0
   },
@@ -277,10 +297,18 @@
    "len": 1.2
   },
   {
+   "id": "exit2",
+   "file": "whoosh1",
+   "at": 574,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.4
+  },
+  {
    "id": "whip3",
    "file": "whoosh7",
    "at": 592.2,
-   "gain": 0.8,
+   "gain": 0.55,
    "from": 0.0,
    "len": 1.0
   },
@@ -317,10 +345,18 @@
    "len": 1.2
   },
   {
+   "id": "exit3",
+   "file": "whoosh1",
+   "at": 754,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.4
+  },
+  {
    "id": "whip4",
    "file": "whoosh8",
    "at": 773.4,
-   "gain": 0.8,
+   "gain": 0.55,
    "from": 0.0,
    "len": 1.0
   },
@@ -365,10 +401,18 @@
    "len": 4.2
   },
   {
+   "id": "exit4",
+   "file": "whoosh1",
+   "at": 1024,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.4
+  },
+  {
    "id": "whip5",
    "file": "whoosh7",
    "at": 1042.2,
-   "gain": 0.8,
+   "gain": 0.55,
    "from": 0.0,
    "len": 1.0
   },
@@ -405,10 +449,18 @@
    "len": 1.2
   },
   {
+   "id": "exit5",
+   "file": "whoosh1",
+   "at": 1234,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.4
+  },
+  {
    "id": "whip6",
    "file": "whoosh8",
    "at": 1253.4,
-   "gain": 0.8,
+   "gain": 0.55,
    "from": 0.0,
    "len": 1.0
   },
@@ -437,10 +489,18 @@
    "len": 2.6
   },
   {
+   "id": "exit6",
+   "file": "whoosh1",
+   "at": 1444,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.4
+  },
+  {
    "id": "whip7",
    "file": "whoosh7",
    "at": 1462.2,
-   "gain": 0.8,
+   "gain": 0.55,
    "from": 0.0,
    "len": 1.0
   },
@@ -485,10 +545,18 @@
    "len": 1.2
   },
   {
+   "id": "exit7",
+   "file": "whoosh1",
+   "at": 1624,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.4
+  },
+  {
    "id": "whip8",
    "file": "whoosh8",
    "at": 1643.4,
-   "gain": 0.8,
+   "gain": 0.55,
    "from": 0.0,
    "len": 1.0
   },

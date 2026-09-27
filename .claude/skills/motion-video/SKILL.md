@@ -33,8 +33,9 @@ Measured across all references (`reference/breakdowns.md`, "Asset choreography")
 - **The camera is locked flat on the paper.** Scenes change with a whip pan along the paper wall, never a push-in or zoom.
 - **Objects float in front of the paper** and cast soft shadows onto it, down and to the right.
 - **Every object enters from somewhere:** left, right, top, bottom, diagonal, from the camera, or a pop. Rotate the directions so consecutive objects differ.
-- **Entrances:** fast, rotating, with a ~3 % overshoot and settle (`settle()` in `cola/motion3d.tsx`). After landing, objects keep drifting a few millimetres; nothing freezes.
+- **Entrances:** smooth glide, rotating, no overshoot, long soft settle (`settle()` in `cola/motion3d.tsx`). After landing, objects keep drifting a few millimetres; nothing freezes.
 - **Objects interact:** pour, stamp, knock out of frame, spin down.
+- **Exits come toward the viewer** (the user's preference): at the end of each scene every object eases forward off the paper, left to right a few frames apart, drifting outward so it slips past the lens, and blurs as it gets close. Entrances stay directional (left, right, top, bottom); no scale-in pops. Implemented by `ExitContext` in `cola/motion3d.tsx` plus the near-field depth-of-field pass in `MotionBlurRenderer` (`dof` prop: sharp beyond 0.92 m, fully soft at 0.35 m, 70 px max at 1080 wide). The DOF pass runs only on frames where something is near the lens.
 - **True 3D motion blur:** use `Mover` + `MotionBlurRenderer` (`cola/motion3d.tsx`). Poses are functions of time; fast frames are rendered up to 8 times across a 180° shutter and averaged.
 - **Reference build:** `remotion/src/cola/ColaOrigin.tsx`.
 

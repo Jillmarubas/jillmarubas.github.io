@@ -7,7 +7,7 @@ import {TypeText, WordRise} from '../promo/motion';
 import '../promo/fonts';
 import TL from './timeline.json';
 import {Assets, CabinetCard, CocaLeaf, FountainGlass, Globe, HutchinsonBottle, KolaNut, Model, Nickel, PourStream, ReleaseWhenDrawn, RubberStamp, TonicWineBottle, ghostTexture, inkTexture, liquidTop, paperTexture, useAssets} from './assets';
-import {CamPose, MotionBlurRenderer, MotionProvider, Mover, Pose, V3, backOut, enter, inOut, inQuad, mix3} from './motion3d';
+import {CamPose, ExitContext, MotionBlurRenderer, MotionProvider, Mover, Pose, V3, backOut, enter, inOut, inQuad, mix3} from './motion3d';
 
 /*
  * ColaOrigin — see BRIEF.md (SOP step 1) and reference/breakdowns.md "Asset choreography".
@@ -21,6 +21,7 @@ const CUTS: number[] = TL.cuts;
 const WHIP: number = TL.whip;
 const EV = TL.events as Record<string, {f: number; d: number}>;
 const E = (id: string) => EV[id];
+const EXIT = TL.exit as {d: number; lead: number};
 
 const STEP = 0.6; // metres between stations along the wall
 const WALL_Z = -0.12;
@@ -327,10 +328,10 @@ const Station: React.FC<{i: number; f: number; a: Assets}> = ({i, f, a}) => {
         const stampTrack = (t: number): Pose => {
           const at: V3 = [-0.02, 0.075, WALL_Z - 0.0012];
           const atR: V3 = [Math.PI / 2, 0, -0.14];
-          if (t < st.f) return {p: [0.12, 0.2, 0.75], r: [1.2, 0.4, -0.6], s: 0};
+          if (t < st.f) return {p: [0.04, 0.44, 0.3], r: [1.2, 0.4, -0.6], s: 0};
           if (t < hit) {
             const k = inQuad((t - st.f) / st.d);
-            return {p: mix3([0.12, 0.2, 0.75], at, k), r: mix3([1.2, 0.4, -0.6], atR, k)};
+            return {p: mix3([0.04, 0.44, 0.3], at, k), r: mix3([1.2, 0.4, -0.6], atR, k)};
           }
           if (t < hit + 5) return {p: at, r: atR};
           const k = 1 - (1 - Math.min(1, (t - hit - 5) / 14)) ** 2;
@@ -352,7 +353,7 @@ const Station: React.FC<{i: number; f: number; a: Assets}> = ({i, f, a}) => {
               <RubberStamp />
             </Mover>
             <Decal visible={f >= hit} />
-            <Mover f={f} radius={0.1} track={(t) => ({p: [0.02, -0.108, 0.0], r: [0.1, -2.3 + 0.004 * Math.max(0, t - j.f), 0], s: t < j.f ? 0 : 0.72 * backOut((t - j.f) / j.d)})}>
+            <Mover f={f} radius={0.1} track={(t) => enter(t, j.f, j.d, {p: [0.4, -0.06, 0.1], r: [0.3, -5.2, 0.6], s: 0.72}, {p: [0.02, -0.108, 0.0], r: [0.1, -2.3, 0], s: 0.72}, 0.6, 21)}>
               <Model scene={g.jug_01} />
             </Mover>
           </>
@@ -405,7 +406,7 @@ const Station: React.FC<{i: number; f: number; a: Assets}> = ({i, f, a}) => {
             <Mover f={f} radius={0.09} track={(t) => enter(t, c.f, c.d, {p: [0.3, 0.36, 0.12], r: [0.6, 1.4, -1.1]}, {p: [-0.03, 0.0, 0], r: [0.02, -0.1, 0.04]}, 1, 16)}>
               <CabinetCard photo={a.photos.candler} caption="Asa G. Candler" />
             </Mover>
-            <group position={[0.07, -0.085, 0.25]} rotation={[0.55, -0.4, 0]}>
+            <Mover f={f} radius={0.03} track={still({p: [0.07, -0.085, 0.25], r: [0.55, -0.4, 0]}, 0)}>
               {Array.from({length: 12}).map((_, k) => {
                 const at = cs.f + k * 4;
                 return (
@@ -413,13 +414,14 @@ const Station: React.FC<{i: number; f: number; a: Assets}> = ({i, f, a}) => {
                     key={k}
                     f={f}
                     radius={0.02}
+                    noExit
                     track={(t) => ({p: [Math.sin(k * 2.1) * 0.0008, 0.001 + k * 0.00196 + (1 - inQuad((t - at) / 6)) * 0.1, Math.cos(k * 1.7) * 0.0008], r: [0, k * 0.9, 0], s: t < at ? 0 : 1})}
                   >
                     <Nickel a={a.coin} />
                   </Mover>
                 );
               })}
-            </group>
+            </Mover>
           </>
         );
       }
@@ -451,14 +453,20 @@ const Station: React.FC<{i: number; f: number; a: Assets}> = ({i, f, a}) => {
       default: {
         const ea = E('s8.earth');
         return (
-          <Mover f={f} radius={0.08} track={(t) => ({p: [0, -0.03 + 0.003 * Math.sin(t / 30), 0.02], r: [0, 0, 0], s: t < ea.f ? 0 : backOut((t - ea.f) / ea.d)})}>
+          <Mover f={f} radius={0.08} track={(t) => enter(t, ea.f, ea.d, {p: [0, -0.42, 0.1], r: [0.5, 0, 0]}, {p: [0, -0.03, 0.02], r: [0, 0, 0]}, 0.4, 22)}>
             <Globe earth={a.earth} spin={3.3 + f * 0.012} />
           </Mover>
         );
       }
     }
   })();
-  return <group position={[i * STEP, 0, 0]}>{body}</group>;
+  // every scene but the last ends with its objects easing toward the viewer and blurring past the lens
+  const exit = i < CUTS.length - 2 ? {start: CUTS[i + 1] - EXIT.lead, d: EXIT.d, z: CAM_Z - 0.14} : null;
+  return (
+    <ExitContext.Provider value={exit}>
+      <group position={[i * STEP, 0, 0]}>{body}</group>
+    </ExitContext.Provider>
+  );
 };
 
 const Decal: React.FC<{visible: boolean}> = ({visible}) => {
@@ -584,7 +592,7 @@ export const ColaOrigin: React.FC<{sound: boolean}> = ({sound}) => {
               {live.map((i) => (
                 <Station key={i} i={i} f={f} a={a} />
               ))}
-              <MotionBlurRenderer f={f} cam={cam} maxSamples={6} />
+              <MotionBlurRenderer f={f} cam={cam} maxSamples={6} dof={{focus: CAM_Z - WALL_Z, sharp: 0.92, soft: 0.35, maxPx: 70}} />
             </>
           )}
           <ReleaseWhenDrawn handle={handle} ready={!!a} />

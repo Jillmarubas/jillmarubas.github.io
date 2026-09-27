@@ -71,12 +71,16 @@ for eid, sc, start, dur, sounds in E:
         else:
             at = f0
         cues.append({'id': eid, 'file': file, 'at': round(at, 2), 'gain': gain, 'from': round(frm, 3), 'len': x.get('len', 1.2)})
+# scene exits: objects ease toward the viewer, starting EXIT_LEAD frames before each cut
+EXIT_D, EXIT_LEAD = 28, 34
+for i, c in enumerate(CUTS[1:-1]):
+    cues.append({'id': f'exit{i}', 'file': 'whoosh1', 'at': round(c - EXIT_LEAD + 8, 2), 'gain': 0.5, 'from': 0.0, 'len': 1.4})
 # a whoosh centred on every whip pan
 for i, c in enumerate(CUTS[1:-1]):
     f = 'whoosh8' if i % 2 else 'whoosh7'
-    cues.append({'id': f'whip{i+1}', 'file': f, 'at': round(c - ONSET[f] * FPS, 2), 'gain': 0.8, 'from': 0.0, 'len': 1.0})
+    cues.append({'id': f'whip{i+1}', 'file': f, 'at': round(c - ONSET[f] * FPS, 2), 'gain': 0.55, 'from': 0.0, 'len': 1.0})
 
-out = {'fps': FPS, 'cuts': CUTS, 'whip': WHIP, 'events': events, 'cues': sorted(cues, key=lambda c: c['at'])}
+out = {'fps': FPS, 'cuts': CUTS, 'whip': WHIP, 'exit': {'d': EXIT_D, 'lead': EXIT_LEAD}, 'events': events, 'cues': sorted(cues, key=lambda c: c['at'])}
 path = os.path.join(os.path.dirname(__file__), '..', 'src', 'cola', 'timeline.json')
 json.dump(out, open(path, 'w'), indent=1)
 print(f'{len(events)} events, {len(out["cues"])} sound cues -> {os.path.relpath(path)}')
