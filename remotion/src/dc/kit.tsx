@@ -139,7 +139,7 @@ export const Body: React.FC<{text: string; at: number; size?: number; width?: nu
 };
 export const Hand: React.FC<{text: string; at: number; size?: number; color?: string; rot?: number}> = ({text, at, size = 58, color = C.hum, rot = -3}) => {
   const f = useCurrentFrame();
-  const n = Math.floor(interpolate(f - at, [0, text.length * 1.6], [0, text.length], clamp));
+  const n = Math.floor(interpolate(f - at, [0, text.length * 0.8], [0, text.length], clamp)); // fast enough to finish inside short lines
   return <div style={{fontFamily: F.hand, fontWeight: 600, fontSize: size, color, transform: `rotate(${rot}deg)`, whiteSpace: 'nowrap'}}>{text.slice(0, n)}</div>;
 };
 export const Source: React.FC<{text: string; at: number}> = ({text, at}) => {

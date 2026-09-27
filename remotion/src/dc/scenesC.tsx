@@ -777,7 +777,7 @@ export const S8a: React.FC = () => {
         <House s={240} />
       </Piece>
       <Column at={L(1)} y={420} width={760}>
-        <Key text="The cloud has an address." at={L(1) + 30} size={84} accent="address." />
+        <Key text="The cloud has an address." at={L(1) + 6} size={84} accent="address." />
       </Column>
     </>
   );
