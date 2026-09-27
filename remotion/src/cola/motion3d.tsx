@@ -72,15 +72,18 @@ export const MotionBlurRenderer: React.FC<{f: number; cam: (t: number) => CamPos
     );
     const output = new OutputPass();
     output.renderToScreen = true;
-    return {add, output, sample: null as THREE.WebGLRenderTarget | null, accum: null as THREE.WebGLRenderTarget | null};
+    return {add, output, sample: null as THREE.WebGLRenderTarget | null, sampleFast: null as THREE.WebGLRenderTarget | null, accum: null as THREE.WebGLRenderTarget | null};
   }, []);
 
   useFrame(() => {
     const size = gl.getDrawingBufferSize(new THREE.Vector2());
     if (!res.sample || res.sample.width !== size.x || res.sample.height !== size.y) {
       res.sample?.dispose();
+      res.sampleFast?.dispose();
       res.accum?.dispose();
+      // MSAA for still frames; blurred frames average several samples, which already smooths edges
       res.sample = new THREE.WebGLRenderTarget(size.x, size.y, {type: THREE.HalfFloatType, samples: 4});
+      res.sampleFast = new THREE.WebGLRenderTarget(size.x, size.y, {type: THREE.HalfFloatType});
       res.accum = new THREE.WebGLRenderTarget(size.x, size.y, {type: THREE.HalfFloatType});
     }
     const pcam = camera as THREE.PerspectiveCamera;
@@ -121,11 +124,12 @@ export const MotionBlurRenderer: React.FC<{f: number; cam: (t: number) => CamPos
     gl.clear();
     for (let k = 0; k < n; k++) {
       setAt(n === 1 ? f : f + ((k + 0.5) / n - 0.5) * SHUTTER);
-      gl.setRenderTarget(res.sample);
+      const target = n === 1 ? res.sample! : res.sampleFast!;
+      gl.setRenderTarget(target);
       gl.setClearColor(0x000000, 0);
       gl.clear();
       gl.render(scene, pcam);
-      (res.add.material as THREE.ShaderMaterial).uniforms.tex.value = res.sample!.texture;
+      (res.add.material as THREE.ShaderMaterial).uniforms.tex.value = target.texture;
       (res.add.material as THREE.ShaderMaterial).uniforms.w.value = 1 / n;
       gl.setRenderTarget(res.accum);
       res.add.render(gl);

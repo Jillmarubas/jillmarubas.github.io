@@ -73,13 +73,13 @@ const LightRig: React.FC<{f: number}> = ({f}) => {
         color="#fff4e6"
         map={gobo}
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
         shadow-camera-near={0.5}
         shadow-camera-far={3}
         shadow-bias={-0.0004}
         shadow-radius={9}
-        shadow-blurSamples={16}
+        shadow-blurSamples={8}
       />
       <object3D ref={target} position={[0, 0, WALL_Z]} />
     </Mover>
@@ -89,6 +89,8 @@ const LightRig: React.FC<{f: number}> = ({f}) => {
 const Studio: React.FC<{a: Assets}> = ({a}) => {
   const {gl, scene} = useThree();
   useMemo(() => {
+    // glass refraction at half resolution: invisible difference, half the cost
+    (gl as THREE.WebGLRenderer & {transmissionResolutionScale: number}).transmissionResolutionScale = 0.5;
     const pm = new THREE.PMREMGenerator(gl);
     scene.environment = pm.fromEquirectangular(a.env).texture;
     scene.environmentIntensity = 0.55;
@@ -472,7 +474,7 @@ export const ColaOrigin: React.FC<{sound: boolean}> = ({sound}) => {
               {live.map((i) => (
                 <Station key={i} i={i} f={f} a={a} />
               ))}
-              <MotionBlurRenderer f={f} cam={cam} maxSamples={8} />
+              <MotionBlurRenderer f={f} cam={cam} maxSamples={6} />
             </>
           )}
           <ReleaseWhenDrawn handle={handle} ready={!!a} />

@@ -288,7 +288,7 @@ export const FountainGlass: React.FC<{fill: number; frame: number; condensation?
       cola: colaMat(),
       foam: new THREE.MeshStandardMaterial({color: '#cfa77c', roughness: 0.75}),
       bubble: bubbleMat(),
-      drop: new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: 0, transmission: 1, thickness: 0.0015, ior: 1.33, envMapIntensity: 2}),
+      drop: new THREE.MeshPhysicalMaterial({color: '#dfe8e6', roughness: 0.03, clearcoat: 1, transparent: true, opacity: 0.3, envMapIntensity: 1.3, depthWrite: false}),
     }),
     [],
   );
@@ -339,13 +339,13 @@ export const FountainGlass: React.FC<{fill: number; frame: number; condensation?
       )}
       {condensation && fill > 0.3 && (
         <Instanced
-          count={260}
+          count={140}
           mat={m.drop}
           place={(i, mm) => {
             const a = random(`da${i}`) * Math.PI * 2;
             const y = 0.006 + Math.pow(random(`dy${i}`), 0.8) * (top - 0.004);
             const r = outerR(y) + 0.0002;
-            const sz = 0.0004 + Math.pow(random(`dz${i}`), 2) * 0.0013;
+            const sz = 0.0003 + Math.pow(random(`dz${i}`), 2.5) * 0.0009;
             const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), new THREE.Vector3(Math.cos(a), 0, Math.sin(a)));
             mm.compose(new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r), q, new THREE.Vector3(sz, sz * 1.25, sz * 0.45));
           }}
