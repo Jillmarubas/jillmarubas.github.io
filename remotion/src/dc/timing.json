@@ -22,56 +22,56 @@
    "start": 217.851,
    "card": 3.2,
    "vo": 221.451,
-   "hasVo": false,
-   "end": 379.669
+   "hasVo": true,
+   "end": 369.387
   },
   {
    "title": "CHAPTER 3: THE WATER",
-   "start": 379.669,
+   "start": 369.387,
    "card": 3.2,
-   "vo": 383.269,
-   "hasVo": false,
-   "end": 487.808
+   "vo": 372.987,
+   "hasVo": true,
+   "end": 466.588
   },
   {
    "title": "CHAPTER 4: THE NEIGHBOURS",
-   "start": 487.808,
+   "start": 466.588,
    "card": 3.2,
-   "vo": 491.408,
-   "hasVo": false,
-   "end": 623.994
+   "vo": 470.188,
+   "hasVo": true,
+   "end": 587.102
   },
   {
    "title": "CHAPTER 5: THE DEAL",
-   "start": 623.994,
+   "start": 587.102,
    "card": 3.2,
-   "vo": 627.594,
-   "hasVo": false,
-   "end": 764.365
+   "vo": 590.702,
+   "hasVo": true,
+   "end": 714.304
   },
   {
    "title": "CHAPTER 6: WHO DECIDES?",
-   "start": 764.365,
+   "start": 714.304,
    "card": 3.2,
-   "vo": 767.965,
-   "hasVo": false,
-   "end": 876.776
+   "vo": 717.904,
+   "hasVo": true,
+   "end": 811.412
   },
   {
    "title": "CHAPTER 7: CAN IT BE FIXED?",
-   "start": 876.776,
+   "start": 811.412,
    "card": 3.2,
-   "vo": 880.376,
-   "hasVo": false,
-   "end": 990.794
+   "vo": 815.012,
+   "hasVo": true,
+   "end": 915.672
   },
   {
    "title": "ENDING",
-   "start": 990.794,
+   "start": 915.672,
    "card": 0.0,
-   "vo": 991.194,
+   "vo": 916.072,
    "hasVo": true,
-   "end": 1018.878
+   "end": 943.756
   }
  ],
  "lines": [
@@ -327,810 +327,810 @@
    "ch": 2,
    "i": 0,
    "start": 221.451,
-   "end": 230.469,
+   "end": 228.031,
    "say": "Your electricity doesn't just come from a power plant. It comes from a shared system called the grid.",
    "show": "Chapter card 2. A network diagram of plants, lines and homes."
   },
   {
    "ch": 2,
    "i": 1,
-   "start": 230.919,
-   "end": 238.508,
+   "start": 229.051,
+   "end": 234.611,
    "say": "And the grid has to be ready for the busiest moment of the year, not the average day.",
    "show": "A line chart with a peak. A dashed \"must be ready\" line sits above it."
   },
   {
    "ch": 2,
    "i": 2,
-   "start": 238.958,
-   "end": 247.262,
+   "start": 235.951,
+   "end": 244.331,
    "say": "In the eastern US, a grid operator called PJM keeps that promise for about 65 million people.",
    "show": "The PJM region highlighted across 13 states. \"65 million people.\""
   },
   {
    "ch": 2,
    "i": 3,
-   "start": 247.712,
-   "end": 254.944,
+   "start": 245.011,
+   "end": 250.551,
    "say": "Once a year, it holds an auction to pay power plants to be available when needed.",
    "show": "An auction gavel. Power plant icons line up with price tags."
   },
   {
    "ch": 2,
    "i": 4,
-   "start": 255.394,
-   "end": 261.376,
+   "start": 251.571,
+   "end": 255.531,
    "say": "Think of it like reserving seats for a concert that might sell out.",
    "show": "Simple theatre seats. Some fill with \"reserved\" tags."
   },
   {
    "ch": 2,
    "i": 5,
-   "start": 261.826,
-   "end": 268.165,
+   "start": 256.431,
+   "end": 261.011,
    "say": "When lots of new people want seats, the price of reserving one goes up.",
    "show": "New data centre icons walk in. Price tags jump."
   },
   {
    "ch": 2,
    "i": 6,
-   "start": 268.615,
-   "end": 279.33,
+   "start": 261.571,
+   "end": 270.371,
    "say": "And the new arrivals want a lot of seats. Tech companies are planning data centres that each need hundreds of megawatts.",
    "show": "One data centre icon takes a whole row of seats."
   },
   {
    "ch": 2,
    "i": 7,
-   "start": 279.78,
-   "end": 281.744,
+   "start": 271.111,
+   "end": 272.371,
    "say": "Look at what happened.",
    "show": "Beat."
   },
   {
    "ch": 2,
    "i": 8,
-   "start": 282.194,
-   "end": 288.355,
+   "start": 273.071,
+   "end": 280.611,
    "say": "For 2024 to 2025, a megawatt of capacity cost about 29 dollars a day.",
    "show": "A bar at $28.92/MW-day. Source: PJM."
   },
   {
    "ch": 2,
    "i": 9,
-   "start": 288.805,
-   "end": 293.805,
+   "start": 281.751,
+   "end": 287.231,
    "say": "The next year: about 270 dollars. Almost ten times more.",
    "show": "The bar shoots up to $269.92."
   },
   {
    "ch": 2,
    "i": 10,
-   "start": 294.255,
-   "end": 297.737,
+   "start": 288.211,
+   "end": 292.831,
    "say": "Then: 329 dollars, the maximum allowed.",
    "show": "The bar hits a red \"price cap\" line."
   },
   {
    "ch": 2,
    "i": 11,
-   "start": 298.187,
-   "end": 311.133,
+   "start": 293.911,
+   "end": 304.351,
    "say": "The grid's independent market monitor found data centres were responsible for most of that jump, about 63 percent of the increase in one auction.",
    "show": "A pie chart: 63% in the accent colour. Source: Monitoring Analytics via IEEFA."
   },
   {
    "ch": 2,
    "i": 12,
-   "start": 311.583,
-   "end": 317.208,
+   "start": 305.191,
+   "end": 310.571,
    "say": "And who pays for capacity? Everyone on the grid. Including you.",
    "show": "The cost flows down from the auction into every house icon."
   },
   {
    "ch": 2,
    "i": 13,
-   "start": 317.658,
-   "end": 326.676,
+   "start": 311.331,
+   "end": 319.291,
    "say": "Across the region, household supply rates rose by between 5 and 44 percent, depending on the utility.",
    "show": "A range bar from 5% to 44%, with utility names as small labels."
   },
   {
    "ch": 2,
    "i": 14,
-   "start": 327.126,
-   "end": 340.608,
+   "start": 320.451,
+   "end": 331.571,
    "say": "Then there are the wires. New power lines and substations to reach these campuses cost billions, and those costs often get spread across all customers.",
    "show": "Transmission towers march across the map toward the data centres."
   },
   {
    "ch": 2,
    "i": 15,
-   "start": 341.058,
-   "end": 354.183,
+   "start": 332.771,
+   "end": 342.891,
    "say": "Utilities and data centre companies argue the big customers pay their fair share, and some states now make them sign special contracts to prove it.",
    "show": "A contract slides in with a pen, captioned \"large-load tariffs\"."
   },
   {
    "ch": 2,
    "i": 16,
-   "start": 354.633,
-   "end": 358.383,
+   "start": 343.851,
+   "end": 346.631,
    "say": "But from a kitchen table, it looks simple.",
    "show": "A kitchen table with a bill on it."
   },
   {
    "ch": 2,
    "i": 17,
-   "start": 358.833,
-   "end": 363.387,
+   "start": 347.871,
+   "end": 351.631,
    "say": "My bill went up. The building down the road is new.",
    "show": "The bill and the grey box sit side by side on the paper."
   },
   {
    "ch": 2,
    "i": 18,
-   "start": 363.837,
-   "end": 365.623,
+   "start": 352.851,
+   "end": 354.731,
    "say": "And nobody asked me.",
    "show": "Text: \"nobody asked me.\""
   },
   {
    "ch": 2,
    "i": 19,
-   "start": 366.073,
-   "end": 373.394,
+   "start": 355.251,
+   "end": 363.091,
    "say": "That feeling, of paying for something you didn't choose, shows up again and again.",
    "show": "The words fade into a dotted line that leads to the next scene."
   },
   {
    "ch": 2,
    "i": 20,
-   "start": 373.844,
-   "end": 378.219,
+   "start": 363.091,
+   "end": 367.611,
    "say": "Including in the next thing these buildings need.",
    "show": "A water drop falls and splashes."
   },
   {
    "ch": 3,
    "i": 0,
-   "start": 383.269,
-   "end": 390.68,
+   "start": 372.987,
+   "end": 379.207,
    "say": "Computers get hot. Tens of thousands of chips, packed together, make a lot of heat.",
    "show": "Chapter card 3. A heat map glows over the server racks."
   },
   {
    "ch": 3,
    "i": 1,
-   "start": 391.13,
-   "end": 398.273,
+   "start": 380.167,
+   "end": 385.847,
    "say": "One of the cheapest ways to cool them is to evaporate water, like sweat on skin.",
    "show": "A cooling tower diagram. Water droplets rise and vanish."
   },
   {
    "ch": 3,
    "i": 2,
-   "start": 398.723,
-   "end": 404.973,
+   "start": 386.767,
+   "end": 391.527,
    "say": "Most of that water doesn't come back. It turns into vapour and leaves.",
    "show": "Arrows: water in, a big arrow up as vapour, a small arrow out. Label: \"around 80% evaporates\"."
   },
   {
    "ch": 3,
    "i": 3,
-   "start": 405.423,
-   "end": 413.815,
+   "start": 392.687,
+   "end": 400.147,
    "say": "A typical data centre can use around 300,000 gallons a day. Roughly what a thousand homes use.",
    "show": "Water bottles fill a grid. 1 building equals 1,000 houses."
   },
   {
    "ch": 3,
    "i": 4,
-   "start": 414.265,
-   "end": 416.855,
+   "start": 400.767,
+   "end": 402.707,
    "say": "The biggest can use millions.",
    "show": "The grid of houses keeps expanding."
   },
   {
    "ch": 3,
    "i": 5,
-   "start": 417.305,
-   "end": 422.483,
+   "start": 403.787,
+   "end": 407.247,
    "say": "Now picture that in a place that's already short of water.",
    "show": "The map shifts to the desert Southwest, in dry browns."
   },
   {
    "ch": 3,
    "i": 6,
-   "start": 422.933,
-   "end": 429.451,
+   "start": 408.187,
+   "end": 414.787,
    "say": "In 2025, a huge project codenamed \"Project Blue\" came to Tucson, Arizona.",
    "show": "A folder stamped \"PROJECT BLUE\"."
   },
   {
    "ch": 3,
    "i": 7,
-   "start": 429.901,
-   "end": 437.044,
+   "start": 415.647,
+   "end": 421.447,
    "say": "Residents packed city meetings. And Tucson's council voted to walk away from it.",
    "show": "A packed council chamber drawn in simple shapes. A vote tally."
   },
   {
    "ch": 3,
    "i": 8,
-   "start": 437.494,
-   "end": 447.315,
+   "start": 422.067,
+   "end": 429.107,
    "say": "In Georgia, near a Meta data centre, some neighbours say their wells started failing after construction began.",
    "show": "A well bucket comes up dry. The Meta building is shown as a generic grey box."
   },
   {
    "ch": 3,
    "i": 9,
-   "start": 447.765,
-   "end": 451.337,
+   "start": 430.147,
+   "end": 432.887,
    "say": "Meta says its own studies found no link.",
    "show": "A caption card: \"Meta: no link found in its studies.\""
   },
   {
    "ch": 3,
    "i": 10,
-   "start": 451.787,
-   "end": 455.537,
+   "start": 433.447,
+   "end": 435.727,
    "say": "But you can see why people are suspicious.",
    "show": "Beat."
   },
   {
    "ch": 3,
    "i": 11,
-   "start": 455.987,
-   "end": 461.523,
+   "start": 436.847,
+   "end": 440.947,
    "say": "Newer permits there allow for up to six million gallons a day.",
    "show": "A gauge rises to \"6M gallons/day (permit)\"."
   },
   {
    "ch": 3,
    "i": 12,
-   "start": 461.973,
-   "end": 470.276,
+   "start": 441.627,
+   "end": 449.067,
    "say": "To be fair, many newer designs use closed-loop cooling that barely consumes any water at all.",
    "show": "A clean closed-loop diagram, with water circling and not escaping."
   },
   {
    "ch": 3,
    "i": 13,
-   "start": 470.726,
-   "end": 477.69,
+   "start": 449.787,
+   "end": 456.287,
    "say": "But that uses more electricity instead. So the problem moves back to the grid.",
    "show": "The loop's arrow points to the power meter from Chapter 2."
   },
   {
    "ch": 3,
    "i": 14,
-   "start": 478.14,
-   "end": 482.426,
+   "start": 457.067,
+   "end": 461.747,
    "say": "Power or water. Every data centre makes a trade.",
    "show": "A balance scale with a lightning bolt on one side and a drop on the other."
   },
   {
    "ch": 3,
    "i": 15,
-   "start": 482.876,
-   "end": 486.358,
+   "start": 462.507,
+   "end": 464.907,
    "say": "And the neighbours pay for either side.",
    "show": "The scale tips onto a row of houses."
   },
   {
    "ch": 4,
    "i": 0,
-   "start": 491.408,
-   "end": 493.015,
+   "start": 470.188,
+   "end": 470.888,
    "say": "Remember that hum?",
    "show": "Chapter card 4. The waveform from the cold open returns."
   },
   {
    "ch": 4,
    "i": 1,
-   "start": 493.465,
-   "end": 507.037,
+   "start": 472.188,
+   "end": 481.648,
    "say": "In the Great Oak neighbourhood of Manassas, residents said a nearby Amazon Web Services campus filled their evenings with a constant, high-pitched whir.",
    "show": "The house outline, with a speaker icon pulsing from the grey box."
   },
   {
    "ch": 4,
    "i": 2,
-   "start": 507.487,
-   "end": 514.63,
+   "start": 483.748,
+   "end": 490.148,
    "say": "Fans and chillers on the roof run all the time. The sound doesn't stop at night.",
    "show": "Roof fans spin. The sky turns to night; the waveform keeps going."
   },
   {
    "ch": 4,
    "i": 3,
-   "start": 515.08,
-   "end": 521.776,
+   "start": 490.968,
+   "end": 494.988,
    "say": "Counties in Virginia have been rewriting their noise rules just to keep up.",
    "show": "A rulebook page flips, with new lines underlined."
   },
   {
    "ch": 4,
    "i": 4,
-   "start": 522.226,
-   "end": 524.101,
+   "start": 495.628,
+   "end": 497.368,
    "say": "Then there's the air.",
    "show": "Clear sky turns to a light grey haze."
   },
   {
    "ch": 4,
    "i": 5,
-   "start": 524.551,
-   "end": 534.462,
+   "start": 498.008,
+   "end": 507.188,
    "say": "In South Memphis, Elon Musk's company xAI built a giant AI supercomputer called Colossus in a matter of months.",
    "show": "The Memphis skyline. A box rises fast with a speed-line blur."
   },
   {
    "ch": 4,
    "i": 6,
-   "start": 534.912,
-   "end": 540.626,
+   "start": 508.228,
+   "end": 513.028,
    "say": "To power it quickly, it brought in gas turbines, dozens of them.",
    "show": "Turbine icons appear one by one."
   },
   {
    "ch": 4,
    "i": 7,
-   "start": 541.076,
-   "end": 547.594,
+   "start": 514.088,
+   "end": 518.588,
    "say": "The Southern Environmental Law Center counted 35 running without permits.",
    "show": "A counter to 35. Each turbine gets a small red \"no permit\" tag. Source: SELC."
   },
   {
    "ch": 4,
    "i": 8,
-   "start": 548.044,
-   "end": 557.776,
+   "start": 519.708,
+   "end": 527.628,
    "say": "The nearest neighbourhood, Boxtown, is a historically Black community that already lived with heavy industry.",
    "show": "A small neighbourhood drawing beside the factory icons."
   },
   {
    "ch": 4,
    "i": 9,
-   "start": 558.226,
-   "end": 567.869,
+   "start": 528.428,
+   "end": 537.328,
    "say": "Local officials later granted permits for 15 turbines. Residents and civil rights groups are still fighting.",
    "show": "A permit document with \"15\" on it. Protest sign shapes."
   },
   {
    "ch": 4,
    "i": 10,
-   "start": 568.319,
-   "end": 570.283,
+   "start": 538.468,
+   "end": 539.488,
    "say": "And then there's land.",
    "show": "The haze clears to fields."
   },
   {
    "ch": 4,
    "i": 11,
-   "start": 570.733,
-   "end": 581.894,
+   "start": 540.328,
+   "end": 550.868,
    "say": "In Prince William County, Virginia, a plan called the Digital Gateway would have covered about 2,100 acres with data centres.",
    "show": "A map outline fills with grey across green fields."
   },
   {
    "ch": 4,
    "i": 12,
-   "start": 582.344,
-   "end": 585.737,
+   "start": 551.688,
+   "end": 554.308,
    "say": "Right next to a Civil War battlefield.",
    "show": "A battlefield marker next to the grey area."
   },
   {
    "ch": 4,
    "i": 13,
-   "start": 586.187,
-   "end": 592.615,
+   "start": 555.468,
+   "end": 559.448,
    "say": "It would have been one of the largest data centre campuses in the world.",
    "show": "Scale comparison against Data Center Alley."
   },
   {
    "ch": 4,
    "i": 14,
-   "start": 593.065,
-   "end": 600.387,
+   "start": 560.308,
+   "end": 566.348,
    "say": "Residents sued. A court voided the rezoning, and the developer gave up its appeal.",
    "show": "A gavel. The grey area peels away and the fields return."
   },
   {
    "ch": 4,
    "i": 15,
-   "start": 600.837,
-   "end": 608.605,
+   "start": 567.088,
+   "end": 574.368,
    "say": "Noise. Air. Land. None of these is new. Factories and highways have caused all of them.",
    "show": "Three icons in a row: ear, cloud, tree. Old factory and highway drawings appear behind them."
   },
   {
    "ch": 4,
    "i": 16,
-   "start": 609.055,
-   "end": 615.037,
+   "start": 574.928,
+   "end": 578.608,
    "say": "The difference is that those things usually came with lots of jobs.",
    "show": "A factory with many little worker figures."
   },
   {
    "ch": 4,
    "i": 17,
-   "start": 615.487,
-   "end": 618.523,
+   "start": 578.628,
+   "end": 581.028,
    "say": "Which raises the obvious question.",
    "show": "Beat."
   },
   {
    "ch": 4,
    "i": 18,
-   "start": 618.973,
-   "end": 622.544,
+   "start": 581.728,
+   "end": 584.988,
    "say": "What does a town actually get in return?",
    "show": "A handshake that pauses before it closes."
   },
   {
    "ch": 5,
    "i": 0,
-   "start": 627.594,
-   "end": 635.63,
+   "start": 590.702,
+   "end": 597.262,
    "say": "Data centres cost a fortune to build. Hundreds of millions of dollars, sometimes billions.",
    "show": "Chapter card 5. A stack of money builds up."
   },
   {
    "ch": 5,
    "i": 1,
-   "start": 636.08,
-   "end": 641.437,
+   "start": 598.202,
+   "end": 602.282,
    "say": "But once they're running, they need surprisingly few people.",
    "show": "The money stack stays. Little worker figures appear, only a handful."
   },
   {
    "ch": 5,
    "i": 2,
-   "start": 641.887,
-   "end": 654.03,
+   "start": 602.782,
+   "end": 613.982,
    "say": "Building one does create jobs: hundreds, sometimes thousands, of construction workers. But those jobs end when the building is finished.",
    "show": "Hard hats fill the site, then walk off one by one."
   },
   {
    "ch": 5,
    "i": 3,
-   "start": 654.48,
-   "end": 666.444,
+   "start": 615.222,
+   "end": 624.062,
    "say": "Virginia's own auditors found a typical large data centre employs about 50 full-time workers, and around half of them are contractors.",
    "show": "50 figures, half in outline. Source: JLARC."
   },
   {
    "ch": 5,
    "i": 4,
-   "start": 666.894,
-   "end": 672.251,
+   "start": 625.262,
+   "end": 629.842,
    "say": "Meanwhile, many states hand them big tax breaks to win them.",
    "show": "Coins slide back from a state building to the box."
   },
   {
    "ch": 5,
    "i": 5,
-   "start": 672.701,
-   "end": 683.773,
+   "start": 631.142,
+   "end": 643.422,
    "say": "Virginia's sales tax exemption for data centre equipment cost state and local governments about 1.9 billion dollars in 2025.",
    "show": "A counter to $1.9B. Source: Good Jobs First."
   },
   {
    "ch": 5,
    "i": 6,
-   "start": 684.223,
-   "end": 691.544,
+   "start": 643.422,
+   "end": 648.322,
    "say": "One watchdog group worked it out at more than a million dollars for every new job.",
    "show": "\"$1.2M per job\", big, in the accent colour."
   },
   {
    "ch": 5,
    "i": 7,
-   "start": 691.994,
-   "end": 695.744,
+   "start": 649.662,
+   "end": 652.622,
    "say": "But here's the other side, and it matters.",
    "show": "Beat. The paper flips."
   },
   {
    "ch": 5,
    "i": 8,
-   "start": 696.194,
-   "end": 710.748,
+   "start": 653.482,
+   "end": 671.782,
    "say": "Virginia's own study found the exemption was one of the state's best-performing incentives, producing about six dollars of labour income for every dollar given up.",
    "show": "A $1 coin turns into $6.10. Source: JLARC."
   },
   {
    "ch": 5,
    "i": 9,
-   "start": 711.198,
-   "end": 715.93,
+   "start": 653.482,
+   "end": 671.782,
    "say": "And look at Loudoun County, Data Center Alley itself.",
    "show": "The Chapter 1 map returns."
   },
   {
    "ch": 5,
    "i": 10,
-   "start": 716.38,
-   "end": 726.915,
+   "start": 671.782,
+   "end": 679.522,
    "say": "Data centres bring in about 1.3 billion dollars a year in local taxes, around 38 percent of the county's general fund.",
    "show": "A pie chart, 38% in the accent colour. Source: Loudoun County."
   },
   {
    "ch": 5,
    "i": 11,
-   "start": 727.365,
-   "end": 734.33,
+   "start": 680.602,
+   "end": 685.702,
    "say": "That money helped cut the homeowner property tax rate every year for a decade.",
    "show": "A line falling from $1.145 to $0.805 per $100."
   },
   {
    "ch": 5,
    "i": 12,
-   "start": 734.78,
-   "end": 739.869,
+   "start": 686.542,
+   "end": 690.562,
    "say": "So data centres can be a great deal. For the right place.",
    "show": "A green check over Loudoun."
   },
   {
    "ch": 5,
    "i": 13,
-   "start": 740.319,
-   "end": 747.462,
+   "start": 691.322,
+   "end": 696.322,
    "say": "The catch is that the benefits and the costs often don't land in the same place.",
    "show": "The map splits in two: money flows to one county, power lines and costs spread to many."
   },
   {
    "ch": 5,
    "i": 14,
-   "start": 747.912,
-   "end": 758.448,
+   "start": 697.282,
+   "end": 708.162,
    "say": "The tax money goes to one county. The power lines, the higher capacity prices, the water, spread out to everyone else.",
    "show": "Arrows spread across the whole PJM map."
   },
   {
    "ch": 5,
    "i": 15,
-   "start": 758.898,
-   "end": 762.915,
+   "start": 708.902,
+   "end": 712.522,
    "say": "And that mismatch is the heart of this story.",
    "show": "The arrows freeze."
   },
   {
    "ch": 6,
    "i": 0,
-   "start": 767.965,
-   "end": 773.501,
+   "start": 717.904,
+   "end": 721.084,
    "say": "Look back at every fight in this video, and there's a pattern.",
    "show": "Chapter card 6. The small scenes from the video appear as cards."
   },
   {
    "ch": 6,
    "i": 1,
-   "start": 773.951,
-   "end": 784.576,
+   "start": 721.964,
+   "end": 730.064,
    "say": "The benefits are global and invisible. Faster apps, smarter AI, profits for some of the biggest companies in the world.",
    "show": "One side of the paper: a globe, app icons, stock arrows, all small and far away."
   },
   {
    "ch": 6,
    "i": 2,
-   "start": 785.026,
-   "end": 792.615,
+   "start": 730.864,
+   "end": 738.164,
    "say": "The costs are local and very visible. A hum. A bill. A dry well. A field that's gone.",
    "show": "The other side: the hum, bill, well and field, big and close."
   },
   {
    "ch": 6,
    "i": 3,
-   "start": 793.065,
-   "end": 804.673,
+   "start": 739.144,
+   "end": 748.824,
    "say": "And often, residents find out late. Projects arrive with code names, like Project Blue, and details come after the deal is shaped.",
    "show": "Folders with code names slide onto a table."
   },
   {
    "ch": 6,
    "i": 4,
-   "start": 805.123,
-   "end": 811.015,
+   "start": 749.604,
+   "end": 753.124,
    "say": "That's why this fight doesn't split neatly between left and right.",
    "show": "A US map colouring both red and blue counties in the accent colour."
   },
   {
    "ch": 6,
    "i": 5,
-   "start": 811.465,
-   "end": 821.823,
+   "start": 753.844,
+   "end": 762.064,
    "say": "Rural conservatives worried about land and taxes are standing next to environmentalists worried about water and gas.",
    "show": "Two groups of figures standing together."
   },
   {
    "ch": 6,
    "i": 6,
-   "start": 822.273,
-   "end": 833.165,
+   "start": 762.904,
+   "end": 771.404,
    "say": "And they're winning more often. Around 30 states have now passed rules on where data centres can go and what they can use.",
    "show": "State outlines light up one by one."
   },
   {
    "ch": 6,
    "i": 7,
-   "start": 833.615,
-   "end": 845.848,
+   "start": 772.284,
+   "end": 782.764,
    "say": "Some towns have simply hit pause. Near Detroit, a utility authority voted to stop new water and sewer service to data centres for a year.",
    "show": "A pause symbol over Ypsilanti, Michigan."
   },
   {
    "ch": 6,
    "i": 8,
-   "start": 846.298,
-   "end": 856.833,
+   "start": 783.464,
+   "end": 792.304,
    "say": "Meanwhile, the industry keeps planning to build more, and faster, because the demand for computing isn't slowing down.",
    "show": "The investment line keeps rising at the top of the frame."
   },
   {
    "ch": 6,
    "i": 9,
-   "start": 857.283,
-   "end": 863.444,
+   "start": 792.984,
+   "end": 797.624,
    "say": "So this isn't really a fight about whether data centres should exist.",
    "show": "Beat."
   },
   {
    "ch": 6,
    "i": 10,
-   "start": 863.894,
-   "end": 870.59,
+   "start": 798.184,
+   "end": 804.284,
    "say": "The phone in your pocket depends on them. So does almost everything online.",
    "show": "The phone from Chapter 1 returns, with its lines running to the boxes."
   },
   {
    "ch": 6,
    "i": 11,
-   "start": 871.04,
-   "end": 875.326,
+   "start": 805.424,
+   "end": 809.604,
    "say": "It's a fight about who pays, and who gets a say.",
    "show": "\"who pays\" and \"who decides\" as two big lines."
   },
   {
    "ch": 7,
    "i": 0,
-   "start": 880.376,
-   "end": 885.733,
+   "start": 815.012,
+   "end": 818.392,
    "say": "So is there a version of this that neighbours wouldn't hate?",
    "show": "Chapter card 7. The house and the box sit side by side."
   },
   {
    "ch": 7,
    "i": 1,
-   "start": 886.183,
-   "end": 888.951,
+   "start": 819.372,
+   "end": 821.532,
    "say": "Some places are already trying.",
    "show": "A world map. Pins appear."
   },
   {
    "ch": 7,
    "i": 2,
-   "start": 889.401,
-   "end": 897.437,
+   "start": 822.372,
+   "end": 829.352,
    "say": "Start with the bill. In Ohio, regulators approved a rule for the biggest new data centres.",
    "show": "Ohio highlighted. A tariff document."
   },
   {
    "ch": 7,
    "i": 3,
-   "start": 897.887,
-   "end": 907.798,
+   "start": 830.212,
+   "end": 838.272,
    "say": "They must pay for at least 85 percent of the power they reserve, for up to 12 years, even if they don't use it.",
    "show": "A gauge fixed at 85%. A 12-year timeline. Source: PUCO / AEP Ohio."
   },
   {
    "ch": 7,
    "i": 4,
-   "start": 908.248,
-   "end": 916.64,
+   "start": 839.232,
+   "end": 846.112,
    "say": "The idea is simple. If you ask the grid to build for you, you pay for it, not your neighbours.",
    "show": "Arrows of cost now flow back into the box instead of the houses."
   },
   {
    "ch": 7,
    "i": 5,
-   "start": 917.09,
-   "end": 925.573,
+   "start": 847.232,
+   "end": 854.412,
    "say": "Then there's the heat. All that warmth the cooling systems throw away could heat homes instead.",
    "show": "Heat waves rise from the box, then bend toward the houses."
   },
   {
    "ch": 7,
    "i": 6,
-   "start": 926.023,
-   "end": 936.558,
+   "start": 855.452,
+   "end": 864.972,
    "say": "In Denmark, Meta's data centre in Odense sends its waste heat into the city's heating network, for up to 11,000 homes.",
    "show": "Denmark outline. Warm pipes run into 11,000 dots."
   },
   {
    "ch": 7,
    "i": 7,
-   "start": 937.008,
-   "end": 950.49,
+   "start": 865.852,
+   "end": 878.112,
    "say": "In Finland, Microsoft and the energy company Fortum are building a system to supply about 40 percent of the district heating for around 250,000 people.",
    "show": "Finland outline. A heating gauge at 40%."
   },
   {
    "ch": 7,
    "i": 8,
-   "start": 950.94,
-   "end": 965.583,
+   "start": 878.932,
+   "end": 891.612,
    "say": "Other fixes are less glamorous. Closed-loop cooling to save water. Real noise limits. Building next to new power instead of plugging into an already stretched grid.",
    "show": "Three quick icons with checkmarks."
   },
   {
    "ch": 7,
    "i": 9,
-   "start": 966.033,
-   "end": 974.962,
+   "start": 892.212,
+   "end": 899.972,
    "say": "And maybe the biggest one: telling people early. Before the land is bought. Before the deal is done.",
    "show": "The code-name folders open, and the documents slide onto the town hall table."
   },
   {
    "ch": 7,
    "i": 10,
-   "start": 975.412,
-   "end": 979.251,
+   "start": 900.792,
+   "end": 903.072,
    "say": "None of this makes a data centre invisible.",
    "show": "Beat."
   },
   {
    "ch": 7,
    "i": 11,
-   "start": 979.701,
-   "end": 989.344,
+   "start": 903.832,
+   "end": 913.652,
    "say": "But it changes the question from \"Why is this being done to us?\" to \"What do we get, and what does it cost?\"",
    "show": "The two questions appear as ink lines, one crossed out."
   },
   {
    "ch": 8,
    "i": 0,
-   "start": 991.194,
-   "end": 996.554,
+   "start": 916.072,
+   "end": 921.432,
    "say": "For years, the internet felt weightless. Something that lived nowhere.",
    "show": "The cloud drawing floats up again."
   },
   {
    "ch": 8,
    "i": 1,
-   "start": 997.534,
-   "end": 999.954,
+   "start": 922.412,
+   "end": 924.832,
    "say": "But it turns out the cloud has an address.",
    "show": "The cloud drops and lands as the grey box across from the house."
   },
   {
    "ch": 8,
    "i": 2,
-   "start": 1000.734,
-   "end": 1005.934,
+   "start": 925.612,
+   "end": 930.812,
    "say": "It uses power, and water, and land. It makes noise.",
    "show": "Icons orbit the box: bolt, drop, tree, waveform."
   },
   {
    "ch": 8,
    "i": 3,
-   "start": 1007.094,
-   "end": 1009.874,
+   "start": 931.972,
+   "end": 934.752,
    "say": "And more and more, it's somebody's neighbour.",
    "show": "The hum fades. The house light turns on. Hold."
   },
   {
    "ch": 8,
    "i": 4,
-   "start": 1010.854,
-   "end": 1014.154,
+   "start": 935.732,
+   "end": 939.032,
    "say": "The question is whether that neighbour gets to have a say.",
    "show": "End card with sources. Credits: \"Research: Data Center Watch, LBNL, IEA, PJM, IEEFA, JLARC, Good Jobs First, Loudoun County, SELC.\""
   }
  ],
- "duration": 1018.878
+ "duration": 943.756
 }

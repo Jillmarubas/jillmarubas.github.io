@@ -38,10 +38,10 @@ const windows: Win[] = (() => {
 /* ------------------------------------------------------------------ lens layers */
 const Lens: React.FC<{f: number}> = ({f}) => (
   <>
-    {/* soft focus falling off toward the edges, so the eye stays in the middle */}
+    {/* soft focus falling off toward the edges, so the eye stays in the middle; grain is static (animated grain triples the file size) */}
     <AbsoluteFill style={{backdropFilter: 'blur(5px)', WebkitMaskImage: 'radial-gradient(ellipse 72% 70% at 50% 50%, transparent 64%, black 100%)', maskImage: 'radial-gradient(ellipse 72% 70% at 50% 50%, transparent 64%, black 100%)'}} />
     <AbsoluteFill style={{background: 'radial-gradient(ellipse 80% 80% at 50% 48%, transparent 58%, rgba(60,44,28,0.20) 100%)'}} />
-    <AbsoluteFill style={{backgroundImage: `url(${staticFile('dc/grain.png')})`, backgroundPosition: `${(f * 37) % 256}px ${(f * 61) % 256}px`, opacity: 0.06, mixBlendMode: 'multiply'}} />
+    <AbsoluteFill style={{backgroundImage: `url(${staticFile('dc/grain.png')})`, backgroundPosition: '0 0', opacity: 0.05, mixBlendMode: 'multiply'}} />
   </>
 );
 

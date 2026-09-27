@@ -173,8 +173,8 @@ export const S2e: React.FC = () => {
           />
         </Card>
       </Piece>
-      <Piece x={1110} y={560} at={L(2) + 30} from="none" shadow={false}>
-        <Hand text="almost 10×" at={L(2) + 30} size={64} />
+      <Piece x={1500} y={150} at={L(2) + 30} from="none" shadow={false}>
+        <Hand text="almost 10× in a year" at={L(2) + 30} size={60} />
       </Piece>
       <Source text="PJM auction results via IEEFA / NRDC" at={0} />
     </>
