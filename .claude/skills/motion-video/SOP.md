@@ -98,6 +98,29 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 
 ---
 
+## Long-form 16:9 explainers (Vox style)
+Reference build: `remotion/src/dc/`, the "Why people hate data centres" explainer.
+
+1. **Script first,** using `reference/vox-script-method.md`: a scene table with time, narration of 20 words or fewer per line, and what's on screen.
+   - Research every number and list it in `RESEARCH.md`.
+   - Get the user's approval before production.
+2. **Voiceover:** use ElevenLabs, one take per chapter, with voice and model fixed for the whole film.
+   - Check the account's credits before starting: about 1 credit per character on `eleven_multilingual_v2`.
+   - A 15-minute script needs about 11k credits.
+3. **Timing:** `scripts/dc_timing.py` aligns every script line to the take with local word timestamps (faster-whisper) and writes `timing.json`.
+   - Chapters without a take get estimated times, so picture can be built first.
+4. **Build:**
+   - Scenes start at a line and run to the next scene.
+   - A `Piece` gives the house choreography: directional entrance, drift, and an exit toward the viewer with blur.
+   - Tokens live in `DESIGN.md` / `design.ts`.
+   - Charts follow the dataviz skill.
+   - **Never interpolate data points you don't have:** plot only sourced values.
+5. **Sound:**
+   - `make_dc_music.py` synthesises the music bed: new mood per chapter, texture change about every 20 s, stings on cards.
+   - `mix_dc_audio.py` ducks the music under the voice (about 13 dB) and adds the hum and whooshes.
+   - Keep big WAVs in `out/`, not `public/`, or every Lambda deploy uploads them.
+6. **Render:** render one `…-partN` composition per chapter on Lambda (picture only), concatenate, then mux `out/dc-mix.wav`.
+
 ## Troubleshooting
 | Symptom | Cause | Fix |
 |---|---|---|
@@ -116,3 +139,4 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 | Playwright's ffmpeg rejects MP4 | Minimal build | Use `npx remotion ffmpeg` / `ffprobe` |
 | Lambda chunks never finish (render stalls at the same %) | Per-element canvas `filter: blur()` (e.g. hundreds of blurred bubbles) makes each frame ~7× slower, so chunks time out | Pre-render each blurred element once into a cached sprite and `drawImage` it; keep a frame under ~10 s locally before sending to Lambda |
 | Frame edges compete with the subject | Busy motion background | Edge blur: CSS `backdropFilter: blur(8px)` layer with a radial `maskImage` (transparent centre, black edges) between canvas and text |
+| ElevenLabs: "This request exceeds your quota" | The account's monthly credits ran out mid-batch | Generate chapter takes one at a time and check credits first. Failed takes aren't charged |
