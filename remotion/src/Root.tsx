@@ -4,6 +4,7 @@ import {PROMO_DURATION, Promo, PromoProps} from './promo/Promo';
 import {SPACE_DURATION, Space} from './space/Space';
 import {REAL_DURATION, RealMoon} from './real/RealMoon';
 import {COLA_DURATION, ColaOrigin} from './cola/ColaOrigin';
+import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
   <>
@@ -36,5 +37,8 @@ export const Root: React.FC = () => (
     <Composition id="MoonDistance" component={Space} durationInFrames={SPACE_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="RealMoon" component={RealMoon} durationInFrames={REAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="ColaOrigin" component={ColaOrigin} durationInFrames={COLA_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
+    <Composition id="BgA" component={BgDrafting} durationInFrames={BG_DURATION} fps={30} width={1080} height={1920} />
+    <Composition id="BgB" component={BgKinetic} durationInFrames={BG_DURATION} fps={30} width={1080} height={1920} />
+    <Composition id="BgC" component={BgFizz} durationInFrames={BG_DURATION} fps={30} width={1080} height={1920} />
   </>
 );
