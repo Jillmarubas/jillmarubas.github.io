@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useMemo, useRef} from 'react';
-import {AbsoluteFill, Audio, Easing, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, Easing, interpolate, random, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import {useThree} from '@react-three/fiber';
 import * as THREE from 'three';
@@ -123,6 +123,91 @@ const Wall: React.FC = () => {
           ),
       )}
     </>
+  );
+};
+
+/* ------------------------------------------------------------------ fizz background (option C) */
+// Drawn in wall coordinates onto a canvas that sits on the paper just around the camera view, so
+// bubbles pan with the wall during whips, catch the window-blind light and blur with the motion.
+const FZ_W = 0.34, FZ_H = 0.54, FZ_PPM = 4200; // metres, pixels per metre
+const FZ_INK = (a: number) => `rgba(38,38,42,${a})`;
+const FZ_ACC = (a: number) => `rgba(122,46,14,${a})`;
+const FizzWall: React.FC<{f: number}> = ({f}) => {
+  const {canvas, tex} = useMemo(() => {
+    const c = document.createElement('canvas');
+    c.width = Math.round(FZ_W * FZ_PPM);
+    c.height = Math.round(FZ_H * FZ_PPM);
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 4;
+    return {canvas: c, tex: t};
+  }, []);
+  const cx = camX(f);
+  const x = canvas.getContext('2d')!;
+  const W = canvas.width, H = canvas.height;
+  const toPx = (wx: number, wy: number): [number, number] => [(wx - cx + FZ_W / 2) * FZ_PPM, (FZ_H / 2 - wy) * FZ_PPM];
+  x.clearRect(0, 0, W, H);
+  x.filter = 'none';
+  // halftone dots swelling in a slow travelling wave
+  const step = 0.0176;
+  for (let wx = Math.floor((cx - FZ_W / 2) / step) * step; wx < cx + FZ_W / 2; wx += step) {
+    for (let wy = -FZ_H / 2 + step / 2; wy < FZ_H / 2; wy += step) {
+      const [px, py] = toPx(wx + step / 2, wy);
+      const wave = Math.max(0, Math.sin((wx - wy) / 0.065 - f / 14));
+      x.fillStyle = FZ_INK(0.17 + 0.12 * wave);
+      x.beginPath();
+      x.arc(px, py, (2 + 3.2 * wave * wave) * (FZ_PPM / 3975), 0, Math.PI * 2);
+      x.fill();
+    }
+  }
+  // slow dashed ring behind each station's subject
+  for (let i = 0; i < CUTS.length - 1; i++) {
+    const [px, py] = toPx(i * STEP, -0.005);
+    if (px < -600 || px > W + 600) continue;
+    x.save();
+    x.translate(px, py);
+    x.rotate((f * 0.25 * Math.PI) / 180);
+    x.strokeStyle = FZ_ACC(0.45);
+    x.lineWidth = 2.6;
+    x.setLineDash([3, 17]);
+    x.beginPath();
+    x.arc(0, 0, 0.1 * FZ_PPM, 0, Math.PI * 2);
+    x.stroke();
+    x.restore();
+  }
+  // rising bubbles: nearer ones are bigger, faster and softer
+  x.setLineDash([]);
+  for (let i = 0; i < 480; i++) {
+    const depth = random(`d${i}`);
+    const size = (0.0045 + depth * 0.028) / 2;
+    const speed = (1.2 + depth * 4.5) / 3975;
+    const bx = -0.2 + random(`x${i}`) * (STEP * (CUTS.length - 2) + 0.4) + Math.sin(f / (18 + depth * 10) + i) * (8 + depth * 22) / 3975;
+    const by = -0.29 + ((f * speed + random(`y${i}`) * 0.6) % 0.6);
+    if (Math.abs(bx - cx) > FZ_W / 2 + 0.04) continue;
+    const [px, py] = toPx(bx, by);
+    const filled = random(`f${i}`) > 0.8;
+    x.filter = depth > 0.7 ? `blur(${(depth - 0.7) * 14}px)` : 'none';
+    x.lineWidth = (1.5 + depth * 2) * (FZ_PPM / 3975);
+    x.strokeStyle = filled ? FZ_ACC(0.5) : FZ_INK(0.32 - depth * 0.1);
+    x.fillStyle = filled ? FZ_ACC(0.12) : 'rgba(0,0,0,0)';
+    x.beginPath();
+    x.arc(px, py, size * FZ_PPM, 0, Math.PI * 2);
+    x.fill();
+    x.stroke();
+    if (!filled) {
+      x.fillStyle = 'rgba(255,255,255,0.9)';
+      x.beginPath();
+      x.arc(px - size * FZ_PPM * 0.36, py - size * FZ_PPM * 0.4, size * FZ_PPM * 0.16, 0, Math.PI * 2);
+      x.fill();
+    }
+  }
+  x.filter = 'none';
+  tex.needsUpdate = true;
+  return (
+    <mesh position={[cx, 0, WALL_Z + 0.0006]} receiveShadow>
+      <planeGeometry args={[FZ_W, FZ_H]} />
+      <meshStandardMaterial map={tex} transparent depthWrite={false} roughness={1} />
+    </mesh>
   );
 };
 
@@ -471,6 +556,7 @@ export const ColaOrigin: React.FC<{sound: boolean}> = ({sound}) => {
               <Studio a={a} />
               <LightRig f={f} />
               <Wall />
+              <FizzWall f={f} />
               {live.map((i) => (
                 <Station key={i} i={i} f={f} a={a} />
               ))}
@@ -480,6 +566,15 @@ export const ColaOrigin: React.FC<{sound: boolean}> = ({sound}) => {
           <ReleaseWhenDrawn handle={handle} ready={!!a} />
         </MotionProvider>
       </ThreeCanvas>
+      {/* soft focus: blur only the picture around the edges so the eye stays in the middle; type stays sharp */}
+      <AbsoluteFill
+        style={{
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          maskImage: 'radial-gradient(ellipse 78% 58% at 50% 52%, transparent 62%, black 100%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 78% 58% at 50% 52%, transparent 62%, black 100%)',
+        }}
+      />
       <Type f={f} scene={scene} />
       <Grain f={f} />
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(60,50,40,0.16) 100%)'}} />

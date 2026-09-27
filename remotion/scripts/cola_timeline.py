@@ -54,7 +54,11 @@ E = [
 ]
 
 events, cues = {}, []
+SLOW = 1.6  # longer, smoother entrances
+KEEP = ('.pour', '.coins', '.write', '.strike', '.bell', '.pop', '.knock', '.stamp')
 for eid, sc, start, dur, sounds in E:
+    if not eid.endswith(KEEP):
+        dur = round(dur * SLOW)
     f0 = CUTS[sc] + start
     events[eid] = {'f': f0, 'd': dur}
     for kind, file, gain, *extra in sounds:

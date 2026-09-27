@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import {useFrame, useThree} from '@react-three/fiber';
 import {FullScreenQuad} from 'three/examples/jsm/postprocessing/Pass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
+import {Easing} from 'remotion';
 
 /**
  * Choreography + true 3D motion blur.
@@ -143,17 +144,20 @@ export const MotionBlurRenderer: React.FC<{f: number; cam: (t: number) => CamPos
 
 /* ------------------------------------------------------------------ easing for tracks */
 const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
-/** Fast in, ~3 % overshoot, settles by x = 1 (measured: references peak at 20-50 % of the move). */
-export const settle = (x: number) => (x <= 0 ? 0 : x >= 1.4 ? 1 : 1 - Math.exp(-5.2 * x) * Math.cos(1.55 * Math.PI * x));
+/**
+ * Smooth glide: gentle acceleration, long soft landing, no overshoot.
+ * cubic-bezier(0.33, 0, 0.15, 1) — peak speed about a third of the way in, then a slow settle
+ * (the user found the earlier snap-and-overshoot too abrupt).
+ */
+const glide = Easing.bezier(0.33, 0, 0.15, 1);
+export const settle = (x: number) => (x <= 0 ? 0 : x >= 1 ? 1 : glide(x));
 export const inOut = (x: number) => {
   const t = clamp01(x);
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 };
 export const inQuad = (x: number) => clamp01(x) ** 2;
-export const backOut = (x: number) => {
-  const t = clamp01(x), c = 1.9;
-  return 1 + (c + 1) * (t - 1) ** 3 + c * (t - 1) ** 2;
-};
+/** Pop in place: same smooth glide, used for scale-ins. */
+export const backOut = (x: number) => settle(x);
 export const mix3 = (a: V3, b: V3, k: number): V3 => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k];
 
 /** Enter from `from` to `to` starting at frame `f0` over `d` frames, then drift gently forever. */
@@ -161,7 +165,7 @@ export const enter = (t: number, f0: number, d: number, from: Pose, to: Pose, dr
   const x = (t - f0) / d;
   const k = settle(x);
   const hold = Math.max(0, t - f0 - d);
-  const bob = drift * Math.min(1, hold / 20);
+  const bob = drift * Math.min(1, hold / 40); // drift fades in gently after landing
   const p = mix3(from.p, to.p, k);
   p[1] += bob * 0.0025 * Math.sin(hold / 23 + seed);
   p[0] += bob * 0.0015 * Math.sin(hold / 31 + seed * 2);
