@@ -35,7 +35,13 @@ const sceneAt = (f: number) => Math.max(0, CUTS.findIndex((c, i) => f >= c && f 
 
 /** Camera x: a whip pan of STEP metres straddling every cut. */
 const camX = (t: number) => CUTS.slice(1, -1).reduce((x, c) => x + STEP * inOut((t - (c - WHIP)) / (2 * WHIP)), 0);
-const cam = (t: number): CamPose => ({pos: [camX(t) + 0.003 * Math.sin(t / 45), 0.002 * Math.sin(t / 57), CAM_Z], look: [camX(t), 0, WALL_Z]});
+/** A gentle breathing zoom: eases in ~6 % over the first half of each scene and back out by the cut. */
+const camZ = (t: number) => {
+  const i = Math.max(0, CUTS.findIndex((c, k) => t >= c && t < CUTS[k + 1]));
+  const u = Math.min(1, Math.max(0, (t - CUTS[i]) / (CUTS[i + 1] - CUTS[i])));
+  return CAM_Z - 0.08 * Math.sin(Math.PI * u) ** 2;
+};
+const cam = (t: number): CamPose => ({pos: [camX(t) + 0.003 * Math.sin(t / 45), 0.002 * Math.sin(t / 57), camZ(t)], look: [camX(t), 0, WALL_Z]});
 
 /* ------------------------------------------------------------------ light rig (follows the camera) */
 const blindsTexture = () => {
