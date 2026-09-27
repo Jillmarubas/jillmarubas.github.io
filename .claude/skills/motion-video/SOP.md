@@ -114,3 +114,5 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 | Seam on a planet | Texture wrap, or decals not wrapped | Sample noise on the sphere, draw decals at x ± width, rotate the seam to the back |
 | `ffmpeg` can't read TIFF | Remotion's ffmpeg is a minimal build | `pip install pillow numpy` and convert with Python |
 | Playwright's ffmpeg rejects MP4 | Minimal build | Use `npx remotion ffmpeg` / `ffprobe` |
+| Lambda chunks never finish (render stalls at the same %) | Per-element canvas `filter: blur()` (e.g. hundreds of blurred bubbles) makes each frame ~7× slower, so chunks time out | Pre-render each blurred element once into a cached sprite and `drawImage` it; keep a frame under ~10 s locally before sending to Lambda |
+| Frame edges compete with the subject | Busy motion background | Edge blur: CSS `backdropFilter: blur(8px)` layer with a radial `maskImage` (transparent centre, black edges) between canvas and text |

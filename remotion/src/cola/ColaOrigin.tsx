@@ -138,6 +138,36 @@ const Wall: React.FC = () => {
 const FZ_W = 0.34, FZ_H = 0.54, FZ_PPM = 4200; // metres, pixels per metre
 const FZ_INK = (a: number) => `rgba(38,38,42,${a})`;
 const FZ_ACC = (a: number) => `rgba(122,46,14,${a})`;
+const SPR = 256, SPR_PAD = 40;
+const spriteCache = new Map<string, HTMLCanvasElement>();
+/** One bubble drawn at sprite size; depth bucket 0..10 sets line weight, tone and softness. */
+const bubbleSprite = (filled: boolean, bucket: number) => {
+  const key = `${filled}-${bucket}`;
+  const hit = spriteCache.get(key);
+  if (hit) return hit;
+  const depth = bucket / 10;
+  const c = document.createElement('canvas');
+  c.width = c.height = SPR;
+  const x = c.getContext('2d')!;
+  const r = SPR / 2 - SPR_PAD;
+  x.filter = depth > 0.7 ? `blur(${(depth - 0.7) * 14 * (r / 60)}px)` : 'none';
+  x.lineWidth = (1.5 + depth * 2) * (r / 45);
+  x.strokeStyle = filled ? FZ_ACC(0.5) : FZ_INK(0.32 - depth * 0.1);
+  x.fillStyle = filled ? FZ_ACC(0.12) : 'rgba(0,0,0,0)';
+  x.beginPath();
+  x.arc(SPR / 2, SPR / 2, r, 0, Math.PI * 2);
+  x.fill();
+  x.stroke();
+  if (!filled) {
+    x.fillStyle = 'rgba(255,255,255,0.9)';
+    x.beginPath();
+    x.arc(SPR / 2 - r * 0.36, SPR / 2 - r * 0.4, r * 0.16, 0, Math.PI * 2);
+    x.fill();
+  }
+  spriteCache.set(key, c);
+  return c;
+};
+
 const FizzWall: React.FC<{f: number}> = ({f}) => {
   const {canvas, tex} = useMemo(() => {
     const c = document.createElement('canvas');
@@ -181,31 +211,19 @@ const FizzWall: React.FC<{f: number}> = ({f}) => {
     x.stroke();
     x.restore();
   }
-  // rising bubbles: nearer ones are bigger, faster and softer
-  x.setLineDash([]);
+  // rising bubbles: nearer ones are bigger, faster and softer. Each look is drawn once into a
+  // sprite (blur included) and stamped, because a live canvas blur per bubble is very slow on CPU.
   for (let i = 0; i < 480; i++) {
     const depth = random(`d${i}`);
     const size = (0.0045 + depth * 0.028) / 2;
     const speed = (1.2 + depth * 4.5) / 3975;
     const bx = -0.2 + random(`x${i}`) * (STEP * (CUTS.length - 2) + 0.4) + Math.sin(f / (18 + depth * 10) + i) * (8 + depth * 22) / 3975;
-    const by = -0.29 + ((f * speed + random(`y${i}`) * 0.6) % 0.6);
     if (Math.abs(bx - cx) > FZ_W / 2 + 0.04) continue;
+    const by = -0.29 + ((f * speed + random(`y${i}`) * 0.6) % 0.6);
     const [px, py] = toPx(bx, by);
-    const filled = random(`f${i}`) > 0.8;
-    x.filter = depth > 0.7 ? `blur(${(depth - 0.7) * 14}px)` : 'none';
-    x.lineWidth = (1.5 + depth * 2) * (FZ_PPM / 3975);
-    x.strokeStyle = filled ? FZ_ACC(0.5) : FZ_INK(0.32 - depth * 0.1);
-    x.fillStyle = filled ? FZ_ACC(0.12) : 'rgba(0,0,0,0)';
-    x.beginPath();
-    x.arc(px, py, size * FZ_PPM, 0, Math.PI * 2);
-    x.fill();
-    x.stroke();
-    if (!filled) {
-      x.fillStyle = 'rgba(255,255,255,0.9)';
-      x.beginPath();
-      x.arc(px - size * FZ_PPM * 0.36, py - size * FZ_PPM * 0.4, size * FZ_PPM * 0.16, 0, Math.PI * 2);
-      x.fill();
-    }
+    const spr = bubbleSprite(random(`f${i}`) > 0.8, Math.round(depth * 10));
+    const d = size * FZ_PPM * 2 * (SPR / (SPR - 2 * SPR_PAD));
+    x.drawImage(spr, px - d / 2, py - d / 2, d, d);
   }
   x.filter = 'none';
   tex.needsUpdate = true;
