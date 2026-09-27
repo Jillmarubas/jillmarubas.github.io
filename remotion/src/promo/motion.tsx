@@ -64,12 +64,13 @@ export const ScatterText: React.FC<{text: string; start: number; duration: numbe
 };
 
 // Words rise, un-blur and darken one after another.
-export const WordRise: React.FC<{words: string[]; start: number; gap?: number; style?: React.CSSProperties; from?: 'below' | 'right'}> = ({
+export const WordRise: React.FC<{words: string[]; start: number; gap?: number; style?: React.CSSProperties; from?: 'below' | 'right'; ink?: [number, number, number]}> = ({
   words,
   start,
   gap = 5,
   style,
   from = 'below',
+  ink = [40, 40, 44],
 }) => {
   const frame = useCurrentFrame();
   return (
@@ -86,7 +87,7 @@ export const WordRise: React.FC<{words: string[]; start: number; gap?: number; s
               opacity: p,
               filter: `blur(${(1 - p) * (from === 'right' ? 14 : 6)}px)`,
               transform: from === 'below' ? `translateY(${off}px)` : `translateX(${off}px)`,
-              color: `rgba(40,40,44,${0.35 + 0.65 * p})`,
+              color: `rgba(${ink[0]},${ink[1]},${ink[2]},${0.35 + 0.65 * p})`,
             }}
           >
             {w}

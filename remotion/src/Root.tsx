@@ -3,7 +3,7 @@ import {Composition} from 'remotion';
 import {PROMO_DURATION, Promo, PromoProps} from './promo/Promo';
 import {SPACE_DURATION, Space} from './space/Space';
 import {REAL_DURATION, RealMoon} from './real/RealMoon';
-import {COKE_DURATION, Coke} from './coke/Coke';
+import {COLA_DURATION, ColaOrigin, Sound} from './cola/ColaOrigin';
 
 export const Root: React.FC = () => (
   <>
@@ -35,6 +35,7 @@ export const Root: React.FC = () => (
     />
     <Composition id="MoonDistance" component={Space} durationInFrames={SPACE_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="RealMoon" component={RealMoon} durationInFrames={REAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
-    <Composition id="ColaOrigin" component={Coke} durationInFrames={COKE_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
+    <Composition id="ColaOrigin" component={ColaOrigin} durationInFrames={COLA_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
+    <Composition id="ColaSfxOnly" component={() => <Sound music={false} />} durationInFrames={COLA_DURATION} fps={30} width={108} height={192} />
   </>
 );
