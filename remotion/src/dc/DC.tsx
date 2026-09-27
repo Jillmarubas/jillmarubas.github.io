@@ -57,7 +57,7 @@ export const DCFilm: React.FC<{offset?: number}> = ({offset = 0}) => {
         return (
           <Sequence key={w.key} from={w.from - offset} durationInFrames={w.dur + EXIT_LEN + 12} layout="none">
             <SceneCtx.Provider value={{dur: w.dur, exitAt, lines: w.lines, seed: w.from}}>
-              <Breathe dur={w.dur}>
+              <Breathe dur={w.dur} exitAt={exitAt}>
                 <w.C />
               </Breathe>
             </SceneCtx.Provider>
@@ -70,11 +70,13 @@ export const DCFilm: React.FC<{offset?: number}> = ({offset = 0}) => {
 };
 
 /** A slow, barely-there push in and out over each scene (the user's "a bit of zoom"). */
-const Breathe: React.FC<{dur: number; children: React.ReactNode}> = ({dur, children}) => {
+const Breathe: React.FC<{dur: number; exitAt: number; children: React.ReactNode}> = ({dur, exitAt, children}) => {
   const f = useCurrentFrame();
   const u = Math.min(1, Math.max(0, f / Math.max(1, dur)));
   const s = 1 + 0.025 * Math.sin(Math.PI * u) ** 2;
-  return <AbsoluteFill style={{transform: `scale(${s})`}}>{children}</AbsoluteFill>;
+  // pieces fly out toward the viewer on their own; this clears anything drawn straight on the desk
+  const o = 1 - Math.min(1, Math.max(0, (f - exitAt - 8) / 16));
+  return <AbsoluteFill style={{transform: `scale(${s})`, opacity: o}}>{children}</AbsoluteFill>;
 };
 
 /** One chapter, for rendering the film in parts on Lambda (picture only; audio is muxed after). */

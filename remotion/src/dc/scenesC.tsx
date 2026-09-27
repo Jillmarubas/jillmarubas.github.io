@@ -813,8 +813,8 @@ export const S8b: React.FC = () => {
       <Column at={L(2)} y={420} width={1600}>
         <Key text="The question is whether that neighbour gets a say." at={L(2)} size={76} accent="say." />
       </Column>
-      <div style={{position: 'absolute', inset: -40, background: C.paper, opacity: credits}} />
-      <div style={{position: 'absolute', left: 240, top: 300, width: 1440, opacity: credits}}>
+      <div style={{position: 'absolute', inset: -40, background: C.paper, opacity: credits, zIndex: 50}} />
+      <div style={{position: 'absolute', left: 240, top: 300, width: 1440, opacity: credits, zIndex: 51}}>
         <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 90, color: C.ink}}>Why people hate data centres</div>
         <div style={{fontFamily: F.mono, fontSize: 24, color: C.ink2, marginTop: 40, lineHeight: 1.8, letterSpacing: '0.06em'}}>
           RESEARCH: DATA CENTER WATCH · BLOOMBERG · LAWRENCE BERKELEY NATIONAL LABORATORY · IEA · PJM · IEEFA · NRDC · MONITORING ANALYTICS · MOST POLICY INITIATIVE · GRIST · SEHN · SELC · JLARC · GOOD JOBS FIRST · CARDINAL NEWS · LOUDOUN COUNTY · PUCO · EURELECTRIC · FORTUM
