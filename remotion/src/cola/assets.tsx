@@ -53,9 +53,20 @@ export const useAssets = () => {
       const gltf: Record<string, THREE.Group> = {};
       for (const [m, scene] of models) {
         scene.traverse((o) => {
-          if ((o as THREE.Mesh).isMesh) {
-            o.castShadow = true;
-            o.receiveShadow = true;
+          const mesh = o as THREE.Mesh;
+          if (mesh.isMesh) {
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            // same fix for the scanned models' glass: alpha blend instead of transmission
+            for (const mat of (Array.isArray(mesh.material) ? mesh.material : [mesh.material]) as THREE.MeshPhysicalMaterial[]) {
+              if (mat.transmission > 0) {
+                mat.transmission = 0;
+                mat.transparent = true;
+                mat.opacity = 0.32;
+                mat.depthWrite = false;
+                mat.envMapIntensity = 2;
+              }
+            }
           }
         });
         gltf[m] = scene;
@@ -170,11 +181,15 @@ const glass = (tint = '#ffffff', rough = 0.015) =>
   new THREE.MeshPhysicalMaterial({
     color: tint,
     roughness: rough,
-    transmission: 1,
-    thickness: 0.004,
+    metalness: 0,
+    transparent: true,
+    opacity: 0.18,
     ior: 1.52,
     specularIntensity: 1,
-    envMapIntensity: 1.4,
+    clearcoat: 1,
+    clearcoatRoughness: 0.02,
+    envMapIntensity: 2.2,
+    depthWrite: false,
     side: THREE.DoubleSide,
   });
 

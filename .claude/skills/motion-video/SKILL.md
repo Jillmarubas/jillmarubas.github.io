@@ -15,7 +15,8 @@ three videos produced in this repo.
 1. **Render on AWS Lambda,** always (the user's standing instruction). Use `remotion/render-lambda.sh`. Local rendering is only for single preview stills.
 2. **Original content only.** Learn techniques from references, but never reuse their footage, photos, logos, characters, scripts or trademarks. Use the client's own assets, public-domain data (NASA), CC0 assets (Poly Haven), or assets drawn in code.
 3. **Facts must be checkable.** Every number on screen gets verified, and the source is credited on screen when it's data (for example "Moon: NASA LRO").
-4. **Default 30 fps.** 24/25 fps is for cinematic or documentary looks, 60 fps only for glossy tech with fast moves. The user prefers 30.
+4. **The look comes from the user's references, never from my own taste.** This user's references are white or cream paper (see `reference/breakdowns.md`), so white paper is the default. Switching to a dark or cinematic look needs the user's explicit OK first.
+5. **Default 30 fps.** 24/25 fps is for cinematic or documentary looks, 60 fps only for glossy tech with fast moves. The user prefers 30.
 
 ## The house style, as measured
 These values come from the references; the full evidence is in `reference/breakdowns.md`.

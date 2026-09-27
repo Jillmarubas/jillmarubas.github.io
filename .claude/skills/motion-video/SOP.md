@@ -15,7 +15,7 @@ Follow the steps in order. Each step ends with a check; don't move on until it p
 Write these down before touching code:
 - **Topic and one-line message.** The hook question is asked in the first 2 s and answered by the end.
 - **Beats:** 4–6 scenes of 1.5–3.5 s each, plus a call-to-action scene. Total 14–24 s.
-- **Look:** pick one from `reference/breakdowns.md` (white studio, dark cinematic, cream paper with window light, black listicle, archival grey, editorial poster). Choose **one accent colour**.
+- **Look:** use the look of the user's references (white paper for this user). Only pick another from `reference/breakdowns.md` (white studio, dark cinematic, cream paper with window light, black listicle, archival grey, editorial poster). Choose **one accent colour**.
 - **Frame rate:** 30 (default), 24/25 for cinematic, 60 for fast glossy tech.
 - **Assets:** what's real data, what comes from CC0, what gets modelled in code. There must be **no** third-party logos, characters or footage.
 - **Facts:** list every number, each with its source.
@@ -45,7 +45,7 @@ Write these down before touching code:
    - Use one key light per scene, contact shadows, an environment map for anything metallic, and ACES tone mapping.
 4. **Motion:** reuse `promo/motion.tsx`. Moves are 11–18 frames at 30 fps; hold 40–60 % of each scene still for reading.
 5. **Lens pass:** vignette, grain, velocity blur on fast moves, a subtle chromatic aberration if the look calls for it.
-6. **Sound:** start from the `make_*_sfx.py` generators (whooshes on cuts, impacts on landings, ticks on counters, pad bed). Put the WAV in `public/`.
+6. **Sound:** use real CC0 recordings (BigSoundBank), levelled by the loudness of their *body* rather than their peak (`scripts/prepare-cola-assets.py`), over a low-passed music bed. Before rendering on Lambda, render a sound-only composition locally and check that every cue peaks at least 12 dB above the music. Synthesized effects are a fallback; start from the `make_*_sfx.py` generators (whooshes on cuts, impacts on landings, ticks on counters, pad bed). Put the WAV in `public/`.
 7. **Fonts:** bundle them in `public/fonts` and load them through `promo/fonts.ts`. Never fetch Google Fonts at render time.
 
 **Check:** `npx tsc --noEmit` passes.
@@ -95,6 +95,8 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 | `Rate Exceeded` / `TooManyRequestsException` | Concurrency limit (10) is full, often with orphaned renderers | Lower the worker count, wait for concurrency to reach 0, then run once |
 | Black 3D frames | Textures weren't loaded when the frame was captured | Release `continueRender` after commit (double `requestAnimationFrame`) |
 | Fonts fall back or `ERR_CERT_AUTHORITY_INVALID` | The headless browser doesn't trust the proxy CA for Google Fonts | Bundle the fonts in `public/fonts` |
+| Glass looks solid white or tinted on the paper backdrop | Transmission can't see HTML behind a transparent canvas | Alpha-blended glass: `transmission 0, transparent, opacity 0.18–0.32`, clearcoat, strong environment map |
+| Scene renders empty or black although assets loaded | The canvas never redrew after the assets arrived | `ReleaseWhenDrawn` in `cola/assets.tsx`: advance the canvas, then `continueRender` |
 | Metal looks black | No environment map | PMREM `RoomEnvironment` or an HDRI |
 | Seam on a planet | Texture wrap, or decals not wrapped | Sample noise on the sphere, draw decals at x ± width, rotate the seam to the back |
 | `ffmpeg` can't read TIFF | Remotion's ffmpeg is a minimal build | `pip install pillow numpy` and convert with Python |
