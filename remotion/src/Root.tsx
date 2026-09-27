@@ -5,6 +5,7 @@ import {SPACE_DURATION, Space} from './space/Space';
 import {REAL_DURATION, RealMoon} from './real/RealMoon';
 import {COLA_DURATION, ColaOrigin} from './cola/ColaOrigin';
 import {DC_CHAPTERS, DC_DURATION, DCFilm, DCPart} from './dc/DC';
+import {FOREST_LOOP, NightForest} from './forest/NightForest';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -45,5 +46,6 @@ export const Root: React.FC = () => (
     {DC_CHAPTERS.map((c, i) => (
       <Composition key={i} id={`DataCentres-part${i}`} component={DCPart} durationInFrames={c.to - c.from} fps={30} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
+      <Composition id="NightForest" component={NightForest} durationInFrames={FOREST_LOOP} fps={30} width={1080} height={1920} />
   </>
 );
