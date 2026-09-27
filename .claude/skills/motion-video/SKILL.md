@@ -28,6 +28,16 @@ These values come from the references; the full evidence is in `reference/breakd
 - **Type:** pair a small script or thin serif lead-in with a heavy sans key word. Add a giant ghost word (8–15 % opacity) behind the subject.
 - **Depth layers,** back to front: backdrop (paper, grid, black) → ghost word → shadow/gobo overlay → hero object → text → foreground props cut off by the frame (blurred) → grain, vignette, lens effects.
 
+## Choreography: the objects move, not the camera
+Measured across all references (`reference/breakdowns.md`, "Asset choreography"): 58 directional entrances and 38 pops in place, and almost no camera zooms. So:
+- **The camera is locked flat on the paper.** Scenes change with a whip pan along the paper wall, never a push-in or zoom.
+- **Objects float in front of the paper** and cast soft shadows onto it, down and to the right.
+- **Every object enters from somewhere:** left, right, top, bottom, diagonal, from the camera, or a pop. Rotate the directions so consecutive objects differ.
+- **Entrances:** fast, rotating, with a ~3 % overshoot and settle (`settle()` in `cola/motion3d.tsx`). After landing, objects keep drifting a few millimetres; nothing freezes.
+- **Objects interact:** pour, stamp, knock out of frame, spin down.
+- **True 3D motion blur:** use `Mover` + `MotionBlurRenderer` (`cola/motion3d.tsx`). Poses are functions of time; fast frames are rendered up to 8 times across a 180° shutter and averaged.
+- **Reference build:** `remotion/src/cola/ColaOrigin.tsx`.
+
 ## Motion vocabulary
 Each entry says which reference(s) it came from, then what already exists in this repo's
 code (`remotion/src/promo/motion.tsx` unless another file is named).

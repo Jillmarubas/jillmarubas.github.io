@@ -75,6 +75,16 @@ cd remotion && FRAMES_PER_LAMBDA=<n> ./render-lambda.sh <CompositionId> out/<nam
 - The script deploys the site, starts **one** render, polls `progress.json` **in S3** (polling through Lambda would use up concurrency slots), then downloads `out.mp4`.
 - Output is **private**.
 - If it's throttled: **don't retry in a loop.** Every retry leaves orphaned renderers running, which eat concurrency. Wait until CloudWatch `ConcurrentExecutions` is 0, then run once.
+- **Limits:**
+  - Remotion refuses more than **200 functions** per render, so `FRAMES_PER_LAMBDA ≥ frames / 200`.
+  - Motion-blurred 3D frames can exceed the default 30 s per-frame limit; `start-lambda-render.mjs` allows 4 minutes.
+  - Use 15 frames per Lambda for a 60 s 3D video (120 functions).
+- **Every asset download retries with backoff** (`withRetry` in `cola/assets.tsx`). Hundreds of renderers fetching the same files from S3 at once will occasionally see a failed request. A bare `Error: Event` from the renderer means a download failed.
+
+**Sound check before rendering:**
+- Mix every cue into **one** mastered file (`scripts/mix_cola_audio.py`, timings from `timeline.json`) and use a single `<Audio>`.
+- Confirm the mixer report shows every cue at least 6 dB over the music and the master at about −16 to −18 dBFS RMS with peaks at −1 dBFS.
+- After rendering, measure the MP4's own audio track, and send the user the standalone `out/cola-soundtrack.m4a` too, so they can tell a muted player from a silent file.
 
 **Check:** `npx remotion ffprobe out/<name>.mp4` shows the right duration, 1080×1920, the fps, and an audio stream.
 
@@ -96,6 +106,9 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 | Black 3D frames | Textures weren't loaded when the frame was captured | Release `continueRender` after commit (double `requestAnimationFrame`) |
 | Fonts fall back or `ERR_CERT_AUTHORITY_INVALID` | The headless browser doesn't trust the proxy CA for Google Fonts | Bundle the fonts in `public/fonts` |
 | Glass looks solid white or tinted on the paper backdrop | Transmission can't see HTML behind a transparent canvas | Alpha-blended glass: `transmission 0, transparent, opacity 0.18–0.32`, clearcoat, strong environment map |
+| Frames with motion come out washed-out white | three.js `autoClear` wipes the motion-blur accumulator before every add | Set `gl.autoClear = false` while accumulating (done in `MotionBlurRenderer`) |
+| Liquid invisible inside a glass or bottle | A transmissive object isn't visible through another transmissive one | Make the liquid opaque (clearcoat, sheen) and keep only the glass transmissive |
+| Glass looks milky or tinted on the white stage | Transmission can't see an HTML backdrop | Put the paper wall in 3D so the glass refracts it |
 | Scene renders empty or black although assets loaded | The canvas never redrew after the assets arrived | `ReleaseWhenDrawn` in `cola/assets.tsx`: advance the canvas, then `continueRender` |
 | Metal looks black | No environment map | PMREM `RoomEnvironment` or an HDRI |
 | Seam on a planet | Texture wrap, or decals not wrapped | Sample noise on the sphere, draw decals at x ± width, rotate the seam to the back |

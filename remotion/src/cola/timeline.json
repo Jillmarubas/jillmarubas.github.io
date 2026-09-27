@@ -1,0 +1,512 @@
+{
+ "fps": 30,
+ "cuts": [
+  0,
+  180,
+  390,
+  600,
+  780,
+  1050,
+  1260,
+  1470,
+  1650,
+  1800
+ ],
+ "whip": 8,
+ "events": {
+  "s0.glass": {
+   "f": 6,
+   "d": 16
+  },
+  "s0.leaf": {
+   "f": 26,
+   "d": 18
+  },
+  "s0.kola": {
+   "f": 38,
+   "d": 16
+  },
+  "s0.pour": {
+   "f": 62,
+   "d": 80
+  },
+  "s1.card": {
+   "f": 190,
+   "d": 16
+  },
+  "s1.watch": {
+   "f": 206,
+   "d": 16
+  },
+  "s1.specs": {
+   "f": 220,
+   "d": 16
+  },
+  "s2.bottle": {
+   "f": 400,
+   "d": 18
+  },
+  "s2.leaf0": {
+   "f": 420,
+   "d": 18
+  },
+  "s2.leaf1": {
+   "f": 428,
+   "d": 18
+  },
+  "s2.leaf2": {
+   "f": 436,
+   "d": 18
+  },
+  "s2.kola0": {
+   "f": 446,
+   "d": 16
+  },
+  "s2.kola1": {
+   "f": 452,
+   "d": 16
+  },
+  "s3.stamp": {
+   "f": 622,
+   "d": 12
+  },
+  "s3.knock": {
+   "f": 666,
+   "d": 10
+  },
+  "s3.jug": {
+   "f": 680,
+   "d": 14
+  },
+  "s4.glass": {
+   "f": 790,
+   "d": 16
+  },
+  "s4.pour": {
+   "f": 816,
+   "d": 80
+  },
+  "s4.coin": {
+   "f": 930,
+   "d": 22
+  },
+  "s5.leaf": {
+   "f": 1060,
+   "d": 18
+  },
+  "s5.kola": {
+   "f": 1068,
+   "d": 18
+  },
+  "s5.write": {
+   "f": 1070,
+   "d": 60
+  },
+  "s5.strike": {
+   "f": 1150,
+   "d": 12
+  },
+  "s6.card": {
+   "f": 1270,
+   "d": 16
+  },
+  "s6.coins": {
+   "f": 1310,
+   "d": 60
+  },
+  "s7.b0": {
+   "f": 1480,
+   "d": 16
+  },
+  "s7.b1": {
+   "f": 1488,
+   "d": 16
+  },
+  "s7.b2": {
+   "f": 1496,
+   "d": 16
+  },
+  "s7.pop": {
+   "f": 1554,
+   "d": 10
+  },
+  "s8.earth": {
+   "f": 1656,
+   "d": 18
+  },
+  "s8.bell": {
+   "f": 1754,
+   "d": 10
+  }
+ },
+ "cues": [
+  {
+   "id": "s0.glass",
+   "file": "whoosh7",
+   "at": 6.2,
+   "gain": 0.7,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s0.glass",
+   "file": "bottle_table",
+   "at": 21.4,
+   "gain": 0.9,
+   "from": 1.46,
+   "len": 1.2
+  },
+  {
+   "id": "s0.leaf",
+   "file": "whoosh8",
+   "at": 28.4,
+   "gain": 0.35,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s0.kola",
+   "file": "whoosh7",
+   "at": 38.2,
+   "gain": 0.45,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s0.pour",
+   "file": "soda_pour",
+   "at": 62,
+   "gain": 0.7,
+   "from": 0.0,
+   "len": 4.2
+  },
+  {
+   "id": "whip1",
+   "file": "whoosh7",
+   "at": 172.2,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.0
+  },
+  {
+   "id": "s1.card",
+   "file": "whoosh8",
+   "at": 191.4,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s1.card",
+   "file": "page_turn",
+   "at": 205.4,
+   "gain": 0.9,
+   "from": 0.03,
+   "len": 0.55
+  },
+  {
+   "id": "s1.watch",
+   "file": "whoosh7",
+   "at": 206.2,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s1.watch",
+   "file": "coin_cup",
+   "at": 221.4,
+   "gain": 0.8,
+   "from": 0.05,
+   "len": 1.2
+  },
+  {
+   "id": "s1.specs",
+   "file": "whoosh8",
+   "at": 221.4,
+   "gain": 0.45,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "whip2",
+   "file": "whoosh8",
+   "at": 383.4,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.0
+  },
+  {
+   "id": "s2.bottle",
+   "file": "whoosh7",
+   "at": 401.2,
+   "gain": 0.7,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s2.bottle",
+   "file": "bottle_table",
+   "at": 417.4,
+   "gain": 0.9,
+   "from": 1.46,
+   "len": 1.2
+  },
+  {
+   "id": "s2.leaf0",
+   "file": "whoosh8",
+   "at": 422.4,
+   "gain": 0.3,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s2.leaf2",
+   "file": "whoosh8",
+   "at": 438.4,
+   "gain": 0.25,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s2.kola0",
+   "file": "whoosh7",
+   "at": 446.2,
+   "gain": 0.35,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "whip3",
+   "file": "whoosh7",
+   "at": 592.2,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.0
+  },
+  {
+   "id": "s3.stamp",
+   "file": "whoosh7",
+   "at": 620.2,
+   "gain": 0.6,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s3.stamp",
+   "file": "bottle_table",
+   "at": 633.4,
+   "gain": 1.0,
+   "from": 0.03,
+   "len": 0.45
+  },
+  {
+   "id": "s3.knock",
+   "file": "whoosh8",
+   "at": 664.4,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s3.jug",
+   "file": "cork",
+   "at": 693.4,
+   "gain": 1.0,
+   "from": 0.23,
+   "len": 1.2
+  },
+  {
+   "id": "whip4",
+   "file": "whoosh8",
+   "at": 773.4,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.0
+  },
+  {
+   "id": "s4.glass",
+   "file": "whoosh7",
+   "at": 790.2,
+   "gain": 0.7,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s4.glass",
+   "file": "bottle_table",
+   "at": 805.4,
+   "gain": 0.9,
+   "from": 1.46,
+   "len": 1.2
+  },
+  {
+   "id": "s4.pour",
+   "file": "soda_pour",
+   "at": 816,
+   "gain": 0.7,
+   "from": 0.0,
+   "len": 4.2
+  },
+  {
+   "id": "s4.coin",
+   "file": "whoosh8",
+   "at": 934.4,
+   "gain": 0.6,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s4.coin",
+   "file": "coin_spin",
+   "at": 951.4,
+   "gain": 1.0,
+   "from": 0.03,
+   "len": 4.2
+  },
+  {
+   "id": "whip5",
+   "file": "whoosh7",
+   "at": 1042.2,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.0
+  },
+  {
+   "id": "s5.leaf",
+   "file": "whoosh7",
+   "at": 1061.2,
+   "gain": 0.6,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s5.write",
+   "file": "typewriter",
+   "at": 1070,
+   "gain": 0.7,
+   "from": 0.9,
+   "len": 1.8
+  },
+  {
+   "id": "s5.kola",
+   "file": "whoosh8",
+   "at": 1070.4,
+   "gain": 0.6,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s5.strike",
+   "file": "type_key",
+   "at": 1150,
+   "gain": 1.0,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "whip6",
+   "file": "whoosh8",
+   "at": 1253.4,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.0
+  },
+  {
+   "id": "s6.card",
+   "file": "whoosh8",
+   "at": 1271.4,
+   "gain": 0.5,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s6.card",
+   "file": "page_turn",
+   "at": 1285.4,
+   "gain": 0.9,
+   "from": 0.03,
+   "len": 0.55
+  },
+  {
+   "id": "s6.coins",
+   "file": "coins",
+   "at": 1310,
+   "gain": 0.9,
+   "from": 0.0,
+   "len": 2.6
+  },
+  {
+   "id": "whip7",
+   "file": "whoosh7",
+   "at": 1462.2,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.0
+  },
+  {
+   "id": "s7.b0",
+   "file": "whoosh7",
+   "at": 1480.2,
+   "gain": 0.4,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "s7.b0",
+   "file": "bottle_table",
+   "at": 1495.4,
+   "gain": 0.8,
+   "from": 1.46,
+   "len": 1.2
+  },
+  {
+   "id": "s7.b1",
+   "file": "bottle_table",
+   "at": 1503.4,
+   "gain": 0.75,
+   "from": 5.55,
+   "len": 0.5
+  },
+  {
+   "id": "s7.b2",
+   "file": "bottle_table",
+   "at": 1511.4,
+   "gain": 0.7,
+   "from": 8.21,
+   "len": 0.5
+  },
+  {
+   "id": "s7.pop",
+   "file": "cork",
+   "at": 1554,
+   "gain": 1.0,
+   "from": 0.0,
+   "len": 1.2
+  },
+  {
+   "id": "whip8",
+   "file": "whoosh8",
+   "at": 1643.4,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.0
+  },
+  {
+   "id": "s8.earth",
+   "file": "whoosh1",
+   "at": 1656,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.6
+  },
+  {
+   "id": "s8.bell",
+   "file": "type_bell",
+   "at": 1754,
+   "gain": 0.8,
+   "from": 0.0,
+   "len": 1.2
+  }
+ ]
+}

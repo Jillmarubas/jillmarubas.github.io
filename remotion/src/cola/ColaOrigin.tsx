@@ -1,290 +1,389 @@
-import React, {useMemo} from 'react';
-import {AbsoluteFill, Audio, Easing, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import React, {useLayoutEffect, useMemo, useRef} from 'react';
+import {AbsoluteFill, Audio, Easing, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import {useThree} from '@react-three/fiber';
 import * as THREE from 'three';
 import {TypeText, WordRise} from '../promo/motion';
 import '../promo/fonts';
-import {Assets, TonicWineBottle, CabinetCard, CocaLeaf, FountainGlass, HutchinsonBottle, KolaNut, Model, Nickel, PourStream, ReleaseWhenDrawn, useAssets} from './assets';
+import TL from './timeline.json';
+import {Assets, CabinetCard, CocaLeaf, FountainGlass, Globe, HutchinsonBottle, KolaNut, Model, Nickel, PourStream, ReleaseWhenDrawn, RubberStamp, TonicWineBottle, ghostTexture, inkTexture, liquidTop, paperTexture, useAssets} from './assets';
+import {CamPose, MotionBlurRenderer, MotionProvider, Mover, Pose, V3, backOut, enter, inOut, inQuad, mix3} from './motion3d';
 
-export const COLA_DURATION = 1800;
-const PAPER = '#f4f2ee';
+/*
+ * ColaOrigin — see BRIEF.md (SOP step 1) and reference/breakdowns.md "Asset choreography".
+ * The camera is locked flat on a paper wall; objects float in front of it, arrive from every
+ * direction, overshoot and settle, keep drifting, and interact. Scenes are stations along the
+ * wall; the camera whip-pans between them. Timing comes from timeline.json, which also drives
+ * the soundtrack mix (scripts/mix_cola_audio.py).
+ */
+export const COLA_DURATION: number = TL.cuts[TL.cuts.length - 1];
+const CUTS: number[] = TL.cuts;
+const WHIP: number = TL.whip;
+const EV = TL.events as Record<string, {f: number; d: number}>;
+const E = (id: string) => EV[id];
+
+const STEP = 0.6; // metres between stations along the wall
+const WALL_Z = -0.12;
+const CAM_Z = 1.25;
+const FOV = 20;
+const PX_PER_M = 1920 / (2 * CAM_Z * Math.tan(((FOV / 2) * Math.PI) / 180));
 const INK = '#26262a';
-const ACCENT = '#7a2e0e'; // cola brown, one word or number at a time
-const CUTS = [0, 180, 390, 600, 780, 1050, 1260, 1470, 1650, COLA_DURATION];
+const ACCENT = '#7a2e0e';
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
-const smooth = Easing.bezier(0.45, 0, 0.2, 1);
-const e = (f: number, a: number, b: number, easing = smooth) => interpolate(f, [a, b], [0, 1], {...clamp, easing});
-const sceneAt = (f: number) => CUTS.findIndex((c, i) => f >= c && f < CUTS[i + 1]);
+const e01 = (f: number, a: number, b: number, easing = Easing.bezier(0.45, 0, 0.2, 1)) => interpolate(f, [a, b], [0, 1], {...clamp, easing});
+const sceneAt = (f: number) => Math.max(0, CUTS.findIndex((c, i) => f >= c && f < CUTS[i + 1]));
 
-type V3 = [number, number, number];
-// One dolly move per scene: camera from -> to, looking from -> to (metres).
-const SHOTS: {pos: [V3, V3]; look: [V3, V3]; aperture?: number}[] = [
-  // distances follow subject size: ~4x the subject's height fills ~45% of the frame
-  {pos: [[0.2, 0.12, 0.62], [0.13, 0.1, 0.48]], look: [[0, 0.06, 0], [0, 0.062, 0]]},
-  {pos: [[0.05, 0.55, 0.38], [0.03, 0.45, 0.3]], look: [[0, 0, 0.02], [0, 0, 0.015]]},
-  {pos: [[0.5, 0.24, 1.05], [0.15, 0.2, 0.92]], look: [[-0.03, 0.13, 0], [-0.04, 0.12, 0]]},
-  {pos: [[0.05, 0.26, 0.95], [0.02, 0.22, 0.82]], look: [[0, 0.11, 0], [0, 0.1, 0]]},
-  {pos: [[0.22, 0.14, 0.58], [0.16, 0.11, 0.46]], look: [[0.03, 0.055, 0.02], [0.035, 0.045, 0.025]]},
-  {pos: [[-0.05, 0.85, 0.58], [0, 0.74, 0.5]], look: [[0, 0.02, 0.02], [0, 0.02, 0.02]]},
-  {pos: [[0.1, 0.55, 0.42], [0.06, 0.46, 0.34]], look: [[0.02, 0, 0.02], [0.02, 0.01, 0.02]]},
-  {pos: [[0.45, 0.12, 0.72], [-0.25, 0.12, 0.7]], look: [[0.06, 0.09, 0], [-0.04, 0.09, 0]]},
-  {pos: [[0, 0.1, 7.2], [0, 0.1, 6.4]], look: [[0, 0.35, 0], [0, 0.35, 0]], aperture: 0},
-];
+/** Camera x: a whip pan of STEP metres straddling every cut. */
+const camX = (t: number) => CUTS.slice(1, -1).reduce((x, c) => x + STEP * inOut((t - (c - WHIP)) / (2 * WHIP)), 0);
+const cam = (t: number): CamPose => ({pos: [camX(t) + 0.003 * Math.sin(t / 45), 0.002 * Math.sin(t / 57), CAM_Z], look: [camX(t), 0, WALL_Z]});
 
-/* ------------------------------------------------------------------ 3D stage (white studio) */
-const Rig: React.FC<{f: number; scene: number; height: number; width: number}> = ({f, scene, width, height}) => {
-  const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera;
-  const shot = SHOTS[scene];
-  const t = e(f, CUTS[scene], CUTS[scene + 1], Easing.bezier(0.33, 0, 0.3, 1));
-  const lerp = (a: V3, b: V3) => a.map((v, i) => v + (b[i] - v) * t) as V3;
-  camera.position.set(...lerp(...shot.pos));
-  camera.lookAt(...lerp(...shot.look));
-  camera.near = scene === 8 ? 0.1 : 0.01;
-  camera.far = 60;
-  // hero sits a little below centre: titles above, body copy below (SKILL.md layout)
-  camera.setViewOffset(width, height, 0, -height * 0.05, width, height);
-  camera.updateProjectionMatrix();
-  return null;
+/* ------------------------------------------------------------------ light rig (follows the camera) */
+const blindsTexture = () => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 512;
+  const x = c.getContext('2d')!;
+  x.fillStyle = '#fff';
+  x.fillRect(0, 0, 512, 512);
+  x.translate(256, 256);
+  x.rotate(-0.62);
+  x.filter = 'blur(10px)';
+  x.fillStyle = 'rgba(0,0,0,0.62)';
+  for (let i = -8; i <= 8; i++) x.fillRect(-500, i * 70, 1000, 30);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
 };
 
-const Studio: React.FC<{env: THREE.Texture; scene: number}> = ({env, scene}) => {
-  const {gl, scene: s3} = useThree();
-  useMemo(() => {
-    const pm = new THREE.PMREMGenerator(gl);
-    s3.environment = pm.fromEquirectangular(env).texture;
-    pm.dispose();
-    gl.setClearColor(PAPER, 0);
-  }, [gl, s3, env]);
-  s3.environmentIntensity = scene === 8 ? 0 : 0.9;
-  s3.background = null;
-  if (scene === 8) {
-    return <directionalLight position={[-5, 1.5, 3]} intensity={3} color="#fff6ea" />;
-  }
+const LightRig: React.FC<{f: number}> = ({f}) => {
+  const spot = useRef<THREE.SpotLight>(null);
+  const target = useRef<THREE.Object3D>(null);
+  const gobo = useMemo(blindsTexture, []);
+  useLayoutEffect(() => {
+    spot.current!.target = target.current!;
+  }, []);
   return (
-    <>
-      {/* one soft key from upper left, shadows fall down-right (realism.md: white studio) */}
-      <directionalLight
-        position={[-0.6, 1.1, 0.5]}
-        intensity={2.2}
-        color="#fffaf2"
+    <Mover f={f} radius={0} track={(t) => ({p: [camX(t), 0, 0]})}>
+      <spotLight
+        ref={spot}
+        position={[-0.55, 0.78, 1.15]}
+        angle={0.5}
+        penumbra={0.3}
+        decay={0}
+        intensity={2.4}
+        color="#fff4e6"
+        map={gobo}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
-        shadow-camera-left={-0.5}
-        shadow-camera-right={0.5}
-        shadow-camera-top={0.5}
-        shadow-camera-bottom={-0.5}
-        shadow-camera-near={0.1}
+        shadow-camera-near={0.5}
         shadow-camera-far={3}
-        shadow-radius={6}
-        shadow-bias={-0.0002}
-        shadow-normalBias={0.002}
+        shadow-bias={-0.0004}
+        shadow-radius={9}
+        shadow-blurSamples={16}
       />
-      <ambientLight intensity={0.25} />
-      {/* shadow-only floor: objects sit on the paper backdrop */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[4, 4]} />
-        <shadowMaterial opacity={0.22} />
+      <object3D ref={target} position={[0, 0, WALL_Z]} />
+    </Mover>
+  );
+};
+
+const Studio: React.FC<{a: Assets}> = ({a}) => {
+  const {gl, scene} = useThree();
+  useMemo(() => {
+    const pm = new THREE.PMREMGenerator(gl);
+    scene.environment = pm.fromEquirectangular(a.env).texture;
+    scene.environmentIntensity = 0.55;
+    pm.dispose();
+  }, [gl, scene, a]);
+  return <hemisphereLight args={['#ffffff', '#d9d1c4', 1.15]} />;
+};
+
+/* ------------------------------------------------------------------ the paper wall */
+const GHOSTS = ['1886', '1865', '1885', '1886', '5¢', 'C+K', '1888', '$1', ''];
+const Wall: React.FC = () => {
+  const {paper, ghosts} = useMemo(() => {
+    const p = paperTexture();
+    p.repeat.set(8 / 0.128, 1.6 / 0.128); // 1.6 cm grid, as in the references
+    return {paper: p, ghosts: GHOSTS.map((g) => (g ? ghostTexture(g) : null))};
+  }, []);
+  return (
+    <>
+      <mesh position={[2.3, 0, WALL_Z]} receiveShadow>
+        <planeGeometry args={[8, 1.6]} />
+        <meshStandardMaterial map={paper} roughness={0.95} />
       </mesh>
+      {ghosts.map(
+        (g, i) =>
+          g && (
+            <mesh key={i} position={[i * STEP, 0.01, WALL_Z + 0.0004]} receiveShadow>
+              <planeGeometry args={[0.3, 0.15]} />
+              <meshStandardMaterial map={g} transparent opacity={0.085} depthWrite={false} roughness={1} />
+            </mesh>
+          ),
+      )}
     </>
   );
 };
 
-/* ------------------------------------------------------------------ scenes */
-const settle = (f: number, at: number, from: number) => (1 - e(f, at, at + 18, Easing.bezier(0.22, 1, 0.36, 1))) * from;
-
-const World: React.FC<{f: number; scene: number; a: Assets}> = ({f, scene, a}) => {
-  const s0 = CUTS[scene];
-  const g = a.gltf;
-  switch (scene) {
-    case 0:
-      return (
-        <>
-          <FountainGlass fill={0.86} frame={f} />
-          <group position={[-0.12, 0.001, -0.14]} rotation={[0, 0.8, 0]}>
-            <group rotation={[-Math.PI / 2 + 0.05, 0, 0]}>
-              <CocaLeaf dry seed="d1" />
-            </group>
-          </group>
-          <group position={[0.1, 0.017, -0.2]}>
-            <KolaNut seed="k0" />
-          </group>
-        </>
-      );
-    case 1:
-      return (
-        <>
-          <group position={[0, 0.001 + settle(f, s0 + 4, 0.06), 0]} rotation={[0, 0.12, 0]}>
-            <CabinetCard photo={a.photos.pemberton} caption="J. S. Pemberton" />
-          </group>
-          <Model scene={g.pocket_watch} position={[0.095, 0.008, 0.065]} rotation={[-Math.PI / 2, 0, 0.6]} />
-          <Model scene={g.round_spectacles} position={[-0.1, 0, 0.09]} rotation={[0, 0.9, 0]} />
-        </>
-      );
-    case 2:
-      return (
-        <>
-          <TonicWineBottle scene={g.wine_bottles_01} position={[0.02, 0, -0.02]} rotation={[0, 0, 0]} />
-          <Model scene={g.chemistry_set} position={[-0.26, 0, -0.22]} rotation={[0, 0.5, 0]} />
-          {[0, 1, 2, 3].map((i) => (
-            <group key={i} position={[-0.16 + i * 0.04, 0.002 + i * 0.001, -0.02 + (i % 2) * 0.03]} rotation={[0, i * 1.3, 0]}>
-              <group rotation={[-Math.PI / 2 + 0.06, 0, 0]}>
-                <CocaLeaf seed={`c${i}`} length={0.05 + i * 0.005} />
-              </group>
-            </group>
-          ))}
-          {[0, 1].map((i) => (
-            <group key={i} position={[0.1 + i * 0.045, 0.011, 0.02 - i * 0.02]} rotation={[0, i * 1.1, 0]}>
-              <KolaNut seed={`k${i}`} />
-            </group>
-          ))}
-        </>
-      );
-    case 3: {
-      const out = e(f, s0 + 30, s0 + 80);
-      return (
-        <>
-          <TonicWineBottle scene={g.wine_bottles_01} position={[0.02 - out * 0.35, 0, -0.02 - out * 0.3]} rotation={[0, 0, 0]} />
-          <Model scene={g.jug_01} position={[0.03 + (1 - e(f, s0 + 60, s0 + 110)) * 0.4, 0, 0.02]} rotation={[0, -2.2, 0]} scale={0.95} />
-        </>
-      );
-    }
-    case 4: {
-      const pour = e(f, s0 + 10, s0 + 100, Easing.linear);
-      const streamOn = f > s0 + 6 && f < s0 + 104;
-      // the nickel drops, spins like a real coin and settles reverse-up
-      const t = f - (s0 + 150);
-      const drop = t < 0 ? null : t < 9 ? 0.22 * (1 - (t / 9) ** 2) : 0;
-      const spinDecay = t < 9 ? 1 : Math.max(0, 1 - (t - 9) / 55);
-      const tilt = t < 9 ? 0.7 : 0.5 * spinDecay * spinDecay;
-      const wobble = t * (0.55 + 0.9 * (1 - spinDecay));
-      return (
-        <>
-          <FountainGlass fill={0.05 + 0.81 * pour} frame={f} />
-          {streamOn && <PourStream length={0.34 - (0.017 + 0.09 * pour)} top={0.36} />}
-          {drop !== null && (
-            <group position={[0.075, 0.00098 + drop + Math.sin(tilt) * 0.0106, 0.02]} rotation={[0, wobble, 0]}>
-              <group rotation={[tilt, 0, 0]}>
-                <Nickel a={a.coin} />
-              </group>
-            </group>
-          )}
-        </>
-      );
-    }
-    case 5:
-      return (
-        <>
-          <Model scene={g.binder_notebook} position={[0, 0, 0]} rotation={[0, 0.25, 0]} />
-          <group position={[-0.1, 0.027, 0.03]} rotation={[0, 0.5, 0]}>
-            <group rotation={[-Math.PI / 2 + 0.04, 0, 0]}>
-              <CocaLeaf seed="n1" length={0.06} />
-            </group>
-          </group>
-          <group position={[0.1, 0.037, 0.0]}>
-            <KolaNut seed="n2" />
-          </group>
-        </>
-      );
-    case 6:
-      return (
-        <>
-          <group position={[-0.02, 0.001 + settle(f, s0 + 4, 0.06), 0]} rotation={[0, -0.1, 0]}>
-            <CabinetCard photo={a.photos.candler} caption="Asa G. Candler" />
-          </group>
-          {Array.from({length: 14}).map((_, i) => {
-            const at = s0 + 50 + i * 5;
-            const p = e(f, at, at + 7, Easing.in(Easing.quad));
-            if (p <= 0) return null;
-            return (
-              <group key={i} position={[0.095 + Math.sin(i * 2.1) * 0.0012, 0.00098 + i * 0.00196 + (1 - p) * 0.08, 0.06 + Math.cos(i * 1.7) * 0.0012]} rotation={[0, i * 0.9, 0]}>
-                <Nickel a={a.coin} />
-              </group>
-            );
-          })}
-        </>
-      );
-    case 7:
-      return (
-        <>
-          {[-0.09, 0, 0.09].map((x, i) => (
-            <group key={i} position={[x, 0, (i % 2) * -0.04]} rotation={[0, i, 0]}>
-              <HutchinsonBottle level={0.72} />
-            </group>
-          ))}
-        </>
-      );
-    default: {
-      const grow = e(f, s0, s0 + 30);
-      return (
-        <group scale={0.85 + 0.15 * grow} rotation={[0, 0, 0.41]}>
-          <mesh rotation={[0, 3.3 + f * 0.004, 0]}>
-            <sphereGeometry args={[1, 128, 96]} />
-            <meshStandardMaterial map={a.earth[0]} roughness={0.65} />
-          </mesh>
-          <mesh rotation={[0, 3.3 + f * 0.0046, 0]}>
-            <sphereGeometry args={[1.008, 128, 96]} />
-            <meshStandardMaterial color="#fff" alphaMap={a.earth[1]} transparent depthWrite={false} />
-          </mesh>
-        </group>
-      );
-    }
-  }
+/* ------------------------------------------------------------------ helpers */
+const still = (to: Pose, drift = 1, seed = 0) => (t: number) => enter(t, -1000, 1, to, to, drift, seed);
+const fillAt = (f: number, id: string, max = 0.86) => {
+  const p = E(id);
+  const x = Math.min(1, Math.max(0, (f - p.f) / p.d));
+  return max * (1 - Math.pow(1 - x, 1.6));
+};
+/** Cola stream from above the frame into a glass whose base pose is known. */
+const Pour: React.FC<{f: number; id: string; glass: Pose}> = ({f, id, glass}) => {
+  const p = E(id);
+  if (f < p.f || f > p.f + p.d + 8) return null;
+  const surface = glass.p[1] + liquidTop(fillAt(f, id));
+  const head = Math.max(surface, 0.32 - (f - p.f) * 0.07);
+  const tail = f > p.f + p.d - 6 ? 0.32 - (f - (p.f + p.d - 6)) * 0.07 : 0.32;
+  if (tail <= head) return null;
+  return <PourStream from={tail} to={head} x={glass.p[0]} z={glass.p[2]} wobble={f * 1.7} />;
 };
 
-/* ------------------------------------------------------------------ 2D layers */
-const TITLES: {kicker: string; lead: string; key: string; body: string; ghost: string}[] = [
-  {kicker: 'THE ORIGIN STORY', lead: 'how a pharmacist invented', key: 'Coca-Cola', body: 'It began with a war wound, a tonic wine and a new law.', ghost: '1886'},
-  {kicker: 'COLUMBUS, GEORGIA · 1865', lead: 'it starts with', key: 'John S. Pemberton', body: 'Wounded in the Civil War, he became dependent on morphine and searched for a substitute.', ghost: '1865'},
-  {kicker: 'ATLANTA · 1885', lead: 'his first attempt', key: 'French Wine Coca', body: 'A tonic of wine, coca leaf and kola nut, sold for nerves and headaches.', ghost: '1885'},
-  {kicker: 'ATLANTA · 1886', lead: 'then the city voted', key: 'to ban alcohol', body: 'So he remade the tonic as a syrup, without the wine.', ghost: '1886'},
-  {kicker: "MAY 8, 1886 · JACOBS' PHARMACY", lead: 'first sold at a soda fountain for', key: '5¢ a glass', body: 'Syrup mixed with carbonated water, served in a 6.5-ounce glass. About nine glasses a day that first year.', ghost: '5¢'},
-  {kicker: 'THE NAME', lead: 'named after its two ingredients', key: 'Coca + Kola', body: 'Bookkeeper Frank M. Robinson chose the name and wrote it out in flowing Spencerian script.', ghost: 'C+K'},
-  {kicker: 'NEW OWNER · 1888', lead: 'after Pemberton died', key: 'Asa G. Candler', body: 'He took control for about $2,300 and founded The Coca-Cola Company in 1892.', ghost: '1888'},
-  {kicker: '1894 – 1903', lead: 'then it went', key: 'into the bottle', body: 'First bottled in Vicksburg, Mississippi, in 1894. National bottling rights sold for $1 in 1899. Cocaine removed by 1903.', ghost: '$1'},
-  {kicker: 'TODAY', lead: 'from one soda fountain to', key: '200+ countries', body: '', ghost: ''},
-];
+/* ------------------------------------------------------------------ stations */
+const Station: React.FC<{i: number; f: number; a: Assets}> = ({i, f, a}) => {
+  const g = a.gltf;
+  const body = (() => {
+    switch (i) {
+      case 0: {
+        const glassTo: Pose = {p: [0.05, -0.075, 0], r: [0.04, 0, -0.03]};
+        const gl0 = E('s0.glass'), lf = E('s0.leaf'), kn = E('s0.kola');
+        const glassTrack = (t: number) => enter(t, gl0.f, gl0.d, {p: [0.22, -0.42, 0.12], r: [0.7, 1.4, -1.0]}, glassTo, 0.5, 1);
+        return (
+          <>
+            <Mover f={f} radius={0.07} track={glassTrack}>
+              <FountainGlass fill={fillAt(f, 's0.pour')} frame={f} />
+            </Mover>
+            <Pour f={f} id="s0.pour" glass={glassTrack(f)} />
+            <Mover f={f} track={(t) => enter(t, lf.f, lf.d, {p: [-0.26, 0.32, 0.1], r: [2.5, 1.5, 3.2]}, {p: [-0.078, 0.028, 0.03], r: [0.25, 0.45, 0.55]}, 1, 2)}>
+              <CocaLeaf seed="h1" />
+            </Mover>
+            <Mover f={f} track={(t) => enter(t, kn.f, kn.d, {p: [-0.32, -0.06, 0.06], r: [0, 0.6, 6.5]}, {p: [-0.066, -0.074, 0.045], r: [0.5, 0.3, 0.25]}, 1, 3)}>
+              <KolaNut seed="h2" />
+            </Mover>
+          </>
+        );
+      }
+      case 1: {
+        const c = E('s1.card'), w = E('s1.watch'), s = E('s1.specs');
+        return (
+          <>
+            <Mover f={f} radius={0.09} track={(t) => enter(t, c.f, c.d, {p: [-0.32, 0.1, 0.12], r: [0.4, -1.3, 0.9]}, {p: [-0.005, 0.0, 0], r: [0.02, 0.1, -0.05]}, 1, 4)}>
+              <CabinetCard photo={a.photos.pemberton} caption="J. S. Pemberton" />
+            </Mover>
+            <Mover f={f} track={(t) => enter(t, w.f, w.d, {p: [0.24, 0.36, 0.12], r: [0, 0, -5]}, {p: [0.078, -0.07, 0.05], r: [0.15, -0.4, 0.3]}, 1, 5)}>
+              <Model scene={g.pocket_watch} scale={1.15} />
+            </Mover>
+            <Mover f={f} radius={0.08} track={(t) => enter(t, s.f, s.d, {p: [0.02, -0.4, 0.14], r: [1.2, 0.8, 0.6]}, {p: [-0.06, -0.098, 0.055], r: [0.2, 0.45, -0.12]}, 1, 6)}>
+              <Model scene={g.round_spectacles} />
+            </Mover>
+          </>
+        );
+      }
+      case 2: {
+        const b = E('s2.bottle');
+        const leaves = ['s2.leaf0', 's2.leaf1', 's2.leaf2'].map(E);
+        const kolas = ['s2.kola0', 's2.kola1'].map(E);
+        const leafTo: V3[] = [[-0.085, -0.058, 0.04], [-0.052, -0.094, 0.055], [-0.1, -0.02, 0.02]];
+        const kolaFrom: V3[] = [[-0.22, -0.4, 0.1], [0.32, -0.32, 0.08]];
+        const kolaTo: V3[] = [[0.072, -0.098, 0.05], [0.1, -0.062, 0.03]];
+        return (
+          <>
+            <Mover f={f} radius={0.14} track={(t) => enter(t, b.f, b.d, {p: [0.36, 0.08, 0.06], r: [0.2, -1.6, -1.5]}, {p: [0.035, 0.0, -0.04], r: [0.05, 0.35, 0.42]}, 1, 7)}>
+              <group position={[0, -0.13, 0]} scale={0.8}>
+                <TonicWineBottle scene={g.wine_bottles_01} />
+              </group>
+            </Mover>
+            {leaves.map((l, k) => (
+              <Mover key={k} f={f} track={(t) => enter(t, l.f, l.d, {p: [-0.12 + k * 0.06, 0.36, 0.1], r: [2 + k, 1 + k, 3 - k]}, {p: leafTo[k], r: [0.3 + k * 0.2, 0.3 - k * 0.3, 0.4 + k * 0.7]}, 1, 8 + k)}>
+                <CocaLeaf seed={`c${k}`} length={0.052 + k * 0.006} />
+              </Mover>
+            ))}
+            {kolas.map((k0, k) => (
+              <Mover key={k} f={f} track={(t) => enter(t, k0.f, k0.d, {p: kolaFrom[k], r: [0, 0, (k ? -1 : 1) * 6]}, {p: kolaTo[k], r: [0.4, k * 1.3, 0.2]}, 1, 11 + k)}>
+                <KolaNut seed={`k${k}`} />
+              </Mover>
+            ))}
+          </>
+        );
+      }
+      case 3: {
+        const st = E('s3.stamp'), kn = E('s3.knock'), j = E('s3.jug');
+        const bottleTo: Pose = {p: [0.035, 0.0, -0.04], r: [0.05, 0.35, 0.42]};
+        const hit = st.f + st.d;
+        const stampTrack = (t: number): Pose => {
+          const at: V3 = [-0.02, 0.075, WALL_Z - 0.0012];
+          const atR: V3 = [Math.PI / 2, 0, -0.14];
+          if (t < st.f) return {p: [0.12, 0.2, 0.75], r: [1.2, 0.4, -0.6], s: 0};
+          if (t < hit) {
+            const k = inQuad((t - st.f) / st.d);
+            return {p: mix3([0.12, 0.2, 0.75], at, k), r: mix3([1.2, 0.4, -0.6], atR, k)};
+          }
+          if (t < hit + 5) return {p: at, r: atR};
+          const k = 1 - (1 - Math.min(1, (t - hit - 5) / 14)) ** 2;
+          return {p: mix3(at, [0.3, 0.36, 0.55], k), r: mix3(atR, [1.0, -0.4, 0.5], k)};
+        };
+        const bottleTrack = (t: number): Pose => {
+          if (t < kn.f) return still(bottleTo, 1, 7)(t);
+          const k = inQuad((t - kn.f) / kn.d);
+          return {p: mix3(bottleTo.p, [-0.5, 0.12, 0.08], k), r: mix3(bottleTo.r!, [1.2, 2.5, 3.0], k)};
+        };
+        return (
+          <>
+            <Mover f={f} radius={0.14} track={bottleTrack}>
+              <group position={[0, -0.13, 0]} scale={0.8}>
+                <TonicWineBottle scene={g.wine_bottles_01} />
+              </group>
+            </Mover>
+            <Mover f={f} radius={0.06} track={stampTrack}>
+              <RubberStamp />
+            </Mover>
+            <Decal visible={f >= hit} />
+            <Mover f={f} radius={0.1} track={(t) => ({p: [0.02, -0.108, 0.0], r: [0.1, -2.3 + 0.004 * Math.max(0, t - j.f), 0], s: t < j.f ? 0 : 0.72 * backOut((t - j.f) / j.d)})}>
+              <Model scene={g.jug_01} />
+            </Mover>
+          </>
+        );
+      }
+      case 4: {
+        const gl0 = E('s4.glass'), c = E('s4.coin');
+        const land = c.f + c.d;
+        const glassTrack = (t: number) => enter(t, gl0.f, gl0.d, {p: [-0.36, 0.12, 0.12], r: [-0.6, -1.2, 1.0]}, {p: [0.05, -0.075, 0], r: [0.03, 0, 0.025]}, 0.5, 12);
+        const coinTrack = (t: number): Pose => {
+          const q = enter(t, c.f, c.d, {p: [0.36, 0.22, 0.4], r: [0, 0, 0]}, {p: [-0.052, -0.06, 0.3], r: [0, 0, 0]}, 1, 13);
+          const x = Math.min(1, Math.max(0, (t - c.f) / c.d));
+          q.r![0] += (1 - x) * Math.PI * 6; // flips through the air
+          q.r![1] += t > land ? 14 * (1 - Math.exp(-(t - land) / 28)) : 0; // then spins down like a real coin
+          return q;
+        };
+        return (
+          <>
+            <Mover f={f} radius={0.07} track={glassTrack}>
+              <FountainGlass fill={fillAt(f, 's4.pour')} frame={f} />
+            </Mover>
+            <Pour f={f} id="s4.pour" glass={glassTrack(f)} />
+            {f >= c.f - 1 && (
+              <Mover f={f} radius={0.012} track={coinTrack}>
+                <group rotation={[Math.PI / 2 - 0.3, 0, 0]}>
+                  <Nickel a={a.coin} />
+                </group>
+              </Mover>
+            )}
+          </>
+        );
+      }
+      case 5: {
+        const l = E('s5.leaf'), k = E('s5.kola');
+        return (
+          <>
+            <Mover f={f} track={(t) => enter(t, l.f, l.d, {p: [-0.34, 0.0, 0.1], r: [0.5, -1.5, 2]}, {p: [-0.058, -0.03, 0.035], r: [0.2, 0.35, 0.35]}, 1, 14)}>
+              <CocaLeaf seed="n1" length={0.072} />
+            </Mover>
+            <Mover f={f} track={(t) => enter(t, k.f, k.d, {p: [0.34, -0.05, 0.1], r: [0, 0, -6]}, {p: [0.064, -0.034, 0.04], r: [0.5, -0.3, -0.2]}, 1, 15)}>
+              <KolaNut seed="n2" size={0.044} />
+            </Mover>
+          </>
+        );
+      }
+      case 6: {
+        const c = E('s6.card'), cs = E('s6.coins');
+        return (
+          <>
+            <Mover f={f} radius={0.09} track={(t) => enter(t, c.f, c.d, {p: [0.3, 0.36, 0.12], r: [0.6, 1.4, -1.1]}, {p: [-0.03, 0.0, 0], r: [0.02, -0.1, 0.04]}, 1, 16)}>
+              <CabinetCard photo={a.photos.candler} caption="Asa G. Candler" />
+            </Mover>
+            <group position={[0.07, -0.085, 0.25]} rotation={[0.55, -0.4, 0]}>
+              {Array.from({length: 12}).map((_, k) => {
+                const at = cs.f + k * 4;
+                return (
+                  <Mover
+                    key={k}
+                    f={f}
+                    radius={0.02}
+                    track={(t) => ({p: [Math.sin(k * 2.1) * 0.0008, 0.001 + k * 0.00196 + (1 - inQuad((t - at) / 6)) * 0.1, Math.cos(k * 1.7) * 0.0008], r: [0, k * 0.9, 0], s: t < at ? 0 : 1})}
+                  >
+                    <Nickel a={a.coin} />
+                  </Mover>
+                );
+              })}
+            </group>
+          </>
+        );
+      }
+      case 7: {
+        const xs = [-0.07, 0, 0.07];
+        const pop = E('s7.pop');
+        return (
+          <>
+            {['s7.b0', 's7.b1', 's7.b2'].map((id, k) => {
+              const b = E(id);
+              return (
+                <Mover
+                  key={k}
+                  f={f}
+                  radius={0.1}
+                  track={(t) => {
+                    const q = enter(t, b.f, b.d, {p: [xs[k], -0.42, 0.1], r: [0.4, 0, (k - 1) * 0.5]}, {p: [xs[k], -0.088, -0.01 * k], r: [0, 0.4 * k, (k - 1) * -0.05]}, 1, 17 + k);
+                    if (k === 1 && t > pop.f) q.s = 1 + 0.05 * Math.exp(-(t - pop.f) / 5) * Math.sin((t - pop.f) * 1.4);
+                    return q;
+                  }}
+                >
+                  <HutchinsonBottle seed={`h${k}`} />
+                </Mover>
+              );
+            })}
+          </>
+        );
+      }
+      default: {
+        const ea = E('s8.earth');
+        return (
+          <Mover f={f} radius={0.08} track={(t) => ({p: [0, -0.03 + 0.003 * Math.sin(t / 30), 0.02], r: [0, 0, 0], s: t < ea.f ? 0 : backOut((t - ea.f) / ea.d)})}>
+            <Globe earth={a.earth} spin={3.3 + f * 0.012} />
+          </Mover>
+        );
+      }
+    }
+  })();
+  return <group position={[i * STEP, 0, 0]}>{body}</group>;
+};
 
-const Backdrop: React.FC<{f: number; scene: number}> = ({f, scene}) => {
-  const s0 = CUTS[scene];
-  const g = e(f, s0 + 2, s0 + 26);
+const Decal: React.FC<{visible: boolean}> = ({visible}) => {
+  const tex = useMemo(() => inkTexture('PROHIBITION'), []);
   return (
-    <AbsoluteFill
-      style={{
-        background: PAPER,
-        backgroundImage: 'linear-gradient(rgba(0,0,0,0.04) 2px, transparent 2px), linear-gradient(90deg, rgba(0,0,0,0.04) 2px, transparent 2px)',
-        backgroundSize: '64px 64px',
-      }}
-    >
-      {/* ghost word: 9 % ink, rises 40 px as it fades in; the hero overlaps it */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 640,
-          width: 1080,
-          textAlign: 'center',
-          fontFamily: 'Poppins',
-          fontWeight: 800,
-          fontSize: 380,
-          letterSpacing: -14,
-          color: `rgba(38,38,42,${0.09 * g})`,
-          transform: `translateY(${(1 - g) * 40}px)`,
-        }}
-      >
-        {TITLES[scene].ghost}
-      </div>
-    </AbsoluteFill>
+    <mesh position={[-0.02, 0.075, WALL_Z + 0.0008]} rotation={[0, 0, -0.14]} visible={visible} receiveShadow>
+      <planeGeometry args={[0.13, 0.038]} />
+      <meshStandardMaterial map={tex} transparent opacity={0.9} depthWrite={false} roughness={0.9} />
+    </mesh>
   );
 };
 
-const Titles: React.FC<{f: number; scene: number}> = ({f, scene}) => {
+/* ------------------------------------------------------------------ 2D type layers */
+const TITLES: {kicker: string; lead: string; key: string; body: string}[] = [
+  {kicker: 'THE ORIGIN STORY', lead: 'how a pharmacist invented', key: 'Coca-Cola', body: 'It began with a war wound, a tonic wine and a new law.'},
+  {kicker: 'COLUMBUS, GEORGIA · 1865', lead: 'it starts with', key: 'John S. Pemberton', body: 'Wounded in the Civil War, he became dependent on morphine and searched for a substitute.'},
+  {kicker: 'ATLANTA · 1885', lead: 'his first attempt', key: 'French Wine Coca', body: 'A tonic of wine, coca leaf and kola nut, sold for nerves and headaches.'},
+  {kicker: 'ATLANTA · 1886', lead: 'then the city voted', key: 'to ban alcohol', body: 'So he remade the tonic as a syrup, without the wine.'},
+  {kicker: "MAY 8, 1886 · JACOBS' PHARMACY", lead: 'first sold at a soda fountain for', key: '5¢ a glass', body: 'Syrup mixed with carbonated water, served in a 6.5-ounce glass. About nine glasses a day that first year.'},
+  {kicker: 'THE NAME', lead: 'named after its two ingredients', key: 'Coca + Kola', body: 'Bookkeeper Frank M. Robinson chose the name and wrote it out in flowing Spencerian script.'},
+  {kicker: 'NEW OWNER · 1888', lead: 'after Pemberton died', key: 'Asa G. Candler', body: 'He took control for about $2,300 and founded The Coca-Cola Company in 1892.'},
+  {kicker: '1894 – 1903', lead: 'then it went', key: 'into the bottle', body: 'First bottled in Vicksburg, Mississippi, in 1894. National bottling rights sold for $1 in 1899. Cocaine removed by 1903.'},
+  {kicker: 'TODAY', lead: 'from one soda fountain to', key: '200+ countries', body: ''},
+];
+
+const Type: React.FC<{f: number; scene: number}> = ({f, scene}) => {
   const s0 = CUTS[scene];
   const t = TITLES[scene];
-  const k = e(f, s0 + 6, s0 + 20);
+  const k = e01(f, s0 + 6, s0 + 20);
+  // type rides along with the whip pan, with blur proportional to its speed
+  const off = -(camX(f) - scene * STEP) * PX_PER_M;
+  const speed = Math.abs(camX(f + 0.5) - camX(f - 0.5)) * PX_PER_M;
   const cta = scene === 8 && f >= s0 + 80;
+  const strike = e01(f, s0 + 100, s0 + 110);
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{transform: `translateX(${off}px)`, filter: `blur(${Math.min(30, speed * 0.25)}px)`}}>
       {!cta ? (
         <div style={{position: 'absolute', left: 90, right: 90, top: 150}}>
           <div style={{fontFamily: 'Inter', fontWeight: 800, fontSize: 24, letterSpacing: `${0.7 - 0.4 * k}em`, color: '#7a7a80', opacity: k}}>{t.kicker}</div>
@@ -305,13 +404,31 @@ const Titles: React.FC<{f: number; scene: number}> = ({f, scene}) => {
           </div>
         </div>
       )}
+      {scene === 5 && (
+        <div style={{position: 'absolute', top: 1320, left: 0, right: 0, textAlign: 'center', fontFamily: 'Caveat', fontWeight: 600, fontSize: 110, color: INK}}>
+          <TypeText text="Coca" start={s0 + 24} cps={0.35} trail={8} />
+          <span style={{opacity: e01(f, s0 + 44, s0 + 52), margin: '0 22px', color: '#9a9aa0'}}>+</span>
+          <span style={{position: 'relative', display: 'inline-block'}}>
+            <TypeText text="Kola" start={s0 + 54} cps={0.35} trail={8} />
+            <svg width={70} height={120} style={{position: 'absolute', left: -4, top: 20, overflow: 'visible'}}>
+              <line x1={0} y1={100} x2={60 * strike} y2={100 - 90 * strike} stroke={ACCENT} strokeWidth={7} strokeLinecap="round" />
+            </svg>
+            <span style={{position: 'absolute', left: 8, top: -90, color: ACCENT, opacity: e01(f, s0 + 110, s0 + 122)}}>C</span>
+          </span>
+        </div>
+      )}
+      {scene === 6 && f >= E('s6.coins').f && (
+        <div style={{position: 'absolute', top: 1330, left: 90, fontFamily: 'Poppins', fontWeight: 700, fontSize: 118, color: ACCENT, letterSpacing: -4, fontVariantNumeric: 'tabular-nums'}}>
+          ${Math.round(interpolate(f, [E('s6.coins').f, E('s6.coins').f + 50], [0, 2300], {...clamp, easing: Easing.bezier(0.45, 0, 0.2, 1)})).toLocaleString('en-US')}
+        </div>
+      )}
       {t.body && (
         <div style={{position: 'absolute', left: 90, right: 90, top: 1560, fontFamily: 'Inter', fontWeight: 500, fontSize: 36, lineHeight: 1.45, color: '#3a3a3e'}}>
           <TypeText text={t.body} start={s0 + 40} cps={3} trail={4} />
         </div>
       )}
       {scene === 8 && (
-        <div style={{position: 'absolute', left: 90, right: 90, bottom: 70, fontFamily: 'Inter', fontWeight: 500, fontSize: 19, lineHeight: 1.5, color: 'rgba(38,38,42,0.55)', opacity: e(f, s0 + 20, s0 + 34)}}>
+        <div style={{position: 'absolute', left: 90, right: 90, bottom: 70, fontFamily: 'Inter', fontWeight: 500, fontSize: 19, lineHeight: 1.5, color: 'rgba(38,38,42,0.55)', opacity: e01(f, s0 + 20, s0 + 34)}}>
           Not affiliated with or endorsed by The Coca-Cola Company. Photos: public domain (Wikimedia Commons). Coin: Smithsonian NNC. 3D models &amp; HDRI: Poly Haven (CC0). Sound: Joseph Sardin, BigSoundBank (CC0). Earth: NASA.
         </div>
       )}
@@ -319,127 +436,8 @@ const Titles: React.FC<{f: number; scene: number}> = ({f, scene}) => {
   );
 };
 
-const Stamp: React.FC<{f: number}> = ({f}) => {
-  if (f < 640 || f >= 780) return null;
-  const p = e(f, 640, 646, Easing.out(Easing.back(2)));
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        top: 420,
-        left: '50%',
-        transform: `translateX(-50%) rotate(-8deg) scale(${1.6 - 0.6 * p})`,
-        opacity: p * 0.85,
-        border: `7px solid ${ACCENT}`,
-        color: ACCENT,
-        padding: '6px 30px',
-        fontFamily: 'Poppins',
-        fontWeight: 800,
-        fontSize: 84,
-        letterSpacing: 10,
-        borderRadius: 8,
-        mixBlendMode: 'multiply',
-      }}
-    >
-      PROHIBITION
-    </div>
-  );
-};
-
-const Candler2300: React.FC<{f: number}> = ({f}) => {
-  if (f < 1300 || f >= 1470) return null;
-  const v = Math.round(interpolate(f, [1300, 1370], [0, 2300], {...clamp, easing: smooth}));
-  return (
-    <div style={{position: 'absolute', top: 1360, right: 90, textAlign: 'right', opacity: e(f, 1300, 1312)}}>
-      <div style={{fontFamily: 'Poppins', fontWeight: 700, fontSize: 130, color: ACCENT, lineHeight: 1, letterSpacing: -4, fontVariantNumeric: 'tabular-nums'}}>${v.toLocaleString('en-US')}</div>
-    </div>
-  );
-};
-
-const NameScript: React.FC<{f: number}> = ({f}) => {
-  if (f < 1050 || f >= 1260) return null;
-  const strike = e(f, 1150, 1162);
-  return (
-    <div style={{position: 'absolute', top: 470, left: 0, right: 0, textAlign: 'center', fontFamily: 'Caveat', fontWeight: 600, fontSize: 120, color: INK}}>
-      <TypeText text="Coca" start={1070} cps={0.35} trail={8} />
-      <span style={{opacity: e(f, 1090, 1098), margin: '0 24px', color: '#9a9aa0'}}>+</span>
-      <span style={{position: 'relative', display: 'inline-block'}}>
-        <TypeText text="Kola" start={1100} cps={0.35} trail={8} />
-        <svg width={70} height={120} style={{position: 'absolute', left: -4, top: 20, overflow: 'visible'}}>
-          <line x1={0} y1={100} x2={60 * strike} y2={100 - 90 * strike} stroke={ACCENT} strokeWidth={7} strokeLinecap="round" />
-        </svg>
-        <span style={{position: 'absolute', left: 8, top: -90, color: ACCENT, opacity: e(f, 1162, 1174)}}>C</span>
-      </span>
-    </div>
-  );
-};
-
-/* ------------------------------------------------------------------ sound: real CC0 recordings + music bed */
-type Cue = {at: number; src: string; vol: number; from?: number; len?: number};
-const CUES: Cue[] = [
-  {at: 4, src: 'sfx/soda_pour.wav', vol: 1, len: 176},
-  ...[180, 390, 600, 780, 1050, 1260, 1470, 1650].map((c, i) => ({at: c - 6, src: i % 2 ? 'sfx/whoosh8.wav' : 'sfx/whoosh7.wav', vol: 0.7})),
-  {at: 186, src: 'sfx/page_turn.wav', vol: 0.7},
-  {at: 395, src: 'sfx/bottle_table.wav', vol: 1, from: 0, len: 40},
-  {at: 470, src: 'sfx/cork.wav', vol: 1},
-  {at: 640, src: 'sfx/bottle_table.wav', vol: 1, from: 0, len: 14},
-  {at: 790, src: 'sfx/soda_pour.wav', vol: 0.95},
-  {at: 930, src: 'sfx/coin_spin.wav', vol: 1, from: 0, len: 110},
-  {at: 1056, src: 'sfx/page_turn.wav', vol: 0.8},
-  {at: 1070, src: 'sfx/typewriter.wav', vol: 0.8, from: 30, len: 90},
-  {at: 1266, src: 'sfx/page_turn.wav', vol: 0.7},
-  {at: 1310, src: 'sfx/coins.wav', vol: 0.8, from: 0, len: 90},
-  {at: 1480, src: 'sfx/bottle_table.wav', vol: 1, from: 0, len: 70},
-  {at: 1560, src: 'sfx/cork.wav', vol: 1},
-  {at: 1650, src: 'sfx/whoosh1.wav', vol: 0.9, from: 0, len: 90},
-  {at: 1765, src: 'sfx/type_bell.wav', vol: 0.9},
-];
-
-export const Sound: React.FC<{music?: boolean}> = ({music = true}) => (
-  <>
-    {music && <Audio src={staticFile('cola-music.wav')} volume={0.3} />}
-    {CUES.map((c, i) => (
-      <Sequence key={i} from={c.at} durationInFrames={c.len ?? 200} layout="none">
-        <Audio src={staticFile(c.src)} volume={c.vol} trimBefore={c.from ?? 0} />
-      </Sequence>
-    ))}
-  </>
-);
-
-/* ------------------------------------------------------------------ assembly */
-// Transitions straddle each cut (SOP 3.1), 18 frames, vocabulary from SKILL.md.
-const TRANS = ['', 'whipUp', 'defocus', 'whipLeft', 'flash', 'whipUp', 'defocus', 'whipLeft', 'defocus'];
-const transition = (f: number) => {
-  let tx = 0, ty = 0, blur = 0, flash = 0;
-  CUTS.forEach((c, i) => {
-    const type = TRANS[i];
-    if (!type || f < c - 9 || f > c + 9) return;
-    const t = interpolate(f, [c - 9, c + 9], [0, 1], clamp);
-    const bell = Math.sin(t * Math.PI);
-    if (type === 'whipUp') { ty = t < 0.5 ? t * 2 * 1920 : (t - 1) * 2 * 1920; blur = bell * 30; }
-    if (type === 'whipLeft') { tx = t < 0.5 ? -t * 2 * 1080 : (1 - t) * 2 * 1080; blur = bell * 30; }
-    if (type === 'defocus') blur = bell * 28;
-    if (type === 'flash') { flash = bell; blur = bell * 10; }
-  });
-  return {tx, ty, blur, flash};
-};
-
-// Window-blind light across paper and objects (breakdown 3; realism.md gobo shadows).
-const Blinds: React.FC<{f: number}> = ({f}) => (
-  <AbsoluteFill
-    style={{
-      background: 'repeating-linear-gradient(-38deg, rgba(90,70,50,0) 0 170px, rgba(90,70,50,0.55) 210px 300px, rgba(90,70,50,0) 340px 500px)',
-      backgroundPosition: `${f * 0.3}px 0`,
-      filter: 'blur(28px)',
-      mixBlendMode: 'multiply',
-      opacity: 0.2,
-      transform: 'scale(1.35)',
-    }}
-  />
-);
-
 const Grain: React.FC<{f: number}> = ({f}) => (
-  <svg width={1080} height={1920} style={{position: 'absolute', inset: 0, opacity: 0.06, mixBlendMode: 'multiply'}}>
+  <svg width={1080} height={1920} style={{position: 'absolute', inset: 0, opacity: 0.055, mixBlendMode: 'multiply'}}>
     <filter id="grain">
       <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={2} seed={f % 113} />
       <feColorMatrix type="saturate" values="0" />
@@ -448,46 +446,43 @@ const Grain: React.FC<{f: number}> = ({f}) => (
   </svg>
 );
 
+/* ------------------------------------------------------------------ assembly */
 export const ColaOrigin: React.FC<{sound: boolean}> = ({sound}) => {
   const f = useCurrentFrame();
   const {width, height} = useVideoConfig();
   const scene = sceneAt(f);
   const {assets: a, handle} = useAssets();
-  const tr = transition(f);
-  const fade = Math.max(interpolate(f, [0, 10], [1, 0], clamp), interpolate(f, [COLA_DURATION - 16, COLA_DURATION - 1], [0, 1], clamp));
+  const live = CUTS.slice(0, -1).map((c, i) => i).filter((i) => f >= CUTS[i] - WHIP - 1 && f < CUTS[i + 1] + WHIP + 1);
+  const fade = Math.max(interpolate(f, [0, 8], [1, 0], clamp), interpolate(f, [COLA_DURATION - 14, COLA_DURATION - 1], [0, 1], clamp));
   return (
-    <AbsoluteFill style={{background: PAPER, overflow: 'hidden'}}>
-      <AbsoluteFill style={{transform: `translate(${tr.tx}px, ${tr.ty}px)`, filter: `blur(${tr.blur}px)`}}>
-        <Backdrop f={f} scene={scene} />
-        <AbsoluteFill style={{filter: 'drop-shadow(0 18px 24px rgba(60,50,40,0.12))'}}>
-          <ThreeCanvas
-            width={width}
-            height={height}
-            shadows={{type: THREE.PCFSoftShadowMap}}
-            gl={{antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.0}}
-            camera={{fov: 32, near: 0.01, far: 60, position: [0, 0.1, 0.5]}}
-          >
-            {a && (
-              <>
-                <Studio env={a.env} scene={scene} />
-                <Rig f={f} scene={scene} width={width} height={height} />
-                <World f={f} scene={scene} a={a} />
-              </>
-            )}
-            <ReleaseWhenDrawn handle={handle} ready={!!a} />
-          </ThreeCanvas>
-        </AbsoluteFill>
-        <Blinds f={f} />
-        <NameScript f={f} />
-        <Stamp f={f} />
-        <Candler2300 f={f} />
-        <Titles f={f} scene={scene} />
-      </AbsoluteFill>
+    <AbsoluteFill style={{background: '#f3f1ec', overflow: 'hidden'}}>
+      <ThreeCanvas
+        width={width}
+        height={height}
+        shadows={{type: THREE.VSMShadowMap}}
+        gl={{antialias: false, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.0}}
+        camera={{fov: FOV, near: 0.05, far: 10, position: [0, 0, CAM_Z]}}
+      >
+        <MotionProvider>
+          {a && (
+            <>
+              <Studio a={a} />
+              <LightRig f={f} />
+              <Wall />
+              {live.map((i) => (
+                <Station key={i} i={i} f={f} a={a} />
+              ))}
+              <MotionBlurRenderer f={f} cam={cam} maxSamples={8} />
+            </>
+          )}
+          <ReleaseWhenDrawn handle={handle} ready={!!a} />
+        </MotionProvider>
+      </ThreeCanvas>
+      <Type f={f} scene={scene} />
       <Grain f={f} />
-      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 60%, rgba(60,50,40,0.18) 100%)'}} />
-      <AbsoluteFill style={{background: 'radial-gradient(circle at 70% 30%, #fff1d6, #ffbf80 60%, transparent 100%)', mixBlendMode: 'screen', opacity: tr.flash * 0.9}} />
-      <AbsoluteFill style={{background: PAPER, opacity: fade}} />
-      {sound && <Sound />}
+      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(60,50,40,0.16) 100%)'}} />
+      <AbsoluteFill style={{background: '#f3f1ec', opacity: fade}} />
+      {sound && <Audio src={staticFile('cola-mix.wav')} />}
     </AbsoluteFill>
   );
 };
