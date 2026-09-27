@@ -6,6 +6,7 @@ import {REAL_DURATION, RealMoon} from './real/RealMoon';
 import {COLA_DURATION, ColaOrigin} from './cola/ColaOrigin';
 import {DC_CHAPTERS, DC_DURATION, DCFilm, DCPart} from './dc/DC';
 import {FOREST_LOOP, NightForest} from './forest/NightForest';
+import {Thumbnail} from './dcc/Thumbnail';
 import {CITY_CHAPTERS, CITY_DURATION, CITY_QA, CityFilm, CityPart, CityQA} from './dcc/Film';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
@@ -47,6 +48,7 @@ export const Root: React.FC = () => (
     {DC_CHAPTERS.map((c, i) => (
       <Composition key={i} id={`DataCentres-part${i}`} component={DCPart} durationInFrames={c.to - c.from} fps={30} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
+      <Composition id="CityThumb" component={Thumbnail} durationInFrames={1} fps={30} width={1920} height={1080} defaultProps={{night: false}} />
       <Composition id="CityQA" component={CityQA} durationInFrames={CITY_QA.length} fps={30} width={1920} height={1080} />
       <Composition id="DataCentresCity" component={CityFilm} durationInFrames={CITY_DURATION} fps={30} width={1920} height={1080} defaultProps={{offset: 0}} />
       {CITY_CHAPTERS.map((c, i) => (
