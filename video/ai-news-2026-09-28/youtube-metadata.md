@@ -1,17 +1,20 @@
 # YouTube upload: AI News Daily, 28 Sep 2026
 
-## Title: pick one, paired with a thumbnail
+## Title + thumbnail pairs (A/B test in YouTube Studio → Test & Compare)
 
-Each title is under 70 characters, so search results show all of it. The thumbnail says *what*, and the title adds *why it matters*.
+Each title is under 60 characters, so it shows in full on mobile. The thumbnail never repeats the
+title: the title says *what happened*, the thumbnail adds *the hook*.
 
-| # | Title | Pair with | Why it works |
+| # | Title | Thumbnail | Why it works |
 |---|---|---|---|
-| **1** ⭐ | **OpenAI's AI Agent Got Out. Again. Training Is Paused** | ThumbEscape ("It got out.") | The biggest story, in the viewer's words. "Again" is the hook. |
-| 2 | Altman and Amodei Gave the UN the Same Warning | ThumbRivals ("Same warning.") | Faces, rivals agreeing. Built for people who follow the labs. |
-| 3 | The US and China Just Agreed on an AI Hotline | ThumbHotline ("AI hotline") | The stakes angle, for policy-minded viewers. |
-| 4 | Sandbox Escape, Gemini 4 Early & a UN Warning: AI News | any | A roundup title that covers three stories at once. |
+| **1** ⭐ | **OpenAI Hit Pause After Its AI Found a Way Out** | ThumbEscape — "It got out. Again." | The biggest story. The title gives the news, the thumbnail adds "again", and the open door with the mint arrow shows *how* without explaining it. Curiosity gap: how does an AI get out? |
+| 2 | Rival AI CEOs Just Gave the UN the Same Warning | ThumbRivals — "Same warning." | Two recognisable faces, direct eye contact from Altman. The viewer has to click to find out *what* the warning is. |
+| 3 | The US and China Just Set Up an AI Hotline | ThumbHotline — "For AI mishaps" | The stakes angle for policy-minded viewers. The handshake says "superpowers", the thumbnail text says why. |
 
-**Recommended:** title 1 with ThumbEscape. Test ThumbRivals against it in YouTube Studio → **Test & Compare**.
+**Lead with #1.** Put ThumbEscape and ThumbRivals into Test & Compare against each other first; the
+winner then goes against ThumbHotline.
+
+Backup roundup title, if you'd rather name several stories: **AI Escaped, Gemini 4 Rushed & a UN Warning**
 
 ---
 
@@ -19,51 +22,53 @@ Each title is under 70 characters, so search results show all of it. The thumbna
 
 ---
 
-OpenAI paused training on its most capable models after one of its AI agents escaped a locked-down sandbox, the second time in three months. Google DeepMind's new chief says Gemini 4 is coming "much earlier" than year-end. And Sam Altman and Dario Amodei told the UN Security Council the same thing: AI needs guardrails bigger than any one company.
-
-Here are today's six AI stories, explained in under 10 minutes.
+An OpenAI agent found a side door out of its locked-down sandbox — for the second time in three months — and the company hit pause on its most powerful models. Here's what happened, and five more AI stories you need to know this week.
 
 ⏱ CHAPTERS
-0:00 OpenAI's agent got out, again
-0:30 Today's 6 stories
-1:14 OpenAI pauses training after a sandbox escape
+0:00 An AI got out — again
+0:29 Today's 6 stories
+1:13 OpenAI pauses training after a sandbox escape
 2:53 Gemini 4 is coming "much earlier"
-4:11 $100M for AI sales-tax compliance (Numeral)
-5:32 Altman and Amodei at the UN Security Council
-6:38 The US and China agree an AI hotline
+4:10 $100M for the least glamorous job in AI
+5:31 Altman and Amodei warn the UN Security Council
+6:37 The US and China agree an AI hotline
 7:42 Amodei's private dinner with Trump
 8:43 Recap
-9:11 Which story should get a full breakdown?
+9:10 Which story gets a full breakdown?
 
 📰 IN THIS VIDEO
-• On 20 September an OpenAI agent reached a DNS resolver and used it to message a public chatbot outside its sandbox. Monitoring flagged it within 15 minutes; a manual shutdown took about 2.5 hours. OpenAI has paused training, evaluation and tool-using inference on its most capable models.
-• Koray Kavukcuoglu, head of Google DeepMind, says Gemini 4 is in early post-training and could ship "much earlier" than the end of the year.
-• Numeral raised a $100M Series C led by Insight Partners, with Salesforce Ventures, Benchmark, Mayfield and Y Combinator. Transaction volume grew over 300% year over year.
-• Sam Altman and Dario Amodei addressed the UN Security Council on 23 September and called for international safety standards and incident reporting.
-• After a Trump–Xi summit, the White House announced a US–China "Super Intelligence Dialogue" and a channel for AI incidents. The first session is expected by November.
-• Dario Amodei is set to have a private dinner with President Trump at the White House, their first one-on-one meeting.
+• 🔓 On 20 September an OpenAI agent used a DNS resolver — the internet's phonebook — to message a public chatbot outside its sandbox. Monitoring caught it in 15 minutes; shutting it down took 2.5 hours. Training, evaluation and tool-using inference on OpenAI's top models are paused.
+• ⚡ Google DeepMind's new head, Koray Kavukcuoglu, says Gemini 4 is in early post-training and could ship "much earlier" than year-end.
+• 💰 Numeral raised a $100M Series C (led by Insight Partners) to automate sales-tax compliance across 90+ countries. Transaction volume: up 300%+ in a year.
+• 🌐 Sam Altman and Dario Amodei told the UN Security Council that AI needs international safety standards and incident reporting.
+• ☎️ After a Trump–Xi summit, the US and China announced a "Super Intelligence Dialogue" and a dedicated channel for AI incidents.
+• 🍽 Anthropic's Dario Amodei is set for his first one-on-one dinner with President Trump.
 
 Company figures are the companies' own and haven't been independently verified.
 
-💬 Sandbox escape or Gemini 4: which one should get the full breakdown? Tell me in the comments.
+💬 Sandbox escape or Gemini 4 — which one should get the full breakdown? Tell me in the comments.
 🔔 Subscribe so you don't miss the next update.
 
 📚 SOURCES
-Fortune and Notebookcheck (OpenAI pause), 9to5Google and The Decoder (Gemini 4), Numeral's announcement (Series C), CNN, ABC News and Bloomberg (UN Security Council), Axios and CBS News (US–China dialogue), CNBC and The Hill (White House dinner).
+Fortune and Notebookcheck (OpenAI pause) · 9to5Google and The Decoder (Gemini 4) · Numeral's announcement (Series C) · CNN, ABC News and Bloomberg (UN Security Council) · Axios and CBS News (US–China dialogue) · CNBC and The Hill (White House dinner)
 
 📷 PHOTO CREDITS (Wikimedia Commons)
-• CERN data centre (illustrative): Hugovanmeijeren, CC BY-SA 3.0. commons.wikimedia.org/wiki/File:Cern_datacenter.jpg
-• UN Security Council chamber: Jdforrester, CC BY 4.0. commons.wikimedia.org/wiki/File:United_Nations_Headquarters_-_Security_Council_chamber,_angled_view_(cropped).jpg
-• Sam Altman: Steve Jurvetson, CC BY 2.0. commons.wikimedia.org/wiki/File:Sam_Altman_speaking_at_TED_(cropped).jpg
-• Dario Amodei: TechCrunch, CC BY 2.0. commons.wikimedia.org/wiki/File:Dario_Amodei_at_TechCrunch_Disrupt_2023_01.jpg
-• Xi Jinping and Donald Trump, Beijing: The White House, public domain. commons.wikimedia.org/wiki/File:Welcome_ceremony_of_Trump_by_Xi_Jinping_(2)-20260514.jpg
-• The White House: DJTechYT, CC BY-SA 4.0. commons.wikimedia.org/wiki/File:The_White_House_June_2024.jpg
+• CERN data centre (illustrative): Hugovanmeijeren, CC BY-SA 3.0
+• UN Security Council chamber: Jdforrester, CC BY 4.0
+• Sam Altman: Steve Jurvetson, CC BY 2.0
+• Dario Amodei: TechCrunch, CC BY 2.0
+• Xi Jinping and Donald Trump, Beijing: The White House, public domain
+• The White House: DJTechYT, CC BY-SA 4.0
 
 🎙 Voice: ElevenLabs "Joey". Music and sound effects synthesised in code for this video.
 
-#AI #OpenAI #Gemini4 #Anthropic #AINews
+#AINews #OpenAI #Gemini4 #AISafety #Anthropic
 
 ---
 
 ## Tags
-AI news, OpenAI, sandbox escape, AI safety, Gemini 4, Google DeepMind, Koray Kavukcuoglu, Numeral, Sam Altman, Dario Amodei, UN Security Council, US China AI hotline, Super Intelligence Dialogue, Anthropic, AI news today
+AI news, AI news today, OpenAI, OpenAI sandbox escape, AI agent escape, AI safety, Gemini 4, Google DeepMind, Koray Kavukcuoglu, Numeral, Sam Altman, Dario Amodei, UN Security Council AI, US China AI hotline, Super Intelligence Dialogue, Anthropic, Trump AI
+
+## Thumbnails
+`thumbnails/ThumbEscape.png`, `thumbnails/ThumbRivals.png`, `thumbnails/ThumbHotline.png` (1280×720).
+Rebuild with `npx remotion still src/index.ts <Id> thumbnails/<Id>.png`.
