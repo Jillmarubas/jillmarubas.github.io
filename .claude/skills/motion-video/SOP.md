@@ -122,6 +122,13 @@ Reference build: `remotion/src/dc/`, the "Why people hate data centres" explaine
    - Keep big WAVs in `out/`, not `public/`, or every Lambda deploy uploads them.
 6. **Render:** render one `…-partN` composition per chapter on Lambda (picture only), concatenate, then mux `out/dc-mix.wav`.
 
+## Story films in 2D vector (the user's default for story videos)
+Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
+shot list with **one scene per script line** (shot type, place, time of day, character pose and
+expression, what moves, any data shown inside the scene). Build a character rig with facial
+expressions first, then the locations, then the shots. Data never sits on a bare card; it
+appears inside the scene. QA a contact sheet of every line's scene.
+
 ## Troubleshooting
 | Symptom | Cause | Fix |
 |---|---|---|
