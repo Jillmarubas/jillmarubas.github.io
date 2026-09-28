@@ -15,7 +15,7 @@ These are Jillmar's requirements. Every video must meet all of them.
 | 1 | **About 10 minutes long**, made with **Remotion** | One Remotion project per episode in `video/ai-news-YYYY-MM-DD/` |
 | 2 | **Voice-over by ElevenLabs "Joey"** | Voice **"Joey – Upbeat Popular News Host"**, ID `mUfWEBhcigm8YlCDbmGP`, model `eleven_multilingual_v2` |
 | 3 | **Rendered on Remotion Lambda** | `npm run lambda:deploy` then `npm run lambda:render` (§6) |
-| 4 | **The design system named for the episode** (Frost Glass on 26 Sep, Settle Motion on 28 Sep) | `design-system/<system>/`; tokens copied into `src/theme.ts`; rules in the episode's `DESIGN.md`. Copy the reference build that already uses that system. |
+| 4 | **The design system named for the episode** (Frost Glass on 26 Sep, Settle Motion on 28 Sep). **Ask Jillmar which one before starting**, unless the request already names it. | `design-system/<system>/`; tokens copied into `src/theme.ts`; rules in the episode's `DESIGN.md`. Copy the reference build that already uses that system. |
 | 5 | **Real photos of people. No AI image generation.** | Wikimedia Commons only, credited on screen and on the end card |
 | 6 | **After Effects-style kinetic type and motion graphics** | Every spoken word animates on its own (§5.4) |
 | 7 | **Motion graphics on every word of the script** | 100% of the script is on screen, timed to the voice |
@@ -62,6 +62,7 @@ These are Jillmar's requirements. Every video must meet all of them.
 
 ## 3. Before starting: checklist
 
+- [ ] **Ask first: which design system should this episode use?** (e.g. Frost Glass, Settle Motion, Cobalt Haze from `design-system/`). Don't assume the last one. Skip only if the request already names it.
 - [ ] The script is saved as `ai-news-script-YYYY-MM-DD.md` and read end to end.
 - [ ] The branch named in the session is checked out (create it if needed).
 - [ ] The ElevenLabs connector is connected (the `creative_*` tools exist).
