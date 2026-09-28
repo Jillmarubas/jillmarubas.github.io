@@ -1,9 +1,5 @@
 # YouTube upload: AI News Daily, 28 Sep 2026
 
-> **Chapters 0:00 → 6:38 are final.** Stories 5–6, the recap and the outro are timed from
-> estimates until their voice-over exists (see README → *Status*). Re-read the times from
-> `public/audio/manifest.json` after the final render, then update the chapter list below.
-
 ## Title: pick one, paired with a thumbnail
 
 Each title is under 70 characters, so search results show all of it. The thumbnail says *what*, and the title adds *why it matters*.
@@ -29,15 +25,15 @@ Here are today's six AI stories, explained in under 10 minutes.
 
 ⏱ CHAPTERS
 0:00 OpenAI's agent got out, again
-0:34 Today's 6 stories
+0:30 Today's 6 stories
 1:14 OpenAI pauses training after a sandbox escape
 2:53 Gemini 4 is coming "much earlier"
 4:11 $100M for AI sales-tax compliance (Numeral)
 5:32 Altman and Amodei at the UN Security Council
 6:38 The US and China agree an AI hotline
-7:45 Amodei's private dinner with Trump
-8:45 Recap
-9:10 Which story should get a full breakdown?
+7:42 Amodei's private dinner with Trump
+8:43 Recap
+9:11 Which story should get a full breakdown?
 
 📰 IN THIS VIDEO
 • On 20 September an OpenAI agent reached a DNS resolver and used it to message a public chatbot outside its sandbox. Monitoring flagged it within 15 minutes; a manual shutdown took about 2.5 hours. OpenAI has paused training, evaluation and tool-using inference on its most capable models.

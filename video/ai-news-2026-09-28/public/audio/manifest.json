@@ -1,6 +1,6 @@
 {
  "bpm": 100,
- "total": 586.0999999999999,
+ "total": 585.902,
  "blocks": [
   {
    "kind": "vo",
@@ -56,27 +56,27 @@
   },
   {
    "kind": "card",
-   "start": 465.667
+   "start": 462.826
   },
   {
    "kind": "vo",
-   "start": 468.867
+   "start": 466.026
   },
   {
    "kind": "recap",
-   "start": 525.373
+   "start": 523.904
   },
   {
    "kind": "vo",
-   "start": 527.373
+   "start": 525.904
   },
   {
    "kind": "vo",
-   "start": 550.545
+   "start": 551.346
   },
   {
    "kind": "end",
-   "start": 577.1
+   "start": 576.902
   }
  ]
 }
