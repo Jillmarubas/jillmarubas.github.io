@@ -146,7 +146,7 @@ export const SwingSet: React.FC<{t: number; a1: number; a2: number; kid1?: React
       <g key={i} transform={`translate(${x as number} -330) rotate(${a as number})`}>
         <path d="M-40 0 L-40 230 M40 0 L40 230" stroke="#6B7686" strokeWidth={4} />
         <rect x={-50} y={228} width={100} height={14} rx={7} fill="#FFC928" />
-        {kid && <g transform="translate(0 290)">{kid as React.ReactNode}</g>}
+        {kid && <g transform="translate(0 228)">{kid as React.ReactNode}</g>}
       </g>
     ))}
   </g>

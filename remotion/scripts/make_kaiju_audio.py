@@ -252,6 +252,7 @@ def roar(d=2.8, hurt=False):
 def rumble(d=3.0, grow=False):
     n = int(d * SR)
     x = lp(noise(d), 90, 4) * 6 + osc(32 + 4 * np.sin(np.arange(n) / SR * 2), d) * 0.5
+    x = x + bp(noise(d), 150, 900) * 1.6 * (0.6 + 0.4 * np.sin(np.arange(n) / SR * 9) ** 2)
     e = np.linspace(0.2, 1, n) ** (1.5 if grow else 0.6)
     return x * e * env(n, 0.4, 0.8)
 
@@ -319,7 +320,11 @@ def boom(d=2.5, f0=55, f1=28):
     n = int(d * SR)
     s = osc(glide(f0, f1, d, 0.4), d) * expdec(n, 1.8)
     th = lp(noise(0.4), 300) * expdec(int(0.4 * SR), 8) * 2
-    return np.tanh(mix(s * 1.3, th) * 1.5)
+    low = np.tanh(mix(s * 1.3, th) * 1.5)
+    # what a phone speaker can actually play: a mid crunch and saturated harmonics
+    crunch = bp(noise(min(d, 1.2)), 250, 3000) * expdec(int(min(d, 1.2) * SR), 5) * 1.4
+    harm = np.tanh(osc(glide(f0 * 3, f1 * 3, d, 0.4), d) * 4) * expdec(n, 3) * 0.5
+    return mix(low, crunch, harm)
 
 
 def splash(d=3.5, big=True):
@@ -551,7 +556,14 @@ def hero_charge(d=1.8):
     return charge_up(d) * 0.6 + shimmer(d) * 0.6
 
 
+def presents_swell(d=3.5):
+    n = int(d * SR)
+    pad = brass([220, 277.18, 329.63, 440], d, 1.2, 1.2, 2600) * 0.9
+    return pad + whoosh(d, 300, 4000) * 0.3
+
+
 SFX = {
+    'presents_swell': lambda: presents_swell(3.5),
     'ambience_park': lambda: ambience_park(6.0),
     'gulls': lambda: gulls(5.0),
     'gulls_panic': lambda: gulls(3.0, True),
@@ -614,6 +626,7 @@ SFX = {
 
 # per-effect loudness (relative to peak-normalised), so screams and booms sit right
 LEVEL = {
+    'presents_swell': 0.7,
     'ambience_park': 0.55, 'gulls': 0.5, 'gulls_panic': 0.4, 'swing_creak': 0.55, 'kids_laugh': 0.95, 'kid_giggle': 0.85,
     'kid_cheer': 0.9, 'kids_cheer': 0.95, 'slide': 0.75, 'rumble_low': 0.8, 'rumble_grow': 0.9, 'chain_rattle': 0.45,
     'kid_gasp': 0.45, 'water_swell': 0.7, 'mega_splash': 1.0, 'water_cascade': 0.55, 'boom_deep': 0.9, 'roar': 1.0,
@@ -747,15 +760,38 @@ def main():
             place(L, x * np.sqrt(1 - pan) * 1.2, t0 + off)
             place(R, x * np.sqrt(pan) * 1.2, t0 + off)
     mus = music(total, [0, at('tremor'), at('emerge'), at('arrival'), at('faceoff'), at('end')])
-    mus = norm(mus, 0.35)
+    mus = norm(mus, 0.25)
     # duck the music a little under loud effects
     fx_env = lp(np.abs(L) + np.abs(R), 3, 2)
     duck = 1 - 0.5 * np.clip(fx_env / (np.max(fx_env) + 1e-9) * 2.5, 0, 1)
     L[: len(mus)] += mus[: len(L)] * duck[: len(mus)]
     R[: len(mus)] += mus[: len(R)] * duck[: len(mus)]
     st = np.stack([L, R], 1)[: int(total * SR)]
+    # phone-speaker master: cut the sub-bass (most phones play nothing below ~150 Hz),
+    # tame the lows and lift the 1.5-5 kHz presence band where screams, crashes and glass live
+    for c in range(2):
+        x = hp(st[:, c], 50, 2)
+        x = x - 0.45 * lp(x, 140, 2)
+        x = x + 0.5 * bp(x, 1500, 5000, 2)
+        st[:, c] = x
+    # scene-by-scene loudness: bring each shot to a target level in the band a phone plays
+    # (calm scenes a little quieter than the action), with short ramps between shots
+    band = bp(st.mean(1), 250, 8000)
+    gain = np.ones(len(st))
+    prev_g = None
+    for s_, t0 in zip(TL['shots'], starts):
+        a, b = int(t0 * SR), int((t0 + s_['dur']) * SR)
+        rms_db = 20 * np.log10(np.sqrt(np.mean(band[a:b] ** 2)) + 1e-9)
+        target = -21.0 if s_['mood'] < 1 else -16.0
+        g = 10 ** (np.clip(target - rms_db, -4, 9) / 20)
+        gain[a:b] = g
+        if prev_g is not None:
+            r = int(0.25 * SR)
+            gain[a : a + r] = np.linspace(prev_g, g, r)
+        prev_g = g
+    st = st * gain[:, None]
     # soft limiter and master level
-    st = np.tanh(st / (np.percentile(np.abs(st), 99.9) + 1e-9) * 0.9)
+    st = np.tanh(st / (np.percentile(np.abs(st), 99.95) + 1e-9) * 1.1)
     st = st / (np.max(np.abs(st)) + 1e-9) * 0.95
     fade = int(1.5 * SR)
     st[-fade:] *= np.linspace(1, 0, fade)[:, None]
@@ -763,6 +799,10 @@ def main():
     wavfile.write(os.path.join(ROOT, 'out/kaiju-mix.wav'), SR, (st * 32767).astype(np.int16))
     rms = 20 * np.log10(np.sqrt(np.mean(st ** 2)) + 1e-9)
     print(f'wrote out/kaiju-mix.wav  {total:.2f}s  rms {rms:.1f} dBFS')
+    phone = bp(st.mean(1), 250, 8000)
+    for s_, t0 in zip(TL['shots'], starts):
+        seg = phone[int(t0 * SR) : int((t0 + s_['dur']) * SR)]
+        print(f"  {s_['id']:9s} phone-band rms {20 * np.log10(np.sqrt(np.mean(seg ** 2)) + 1e-9):6.1f} dB")
 
 
 if __name__ == '__main__':

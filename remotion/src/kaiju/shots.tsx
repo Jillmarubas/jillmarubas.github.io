@@ -86,6 +86,49 @@ const Collapse: React.FC<{w: number; h: number; k: number; c1: string; c2: strin
 };
 
 /* ================================================================== ACT 1: the playground */
+/** Claude's mark: an orange spark of rounded rays. */
+const ClaudeMark: React.FC<{k: number; t: number; size?: number}> = ({k, t, size = 120}) => {
+  const rays = 12;
+  return (
+    <g transform={`rotate(${t * 0.3})`}>
+      {Array.from({length: rays}, (_, i) => {
+        const a = (i / rays) * 360 + (i % 2 ? 8 : 0);
+        const len = size * (i % 3 === 0 ? 1 : i % 3 === 1 ? 0.78 : 0.88) * cl(k * 1.4 - i * 0.03);
+        return <rect key={i} x={-size * 0.075} y={-len} width={size * 0.15} height={len} rx={size * 0.075} fill="#D97757" transform={`rotate(${a})`} />;
+      })}
+      <circle r={size * 0.14 * cl(k * 2)} fill="#D97757" />
+    </g>
+  );
+};
+
+const Presents: React.FC<ShotProps> = ({t}) => {
+  const logo = e(t, 6, 30);
+  const name = e(t, 24, 22);
+  const pres = e(t, 50, 20);
+  const out = 1 - e(t, 100, 18);
+  return (
+    <g opacity={out}>
+      <rect x={-400} y={-400} width={2800} height={2000} fill="#141413" />
+      <rect x={-400} y={-400} width={2800} height={2000} fill="url(#presentsGlow)" opacity={logo} />
+      <defs>
+        <radialGradient id="presentsGlow" cx="0.5" cy="0.45" r="0.5">
+          <stop offset="0" stopColor="#D97757" stopOpacity={0.22} />
+          <stop offset="1" stopColor="#D97757" stopOpacity={0} />
+        </radialGradient>
+      </defs>
+      <g transform={`translate(960 400) scale(${0.85 + 0.15 * logo})`}>
+        <ClaudeMark k={logo} t={t} size={120} />
+      </g>
+      <text x={960} y={640} textAnchor="middle" fontFamily="Fraunces" fontWeight={600} fontSize={96} fill="#F5F0E8" letterSpacing={2} opacity={name} transform={`translate(0 ${(1 - name) * 20})`}>
+        Opus 5.5
+      </text>
+      <text x={960} y={730} textAnchor="middle" fontFamily="Poppins" fontWeight={600} fontSize={34} fill="#D97757" letterSpacing={18} opacity={pres}>
+        PRESENTS
+      </text>
+    </g>
+  );
+};
+
 const Open: React.FC<ShotProps> = ({t, d, mood}) => {
   const title = e(t, 30, 24) * (1 - e(t, 150, 24));
   return (
@@ -103,7 +146,7 @@ const Open: React.FC<ShotProps> = ({t, d, mood}) => {
         </g>
         <ParkGround t={t} y={800} mood={mood} />
         <g transform="translate(700 860) scale(0.6)">
-          <SwingSet t={t} a1={Math.sin(t / 14) * 30} a2={Math.sin(t / 14 + 2) * 26} kid1={<Human kid seed={3} t={t} emo="laugh" pose={{legs: 'sit', armL: 160, armR: 160, elbowL: 0, elbowR: 0}} />} kid2={<Human kid seed={8} girl t={t} emo="happy" pose={{legs: 'sit', armL: 160, armR: 160}} />} />
+          <SwingSet t={t} a1={Math.sin(t / 14) * 30} a2={Math.sin(t / 14 + 2) * 26} kid1={<Human kid seed={3} t={t} emo="laugh" pose={{legs: 'sitHang', armL: 160, armR: 160, elbowL: 0, elbowR: 0}} />} kid2={<Human kid seed={8} girl t={t} emo="happy" pose={{legs: 'sitHang', armL: 160, armR: 160}} />} />
         </g>
         <g transform="translate(1180 880) scale(0.62)">
           <Slide />
@@ -115,12 +158,12 @@ const Open: React.FC<ShotProps> = ({t, d, mood}) => {
           <Human kid seed={21} t={t} emo="happy" pose={{legs: 'run'}} dir={-1} />
         </g>
       </Cam>
-      <g opacity={title}>
-        <text x={960} y={330} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={120} fill="#1E2A44" opacity={0.25} transform="translate(8 10)">
-          THE GIANT FROM THE SEA
+      <g opacity={title} transform={`translate(0 ${(1 - title) * 16})`}>
+        <text x={966} y={238} textAnchor="middle" fontFamily="Fraunces" fontWeight={900} fontSize={112} fill="#1E3A5F" opacity={0.25}>
+          The Giant from the Sea
         </text>
-        <text x={960} y={330} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={120} fill="#FFFFFF" letterSpacing={4}>
-          THE GIANT FROM THE SEA
+        <text x={960} y={230} textAnchor="middle" fontFamily="Fraunces" fontWeight={900} fontSize={112} fill="#FFFFFF">
+          The Giant from the Sea
         </text>
       </g>
     </>
@@ -141,8 +184,8 @@ const Swings: React.FC<ShotProps> = ({t, d, mood}) => {
           t={t}
           a1={a1}
           a2={a2}
-          kid1={<Human kid seed={3} t={t} emo="laugh" pose={{legs: 'sit', armL: 165, armR: 165}} look={-0.3} />}
-          kid2={<Human kid seed={8} girl t={t} emo="happy" emoTo="laugh" emoK={cl(Math.sin(t / 13 + 1.8))} pose={{legs: 'sit', armL: 165, armR: 165}} />}
+          kid1={<Human kid seed={3} t={t} emo="laugh" pose={{legs: 'sitHang', armL: 165, armR: 165}} look={-0.3} />}
+          kid2={<Human kid seed={8} girl t={t} emo="happy" emoTo="laugh" emoK={cl(Math.sin(t / 13 + 1.8))} pose={{legs: 'sitHang', armL: 165, armR: 165}} />}
         />
       </g>
       <g transform="translate(360 1010) scale(1.3)">
@@ -152,12 +195,51 @@ const Swings: React.FC<ShotProps> = ({t, d, mood}) => {
   );
 };
 
+/** A point on the slide's surface (the path drawn in Slide) and its slope angle. */
+const slidePoint = (u: number) => {
+  const P0 = [-100, -300], P1 = [0, -300], P2 = [40, -60], P3 = [190, -20];
+  const b = (k: number) => {
+    const m = 1 - u;
+    return m * m * m * P0[k] + 3 * m * m * u * P1[k] + 3 * m * u * u * P2[k] + u * u * u * P3[k];
+  };
+  const d = (k: number) => {
+    const m = 1 - u;
+    return 3 * m * m * (P1[k] - P0[k]) + 6 * m * u * (P2[k] - P1[k]) + 3 * u * u * (P3[k] - P2[k]);
+  };
+  return {x: b(0), y: b(1), a: (Math.atan2(d(1), d(0)) * 180) / Math.PI};
+};
+
 const SlideShot: React.FC<ShotProps> = ({t, d, mood}) => {
-  const k = e(t, 12, 40);
-  // path along the slide surface (slide at 880,900 scale 1.6)
-  const u = k;
-  const sx = -100 + u * 290;
-  const sy = -300 + Math.pow(u, 1.6) * 280;
+  // 0-1.6 s climb the ladder, 1.6-2.0 s sit at the top, 2.0-3.3 s slide, then land and cheer
+  const climbEnd = 1.6 * S;
+  const slideStart = 2.0 * S;
+  const slideEnd = 3.3 * S;
+  let kid: React.ReactNode;
+  if (t < climbEnd) {
+    const k = cl(t / climbEnd);
+    const rung = Math.floor(k * 5.5);
+    const y = -Math.min(5, rung) * 55 - (k * 5.5 - rung) * 20;
+    kid = (
+      <g transform={`translate(-147 ${y})`}>
+        <Human kid seed={12} t={t} emo="happy" pose={{legs: 'walk', armL: 150 + Math.sin(t / 3) * 20, armR: 150 - Math.sin(t / 3) * 20}} speed={1.4} />
+      </g>
+    );
+  } else if (t < slideEnd) {
+    const u = t < slideStart ? 0 : io(cl((t - slideStart) / (slideEnd - slideStart)));
+    const p = slidePoint(u);
+    kid = (
+      <g transform={`translate(${p.x} ${p.y}) rotate(${p.a * 0.85})`}>
+        <Human kid seed={12} t={t} emo={u < 0.05 ? 'happy' : 'laugh'} emoTo="cheer" emoK={u} pose={{legs: 'sitHang', armL: 160, armR: 150 + Math.sin(t / 4) * 10}} />
+      </g>
+    );
+  } else {
+    const k = e(t, slideEnd, 12);
+    kid = (
+      <g transform={`translate(${190 + k * 40} -20) translate(0 ${20 * k})`}>
+        <Human kid seed={12} t={t} emo="cheer" pose={{legs: k < 0.5 ? 'sitHang' : 'jump', armL: 170, armR: 165}} />
+      </g>
+    );
+  }
   return (
     <Cam t={t} d={d} z0={1.08} z1={1.0} x={900} y={560}>
       <Sky mood={mood} t={t} horizon={620} />
@@ -165,9 +247,7 @@ const SlideShot: React.FC<ShotProps> = ({t, d, mood}) => {
       <ParkGround t={t} y={880} mood={mood} />
       <g transform="translate(860 930) scale(1.7)">
         <Slide />
-        <g transform={`translate(${sx} ${sy - 4}) rotate(${-10 + u * 30})`}>
-          <Human kid seed={12} t={t} emo={t < 10 ? 'happy' : 'laugh'} emoTo="cheer" emoK={e(t, 50, 12)} pose={{legs: 'sit', armL: 150 + Math.sin(t / 4) * 10, armR: 160}} />
-        </g>
+        {kid}
       </g>
       <g transform="translate(1540 1000) scale(1.4)">
         <Human kid seed={21} girl t={t} emo="laugh" pose={{armL: 100 + Math.sin(t / 3) * 25, armR: 100 - Math.sin(t / 3) * 25, elbowL: 60, elbowR: 60}} dir={-1} />
@@ -504,7 +584,7 @@ const MomRun: React.FC<ShotProps> = ({t, d, mood}) => {
       <g transform="translate(900 1060) scale(2.4)">
         <Human seed={40} girl t={t} emo="scared" pose={{legs: 'run', armL: 95, armR: 85, elbowL: 70, elbowR: 70}} dir={-1} speed={1.2} />
         <g transform={`translate(-26 ${-150 + Math.abs(Math.sin(t * 0.5)) * 6}) scale(0.62)`}>
-          <Human kid seed={8} girl t={t} emo="cry" pose={{legs: 'sit', armL: 150 + Math.sin(t / 3) * 20, armR: 60}} dir={1} hold="teddy" />
+          <Human kid seed={8} girl t={t} emo="cry" pose={{legs: 'sitHang', armL: 150 + Math.sin(t / 3) * 20, armR: 60}} dir={1} hold="teddy" />
         </g>
       </g>
       <Tint mood={mood} />
@@ -515,7 +595,8 @@ const MomRun: React.FC<ShotProps> = ({t, d, mood}) => {
 const ShadowShot: React.FC<ShotProps> = ({t, d, mood}) => {
   const dark = e(t, 0, 50);
   const land = 2.5 * S;
-  const footY = t < land ? lerp(-900, 560, io(cl((t - 30) / (land - 30)))) : 560;
+  // the sole comes down onto the far lane of the road (y 900) and stays planted
+  const footY = t < land ? lerp(-1100, 900, Math.pow(cl((t - 30) / (land - 30)), 2.2)) : 900;
   const sh = shake(t, land, 30, 45);
   const jump = t > land ? Math.max(0, Math.sin(cl((t - land) / 16) * Math.PI)) * 50 : 0;
   return (
@@ -542,19 +623,32 @@ const ShadowShot: React.FC<ShotProps> = ({t, d, mood}) => {
       ))}
       {/* the shadow sweeps over the street */}
       <rect x={-200} y={-200} width={2400} height={1600} fill="#0B0E1A" opacity={dark * 0.45} />
-      {/* the foot comes down */}
-      <g transform={`translate(1450 ${footY}) scale(1.4)`}>
-        <rect x={-150} y={-700} width={300} height={600} rx={100} fill={MC.skin} />
-        <path d="M-230 20 Q-240 -120 -150 -130 L150 -130 Q230 -110 220 20 Z" fill={MC.skin} />
-        <path d="M-60 -700 L -60 -150 Q 0 -120 60 -150 L 60 -700 Z" fill={MC.skin2} opacity={0.5} />
-        {[-200, -130, -60].map((x) => (
-          <path key={x} d={`M${x} 20 l -24 18 l 40 -4 Z`} fill={MC.teeth} />
+      {/* the foot comes down: a scaly leg, a heel and three clawed toes; its sole is at footY */}
+      <g transform={`translate(1450 ${footY}) scale(1.35)`}>
+        <ellipse cx={0} cy={4} rx={260 * cl((t - land + 20) / 20)} ry={26} fill="#000" opacity={0.3} />
+        <path d="M-170 -1400 L 170 -1400 L 190 -260 Q 190 -150 120 -130 L -130 -130 Q -190 -150 -180 -260 Z" fill={MC.skin} />
+        <path d="M60 -1400 L 170 -1400 L 190 -260 Q 190 -150 120 -130 L 60 -130 Z" fill={MC.skin2} />
+        {Array.from({length: 14}, (_, i) => (
+          <ellipse key={i} cx={-120 + ((i * 67) % 240)} cy={-1300 + ((i * 131) % 1100)} rx={16} ry={10} fill={MC.skin2} opacity={0.7} />
+        ))}
+        {[0, 1, 2, 3].map((i) => (
+          <path key={i} d={`M-150 ${-420 - i * 70} q 150 30 300 0`} stroke={MC.skin2} strokeWidth={10} fill="none" strokeLinecap="round" />
+        ))}
+        {/* heel and toes resting on the road */}
+        <path d="M-250 0 Q -262 -120 -170 -150 L 170 -150 Q 250 -130 240 0 Z" fill={MC.skin} />
+        <path d="M-250 0 Q -262 -60 -220 -80 L 230 -80 Q 246 -40 240 0 Z" fill={MC.skin2} />
+        {[-190, -60, 70].map((x) => (
+          <g key={x}>
+            <ellipse cx={x} cy={-40} rx={62} ry={44} fill={MC.skin} />
+            <path d={`M${x - 70} -6 q -30 4 -44 26 q 26 -2 50 -4 Z`} fill={MC.teeth} />
+          </g>
         ))}
       </g>
-      {t > land && <path d="M1150 900 l 80 40 l -40 60 l 90 50 M1700 900 l -60 50 l 50 40" stroke="#1E2A44" strokeWidth={10} fill="none" />}
-      <Dust t={t} t0={land} x={1450} y={880} r={150} col="#8E8174" life={70} />
-      <Debris t={t} t0={land} x={1450} y={860} n={30} spread={900} up={20} seed={9} />
-      <Shockwave t={t} t0={land} x={1450} y={900} r={1400} life={26} />
+      {t > land && <path d="M1100 910 l 80 30 l -40 50 l 90 40 M1800 910 l -60 40 l 50 40 M1450 915 l 20 60 l -30 50" stroke="#1E2A44" strokeWidth={10} fill="none" />}
+      <Dust t={t} t0={land} x={1060} y={905} r={80} col="#8E8174" life={60} spread={0.6} />
+      <Dust t={t} t0={land} x={1840} y={905} r={80} col="#8E8174" life={60} spread={0.6} />
+      <Debris t={t} t0={land} x={1450} y={890} n={30} spread={900} up={20} seed={9} />
+      <Shockwave t={t} t0={land} x={1450} y={905} r={1400} life={26} />
       <Tint mood={mood} />
     </Cam>
   );
@@ -656,17 +750,17 @@ const Hide: React.FC<ShotProps> = ({t, d, mood}) => {
       <Sea mood={mood} t={t} y={600} />
       <Skyline mood={mood} t={t} x={100} y={610} w={1300} s={0.7} fire={1} broken={[2, 5, 9, 13]} />
       <ParkGround t={t} y={820} mood={mood} />
-      <g transform="translate(700 1080) scale(2.2)">
+      <g transform="translate(560 1000) scale(2.1)">
         <Slide />
       </g>
-      {/* hiding under the slide */}
-      <g transform="translate(760 1060) scale(1.9)">
-        <Human seed={40} girl t={t} emo="worried" pose={{legs: 'sit', armL: 80, armR: 80, elbowL: 60, elbowR: 70}} />
+      {/* huddled together on the grass beside the slide */}
+      <g transform="translate(900 950) scale(2)">
+        <Human seed={40} girl t={t} emo="worried" pose={{legs: 'sit', armL: 80, armR: 75, elbowL: 50, elbowR: 60}} />
       </g>
-      <g transform="translate(900 1060) scale(1.9)">
+      <g transform="translate(1080 970) scale(2)">
         <Human kid seed={8} girl t={t} emo="cry" emoTo="hopeful" emoK={e(t, 3.5 * S, 16)} lookY={t > 3.4 * S ? -1 : 0} look={t > 3.4 * S ? 0.8 : 0} pose={{legs: 'sit', armL: 60, armR: 50}} hold="teddy" />
       </g>
-      <g transform="translate(1050 1060) scale(1.9)">
+      <g transform="translate(1250 970) scale(2)">
         <Human kid seed={3} t={t} emo="scared" emoTo="shock" emoK={e(t, 3.6 * S, 10)} lookY={t > 3.5 * S ? -1 : 0} pose={{legs: 'sit', armL: 70, armR: 70, elbowL: 50}} />
       </g>
       <Tint mood={mood} />
@@ -918,6 +1012,7 @@ const End: React.FC<ShotProps> = ({t, d, mood}) => {
 };
 
 export const SHOT_COMPONENTS: Record<string, React.FC<ShotProps>> = {
+  presents: Presents,
   open: Open,
   swings: Swings,
   slide: SlideShot,

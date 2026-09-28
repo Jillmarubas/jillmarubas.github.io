@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
-import '../dcc/fonts';
+import './fonts';
 import TL from './timeline.json';
 import {SHOT_COMPONENTS} from './shots';
 

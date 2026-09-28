@@ -38,7 +38,7 @@ export type Pose = {
   armR?: number;
   elbowL?: number;
   elbowR?: number;
-  legs?: 'stand' | 'walk' | 'run' | 'sit' | 'jump';
+  legs?: 'stand' | 'walk' | 'run' | 'sit' | 'sitHang' | 'jump';
 };
 export type HumanProps = {
   kid?: boolean;
@@ -109,8 +109,13 @@ export const Human: React.FC<HumanProps> = ({kid, seed, t, emo = 'neutral', emoT
     legA = [swing, -swing];
     knee = [Math.max(0, -Math.sin(cyc)) * (legs === 'run' ? 60 : 25), Math.max(0, Math.sin(cyc)) * (legs === 'run' ? 60 : 25)];
   } else if (legs === 'sit') {
-    legA = [80, 80];
-    knee = [-80, -80];
+    // sitting on the ground: legs straight out in front
+    legA = [88, 84];
+    knee = [0, 4];
+  } else if (legs === 'sitHang') {
+    // sitting on a seat or slide: thighs forward, shins hanging down
+    legA = [86, 80];
+    knee = [84, 80];
   } else if (legs === 'jump') {
     legA = [25, -15];
     knee = [40, 50];
@@ -127,11 +132,15 @@ export const Human: React.FC<HumanProps> = ({kid, seed, t, emo = 'neutral', emoT
   const curve = F.smile * R * 0.16;
   const tearDrops = F.tears > 0.05 ? [0, 1, 2].map((k) => ((t * 1.6 + k * 12) % 36) / 36) : [];
   const shirtCol = top;
+  const seated = legs === 'sit' || legs === 'sitHang';
   return (
-    <g transform={`scale(${s * dir} ${s}) translate(0 ${-bob}) rotate(${lean})`}>
-      <ellipse cx={0} cy={bob + 2} rx={P.bodyW * 0.7} ry={5} fill="#000" opacity={0.15} />
-      {legs !== 'sit' && [leg(-P.bodyW * 0.22, legA[0], knee[0], 'l1'), leg(P.bodyW * 0.22, legA[1], knee[1], 'l2')]}
-      {legs === 'sit' && [leg(-P.bodyW * 0.2, legA[0], knee[0], 'l1'), leg(P.bodyW * 0.2, legA[1], knee[1], 'l2')]}
+    <g transform={`scale(${s * dir} ${s})`}>
+    {/* sitting poses put the seat (hips) at the origin; standing poses put the feet there */}
+    {seated && <ellipse cx={P.bodyW * 0.4} cy={2} rx={P.bodyW * 1.1} ry={6} fill="#000" opacity={0.15} />}
+    {!seated && <ellipse cx={0} cy={2} rx={P.bodyW * 0.7} ry={5} fill="#000" opacity={0.15} />}
+    <g transform={`translate(0 ${(seated ? P.legL : 0) - bob}) rotate(${lean})`}>
+      {!seated && [leg(-P.bodyW * 0.22, legA[0], knee[0], 'l1'), leg(P.bodyW * 0.22, legA[1], knee[1], 'l2')]}
+      {seated && [leg(-P.bodyW * 0.15, legA[0], knee[0], 'l1'), leg(P.bodyW * 0.15, legA[1], knee[1], 'l2')]}
       {/* back arm */}
       {limb(-P.bodyW * 0.42, P.bodyTop + 8, P.armL, aL, pose.elbowL ?? 0, shirtCol, skin, 'aL')}
       {/* body */}
@@ -197,18 +206,34 @@ export const Human: React.FC<HumanProps> = ({kid, seed, t, emo = 'neutral', emoT
             <path d={`M${ex + R * 0.12} ${eyeY + eyeRX} l 0 ${R * 0.55}`} stroke="#7FD0FF" strokeWidth={R * 0.07} strokeLinecap="round" opacity={0.7 * F.tears} />
           </>
         )}
-        {/* mouth */}
+        {/* mouth: a smile for happy faces, an O for shock, a down-turned open mouth for fear */}
         <g transform={`translate(${R * 0.12} ${my})`}>
-          {mo > 0.08 ? (
+          {mo <= 0.08 ? (
+            <path d={`M${-mw * 0.8} 0 Q 0 ${curve * 1.4} ${mw * 0.8} 0`} fill="none" stroke="#6B1F2A" strokeWidth={R * 0.075} strokeLinecap="round" />
+          ) : F.smile > 0.3 ? (
             <g>
-              <path d={`M${-mw} ${-curve * 0.3} Q 0 ${curve * 0.4 - mo * R * 0.05} ${mw} ${-curve * 0.3} Q ${mw * 0.9} ${mo * R * 0.5 + Math.max(0, curve) * 0.8} 0 ${mo * R * 0.55 + Math.max(0, curve)} Q ${-mw * 0.9} ${mo * R * 0.5 + Math.max(0, curve) * 0.8} ${-mw} ${-curve * 0.3} Z`} fill="#6B1F2A" />
-              <ellipse cx={0} cy={mo * R * 0.38 + Math.max(0, curve) * 0.6} rx={mw * 0.45} ry={mo * R * 0.14} fill="#FF6F7F" />
-              {curve > 0 && <rect x={-mw * 0.7} y={-curve * 0.25} width={mw * 1.4} height={R * 0.07} rx={R * 0.03} fill="#fff" />}
+              <path d={`M${-mw} ${-curve * 0.3} Q 0 ${curve * 0.4 - mo * R * 0.05} ${mw} ${-curve * 0.3} Q ${mw * 0.9} ${mo * R * 0.5 + curve * 0.8} 0 ${mo * R * 0.55 + curve} Q ${-mw * 0.9} ${mo * R * 0.5 + curve * 0.8} ${-mw} ${-curve * 0.3} Z`} fill="#6B1F2A" />
+              <ellipse cx={0} cy={mo * R * 0.38 + curve * 0.6} rx={mw * 0.45} ry={mo * R * 0.14} fill="#FF6F7F" />
+              <rect x={-mw * 0.7} y={-curve * 0.25} width={mw * 1.4} height={R * 0.07} rx={R * 0.03} fill="#fff" />
+            </g>
+          ) : F.smile > -0.15 ? (
+            <g>
+              <ellipse cx={0} cy={mo * R * 0.12} rx={mw * 0.55} ry={mo * R * 0.3 + R * 0.04} fill="#6B1F2A" />
+              <ellipse cx={0} cy={mo * R * 0.28} rx={mw * 0.3} ry={mo * R * 0.1} fill="#FF6F7F" />
             </g>
           ) : (
-            <path d={`M${-mw * 0.8} 0 Q 0 ${curve * 1.4} ${mw * 0.8} 0`} fill="none" stroke="#6B1F2A" strokeWidth={R * 0.075} strokeLinecap="round" />
+            <g>
+              {/* corners pulled down, top lip arched up: a frightened scream */}
+              <path d={`M${-mw * 0.95} ${R * 0.14} Q ${-mw * 0.7} ${-mo * R * 0.42} 0 ${-mo * R * 0.4} Q ${mw * 0.7} ${-mo * R * 0.42} ${mw * 0.95} ${R * 0.14} Q ${mw * 0.5} ${R * 0.14 + mo * R * 0.3} 0 ${R * 0.14 + mo * R * 0.32} Q ${-mw * 0.5} ${R * 0.14 + mo * R * 0.3} ${-mw * 0.95} ${R * 0.14} Z`} fill="#5A1622" />
+              <rect x={-mw * 0.55} y={-mo * R * 0.38} width={mw * 1.1} height={R * 0.07} rx={R * 0.03} fill="#fff" />
+              <ellipse cx={0} cy={R * 0.12 + mo * R * 0.2} rx={mw * 0.4} ry={mo * R * 0.1} fill="#FF6F7F" />
+            </g>
           )}
         </g>
+        {/* a sweat drop when frightened */}
+        {F.brow > 0.7 && F.tears < 0.3 && (
+          <path d={`M${R * 0.95} ${-R * 0.55 + ((t * 0.8) % 30)} q ${R * 0.12} ${R * 0.2} 0 ${R * 0.26} q ${-R * 0.12} ${-R * 0.06} 0 ${-R * 0.26} Z`} fill="#8FD8FF" opacity={0.9} />
+        )}
       </g>
       {/* front arm and anything held */}
       <g>
@@ -225,6 +250,7 @@ export const Human: React.FC<HumanProps> = ({kid, seed, t, emo = 'neutral', emoT
           </g>
         )}
       </g>
+    </g>
     </g>
   );
 };
