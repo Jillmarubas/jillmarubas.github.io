@@ -290,12 +290,14 @@ def ambience_park(d=6.0):
 
 
 def swing_creak(d=4.5):
+    """Metal chain squeaks at the end of each swing: short, bright and inharmonic, not voice-like."""
     out = np.zeros(int(d * SR))
     for i in range(int(d / 1.3)):
-        L = 0.35
-        f = 900 + 180 * np.sin(np.linspace(0, np.pi, int(L * SR)))
-        s = (osc(f, L, 'saw') * 0.3 + osc(f * 1.5, L) * 0.2) * env(int(L * SR), 0.05, 0.1)
-        place(out, bp(s, 600, 3000) * 0.5, i * 1.3)
+        L = 0.18
+        n = int(L * SR)
+        ring = sum(osc(f * (1 + 0.02 * np.sin(np.linspace(0, 6, n))), L) * w for f, w in ((2630, 1), (3915, 0.6), (5210, 0.4)))
+        rub = bp(noise(L), 1800, 6000) * 0.5
+        place(out, (ring * 0.4 + rub) * env(n, 0.02, 0.1) * 0.6, i * 1.3 + 0.2)
     return out
 
 
@@ -564,7 +566,7 @@ def presents_swell(d=3.5):
 
 SFX = {
     'presents_swell': lambda: presents_swell(3.5),
-    'ambience_park': lambda: ambience_park(6.0),
+    'ambience_park': lambda: mix(ambience_park(6.0) * 0.6, lp(rec(371377, 6.0, pick=0), 5000) * 0.5),
     'gulls': lambda: gulls(5.0),
     'gulls_panic': lambda: gulls(3.0, True),
     'kids_laugh': lambda: kids_laugh(1.8),
@@ -639,6 +641,73 @@ LEVEL = {
     'beam_clash': 0.85, 'sting': 0.9,
 }
 
+
+
+# ------------------------------------------------------------------ real voice recordings (CC0)
+# Synthesised voices sound robotic, so laughs, screams, crying and crowds use CC0 recordings
+# from Freesound (see assets/kaiju-sfx/CREDITS.md). Each cue takes the loudest window of the
+# right length from a chosen range, with short fades, and repeated cues use different windows.
+import subprocess
+
+SAMPLE_DIR = os.path.join(ROOT, 'assets/kaiju-sfx')
+_decoded = {}
+
+
+def load(fsid):
+    if fsid not in _decoded:
+        wav = os.path.join(SAMPLE_DIR, f'fs{fsid}.wav')
+        if not os.path.exists(wav):
+            subprocess.run(['npx', 'remotion', 'ffmpeg', '-y', '-loglevel', 'error', '-i', os.path.join(SAMPLE_DIR, f'fs{fsid}.mp3'), '-ac', '1', '-ar', str(SR), wav], cwd=ROOT, check=True)
+        sr, x = wavfile.read(wav)
+        x = x.astype(float) / 32767
+        _decoded[fsid] = norm(x - np.mean(x))
+    return _decoded[fsid]
+
+
+def rec(fsid, d, lo=0.0, hi=None, pick=0, fade=0.06):
+    """The pick-th loudest non-overlapping window of length d between lo and hi seconds."""
+    x = load(fsid)
+    hi = len(x) / SR if hi is None else min(hi, len(x) / SR)
+    a, b = int(lo * SR), int(hi * SR)
+    seg = x[a:b]
+    n = min(int(d * SR), len(seg))
+    hop = max(1, int(0.1 * SR))
+    starts = list(range(0, max(1, len(seg) - n + 1), hop))
+    e = np.array([np.sqrt(np.mean(seg[i : i + n] ** 2)) for i in starts])
+    chosen = []
+    for i in np.argsort(-e):
+        s0 = starts[i]
+        if all(abs(s0 - c) >= n for c in chosen):
+            chosen.append(s0)
+        if len(chosen) > pick:
+            break
+    s0 = chosen[min(pick, len(chosen) - 1)]
+    out = seg[s0 : s0 + n].copy()
+    f = int(fade * SR)
+    out[:f] *= np.linspace(0, 1, f)
+    out[-f:] *= np.linspace(1, 0, f)
+    return out
+
+
+REAL = {
+    'kids_laugh': [lambda: rec(371342, 3.0), lambda: rec(342838, 3.0, pick=0), lambda: rec(342838, 3.0, pick=1)],
+    'kid_giggle': [lambda: rec(342838, 1.6, pick=2)],
+    'kid_cheer': [lambda: mix(rec(371342, 2.2) * 0.8, rec(438421, 2.2, lo=3) * 0.5)],
+    'kids_cheer': [lambda: rec(438421, 3.0, lo=3, hi=29)],
+    'kid_gasp': [lambda: rec(318078, 0.9)],
+    'kids_scream': [lambda: mix(rec(397686, 2.4), np.concatenate([np.zeros(int(0.25 * SR)), rec(235592, 2.2) * 0.8]))],
+    'kid_cry': [lambda: rec(635910, 3.4, lo=17.5, hi=27.5), lambda: rec(203508, 3.4, lo=30, hi=54)],
+    'kid_sob': [lambda: rec(203508, 3.0, lo=30, hi=54, pick=1)],
+    'mom_shout': [lambda: rec(319258, 1.3)],
+    'crowd_scream': [
+        lambda: mix(rec(435716, 4.5, pick=0), rec(459101, 4.5) * 0.6),
+        lambda: mix(rec(435716, 4.5, pick=1), rec(235591, 2.5) * 0.4),
+        lambda: rec(435716, 4.5, pick=2),
+        lambda: mix(rec(435716, 4.5, pick=3), rec(459101, 4.5, pick=1) * 0.6),
+        lambda: rec(435716, 4.5, pick=4),
+        lambda: rec(435716, 4.5, pick=5),
+    ],
+}
 
 # ------------------------------------------------------------------ music bed
 def note(f, d, kind='pluck'):
@@ -751,11 +820,20 @@ def main():
     L = np.zeros(int(total * SR) + SR * 5)
     R = np.zeros_like(L)
     cache = {}
+    used = {}
     for s, t0 in zip(TL['shots'], starts):
         for off, name, g in s['sfx']:
-            if name not in cache:
-                cache[name] = norm(SFX[name]())
-            x = cache[name] * LEVEL.get(name, 0.6) * g
+            if name in REAL:
+                k = used.get(name, 0)
+                used[name] = k + 1
+                key = (name, k % len(REAL[name]))
+                if key not in cache:
+                    cache[key] = norm(REAL[name][key[1]]())
+                x = cache[key] * LEVEL.get(name, 0.6) * g
+            else:
+                if name not in cache:
+                    cache[name] = norm(SFX[name]())
+                x = cache[name] * LEVEL.get(name, 0.6) * g
             pan = 0.5 + (rng.random() - 0.5) * 0.5
             place(L, x * np.sqrt(1 - pan) * 1.2, t0 + off)
             place(R, x * np.sqrt(pan) * 1.2, t0 + off)
