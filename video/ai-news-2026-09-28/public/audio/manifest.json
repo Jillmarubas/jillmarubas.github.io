@@ -1,0 +1,82 @@
+{
+ "bpm": 100,
+ "total": 586.0999999999999,
+ "blocks": [
+  {
+   "kind": "vo",
+   "start": 0.6
+  },
+  {
+   "kind": "sting",
+   "start": 30.053
+  },
+  {
+   "kind": "vo",
+   "start": 33.853
+  },
+  {
+   "kind": "card",
+   "start": 74.055
+  },
+  {
+   "kind": "vo",
+   "start": 77.255
+  },
+  {
+   "kind": "card",
+   "start": 173.585
+  },
+  {
+   "kind": "vo",
+   "start": 176.785
+  },
+  {
+   "kind": "card",
+   "start": 251.094
+  },
+  {
+   "kind": "vo",
+   "start": 254.294
+  },
+  {
+   "kind": "card",
+   "start": 331.998
+  },
+  {
+   "kind": "vo",
+   "start": 335.198
+  },
+  {
+   "kind": "card",
+   "start": 398.039
+  },
+  {
+   "kind": "vo",
+   "start": 401.239
+  },
+  {
+   "kind": "card",
+   "start": 465.667
+  },
+  {
+   "kind": "vo",
+   "start": 468.867
+  },
+  {
+   "kind": "recap",
+   "start": 525.373
+  },
+  {
+   "kind": "vo",
+   "start": 527.373
+  },
+  {
+   "kind": "vo",
+   "start": 550.545
+  },
+  {
+   "kind": "end",
+   "start": 577.1
+  }
+ ]
+}
