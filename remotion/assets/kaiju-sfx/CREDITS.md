@@ -20,3 +20,15 @@ required. Listed so the sources can be checked. Files are the Freesound HQ previ
 | fs459101.mp3 | https://freesound.org/s/459101/ | Crowd Screaming | DigestContent | city panic layer |
 
 Other candidates were rejected because they contained spoken words or music.
+
+## Added in v4
+
+| File | Freesound | Title | Author | Used for |
+|---|---|---|---|---|
+| fs182503.mp3 | https://freesound.org/s/182503/ | Birds Chirping 01 - Down small park lane | swiftoid | playground birds |
+| fs353416.mp3 | https://freesound.org/s/353416/ | Seagull on beach | squashy555 | seagulls |
+| fs398908.mp3 | https://freesound.org/s/398908/ | Monster Roar 2 | quadraslayer | monster roar (pitched down) |
+| fs85568.mp3 | https://freesound.org/s/85568/ | DRAGON_ROAR | JoelAudio | monster roar layer (pitched down) |
+| fs476083.mp3 | https://freesound.org/s/476083/ | roar | icyjim | monster hurt roar |
+| fs469411.mp3 | https://freesound.org/s/469411/ | Police siren | sofialomba | police siren |
+| fs182474.mp3 | https://freesound.org/s/182474/ | car horn | keweldog | car horn |

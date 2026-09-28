@@ -515,12 +515,12 @@ const Panic: React.FC<ShotProps> = ({t, d, mood}) => {
         [760, '#3A86E8', -1],
         [1250, '#FFFFFF', 1],
       ].map(([x, c, dr], i) => (
-        <g key={i} transform={`translate(${x as number} 870)`}>
+        <g key={i} transform={`translate(${x as number} 850) scale(2.4)`}>
           <Car color={c as string} t={0} dir={dr as 1 | -1} />
         </g>
       ))}
       {/* police car with flashing lights */}
-      <g transform={`translate(${lerp(2100, 1650, e(t, 20, 60))} 960)`}>
+      <g transform={`translate(${lerp(2300, 1600, e(t, 20, 60))} 930) scale(2.4)`}>
         <Car color="#FFFFFF" t={t} dir={-1} />
         <rect x={-30} y={-84} width={28} height={14} rx={4} fill={siren ? '#E8403A' : '#6B1F1F'} />
         <rect x={2} y={-84} width={28} height={14} rx={4} fill={siren ? '#2C2C8C' : '#3A86E8'} />
@@ -544,11 +544,11 @@ const Crash: React.FC<ShotProps> = ({t, d, mood}) => {
       <Sky mood={mood} t={t} horizon={660} />
       <StreetRow t={t} y={660} mood={mood} seed={4} />
       <Road y={660} t={t} />
-      <g transform="translate(760 900) scale(1.4)">
+      <g transform="translate(700 900) scale(2.5)">
         <Car color="#3A86E8" t={0} dir={1} kind="van" />
         {crumple > 0 && <path d="M60 -70 l 20 30 l -14 10 l 18 26" stroke="#1E2A44" strokeWidth={4} fill="none" />}
       </g>
-      <g transform={`translate(${carX} 930) rotate(${spin}) scale(1.4)`}>
+      <g transform={`translate(${carX + 60} 930) rotate(${spin}) scale(2.5)`}>
         <Car color="#E8403A" t={t} dir={-1} kind="sport" />
         {crumple > 0 && <path d="M-80 -30 l -10 -20 l 16 -6" stroke="#1E2A44" strokeWidth={4} fill="none" />}
       </g>
@@ -608,7 +608,7 @@ const ShadowShot: React.FC<ShotProps> = ({t, d, mood}) => {
         [240, '#FFC928'],
         [640, '#7D6BE0'],
       ].map(([x, c], i) => (
-        <g key={i} transform={`translate(${x} ${880 - jump * (i ? 0.7 : 1)}) rotate(${jump * (i ? -0.2 : 0.15)})`}>
+        <g key={i} transform={`translate(${x} ${880 - jump * (i ? 0.7 : 1)}) rotate(${jump * (i ? -0.2 : 0.15)}) scale(2.3)`}>
           <Car color={c as string} t={0} />
         </g>
       ))}
@@ -793,7 +793,7 @@ const Arrival: React.FC<ShotProps> = ({t, d, mood}) => {
       )}
       {t >= land && (
         <g transform="translate(900 1010) scale(0.66)">
-          <Hero t={t} crouch={1 - rise} armL={lerp(40, 70, rise)} armR={lerp(-20, 80, rise)} elbowL={lerp(10, 80, rise)} elbowR={lerp(10, 100, rise)} glow={lerp(0.4, 1, rise)} legA={lerp(30, 14, rise)} legB={lerp(-30, -14, rise)} />
+          <Hero t={t} turn={0.85} crouch={1 - rise} armL={lerp(40, 70, rise)} armR={lerp(-20, 80, rise)} elbowL={lerp(10, 80, rise)} elbowR={lerp(10, 100, rise)} glow={lerp(0.4, 1, rise)} legA={lerp(30, 14, rise)} legB={lerp(-30, -14, rise)} />
         </g>
       )}
       <Shockwave t={t} t0={land} x={900} y={1000} r={1800} life={30} col={HC.crystal} />
@@ -865,7 +865,7 @@ const FaceOff: React.FC<ShotProps> = ({t, d, mood}) => (
   <Cam t={t} d={d} z0={0.95} z1={1.04} sh={shake(t, 1.8 * S, 8, 50)}>
     <Arena t={t} mood={mood} />
     <g transform="translate(560 1010) scale(0.62)">
-      <Hero t={t} armL={70} armR={80} elbowL={80} elbowR={100} legA={16} legB={-16} crouch={0.15} />
+      <Hero t={t} turn={0.85} armL={70} armR={80} elbowL={80} elbowR={100} legA={16} legB={-16} crouch={0.15} />
     </g>
     <g transform="translate(1420 1010) scale(0.62)">
       <Monster t={t} jaw={e(t, 1.8 * S, 10) * (1 - e(t, 3.6 * S, 12))} charge={0.3} arms={0.5} />
@@ -888,7 +888,7 @@ const Clash: React.FC<ShotProps> = ({t, d, mood}) => {
     <Cam t={t} d={d} z0={1.0} z1={1.1} x={1000} y={640} sh={sh}>
       <Arena t={t} mood={mood} />
       <g transform={`translate(${hx} 1010) scale(0.7)`}>
-        <Hero t={t} armR={lerp(60, 92, Math.max(p1, p2))} elbowR={lerp(100, 0, Math.max(p1, p2))} armL={70} elbowL={90} legA={k < 1 ? 20 + Math.sin(t * 0.3) * 14 : 18} legB={k < 1 ? -20 - Math.sin(t * 0.3) * 14 : -18} crouch={0.1} />
+        <Hero t={t} turn={0.85} armR={lerp(60, 92, Math.max(p1, p2))} elbowR={lerp(100, 0, Math.max(p1, p2))} armL={70} elbowL={90} legA={k < 1 ? 20 + Math.sin(t * 0.3) * 14 : 18} legB={k < 1 ? -20 - Math.sin(t * 0.3) * 14 : -18} crouch={0.1} />
       </g>
       <g transform={`translate(${mx + recoil * 90} 1010) scale(0.7)`}>
         <Monster t={t} walk={k < 1 ? 1 : 0} hurt={recoil} jaw={recoil * 0.8} arms={0.6} />
@@ -918,7 +918,7 @@ const TailShot: React.FC<ShotProps> = ({t, d, mood}) => {
         <Monster t={t} tail={-swipe * 55 + e(t, 40, 30) * 55} jaw={0.4} charge={0.3} />
       </g>
       <g transform={`translate(${hx} ${hy}) scale(0.62) rotate(${jump < 1 ? -jump * 360 : 0} 0 -500)`}>
-        <Hero t={t} crouch={jump >= 1 ? 1 - e(t, land, 30) : 0.5} armL={100} armR={100} elbowL={40} elbowR={40} legA={jump < 1 ? 60 : 20} legB={jump < 1 ? 30 : -20} />
+        <Hero t={t} turn={0.85} crouch={jump >= 1 ? 1 - e(t, land, 30) : 0.5} armL={100} armR={100} elbowL={40} elbowR={40} legA={jump < 1 ? 60 : 20} legB={jump < 1 ? 30 : -20} />
       </g>
       {Array.from({length: 6}, (_, i) => (
         <path key={i} d={`M${900 - i * 40} ${700 + i * 40} q -200 -60 -420 40`} stroke="#FFFFFF" strokeWidth={6} fill="none" opacity={swipe > 0 && swipe < 1 ? 0.5 : 0} />
@@ -944,7 +944,7 @@ const Beams: React.FC<ShotProps> = ({t, d, mood}) => {
     <Cam t={t} d={d} z0={0.98} z1={1.06} sh={t > boom ? shake(t, boom, 30, 40) : sh}>
       <Arena t={t} mood={mood} />
       <g transform="translate(400 1010) scale(0.66)">
-        <Hero t={t} armR={90} elbowR={0} armL={20} elbowL={110} legA={20} legB={-20} crouch={0.12} glow={1} />
+        <Hero t={t} turn={0.85} armR={90} elbowR={0} armL={20} elbowL={110} legA={20} legB={-20} crouch={0.12} glow={1} />
       </g>
       <g transform="translate(1500 1010) scale(0.66)">
         <Monster t={t} charge={e(t, 0, 40)} jaw={e(t, fire - 10, 10)} hurt={t > boom ? 1 : 0} />
@@ -978,7 +978,7 @@ const End: React.FC<ShotProps> = ({t, d, mood}) => {
         <Skyline mood={mood} t={t} x={-200} y={880} w={2400} s={1.0} fire={1} broken={[3, 9, 16, 22, 27]} />
         <g transform="translate(700 880) scale(0.5)" opacity={0.95}>
           <g filter="url(#silhouette)">
-            <Hero t={t} armL={10} armR={-6} />
+            <Hero t={t} turn={0.85} armL={10} armR={-6} />
           </g>
         </g>
         <g transform="translate(1450 890) scale(0.42)">

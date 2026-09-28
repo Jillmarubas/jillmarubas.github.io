@@ -180,9 +180,10 @@ export type HeroProps = {
   crouch?: number; // 0..1
   glow?: number; // 0..1 eyes and crystal intensity
   blink?: boolean; // crystal blinking (warning)
+  turn?: number; // 0 = facing the camera, 1 = three-quarter view facing right (toward the monster)
 };
 
-export const Hero: React.FC<HeroProps> = ({t, armL = 12, armR = -10, elbowL = 10, elbowR = 12, legA = 6, legB = -6, crouch = 0, glow = 1, blink}) => {
+export const Hero: React.FC<HeroProps> = ({t, armL = 12, armR = -10, elbowL = 10, elbowR = 12, legA = 6, legB = -6, crouch = 0, glow = 1, blink, turn = 0}) => {
   const breathe = 1 + Math.sin(t / 18) * 0.008;
   const dip = crouch * 150;
   const crystalOn = blink ? (Math.floor(t / 6) % 2 ? 1 : 0.3) : 1;
@@ -214,14 +215,14 @@ export const Hero: React.FC<HeroProps> = ({t, armL = 12, armR = -10, elbowL = 10
       {leg(-50, legB, true, 'lb')}
       {limb(-120, -800 + dip, 330, armL, elbowL, true, 'al')}
       {/* torso */}
-      <g transform={`translate(0 ${dip}) translate(0 -620) scale(${breathe}) translate(0 620)`}>
+      <g transform={`translate(${turn * 14} ${dip}) translate(0 -620) scale(${breathe * (1 - 0.16 * turn)} ${breathe}) translate(0 620)`}>
         <path d="M-150 -860 Q 0 -900 150 -860 L 120 -460 Q 0 -430 -120 -460 Z" fill={HC.silver} />
         <path d="M-150 -860 L -60 -860 L -20 -600 L -100 -470 L -120 -460 Z" fill={HC.red} />
         <path d="M150 -860 L 60 -860 L 20 -600 L 100 -470 L 120 -460 Z" fill={HC.red} />
         <path d="M-60 -860 L 60 -860 L 20 -600 L -20 -600 Z" fill={HC.silver} />
         <rect x={-126} y={-480} width={252} height={34} rx={14} fill={HC.gold} />
         {/* chest crystal (diamond) */}
-        <g transform="translate(0 -720)">
+        <g transform={`translate(${turn * 42} -720) scale(${1 - 0.25 * turn} 1)`}>
           <path d="M0 -58 L40 0 L0 58 L-40 0 Z" fill={HC.crystal} opacity={0.35 * glow * crystalOn} transform="scale(1.9)" />
           <path d="M0 -58 L40 0 L0 58 L-40 0 Z" fill={HC.dark} />
           <path d="M0 -46 L30 0 L0 46 L-30 0 Z" fill={HC.crystal} opacity={0.4 + 0.6 * glow * crystalOn} />
@@ -237,18 +238,26 @@ export const Hero: React.FC<HeroProps> = ({t, armL = 12, armR = -10, elbowL = 10
       <g transform={`translate(0 ${-960 + dip})`}>
         <rect x={-34} y={40} width={68} height={50} fill={HC.silver2} />
         <path d="M-78 10 C -84 -80, -40 -120, 0 -120 C 40 -120, 84 -80, 78 10 C 74 60, 30 86, 0 86 C -30 86, -74 60, -78 10 Z" fill={HC.silver} />
-        {/* crest fin */}
-        <path d="M-14 -118 L 0 -168 L 14 -118 L 10 40 L -10 40 Z" fill={HC.red} />
-        <path d="M-6 -150 L 0 -168 L 6 -150 L 4 30 L -4 30 Z" fill={HC.gold} />
-        {/* eyes */}
-        {[-1, 1].map((sd) => (
-          <g key={sd} transform={`translate(${sd * 38} -8) rotate(${sd * -18})`}>
-            <ellipse rx={32} ry={18} fill={HC.eye} opacity={0.25 * glow} transform="scale(1.7)" />
-            <ellipse rx={30} ry={17} fill={HC.eye} opacity={0.5 + 0.5 * glow} />
-            <ellipse rx={18} ry={8} fill="#fff" opacity={glow} />
-          </g>
-        ))}
-        <path d="M-20 56 Q 0 64 20 56" stroke={HC.silver2} strokeWidth={6} fill="none" strokeLinecap="round" />
+        {/* crest fin (slides toward the facing side when turned) */}
+        <g transform={`translate(${turn * 26} 0)`}>
+          <path d="M-14 -118 L 0 -168 L 14 -118 L 10 40 L -10 40 Z" fill={HC.red} />
+          <path d="M-6 -150 L 0 -168 L 6 -150 L 4 30 L -4 30 Z" fill={HC.gold} />
+        </g>
+        {/* the far side of the helmet in shadow when turned */}
+        {turn > 0 && <path d="M-78 10 C -84 -80, -40 -120, 0 -120 C -30 -100, -52 -50, -50 10 C -48 50, -30 76, 0 86 C -30 86, -74 60, -78 10 Z" fill={HC.silver2} opacity={turn * 0.8} />}
+        {/* eyes: the near eye stays full, the far eye narrows */}
+        {[-1, 1].map((sd) => {
+          const x = sd * 38 + turn * (sd > 0 ? 22 : 34);
+          const sx = sd > 0 ? 1 : 1 - 0.45 * turn;
+          return (
+            <g key={sd} transform={`translate(${x} -8) rotate(${sd * -18}) scale(${sx} 1)`}>
+              <ellipse rx={32} ry={18} fill={HC.eye} opacity={0.25 * glow} transform="scale(1.7)" />
+              <ellipse rx={30} ry={17} fill={HC.eye} opacity={0.5 + 0.5 * glow} />
+              <ellipse rx={18} ry={8} fill="#fff" opacity={glow} />
+            </g>
+          );
+        })}
+        <path d={`M${-20 + turn * 30} 56 Q ${turn * 30} 64 ${20 + turn * 30} 56`} stroke={HC.silver2} strokeWidth={6} fill="none" strokeLinecap="round" />
       </g>
       {limb(120, -800 + dip, 330, armR, elbowR, false, 'ar')}
     </g>

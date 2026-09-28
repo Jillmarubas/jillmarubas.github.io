@@ -281,7 +281,7 @@ def gulls(d=4.0, panic=False):
 def ambience_park(d=6.0):
     breeze = lp(noise(d), 500) * 0.5 * (0.7 + 0.3 * np.sin(np.arange(int(d * SR)) / SR * 0.8))
     birds = np.zeros(int(d * SR))
-    for _ in range(int(d * 3)):
+    for _ in range(0):
         L = 0.08 + rng.random() * 0.1
         f = glide(3000 + rng.random() * 1500, 4200 + rng.random() * 1500, L)
         place(birds, osc(f, L) * env(int(L * SR), 0.01, 0.04) * 0.25, rng.random() * (d - 0.3))
@@ -566,7 +566,7 @@ def presents_swell(d=3.5):
 
 SFX = {
     'presents_swell': lambda: presents_swell(3.5),
-    'ambience_park': lambda: mix(ambience_park(6.0) * 0.6, lp(rec(371377, 6.0, pick=0), 5000) * 0.5),
+    'ambience_park': lambda: mix(ambience_park(6.0) * 0.35, rec(182503, 6.0) * 0.8, lp(rec(371377, 6.0, pick=0), 5000) * 0.45),
     'gulls': lambda: gulls(5.0),
     'gulls_panic': lambda: gulls(3.0, True),
     'kids_laugh': lambda: kids_laugh(1.8),
@@ -628,6 +628,7 @@ SFX = {
 
 # per-effect loudness (relative to peak-normalised), so screams and booms sit right
 LEVEL = {
+    'birds': 0.4,
     'presents_swell': 0.7,
     'ambience_park': 0.55, 'gulls': 0.5, 'gulls_panic': 0.4, 'swing_creak': 0.55, 'kids_laugh': 0.95, 'kid_giggle': 0.85,
     'kid_cheer': 0.9, 'kids_cheer': 0.95, 'slide': 0.75, 'rumble_low': 0.8, 'rumble_grow': 0.9, 'chain_rattle': 0.45,
@@ -689,7 +690,28 @@ def rec(fsid, d, lo=0.0, hi=None, pick=0, fade=0.06):
     return out
 
 
+
+def pitch(x, ratio):
+    """Lower (ratio < 1) or raise the pitch by resampling (also changes the length)."""
+    return signal.resample(x, int(len(x) / ratio))
+
+
+def monster_roar(pick=0, d=2.8):
+    """Two CC0 creature roars, pitched down to sound huge, over a synthesised sub rumble."""
+    a = pitch(rec(398908, d / 0.78 * 0.9, pick=pick % 2), 0.78)
+    b = pitch(rec(85568, 2.2), 0.72)
+    sub = lp(roar(d), 300) * 0.5
+    return mix(a, b * 0.6, sub)
+
+
 REAL = {
+    'gulls': [lambda: rec(353416, 5.0, pick=0), lambda: rec(353416, 5.0, pick=1)],
+    'birds': [lambda: rec(182503, 5.0, pick=0), lambda: rec(182503, 5.0, pick=1), lambda: rec(182503, 4.5, pick=2)],
+    'gulls_panic': [lambda: pitch(rec(353416, 3.6, pick=2), 1.15)],
+    'roar': [lambda: monster_roar(0), lambda: monster_roar(1), lambda: monster_roar(0, 2.4), lambda: monster_roar(1, 2.4)],
+    'roar_hurt': [lambda: mix(pitch(rec(476083, 1.6), 0.8), lp(roar(1.4, True), 400) * 0.4)],
+    'siren': [lambda: rec(469411, 4.0)],
+    'car_horn': [lambda: rec(182474, 0.9)],
     'kids_laugh': [lambda: rec(371342, 3.0), lambda: rec(342838, 3.0, pick=0), lambda: rec(342838, 3.0, pick=1)],
     'kid_giggle': [lambda: rec(342838, 1.6, pick=2)],
     'kid_cheer': [lambda: mix(rec(371342, 2.2) * 0.8, rec(438421, 2.2, lo=3) * 0.5)],
