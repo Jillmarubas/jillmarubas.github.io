@@ -7,6 +7,7 @@ import {COLA_DURATION, ColaOrigin} from './cola/ColaOrigin';
 import {DC_CHAPTERS, DC_DURATION, DCFilm, DCPart} from './dc/DC';
 import {FOREST_LOOP, NightForest} from './forest/NightForest';
 import {Thumbnail} from './dcc/Thumbnail';
+import {KaijuThumb} from './kaiju/Thumb';
 import {KAIJU_DURATION, KAIJU_QA, KaijuFilm, KaijuQA} from './kaiju/Film';
 import {CITY_CHAPTERS, CITY_DURATION, CITY_QA, CityFilm, CityPart, CityQA} from './dcc/Film';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
@@ -50,6 +51,7 @@ export const Root: React.FC = () => (
       <Composition key={i} id={`DataCentres-part${i}`} component={DCPart} durationInFrames={c.to - c.from} fps={30} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
       <Composition id="GiantFromTheSea" component={KaijuFilm} durationInFrames={KAIJU_DURATION} fps={30} width={1920} height={1080} defaultProps={{offset: 0}} />
+      <Composition id="KaijuThumb" component={KaijuThumb} durationInFrames={1} fps={30} width={1920} height={1080} />
       <Composition id="KaijuQA" component={KaijuQA} durationInFrames={KAIJU_QA.length} fps={30} width={1920} height={1080} />
       <Composition id="CityThumb" component={Thumbnail} durationInFrames={1} fps={30} width={1920} height={1080} defaultProps={{night: false}} />
       <Composition id="CityQA" component={CityQA} durationInFrames={CITY_QA.length} fps={30} width={1920} height={1080} />
