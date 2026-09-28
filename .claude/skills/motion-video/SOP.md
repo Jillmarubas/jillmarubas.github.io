@@ -105,7 +105,9 @@ Reference build: `remotion/src/dc/`, the "Why people hate data centres" explaine
    - Research every number and list it in `RESEARCH.md`.
    - Get the user's approval before production.
 2. **Voiceover:** use ElevenLabs, one take per chapter, with voice and model fixed for the whole film.
-   - **Always let the user choose the voice first.** Send 3–4 voice preview links (they're free), then generate one short test line (at most about 60 s) and wait for their OK before generating anything longer. Never pick the narrator yourself for a long script. That mistake once wasted about 10,800 credits on a voice the user rejected.
+   - **Default narrator: Asher, voice ID `tMvyQtpCVQ0DkixuYm6J`,** on `eleven_multilingual_v2`. The user chose this voice for the data-centres explainer and asked for it to be the SOP default. Use it for every voiceover unless the user asks for a different voice.
+   - Rejected voices, never to be used: "Grounded Woman Narrator" (`6eEQXEFYsrOsaQlOdxlJ`).
+   - **A new voice needs the user's choice first.** If the user wants a voice other than Asher, send 3–4 voice preview links (they're free), then generate one short test line (at most about 60 s) and wait for their OK before generating anything longer. Never pick a new narrator yourself for a long script. That mistake once wasted about 10,800 credits on a voice the user rejected.
    - Check the account's credits before starting: about 1 credit per character on `eleven_multilingual_v2`.
    - A 15-minute script needs about 11k credits.
 3. **Timing:** `scripts/dc_timing.py` aligns every script line to the take with local word timestamps (faster-whisper) and writes `timing.json`.
