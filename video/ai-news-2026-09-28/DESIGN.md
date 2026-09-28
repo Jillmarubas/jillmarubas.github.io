@@ -70,7 +70,8 @@ line. The phrase just read dims to 16% above it, and the one before that leaves.
 
 ## Audio
 As in the SOP: music and SFX synthesised in code (`synth/`), VO at −16 LUFS, bed ducked
-about 15 dB under the voice, a glitch only on the two escape moments.
+about 15 dB under the voice. SFX: whoosh, impact, tick and shutter only. No riser and no
+glitch: they read as sci-fi ("alien") and were removed at Jillmar's request.
 
 ## Do not use
 Inter, Archivo or system fonts · the Frost Glass orange · glass, backdrop blur or glow ·

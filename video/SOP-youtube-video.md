@@ -138,6 +138,8 @@ Words start 2 frames before they're heard.
 - builds the six SFX;
 - writes `public/audio/manifest.json`.
 
+**No sci-fi SFX.** Jillmar doesn't want the riser or the glitch (they sound "alien"); use only whoosh, impact, tick and shutter.
+
 The composition refuses to render if the audio is stale. **Rerun `npm run audio` after any change to VO or timing.**
 
 ---

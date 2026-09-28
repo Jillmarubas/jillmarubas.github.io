@@ -55,50 +55,7 @@ export const impact = () => {
   return dry;
 };
 
-// Riser: noise through a climbing band-pass plus a saw gliding up an octave and a half.
-export const riser = () => {
-  const d = 1.6, buf = stereo(d), r = rng(17);
-  const bp = new Biquad('bp', 400, 2), lp = new Biquad('lp', 800, 1.2);
-  let a = 0, b = 0.5;
-  for (let i = 0; i < buf[0].length; i++) {
-    const s = i / SR, x = s / d;
-    if ((i & 15) === 0) { bp.set(400 * Math.pow(15, x), 2); lp.set(600 + 5000 * x * x, 1.2); }
-    const f = 220 * Math.pow(2, 1.5 * x);
-    a += f / SR; b += (f * 1.005) / SR; a -= Math.floor(a); b -= Math.floor(b);
-    const env = Math.pow(x, 2.4) * (s > d - 0.012 ? (d - s) / 0.012 : 1);
-    const v = bp.run(r() * 2 - 1) * 1.1 + lp.run(a * 2 - 1 + b * 2 - 1) * 0.35;
-    const w = 0.5 + 0.5 * Math.sin(TAU * (2 + 10 * x) * s); // a tremolo that speeds up
-    put(buf, i, v * env * (0.75 + 0.25 * w), Math.sin(TAU * 0.7 * s) * 0.3);
-  }
-  return buf;
-};
-
-// Digital glitch: bit-crushed, sample-held squares cut into stutters.
-export const glitch = () => {
-  const d = 0.9, buf = stereo(d), r = rng(23);
-  const slices = [];
-  for (let t = 0; t < d - 0.05;) {
-    const len = 0.02 + r() * 0.07;
-    slices.push({t, len, f: 180 + r() * 1900, hold: 2 + Math.floor(r() * 18), bits: 3 + Math.floor(r() * 4), on: r() > 0.22, p: r() * 1.6 - 0.8});
-    t += len;
-  }
-  let held = 0;
-  for (const sl of slices) {
-    if (!sl.on) continue;
-    const i0 = Math.round(sl.t * SR), n = Math.round(sl.len * SR);
-    const q = Math.pow(2, sl.bits);
-    for (let k = 0; k < n && i0 + k < buf[0].length; k++) {
-      const s = k / SR;
-      if (k % sl.hold === 0) {
-        const sq = Math.sin(TAU * sl.f * s) > 0 ? 1 : -1;
-        held = Math.round((sq * 0.6 + (r() * 2 - 1) * 0.4) * q) / q;
-      }
-      const env = Math.min(1, k / 40) * Math.min(1, (n - k) / 40) * Math.exp(-(sl.t) / 0.7);
-      put(buf, i0 + k, held * env * 0.8, sl.p);
-    }
-  }
-  return buf;
-};
+// No riser and no glitch: both read as sci-fi ("alien") and were taken out on 28 Sep.
 
 // Camera shutter: two short mechanical clicks with a small metal resonance.
 export const shutter = () => {

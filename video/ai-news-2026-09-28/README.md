@@ -21,7 +21,8 @@ Complete: all ten VO sections generated with Joey, Whisper-timed, and rendered o
   `public/photos/credits.json`. `scripts/fetch.py` downloads Commons' standard 1920 px thumbnails,
   because originals and non-standard sizes get HTTP 429 / 400.
 - **Music and SFX** are synthesised in code (`synth/`, `npm run audio`), arranged against the running
-  order: a darker progression under the sandbox-escape and UN stories.
+  order: a darker progression under the sandbox-escape and UN stories. SFX are whoosh, impact,
+  tick and shutter; the riser and glitch were removed as too sci-fi.
 - **Sections without VO** (`est: true` in the timeline) get timings estimated at the measured speaking
   rate, so the whole cut can be reviewed before the voice exists.
 
