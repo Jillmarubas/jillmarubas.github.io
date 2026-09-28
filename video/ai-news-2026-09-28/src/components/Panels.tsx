@@ -3,6 +3,7 @@ import {AbsoluteFill, Img, interpolate, staticFile} from 'remotion';
 import credits from '../../public/photos/credits.json';
 import {BLUR_IN, C, DUR, F, R, RISE, STAGGER, depart, glide, settle, snap} from '../theme';
 import {RollingNumber} from './Kinetic';
+import {PERF} from '../perf';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 export const ease = (local: number, a: number, b: number, easing = settle) => interpolate(local, [a, b], [0, 1], {...clamp, easing});
@@ -26,25 +27,49 @@ export const Label: React.FC<{children: React.ReactNode; color?: string; dot?: s
   </div>
 );
 
-// A graphite card on night. No glass, no blur: Settle's surfaces are flat.
-export const NightCard: React.FC<{style?: React.CSSProperties; children?: React.ReactNode; radius?: number; raised?: boolean}> = ({
-  style,
-  children,
-  radius = R.panel,
-  raised,
-}) => (
-  <div
-    style={{
-      position: 'relative',
-      borderRadius: radius,
-      background: raised ? '#1D201D' : C.night2,
-      border: `1px solid ${raised ? 'rgba(242,243,242,.14)' : 'rgba(242,243,242,.07)'}`,
-      ...style,
-    }}
-  >
-    {children}
-  </div>
-);
+// A frosted-glass surface: backdrop blur over the moving gradient, a translucent dark fill, a lit
+// top rim and depth. `nested` boxes (rows, nodes inside a panel) get fill and rim but no second
+// blur: glass on glass re-blurs the blur and turns milky. `raised` marks the active nested box.
+export const NightCard: React.FC<{
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+  radius?: number;
+  raised?: boolean;
+  nested?: boolean;
+}> = ({style, children, radius = R.panel, raised, nested}) => {
+  const inner = nested || raised;
+  return (
+    <div
+      style={{
+        position: 'relative',
+        borderRadius: radius,
+        background: inner ? (raised ? 'rgba(242,243,242,.13)' : 'rgba(242,243,242,.055)') : 'linear-gradient(160deg, rgba(242,243,242,.10), rgba(242,243,242,.03) 40%, rgba(6,10,8,.30))',
+        backdropFilter: inner || PERF.noBackdrop ? undefined : 'blur(26px) saturate(140%)',
+        WebkitBackdropFilter: inner || PERF.noBackdrop ? undefined : 'blur(26px) saturate(140%)',
+        border: `1px solid ${raised ? 'rgba(242,243,242,.32)' : inner ? 'rgba(242,243,242,.12)' : 'rgba(242,243,242,.22)'}`,
+        boxShadow: inner
+          ? 'inset 0 1px 0 rgba(255,255,255,.07)'
+          : '0 28px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.18), inset 0 -1px 0 rgba(0,0,0,.3)',
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Zoom on explain: a box zooms in as it arrives, then pushes in one small step each time an item
+// in it is explained. `steps` are the panel-local frames at which items are said.
+export const explainZoom = (local: number, steps: number[] = []) => {
+  const arrive = 0.86 + 0.14 * ease(local, 0, DUR.slow);
+  const push = Math.min(0.06, steps.reduce((z, at) => z + 0.02 * ease(local, at, at + DUR.base, glide), 0));
+  return arrive * (1 + push);
+};
+
+// The item being explained right now zooms up a little on glide, and settles back once the next
+// one takes over.
+export const focusZoom = (local: number, at: number, until?: number, amount = 0.05) =>
+  1 + amount * ease(local, at, at + DUR.base, glide) * (until === undefined ? 1 : 1 - ease(local, until, until + DUR.base, glide));
 
 // A small Settle pill (the `.pill` in settle-motion.html).
 export const Pill: React.FC<{children: React.ReactNode; live?: boolean; style?: React.CSSProperties}> = ({children, live, style}) => (
@@ -59,7 +84,8 @@ export const Pill: React.FC<{children: React.ReactNode; live?: boolean; style?: 
       borderRadius: 999,
       border: `1px solid ${C.pillEdge}`,
       color: C.onNight2,
-      background: 'rgba(0,0,0,.55)',
+      background: 'rgba(0,0,0,.45)',
+      backdropFilter: PERF.noBackdrop ? undefined : 'blur(14px)',
       ...style,
     }}
   >
@@ -109,7 +135,8 @@ export const PhotoFull: React.FC<{
           borderRadius: 32 - 14 * rise,
           overflow: 'hidden',
           background: C.night2,
-          border: `1px solid ${C.edge}`,
+          border: '1px solid rgba(242,243,242,.18)',
+          boxShadow: '0 28px 70px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.18)',
           transform: `translateY(${(1 - rise) * 105}%) scale(${0.92 + 0.08 * rise})`,
         }}
       >
@@ -155,7 +182,13 @@ export const PhotoFull: React.FC<{
 };
 
 // ---- the card that holds a graphic in split mode: blur-in, 48 px rise ----------------------
-export const PanelShell: React.FC<{label: string; local: number; children: React.ReactNode; live?: boolean}> = ({label, local, children, live}) => {
+export const PanelShell: React.FC<{label: string; local: number; children: React.ReactNode; live?: boolean; steps?: number[]}> = ({
+  label,
+  local,
+  children,
+  live,
+  steps,
+}) => {
   const p = ease(local, 0, DUR.slow);
   return (
     <div
@@ -166,7 +199,8 @@ export const PanelShell: React.FC<{label: string; local: number; children: React
         width: 760,
         height: 760,
         opacity: p,
-        transform: `translateY(${(1 - p) * RISE.card}px)`,
+        transform: `translateY(${(1 - p) * RISE.card}px) scale(${explainZoom(local, steps)})`,
+        transformOrigin: '50% 50%',
         filter: p < 1 ? `blur(${(1 - p) * BLUR_IN}px)` : undefined,
       }}
     >
@@ -179,11 +213,28 @@ export const PanelShell: React.FC<{label: string; local: number; children: React
 };
 
 // A row that blurs in at `at` (panel-local frame).
-const Row: React.FC<{local: number; at: number; active?: boolean; children: React.ReactNode}> = ({local, at, active, children}) => {
+const Row: React.FC<{local: number; at: number; active?: boolean; zoomAt?: number; zoomUntil?: number; children: React.ReactNode}> = ({
+  local,
+  at,
+  active,
+  zoomAt,
+  zoomUntil,
+  children,
+}) => {
   const p = ease(local, at, at + DUR.slow);
+  const z = zoomAt === undefined ? 1 : focusZoom(local, zoomAt, zoomUntil);
   return (
-    <div style={{opacity: p, transform: `translateY(${(1 - p) * RISE.sm}px)`, filter: p < 1 ? `blur(${(1 - p) * BLUR_IN}px)` : undefined}}>
-      <NightCard raised={active} radius={18} style={{padding: '18px 22px', background: active ? '#1D201D' : 'rgba(242,243,242,.035)'}}>
+    <div
+      style={{
+        opacity: p,
+        transform: `translateY(${(1 - p) * RISE.sm}px) scale(${z})`,
+        transformOrigin: '0% 50%',
+        position: 'relative',
+        zIndex: z > 1.001 ? 2 : 1,
+        filter: p < 1 ? `blur(${(1 - p) * BLUR_IN}px)` : undefined,
+      }}
+    >
+      <NightCard raised={active} nested radius={18} style={{padding: '18px 22px'}}>
         {children}
       </NightCard>
     </div>
@@ -199,13 +250,13 @@ export const ListPanel: React.FC<{
 }> = ({label, items, local, done}) => {
   const activeIdx = items.reduce((acc, it, i) => (local >= it.at ? i : acc), -1);
   return (
-    <PanelShell label={label} local={local}>
+    <PanelShell label={label} local={local} steps={items.map((it) => it.at)}>
       <div style={{display: 'flex', flexDirection: 'column', gap: 12}}>
         {items.map((it, i) => {
           const said = local >= it.at;
           const tick = interpolate(local, [it.at + 4, it.at + 4 + DUR.base], [0, 1], {...clamp, easing: snap});
           return (
-            <Row key={i} local={local} at={Math.min(it.at, 8 + i * STAGGER.card)} active={i === activeIdx}>
+            <Row key={i} local={local} at={Math.min(it.at, 8 + i * STAGGER.card)} active={i === activeIdx} zoomAt={it.at} zoomUntil={items[i + 1]?.at}>
               <div style={{display: 'flex', gap: 18, alignItems: 'center'}}>
                 <div style={{position: 'relative', width: 34, flex: 'none', fontFamily: F.mono, fontSize: 17, color: said ? C.onNight : C.floor}}>
                   {done && tick > 0 ? (
@@ -242,7 +293,7 @@ export const StatPanel: React.FC<{
 }> = ({label, value, line, note, countAt = 8, local}) => {
   const lit = ease(local, countAt, countAt + 5, glide);
   return (
-    <PanelShell label={label} local={local}>
+    <PanelShell label={label} local={local} steps={[countAt]}>
       <div
         style={{
           fontFamily: F.sans,
@@ -252,6 +303,8 @@ export const StatPanel: React.FC<{
           letterSpacing: '-0.055em',
           color: C.onNight,
           opacity: lit, // never visible before it is said
+          transform: `scale(${1.18 - 0.18 * ease(local, countAt, countAt + DUR.slow)})`,
+          transformOrigin: '0% 100%',
           marginTop: 30,
         }}
       >
@@ -278,7 +331,7 @@ export const ChipsPanel: React.FC<{label: string; title?: string; chips: {t: str
   note,
   local,
 }) => (
-  <PanelShell label={label} local={local}>
+  <PanelShell label={label} local={local} steps={chips.map((c) => c.at)}>
     {title ? (
       <div style={{fontFamily: F.sans, fontWeight: 500, fontSize: 58, lineHeight: 1.02, color: C.onNight, marginBottom: 36, letterSpacing: '-0.04em', opacity: ease(local, 4, 16)}}>
         {title}
@@ -292,7 +345,9 @@ export const ChipsPanel: React.FC<{label: string; title?: string; chips: {t: str
             key={i}
             style={{
               opacity: p,
-              transform: `translateY(${(1 - p) * RISE.nudge}px)`,
+              // each chip zooms in from 1.25 as it is named, and holds a little large while it is the one being said
+              transform: `translateY(${(1 - p) * RISE.nudge}px) scale(${(1.25 - 0.25 * p) * focusZoom(local, c.at + DUR.base, chips[i + 1]?.at, 0.04)})`,
+              transformOrigin: '0% 50%',
               filter: p < 1 ? `blur(${(1 - p) * BLUR_IN}px)` : undefined,
               display: 'flex',
               alignItems: 'center',
@@ -304,7 +359,8 @@ export const ChipsPanel: React.FC<{label: string; title?: string; chips: {t: str
               padding: '14px 24px',
               borderRadius: 999,
               color: C.onNight,
-              background: c.hi ? '#1D201D' : 'rgba(242,243,242,.04)',
+              background: c.hi ? 'rgba(242,243,242,.12)' : 'rgba(242,243,242,.05)',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,.08)',
               border: `1px solid ${c.hi ? 'rgba(242,243,242,.4)' : C.pillEdge}`,
             }}
           >
@@ -337,7 +393,7 @@ export const TimelinePanel: React.FC<{
   });
   const shown = nodes.map((n) => local >= n.at);
   return (
-    <PanelShell label={label} local={local}>
+    <PanelShell label={label} local={local} steps={nodes.map((n) => n.at)}>
       <div style={{position: 'absolute', left: 14, top: top + 12, width: 2, height: (nodes.length - 1) * gapY, background: 'rgba(242,243,242,.12)'}} />
       <div style={{position: 'absolute', left: 14, top: top + 12, width: 2, height: pos * gapY, background: C.onNight}} />
       <div style={{position: 'absolute', left: 4, top: top + 2 + pos * gapY, width: 22, height: 22, borderRadius: 11, background: C.mint, opacity: ease(local, nodes[0].at, nodes[0].at + 6)}} />
@@ -345,7 +401,7 @@ export const TimelinePanel: React.FC<{
         const p = ease(local, n.at, n.at + DUR.slow);
         const current = i === Math.round(pos);
         return (
-          <div key={i} style={{position: 'absolute', left: 60, top: top + i * gapY - 6, right: bracket ? 170 : 0, opacity: p, transform: `translateY(${(1 - p) * RISE.nudge}px)`, filter: p < 1 ? `blur(${(1 - p) * BLUR_IN}px)` : undefined}}>
+          <div key={i} style={{position: 'absolute', left: 60, top: top + i * gapY - 6, right: bracket ? 170 : 0, opacity: p, transform: `translateY(${(1 - p) * RISE.nudge}px) scale(${focusZoom(local, n.at, nodes[i + 1]?.at, 0.06)})`, transformOrigin: '0% 50%', filter: p < 1 ? `blur(${(1 - p) * BLUR_IN}px)` : undefined}}>
             <div style={{fontFamily: F.mono, fontSize: 17, color: current ? C.onNight : C.onNight2}}>{n.date}</div>
             <div style={{fontFamily: F.sans, fontWeight: 500, fontSize: 31, lineHeight: 1.15, letterSpacing: '-0.02em', color: current && shown[i] ? C.onNight : 'rgba(242,243,242,.55)', marginTop: 6}}>{n.t}</div>
           </div>
@@ -377,10 +433,10 @@ export const ClaimsPanel: React.FC<{label: string; items: {t: string; at: number
   note,
   local,
 }) => (
-  <PanelShell label={label} local={local}>
+  <PanelShell label={label} local={local} steps={items.map((it) => it.at)}>
     <div style={{display: 'flex', flexDirection: 'column', gap: 14}}>
       {items.map((it, i) => (
-        <Row key={i} local={local} at={it.at}>
+        <Row key={i} local={local} at={it.at} zoomAt={it.at} zoomUntil={items[i + 1]?.at}>
           <div style={{display: 'flex', gap: 18, alignItems: 'flex-start'}}>
             <div style={{marginTop: 11, width: 12, height: 12, borderRadius: 6, flex: 'none', background: it.open ? 'transparent' : C.onNight, border: `2px solid ${C.onNight}`}} />
             <div style={{fontFamily: F.sans, fontWeight: 500, fontSize: 30, lineHeight: 1.2, letterSpacing: '-0.02em', color: C.onNight}}>{it.t}</div>
@@ -405,14 +461,14 @@ export const SandboxPanel: React.FC<{local: number; dnsAt: number; outAt: number
   const door = ease(local, doorAt, doorAt + DUR.base, glide);
   const node = (x: number, y: number, p: number, title: string, sub: string, live?: boolean) => (
     <div style={{position: 'absolute', left: x, top: y, opacity: p, transform: `translateY(${(1 - p) * RISE.nudge}px)`}}>
-      <NightCard raised radius={16} style={{padding: '14px 18px', minWidth: 190}}>
+      <NightCard nested radius={16} style={{padding: '14px 18px', minWidth: 190}}>
         <Label dot={live ? C.mint : undefined} style={{fontSize: 14}}>{sub}</Label>
         <div style={{fontFamily: F.sans, fontWeight: 500, fontSize: 28, letterSpacing: '-0.02em', color: C.onNight, marginTop: 6}}>{title}</div>
       </NightCard>
     </div>
   );
   return (
-    <PanelShell label="How the agent got out" local={local}>
+    <PanelShell label="How the agent got out" local={local} steps={[dnsAt, outAt, doorAt]}>
       {/* the sandbox: a dashed wall */}
       <div style={{position: 'absolute', left: 0, top: 10, width: 380, height: 420, borderRadius: 22, border: '2px dashed rgba(242,243,242,.35)', opacity: box}} />
       <Label style={{position: 'absolute', left: 22, top: 26, fontSize: 15, opacity: box}}>Sandbox · locked down</Label>
@@ -441,7 +497,7 @@ export const StagesPanel: React.FC<{label: string; title: string; stages: {t: st
   note,
   local,
 }) => (
-  <PanelShell label={label} local={local} live>
+  <PanelShell label={label} local={local} live steps={stages.map((x) => x.at)}>
     <div style={{fontFamily: F.sans, fontWeight: 500, fontSize: 84, lineHeight: 1, letterSpacing: '-0.05em', color: C.onNight, opacity: ease(local, 4, 18)}}>{title}</div>
     <div style={{display: 'flex', flexDirection: 'column', gap: 12, marginTop: 38}}>
       {stages.map((s, i) => {
@@ -449,8 +505,8 @@ export const StagesPanel: React.FC<{label: string; title: string; stages: {t: st
         const tick = interpolate(local, [s.at + 6, s.at + 6 + DUR.base], [0, 1], {...clamp, easing: snap});
         const spin = (local * 12) % 360;
         return (
-          <div key={i} style={{opacity: p, transform: `translateY(${(1 - p) * RISE.sm}px)`, filter: p < 1 ? `blur(${(1 - p) * BLUR_IN}px)` : undefined}}>
-            <NightCard raised={s.state === 'active'} radius={18} style={{padding: '18px 22px', display: 'flex', gap: 18, alignItems: 'center'}}>
+          <div key={i} style={{opacity: p, transform: `translateY(${(1 - p) * RISE.sm}px) scale(${focusZoom(local, s.at, stages[i + 1]?.at)})`, transformOrigin: '0% 50%', filter: p < 1 ? `blur(${(1 - p) * BLUR_IN}px)` : undefined}}>
+            <NightCard nested raised={s.state === 'active'} radius={18} style={{padding: '18px 22px', display: 'flex', gap: 18, alignItems: 'center'}}>
               <div style={{width: 32, height: 32, flex: 'none', display: 'grid', placeItems: 'center'}}>
                 {s.state === 'done' ? (
                   <div style={{width: 30, height: 30, borderRadius: 15, background: C.mint, color: C.mintInk, display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 18, fontFamily: F.sans, transform: `scale(${tick})`}}>✓</div>
@@ -490,7 +546,7 @@ export const OrbitPanel: React.FC<{label: string; center: string; bodies: string
   const ry = 92;
   const appear = ease(local, 6, 6 + DUR.slow);
   return (
-    <PanelShell label={label} local={local}>
+    <PanelShell label={label} local={local} steps={[captionAt]}>
       <svg width={664} height={500} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible', opacity: appear}}>
         <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="none" stroke="rgba(242,243,242,.18)" strokeWidth={1.5} strokeDasharray="4 8" transform={`rotate(-8 ${cx} ${cy})`} />
       </svg>
@@ -583,7 +639,7 @@ export const HotlinePanel: React.FC<{local: number; lineAt: number; label: strin
     </div>
   );
   return (
-    <PanelShell label={label} local={local} live={local > lineAt + DUR.slow}>
+    <PanelShell label={label} local={local} live={local > lineAt + DUR.slow} steps={[lineAt]}>
       <div style={{position: 'absolute', left: 110, top: 162, width: 444 * line, height: 2, background: C.onNight}} />
       {pulse >= 0 ? (
         <div style={{position: 'absolute', left: 110 + 444 * pulse - 9, top: 154, width: 18, height: 18, borderRadius: 9, background: C.mint, boxShadow: '0 0 24px rgba(171,254,193,.5)'}} />

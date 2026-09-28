@@ -65,7 +65,8 @@ export const Chrome: React.FC = () => {
             borderRadius: 999,
             border: `1px solid ${C.pillEdge}`,
             color: C.onNight2,
-            background: 'rgba(0,0,0,.5)',
+            background: 'rgba(0,0,0,.4)',
+            backdropFilter: 'blur(14px)',
           }}
         >
           <span style={{width: 8, height: 8, borderRadius: 4, background: story ? C.mint : C.onNight2}} />

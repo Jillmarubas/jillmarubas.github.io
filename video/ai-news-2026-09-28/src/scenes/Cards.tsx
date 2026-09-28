@@ -66,7 +66,10 @@ export const StoryCard: React.FC<{n: number; len: number}> = ({n, len}) => {
           right: 28,
           bottom: 28,
           borderRadius: 32 - 14 * rise,
-          background: C.paper,
+          // light frosted glass: the moving gradient shows faintly through it
+          background: 'rgba(250,252,251,.8)',
+          backdropFilter: 'blur(30px) saturate(150%)',
+          border: '1px solid rgba(255,255,255,.75)',
           overflow: 'hidden',
           transform: `translateY(${(1 - rise) * 105 - out * 40}%) scale(${0.92 + 0.08 * rise})`,
           opacity: 1 - out,

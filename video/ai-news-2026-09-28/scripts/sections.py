@@ -7,7 +7,7 @@
 #          emphasis treatment. Numbers are always emphasised and count up.
 
 SECTIONS = {
-"01-hook": """Okay, this was a wild weekend for AI. OpenAI just paused training on its most powerful models — again — after one of its own AI agents broke out of a locked-down testing environment. Google just teased a launch that could flip the balance of power between the big three AI labs. And two rival CEOs sat in front of the United Nations Security Council and said, out loud, that AI could be a risk to humanity. So yeah, let's get into it.""",
+"01-hook": """Okay, this was a wild weekend for AI. OpenAI just paused training on its most powerful models — again — after one of its own AI agents broke out of a locked-down testing environment. Google just teased a launch that could flip the balance of power between the big three AI labs. And two rival CEOs sat in front of the United Nations Security Council and said out loud that AI could be a risk to humanity. So yeah, let's get into it.""",
 
 "02-preview": """In today's video: OpenAI's second "sandbox escape" in three months, and why it forced a full training shutdown. Google DeepMind's brand-new chief teasing an early Gemini four. A hundred-million-dollar funding round for an AI startup that's quietly taking over one of the most annoying parts of running a business. Sam Altman and Dario Amodei standing side by side at the UN, warning about the technology they built. The US and China agreeing to build an actual AI hotline. And why Anthropic's CEO is suddenly getting a personal invite to dinner at the White House. Let's break it all down.""",
 

@@ -19,7 +19,7 @@ const region = process.env.REMOTION_REGION || 'us-east-1';
 // the running time the audio was synthesised for (npm run audio), which the composition also uses
 const manifest = JSON.parse(fs.readFileSync(path.resolve('public/audio/manifest.json'), 'utf8'));
 const TOTAL_FRAMES = Math.ceil(manifest.total * 30);
-const PARTS = 5;
+const PARTS = 8; // glass (backdrop blur) makes frames costlier: smaller parts keep each Lambda well under 900 s
 const CHUNKS = 8;
 const OUT = path.resolve('out');
 const PARTS_DIR = path.join(OUT, 'parts');

@@ -8,9 +8,9 @@ make every sentence easy to follow by ear *and* by eye. **Every word of the scri
 set on screen as Joey says it**, and each word animates on its own.
 
 ## Direction: Settle Motion, with the voice as the playhead
-Built from `design-system/settle-motion/` (tokens.css and settle-motion.html). Near-black
-night, grey photos in rounded night panels, white paper panels for quotes and story cards,
-and one ambient green haze. Motion arrives fast and settles; nothing bounces except a
+Built from `design-system/settle-motion/` (tokens.css and settle-motion.html). Grey photos in
+rounded panels, frosted-glass boxes over a slowly moving green–teal gradient, and light frosted
+glass for quotes and story cards. Motion arrives fast and settles; nothing bounces except a
 success.
 
 Settle's second principle is "scroll is the playhead": headline words brighten as you
@@ -74,7 +74,7 @@ about 15 dB under the voice. SFX: whoosh, impact, tick and shutter only. No rise
 glitch: they read as sci-fi ("alien") and were removed at Jillmar's request.
 
 ## Do not use
-Inter, Archivo or system fonts · the Frost Glass orange · glass, backdrop blur or glow ·
+Inter, Archivo or system fonts · the Frost Glass orange · glass on glass (nested boxes never get a second blur) ·
 colour photos · mint for decoration or hover · centred type · emoji · AI-generated
 people or images · company logos.
 
@@ -83,3 +83,14 @@ Real photographs only, from Wikimedia Commons, graded to grey. Each is credited 
 and in `public/photos/credits.json`. People appear only in stories about their
 organisation, captioned with name and role. Illustrative places are labelled as
 illustrative.
+
+## Revision, 28 Sep (Jillmar's notes)
+- **Glass on every box.** Panels are frosted glass (`NightCard`): backdrop blur 26 px, a translucent fill with a
+  soft top-left sheen, a lit rim and depth. Rows and nodes inside a panel get fill and rim only. Quote panels
+  and story cards are light frosted glass (white at 80%). Pills blur 14 px.
+- **A moving gradient background** (`Field.tsx`): five blooms in mint, deep green and cool teal drift on
+  60–110 s periods; the left reading column is kept darker so the words stay legible.
+- **Zoom on explain.** Each box zooms in from 0.86 as it arrives, then pushes in one 2% step each time one of its
+  items is explained (up to 6%). The item being explained zooms up 5% on `glide` and settles back when the next
+  one takes over; chips zoom in from 1.25 as they are named, and big numbers from 1.18.
+- **Hook VO re-recorded** without the commas around "out loud", which made Joey pause.

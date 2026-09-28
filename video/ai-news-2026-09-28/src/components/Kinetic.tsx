@@ -152,7 +152,13 @@ const Transcript: React.FC<{s: Section; run: Run; next?: Phrase; frame: number}>
 
   const last = s.phrases[ks[ks.length - 1]];
   const holdEnd = next ? inOf(next) - 4 : Math.round(s.duration * FPS) + 6;
-  const exitAt = Math.max(Math.round(last.e * FPS) + 4, Math.min(holdEnd, Math.round(last.e * FPS) + Math.round(2.4 * FPS)));
+  let exitAt = Math.max(Math.round(last.e * FPS) + 4, Math.min(holdEnd, Math.round(last.e * FPS) + Math.round(2.4 * FPS)));
+  // when the next column arrives straight after (no pause in the voice), this one must be gone by
+  // then: two columns share the reading line. Its last word still gets to light up first.
+  if (next) {
+    const lastLit = Math.round(s.words[last.b].s * FPS) - LEAD + 4;
+    exitAt = Math.min(exitAt, Math.max(lastLit, inOf(next) - EXIT + 2));
+  }
   const firstIn = inOf(s.phrases[ks[0]]);
   // stays mounted (hidden) outside its window, so there is always a layout to measure
   const active = frame >= firstIn - 1 && frame <= exitAt + EXIT;
@@ -259,7 +265,10 @@ const QuotePanel: React.FC<{s: Section; run: QuoteRun; next?: Phrase; frame: num
           top: 170,
           bottom: 150,
           borderRadius: 32 - 14 * rise,
-          background: C.paper,
+          // light frosted glass: the moving gradient shows faintly through it
+          background: 'rgba(250,252,251,.8)',
+          backdropFilter: 'blur(30px) saturate(150%)',
+          border: '1px solid rgba(255,255,255,.75)',
           color: C.ink,
           overflow: 'hidden',
           transform: `translateY(${(1 - rise) * 105 + out * 6}%) scale(${0.92 + 0.08 * rise})`,

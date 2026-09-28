@@ -1,6 +1,6 @@
 {
  "bpm": 100,
- "total": 585.902,
+ "total": 585.353,
  "blocks": [
   {
    "kind": "vo",
@@ -8,75 +8,75 @@
   },
   {
    "kind": "sting",
-   "start": 30.053
+   "start": 29.504
   },
   {
    "kind": "vo",
-   "start": 33.853
+   "start": 33.304
   },
   {
    "kind": "card",
-   "start": 74.055
+   "start": 73.506
   },
   {
    "kind": "vo",
-   "start": 77.255
+   "start": 76.706
   },
   {
    "kind": "card",
-   "start": 173.585
+   "start": 173.036
   },
   {
    "kind": "vo",
-   "start": 176.785
+   "start": 176.236
   },
   {
    "kind": "card",
-   "start": 251.094
+   "start": 250.545
   },
   {
    "kind": "vo",
-   "start": 254.294
+   "start": 253.745
   },
   {
    "kind": "card",
-   "start": 331.998
+   "start": 331.449
   },
   {
    "kind": "vo",
-   "start": 335.198
+   "start": 334.649
   },
   {
    "kind": "card",
-   "start": 398.039
+   "start": 397.49
   },
   {
    "kind": "vo",
-   "start": 401.239
+   "start": 400.69
   },
   {
    "kind": "card",
-   "start": 462.826
+   "start": 462.277
   },
   {
    "kind": "vo",
-   "start": 466.026
+   "start": 465.477
   },
   {
    "kind": "recap",
-   "start": 523.904
+   "start": 523.355
   },
   {
    "kind": "vo",
-   "start": 525.904
+   "start": 525.355
   },
   {
    "kind": "vo",
-   "start": 551.346
+   "start": 550.797
   },
   {
    "kind": "end",
-   "start": 576.902
+   "start": 576.353
   }
  ]
 }
