@@ -8,7 +8,8 @@ copying the 26 Sep episode's pipeline and replacing its Frost Glass look.
 ## Status
 
 Complete: all ten VO sections generated with Joey, Whisper-timed, and rendered on Remotion Lambda
-(9:45.9, 1920×1080, 30 fps). The master stays out of git (`out/` is ignored).
+(9:45.4, 1920×1080, 30 fps). Revised 28 Sep: glass boxes, a moving gradient, zoom on explain and a
+smoother hook take (see DESIGN.md). The master stays out of git (`out/` is ignored).
 
 ## How it works
 - **Every word is animated.** `src/data/timeline.json` holds every on-screen token with the time Joey
