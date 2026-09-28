@@ -614,10 +614,10 @@ SFX = {
 
 # per-effect loudness (relative to peak-normalised), so screams and booms sit right
 LEVEL = {
-    'ambience_park': 0.25, 'gulls': 0.3, 'gulls_panic': 0.4, 'swing_creak': 0.3, 'kids_laugh': 0.5, 'kid_giggle': 0.5,
-    'kid_cheer': 0.55, 'kids_cheer': 0.7, 'slide': 0.45, 'rumble_low': 0.8, 'rumble_grow': 0.9, 'chain_rattle': 0.45,
+    'ambience_park': 0.55, 'gulls': 0.5, 'gulls_panic': 0.4, 'swing_creak': 0.55, 'kids_laugh': 0.95, 'kid_giggle': 0.85,
+    'kid_cheer': 0.9, 'kids_cheer': 0.95, 'slide': 0.75, 'rumble_low': 0.8, 'rumble_grow': 0.9, 'chain_rattle': 0.45,
     'kid_gasp': 0.45, 'water_swell': 0.7, 'mega_splash': 1.0, 'water_cascade': 0.55, 'boom_deep': 0.9, 'roar': 1.0,
-    'roar_hurt': 0.85, 'kids_scream': 0.8, 'kid_cry': 0.65, 'kid_sob': 0.45, 'mom_shout': 0.55, 'wave_crash': 0.75,
+    'roar_hurt': 0.85, 'kids_scream': 0.8, 'kid_cry': 0.85, 'kid_sob': 0.7, 'mom_shout': 0.55, 'wave_crash': 0.75,
     'boat_horn': 0.45, 'stomp_water': 0.9, 'stomp': 1.0, 'crowd_scream': 0.7, 'footsteps_crowd': 0.4, 'footsteps_run': 0.45,
     'siren': 0.35, 'tire_screech': 0.5, 'car_crash': 0.95, 'glass': 0.5, 'car_horn': 0.35, 'car_alarm': 0.3, 'wind_whoosh': 0.5,
     'tail_whoosh': 0.7, 'whoosh': 0.6, 'building_collapse': 1.0, 'debris': 0.6, 'charge_up': 0.6, 'beam_fire': 0.8,
@@ -661,10 +661,10 @@ def music(total, marks):
     i = 0
     while t < a1 - beat:
         f = 440 * 2 ** ((mel[i % len(mel)] - 69) / 12)
-        place(out, note(f, beat * 1.5) * 0.18, t)
+        place(out, note(f, beat * 1.5) * 0.32, t)
         if i % 4 == 0:
             for m in chords[(i // 4) % 4]:
-                place(out, note(440 * 2 ** ((m - 12 - 69) / 12), beat * 4, 'pad') * 0.2, t)
+                place(out, note(440 * 2 ** ((m - 12 - 69) / 12), beat * 4, 'pad') * 0.32, t)
         t += beat / 2 if i % 3 == 2 else beat
         i += 1
     # 2) tension: a low drone and a heartbeat
@@ -755,7 +755,8 @@ def main():
     R[: len(mus)] += mus[: len(R)] * duck[: len(mus)]
     st = np.stack([L, R], 1)[: int(total * SR)]
     # soft limiter and master level
-    st = np.tanh(st / (np.percentile(np.abs(st), 99.9) + 1e-9) * 0.9) * 0.93
+    st = np.tanh(st / (np.percentile(np.abs(st), 99.9) + 1e-9) * 0.9)
+    st = st / (np.max(np.abs(st)) + 1e-9) * 0.95
     fade = int(1.5 * SR)
     st[-fade:] *= np.linspace(1, 0, fade)[:, None]
     os.makedirs(os.path.join(ROOT, 'out'), exist_ok=True)
