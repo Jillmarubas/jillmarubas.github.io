@@ -25,6 +25,7 @@ These are Jillmar's requirements. Every video must meet all of them.
 | 11 | **High-quality final video** (full 1080p original, not a compressed copy) | Kept private in S3 and downloaded from the AWS console (§8) |
 | 12 | **Thumbnails** | 3 variants as Remotion `<Still>`s for YouTube Test & Compare (§9) |
 | 13 | **Do not put the video on GitHub** | The repo is public, and GitHub rejects files over 100 MB. The video stays in S3. |
+| 14 | **Quality over render cost** | Jillmar is fine with higher Lambda costs (e.g. glass/backdrop blur at ~$0.36 per episode) as long as the result looks good. Don't drop an effect to save render money; split the render into more parts instead. |
 
 ---
 
