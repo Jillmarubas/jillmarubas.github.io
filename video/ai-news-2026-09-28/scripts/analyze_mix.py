@@ -20,28 +20,29 @@ print(f"integrated {I} LUFS · LRA {LRA} LU · true peak {TP} dBTP")
 # rebuild the running order (same maths as src/timeline.ts) to label speech vs gaps
 tl = json.load(open(os.path.join(root, "src/data/timeline.json")))
 dur = {s["id"]: s["duration"] for s in tl}
+est = {s["id"] for s in tl if s.get("est")}  # sections with no VO yet: silent, left out of speech stats
 blocks, t = [], 0.6
 def vo(i, tail):
     global t
     blocks.append(("vo", i, t, t + dur[i])); t += dur[i] + tail
 vo("01-hook", 0.3); blocks.append(("sting", "", t, t + 3.6)); t += 3.8; vo("02-preview", 0.6)
-for k, i in enumerate(["03-story1", "04-story2", "05-story3", "06-story4", "07-story5"]):
+for k, i in enumerate(["03-story1", "04-story2", "05-story3", "06-story4", "07-story5", "08-story6"]):
     blocks.append(("card", str(k + 1), t, t + 3.2)); t += 3.2; vo(i, 0.8)
-blocks.append(("recap", "", t, t + 2)); t += 2; vo("08-wrap", 0.6); vo("09-outro", 0.4); blocks.append(("end", "", t, t + 9))
+blocks.append(("recap", "", t, t + 2)); t += 2; vo("09-wrap", 0.6); vo("10-outro", 0.4); blocks.append(("end", "", t, t + 9))
 
 def label(x):
     for kind, i, a, b in blocks:
         if a <= x < b: return f"{kind} {i}".strip()
     return "gap"
 
-speech = [S for (x, M, S) in rows if label(x).startswith("vo") and S > -60]
+speech = [S for (x, M, S) in rows if label(x).startswith("vo") and label(x)[3:] not in est and S > -60]
 gaps = [S for (x, M, S) in rows if not label(x).startswith("vo") and S > -70]
 print(f"short-term during speech: median {statistics.median(speech):.1f} LUFS, p95 {sorted(speech)[int(.95*len(speech))]:.1f}")
 print(f"short-term in cards/stings/end: median {statistics.median(gaps):.1f} LUFS, max {max(gaps):.1f}")
 per = {}
 for x, M, S in rows:
     lb = label(x)
-    if lb.startswith("vo") and S > -60: per.setdefault(lb, []).append(S)
+    if lb.startswith("vo") and lb[3:] not in est and S > -60: per.setdefault(lb, []).append(S)
 for k, v in per.items():
     print(f"  {k:14s} median short-term {statistics.median(v):6.1f} LUFS")
 # loudest momentary spikes
