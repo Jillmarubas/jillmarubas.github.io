@@ -17,6 +17,7 @@ three videos produced in this repo.
 3. **Facts must be checkable.** Every number on screen gets verified, and the source is credited on screen when it's data (for example "Moon: NASA LRO").
 4. **The look comes from the user's references, never from my own taste.** This user's references are white or cream paper (see `reference/breakdowns.md`), so white paper is the default. Switching to a dark or cinematic look needs the user's explicit OK first.
 5. **Default 30 fps.** 24/25 fps is for cinematic or documentary looks, 60 fps only for glossy tech with fast moves. The user prefers 30.
+6. **Every video gets thumbnails in the approved style:** a fictional person's shocked reaction, at most three words, a yellow key word and a red marker-stroke punch word (`remotion/src/thumbs/HighlightThumb.tsx`, `marker` by default). See the SOP section "Thumbnails".
 
 ## The house style, as measured
 These values come from the references; the full evidence is in `reference/breakdowns.md`.

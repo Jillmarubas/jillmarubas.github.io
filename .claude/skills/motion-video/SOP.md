@@ -95,6 +95,31 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 - Send the MP4.
 - Summarise the beats, the techniques used, where the data came from, render time and cost, and anything not verified (for example, audio can't be listened to here).
 - If the reference study taught something new, append it to `reference/breakdowns.md` or `reference/realism.md`.
+- **Every long-form video also gets thumbnails** in the approved style (see "Thumbnails" below) and a `YOUTUBE.md` with title and thumbnail pairs, description, chapters, sources and tags.
+
+---
+
+## Thumbnails: the approved style (every video)
+The user approved this look on 29 Sep 2026 (AI News Daily, variant G) and wants it on **every video**.
+Reference image: `reference/thumbnail-approved.jpg`. Component: `remotion/src/thumbs/HighlightThumb.tsx`.
+
+1. **Lead with the most interesting story,** not the first one in the video. Put it in its own chapter so a click lands on it quickly.
+2. **The image is a person's reaction:** a photoreal, *fictional* person (never a real or public figure, no logos or brands) reacting with a strong emotion, usually shock (wide eyes, open mouth, hand on cheek), to the story's object. For a leak, photos burst out of a glowing phone.
+   - Generate it with ElevenLabs `creative_generate_image`, model `bytedance-seedream-5-pro`, 4 variations, which returns 2048×1152 16:9. Download immediately (links expire in 2 h) and save as JPG (q92) in `public/<project>/thumb/`.
+   - Prompt template: *"Photorealistic cinematic still for a YouTube thumbnail, 16:9 widescreen. A fictional person in their late twenties (not a celebrity) on the right third, [reacting to X] with a genuinely shocked expression: wide eyes, raised eyebrows, mouth open, one hand pressed to their cheek. [The story's object] with a [accent] glow on their face. [Things flying or spilling out], a few close to the camera and motion-blurred. Background: [design system's dark colour] fading to [its light colour], glowing bokeh. Warm key light from front left, strong cool rim light from behind. The left 45 percent of the frame is calm, dark and empty, reserved for headline text. Sharp focus on the eyes, visible skin pores, shallow depth of field, subtle film grain. No text, no letters, no logos, no watermarks."*
+3. **Words: three at most**, on the left third: `[key or number, word, punch word]`, e.g. `53 · PHOTOS · LEAKED`. Geist 900, tilted −3°.
+   - **Default treatment, `marker`:** the key/number big in yellow `#FFD60A`, the middle word white, both with a dark outline in the design system's darkest colour; the punch word white on a slanted red `#FF2A3D` marker stroke.
+   - Alternatives for A/B tests: `highlighter` (first two words dark on a yellow bar, punch word on a red bar) and `glow` (yellow words, punch word red with a white outline and red glow).
+   - Yellow and red stay the same in every design system (they're the complementary pop). Only `ink` (outlines, scrim, vignette) takes the design system's darkest colour.
+4. **Build:** `<HighlightThumb src="…/thumb/x.jpg" words={['53', 'PHOTOS', 'LEAKED']} style="marker" ink={darkest} />` as a 1920×1080, 1-frame composition. It adds a slight contrast/saturation lift, a left scrim, and a vignette.
+5. **Deliver three variants that change one thing each.** Usually the `marker` default plus two others, differing either in word treatment (same photo) or in photo (same words). Recommend the `marker` one.
+6. **Check:**
+   - Shrink to 200 px wide: the face, the glow and the punch word must read at a glance.
+   - Export JPG `-q:v 2` to `out/thumbs/<project>-thumb-<X>.jpg`; each must be under 2 MB (about 200 KB is typical).
+   - The chat upload limit is 30 MiB, so thumbnails can be sent directly.
+7. **Title and copy:**
+   - The title *complements* the thumbnail text and never repeats it (thumbnail "53 PHOTOS LEAKED" ↔ title "OpenAI's Own AI Agents Went Rogue").
+   - Write `YOUTUBE.md` in the same format as `remotion/src/dcc/YOUTUBE.md`, plus a table pairing each thumbnail with its title and an **Accuracy notes** section. Anything the image implies that the sources don't confirm, such as who is in the leaked photos, gets a note.
 
 ---
 
