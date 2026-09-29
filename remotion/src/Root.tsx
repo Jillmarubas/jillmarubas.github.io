@@ -5,6 +5,7 @@ import {SPACE_DURATION, Space} from './space/Space';
 import {REAL_DURATION, RealMoon} from './real/RealMoon';
 import {AINEWS_DURATION, AINews} from './ainews0929/AINews';
 import {GradTest} from './_qa/GradTest';
+import {LeakThumbA, LeakThumbB, LeakThumbC} from './ainews0929/Thumbnail';
 
 export const Root: React.FC = () => (
   <>
@@ -37,6 +38,9 @@ export const Root: React.FC = () => (
     <Composition id="MoonDistance" component={Space} durationInFrames={SPACE_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="RealMoon" component={RealMoon} durationInFrames={REAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="GradTest" component={GradTest} durationInFrames={450} fps={30} width={1920} height={1080} />
+    <Composition id="LeakThumbA" component={LeakThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="LeakThumbB" component={LeakThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="LeakThumbC" component={LeakThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="AINews0929" component={AINews} durationInFrames={AINEWS_DURATION} fps={30} width={1920} height={1080} defaultProps={{sound: true}} />
   </>
 );

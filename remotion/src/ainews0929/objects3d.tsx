@@ -7,8 +7,9 @@ import {RoundedBoxGeometry} from 'three/examples/jsm/geometries/RoundedBoxGeomet
 import {random, useVideoConfig} from 'remotion';
 import {C} from './theme';
 
-export type Mood = 'azure' | 'ok' | 'warn' | 'err' | 'frost';
-export const MOOD: Record<Mood, string> = {azure: '#6f9bff', ok: C.ok, warn: C.warn, err: C.err, frost: C.frost};
+export type Mood = 'azure' | 'ok' | 'warn' | 'err' | 'frost' | 'alarm';
+// alarm: a saturated red for thumbnails only, where the pale signal red reads as pink at small sizes
+export const MOOD: Record<Mood, string> = {azure: '#6f9bff', ok: C.ok, warn: C.warn, err: C.err, frost: C.frost, alarm: '#C8000F'};
 export type ObjProps = {f: number; p: number; mood: Mood; seed: number};
 
 // ---------- geometry cache (built once, reused every frame) ----------
@@ -360,6 +361,16 @@ const photoTex = (seed: number) => {
     g.moveTo(0, 192);
     for (let x = 0; x <= 256; x += 16) g.lineTo(x, 120 + k * 22 + Math.sin(x / 30 + seed + k * 2) * 18);
     g.lineTo(256, 192);
+    g.fill();
+  }
+  if (seed >= 100) {
+    // portrait: a generic silhouette (no real person), so the print reads as someone's private photo
+    g.fillStyle = `hsl(${hue + 200},30%,22%)`;
+    g.beginPath();
+    g.arc(128, 86, 30, 0, Math.PI * 2);
+    g.fill();
+    g.beginPath();
+    g.ellipse(128, 196, 70, 70, 0, Math.PI, 0);
     g.fill();
   }
   const t = new THREE.CanvasTexture(c);
