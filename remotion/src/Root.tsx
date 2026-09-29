@@ -5,7 +5,7 @@ import {SPACE_DURATION, Space} from './space/Space';
 import {REAL_DURATION, RealMoon} from './real/RealMoon';
 import {AINEWS_DURATION, AINews} from './ainews0929/AINews';
 import {GradTest} from './_qa/GradTest';
-import {LeakThumbA, LeakThumbB, LeakThumbC, ShockThumbD, ShockThumbE, ShockThumbF} from './ainews0929/Thumbnail';
+import {LeakThumbA, LeakThumbB, LeakThumbC, ShockThumbD, ShockThumbE, ShockThumbF, HighlightThumbG, HighlightThumbH, HighlightThumbI} from './ainews0929/Thumbnail';
 
 export const Root: React.FC = () => (
   <>
@@ -44,6 +44,9 @@ export const Root: React.FC = () => (
     <Composition id="ShockThumbD" component={ShockThumbD} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="ShockThumbE" component={ShockThumbE} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="ShockThumbF" component={ShockThumbF} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="HighlightThumbG" component={HighlightThumbG} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="HighlightThumbH" component={HighlightThumbH} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="HighlightThumbI" component={HighlightThumbI} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="AINews0929" component={AINews} durationInFrames={AINEWS_DURATION} fps={30} width={1920} height={1080} defaultProps={{sound: true}} />
   </>
 );

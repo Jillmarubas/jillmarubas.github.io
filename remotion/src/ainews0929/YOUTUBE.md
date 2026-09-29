@@ -14,6 +14,14 @@ Thumbnails: `LeakThumbA` / `LeakThumbB` / `LeakThumbC` in `Thumbnail.tsx` (1920Ã
 | 5 (photo) | E: shocked reaction, wider, same words | OpenAI's Own AI Agents Went Rogue |
 | 6 (photo) | F: shocked reaction, different person, same words | OpenAI's Own AI Agents Went Rogue |
 
+| **7 (recommended)** | G: photo F, big yellow "53", white "PHOTOS", "LEAKED" on a red marker stroke | OpenAI's Own AI Agents Went Rogue |
+| 8 | H: photo F, "53 PHOTOS" on a yellow highlighter bar, "LEAKED" on a red bar | OpenAI's Own AI Agents Went Rogue |
+| 9 | I: photo F, yellow words with a dark outline, "LEAKED" red with a white outline and glow | OpenAI's Own AI Agents Went Rogue |
+
+Highlight variants G/H/I (`HighlightThumbG/H/I`) use Geist 800/900 (thumbnails only) with yellow `#FFD60A`
+and red `#FF2A3D`, the complementary pair that pops hardest on cobalt. They change only the word styling,
+so test G vs H vs I to pick the treatment.
+
 Photo variants D/E/F (`ShockThumbD/E/F`) use images generated with ElevenLabs (Seedream 5 Pro, flow
 `BW9yPEcLZdlfRHQyJNiz`): fictional people, no real person, no logos. Stored in `public/ainews0929/thumb/`.
 D/E/F share the same words, so they test only the image. For the biggest difference, test D against A

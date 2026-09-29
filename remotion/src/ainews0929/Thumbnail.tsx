@@ -132,3 +132,75 @@ const LEAK_WORDS: [string, string][] = [['53', C.frost], ['PHOTOS', C.frost], ['
 export const ShockThumbD: React.FC = () => <ShockThumb src="ainews0929/thumb/shock4.jpg" lines={LEAK_WORDS} />;
 export const ShockThumbE: React.FC = () => <ShockThumb src="ainews0929/thumb/shock2.jpg" lines={LEAK_WORDS} />;
 export const ShockThumbF: React.FC = () => <ShockThumb src="ainews0929/thumb/shock1.jpg" lines={LEAK_WORDS} />;
+
+// ---------- highlighted words (on photo F): more contrast, yellow + red against the cobalt ----------
+const YEL = '#FFD60A';
+const RED = '#FF2A3D';
+const INK = C.cobalt950;
+const outline = (w: number, c: string) =>
+  [`${w}px 0 0 ${c}`, `-${w}px 0 0 ${c}`, `0 ${w}px 0 ${c}`, `0 -${w}px 0 ${c}`, `${w * 0.7}px ${w * 0.7}px 0 ${c}`, `-${w * 0.7}px ${w * 0.7}px 0 ${c}`, `${w * 0.7}px -${w * 0.7}px 0 ${c}`, `-${w * 0.7}px -${w * 0.7}px 0 ${c}`].join(', ');
+const drop = '0 18px 40px rgba(2,10,40,.55)';
+// A marker stroke: slightly rotated bar with ragged ends, like a highlighter pass.
+const Bar: React.FC<{color: string; rot: number; children: React.ReactNode; pad?: string}> = ({color, rot, children, pad = '0.02em 0.22em 0.08em'}) => (
+  <span style={{position: 'relative', display: 'inline-block', transform: `rotate(${rot}deg)`}}>
+    <span
+      style={{
+        position: 'absolute',
+        inset: '8% -3% 0 -3%',
+        background: color,
+        clipPath: 'polygon(1.5% 6%, 98% 0%, 100% 48%, 98.5% 96%, 2% 100%, 0% 55%)',
+        boxShadow: '0 16px 40px rgba(2,10,40,.45)',
+        filter: 'drop-shadow(0 12px 22px rgba(2,10,40,.45))',
+      }}
+    />
+    <span style={{position: 'relative', padding: pad}}>{children}</span>
+  </span>
+);
+
+const Words: React.FC<{style: 'marker' | 'highlighter' | 'glow'}> = ({style}) => {
+  const base: React.CSSProperties = {fontFamily: F.sans, fontWeight: 900, letterSpacing: '-0.045em', lineHeight: 0.92};
+  if (style === 'marker')
+    return (
+      <div style={{...base, transform: 'rotate(-3deg)', transformOrigin: 'left center'}}>
+        <div style={{fontSize: 270, color: YEL, textShadow: `${outline(7, INK)}, ${drop}`}}>53</div>
+        <div style={{fontSize: 172, color: C.frost, textShadow: `${outline(6, INK)}, ${drop}`}}>PHOTOS</div>
+        <div style={{fontSize: 186, color: C.frost, marginTop: 18, marginLeft: -8}}>
+          <Bar color={RED} rot={-1.5}>LEAKED</Bar>
+        </div>
+      </div>
+    );
+  if (style === 'highlighter')
+    return (
+      <div style={{...base, transform: 'rotate(-2deg)', transformOrigin: 'left center'}}>
+        <div style={{fontSize: 176, color: INK}}>
+          <Bar color={YEL} rot={-1} pad="0.02em 0.32em 0.08em">53 PHOTOS</Bar>
+        </div>
+        <div style={{fontSize: 200, color: C.frost, marginTop: 26}}>
+          <Bar color={RED} rot={1.5} pad="0.02em 0.32em 0.08em">LEAKED</Bar>
+        </div>
+      </div>
+    );
+  return (
+    <div style={{...base, transform: 'rotate(-3deg)', transformOrigin: 'left center'}}>
+      <div style={{fontSize: 250, color: YEL, textShadow: `${outline(8, INK)}, ${drop}`}}>53</div>
+      <div style={{fontSize: 170, color: YEL, textShadow: `${outline(7, INK)}, ${drop}`}}>PHOTOS</div>
+      <div style={{fontSize: 196, color: RED, textShadow: `${outline(7, '#FFFFFF')}, 0 0 50px rgba(255,42,61,.85), ${drop}`}}>LEAKED</div>
+    </div>
+  );
+};
+
+export const HighlightThumb: React.FC<{style: 'marker' | 'highlighter' | 'glow'; src?: string}> = ({style, src = 'ainews0929/thumb/shock1.jpg'}) => (
+  <AbsoluteFill style={{background: C.cobalt950, overflow: 'hidden'}}>
+    <Img src={staticFile(src)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover'}} />
+    {/* punchier grade: a little more contrast and saturation than the raw image */}
+    <AbsoluteFill style={{backdropFilter: 'contrast(1.08) saturate(1.15)'}} />
+    <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(4,31,92,.85) 0%, rgba(4,31,92,.55) 36%, rgba(4,31,92,0) 58%)'}} />
+    <div style={{position: 'absolute', left: 80, top: style === 'highlighter' ? 250 : 110}}>
+      <Words style={style} />
+    </div>
+    <AbsoluteFill style={{background: 'radial-gradient(ellipse 80% 80% at 60% 50%, rgba(0,0,0,0) 55%, rgba(2,10,36,.4) 100%)'}} />
+  </AbsoluteFill>
+);
+export const HighlightThumbG: React.FC = () => <HighlightThumb style="marker" />;
+export const HighlightThumbH: React.FC = () => <HighlightThumb style="highlighter" />;
+export const HighlightThumbI: React.FC = () => <HighlightThumb style="glow" />;

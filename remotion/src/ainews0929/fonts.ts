@@ -6,6 +6,8 @@ const FONTS: [string, string, string, string][] = [
   ['Geist', 'normal', '400', 'Geist-400-normal.woff2'],
   ['Geist', 'normal', '500', 'Geist-500-normal.woff2'],
   ['Geist', 'normal', '600', 'Geist-600-normal.woff2'],
+  ['Geist', 'normal', '800', 'Geist-800-normal.woff2'], // thumbnails only
+  ['Geist', 'normal', '900', 'Geist-900-normal.woff2'], // thumbnails only
   ['Geist Mono', 'normal', '500', 'GeistMono-500-normal.woff2'],
   ['Instrument Serif', 'italic', '400', 'InstrumentSerif-400-italic.woff2'],
 ];
