@@ -88,6 +88,18 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 
 ---
 
+## Long-form variant: daily news (YouTube, 1920×1080)
+Learned on AI News Daily, 29 Sep 2026 (`remotion/src/ainews0929/`). The steps above still apply; these change:
+- **Format:** 1920×1080, 30 fps, length set by the VO (8–10 min). Beats change on the VO's words, every 3–10 s, instead of every 1.5–3.5 s.
+- **Fact-check the script before recording.** Check dates against the weekday (`date -d`), figures against two sources, and quotes against their context. Record the corrections in a `BRIEF.md` next to the code.
+- **VO:** ElevenLabs, one clip per section. The account allows **3 concurrent** generations, so queue the rest. Download the clips right away, because the links expire in 2 h.
+- **Word timings:** `python3 scripts/align_vo.py <vo-script.json> <vo_dir> timings.json` (faster-whisper `base.en`, local and free). Cue beats with `cue(section, word, nth)`, or with `cueNear(section, word, seconds)` for common words.
+- **Check every cue for duplicates.** Lookup is case-insensitive, so "That", "To", "The", "It's", "up" and "public" often hit an earlier occurrence. Grep each section for words used with nth=1 that occur more than once.
+- **Every beat opens on an object.** A stage with only text for more than about 2 s reads as a slide.
+- **Text on the haze bloom:** labels over the light corner go on `--glass-sheet` (cobalt 60 %), not the white panel tier.
+- **Lambda:** concurrency is now 1,000, but Remotion caps a render at 200 functions, so use `FRAMES_PER_LAMBDA = ceil(frames / 200)` (80 for ~15.7k frames). Use a per-episode `SITE=` name.
+- **QA stills:** `node scripts/stills.mjs <Comp> <outdir> <scale> <frames…>` bundles once and renders every frame you list.
+
 ## Troubleshooting
 | Symptom | Cause | Fix |
 |---|---|---|

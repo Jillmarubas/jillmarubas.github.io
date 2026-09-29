@@ -3,6 +3,7 @@ import {Composition} from 'remotion';
 import {PROMO_DURATION, Promo, PromoProps} from './promo/Promo';
 import {SPACE_DURATION, Space} from './space/Space';
 import {REAL_DURATION, RealMoon} from './real/RealMoon';
+import {AINEWS_DURATION, AINews} from './ainews0929/AINews';
 
 export const Root: React.FC = () => (
   <>
@@ -34,5 +35,6 @@ export const Root: React.FC = () => (
     />
     <Composition id="MoonDistance" component={Space} durationInFrames={SPACE_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="RealMoon" component={RealMoon} durationInFrames={REAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
+    <Composition id="AINews0929" component={AINews} durationInFrames={AINEWS_DURATION} fps={30} width={1920} height={1080} defaultProps={{sound: true}} />
   </>
 );
