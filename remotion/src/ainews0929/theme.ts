@@ -1,5 +1,5 @@
 // Cobalt Haze tokens (design-system/cobalt-haze/tokens.css), translated for video.
-import {Easing, continueRender, delayRender, staticFile} from 'remotion';
+import {Easing} from 'remotion';
 
 export const FPS = 30;
 export const W = 1920;
@@ -45,22 +45,3 @@ export const glass = Easing.bezier(0.16, 1, 0.3, 1);
 export const inOut = Easing.bezier(0.45, 0, 0.2, 1);
 export const depart = Easing.bezier(0.55, 0, 1, 0.45);
 export const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
-
-const FONTS: [string, string, string, string][] = [
-  ['Geist', 'normal', '300', 'Geist-300-normal.woff2'],
-  ['Geist', 'normal', '400', 'Geist-400-normal.woff2'],
-  ['Geist', 'normal', '500', 'Geist-500-normal.woff2'],
-  ['Geist', 'normal', '600', 'Geist-600-normal.woff2'],
-  ['Geist Mono', 'normal', '500', 'GeistMono-500-normal.woff2'],
-  ['Instrument Serif', 'italic', '400', 'InstrumentSerif-400-italic.woff2'],
-];
-
-// Fonts are bundled in public/fonts so renders never depend on fetching Google Fonts.
-const handle = delayRender('Loading Cobalt Haze fonts');
-Promise.all(
-  FONTS.map(([family, style, weight, file]) => {
-    const face = new FontFace(family, `url(${staticFile(`fonts/${file}`)}) format('woff2')`, {style, weight});
-    document.fonts.add(face);
-    return face.load();
-  }),
-).then(() => continueRender(handle));

@@ -1,12 +1,12 @@
 // AI News Daily — 29 September 2026. 1920×1080, 30 fps, Cobalt Haze, VO by Asher.
 import React from 'react';
-import {AbsoluteFill, Audio, Loop, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import './theme';
-import {C, clamp, F, FPS} from './theme';
+import {AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import './fonts';
+import {C, clamp, F} from './theme';
 import {BLOCKS, TOTAL_FRAMES, blockOf, fr} from './timeline';
-import {ITEMS, SFX, UI} from './beats';
+import {ITEMS, UI} from './beats';
 import {Stage3D} from './Stage3D';
-import {Appear, Field, Lens, Source} from './ui';
+import {Appear, Field, glassBox, Lens, MonoPill, Source} from './ui';
 
 const STORIES = ['Nvidia', 'OpenAI', 'ElevenLabs', 'Instinct', 'Washington'];
 const storyStarts = STORIES.map((_, i) => fr(blockOf('stinger', i + 1).start));
@@ -22,13 +22,13 @@ const HUD: React.FC = () => {
   const cur = f >= outroStart ? -1 : storyStarts.filter((s) => f >= s).length - 1;
   return (
     <div style={{position: 'absolute', inset: 0, opacity: o}}>
-      <div style={{position: 'absolute', left: 80, top: 60, display: 'flex', alignItems: 'center', gap: 12}}>
+      <div style={{...glassBox('sheet', 999), position: 'absolute', left: 64, top: 48, display: 'flex', alignItems: 'center', gap: 12, padding: '10px 20px'}}>
         <span style={{width: 12, height: 12, borderRadius: 6, background: C.ok, boxShadow: `0 0 12px ${C.ok}`}} />
         <span style={{fontFamily: F.sans, fontWeight: 500, fontSize: 26, color: C.text1, letterSpacing: '-0.01em'}}>
           AI News <span style={{fontFamily: F.serif, fontStyle: 'italic', fontWeight: 400, fontSize: '1.12em'}}>Daily</span>
         </span>
       </div>
-      <div style={{position: 'absolute', right: 80, top: 66, fontFamily: F.mono, fontWeight: 500, fontSize: 20, letterSpacing: '0.18em', color: C.text2}}>29 SEP 2026</div>
+      <div style={{...glassBox('sheet', 999), position: 'absolute', right: 64, top: 52, padding: '12px 20px', fontFamily: F.mono, fontWeight: 500, fontSize: 20, letterSpacing: '0.18em', color: C.text2}}>29 SEP 2026</div>
       {/* story rail */}
       <div
         style={{
@@ -40,10 +40,8 @@ const HUD: React.FC = () => {
           gap: 6,
           padding: 6,
           borderRadius: 999,
-          background: 'rgba(255,255,255,0.08)',
-          border: '1px solid rgba(255,255,255,0.18)',
-          boxShadow: 'inset 0 1px 0 rgba(255,255,255,.16)',
-          opacity: cur >= 0 ? 1 : 0.6,
+          ...glassBox('sheet', 999),
+          opacity: cur >= 0 ? 1 : 0.85,
         }}
       >
         {STORIES.map((s, i) => (
@@ -57,7 +55,7 @@ const HUD: React.FC = () => {
               fontSize: 16,
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
-              color: i === cur ? C.cobalt800 : 'rgba(214,223,240,.7)',
+              color: i === cur ? C.cobalt800 : C.text2,
               background: i === cur ? C.frost : 'transparent',
             }}
           >
@@ -85,7 +83,9 @@ const EndCard: React.FC = () => {
         <div style={{fontFamily: F.sans, fontWeight: 500, fontSize: 132, letterSpacing: '-0.055em', color: C.text1}}>
           AI News <span style={{fontFamily: F.serif, fontStyle: 'italic', fontWeight: 400, fontSize: '1.12em', letterSpacing: 0}}>Daily</span>
         </div>
-        <div style={{fontFamily: F.mono, fontWeight: 500, fontSize: 24, letterSpacing: '0.3em', color: C.text2, marginTop: 18}}>THANKS FOR WATCHING</div>
+        <div style={{marginTop: 18}}>
+          <MonoPill>THANKS FOR WATCHING</MonoPill>
+        </div>
       </Appear>
       <Appear at={at + 10} out={1e9} style={{left: 0, right: 0, top: 700, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10}}>
         {SOURCES.map((s) => (
@@ -111,25 +111,8 @@ export const AINews: React.FC<{sound: boolean}> = ({sound}) => {
       <HUD />
       <Lens />
       <AbsoluteFill style={{background: C.cobalt950, opacity: Math.max(fadeIn, fadeOut)}} />
-      {sound && (
-        <>
-          <Loop durationInFrames={64 * FPS}>
-            <Audio src={staticFile('ainews0929/sfx/bed.wav')} volume={0.09} />
-          </Loop>
-          {BLOCKS.map((b, i) =>
-            b.kind === 'vo' ? (
-              <Sequence key={i} from={fr(b.start)} durationInFrames={Math.ceil((b.len + 0.3) * FPS)} name={`VO ${b.id}`}>
-                <Audio src={staticFile(`ainews0929/vo/${b.id}.mp3`)} />
-              </Sequence>
-            ) : null,
-          )}
-          {SFX.map((s, i) => (
-            <Sequence key={`s${i}`} from={Math.max(0, s.at - 6)} durationInFrames={FPS} name={`sfx ${s.file}`}>
-              <Audio src={staticFile(`ainews0929/sfx/${s.file}.wav`)} volume={s.vol ?? 0.3} />
-            </Sequence>
-          ))}
-        </>
-      )}
+      {/* one mastered mix (scripts/mix_news_audio.py): voice -17.8 dBFS RMS, music ducked, cues over music, peaks -1 dBFS */}
+      {sound && <Audio src={staticFile('ainews0929/mix.m4a')} />}
     </AbsoluteFill>
   );
 };

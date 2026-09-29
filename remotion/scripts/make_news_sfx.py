@@ -1,10 +1,10 @@
 """Sound for AI News Daily: whoosh, impact, tick and a 64 s seamless pad bed.
-Writes public/ainews0929/sfx/*.wav. Needs numpy."""
+Writes out/ainews0929/sfx/*.wav (mixer inputs; big WAVs stay out of public/). Needs numpy."""
 import os, wave
 import numpy as np
 
 SR = 44100
-OUT = 'public/ainews0929/sfx'
+OUT = 'out/ainews0929/sfx'
 os.makedirs(OUT, exist_ok=True)
 rng = np.random.default_rng(11)
 

@@ -1,63 +1,19 @@
 // Cobalt Haze surfaces for video: the field, glass, type, and the lens pass.
 import React from 'react';
-import {Img, interpolate, random, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, useCurrentFrame} from 'remotion';
+import {LivingGradient, paletteFrom} from '../gradient/GradientLoop';
 import {C, clamp, F, glass, SHADOW} from './theme';
 
-// ---------- the field: 150° cobalt ramp + four drifting blooms (48–62 s cycles) ----------
-export const Field: React.FC<{tint?: number}> = ({tint = 0}) => {
-  const f = useCurrentFrame();
-  const {fps} = useVideoConfig();
-  const t = f / fps;
-  const osc = (period: number, phase = 0) => (1 - Math.cos(((t + phase) / period) * Math.PI * 2)) / 2;
-  const bloom = (w: number, pos: React.CSSProperties, color: string, tx: number, ty: number, sc: number, period: number) => {
-    const k = osc(period);
-    return (
-      <div
-        style={{
-          position: 'absolute',
-          width: w,
-          height: w,
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${color}, rgba(0,0,0,0) 64%)`,
-          transform: `translate(${tx * k}%, ${ty * k}%) scale(${1 + sc * k})`,
-          ...pos,
-        }}
-      />
-    );
-  };
-  return (
-    <div style={{position: 'absolute', inset: 0, overflow: 'hidden', background: 'linear-gradient(150deg,#041F5C 0%,#05348E 30%,#1E4C9E 52%,#6F8CC0 74%,#B9C3D9 90%,#C9C6CD 100%)'}}>
-      {bloom(1500, {right: -560, top: -560}, 'rgba(4,31,92,.92)', -6, 8, 0.05, 62)}
-      {bloom(1130, {left: -300, top: 200}, 'rgba(77,113,173,.72)', 10, -8, 0, 56)}
-      {bloom(690, {right: 380, bottom: -170}, 'rgba(177,200,224,.75)', 10, -8, 0, 44)}
-      {bloom(1550, {right: -560, bottom: -730}, 'rgba(214,210,218,.95)', -8, -6, 0.08, 48)}
-      {/* keep the left third deep so type always sits on cobalt, never on the haze bloom */}
-      <div style={{position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(4,31,92,.55) 0%, rgba(4,31,92,.18) 45%, rgba(4,31,92,0) 70%)'}} />
-      <div style={{position: 'absolute', inset: 0, background: `rgba(4,31,92,${tint})`}} />
-    </div>
-  );
-};
+// ---------- the field: the approved living gradient (SOP "Daily news videos"), in Cobalt Haze colours ----------
+// soften 0: Cobalt Haze sets white type on a deep field, so its own field colours are used as they are
+// (softening toward white would drop the headlines below 4.5:1). Order: primary, secondary, light accent, haze.
+export const COBALT_GRADIENT = paletteFrom([C.cobalt800, C.azure400, C.ice100, C.periwinkle200], 0);
+export const Field: React.FC = () => <LivingGradient palette={COBALT_GRADIENT} />;
 
-// ---------- lens pass: vignette + grain, re-seeded every frame ----------
-export const Lens: React.FC = () => {
-  const f = useCurrentFrame();
-  return (
-    <>
-      <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 75% 75% at 50% 48%, rgba(0,0,0,0) 55%, rgba(2,10,36,.42) 100%)'}} />
-      <div
-        style={{
-          position: 'absolute',
-          inset: -256,
-          backgroundImage: `url(${staticFile('ainews0929/grain.png')})`,
-          backgroundSize: '256px 256px',
-          transform: `translate(${Math.floor(random(`gx${f}`) * 256)}px, ${Math.floor(random(`gy${f}`) * 256)}px)`,
-          opacity: 0.07,
-          mixBlendMode: 'overlay',
-        }}
-      />
-    </>
-  );
-};
+// ---------- lens pass: vignette only; grain is the gradient's static grain (never animated) ----------
+export const Lens: React.FC = () => (
+  <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 75% 75% at 50% 48%, rgba(0,0,0,0) 55%, rgba(2,10,36,.42) 100%)'}} />
+);
 
 // ---------- entrance/exit wrapper: rise 24 px + 8 px blur in, blur out ----------
 export const Appear: React.FC<{at: number; out: number; children: React.ReactNode; style?: React.CSSProperties; rise?: number; from?: 'below' | 'left' | 'right'}> = ({
@@ -87,7 +43,7 @@ export const glassBox = (tier: 'chrome' | 'panel' | 'modal' | 'sheet' = 'panel',
 
 // Glass kicker chip: accent dot + mono caps.
 export const Kicker: React.FC<{text: string; color?: string; size?: number}> = ({text, color = C.ok, size = 22}) => (
-  <div style={{...glassBox('chrome', 999), display: 'inline-flex', alignItems: 'center', gap: 14, padding: '12px 24px 12px 20px'}}>
+  <div style={{...glassBox('sheet', 999), display: 'inline-flex', alignItems: 'center', gap: 14, padding: '12px 24px 12px 20px'}}>
     <span style={{width: 12, height: 12, borderRadius: 6, background: color, boxShadow: `0 0 14px ${color}`}} />
     <span style={{fontFamily: F.mono, fontWeight: 500, fontSize: size, letterSpacing: '0.12em', color: C.text1, textTransform: 'uppercase'}}>{text}</span>
   </div>
@@ -170,9 +126,13 @@ export const Quote: React.FC<{text: string; who: string; width?: number; size?: 
 );
 
 export const Source: React.FC<{text: string}> = ({text}) => (
-  <div style={{fontFamily: F.mono, fontWeight: 500, fontSize: 18, letterSpacing: '0.06em', color: 'rgba(214,223,240,.78)'}}>SOURCE · {text}</div>
+  <div style={{...glassBox('sheet', 999), display: 'inline-block', padding: '8px 16px', fontFamily: F.mono, fontWeight: 500, fontSize: 18, letterSpacing: '0.06em', color: C.text2, whiteSpace: 'nowrap'}}>SOURCE · {text}</div>
+);
+// Mono line on a sheet pill (dates, captions).
+export const MonoPill: React.FC<{children: React.ReactNode; size?: number}> = ({children, size = 24}) => (
+  <div style={{...glassBox('sheet', 999), display: 'inline-block', padding: '10px 22px', fontFamily: F.mono, fontWeight: 500, fontSize: size, letterSpacing: '0.24em', color: C.text2, whiteSpace: 'nowrap'}}>{children}</div>
 );
 
-export const Small: React.FC<{children: React.ReactNode; size?: number; color?: string; width?: number}> = ({children, size = 30, color = C.text2, width}) => (
-  <div style={{fontFamily: F.sans, fontWeight: 400, fontSize: size, lineHeight: 1.35, color, width, letterSpacing: '-0.01em'}}>{children}</div>
+export const Small: React.FC<{children: React.ReactNode; size?: number; color?: string; width?: number}> = ({children, size = 30, color = C.text1, width}) => (
+  <div style={{...glassBox('sheet', 18), display: 'inline-block', padding: '12px 20px', maxWidth: width, fontFamily: F.sans, fontWeight: 400, fontSize: size, lineHeight: 1.3, color, letterSpacing: '-0.01em'}}>{children}</div>
 );

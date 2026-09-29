@@ -5,7 +5,7 @@ import {useCurrentFrame} from 'remotion';
 import {Item} from './Stage3D';
 import {Mood, ObjKind} from './objects3d';
 import {blockOf, cue, cueNear, sectionEnd, sectionStart, SectionId} from './timeline';
-import {Appear, Counter, Headline, Kicker, Quote, Small, Source, Tag} from './ui';
+import {Appear, Counter, Headline, Kicker, MonoPill, Quote, Small, Source, Tag} from './ui';
 import {CodeCard, Flash, Press, Progress, Rain, Rings, Wave, XMark} from './props2d';
 import {C, F} from './theme';
 
@@ -78,7 +78,7 @@ const text = (c: Ctx, kicker: string, lines: string[], color: string = C.ok, siz
       items: [c.o('orb', 960, 420, 300, c.at + 2, {mood: 'ok', seed: 7})],
       ui: [
         c.A(c.at + 8, 960, 640, <div style={{fontFamily: F.sans, fontWeight: 500, fontSize: 120, letterSpacing: '-0.055em', color: C.text1, whiteSpace: 'nowrap'}}>AI News <span style={{fontFamily: F.serif, fontStyle: 'italic', fontWeight: 400, fontSize: '1.12em', letterSpacing: 0}}>Daily</span></div>, {center: true}),
-        c.A(c.at + 14, 960, 810, <div style={{fontFamily: F.mono, fontWeight: 500, fontSize: 26, letterSpacing: '0.3em', color: C.text2}}>TUESDAY · 29 SEPTEMBER 2026</div>, {center: true}),
+        c.A(c.at + 14, 960, 800, <MonoPill size={26}>TUESDAY · 29 SEPTEMBER 2026</MonoPill>, {center: true}),
       ],
     }),
     true,
@@ -442,7 +442,7 @@ const NameTag: React.FC<{at: number; label: string}> = ({at, label}) => (
 const OldTags: React.FC<{strikeAt: number}> = ({strikeAt}) => (
   <div style={{display: 'flex', gap: 12, position: 'relative'}}>
     {['<pitch +2>', '<rate 0.9>', '<emphasis>'].map((t) => (
-      <div key={t} style={{fontFamily: F.mono, fontSize: 26, color: C.text2, padding: '10px 18px', borderRadius: 12, border: `1px dashed ${C.rim}`}}>
+      <div key={t} style={{fontFamily: F.mono, fontSize: 26, color: C.text2, padding: '10px 18px', borderRadius: 12, border: `1px dashed ${C.rim}`, background: C.glassSheet}}>
         {t}
       </div>
     ))}

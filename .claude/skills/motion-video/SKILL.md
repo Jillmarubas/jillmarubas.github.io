@@ -15,7 +15,8 @@ three videos produced in this repo.
 1. **Render on AWS Lambda,** always (the user's standing instruction). Use `remotion/render-lambda.sh`. Local rendering is only for single preview stills.
 2. **Original content only.** Learn techniques from references, but never reuse their footage, photos, logos, characters, scripts or trademarks. Use the client's own assets, public-domain data (NASA), CC0 assets (Poly Haven), or assets drawn in code.
 3. **Facts must be checkable.** Every number on screen gets verified, and the source is credited on screen when it's data (for example "Moon: NASA LRO").
-4. **Default 30 fps.** 24/25 fps is for cinematic or documentary looks, 60 fps only for glossy tech with fast moves. The user prefers 30.
+4. **The look comes from the user's references, never from my own taste.** This user's references are white or cream paper (see `reference/breakdowns.md`), so white paper is the default. Switching to a dark or cinematic look needs the user's explicit OK first.
+5. **Default 30 fps.** 24/25 fps is for cinematic or documentary looks, 60 fps only for glossy tech with fast moves. The user prefers 30.
 
 ## The house style, as measured
 These values come from the references; the full evidence is in `reference/breakdowns.md`.
@@ -26,6 +27,17 @@ These values come from the references; the full evidence is in `reference/breakd
 - **Easing:** ease-in-out with peak speed at the midpoint (`bezier(0.45,0,0.2,1)`) for most moves. For a cinematic feel, snap in and settle (`bezier(0.22,1,0.36,1)`, peak speed about 20 % in).
 - **Type:** pair a small script or thin serif lead-in with a heavy sans key word. Add a giant ghost word (8–15 % opacity) behind the subject.
 - **Depth layers,** back to front: backdrop (paper, grid, black) → ghost word → shadow/gobo overlay → hero object → text → foreground props cut off by the frame (blurred) → grain, vignette, lens effects.
+
+## Choreography: the objects move, not the camera
+Measured across all references (`reference/breakdowns.md`, "Asset choreography"): 58 directional entrances and 38 pops in place, and almost no camera zooms. So:
+- **The camera is locked flat on the paper.** Scenes change with a whip pan along the paper wall, never a push-in or zoom.
+- **Objects float in front of the paper** and cast soft shadows onto it, down and to the right.
+- **Every object enters from somewhere:** left, right, top, bottom, diagonal, from the camera, or a pop. Rotate the directions so consecutive objects differ.
+- **Entrances:** smooth glide, rotating, no overshoot, long soft settle (`settle()` in `cola/motion3d.tsx`). After landing, objects keep drifting a few millimetres; nothing freezes.
+- **Objects interact:** pour, stamp, knock out of frame, spin down.
+- **Exits come toward the viewer** (the user's preference): at the end of each scene every object eases forward off the paper, left to right a few frames apart, drifting outward so it slips past the lens, and blurs as it gets close. Entrances stay directional (left, right, top, bottom); no scale-in pops. Implemented by `ExitContext` in `cola/motion3d.tsx` plus the near-field depth-of-field pass in `MotionBlurRenderer` (`dof` prop: sharp beyond 0.92 m, fully soft at 0.35 m, 70 px max at 1080 wide). The DOF pass runs only on frames where something is near the lens.
+- **True 3D motion blur:** use `Mover` + `MotionBlurRenderer` (`cola/motion3d.tsx`). Poses are functions of time; fast frames are rendered up to 8 times across a 180° shutter and averaged.
+- **Reference build:** `remotion/src/cola/ColaOrigin.tsx`.
 
 ## Motion vocabulary
 Each entry says which reference(s) it came from, then what already exists in this repo's
@@ -59,4 +71,6 @@ reflections + lens effects (DOF, grain, vignette, subtle chromatic aberration).*
 - `SOP.md`: the step-by-step procedure (brief → reference study → build → QA → Lambda → deliver).
 - `reference/breakdowns.md`: measured breakdowns of the six references.
 - `reference/realism.md`: lighting, shadow, reflection, material and lens recipes, with numbers.
+- **Daily news videos:** always use the approved living-gradient background (`<LivingGradient>` in `remotion/src/gradient/GradientLoop.tsx`) in the chosen design system's colours. See the SOP section "Daily news videos".
+- `reference/vector-story-film.md`: **default for story videos.** 2D vector films where every script line is its own scene with a main character, emotions and cinematic shots. Read it before planning any story or explainer film.
 - `remotion/`: the working project. Compositions `BrandStory` (2D + SVG), `MoonDistance` (3D procedural) and `RealMoon` (NASA data, photoreal). Scripts: `render-lambda.sh`, `scripts/analyze-reference.sh`, `scripts/prepare-nasa-textures.py`, and the `make_*_sfx.py` sound generators.

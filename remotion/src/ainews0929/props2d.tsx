@@ -17,7 +17,7 @@ export const Wave: React.FC<{w: number; h: number; smooth?: number; color?: stri
         return <div key={i} style={{flex: 1, height: `${Math.max(6, v * (h - 60))}px`, borderRadius: 4, background: color, opacity: 0.55 + 0.45 * v}} />;
       })}
       {label && (
-        <div style={{position: 'absolute', left: 24, top: -40, fontFamily: F.mono, fontSize: 20, letterSpacing: '0.1em', color: C.text2, textTransform: 'uppercase'}}>{label}</div>
+        <div style={{...glassBox('sheet', 999), position: 'absolute', left: 16, top: -50, padding: '6px 14px', fontFamily: F.mono, fontSize: 20, letterSpacing: '0.1em', color: C.text2, textTransform: 'uppercase'}}>{label}</div>
       )}
     </div>
   );
@@ -88,7 +88,7 @@ export const Progress: React.FC<{label: string; at: number; stopAt: number; to: 
   const v = interpolate(f, [at, stopAt], [to * 0.55, to], clamp);
   const stopped = f >= stopAt;
   return (
-    <div style={{...glassBox('panel', 20), width: w, padding: '18px 22px'}}>
+    <div style={{...glassBox('sheet', 20), width: w, padding: '18px 22px'}}>
       <div style={{display: 'flex', justifyContent: 'space-between', fontFamily: F.mono, fontSize: 20, letterSpacing: '0.1em', color: C.text2, marginBottom: 12}}>
         <span>{label}</span>
         <span style={{color: stopped ? C.warn : C.text2}}>{stopped ? 'PAUSED' : `${Math.round(v * 100)}%`}</span>
@@ -128,7 +128,7 @@ export const Press: React.FC<{at: number; label: string; icon: 'like' | 'sub' | 
         alignItems: 'center',
         gap: 16,
         padding: '20px 36px 20px 28px',
-        background: on ? C.frost : C.glassModal,
+        background: on ? C.frost : C.glassSheet,
         transform: `scale(${1 - press * 0.08})`,
       }}
     >
