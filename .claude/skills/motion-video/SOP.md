@@ -131,6 +131,29 @@ expression, what moves, any data shown inside the scene). Build a character rig 
 expressions first, then the locations, then the shots. Data never sits on a bare card; it
 appears inside the scene. QA a contact sheet of every line's scene.
 
+## Daily news videos: the living-gradient background (always)
+The user approved this motion (Sept 2026) and wants it on **every daily news video, whatever
+design system they choose**.
+
+- **Component:** `remotion/src/gradient/GradientLoop.tsx` → `<LivingGradient palette={…} />`.
+  Put it as the bottom layer of every news scene. Do not build a different background.
+- **Colours come from the chosen design system:** `paletteFrom([primary, secondary, lightAccent, optionalHaze])`.
+  It softens the colours toward white (default 0.35) so headlines stay readable; use 0.45 or
+  more for strong brand colours (reds, navies), and `soften: 0` only if the design system's
+  own background tints are already soft. With no design system, use `REFERENCE_PALETTE`
+  (periwinkle / mint / aqua, the user's reference).
+- **Keep the approved motion exactly:** `SPEED = 2`, `TRAVEL = 2.2`, sway 4°, blob pulse 18 %,
+  static grain at 0.16 opacity (`public/grain-1024.png`, never animated grain). Change these only
+  if the user asks.
+- **Seamless at any length:** the motion repeats every `loop` frames (default 450 = 15 s), so a
+  news video of any duration runs continuously; no cuts or restarts in the background between stories.
+- **Readability check:** after placing text, render a still and make sure body text keeps at
+  least 4.5:1 contrast over the lightest part of the gradient; add a soft card behind text if not.
+- **Resolution:** the component scales to any size. Render 4K (3840×2160) when the user asks for
+  it; the delivered 4K file needs a two-pass encode (`-tune grain`, about 14.5 Mb/s for 15 s) to
+  fit under 30 MB.
+- Demo of the same motion with another palette: composition `GradientNewsDemo`.
+
 ## Troubleshooting
 | Symptom | Cause | Fix |
 |---|---|---|

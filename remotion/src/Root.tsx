@@ -8,7 +8,7 @@ import {DC_CHAPTERS, DC_DURATION, DCFilm, DCPart} from './dc/DC';
 import {FOREST_LOOP, NightForest} from './forest/NightForest';
 import {Thumbnail} from './dcc/Thumbnail';
 import {KaijuThumb} from './kaiju/Thumb';
-import {GRADIENT_LOOP, GradientLoop} from './gradient/GradientLoop';
+import {GRADIENT_LOOP, GradientLoop, GradientLoopNewsDemo} from './gradient/GradientLoop';
 import {KAIJU_DURATION, KAIJU_QA, KaijuFilm, KaijuQA} from './kaiju/Film';
 import {CITY_CHAPTERS, CITY_DURATION, CITY_QA, CityFilm, CityPart, CityQA} from './dcc/Film';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
@@ -53,6 +53,7 @@ export const Root: React.FC = () => (
     ))}
       <Composition id="GiantFromTheSea" component={KaijuFilm} durationInFrames={KAIJU_DURATION} fps={30} width={1920} height={1080} defaultProps={{offset: 0}} />
       <Composition id="GradientLoop4K" component={GradientLoop} durationInFrames={GRADIENT_LOOP} fps={30} width={3840} height={2160} />
+      <Composition id="GradientNewsDemo" component={GradientLoopNewsDemo} durationInFrames={GRADIENT_LOOP} fps={30} width={1920} height={1080} />
       <Composition id="KaijuThumb" component={KaijuThumb} durationInFrames={1} fps={30} width={1920} height={1080} />
       <Composition id="KaijuQA" component={KaijuQA} durationInFrames={KAIJU_QA.length} fps={30} width={1920} height={1080} />
       <Composition id="CityThumb" component={Thumbnail} durationInFrames={1} fps={30} width={1920} height={1080} defaultProps={{night: false}} />
