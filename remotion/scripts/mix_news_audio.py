@@ -33,10 +33,10 @@ def speech_rms(x, win=0.4):
     return float(np.sqrt(np.mean(w[w > w.max() * 0.1] ** 2)))
 
 
-def smooth(env, attack, release):
-    """One-pole follower on a per-sample gain envelope (different speeds up and down)."""
+def smooth(env, attack, release, rate):
+    """One-pole follower on a gain envelope sampled at `rate` Hz (different speeds up and down)."""
     out = np.empty_like(env); y = env[0]
-    a, r = np.exp(-1 / (attack * SR)), np.exp(-1 / (release * SR))
+    a, r = np.exp(-1 / (attack * rate)), np.exp(-1 / (release * rate))
     for i, v in enumerate(env):
         k = a if v < y else r
         y = k * y + (1 - k) * v
@@ -44,8 +44,8 @@ def smooth(env, attack, release):
     return out
 
 
-# ---------- voice ----------
-VO_TARGET = -16.0  # lands at about -17 after the limiter
+# ---------- voice: level-match the takes, then a gentle compressor so the limiter barely works ----------
+VO_TARGET = -17.0
 voice = np.zeros(N)
 vo_mask = np.zeros(N, bool)
 clips = [b for b in TL['blocks'] if b['kind'] == 'vo']
@@ -57,12 +57,31 @@ for b in clips:
     voice[i:i + len(x)] += x[: N - i]
     vo_mask[i:i + len(x)] = True
 
+
+def compress(x, thr_db=-9.0, ratio=3.0, blk=48):
+    """Peak-ish compressor on 1 ms blocks: 3:1 above -9 dBFS, 2 ms attack, 80 ms release."""
+    pad = (-len(x)) % blk
+    env = np.abs(np.pad(x, (0, pad))).reshape(-1, blk).max(1)
+    over = np.maximum(0, 20 * np.log10(np.maximum(env, 1e-9)) - thr_db)
+    g = amp(-over * (1 - 1 / ratio))
+    out = np.empty_like(g); y = 1.0
+    a, r = np.exp(-1 / (0.002 * 1000)), np.exp(-1 / (0.08 * 1000))  # per 1 ms block
+    for i, v in enumerate(g):
+        k = a if v < y else r
+        y = k * y + (1 - k) * v
+        out[i] = y
+    return x * np.interp(np.arange(len(x)), np.arange(len(out)) * blk + blk / 2, out)
+
+
+voice = compress(voice)
+voice *= amp(VO_TARGET - db(speech_rms(voice[vo_mask])))  # make-up gain back to the target
+
 # ---------- music: loop the bed, duck under the voice ----------
 bed = load('out/ainews0929/sfx/bed.wav')
 music = np.tile(bed, N // len(bed) + 1)[:N]
 music *= amp(VO_TARGET - 13 - db(rms(bed)))  # under voice: 13 dB below the voice
 lift = np.where(vo_mask, 1.0, amp(7))  # gaps (title, stingers, end card): music comes up 7 dB
-lift = smooth(lift[::48], 0.25, 0.6)  # follower at 1 kHz, then back to audio rate
+lift = smooth(lift[::48], 0.25, 0.6, SR / 48)  # follower at 1 kHz, then back to audio rate
 lift = np.interp(np.arange(N), np.arange(len(lift)) * 48, lift)
 music *= lift
 music[-int(2.5 * SR):] *= np.linspace(1, 0, int(2.5 * SR))  # fade with the picture
@@ -85,14 +104,15 @@ for c in TL['sfx']:
 
 # ---------- sum, limit to -1 dBFS ----------
 mix = voice + music + cues
-thr = amp(-1.0)
+thr = amp(-2.0)  # AAC encoding overshoots ~0.5-1 dB; this keeps the encoded file at or below -1 dBFS
 blk = 240  # 5 ms look-ahead blocks
 pad = (-len(mix)) % blk
 peaks = np.abs(np.pad(mix, (0, pad))).reshape(-1, blk).max(1)
 g = np.minimum(1, thr / np.maximum(peaks, 1e-9))
 g = np.minimum(g, np.roll(g, -1))  # reach the gain one block early
-g = smooth(g, 0.001, 0.08)
-mix *= np.interp(np.arange(N), np.arange(len(g)) * blk + blk / 2, g)[:N]
+g = smooth(g, 0.001, 0.08, SR / blk)
+gr = np.interp(np.arange(N), np.arange(len(g)) * blk + blk / 2, g)[:N]
+mix *= gr
 mix = np.clip(mix, -thr, thr)
 
 with wave.open('out/ainews0929-mix.wav', 'wb') as w:
@@ -106,6 +126,14 @@ print(f'music under   {db(rms(music[vo_mask])):.1f} dBFS RMS  ({db(rms(music[vo_
 print(f'music in gaps {db(rms(music[~vo_mask][: -int(3 * SR)])):.1f} dBFS RMS')
 print(f'cues over music: min {min(report):.1f} dB, median {np.median(report):.1f} dB ({len(report)} cues)')
 print(f'cue peaks over music: min {min(peaks_over):.1f} dB (SOP: >= 12)')
+print(f'limiter       max {-db(gr.min()):.1f} dB reduction, {np.mean(gr < amp(-1)) * 100:.2f}% of the time over 1 dB')
 print(f'master peak   {db(np.abs(mix).max()):.2f} dBFS')
-if min(report) < 6 or min(peaks_over) < 12 or db(np.abs(mix).max()) > -0.99:
+if min(report) < 6 or min(peaks_over) < 12:
     sys.exit('mix check failed')
+
+# encode for the composition, then check the peaks of the encoded file itself
+subprocess.run(['npx', 'remotion', 'ffmpeg', '-loglevel', 'error', '-y', '-i', 'out/ainews0929-mix.wav', '-c:a', 'aac', '-b:a', '192k', '-f', 'mp4', 'public/ainews0929/mix.m4a'], check=True)
+enc = load('public/ainews0929/mix.m4a')
+print(f'encoded peak  {db(np.abs(enc).max()):.2f} dBFS (SOP: <= -1)')
+if db(np.abs(enc).max()) > -1.0:
+    sys.exit('encoded peak above -1 dBFS')
