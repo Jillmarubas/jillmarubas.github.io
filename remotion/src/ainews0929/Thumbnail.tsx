@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
 import {useThree} from '@react-three/fiber';
 import {ThreeCanvas} from '@remotion/three';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, Img, staticFile} from 'remotion';
 import './fonts';
 import {LivingGradient, paletteFrom} from '../gradient/GradientLoop';
 import {MotionBlurRenderer, MotionProvider, Mover, V3} from '../cola/motion3d';
@@ -110,3 +110,20 @@ export const LeakThumb: React.FC<{lines: [string, string][]; dark?: boolean}> = 
 export const LeakThumbA: React.FC = () => <LeakThumb lines={[['53', C.frost], ['PHOTOS', C.frost], ['LEAKED', C.err]]} />;
 export const LeakThumbB: React.FC = () => <LeakThumb lines={[['AI', C.frost], ['WENT', C.frost], ['ROGUE', C.err]]} />;
 export const LeakThumbC: React.FC = () => <LeakThumb dark lines={[['53', C.frost], ['PHOTOS', C.frost], ['LEAKED', C.err]]} />;
+
+// Photo variants: a generated shocked reaction (fictional person, no logos) full-bleed,
+// a cobalt scrim on the text third, same three words and palette as A.
+export const ShockThumb: React.FC<{src: string; lines: [string, string][]; flip?: boolean}> = ({src, lines, flip}) => (
+  <AbsoluteFill style={{background: C.cobalt950, overflow: 'hidden'}}>
+    <Img src={staticFile(src)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: flip ? 'scaleX(-1)' : undefined}} />
+    <AbsoluteFill style={{background: 'linear-gradient(90deg, rgba(4,31,92,.88) 0%, rgba(4,31,92,.62) 34%, rgba(4,31,92,0) 56%)'}} />
+    <div style={{position: 'absolute', left: 90, top: 150, fontFamily: F.sans, fontWeight: 600, fontSize: 190, lineHeight: 0.9, letterSpacing: '-0.05em', color: C.frost, textShadow: '0 10px 40px rgba(2,10,40,.7), 0 2px 0 rgba(2,10,40,.5)'}}>
+      {lines.map(([t, c], i) => (
+        <div key={i} style={{color: c, paddingLeft: i % 2 ? '0.4em' : 0}}>
+          {t}
+        </div>
+      ))}
+    </div>
+    <AbsoluteFill style={{background: 'radial-gradient(ellipse 80% 80% at 60% 50%, rgba(0,0,0,0) 55%, rgba(2,10,36,.4) 100%)'}} />
+  </AbsoluteFill>
+);
