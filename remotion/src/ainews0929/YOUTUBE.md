@@ -10,6 +10,15 @@ Thumbnails: `LeakThumbA` / `LeakThumbB` / `LeakThumbC` in `Thumbnail.tsx` (1920Ã
 | 2 | B: "AI WENT ROGUE" | OpenAI's AI Agents Leaked 53 Private Photos |
 | 3 | C: "53 PHOTOS LEAKED", darker | OpenAI's Own AI Agents Went Rogue |
 
+| **4 (photo, recommended overall)** | D: shocked reaction, close-up, "53 PHOTOS LEAKED" | OpenAI's Own AI Agents Went Rogue |
+| 5 (photo) | E: shocked reaction, wider, same words | OpenAI's Own AI Agents Went Rogue |
+| 6 (photo) | F: shocked reaction, different person, same words | OpenAI's Own AI Agents Went Rogue |
+
+Photo variants D/E/F (`ShockThumbD/E/F`) use images generated with ElevenLabs (Seedream 5 Pro, flow
+`BW9yPEcLZdlfRHQyJNiz`): fictional people, no real person, no logos. Stored in `public/ainews0929/thumb/`.
+D/E/F share the same words, so they test only the image. For the biggest difference, test D against A
+(photo vs 3D object) first.
+
 **A/B test:** in YouTube Studio â†’ Test & Compare, test A vs B vs C. A vs C isolates the background;
 A vs B isolates the words. Keep the winner's title pairing.
 

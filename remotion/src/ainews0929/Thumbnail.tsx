@@ -127,3 +127,8 @@ export const ShockThumb: React.FC<{src: string; lines: [string, string][]; flip?
     <AbsoluteFill style={{background: 'radial-gradient(ellipse 80% 80% at 60% 50%, rgba(0,0,0,0) 55%, rgba(2,10,36,.4) 100%)'}} />
   </AbsoluteFill>
 );
+
+const LEAK_WORDS: [string, string][] = [['53', C.frost], ['PHOTOS', C.frost], ['LEAKED', C.err]];
+export const ShockThumbD: React.FC = () => <ShockThumb src="ainews0929/thumb/shock4.jpg" lines={LEAK_WORDS} />;
+export const ShockThumbE: React.FC = () => <ShockThumb src="ainews0929/thumb/shock2.jpg" lines={LEAK_WORDS} />;
+export const ShockThumbF: React.FC = () => <ShockThumb src="ainews0929/thumb/shock1.jpg" lines={LEAK_WORDS} />;
