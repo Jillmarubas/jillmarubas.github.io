@@ -176,7 +176,7 @@ const WhiteHouseModel: React.FC = () => {
       {/* ground */}
       <Box p={[0, -0.05, 8]} s={[46, 0.1, 30]} m={M.lawn} />
       {/* Pennsylvania Avenue (pedestrian plaza) */}
-      <Box p={[0, -0.04, 22]} s={[46, 0.08, 4]} m={M.drive} />
+      <Box p={[0, -0.04, 22]} s={[46, 0.09, 4]} m={M.drive} />
       {/* semicircular drive */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 6.2]} material={M.drive} receiveShadow>
         <ringGeometry args={[7.2, 8.4, 64, 1, Math.PI, Math.PI]} />
@@ -351,8 +351,8 @@ const ApexModel: React.FC = () => {
     <group>
       <Box p={[0, -0.05, 0]} s={[40, 0.1, 26]} m={M.drive} />
       {/* Pennsylvania Ave (north) and Constitution Ave (south) */}
-      <Box p={[0, -0.03, -8.5]} s={[40, 0.06, 4.4]} m={M.road} />
-      <Box p={[0, -0.03, 8.5]} s={[40, 0.06, 4.4]} m={M.road} />
+      <Box p={[0, -0.025, -8.5]} s={[40, 0.06, 4.4]} m={M.road} />
+      <Box p={[0, -0.025, 8.5]} s={[40, 0.06, 4.4]} m={M.road} />
       {Array.from({length: 18}, (_, i) => (
         <Box key={i} p={[-18 + i * 2.2, 0.0, -8.5]} s={[1, 0.02, 0.12]} m={M.card} />
       ))}
@@ -424,7 +424,7 @@ export const Place3D: React.FC<{which: 'whitehouse' | 'ftc'; w: number; h: numbe
     >
       <LookAt target={target as [number, number, number]} />
       <hemisphereLight args={['#FFF6E8', '#B8A890', 0.55]} />
-      <directionalLight position={[-18, 26, 14]} intensity={2.4} color="#FFE9CC" castShadow shadow-mapSize={[2048, 2048]} shadow-radius={6} shadow-bias={-0.0005} shadow-camera-left={-30} shadow-camera-right={30} shadow-camera-top={30} shadow-camera-bottom={-30} shadow-camera-far={120} />
+      <directionalLight position={[-18, 26, 14]} intensity={2.4} color="#FFE9CC" castShadow shadow-mapSize={[4096, 4096]} shadow-radius={4} shadow-bias={-0.0002} shadow-normalBias={0.04} shadow-camera-left={-28} shadow-camera-right={28} shadow-camera-top={28} shadow-camera-bottom={-28} shadow-camera-near={5} shadow-camera-far={90} />
       <directionalLight position={[20, 10, -12]} intensity={0.5} color="#C9D8FF" />
       <Rig which={which} at={at} orbit={orbit} push={push} dur={dur} />
     </ThreeCanvas>

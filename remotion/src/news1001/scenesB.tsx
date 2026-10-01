@@ -527,7 +527,7 @@ export const M4: React.FC = () => (
           h={820}
           at={2}
           center={[-150, 30]}
-          scale={1.25}
+          scale={1.08}
           hi={{'United States of America': '#9FB2C4', China: '#D9A39B'}}
           threads={[
             {from: [-100, 40], to: [110, 34], at: 14},
@@ -602,8 +602,9 @@ export const M7: React.FC = () => (
       <Padlock w={220} />
     </Piece>
     <Piece x={1470} y={480} at={30} from="r" rot={4}>
-      <div style={{width: 380, height: 300}}>
-        <WorldMap w={380} h={300} at={30} center={[-150, 30]} scale={1.1} hi={{'United States of America': '#9FB2C4', China: '#D9A39B'}} threads={[{from: [-100, 40], to: [110, 34], at: 40}]} />
+      <div style={{width: 420, height: 300, background: C.card, padding: 16, boxSizing: 'border-box', position: 'relative'}}>
+        <Tape x={210} y={-2} w={110} rot={-3} />
+        <WorldMap w={388} h={268} at={30} center={[-150, 30]} scale={1.1} hi={{'United States of America': '#9FB2C4', China: '#D9A39B'}} threads={[{from: [-100, 40], to: [110, 34], at: 40}]} />
       </div>
     </Piece>
   </AbsoluteFill>

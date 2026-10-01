@@ -396,3 +396,66 @@ export const Clipboard: React.FC<{w?: number; at: number}> = ({w = 300, at}) => 
     </div>
   );
 };
+
+/**
+ * A panelled wooden door in its frame: six raised panels, brass knob and keyhole, three hinges.
+ * `open` (0..1) swings the leaf toward the viewer on its left hinges; warm light from the room
+ * behind fills the doorway and spills onto the desk. `inside` is what waits in the room.
+ */
+export const Door: React.FC<{w?: number; open: number; inside?: React.ReactNode}> = ({w = 340, open, inside}) => {
+  const h = w * 1.72;
+  const fw = w * 0.09; // frame width
+  const lw = w - fw * 2; // leaf
+  const lh = h - fw;
+  const wood = '#6B4226';
+  const panel = (x: number, y: number, pw: number, ph: number, k: number) => (
+    <g key={k}>
+      <rect x={x} y={y} width={pw} height={ph} fill="#5A361E" />
+      <rect x={x + 6} y={y + 6} width={pw - 12} height={ph - 12} fill="#7A4C2B" />
+      <rect x={x + 6} y={y + 6} width={pw - 12} height={5} fill="rgba(255,226,180,0.22)" />
+      <rect x={x + 6} y={y + 6} width={5} height={ph - 12} fill="rgba(255,226,180,0.16)" />
+      <rect x={x + 6} y={y + ph - 11} width={pw - 12} height={5} fill="rgba(0,0,0,0.25)" />
+      <rect x={x + pw - 11} y={y + 6} width={5} height={ph - 12} fill="rgba(0,0,0,0.2)" />
+    </g>
+  );
+  const px = lw * 0.12;
+  const pw = (lw - px * 3) / 2;
+  const rows = [
+    [lh * 0.06, lh * 0.17],
+    [lh * 0.29, lh * 0.33],
+    [lh * 0.68, lh * 0.25],
+  ];
+  return (
+    <div style={{position: 'relative', width: w, height: h}}>
+      {/* light spilling onto the desk */}
+      <div style={{position: 'absolute', left: fw - w * 0.2, top: h - 4, width: lw + w * 0.4, height: h * 0.32, background: `linear-gradient(180deg, rgba(255,214,140,${0.55 * open}), rgba(255,214,140,0))`, clipPath: 'polygon(20% 0, 80% 0, 100% 100%, 0 100%)'}} />
+      {/* the frame (architrave) */}
+      <div style={{position: 'absolute', left: 0, top: 0, width: w, height: h, background: '#EFE6D3', boxShadow: 'inset 0 0 0 3px #D8CCB2'}} />
+      <div style={{position: 'absolute', left: -fw * 0.4, top: -fw * 0.7, width: w + fw * 0.8, height: fw * 0.9, background: '#E6DBC3', boxShadow: '0 4px 0 #CDBF9F'}} />
+      {/* the room behind: warm light */}
+      <div style={{position: 'absolute', left: fw, top: fw, width: lw, height: lh, background: 'radial-gradient(ellipse at 50% 40%, #FFF1CC 0%, #F6C873 55%, #C98A3C 100%)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div style={{opacity: Math.min(1, open * 3)}}>{inside}</div>
+      </div>
+      {/* the leaf, hinged on the left */}
+      <div style={{position: 'absolute', left: fw, top: fw, width: lw, height: lh, transformOrigin: '0 50%', transform: `perspective(1100px) rotateY(${-78 * open}deg)`, boxShadow: `${8 + open * 30}px 0 ${20 + open * 30}px rgba(20,14,8,${0.25 + open * 0.2})`}}>
+        <svg width={lw} height={lh} style={{display: 'block'}}>
+          <rect width={lw} height={lh} fill={wood} />
+          {Array.from({length: 14}, (_, i) => (
+            <path key={i} d={`M${(i + 0.5) * (lw / 14)} 0 C ${(i + 0.2) * (lw / 14)} ${lh * 0.3}, ${(i + 0.8) * (lw / 14)} ${lh * 0.6}, ${(i + 0.4) * (lw / 14)} ${lh}`} stroke="rgba(40,22,10,0.18)" strokeWidth={1.5} fill="none" />
+          ))}
+          {rows.flatMap(([y, ph], r) => [panel(px, y, pw, ph, r * 2), panel(px * 2 + pw, y, pw, ph, r * 2 + 1)])}
+          {/* hinges */}
+          {[0.1, 0.5, 0.88].map((t) => (
+            <rect key={t} x={0} y={lh * t} width={10} height={lh * 0.06} rx={2} fill="#8E7A4A" />
+          ))}
+          {/* brass backplate, knob and keyhole */}
+          <rect x={lw - lw * 0.17} y={lh * 0.5} width={lw * 0.07} height={lh * 0.14} rx={lw * 0.035} fill="#A9852F" />
+          <circle cx={lw - lw * 0.135} cy={lh * 0.545} r={lw * 0.055} fill="#C9A24A" />
+          <circle cx={lw - lw * 0.15} cy={lh * 0.53} r={lw * 0.018} fill="rgba(255,244,210,0.85)" />
+          <circle cx={lw - lw * 0.135} cy={lh * 0.605} r={lw * 0.012} fill="#2B1A0C" />
+          <rect x={lw - lw * 0.14} y={lh * 0.605} width={lw * 0.01} height={lh * 0.018} fill="#2B1A0C" />
+        </svg>
+      </div>
+    </div>
+  );
+};

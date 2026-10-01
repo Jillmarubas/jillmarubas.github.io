@@ -4,7 +4,7 @@ import {C, F} from './design';
 import {Logo3D} from './Logo3D';
 import {Place3D} from './Places';
 import {Arrow, Circle, Counter, Hand, Highlight, Kicker, Paper, Photo, Piece, Source, Stamp, clamp, e01, settle, useL, useScene} from './kit';
-import {Bell, CalPage, Clipping, Doc, Folder, Magnifier, MoneyPile, Scale, Shield, Sticky, Tape0} from './props';
+import {Bell, CalPage, Clipping, Doc, Door, Folder, Magnifier, MoneyPile, Scale, Shield, Sticky, Tape0} from './props';
 
 /* =================================================================== HOOK */
 
@@ -205,12 +205,9 @@ export const G1: React.FC = () => {
   const crowd = Array.from({length: 9}, (_, i) => i);
   return (
     <AbsoluteFill>
-      {/* the door */}
-      <Piece x={960} y={520} at={0} from="b">
-        <div style={{width: 300, height: 520, background: '#3B3A37', position: 'relative', border: `14px solid ${C.card}`}}>
-          <div style={{position: 'absolute', left: 0, top: 0, width: 300, height: 520, background: '#5A4636', transformOrigin: '0 50%', transform: `perspective(900px) rotateY(${-70 * open}deg)`}} />
-          <Logo3D name="gemini" w={180} h={180} at={6} fit={0.7} spin={0} />
-        </div>
+      {/* the door: ajar for the security partners, then wide open for paying subscribers */}
+      <Piece x={960} y={500} at={0} from="b">
+        <Door w={330} open={Math.max(0.32 * Math.sin(Math.PI * e01(f, 14, 50)), open)} inside={<Logo3D name="gemini" w={220} h={220} at={6} fit={0.75} spin={0} />} />
       </Piece>
       {/* three cyber-defence partners pass through first */}
       {[0, 1, 2].map((i) => {
@@ -222,7 +219,7 @@ export const G1: React.FC = () => {
         );
       })}
       {/* everyone else waits behind the rope */}
-      <Piece x={330} y={830} at={10} from="l" shadow={false}>
+      <Piece x={430} y={830} at={10} from="l" shadow={false}>
         <svg width={520} height={190}>
           {crowd.map((i) => (
             <g key={i} transform={`translate(${30 + i * 52}, ${40 + (i % 2) * 14})`}>

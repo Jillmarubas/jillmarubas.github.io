@@ -43,8 +43,9 @@ export const WorldMap: React.FC<{w: number; h: number; at: number; hi?: Record<s
   const proj = geoEqualEarth().rotate([-center[0], 0]).fitExtent([[10, 10], [w - 10, h - 10]], geo);
   proj.scale(proj.scale() * scale);
   const path = geoPath(proj);
+  // the map is printed on its sheet: anything past the edge is trimmed, never spills onto the desk
   return (
-    <svg width={w} height={h} style={{overflow: 'visible'}}>
+    <svg width={w} height={h} style={{overflow: 'hidden', display: 'block'}}>
       {geo.features.map((ft, i) => {
         const n = nameOf(ft);
         const c = hi[n];
