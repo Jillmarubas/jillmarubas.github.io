@@ -3,6 +3,7 @@ import {Composition} from 'remotion';
 import {N1Test} from './news1001/Test';
 import {N1_CHAPTERS, N1_DURATION, N1Film, N1Part} from './news1001/Film';
 import {N1_QA, N1QA} from './news1001/QA';
+import {N1ThumbA, N1ThumbB, N1ThumbC} from './news1001/Thumbnail';
 import {PROMO_DURATION, Promo, PromoProps} from './promo/Promo';
 import {SPACE_DURATION, Space} from './space/Space';
 import {REAL_DURATION, RealMoon} from './real/RealMoon';
@@ -71,6 +72,9 @@ export const Root: React.FC = () => (
       <Composition key={`n1${i}`} id={`AINews1001-part${i}`} component={N1Part} durationInFrames={c.to - c.from} fps={24} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
     <Composition id="AINews1001QA" component={N1QA} durationInFrames={N1_QA.length} fps={24} width={1920} height={1080} />
+    <Composition id="N1ThumbA" component={N1ThumbA} durationInFrames={1} fps={24} width={1920} height={1080} />
+    <Composition id="N1ThumbB" component={N1ThumbB} durationInFrames={1} fps={24} width={1920} height={1080} />
+    <Composition id="N1ThumbC" component={N1ThumbC} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="N1Test" component={N1Test} durationInFrames={120} fps={24} width={1920} height={1080} defaultProps={{logos: ['anthropic', 'kimi', 'oura'], place: 'whitehouse' as 'whitehouse' | 'ftc' | 'none'}} />
     </>
 );
