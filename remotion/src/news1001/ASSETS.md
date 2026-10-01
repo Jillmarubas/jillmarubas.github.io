@@ -6,19 +6,8 @@ The **YouTube description credits** block at the bottom is ready to paste.
 ## Voice
 - Narration: ElevenLabs, voice "Asher" (`tMvyQtpCVQ0DkixuYm6J`), `eleven_multilingual_v2`, one take per segment (9,591 credits).
 
-## Music (not ElevenLabs): Kevin MacLeod, incompetech.com, CC BY 4.0
-| Story | Cue |
-|---|---|
-| Hook, preview, outro | "Anxiety" |
-| 1 Gemini 4 Argon | "Static Motion" |
-| 2 FTC probe | "Apprehension" |
-| 3 White House accord | "Interloper" |
-| 4 OpenAI vs Moonshot | "Penumbra" |
-| 5 Meta tax | "Unanswered Questions" |
-| 6 OpenAI $30B | "Long Note Three" |
-| 7 DoorDash | "Echoes of Time v2" |
-
-(Round 4: the user rejected the first set ("Investigations", "Crypto", "Hidden Agenda", "Covert Affair", "Darkling", "Spy Glass") as comedic. The replacements were chosen by measurement for low spectral centroid, strong bass and sparse onsets, i.e. dark drones and slow pulses, with no bouncy pizzicato.)
+## Music
+None. The user chose a voice-and-effects-only soundtrack (round 5). No music licence or credit is needed.
 
 ## Sound effects (not ElevenLabs), all CC0
 - Kenney.nl: Casino Audio (paper/card slides, chip stacks), Impact Sounds (stamps, bell), Interface Sounds (ticks, message pops), RPG Audio (page flips, switch click).
@@ -79,7 +68,6 @@ Colours are read straight from each file; the front face of every 3D logo render
 ### YouTube description credits (paste as is)
 ```
 Narration: ElevenLabs ("Asher")
-Music by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0 — "Anxiety", "Static Motion", "Apprehension", "Interloper", "Penumbra", "Unanswered Questions", "Long Note Three", "Echoes of Time v2". https://creativecommons.org/licenses/by/4.0/
 Sound effects: Kenney.nl and BigSoundBank.com (CC0)
 Photos (Wikimedia Commons): Dario Amodei, Greg Brockman — TechCrunch, CC BY 2.0; Sundar Pichai — Lukasz Kobus/European Commission, CC BY 4.0; Elon Musk — Gage Skidmore, CC BY-SA 4.0; Toby Walsh — Avobronte, CC BY-SA 3.0; Andy Fang — Collision Conf, CC BY 2.0; ramen — Lusheeta, CC BY-SA 3.0; Andrew Ferguson (FTC), Mark Zuckerberg, Jensen Huang, Donald Trump (The White House) — public domain.
 Logos are trademarks of their owners, shown for news reporting.

@@ -195,7 +195,9 @@ place(fx, click, sec(W['E1']['from'] + spE * 0.12), 0.8)
 place(fx, click, sec(W['E1']['from'] + spE * 0.36), 0.8)
 place(fx, click, sec(W['E2']['from'] + 40), 1.0)
 
-mix = vo + music + fx
+# the user chose no background music (1 Oct 2026, round 5): voice + effects only
+MUSIC = False
+mix = vo + fx + (music if MUSIC else 0)
 out = os.path.join(ROOT, 'out/news1001/mix-raw.wav')
 pk = float(np.abs(mix).max())
 if pk > 0.98:
