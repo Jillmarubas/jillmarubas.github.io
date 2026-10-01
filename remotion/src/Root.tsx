@@ -1,5 +1,8 @@
 import React from 'react';
 import {Composition} from 'remotion';
+import {N1Test} from './news1001/Test';
+import {N1_CHAPTERS, N1_DURATION, N1Film, N1Part} from './news1001/Film';
+import {N1_QA, N1QA} from './news1001/QA';
 import {PROMO_DURATION, Promo, PromoProps} from './promo/Promo';
 import {SPACE_DURATION, Space} from './space/Space';
 import {REAL_DURATION, RealMoon} from './real/RealMoon';
@@ -63,5 +66,11 @@ export const Root: React.FC = () => (
         <Composition key={`city${i}`} id={`DataCentresCity-part${i}`} component={CityPart} durationInFrames={c.to - c.from} fps={30} width={1920} height={1080} defaultProps={{part: i}} />
       ))}
       <Composition id="NightForest" component={NightForest} durationInFrames={FOREST_LOOP} fps={30} width={1080} height={1920} />
-  </>
+    <Composition id="AINews1001" component={N1Film} durationInFrames={N1_DURATION} fps={24} width={1920} height={1080} defaultProps={{offset: 0}} />
+    {N1_CHAPTERS.map((c, i) => (
+      <Composition key={`n1${i}`} id={`AINews1001-part${i}`} component={N1Part} durationInFrames={c.to - c.from} fps={24} width={1920} height={1080} defaultProps={{part: i}} />
+    ))}
+    <Composition id="AINews1001QA" component={N1QA} durationInFrames={N1_QA.length} fps={24} width={1920} height={1080} />
+    <Composition id="N1Test" component={N1Test} durationInFrames={120} fps={24} width={1920} height={1080} defaultProps={{logos: ['anthropic', 'kimi', 'oura'], place: 'whitehouse' as 'whitehouse' | 'ftc' | 'none'}} />
+    </>
 );
