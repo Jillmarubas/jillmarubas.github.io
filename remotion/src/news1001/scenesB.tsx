@@ -4,7 +4,7 @@ import {C, F} from './design';
 import {Logo3D} from './Logo3D';
 import {Place3D} from './Places';
 import {WorldMap} from './maps';
-import {Arrow, Counter, Hand, Kicker, Paper, Photo, Piece, Source, Stamp, Tape, clamp, e01, settle, useL, useScene} from './kit';
+import {Arrow, Counter, Hand, Kicker, Paper, Photo, Piece, QuoteMark, Source, Stamp, Tape, clamp, e01, settle, useL, useScene} from './kit';
 import {Badge, CalPage, Clipboard, Clipping, Doc, Flask, Folder, Gauge, Magnifier, Padlock, RoundTable, Scale} from './props';
 
 const seal = (n: string, s = 110) => <Img src={staticFile(`news1001/logos/${n}.svg`)} style={{width: s, height: s}} />;
@@ -17,9 +17,9 @@ export const F0: React.FC = () => {
   const sc = useScene();
   return (
     <AbsoluteFill>
-      <Piece x={800} y={560} at={0} from="none" shadow={false}>
-        <div style={{width: 1500, height: 1000}}>
-          <Place3D which="ftc" w={1500} h={1000} at={0} dur={sc.dur} orbit={-16} push={3} cam={[-20, 14, 24]} />
+      <Piece x={960} y={540} at={0} from="none" shadow={false}>
+        <div style={{width: 1920, height: 1080}}>
+          <Place3D which="ftc" w={1920} h={1080} at={0} dur={sc.dur} orbit={-16} push={3} cam={[-22, 15, 25]} look={[2, 2, 0]} />
         </div>
       </Piece>
       <Piece x={330} y={120} at={8} from="none" shadow={false}>
@@ -208,7 +208,7 @@ export const A0: React.FC = () => {
           <Place3D which="whitehouse" w={1920} h={1080} at={0} dur={sc.dur} orbit={-12} push={7} cam={[6, 10, 34]} look={[0, 3, 2]} />
         </div>
       </Piece>
-      <Piece x={250} y={980} at={10} from="none" shadow={false}>
+      <Piece x={340} y={980} at={10} from="none" shadow={false}>
         <Kicker text="The White House · North Lawn" at={10} color={C.ink} />
       </Piece>
     </AbsoluteFill>
@@ -319,7 +319,9 @@ export const A5: React.FC = () => {
       </Piece>
       <Piece x={1230} y={520} at={L(0) + 70} from="none" shadow={false}>
         <div style={{width: 900}}>
-          <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 200, color: C.red, lineHeight: 0.6, height: 90}}>“</div>
+          <div style={{marginTop: 22, marginBottom: 14}}>
+            <QuoteMark size={72} />
+          </div>
           <Hand text="incompetent and careless" at={L(0) + 74} size={100} color={C.ink} rot={-2} />
           <Hand text="at managing themselves" at={L(0) + 96} size={80} color={C.ink} rot={-2} />
           <div style={{marginTop: 26}}>
@@ -552,7 +554,9 @@ export const M5: React.FC = () => {
       <Piece x={1260} y={360} at={30} from="none" shadow={false}>
         <div>
           <Kicker text="July 22, 2026 · on Kimi K3" at={30} color={C.red} />
-          <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 200, color: C.red, lineHeight: 0.6, height: 80, marginTop: 20}}>“</div>
+          <div style={{marginTop: 22, marginBottom: 14}}>
+            <QuoteMark size={72} />
+          </div>
           <Hand text="pretty good" at={L(0) + 120} size={130} color={C.ink} rot={-3} />
         </div>
       </Piece>

@@ -57,7 +57,7 @@ export const CalPage: React.FC<{month: string; day: string | number; year?: stri
   return (
     <div style={{width: w, height: h, background: C.card, position: 'relative', overflow: 'hidden'}}>
       <div style={{height: h * 0.26, background: C.red, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: F.mono, fontWeight: 500, fontSize: w * 0.11, letterSpacing: '0.2em', color: '#fff'}}>{month}</div>
-      <div style={{position: 'absolute', top: h * 0.26, left: 0, right: 0, bottom: h * 0.14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: F.display, fontWeight: 900, fontSize: w * 0.48, color: C.ink}}>{day}</div>
+      <div style={{position: 'absolute', top: h * 0.26, left: 0, right: 0, bottom: h * 0.14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: F.display, fontWeight: 900, fontSize: w * 0.48 * Math.min(1, 2.2 / String(day).length), color: C.ink}}>{day}</div>
       {year && <div style={{position: 'absolute', bottom: h * 0.05, width: '100%', textAlign: 'center', fontFamily: F.mono, fontSize: w * 0.07, letterSpacing: '0.2em', color: C.ink2}}>{year}</div>}
       {[0.08, 0.92].map((x) => (
         <div key={x} style={{position: 'absolute', top: -8, left: w * x - 7, width: 14, height: 22, borderRadius: 7, background: '#444'}} />

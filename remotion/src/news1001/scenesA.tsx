@@ -3,7 +3,7 @@ import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remot
 import {C, F} from './design';
 import {Logo3D} from './Logo3D';
 import {Place3D} from './Places';
-import {Arrow, Circle, Counter, Hand, Highlight, Kicker, Paper, Photo, Piece, Source, Stamp, clamp, e01, settle, useL, useScene} from './kit';
+import {Arrow, Circle, Counter, Hand, Highlight, Kicker, Paper, Photo, Piece, QuoteMark, Source, Stamp, clamp, e01, settle, useL, useScene} from './kit';
 import {Bell, CalPage, Clipping, Doc, Door, Folder, Magnifier, MoneyPile, Scale, Shield, Sticky, Tape0} from './props';
 
 /* =================================================================== HOOK */
@@ -14,12 +14,12 @@ export const H0: React.FC = () => {
   const sc = useScene();
   return (
     <AbsoluteFill>
-      <Piece x={760} y={560} at={0} from="none" shadow={false}>
-        <div style={{width: 1500, height: 1000}}>
-          <Place3D which="ftc" w={1500} h={1000} at={0} dur={sc.dur} orbit={18} push={2} />
+      <Piece x={960} y={540} at={0} from="none" shadow={false}>
+        <div style={{width: 1920, height: 1080}}>
+          <Place3D which="ftc" w={1920} h={1080} at={0} dur={sc.dur} orbit={18} push={2} cam={[16, 15, 26]} look={[-2, 2, 0]} />
         </div>
       </Piece>
-      <Piece x={170} y={110} at={6} from="none" shadow={false}>
+      <Piece x={300} y={110} at={6} from="none" shadow={false}>
         <Kicker text="Washington, D.C." at={6} />
       </Piece>
       <Piece x={1560} y={560} at={L(0) + 14} from="r" rot={4}>
@@ -41,9 +41,9 @@ export const H1: React.FC = () => {
   const logos = ['anthropic', 'openai', 'google', 'meta', 'xai', 'nvidia'];
   return (
     <AbsoluteFill>
-      <Piece x={760} y={470} at={0} from="none" shadow={false}>
-        <div style={{width: 1400, height: 860}}>
-          <Place3D which="whitehouse" w={1400} h={860} at={0} dur={sc.dur} orbit={10} push={3} cam={[0, 12, 36]} />
+      <Piece x={960} y={540} at={0} from="none" shadow={false}>
+        <div style={{width: 1920, height: 1080}}>
+          <Place3D which="whitehouse" w={1920} h={1080} at={0} dur={sc.dur} orbit={10} push={3} cam={[5, 12, 36]} look={[4, 3, 3]} />
         </div>
       </Piece>
       <Piece x={1570} y={560} at={L(0) + 10} from="r" rot={3}>
@@ -382,7 +382,9 @@ export const G4: React.FC = () => (
     </Piece>
     <Piece x={1320} y={520} at={14} from="none" shadow={false}>
       <div style={{width: 700}}>
-        <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 200, color: C.red, lineHeight: 0.6, height: 90}}>“</div>
+        <div style={{marginTop: 22, marginBottom: 14}}>
+            <QuoteMark size={72} />
+          </div>
         <Hand text="incredibly well-rounded" at={18} size={104} rot={-3} color={C.ink} />
         <div style={{marginTop: 22}}>
           <Kicker text="to CNBC" at={30} />

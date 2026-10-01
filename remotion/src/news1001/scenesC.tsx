@@ -3,7 +3,7 @@ import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from 'remot
 import {C, F} from './design';
 import {Logo3D} from './Logo3D';
 import {USMap} from './maps';
-import {Arrow, Counter, Hand, Kicker, Paper, Photo, Piece, Source, Stamp, Tape, clamp, e01, settle, useL} from './kit';
+import {Arrow, Counter, Hand, Kicker, Paper, Photo, Piece, QuoteMark, Source, Stamp, Tape, clamp, e01, settle, useL} from './kit';
 import {Bell, Brick, Bubble, CalPage, DataCentre, Doc, Folder, GPU, MoneyPile, Phone, PriceTag, Ring} from './props';
 import {existsIrs} from './assets';
 
@@ -77,7 +77,7 @@ export const T2: React.FC = () => {
       <Piece x={960} y={180} at={0} from="t" shadow={false}>
         <Logo3D name="meta" w={420} h={160} at={0} fit={0.9} spin={0} tilt={-8} />
       </Piece>
-      <Arrow x1={860} y1={380} x2={1180} y2={300} at={L(0) + 140} />
+      <Arrow x1={800} y1={600} x2={1080} y2={470} at={L(0) + 140} bend={-0.18} />
       <Source text="The New York Times; Meta filings" />
     </AbsoluteFill>
   );
@@ -399,7 +399,9 @@ export const D3: React.FC = () => {
       </Piece>
       <Piece x={1230} y={520} at={L(0) + 50} from="none" shadow={false}>
         <div style={{width: 1000}}>
-          <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 200, color: C.red, lineHeight: 0.6, height: 80}}>“</div>
+          <div style={{marginTop: 22, marginBottom: 14}}>
+            <QuoteMark size={72} />
+          </div>
           <Hand text="Every other AI agent is meeting" at={L(0) + 52} size={74} color={C.ink} rot={-2} speed={0.4} />
           <Hand text="you for the first time." at={L(0) + 66} size={74} color={C.ink} rot={-2} speed={0.4} />
           <Hand text="We've known you for years." at={L(0) + 100} size={88} color={C.red} rot={-2} speed={0.4} />

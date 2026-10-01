@@ -173,7 +173,10 @@ const WhiteHouseModel: React.FC = () => {
   const bayW = W0 / bays;
   return (
     <group>
-      {/* ground */}
+      {/* ground: the President's Park lawn running off in every direction */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.12, 0]} material={M.lawn2} receiveShadow>
+        <planeGeometry args={[700, 700]} />
+      </mesh>
       <Box p={[0, -0.05, 8]} s={[46, 0.1, 30]} m={M.lawn} />
       {/* Pennsylvania Avenue (pedestrian plaza) */}
       <Box p={[0, -0.04, 22]} s={[46, 0.09, 4]} m={M.drive} />
@@ -349,7 +352,14 @@ const ApexModel: React.FC = () => {
   }, []);
   return (
     <group>
+      {/* ground: the downtown pavement running off in every direction */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.12, 0]} material={M.drive} receiveShadow>
+        <planeGeometry args={[700, 700]} />
+      </mesh>
       <Box p={[0, -0.05, 0]} s={[40, 0.1, 26]} m={M.drive} />
+      {/* the avenues continue past the frame */}
+      <Box p={[0, -0.04, -8.5]} s={[400, 0.06, 4.4]} m={M.road} />
+      <Box p={[0, -0.04, 8.5]} s={[400, 0.06, 4.4]} m={M.road} />
       {/* Pennsylvania Ave (north) and Constitution Ave (south) */}
       <Box p={[0, -0.025, -8.5]} s={[40, 0.06, 4.4]} m={M.road} />
       <Box p={[0, -0.025, 8.5]} s={[40, 0.06, 4.4]} m={M.road} />
@@ -423,6 +433,7 @@ export const Place3D: React.FC<{which: 'whitehouse' | 'ftc'; w: number; h: numbe
       style={{background: 'transparent'}}
     >
       <LookAt target={target as [number, number, number]} />
+      <fog attach="fog" args={['#E9E1D2', 60, 190]} />
       <hemisphereLight args={['#FFF6E8', '#B8A890', 0.55]} />
       <directionalLight position={[-18, 26, 14]} intensity={2.4} color="#FFE9CC" castShadow shadow-mapSize={[4096, 4096]} shadow-radius={4} shadow-bias={-0.0002} shadow-normalBias={0.04} shadow-camera-left={-28} shadow-camera-right={28} shadow-camera-top={28} shadow-camera-bottom={-28} shadow-camera-near={5} shadow-camera-far={90} />
       <directionalLight position={[20, 10, -12]} intensity={0.5} color="#C9D8FF" />

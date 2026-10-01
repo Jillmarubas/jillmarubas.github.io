@@ -245,9 +245,9 @@ export const Photo: React.FC<{slug: string; name: string; role?: string; w?: num
         ) : null}
       </div>
       <div style={{marginTop: 12, opacity: nameO, transform: `translateY(${(1 - nameO) * 8}px)`}}>
-        <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 40, color: C.ink, lineHeight: 1}}>{name}</div>
-        {role && <div style={{fontFamily: F.mono, fontWeight: 500, fontSize: 17, letterSpacing: '0.1em', color: C.ink2, textTransform: 'uppercase', marginTop: 6}}>{role}</div>}
-        <div style={{fontFamily: F.mono, fontSize: 10.5, color: C.mute, marginTop: 8, lineHeight: 1.3, maxWidth: w}}>{credit(slug)}</div>
+        <div style={{fontFamily: F.display, fontWeight: 900, fontSize: Math.min(40, w * 0.15), color: C.ink, lineHeight: 1.02, maxWidth: w}}>{name}</div>
+        {role && <div style={{fontFamily: F.mono, fontWeight: 500, fontSize: Math.min(17, w * 0.065), letterSpacing: '0.1em', color: C.ink2, textTransform: 'uppercase', marginTop: 6}}>{role}</div>}
+        <div style={{fontFamily: F.mono, fontSize: Math.min(10.5, w * 0.05), color: C.mute, marginTop: 8, lineHeight: 1.3, maxWidth: w}}>{credit(slug)}</div>
       </div>
     </div>
   );
@@ -278,4 +278,13 @@ export const Lines: React.FC<{n: number; w: number; gap?: number; seed?: string;
       <div key={i} style={{height: 9, borderRadius: 2, background: color, width: i === n - 1 ? w * 0.55 : w * (0.82 + 0.18 * random(`${seed}${i}`))}} />
     ))}
   </div>
+);
+
+/** An opening quote mark drawn as a shape (exact bounding box, unlike the font glyph). */
+export const QuoteMark: React.FC<{size?: number; color?: string}> = ({size = 96, color = C.red}) => (
+  <svg width={size * 1.25} height={size} viewBox="0 0 125 100" style={{display: 'block'}}>
+    {[0, 62].map((dx) => (
+      <path key={dx} transform={`translate(${dx} 0)`} d="M2 72 C2 40 18 16 50 2 L56 12 C38 22 30 34 29 46 A24 24 0 1 1 2 72 Z" fill={color} />
+    ))}
+  </svg>
 );
