@@ -124,6 +124,17 @@ Reference build: `remotion/src/dc/`, the "Why people hate data centres" explaine
    - Keep big WAVs in `out/`, not `public/`, or every Lambda deploy uploads them.
 6. **Render:** render one `…-partN` composition per chapter on Lambda (picture only), concatenate, then mux `out/dc-mix.wav`.
 
+### Vox-style rules set by the user (1 Oct 2026). These override the general rules above for Vox-style videos.
+1. **24 fps,** not 30. Moves are 9–14 frames at 24 fps.
+2. **Verify every person and place before any production work.** Confirm each person's name, current title and quotes, and each place, against at least one primary or major outlet. Record every check in `VERIFY.md` with a ✅/⚠️/❌ status. Fix or flag every ⚠️/❌ line with the user before the voiceover is generated.
+3. **Real photos of every person named.** Use photos with a reusable licence: Wikimedia Commons CC-BY/CC-BY-SA, public-domain government photos (White House, Congress, FTC), or official press-kit headshots. Record the licence and author for each photo in `ASSETS.md` and credit them on screen in small type. Never use AI-generated faces of real people. If no licensed photo exists, tell the user and offer a named silhouette card instead.
+4. **3D logos with exact brand colours.** Extrude each company's official vector mark in Three.js. Take the hex values from the company's brand or press page, record them in `ASSETS.md`, and compare the render with the official mark side by side. Logos are used for editorial reference only: never altered, combined or animated into something the company didn't make.
+5. **Show, don't type.** Explain with objects and real photos (a document, a phone, a chip, a building, a chart), not words on screen. On-screen text is limited to names and titles, quoted words, numbers and sources.
+6. **Places get a replica of their surroundings.** When the script names a place (the White House, a headquarters, a city), build its setting in 3D or 2.5D from reference photos: the real building shape, its trees, plants, street and neighbouring buildings. Recreate the setting; never trace or reuse photos of it.
+7. **No generic or sloppy generation.** No stock "AI brain", glowing circuits, random robots, purple gradients or filler B-roll. Every shot must show the specific thing the line is about.
+8. **High quality:** 1920×1080, 24 fps, 4:4:4-quality source, CRF ≤ 18 H.264, loudness −14 LUFS for YouTube.
+9. **Check everything before finishing:** a contact sheet of every scene, a spelling check of every name and title, every number checked against `VERIFY.md`, a full watch-through for audio sync and pops, and `ffprobe` on the final file (24 fps, 1920×1080, duration). List what was checked in the delivery message.
+
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
 shot list with **one scene per script line** (shot type, place, time of day, character pose and
