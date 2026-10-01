@@ -135,6 +135,13 @@ Reference build: `remotion/src/dc/`, the "Why people hate data centres" explaine
 8. **High quality:** 1920×1080, 24 fps, 4:4:4-quality source, CRF ≤ 18 H.264, loudness −14 LUFS for YouTube.
 9. **Check everything before finishing:** a contact sheet of every scene, a spelling check of every name and title, every number checked against `VERIFY.md`, a full watch-through for audio sync and pops, and `ffprobe` on the final file (24 fps, 1920×1080, duration). List what was checked in the delivery message.
 
+### Lessons from the first build under these rules (AI News, 1 Oct 2026; `remotion/src/news1001/`)
+- **3D logos share one WebGL context** (`Logo3D.tsx`): each logo draws through a single shared renderer into its own 2D canvas. One `ThreeCanvas` per logo blanked logos in long sequential renders (Chrome drops contexts past ~16).
+- **Exact brand colour:** logo front faces use an unlit material, so they render the file's hex pixel-exact. Sides and bevels are lit for depth. Extrusion depth follows the mark's short side, so wordmarks stay slim. Leave 22 % spare width so tilted wordmarks don't clip.
+- **Join Lambda parts video-only:** strip each part's silent audio before concatenating, or every join adds a gap (it drifted 0.7 s over 10 parts). Then mux the mix with `apad` + `-shortest` and check that the last frame lands at frames/24.
+- **Wikimedia rate limits:** fetch originals by md5 path from upload.wikimedia.org, fall back to standard thumbnail widths (500/1280 px), and read the licence from the file page (`licensetpl_short`, with `&#95;` unescaped).
+- **Free music and effects:** FreePD is closed. Use Incompetech (CC BY 4.0, credit in the description), Kenney.nl (CC0) and BigSoundBank (CC0). `scripts/mix_news1001.py` places the cues from the scene list.
+
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
 shot list with **one scene per script line** (shot type, place, time of day, character pose and

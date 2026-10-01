@@ -60,3 +60,6 @@ Checked on 1 Oct 2026, before any production work (SOP, Vox-style rule 2).
 | 7 | "Order my usual"; photo of a dish → similar nearby | ✅ | |
 | 7 | Bloomberg found pricing mismatches; fixes for the waitlist | ✅ | Also mismatched restaurant photos |
 | 7 | MCP enterprise tool; Slack bots; SpaceX, Cognition, Mercor | ✅ | |
+
+## Fixes applied to the script before the voiceover (approved by the user, 1 Oct 2026)
+All seven ⚠️/❌ lines were fixed as suggested: the Doshi quote is now "incredibly well-rounded"; the June target and Gemini 3.5 are explained; the Bloomberg line reports staff doubts without an unverified rebuttal; Ferguson is paraphrased; the accord uses its published name; Toby Walsh's title is corrected; the Anthropic IPO line is softened. "Back in July" was added to the Brockman line. Final text: `lines.json`.
