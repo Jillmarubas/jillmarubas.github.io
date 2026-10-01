@@ -2,7 +2,7 @@
 
 No ElevenLabs credits are used for music or effects (the user's rule). Sources:
   - voiceover: Asher (ElevenLabs), one take per segment, public/news1001/vo/s<N>.mp3
-  - music: Kevin MacLeod (incompetech.com), CC BY 4.0, suspense cues, one per story,
+  - music: Kevin MacLeod (incompetech.com), CC BY 4.0, dark suspense cues, one per story,
     crossfaded at story changes and ducked ~12 dB under the voice
   - effects: Kenney.nl audio packs (CC0) and BigSoundBank recordings (CC0) already in public/sfx
 Cue times come from src/news1001/timing.json and the scene list in src/news1001/scenes.tsx
@@ -68,7 +68,8 @@ for ci, ch in enumerate(T['chapters']):
     place(vo, v, ch['vo'])
 
 # ------------------------------------------------------------------ music: one suspense cue per story, crossfaded
-CUES = ['Investigations', 'Investigations', 'Crypto', 'Hidden Agenda', 'Interloper', 'Covert Affair', 'Unanswered Questions', 'Darkling', 'Spy Glass', 'Investigations']
+# dark, low, minor-key suspense cues only (the user rejected the playful spy/pizzicato ones)
+CUES = ['Anxiety', 'Anxiety', 'Static Motion', 'Apprehension', 'Interloper', 'Penumbra', 'Unanswered Questions', 'Long Note Three', 'Echoes of Time v2', 'Anxiety']
 music = np.zeros((N, 2), np.float32)
 XF = 1.6
 i = 0
@@ -79,7 +80,7 @@ while i < len(CUES):
     t0 = T['chapters'][i]['start']
     t1 = T['chapters'][j]['end'] if j + 1 < len(CUES) else T['duration'] + 0.5
     m = load(os.path.join(MUS, f'{CUES[i]}.mp3'))
-    m = m[int(2.0 * SR):] if CUES[i] != 'Investigations' else m  # skip slow intros mid-film
+    m = m[int(2.0 * SR):] if i > 0 else m  # skip slow intros mid-film
     m *= 10 ** (-20 / 20) / rms(m[: 60 * SR])
     need = int((t1 - t0 + XF) * SR)
     while len(m) < need:  # loop if a story outlasts the cue
