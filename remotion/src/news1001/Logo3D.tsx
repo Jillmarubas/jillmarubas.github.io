@@ -190,10 +190,12 @@ const makeRig = (name: string, txt: string, w: number, h: number, fit: number, d
   probe.paths.forEach((p) => SVGLoader.createShapes(p).forEach((sh) => sh.getPoints(8).forEach((pt) => bb.expandByPoint(new THREE.Vector3(pt.x, pt.y, 0)))));
   const sz = bb.getSize(new THREE.Vector3());
   const big = Math.max(sz.x, sz.y) || 1;
-  const b = build(txt, big * depthRatio, override, !NO_BEVEL.has(name));
+  // extrusion depth follows the mark's short side, so wide wordmarks stay slim slabs, not deep blocks
+  const b = build(txt, Math.min(sz.x || big, sz.y || big) * depthRatio, override, !NO_BEVEL.has(name));
   const group = new THREE.Group();
   // fill `fit` of the box along whichever axis binds first (wide wordmarks use the width)
-  const scale = Math.min(((viewH * w) / h) * fit / (sz.x || 1), (viewH * fit) / (sz.y || 1));
+  // the width term keeps 22 % spare so a tilted, turning wordmark never clips at the canvas edge
+  const scale = Math.min((((viewH * w) / h) * fit * 0.78) / (sz.x || 1), (viewH * fit) / (sz.y || 1));
   const inner = new THREE.Group();
   inner.scale.setScalar(scale);
   const mats: THREE.Material[] = [];

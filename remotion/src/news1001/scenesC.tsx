@@ -66,7 +66,7 @@ export const T2: React.FC = () => {
   return (
     <AbsoluteFill>
       {bars.map((b, i) => (
-        <Piece key={b.y} x={620 + i * 680} y={600} at={b.at - 8} from="b" shadow={false}>
+        <Piece key={b.y} x={620 + i * 680} y={600} at={i * 8} from="b" shadow={false}>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16}}>
             <Counter to={b.v} at={b.at} dur={30} decimals={1} prefix="$" suffix="B" size={i ? 150 : 110} color={i ? C.red : C.ink} />
             <MoneyPile n={b.n} at={b.at} dur={36} cols={3} w={110} />
@@ -74,6 +74,9 @@ export const T2: React.FC = () => {
           </div>
         </Piece>
       ))}
+      <Piece x={960} y={180} at={0} from="t" shadow={false}>
+        <Logo3D name="meta" w={420} h={160} at={0} fit={0.9} spin={0} tilt={-8} />
+      </Piece>
       <Arrow x1={860} y1={380} x2={1180} y2={300} at={L(0) + 140} />
       <Source text="The New York Times; Meta filings" />
     </AbsoluteFill>
