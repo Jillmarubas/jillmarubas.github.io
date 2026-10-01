@@ -3,6 +3,9 @@
 Everything in the video is either made in code for this film, or listed here with its licence.
 The **YouTube description credits** block at the bottom is ready to paste.
 
+## Thumbnails
+Built in Remotion (`Thumbnail.tsx`) from the licensed photos below, cut out locally with rembg (`public/news1001/cut/`). No AI-generated images.
+
 ## Voice
 - Narration: ElevenLabs, voice "Asher" (`tMvyQtpCVQ0DkixuYm6J`), `eleven_multilingual_v2`, one take per segment (9,591 credits).
 
@@ -21,6 +24,7 @@ None. The user chose a voice-and-effects-only soundtrack (round 5). No music lic
 | Greg Brockman | TechCrunch | CC BY 2.0 |
 | Sundar Pichai | Lukasz Kobus, European Commission | CC BY 4.0 |
 | Mark Zuckerberg | The White House | Public domain |
+| Mark Zuckerberg (thumbnail E/F) | Anthony Quintano, "Mark Zuckerberg F8 2019 Keynote" | CC BY 2.0 |
 | Elon Musk | Gage Skidmore | CC BY-SA 4.0 |
 | Jensen Huang | The White House | Public domain |
 | Donald Trump | Daniel Torok, The White House | Public domain |
@@ -69,7 +73,7 @@ Colours are read straight from each file; the front face of every 3D logo render
 ```
 Narration: ElevenLabs ("Asher")
 Sound effects: Kenney.nl and BigSoundBank.com (CC0)
-Photos (Wikimedia Commons): Dario Amodei, Greg Brockman — TechCrunch, CC BY 2.0; Sundar Pichai — Lukasz Kobus/European Commission, CC BY 4.0; Elon Musk — Gage Skidmore, CC BY-SA 4.0; Toby Walsh — Avobronte, CC BY-SA 3.0; Andy Fang — Collision Conf, CC BY 2.0; ramen — Lusheeta, CC BY-SA 3.0; Andrew Ferguson (FTC), Mark Zuckerberg, Jensen Huang, Donald Trump (The White House) — public domain.
+Photos (Wikimedia Commons): Dario Amodei, Greg Brockman — TechCrunch, CC BY 2.0; Sundar Pichai — Lukasz Kobus/European Commission, CC BY 4.0; Elon Musk — Gage Skidmore, CC BY-SA 4.0; Toby Walsh — Avobronte, CC BY-SA 3.0; Andy Fang — Collision Conf, CC BY 2.0; Mark Zuckerberg (thumbnail) — Anthony Quintano, CC BY 2.0; ramen — Lusheeta, CC BY-SA 3.0; Andrew Ferguson (FTC), Mark Zuckerberg, Jensen Huang, Donald Trump (The White House) — public domain.
 Logos are trademarks of their owners, shown for news reporting.
 Sources: CNBC, VentureBeat, 9to5Google, Reuters, New York Post, The Decoder, Al Jazeera, NBC News, Washington Examiner, Bloomberg, Bloomberg Law, Semafor, OpenAI, Anthropic, The New York Times, Meta SEC filings (10-Q), TechCrunch, Implicator.ai.
 ```

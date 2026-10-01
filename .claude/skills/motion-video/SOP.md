@@ -99,6 +99,10 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 ---
 
 ## Thumbnails: the approved style (every video)
+> **ElevenLabs is for voiceover only (the user's rule, 1 Oct 2026).** Never use ElevenLabs credits for images, video, music or sound effects. Thumbnails are built in Remotion from licensed photos, 3D logos and the film's own assets. This overrides any older step below that generates images with ElevenLabs.
+
+**Updated 1 Oct 2026 (user):** thumbnails use **real, licensed photos of the people named in the script** (Wikimedia Commons CC/public domain, the same photos as the video), cut out locally with `rembg` (no paid tools), in a more provocative layout (versus, contrast, a stamp). Words stay at three at most and must be accurate: no invented quotes, no altered expressions, nothing a source doesn't support. Credit the photos in the description. Points 2 and 4 below (fictional generated people) are kept only as history.
+
 The user approved this look on 29 Sep 2026 (AI News Daily, variant G) and wants it on **every video**.
 Reference image: `reference/thumbnail-approved.jpg`. Component: `remotion/src/thumbs/HighlightThumb.tsx`.
 

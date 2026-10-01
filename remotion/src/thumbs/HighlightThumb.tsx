@@ -38,7 +38,7 @@ const outline = (w: number, c: string) =>
   [`${w}px 0 0 ${c}`, `-${w}px 0 0 ${c}`, `0 ${w}px 0 ${c}`, `0 -${w}px 0 ${c}`, `${w * 0.7}px ${w * 0.7}px 0 ${c}`, `-${w * 0.7}px ${w * 0.7}px 0 ${c}`, `${w * 0.7}px -${w * 0.7}px 0 ${c}`, `-${w * 0.7}px -${w * 0.7}px 0 ${c}`].join(', ');
 
 // A marker stroke: slightly rotated bar with ragged ends, like one pass of a highlighter.
-const Bar: React.FC<{color: string; rot: number; children: React.ReactNode; pad?: string; ink: string}> = ({color, rot, children, pad = '0.02em 0.22em 0.08em', ink}) => (
+export const Bar: React.FC<{color: string; rot: number; children: React.ReactNode; pad?: string; ink: string}> = ({color, rot, children, pad = '0.02em 0.22em 0.08em', ink}) => (
   <span style={{position: 'relative', display: 'inline-block', transform: `rotate(${rot}deg)`}}>
     <span
       style={{
@@ -53,7 +53,7 @@ const Bar: React.FC<{color: string; rot: number; children: React.ReactNode; pad?
   </span>
 );
 
-const Words: React.FC<{words: [string, string, string]; style: ThumbStyle; ink: string}> = ({words: [a, b, c], style, ink}) => {
+export const Words: React.FC<{words: [string, string, string]; style: ThumbStyle; ink: string}> = ({words: [a, b, c], style, ink}) => {
   const base: React.CSSProperties = {fontFamily: 'Geist, sans-serif', fontWeight: 900, letterSpacing: '-0.045em', lineHeight: 0.92};
   const drop = `0 18px 40px ${rgba(ink, 0.55)}`;
   if (style === 'marker')
