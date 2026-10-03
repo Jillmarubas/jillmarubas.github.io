@@ -1,8 +1,8 @@
 """Mix and master "Claude Code Just Got Mods" (AI News Daily, 3 Oct 2026): out/cc1003/mix.wav (+ soundtrack.m4a).
 
 Voice + effects only (no music, the user's rule): the single short swoosh (public/sfx/whoosh7.mp3,
-BigSoundBank CC0) once per scene change, plus soft synthesized laptop keystrokes under every
-typed command and mouse clicks where the cursor clicks. Scene windows mirror Film.tsx; word
+BigSoundBank CC0) once per scene change, plus the user's laptop-typing recording under every
+typed command (no synthesized clicks). Scene windows mirror Film.tsx; word
 lookups mirror timing.ts useS().w(); keystroke times mirror keys.ts typeTimes().
 Master: -14 LUFS integrated, -1 dBTP (ffmpeg loudnorm, 2 pass), 48 kHz stereo.
 """
@@ -110,7 +110,7 @@ keys += [tc + 0.2 + 1.3 * i / len(msg) for i in range(len(msg))]
 clicks += [W(k, 'like') - 0.03, W(k, 'subscribe') - 0.03]
 k = scene('SecondFreebie'); clicks.append(W(k, 'usage') - 0.08)
 k = scene('EvalPipeline'); clicks.append(W(k, 'approve'))
-print(len(keys), 'keystrokes,', len(enters), 'enters,', len(clicks), 'clicks')
+print(len(keys), 'keystrokes')
 
 # ------------------------------------------------------------- sounds
 
@@ -182,16 +182,62 @@ for k, t0 in enumerate(transitions):
     first = SC[k + 1]['from'] == 0 and SC[k + 1]['ch'] != SC[k]['ch']
     gain = v_rms / w_body * (10 ** ((-12 if first else -16) / 20))
     place(fx, whoosh, t0 - 0.12, gain, pan=0.25 if k % 2 else -0.25)
-kc_level = v_rms * 10 ** (-21 / 20)
-for i, t0 in enumerate(sorted(keys)):
-    s = key_click(i)
-    place(fx, s, t0, kc_level / rms(s) * (0.8 + 0.4 * rnd(str(i))), pan=(rnd('p' + str(i)) - 0.5) * 0.3)
-for i, t0 in enumerate(enters):
-    s = key_click(1000 + i, strong=True)
-    place(fx, s, t0, kc_level * 1.6 / rms(s))
-mc = mouse_click()
+# Typing: the user's own laptop-keyboard recording (public/cc1003/sfx/typing-laptop.wav, 3 Oct 2026),
+# replacing the synthesized clicks. One burst per typed command: starts with the first key, stops
+# after the last, loops with a crossfade when a command takes longer than the 4 s clip.
+typing = load(os.path.join(ROOT, 'public/cc1003/sfx/typing-laptop.wav'))
+typ_level = v_rms * 10 ** (-17 / 20) / rms(typing)
+XF = int(0.25 * SR)
+
+
+def burst(dur, off):
+    n = int(dur * SR)
+    out = np.zeros((n, 2), np.float32)
+    pos, o = 0, int(off * SR) % len(typing)
+    while pos < n:
+        seg = np.roll(typing, -o, axis=0)
+        take = min(len(seg), n - pos)
+        piece = seg[:take].copy()
+        if pos > 0:  # crossfade into the previous loop
+            m = min(XF, take)
+            piece[:m] *= np.linspace(0, 1, m)[:, None]
+            out[pos:pos + m] *= np.linspace(1, 0, m)[:, None]
+        out[pos:pos + take] += piece
+        pos += take - XF if take == len(seg) else take
+        o = (o + int(rnd(str(pos)) * len(typing))) % len(typing)
+    fi, fo = int(0.03 * SR), int(0.15 * SR)
+    out[:fi] *= np.linspace(0, 1, fi)[:, None]
+    out[-fo:] *= np.linspace(1, 0, fo)[:, None]
+    return out
+
+
+ks = sorted(keys)
+runs, cur = [], [ks[0]]
+for t0 in ks[1:]:
+    if t0 - cur[-1] > 0.5:
+        runs.append(cur)
+        cur = []
+    cur.append(t0)
+runs.append(cur)
+for i, r in enumerate(runs):
+    d = r[-1] - r[0] + 0.12
+    if d < 0.25:
+        continue
+    place(fx, burst(d, rnd('o' + str(i)) * 4), r[0] - 0.02, typ_level, pan=0)
+print(len(runs), 'typing bursts')
+
+# Mouse clicks: the user's own click recording (public/cc1003/sfx/mouse-click.wav), trimmed to its sound.
+click = load(os.path.join(ROOT, 'public/cc1003/sfx/mouse-click.wav'))
+env = np.abs(click).max(1)
+on = int(np.argmax(env > 0.05 * env.max()))
+click = click[max(0, on - int(0.005 * SR)):][: int(0.6 * SR)]
+click_gain = v_rms * 10 ** (-15 / 20) / rms(click[np.abs(click).max(1) > 0.02 * np.abs(click).max()])
 for t0 in clicks:
-    place(fx, mc, t0, v_rms * 10 ** (-18 / 20) / rms(mc))
+    place(fx, click, t0, click_gain)
+print(len(clicks), 'mouse clicks')
+for r in runs[:3]:
+    a, b = int((r[0]) * SR), int((r[-1] + 0.1) * SR)
+    print('  burst %.1f-%.1fs: typing %.1f dB vs voice body' % (r[0], r[-1], 20 * np.log10(rms(fx[a:b]) / v_rms + 1e-9)))
 
 mix = voice + fx
 pre = os.path.join(TMP, 'pre.wav')
