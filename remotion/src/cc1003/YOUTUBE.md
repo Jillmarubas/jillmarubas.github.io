@@ -65,7 +65,7 @@ claude --version
 • Publishing plugins: https://claude.com/blog/build-plugins-for-claude
 
 🖼 Credits
-Narration: ElevenLabs ("Joey"). Sound effect: BigSoundBank.com (CC0). Thumbnail person: AI-generated, fictional.
+Narration: ElevenLabs ("Joey"). Swoosh: BigSoundBank.com (CC0). Typing, Enter-key and mouse-click sounds: my own (ElevenLabs). Thumbnail person: AI-generated, fictional.
 Claude symbol: Wikimedia Commons (CC0). Claude and Claude Code are trademarks of Anthropic, shown for news reporting.
 Terminal screens are illustrations, not screen recordings.
 
