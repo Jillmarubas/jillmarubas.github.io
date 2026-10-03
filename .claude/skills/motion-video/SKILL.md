@@ -58,5 +58,6 @@ reflections + lens effects (DOF, grain, vignette, subtle chromatic aberration).*
 ## Files
 - `SOP.md`: the step-by-step procedure (brief → reference study → build → QA → Lambda → deliver).
 - `reference/breakdowns.md`: measured breakdowns of the six references.
+- `../../../design-system/`: house design systems usable as a look. **Autopilot Blue** is wired for Remotion (`remotion/src/autopilot/`); its rules are in `SOP.md` → "Design systems".
 - `reference/realism.md`: lighting, shadow, reflection, material and lens recipes, with numbers.
 - `remotion/`: the working project. Compositions `BrandStory` (2D + SVG), `MoonDistance` (3D procedural) and `RealMoon` (NASA data, photoreal). Scripts: `render-lambda.sh`, `scripts/analyze-reference.sh`, `scripts/prepare-nasa-textures.py`, and the `make_*_sfx.py` sound generators.

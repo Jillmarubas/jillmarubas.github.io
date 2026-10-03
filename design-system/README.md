@@ -1,10 +1,10 @@
 # Design systems — Jillmar Ubas
 
-Everything from the September 2026 design work, in one place. Two systems, both
-built by sampling real references pixel by pixel and frame by frame, plus the
+Everything from the September–October 2026 design work, in one place. Three systems,
+all built by sampling real references pixel by pixel and frame by frame, plus the
 drop-in motion layer now running on the live portfolio.
 
-Last updated: 12 September 2026
+Last updated: 3 October 2026
 
 ---
 
@@ -18,9 +18,11 @@ Last updated: 12 September 2026
 | `settle-motion/tokens.css` | Settle Motion tokens: durations (with frame counts), curves, choreography. |
 | `settle-motion/motion-layer.html` | The **drop-in motion layer**. Paste before `</body>` on any page. |
 | `frost-glass/frost-glass-layer.html` | The **drop-in frost glass layer** — orange field + dark glass surfaces. Running on the live portfolio. |
+| `autopilot-blue/autopilot-blue.html` | **Autopilot Blue** — silent ground, dissolving type, one cobalt object. Open in a browser. |
+| `autopilot-blue/tokens.css` | Autopilot Blue tokens (light + dark), ready to paste into any stylesheet. |
 | `frost-glass/cv-glass-layer.html` | The CV variant — same field, but a **light** frosted sheet, screen-only so print stays white paper. |
 
-Both `.html` files are standalone — no build step, no server. Double-click to open.
+All `.html` files are standalone — no build step, no server. Double-click to open.
 
 ---
 
@@ -81,6 +83,30 @@ changes:
 
 Change those selectors at the top of each block to match a different site. Elements
 already on screen are never hidden, and everything stops under reduced motion.
+
+---
+
+## Autopilot Blue — one object, one light
+
+A blue-grey ground that is never one grey, five lines of type dissolving into it, and a
+single cobalt object throwing blue light onto the floor.
+
+- **Sampled from:** a nine-second motion frame by Illia Holubka (Pinterest pin
+  1067142074228622392). Colours sampled, not guessed.
+- **Live page:** https://claude.ai/artifact/WSfUU9haNw5557BqXCknRc
+- **Covers:** ground wash, the five-face blue ramp (+ `--blue-ink` for accessible text),
+  type scale (Instrument Sans / Hanken Grotesk / IBM Plex Mono) and the veil ramp,
+  superellipse radii, blue bloom elevation, three easing curves and four durations,
+  live components (pill-to-card morph, buttons, field, switch), full light + dark tokens.
+- **The one rule to remember:** one saturated object per view.
+- **Wired into the motion-video SOP:** `.claude/skills/motion-video/SOP.md` → "Design
+  systems". Remotion tokens and bundled fonts live in `remotion/src/autopilot/`.
+
+### Reuse
+```html
+<link rel="stylesheet" href="design-system/autopilot-blue/tokens.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+```
 
 ---
 

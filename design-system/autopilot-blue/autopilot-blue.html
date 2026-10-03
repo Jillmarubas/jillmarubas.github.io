@@ -1,0 +1,700 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Autopilot Blue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* ============================================================
+   AUTOPILOT BLUE — tokens
+   Light palette is the source of truth. Dark redefines tokens only.
+   ============================================================ */
+:root{
+  /* --ground */
+  --ground-hi:#EAEAEA;
+  --ground-lo:#CDDDEC;
+  --ground-mid:#DCE3ED;
+  --surface:#F3F4F6;
+  --surface-sunk:#E3E6EB;
+  --line:#D5D9E0;
+  --line-soft:#E1E4EA;
+
+  /* --ink */
+  --ink:#10151C;
+  --ink-2:#4B5563;
+  --ink-3:#7B8695;
+  --ink-rgb:16,21,28;
+
+  /* --blue */
+  --blue-core:#0571F8;
+  --blue-face:#2082FD;
+  --blue-lift:#4D8FFC;
+  --blue-veil:#81A2F6;
+  --blue-ink:#0A50B8;
+  --blue-wash:rgba(5,113,248,.08);
+  --blue-rim:rgba(255,255,255,.55);
+
+  /* --bloom */
+  --bloom-sm:0 6px 18px -6px rgba(5,113,248,.35);
+  --bloom-md:0 18px 44px -14px rgba(5,113,248,.45);
+  --bloom-lg:0 34px 80px -22px rgba(5,113,248,.55);
+  --lift-flat:0 1px 0 rgba(var(--ink-rgb),.05);
+
+  /* --radius (superellipse-adjacent, n approx 4) */
+  --r-xs:8px; --r-sm:14px; --r-md:22px; --r-lg:34px; --r-xl:52px; --r-pill:999px;
+
+  /* --ease */
+  --ease-swift:cubic-bezier(.22,1,.36,1);
+  --ease-morph:cubic-bezier(.65,0,.35,1);
+  --ease-settle:cubic-bezier(.34,1.2,.64,1);
+  --t-tap:120ms; --t-move:220ms; --t-morph:380ms; --t-stage:640ms;
+
+  /* --type */
+  --display:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  --page:1120px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground-hi:#0C1016; --ground-lo:#111C2A; --ground-mid:#0F1620;
+    --surface:#141A22; --surface-sunk:#0F141B;
+    --line:#242D3A; --line-soft:#1B222C;
+    --ink:#E9EDF3; --ink-2:#A4B0BF; --ink-3:#6D798A; --ink-rgb:233,237,243;
+    --blue-core:#2E86FF; --blue-face:#4D9BFF; --blue-lift:#7FB6FF; --blue-veil:#2B5A9E;
+    --blue-ink:#8CBEFF; --blue-wash:rgba(46,134,255,.12); --blue-rim:rgba(255,255,255,.30);
+    --bloom-sm:0 6px 18px -6px rgba(46,134,255,.40);
+    --bloom-md:0 18px 44px -14px rgba(46,134,255,.50);
+    --bloom-lg:0 34px 80px -22px rgba(46,134,255,.60);
+    --lift-flat:0 1px 0 rgba(0,0,0,.4);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground-hi:#0C1016; --ground-lo:#111C2A; --ground-mid:#0F1620;
+  --surface:#141A22; --surface-sunk:#0F141B;
+  --line:#242D3A; --line-soft:#1B222C;
+  --ink:#E9EDF3; --ink-2:#A4B0BF; --ink-3:#6D798A; --ink-rgb:233,237,243;
+  --blue-core:#2E86FF; --blue-face:#4D9BFF; --blue-lift:#7FB6FF; --blue-veil:#2B5A9E;
+  --blue-ink:#8CBEFF; --blue-wash:rgba(46,134,255,.12); --blue-rim:rgba(255,255,255,.30);
+  --bloom-sm:0 6px 18px -6px rgba(46,134,255,.40);
+  --bloom-md:0 18px 44px -14px rgba(46,134,255,.50);
+  --bloom-lg:0 34px 80px -22px rgba(46,134,255,.60);
+  --lift-flat:0 1px 0 rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:var(--body);
+  font-weight:400;
+  color:var(--ink);
+  background:var(--ground-hi);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
+.page{max-width:var(--page);margin:0 auto;padding:0 28px 110px}
+:focus-visible{outline:2px solid var(--blue-core);outline-offset:3px;border-radius:4px}
+
+/* ---------- masthead ---------- */
+.masthead{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:14px 22px;
+  padding:38px 0 26px;
+}
+.wordmark{
+  font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.02em;
+  display:flex;align-items:center;gap:10px;margin:0;
+}
+.wordmark i{
+  width:13px;height:13px;border-radius:5px;background:var(--blue-core);
+  box-shadow:var(--bloom-sm);display:block;
+}
+.masthead p{margin:0;color:var(--ink-3);font-size:14px;max-width:46ch}
+.masthead .src{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+
+/* ---------- hero: rebuild of the source frame ---------- */
+.frame{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  aspect-ratio:16/9;min-height:300px;
+  background:
+    radial-gradient(120% 90% at 62% 118%, rgba(129,162,246,.42) 0%, rgba(129,162,246,0) 62%),
+    linear-gradient(180deg, var(--ground-hi) 0%, var(--ground-hi) 42%, var(--ground-mid) 74%, var(--ground-lo) 100%);
+  border:1px solid var(--line-soft);
+  display:grid;grid-template-columns:1.05fr .95fr;align-items:center;
+  container-type:inline-size;
+}
+.stack{padding-left:8%;display:flex;flex-direction:column;gap:.1em}
+.stack span{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(26px,5.2cqi,64px);
+  line-height:1.14;letter-spacing:-.035em;
+  color:rgba(var(--ink-rgb),var(--veil));
+}
+.stack span:nth-child(1){--veil:.62}
+.stack span:nth-child(2){--veil:.34}
+.stack span:nth-child(3){--veil:.20}
+.stack span:nth-child(4){--veil:.11}
+.stack span:nth-child(5){--veil:.05}
+
+.morphframe{position:relative;height:100%;display:grid;place-items:center}
+.shapes{position:relative;width:74%;aspect-ratio:2.05/1}
+.shape-back,.shape-front{position:absolute;top:0;bottom:0;border-radius:var(--r-xl)}
+.shape-back{
+  left:0;right:16%;
+  background:linear-gradient(155deg,var(--blue-face),var(--blue-core) 62%);
+  box-shadow:var(--bloom-md);
+}
+.shape-front{
+  left:34%;right:0;
+  background:linear-gradient(165deg,var(--blue-face) 0%,var(--blue-core) 55%,var(--blue-lift) 100%);
+  box-shadow:inset 1.5px 0 0 var(--blue-rim), inset 0 1.5px 0 var(--blue-rim), var(--bloom-lg);
+}
+.pointer{position:absolute;right:2%;bottom:-6%;width:clamp(38px,9cqi,74px);filter:drop-shadow(0 6px 14px rgba(0,0,0,.28))}
+.framecap{
+  display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);padding:12px 2px 0;margin:0;
+}
+
+/* ---------- section scaffolding ---------- */
+.sec{padding-top:72px}
+.sechead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;border-top:1px solid var(--line);padding-top:18px;margin-bottom:26px}
+.ns{font-family:var(--mono);font-size:12px;color:var(--blue-ink);letter-spacing:.02em;background:var(--blue-wash);padding:3px 8px;border-radius:var(--r-xs)}
+.sechead h2{font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:-.025em;margin:0;text-wrap:balance}
+.sechead p{margin:0;color:var(--ink-2);font-size:14.5px;max-width:60ch;flex:1 1 320px}
+.note{font-size:14.5px;color:var(--ink-2);max-width:66ch;margin:22px 0 0}
+.note code,.inline{font-family:var(--mono);font-size:12.5px;color:var(--blue-ink)}
+.rule{font-family:var(--display);font-weight:500;font-size:14.5px;color:var(--ink);line-height:1.5;
+  border-left:2px solid var(--blue-core);padding:2px 0 2px 14px;margin:22px 0 0;max-width:64ch}
+
+/* ---------- swatches ---------- */
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+.chip{border:1px solid var(--line-soft);border-radius:var(--r-md);overflow:hidden;background:var(--surface)}
+.chip .fill{height:88px}
+.chip .meta{padding:11px 13px;display:flex;flex-direction:column;gap:2px}
+.chip b{font-family:var(--mono);font-weight:500;font-size:12px;color:var(--ink)}
+.chip small{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);text-transform:uppercase}
+.chip em{font-style:normal;font-size:12.5px;color:var(--ink-2);line-height:1.45;margin-top:3px}
+
+.washbar{
+  height:132px;border-radius:var(--r-md);border:1px solid var(--line-soft);
+  background:
+    radial-gradient(120% 130% at 62% 130%, rgba(129,162,246,.42) 0%, rgba(129,162,246,0) 62%),
+    linear-gradient(180deg, var(--ground-hi) 0%, var(--ground-hi) 42%, var(--ground-mid) 74%, var(--ground-lo) 100%);
+  display:flex;align-items:flex-end;padding:12px 14px;margin-bottom:16px;
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+}
+
+/* ---------- blue ramp ---------- */
+.ramp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line-soft)}
+.ramp div{padding:22px 14px 16px;min-height:138px;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;color:#fff}
+.ramp b{font-family:var(--mono);font-weight:500;font-size:12px}
+.ramp small{font-family:var(--mono);font-size:11px;opacity:.82}
+.ramp span{font-size:12.5px;line-height:1.4;margin-top:5px;opacity:.92}
+
+/* ---------- type ---------- */
+.scale{display:flex;flex-direction:column;border-top:1px solid var(--line-soft)}
+.scale .row{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px solid var(--line-soft);flex-wrap:wrap}
+.scale .spec{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);min-width:212px;flex:0 0 auto}
+.scale .samp{font-family:var(--display);letter-spacing:-.03em;line-height:1.1;flex:1 1 240px;min-width:0}
+.veilbox{margin-top:26px;border:1px solid var(--line-soft);border-radius:var(--r-md);overflow:hidden}
+.veilbox .demo{
+  padding:26px 24px;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,var(--ground-hi),var(--ground-mid));
+}
+.veilbox .demo span{font-family:var(--display);font-weight:500;font-size:clamp(22px,4vw,40px);letter-spacing:-.035em;line-height:1.16}
+.veilbox .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));border-top:1px solid var(--line-soft);background:var(--surface)}
+.veilbox .legend div{padding:11px 13px;border-right:1px solid var(--line-soft);font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.veilbox .legend div:last-child{border-right:0}
+.veilbox .legend b{display:block;color:var(--ink);font-weight:500}
+
+/* ---------- geometry ---------- */
+.geo{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:20px;align-items:start}
+.geobox{border:1px solid var(--line-soft);border-radius:var(--r-md);background:var(--surface);padding:20px;display:flex;flex-direction:column;gap:14px}
+.geobox .art{display:grid;place-items:center;min-height:150px}
+.geobox h3{font-family:var(--display);font-weight:600;font-size:15px;margin:0;letter-spacing:-.01em}
+.geobox p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.5}
+.radii{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.radii figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
+.radii i{display:block;width:66px;height:48px;background:linear-gradient(160deg,var(--blue-face),var(--blue-core));box-shadow:var(--bloom-sm)}
+.radii figcaption{font-family:var(--mono);font-size:11px;color:var(--ink-3);text-align:center;line-height:1.35}
+
+/* ---------- bloom ---------- */
+.blooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+.bloomcell{background:var(--surface-sunk);border-radius:var(--r-md);padding:34px 20px 22px;display:flex;flex-direction:column;align-items:center;gap:22px;border:1px solid var(--line-soft)}
+.bloomcell i{width:100%;height:66px;border-radius:var(--r-lg);background:linear-gradient(160deg,var(--blue-face),var(--blue-core))}
+.bloomcell code{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);text-align:center;line-height:1.6}
+
+/* ---------- motion ---------- */
+.eases{display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));gap:18px}
+.ease{border:1px solid var(--line-soft);border-radius:var(--r-md);padding:16px;background:var(--surface);display:flex;flex-direction:column;gap:12px}
+.ease svg{width:100%;height:96px;display:block}
+.ease b{font-family:var(--display);font-size:14px;font-weight:600}
+.ease code{font-family:var(--mono);font-size:11px;color:var(--ink-3);word-break:break-all}
+.track{height:10px;border-radius:var(--r-pill);background:var(--surface-sunk);position:relative;overflow:hidden}
+.track i{position:absolute;top:0;bottom:0;left:0;width:30%;border-radius:var(--r-pill);background:var(--blue-core);animation:slide 1.9s infinite alternate var(--e)}
+.ease:nth-child(1){--e:var(--ease-swift)}
+.ease:nth-child(2){--e:var(--ease-morph)}
+.ease:nth-child(3){--e:var(--ease-settle)}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(233%)}}
+.durs{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.durs span{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);border:1px solid var(--line-soft);background:var(--surface);padding:6px 10px;border-radius:var(--r-xs)}
+
+/* ---------- components ---------- */
+.lab{border:1px solid var(--line-soft);border-radius:var(--r-lg);overflow:hidden;background:var(--surface)}
+.lab .stage{
+  padding:44px 28px;display:flex;flex-wrap:wrap;gap:34px;align-items:center;justify-content:center;
+  background:
+    radial-gradient(110% 130% at 50% 140%, rgba(129,162,246,.28) 0%, rgba(129,162,246,0) 60%),
+    linear-gradient(180deg,var(--ground-hi),var(--ground-mid));
+}
+.lab .caption{border-top:1px solid var(--line-soft);padding:12px 16px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);line-height:1.6}
+
+.btn{
+  font-family:var(--display);font-weight:500;font-size:15px;letter-spacing:-.01em;
+  border:0;border-radius:var(--r-pill);padding:13px 24px;cursor:pointer;
+  transition:transform var(--t-tap) var(--ease-swift), box-shadow var(--t-move) var(--ease-swift), background var(--t-move) linear, color var(--t-move) linear;
+}
+.btn-primary{background:linear-gradient(160deg,var(--blue-face),var(--blue-core));color:#fff;box-shadow:var(--bloom-md)}
+.btn-primary:hover{box-shadow:var(--bloom-lg);transform:translateY(-1px)}
+.btn-primary:active{transform:translateY(1px);box-shadow:var(--bloom-sm)}
+.btn-quiet{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn-quiet:hover{background:var(--blue-wash);box-shadow:inset 0 0 0 1px var(--blue-core);color:var(--blue-ink)}
+
+.switch{
+  width:66px;height:38px;border-radius:var(--r-pill);border:0;cursor:pointer;padding:4px;
+  background:var(--surface-sunk);box-shadow:inset 0 0 0 1px var(--line);
+  display:flex;align-items:center;transition:background var(--t-move) var(--ease-swift),box-shadow var(--t-move) var(--ease-swift);
+}
+.switch i{width:30px;height:30px;border-radius:var(--r-pill);background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.22);transition:transform var(--t-morph) var(--ease-settle)}
+.switch[aria-checked="true"]{background:linear-gradient(160deg,var(--blue-face),var(--blue-core));box-shadow:var(--bloom-sm)}
+.switch[aria-checked="true"] i{transform:translateX(28px)}
+
+/* the morph — the source motion, made operable */
+.morph{
+  position:relative;border:0;cursor:pointer;color:#fff;text-align:left;
+  font-family:var(--display);font-weight:500;
+  background:linear-gradient(160deg,var(--blue-face),var(--blue-core) 62%);
+  box-shadow:var(--bloom-md);
+  border-radius:var(--r-xl);
+  width:190px;height:62px;padding:0 26px;
+  display:flex;align-items:center;overflow:hidden;
+  transition:width var(--t-morph) var(--ease-morph),height var(--t-morph) var(--ease-morph),
+             border-radius var(--t-morph) var(--ease-morph),padding var(--t-morph) var(--ease-morph),
+             box-shadow var(--t-stage) var(--ease-swift);
+}
+.morph .label{font-size:16px;letter-spacing:-.01em;white-space:nowrap}
+.morph .rows{
+  position:absolute;left:26px;right:26px;top:58px;
+  display:flex;flex-direction:column;
+  opacity:0;transition:opacity var(--t-move) linear var(--t-tap);
+}
+.morph .rows span{font-size:14.5px;font-weight:400;letter-spacing:-.005em;color:rgba(255,255,255,.94);display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-top:1px solid rgba(255,255,255,.16)}
+.morph .rows span:first-child{border-top:0}
+.morph .rows small{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.66)}
+.morph[aria-expanded="true"]{width:292px;height:214px;border-radius:var(--r-lg);align-items:flex-start;padding-top:19px}
+.morph[aria-expanded="true"] .rows{opacity:1}
+
+.field{display:flex;flex-direction:column;gap:7px}
+.field label,.fieldlabel{font-family:var(--mono);font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.field input{
+  font-family:var(--body);font-size:15px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);
+  padding:11px 14px;min-width:212px;
+  transition:border-color var(--t-move) var(--ease-swift),box-shadow var(--t-move) var(--ease-swift);
+}
+.field input:focus{outline:0;border-color:var(--blue-core);box-shadow:0 0 0 4px var(--blue-wash)}
+.controls{display:flex;flex-direction:column;gap:20px}
+.controls .btnrow{display:flex;gap:12px;flex-wrap:wrap}
+.controls .inputs{display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap}
+
+/* ---------- token dump ---------- */
+.dump{position:relative;border:1px solid var(--line-soft);border-radius:var(--r-md);background:var(--surface-sunk);overflow:hidden}
+.dump pre{margin:0;padding:20px;overflow-x:auto;font-family:var(--mono);font-size:12px;line-height:1.75;color:var(--ink-2)}
+.dump .cp{position:absolute;top:12px;right:12px}
+.dump .cp button{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:var(--r-xs);padding:6px 11px;cursor:pointer}
+.dump .cp button:hover{border-color:var(--blue-core);color:var(--blue-ink)}
+
+footer{margin-top:74px;border-top:1px solid var(--line);padding-top:20px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between}
+
+@media (max-width:760px){
+  .frame{grid-template-columns:1fr;aspect-ratio:auto;padding:36px 0 46px;gap:36px;min-height:0}
+  .stack span{font-size:clamp(28px,9vw,46px)}
+  .morphframe{min-height:180px}
+  .shapes{width:80%}
+  .masthead .src{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+}
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <h1 class="wordmark"><i></i>Autopilot Blue</h1>
+    <p>A design system read off one nine-second frame: silent ground, dissolving type, a single cobalt object.</p>
+    <span class="src">source: pin 1067142074228622392 &middot; Illia Holubka</span>
+  </header>
+
+  <div class="frame">
+    <div class="stack" aria-hidden="true">
+      <span>Auto Pilot</span>
+      <span>Replies</span>
+      <span>Follows Up</span>
+      <span>Books Calls</span>
+      <span>24/7</span>
+    </div>
+    <div class="morphframe">
+      <div class="shapes">
+        <div class="shape-back"></div>
+        <div class="shape-front"></div>
+        <svg class="pointer" viewBox="0 0 32 41" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 2.5 L5 31 L12.4 24 L17.2 34.6 L22.4 32.2 L17.7 22 L26.5 22 Z"
+                fill="#ffffff" stroke="#101418" stroke-width="2.2" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <p class="framecap">
+    <span>frame rebuilt in CSS &middot; no bitmap</span>
+    <span>ground #EAEAEA &rarr; #CDDDEC &middot; object #0571F8</span>
+  </p>
+
+  <!-- ============ GROUND ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <span class="ns">--ground</span>
+      <h2>The ground is never one grey</h2>
+      <p>The frame reads as flat neutral until you sample it. It holds #EAEAEA across the top two-fifths, then cools through a blue-grey into #CDDDEC at the floor, lit from below right. Every neutral in the system carries that same blue bias &mdash; a true 50% grey looks dirty against it.</p>
+    </div>
+
+    <div class="washbar">the page wash &mdash; vertical cool-down plus one low bloom at 62% / 118%</div>
+
+    <div class="grid g4">
+      <div class="chip"><div class="fill" style="background:#EAEAEA"></div><div class="meta"><b>--ground-hi</b><small>#EAEAEA</small><em>Top two-fifths. The resting field.</em></div></div>
+      <div class="chip"><div class="fill" style="background:#DCE3ED"></div><div class="meta"><b>--ground-mid</b><small>#DCE3ED</small><em>Where the neutral starts turning.</em></div></div>
+      <div class="chip"><div class="fill" style="background:#CDDDEC"></div><div class="meta"><b>--ground-lo</b><small>#CDDDEC</small><em>The floor. Light source lives here.</em></div></div>
+      <div class="chip"><div class="fill" style="background:#F3F4F6"></div><div class="meta"><b>--surface</b><small>#F3F4F6</small><em>Panels sitting on the wash.</em></div></div>
+    </div>
+
+    <p class="rule">The gradient always runs top-to-floor, never corner-to-corner. A diagonal wash breaks the single-light-source read the whole system depends on.</p>
+  </section>
+
+  <!-- ============ BLUE ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <span class="ns">--blue</span>
+      <h2>One object gets the colour</h2>
+      <p>There is exactly one saturated thing in the source frame. This ramp is not a tint scale for decorating many elements &mdash; it is four faces of the same object: its body, its lit plane, the rim where a second shape overlaps it, and the bloom it throws onto the floor.</p>
+    </div>
+
+    <div class="ramp">
+      <div style="background:#0571F8"><b>--blue-core</b><small>#0571F8</small><span>Body. Fills, primary actions.</span></div>
+      <div style="background:#2082FD"><b>--blue-face</b><small>#2082FD</small><span>Lit plane, gradient origin.</span></div>
+      <div style="background:#4D8FFC"><b>--blue-lift</b><small>#4D8FFC</small><span>Edge catching light on overlap.</span></div>
+      <div style="background:#81A2F6"><b>--blue-veil</b><small>#81A2F6</small><span>Bloom on the floor. Never a fill.</span></div>
+      <div style="background:#0A50B8"><b>--blue-ink</b><small>#0A50B8</small><span>Text and links. 6.1:1 on ground.</span></div>
+    </div>
+
+    <p class="note">The one token the source did not have is <code>--blue-ink</code>. That frame never sets blue type, so it never had to clear a contrast bar; #0571F8 on #EAEAEA measures 3.7:1, which carries large display only. Anything at body size drops to #0A50B8.</p>
+    <p class="rule">One saturated object per view. A second one does not read as emphasis &mdash; it reads as an interface that lost its nerve.</p>
+  </section>
+
+  <!-- ============ TYPE ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <span class="ns">--type</span>
+      <h2>Type that dissolves downward</h2>
+      <p>The frame stacks five lines and drops each further into the ground until the last is barely a rumour. Instrument Sans takes the display role &mdash; a neo-grotesque with the tight apertures and flat terminals the source uses &mdash; against Hanken Grotesk for reading and IBM Plex Mono for anything carrying a value.</p>
+    </div>
+
+    <div class="scale">
+      <div class="row"><span class="spec">display &middot; 64px &middot; 500 &middot; -.035em</span><span class="samp" style="font-size:clamp(34px,6vw,64px);font-weight:500">Auto Pilot</span></div>
+      <div class="row"><span class="spec">title &middot; 26px &middot; 600 &middot; -.025em</span><span class="samp" style="font-size:26px;font-weight:600">Handles the inbox while you sleep</span></div>
+      <div class="row"><span class="spec">lead &middot; 18px &middot; 400 &middot; 1.5</span><span class="samp" style="font-size:18px;font-weight:400;font-family:var(--body);letter-spacing:0;line-height:1.5">Replies in ninety seconds, books the call, logs the thread.</span></div>
+      <div class="row"><span class="spec">body &middot; 15px &middot; 400 &middot; 1.6</span><span class="samp" style="font-size:15px;font-weight:400;font-family:var(--body);letter-spacing:0;line-height:1.6">Body copy sets in Hanken Grotesk and holds near sixty-five characters to the line.</span></div>
+      <div class="row"><span class="spec">mono &middot; 11.5px &middot; 500 &middot; .02em</span><span class="samp" style="font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.02em">--ease-morph: cubic-bezier(.65, 0, .35, 1)</span></div>
+    </div>
+
+    <div class="veilbox">
+      <div class="demo" aria-hidden="true">
+        <span style="color:rgba(var(--ink-rgb),.62)">Auto Pilot</span>
+        <span style="color:rgba(var(--ink-rgb),.34)">Replies</span>
+        <span style="color:rgba(var(--ink-rgb),.20)">Follows Up</span>
+        <span style="color:rgba(var(--ink-rgb),.11)">Books Calls</span>
+        <span style="color:rgba(var(--ink-rgb),.05)">24/7</span>
+      </div>
+      <div class="legend">
+        <div><b>--veil-1</b>.62 alpha</div>
+        <div><b>--veil-2</b>.34 alpha</div>
+        <div><b>--veil-3</b>.20 alpha</div>
+        <div><b>--veil-4</b>.11 alpha</div>
+        <div><b>--veil-5</b>.05 alpha</div>
+      </div>
+    </div>
+
+    <p class="rule">The veil ramp is decorative only. Below --veil-1, nothing may carry information a reader needs &mdash; no labels, no values, no controls. Mark the lower steps aria-hidden and repeat anything that matters at full ink.</p>
+  </section>
+
+  <!-- ============ RADIUS ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <span class="ns">--radius</span>
+      <h2>Superellipses, not stadiums</h2>
+      <p>The blue shapes are neither rounded rectangles nor pills. Their corners are superellipse curves &mdash; |x/a|&#8319; + |y/b|&#8319; = 1 at roughly n = 4 &mdash; so curvature arrives gradually instead of snapping into an arc. Border-radius can only approximate that, and the gap shows most at the largest sizes.</p>
+    </div>
+
+    <div class="geo">
+      <div class="geobox">
+        <div class="art">
+          <div style="width:190px;height:118px;border-radius:52px;background:linear-gradient(160deg,var(--blue-face),var(--blue-core));box-shadow:var(--bloom-md)"></div>
+        </div>
+        <h3>border-radius: 52px</h3>
+        <p>What the browser gives you. The straight edge ends and the arc begins at a visible seam.</p>
+      </div>
+      <div class="geobox">
+        <div class="art">
+          <svg width="190" height="118" viewBox="0 0 190 118" aria-hidden="true" style="filter:drop-shadow(0 18px 34px rgba(5,113,248,.42))">
+            <defs><linearGradient id="sq" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2082FD"></stop><stop offset="1" stop-color="#0571F8"></stop>
+            </linearGradient></defs>
+            <path id="squircle" fill="url(#sq)" d="M 190 59 L 0 59 Z"></path>
+          </svg>
+        </div>
+        <h3>superellipse n = 4</h3>
+        <p>Curvature ramps continuously into the corner. This is the shape in the source frame.</p>
+      </div>
+      <div class="geobox">
+        <div class="art">
+          <div class="radii">
+            <figure><i style="border-radius:8px"></i><figcaption>--r-xs<br>8</figcaption></figure>
+            <figure><i style="border-radius:14px"></i><figcaption>--r-sm<br>14</figcaption></figure>
+            <figure><i style="border-radius:22px"></i><figcaption>--r-md<br>22</figcaption></figure>
+            <figure><i style="border-radius:34px"></i><figcaption>--r-lg<br>34</figcaption></figure>
+            <figure><i style="border-radius:52px"></i><figcaption>--r-xl<br>52</figcaption></figure>
+          </div>
+        </div>
+        <h3>The radius scale</h3>
+        <p>Fields take --r-sm, panels --r-md, cards --r-lg, hero objects --r-xl. Controls take --r-pill.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOOM ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <span class="ns">--bloom</span>
+      <h2>Coloured light, not grey shadow</h2>
+      <p>Nothing in the frame casts a neutral shadow. The blue object throws blue back onto the floor &mdash; which is the reason the ground cools toward the bottom at all. Elevation here is a tinted bloom with a wide blur and a heavy negative spread, so it stays soft and never draws an outline.</p>
+    </div>
+
+    <div class="blooms">
+      <div class="bloomcell"><i style="box-shadow:var(--bloom-sm)"></i><code>--bloom-sm<br>0 6px 18px -6px / .35</code></div>
+      <div class="bloomcell"><i style="box-shadow:var(--bloom-md)"></i><code>--bloom-md<br>0 18px 44px -14px / .45</code></div>
+      <div class="bloomcell"><i style="box-shadow:var(--bloom-lg)"></i><code>--bloom-lg<br>0 34px 80px -22px / .55</code></div>
+    </div>
+
+    <p class="rule">Where two blue planes overlap, the upper one takes a 1.5px inset rim of white at 55% on its lit edges. That rim is the only hard line the system permits.</p>
+  </section>
+
+  <!-- ============ EASE ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <span class="ns">--ease</span>
+      <h2>Everything arrives, nothing departs</h2>
+      <p>The source is a nine-second loop in which a pill widens into a card under a cursor. Its motion is front-loaded and long-tailed: fast out of the gate, then a slow settle. Three curves cover the whole system.</p>
+    </div>
+
+    <div class="eases">
+      <div class="ease">
+        <svg viewBox="-8 -34 116 142" aria-hidden="true">
+          <path d="M 0 100 L 100 100 M 0 100 L 0 0" stroke="var(--line)" stroke-width="1.5" fill="none"></path>
+          <path d="M 0 100 C 22 0 36 0 100 0" stroke="var(--blue-core)" stroke-width="3.5" fill="none" stroke-linecap="round"></path>
+        </svg>
+        <b>swift</b>
+        <code>cubic-bezier(.22, 1, .36, 1)</code>
+        <div class="track"><i></i></div>
+      </div>
+      <div class="ease">
+        <svg viewBox="-8 -34 116 142" aria-hidden="true">
+          <path d="M 0 100 L 100 100 M 0 100 L 0 0" stroke="var(--line)" stroke-width="1.5" fill="none"></path>
+          <path d="M 0 100 C 65 100 35 0 100 0" stroke="var(--blue-core)" stroke-width="3.5" fill="none" stroke-linecap="round"></path>
+        </svg>
+        <b>morph</b>
+        <code>cubic-bezier(.65, 0, .35, 1)</code>
+        <div class="track"><i></i></div>
+      </div>
+      <div class="ease">
+        <svg viewBox="-8 -34 116 142" aria-hidden="true">
+          <path d="M 0 100 L 100 100 M 0 100 L 0 0" stroke="var(--line)" stroke-width="1.5" fill="none"></path>
+          <path d="M 0 100 C 34 -20 64 0 100 0" stroke="var(--blue-core)" stroke-width="3.5" fill="none" stroke-linecap="round"></path>
+        </svg>
+        <b>settle</b>
+        <code>cubic-bezier(.34, 1.2, .64, 1)</code>
+        <div class="track"><i></i></div>
+      </div>
+    </div>
+
+    <div class="durs">
+      <span>--t-tap 120ms &middot; press feedback</span>
+      <span>--t-move 220ms &middot; fades and colour</span>
+      <span>--t-morph 380ms &middot; shape change</span>
+      <span>--t-stage 640ms &middot; whole-scene</span>
+    </div>
+
+    <p class="rule">Morph for anything changing size or shape, swift for anything changing place, settle only where a control should feel physical. Overshoot on a card is nausea, not delight.</p>
+  </section>
+
+  <!-- ============ COMPONENTS ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <span class="ns">--components</span>
+      <h2>The frame, made operable</h2>
+      <p>The pill widening into a card is the source motion. Here it is a real control &mdash; press it, or focus it and hit Enter. Everything else on this stage inherits the same four faces of blue, the same superellipse corners, the same bloom.</p>
+    </div>
+
+    <div class="lab">
+      <div class="stage">
+        <button class="morph" id="morph" type="button" aria-expanded="false">
+          <span class="label">Auto Pilot</span>
+          <span class="rows">
+            <span>Replies<small>90s avg</small></span>
+            <span>Follows up<small>3x</small></span>
+            <span>Books calls<small>24/7</small></span>
+          </span>
+        </button>
+
+        <div class="controls">
+          <div class="btnrow">
+            <button class="btn btn-primary" type="button">Turn on</button>
+            <button class="btn btn-quiet" type="button">Review drafts</button>
+          </div>
+          <div class="inputs">
+            <div class="field">
+              <label for="hand">Hand off after</label>
+              <input id="hand" type="text" value="3 unanswered replies">
+            </div>
+            <div class="field">
+              <span class="fieldlabel" id="nslabel">Night shift</span>
+              <button class="switch" id="sw" type="button" role="switch" aria-checked="true" aria-labelledby="nslabel"><i></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="caption">morph &middot; width + height + radius on --t-morph / --ease-morph &nbsp;|&nbsp; switch knob on --t-morph / --ease-settle &nbsp;|&nbsp; buttons on --t-tap / --ease-swift</div>
+    </div>
+  </section>
+
+  <!-- ============ TOKENS ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <span class="ns">--tokens</span>
+      <h2>Take the whole set</h2>
+      <p>Drop this into a stylesheet root. The dark values are the ones this page itself switches to &mdash; cobalt lifts to #2E86FF so it keeps working against a near-black ground, and the veil ramp inverts rather than dimming.</p>
+    </div>
+
+    <div class="dump">
+      <div class="cp"><button id="copy" type="button">Copy</button></div>
+      <pre id="tok">:root{
+  /* ground */
+  --ground-hi:#EAEAEA; --ground-mid:#DCE3ED; --ground-lo:#CDDDEC;
+  --surface:#F3F4F6;   --surface-sunk:#E3E6EB;
+  --line:#D5D9E0;      --line-soft:#E1E4EA;
+
+  /* ink */
+  --ink:#10151C; --ink-2:#4B5563; --ink-3:#7B8695;
+
+  /* blue */
+  --blue-core:#0571F8; --blue-face:#2082FD; --blue-lift:#4D8FFC;
+  --blue-veil:#81A2F6; --blue-ink:#0A50B8;
+  --blue-wash:rgba(5,113,248,.08); --blue-rim:rgba(255,255,255,.55);
+
+  /* veil ramp - decorative only, never load-bearing */
+  --veil-1:.62; --veil-2:.34; --veil-3:.20; --veil-4:.11; --veil-5:.05;
+
+  /* bloom - coloured light, never grey */
+  --bloom-sm:0 6px 18px -6px rgba(5,113,248,.35);
+  --bloom-md:0 18px 44px -14px rgba(5,113,248,.45);
+  --bloom-lg:0 34px 80px -22px rgba(5,113,248,.55);
+
+  /* radius - superellipse n=4 approximations */
+  --r-xs:8px; --r-sm:14px; --r-md:22px;
+  --r-lg:34px; --r-xl:52px; --r-pill:999px;
+
+  /* ease */
+  --ease-swift:cubic-bezier(.22,1,.36,1);
+  --ease-morph:cubic-bezier(.65,0,.35,1);
+  --ease-settle:cubic-bezier(.34,1.2,.64,1);
+  --t-tap:120ms; --t-move:220ms; --t-morph:380ms; --t-stage:640ms;
+
+  /* type */
+  --display:"Instrument Sans",system-ui,sans-serif;
+  --body:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+
+:root[data-theme="dark"]{
+  --ground-hi:#0C1016; --ground-mid:#0F1620; --ground-lo:#111C2A;
+  --surface:#141A22;   --surface-sunk:#0F141B;
+  --line:#242D3A;      --line-soft:#1B222C;
+  --ink:#E9EDF3; --ink-2:#A4B0BF; --ink-3:#6D798A;
+  --blue-core:#2E86FF; --blue-face:#4D9BFF; --blue-lift:#7FB6FF;
+  --blue-veil:#2B5A9E; --blue-ink:#8CBEFF;
+  --blue-wash:rgba(46,134,255,.12); --blue-rim:rgba(255,255,255,.30);
+  --bloom-sm:0 6px 18px -6px rgba(46,134,255,.40);
+  --bloom-md:0 18px 44px -14px rgba(46,134,255,.50);
+  --bloom-lg:0 34px 80px -22px rgba(46,134,255,.60);
+}</pre>
+    </div>
+  </section>
+
+  <footer>
+    <span>Autopilot Blue &middot; extracted from a single frame</span>
+    <span>reference: Illia Holubka &middot; colours sampled, not guessed</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  /* superellipse path, n = 4 */
+  var w = 190, h = 118, n = 4, a = w / 2, b = h / 2, steps = 200, d = "";
+  for (var i = 0; i <= steps; i++){
+    var t = (i / steps) * Math.PI * 2;
+    var ct = Math.cos(t), st = Math.sin(t);
+    var sgn = function(v){ return v < 0 ? -1 : 1; };
+    var x = a + sgn(ct) * a * Math.pow(Math.abs(ct), 2 / n);
+    var y = b + sgn(st) * b * Math.pow(Math.abs(st), 2 / n);
+    d += (i ? " L " : "M ") + x.toFixed(2) + " " + y.toFixed(2);
+  }
+  var sq = document.getElementById("squircle");
+  if (sq) { sq.setAttribute("d", d + " Z"); }
+
+  var m = document.getElementById("morph");
+  m.addEventListener("click", function(){
+    m.setAttribute("aria-expanded", m.getAttribute("aria-expanded") === "true" ? "false" : "true");
+  });
+
+  var s = document.getElementById("sw");
+  s.addEventListener("click", function(){
+    s.setAttribute("aria-checked", s.getAttribute("aria-checked") === "true" ? "false" : "true");
+  });
+
+  var btn = document.getElementById("copy");
+  btn.addEventListener("click", function(){
+    var text = document.getElementById("tok").textContent;
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent = "Copied";
+      setTimeout(function(){ btn.textContent = "Copy"; }, 1600);
+    }, function(){
+      btn.textContent = "Select manually";
+      setTimeout(function(){ btn.textContent = "Copy"; }, 1600);
+    });
+  });
+})();
+</script>
+
+</body></html>
