@@ -227,27 +227,52 @@ export const A7: React.FC = () => {
   );
 };
 
+/** A meeting table seen from the front: officials seated behind it, residents in front; two empty seats fill as the doors open. */
 export const A8: React.FC = () => {
   const f = useCurrentFrame();
-  const fill = e01(f, 10, 16);
+  const fill = e01(f, 12, 14);
+  const P = '#9AA7B8';
+  const chair = '#3B4757';
+  // seated person, upper body only (the table hides the rest); `o` fades a newly seated person in
+  const Seated: React.FC<{x: number; y: number; s?: number; color?: string; o?: number}> = ({x, y, s = 1, color = P, o = 1}) => (
+    <g transform={`translate(${x} ${y}) scale(${s})`} opacity={o}>
+      <path d="M-44 0 C-44 -46 -26 -62 0 -62 C26 -62 44 -46 44 0 Z" fill={color} />
+      <circle cx={0} cy={-88} r={26} fill={color} />
+    </g>
+  );
+  const ChairBack: React.FC<{x: number; y: number; s?: number}> = ({x, y, s = 1}) => (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      <rect x={-40} y={-110} width={80} height={120} rx={20} fill={chair} />
+    </g>
+  );
   return (
     <AbsoluteFill>
-      <Piece x={960} y={600} at={0}>
-        <svg width={1000} height={420} viewBox="0 0 250 105">
-          <ellipse cx={125} cy={60} rx={110} ry={30} fill="#E9EDF2" />
-          <ellipse cx={125} cy={56} rx={110} ry={30} fill="#FBFCFD" />
-          {Array.from({length: 8}, (_, i) => {
-            const a = Math.PI + (i / 7) * Math.PI;
-            const x = 125 + Math.cos(a) * 128;
-            const y = 58 + Math.sin(a) * 36 + 30;
-            const filled = i === 3 || i === 4 ? fill : 1;
-            return (
-              <g key={i} transform={`translate(${x} ${y})`}>
-                <rect x={-7} y={-20} width={14} height={16} rx={4} fill="#9AA7B8" />
-                <circle cx={0} cy={-26} r={5} fill={i === 3 || i === 4 ? `rgba(5,113,248,${filled})` : '#9AA7B8'} />
-              </g>
-            );
-          })}
+      <Piece x={960} y={580} at={0}>
+        <svg width={1300} height={640} viewBox="0 0 1300 640" style={{overflow: 'visible', display: 'block'}}>
+          {/* far side: four seats behind the table, the middle two empty until they fill */}
+          {[340, 540, 760, 960].map((x, i) => (
+            <ChairBack key={x} x={x} y={222} s={0.9} />
+          ))}
+          <Seated x={340} y={236} s={0.9} />
+          <Seated x={540} y={236} s={0.9} color={C.core} o={fill} />
+          <Seated x={760} y={236} s={0.9} color={C.core} o={fill} />
+          <Seated x={960} y={236} s={0.9} />
+          {/* the table: top, then its front edge */}
+          <ellipse cx={650} cy={316} rx={520} ry={80} fill="#D3DBE6" />
+          <ellipse cx={650} cy={302} rx={520} ry={80} fill="#FBFCFD" />
+          <ellipse cx={650} cy={302} rx={470} ry={62} fill="none" stroke="rgba(16,21,28,.05)" strokeWidth={2} />
+          {/* papers on the table */}
+          {[470, 650, 830].map((x, i) => (
+            <rect key={x} x={x - 40} y={292 - (i % 2) * 6} width={80} height={30} rx={4} fill="#fff" stroke="#DCE3ED" strokeWidth={2} transform={`rotate(${-8 + i * 8} ${x} 300)`} />
+          ))}
+          {/* near side: three people with their backs to us, in chairs */}
+          {[420, 650, 880].map((x) => (
+            <g key={x}>
+              <circle cx={x} cy={372} r={30} fill="#7B8695" />
+              <path d={`M${x - 64} 494 C${x - 64} 432 ${x - 40} 410 ${x} 410 C${x + 40} 410 ${x + 64} 432 ${x + 64} 494 Z`} fill="#7B8695" />
+              <rect x={x - 48} y={452} width={96} height={96} rx={22} fill={chair} />
+            </g>
+          ))}
         </svg>
       </Piece>
     </AbsoluteFill>

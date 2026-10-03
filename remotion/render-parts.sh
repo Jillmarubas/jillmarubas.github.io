@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Render a long film on Lambda as one composition per chapter, in parallel, picture only.
 # Deploys the site once, starts every part, polls progress.json in S3, downloads each out.mp4.
-# Usage: SITE=<site> FRAMES_PER_LAMBDA=<n> ./render-parts.sh <CompositionPrefix> <parts> <outdir>
+# Usage: SITE=<site> FRAMES_PER_LAMBDA=<n> [PARTS_LIST="2 3"] ./render-parts.sh <CompositionPrefix> <parts> <outdir>
+#   PARTS_LIST re-renders only the listed parts (after a fix to those chapters).
 #   e.g. ./render-parts.sh AINews1003 8 out/news1003/parts   (renders AINews1003-part0 .. part7)
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -23,7 +24,8 @@ SERVE_URL=$(npx remotion lambda sites create src/index.ts --site-name="$SITE" --
 echo "site $SERVE_URL"
 
 declare -A BASES
-for ((i = 0; i < PARTS; i++)); do
+LIST=${PARTS_LIST:-$(seq 0 $((PARTS - 1)))}
+for i in $LIST; do
   read -r RID BUCKET < <(node start-lambda-render.mjs "$PREFIX-part$i" "$REGION" "$FUNCTION" "$SERVE_URL" "$FRAMES_PER_LAMBDA" |
     python3 -c 'import json,sys; d=json.loads(sys.stdin.read().strip().splitlines()[-1]); print(d["renderId"], d["bucketName"])')
   BASES[$i]="https://$BUCKET.s3.$REGION.amazonaws.com/renders/$RID"
@@ -31,11 +33,11 @@ for ((i = 0; i < PARTS; i++)); do
   sleep 2
 done
 
-left=$PARTS
+left=$(echo $LIST | wc -w)
 declare -A DONE
 while [ "$left" -gt 0 ]; do
   sleep 20
-  for ((i = 0; i < PARTS; i++)); do
+  for i in $LIST; do
     [ -n "${DONE[$i]:-}" ] && continue
     P=$(curl -sS "${BASES[$i]}/progress.json" || true)
     S=$(python3 -c '

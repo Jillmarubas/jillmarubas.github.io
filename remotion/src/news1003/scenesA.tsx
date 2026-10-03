@@ -196,8 +196,8 @@ export const P4: React.FC = () => <Preview n={4} />;
 export const N0: React.FC = () => {
   const w = useW();
   const f = useCurrentFrame();
-  const tB = w('prices', 0, 80) + 14;
-  const up = e01(f, tB - 10, 22);
+  const tB = w('memory', 0, 80) + 4;
+  const up = e01(f, tB - 6, 20);
   return (
     <AbsoluteFill>
       <Piece x={420} y={260} at={0} shadow={false}>
@@ -209,10 +209,28 @@ export const N0: React.FC = () => {
       <Piece x={1500} y={330 - up * 60} at={tB - 14} rot={8}>
         <PriceTag price="$ ↑" w={300} />
       </Piece>
-      <svg width={1920} height={1080} style={{position: 'absolute', inset: 0}}>
-        <path d={`M1300 820 C1400 ${760 - up * 200} 1470 ${620 - up * 160} 1560 ${520 - up * 140}`} fill="none" stroke={C.core} strokeWidth={6} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - up} />
-      </svg>
+      <RisingArrow up={up} />
     </AbsoluteFill>
+  );
+};
+
+/** A red zigzag arrow climbing toward the price tag (the user's reference: a classic rising-price arrow), drawn on with `up`. */
+const RisingArrow: React.FC<{up: number}> = ({up}) => {
+  const pts: [number, number][] = [[1040, 880], [1150, 790], [1205, 850], [1320, 735], [1375, 800], [1500, 680], [1555, 745], [1690, 615]];
+  const d = pts.map(([x, y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' ');
+  const [x2, y2] = pts[pts.length - 1];
+  const [x1, y1] = pts[pts.length - 2];
+  const a = Math.atan2(y2 - y1, x2 - x1);
+  const head = Math.max(0, (up - 0.85) / 0.15);
+  const L = 78;
+  const tip = [x2 + Math.cos(a) * L * 0.75, y2 + Math.sin(a) * L * 0.75];
+  const left = [x2 + Math.cos(a + 2.2) * L * 0.55, y2 + Math.sin(a + 2.2) * L * 0.55];
+  const right = [x2 + Math.cos(a - 2.2) * L * 0.55, y2 + Math.sin(a - 2.2) * L * 0.55];
+  return (
+    <svg width={1920} height={1080} style={{position: 'absolute', inset: 0, overflow: 'visible', filter: 'drop-shadow(0 12px 18px rgba(170,40,20,.22))'}}>
+      <path d={d} fill="none" stroke="#D9412F" strokeWidth={30} strokeLinejoin="miter" strokeMiterlimit={4} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - Math.min(1, up / 0.88)} />
+      <path d={`M${tip[0]} ${tip[1]} L${left[0]} ${left[1]} L${right[0]} ${right[1]} Z`} fill="#D9412F" opacity={head} transform={`translate(${x2} ${y2}) scale(${0.6 + 0.4 * head}) translate(${-x2} ${-y2})`} />
+    </svg>
   );
 };
 
@@ -388,9 +406,9 @@ export const N8: React.FC = () => {
       <Piece x={1340} y={470} at={tCx - 20} shadow={false}>
         <div style={{position: 'relative'}}>
           <Cutout src="cut/spark_rear.png" w={760} />
-          <div style={{position: 'absolute', left: '71%', top: '61%', width: 160, height: 60}}>
-            <Ring w={170} h={70} at={tCx} />
-          </div>
+          <svg viewBox="0 0 1280 720" style={{position: 'absolute', left: 0, top: 0, width: '100%', height: '100%', overflow: 'visible'}}>
+            <rect x={738} y={378} width={258} height={90} rx={45} fill="none" stroke={C.core} strokeWidth={10} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - e01(f, tCx, 11)} strokeLinecap="round" />
+          </svg>
         </div>
       </Piece>
       <Piece x={1340} y={830} at={tCx}>
