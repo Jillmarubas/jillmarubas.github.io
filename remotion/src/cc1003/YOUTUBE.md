@@ -48,8 +48,8 @@ claude --version
 /claim-credit
 /checkup prompt-audit
 /plugin enable cc-plugin-you-should-know@builtin
-/claude-api build-eval <your question>
-/claude-api hillclimb <what to improve>
+/claude-api build-eval how often does our support bot send a ticket to the right team?
+/claude-api hillclimb make each ticket cheaper to handle without getting more of them wrong
 
 📚 Sources (all from the "This week in Claude Code" email, Claude Code team, 3 Oct 2026)
 • Mods: https://claude.com/blog/claude-code-mods
@@ -72,6 +72,8 @@ Terminal screens are illustrations, not screen recordings.
 💬 What's the first mod you're going to build? Tell me in the comments.
 
 #ClaudeCode #AI #AINews
+
+(No angle brackets anywhere: YouTube rejects them in descriptions.)
 
 ## Tags (paste into the Tags box)
 Claude Code, Claude Code mods, Claude Code tutorial, Claude Code update, Opus 5.5, Sonnet 5.5, Claude Code free credit, claim-credit, cloud sessions, Wrap-Up Allowance, prompt-audit, You should know mod, Claude API evals, hillclimb, Claude directory, Anthropic, AI coding assistant, AI news
