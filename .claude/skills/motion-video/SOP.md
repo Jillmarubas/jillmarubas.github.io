@@ -222,6 +222,80 @@ Reference build: `remotion/src/dc/`, the "Why people hate data centres" explaine
 - **Sound:** `scripts/mix_cc1003.py` mirrors the scene windows, word lookups and keystroke times, and adds soft synthesized keystrokes and clicks under typing plus the one swoosh per scene change.
 - **Delivery:** 1080p60 for 7 min is ~200 MB (S3 `deliveries/`, uploaded with `@aws-sdk/client-s3` through `global-agent`); a 2-pass 720p60 at 480 kb/s fits the 30 MiB chat limit and stays clean for dark flat graphics.
 
+## Tech explainer + tutorial videos: the MacBook style (approved by the user, 3 Oct 2026)
+The user's words: "it looks professional and human made, I hope it will be consistent." **Use this
+look for every tutorial, explainer or tech-news video**, and any mix of the three (software, AI tools,
+how-tos, product updates), unless the user asks for something else.
+
+**When a video is tutorial + explainer + news** (like cc1003), this style wins where it clashes with
+the Vox-style news rules:
+- **60 fps**, not 24.
+- **Typed text is allowed.** Commands, step badges and callouts are the point of a tutorial, so
+  "show, don't type" applies only to the explainer scenes.
+
+The news rules still hold:
+- verify every claim against its source first (`VERIFY.md`) and fix or flag mismatches before the voiceover
+- real licensed photos of people named, or a named silhouette card when none exists
+- logos in their exact colours, for editorial reference
+- sources credited in the video and the description
+- the living-gradient background (already built in) Reference build: `remotion/src/cc1003/` ("Claude Code Just Got Mods", 7:10).
+Start a new video by copying that folder; don't rebuild the pieces.
+
+**Format and motion**
+- 1920×1080, **60 fps**. Every scene uses the After Effects toolkit in `cc1003/ae.tsx`:
+  - keyframes with AE easing (`kf`, `E.easy` / `E.out` / `E.back`)
+  - `Layer` with real motion blur
+  - `AText` per-character text, with `*word*` in the accent colour
+  - `Draw` trim paths, `Count` number counters, and `Camera`/`Depth` parallax
+  - timings in seconds, keyed to spoken words with `useS().w(word, n)`
+- Dark living gradient (`GRADIENT` in `cc1003/design.ts`) behind everything, plus a vignette.
+- **One accent colour** per video, taken from the subject's brand (Claude orange `#D97757` for Claude
+  videos). Text is warm white. Default text colour is set on the film root.
+- Transitions: blurred whip left/right inside a chapter, zoom between chapters (`Film.tsx` `Shot`).
+
+**The MacBook (tutorial parts)**
+- The space-black laptop from `src/tutorial/` on the `LaptopRig` camera (`cc1003/laptop.tsx`):
+  - swings in in 3D, then zooms to whatever the voice is describing
+  - frame zooms with `fxL`/`fyAt` so the left edge of the text never crops
+- Terminal and app screens are drawn in code (`cc1003/terminal.tsx`), never fake screen recordings.
+  Label illustrative numbers or settings as "illustration".
+- For a one-command shot, use `TermShot` (`cc1003/shots.tsx`).
+
+**What makes it informative (keep all of these)**
+- **Part stinger:** a big numbered title that collapses into a corner tag for the rest of the chapter (`PartTag`).
+- **Step badges, top right:** "STEP 1 · Check your version" (`StepBadge`).
+- **Command card, bottom centre:** every command typed in sync with the terminal, large enough to read (`CmdCard`).
+- **Callouts:** dot + drawn leader line + label pointing at the exact screen line (`Callout`, `screenToFrame`).
+- **Explainers between tutorial steps:** glass cards, icons drawn on, bar charts of sourced numbers only, counters, before/after.
+
+**Sound (the user's rules)**
+- Voice + effects only, **no music**:
+  - the one swoosh `public/sfx/whoosh7.mp3` per scene change
+  - the user's own recordings in `public/cc1003/sfx/`: `typing-laptop.wav` under typed commands (bursts that loop with a crossfade), `enter-key.wav` on each submit, `mouse-click.wav` on cursor clicks
+- **Never synthesize keystrokes or clicks.** The user rejected them as sounding "like static".
+- Mixer: `scripts/mix_cc1003.py`. Master to −14 LUFS, −1 dBTP.
+
+**Voice**
+- Use the voice the user names in the script. The cc1003 build used ElevenLabs "Joey - Upbeat Popular News Host" (`mUfWEBhcigm8YlCDbmGP`).
+- Always `generations_count: 1`.
+
+**QA before rendering**
+- Contact sheet of one still per script line (`scripts/stills.mjs`). Check for:
+  - invisible black text
+  - empty frames after a stinger
+  - overlapping callouts or tags
+  - counters showing before their moment
+- Render parts on Lambda (`render-parts.sh`, `FRAMES_PER_LAMBDA=40`), join them picture-only, mux the mix, and check the frame count.
+
+**Delivery**
+- Upload the 1080p60 file to S3 `deliveries/`.
+- Send a 2-pass 720p60 preview at 480 kb/s (under 30 MiB) in chat.
+- Write `YOUTUBE.md`. The description must contain **no angle brackets** (YouTube rejects `<` and `>`), so write example commands in full.
+
+**Thumbnails**
+- Follow "Thumbnails: the approved style" above.
+- ElevenLabs stays voiceover-only (the user's rule, confirmed 3 Oct 2026). The AI-generated person on the cc1003 thumbnails was a one-off the user asked for.
+
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
 shot list with **one scene per script line** (shot type, place, time of day, character pose and
