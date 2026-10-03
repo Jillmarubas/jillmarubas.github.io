@@ -224,8 +224,21 @@ Reference build: `remotion/src/dc/`, the "Why people hate data centres" explaine
 
 ## Tech explainer + tutorial videos: the MacBook style (approved by the user, 3 Oct 2026)
 The user's words: "it looks professional and human made, I hope it will be consistent." **Use this
-look for every explainer + tutorial video** (software, AI tools, how-tos) unless the user asks for
-something else. Reference build: `remotion/src/cc1003/` ("Claude Code Just Got Mods", 7:10).
+look for every tutorial, explainer or tech-news video**, and any mix of the three (software, AI tools,
+how-tos, product updates), unless the user asks for something else.
+
+**When a video is tutorial + explainer + news** (like cc1003), this style wins where it clashes with
+the Vox-style news rules:
+- **60 fps**, not 24.
+- **Typed text is allowed.** Commands, step badges and callouts are the point of a tutorial, so
+  "show, don't type" applies only to the explainer scenes.
+
+The news rules still hold:
+- verify every claim against its source first (`VERIFY.md`) and fix or flag mismatches before the voiceover
+- real licensed photos of people named, or a named silhouette card when none exists
+- logos in their exact colours, for editorial reference
+- sources credited in the video and the description
+- the living-gradient background (already built in) Reference build: `remotion/src/cc1003/` ("Claude Code Just Got Mods", 7:10).
 Start a new video by copying that folder; don't rebuild the pieces.
 
 **Format and motion**
