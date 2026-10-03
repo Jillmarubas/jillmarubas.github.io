@@ -1,8 +1,9 @@
 """Mix and master "Claude Code Just Got Mods" (AI News Daily, 3 Oct 2026): out/cc1003/mix.wav (+ soundtrack.m4a).
 
 Voice + effects only (no music, the user's rule): the single short swoosh (public/sfx/whoosh7.mp3,
-BigSoundBank CC0) once per scene change, plus the user's laptop-typing recording under every
-typed command (no synthesized clicks). Scene windows mirror Film.tsx; word
+BigSoundBank CC0) once per scene change, plus the user's own recordings (public/cc1003/sfx/):
+laptop typing under every typed command, an Enter key on each submit, and a mouse click
+where the cursor clicks. No synthesized effects. Scene windows mirror Film.tsx; word
 lookups mirror timing.ts useS().w(); keystroke times mirror keys.ts typeTimes().
 Master: -14 LUFS integrated, -1 dBTP (ffmpeg loudnorm, 2 pass), 48 kHz stereo.
 """
@@ -226,18 +227,25 @@ for i, r in enumerate(runs):
     place(fx, burst(d, rnd('o' + str(i)) * 4), r[0] - 0.02, typ_level, pan=0)
 print(len(runs), 'typing bursts')
 
-# Mouse clicks: the user's own click recording (public/cc1003/sfx/mouse-click.wav), trimmed to its sound.
-click = load(os.path.join(ROOT, 'public/cc1003/sfx/mouse-click.wav'))
-env = np.abs(click).max(1)
-on = int(np.argmax(env > 0.05 * env.max()))
-click = click[max(0, on - int(0.005 * SR)):][: int(0.6 * SR)]
-click_gain = v_rms * 10 ** (-15 / 20) / rms(click[np.abs(click).max(1) > 0.02 * np.abs(click).max()])
+
+
+def one_shot(name, max_s=0.6):
+    """A single recorded hit, trimmed to where the sound starts, with its body level."""
+    x = load(os.path.join(ROOT, 'public/cc1003/sfx', name))
+    env = np.abs(x).max(1)
+    on = int(np.argmax(env > 0.05 * env.max()))
+    x = x[max(0, on - int(0.005 * SR)):][: int(max_s * SR)]
+    return x, rms(x[np.abs(x).max(1) > 0.02 * np.abs(x).max()])
+
+
+# The user's own recordings (3 Oct 2026): mouse click at the cursor clicks, Enter key when a command is submitted.
+click, c_rms = one_shot('mouse-click.wav')
 for t0 in clicks:
-    place(fx, click, t0, click_gain)
-print(len(clicks), 'mouse clicks')
-for r in runs[:3]:
-    a, b = int((r[0]) * SR), int((r[-1] + 0.1) * SR)
-    print('  burst %.1f-%.1fs: typing %.1f dB vs voice body' % (r[0], r[-1], 20 * np.log10(rms(fx[a:b]) / v_rms + 1e-9)))
+    place(fx, click, t0, v_rms * 10 ** (-15 / 20) / c_rms)
+enter_key, e_rms = one_shot('enter-key.wav')
+for t0 in enters:
+    place(fx, enter_key, t0, v_rms * 10 ** (-13 / 20) / e_rms)
+print(len(clicks), 'mouse clicks,', len(enters), 'enter keys')
 
 mix = voice + fx
 pre = os.path.join(TMP, 'pre.wav')
