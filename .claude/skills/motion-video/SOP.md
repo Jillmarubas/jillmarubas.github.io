@@ -120,7 +120,7 @@ the original's content.
 | Bloom | `0 18px 44px -14px` / `0 34px 80px -22px`, blue at .45 / .55 | Elevation and contact light. Never a grey shadow. |
 | Radius | 8 / 14 / 22 / 34 / 52 / pill | Hero object takes 52 (or a true superellipse, n = 4). |
 | Ease | swift `(.22,1,.36,1)` · morph `(.65,0,.35,1)` · settle `(.34,1.2,.64,1)` | Morph for size/shape, swift for position, settle only for physical controls. |
-| Durations @ 30 fps | tap 4 f · move 7 f · morph 11 f · stage 19 f | Morph (11 f) sits inside the 11–18 frame house move length. |
+| Durations @ 30 fps | tap 4 f · move 7 f · morph 11 f · stage 19 f | Morph (11 f) sits inside the 11–18 frame house move length. At 24 fps (Vox-style): tap 3 · move 5 · morph 9 · stage 15. |
 
 **Rules (check at QA, step 4):**
 - [ ] One saturated object per scene. A second blue thing reads as noise, not emphasis.
@@ -203,6 +203,15 @@ Reference build: `remotion/src/dc/`, the "Why people hate data centres" explaine
 - **Join Lambda parts video-only:** strip each part's silent audio before concatenating, or every join adds a gap (it drifted 0.7 s over 10 parts). Then mux the mix with `apad` + `-shortest` and check that the last frame lands at frames/24.
 - **Wikimedia rate limits:** fetch originals by md5 path from upload.wikimedia.org, fall back to standard thumbnail widths (500/1280 px), and read the licence from the file page (`licensetpl_short`, with `&#95;` unescaped).
 - **Free music and effects:** FreePD is closed. Use Incompetech (CC BY 4.0, credit in the description), Kenney.nl (CC0) and BigSoundBank (CC0). `scripts/mix_news1001.py` places the cues from the scene list.
+
+### Lessons from AI News, 3 Oct 2026 (`remotion/src/news1003/`, Autopilot Blue)
+- **One swoosh only (the user's rule, 3 Oct 2026).** Use the single short swoosh `public/sfx/whoosh7.mp3` (0.94 s, CC0), once per scene exit and a little louder into story cards. Never the 10.9 s `whoosh1.mp3`, and never music unless asked. Mixer: `scripts/mix_news1003.py`.
+- **Key pieces to the spoken word, not just the line.** `scripts/news1003_timing.py` stores every script word's time (recognised words from faster-whisper, missing ones interpolated); scenes call `useW()('subpoenaed')` to land an object on its word.
+- **Render chapters in parallel:** `SITE=<site> FRAMES_PER_LAMBDA=24 ./render-parts.sh <Prefix> <parts> <outdir>` deploys once, starts every `<Prefix>-partN`, polls S3, downloads all. The account's concurrency is now 1,000; a 9-minute film rendered in about 4 minutes.
+- **Autopilot Blue at 24 fps:** tap 3 f, move 5 f, morph 9 f, stage 15 f; arrivals 13 f on `swift`. One cobalt object per view; logos keep their own colours; shadows are blue bloom.
+- **Logos that don't extrude:** a mark whose compound path breaks in `SVGLoader` (Tavus) is shown flat in its exact colours (`FLAT` set in `Logo3D.tsx`). Wordmarks get `shadowOpacity` ≈ 0.08 so their contact shadow doesn't read as a doubled word.
+- **No licensed photo:** if neither Commons nor an official press page has one (Steve Corfield), use the named silhouette card (`Silhouette` in `kit.tsx`) and say so in the delivery.
+- **Delivery of big files:** the final MP4 (~330 MB for 9 min) is over the chat limit. Upload it to the Remotion bucket under `deliveries/`; a presigned link made here is signed by the session proxy and won't work outside, so give the S3 path (console download) too.
 
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a

@@ -161,7 +161,7 @@ const TILES: {logo: string; fit: number; node: React.ReactNode}[] = [
   {logo: 'amazon', fit: 0.85, node: <USMap w={250} at={0} label={false} />},
   {logo: 'anthropic', fit: 0.85, node: <IDBadge w={100} title="Resident" />},
   {logo: 'tavus', fit: 0.85, node: <Tile w={230} seed={1} />},
-  {logo: 'openai', fit: 0.75, node: <div style={{transform: 'scale(.4)'}}><Tangle w={560} k={0} /></div>},
+  {logo: 'openai', fit: 0.75, node: <div style={{width: 260, height: 200, overflow: 'hidden', display: 'grid', placeItems: 'center'}}><Tangle w={220} k={0} /></div>},
 ];
 const Preview: React.FC<{n: number}> = ({n}) => {
   const f = useCurrentFrame();
@@ -170,7 +170,7 @@ const Preview: React.FC<{n: number}> = ({n}) => {
       {TILES.map((t, i) => {
         if (i > n) return null;
         const cur = i === n;
-        const x = 225 + i * 367;
+        const x = 260 + i * 350;
         return (
           <Piece key={i} x={x} y={540} at={cur ? 0 : -30} exit={n === 4}>
             <Panel w={330} h={460} r={R.lg} pad={0} blue={false} style={{opacity: cur ? 1 : 0.62, boxShadow: cur ? `inset 0 0 0 3px ${C.core}` : undefined}}>
@@ -388,7 +388,7 @@ export const N8: React.FC = () => {
       <Piece x={1340} y={470} at={tCx - 20} shadow={false}>
         <div style={{position: 'relative'}}>
           <Cutout src="cut/spark_rear.png" w={760} />
-          <div style={{position: 'absolute', left: '77%', top: '64%', width: 160, height: 60}}>
+          <div style={{position: 'absolute', left: '71%', top: '61%', width: 160, height: 60}}>
             <Ring w={170} h={70} at={tCx} />
           </div>
         </div>

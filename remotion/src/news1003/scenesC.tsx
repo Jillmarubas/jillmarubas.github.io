@@ -183,8 +183,8 @@ export const O0: React.FC = () => {
       <Piece x={960} y={250} at={0} shadow={false}>
         <Logo3D name="openai" w={400} h={260} at={0} fit={0.8} />
       </Piece>
-      <Piece x={960} y={680} at={6} shadow={false}>
-        <Tangle w={1000} k={e01(f, tU, 40)} />
+      <Piece x={960} y={720} at={6} shadow={false}>
+        <Tangle w={720} k={e01(f, tU, 40)} />
       </Piece>
     </AbsoluteFill>
   );

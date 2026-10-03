@@ -461,10 +461,11 @@ const COHORT: [string, number, string][] = [
 ];
 export const C6: React.FC = () => {
   const w = useW();
+  const sc = useScene();
   return (
     <AbsoluteFill>
       {COHORT.map(([logo, fit, word], i) => {
-        const t = w(word, 0, 10 + i * 16);
+        const t = Math.min(w(word, 0, 10 + i * 16), sc.dur - 40 + i * 2);
         const x = 380 + (i % 3) * 580;
         const y = 350 + Math.floor(i / 3) * 380;
         return (

@@ -96,19 +96,19 @@
   "page": "https://commons.wikimedia.org/wiki/File:Seal_of_the_United_States_Census_Bureau.svg"
  },
  "huggingface": {
-  "file": "Hf-logo.svg",
-  "license": "PAGE-FAIL",
-  "author": "?",
-  "ok": false,
+  "file": "huggingface_logo.svg",
+  "license": "Official brand asset (huggingface.co/brand)",
+  "author": "Hugging Face",
+  "ok": true,
   "local": "huggingface.svg",
-  "page": "https://commons.wikimedia.org/wiki/File:Hf-logo.svg"
+  "page": "https://huggingface.co/front/assets/huggingface_logo.svg"
  },
- "novo": {
-  "file": "Novo-nordisk-logo.svg",
-  "license": "PAGE-FAIL",
-  "author": "?",
-  "ok": false,
-  "local": "novo.svg",
-  "page": "https://commons.wikimedia.org/wiki/File:Novo-nordisk-logo.svg"
+ "tavus": {
+  "file": "logo.svg",
+  "license": "Official site logo (editorial use)",
+  "author": "Tavus",
+  "ok": true,
+  "local": "tavus.svg",
+  "page": "https://www.tavus.io/"
  }
 }

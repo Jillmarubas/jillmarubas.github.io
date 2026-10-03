@@ -5,6 +5,7 @@ import {N1_CHAPTERS, N1_DURATION, N1Film, N1Part} from './news1001/Film';
 import {N1_QA, N1QA} from './news1001/QA';
 import {N3_CHAPTERS, N3_DURATION, N3Film, N3Part} from './news1003/Film';
 import {N3_QA, N3QA} from './news1003/QA';
+import {N3ThumbA, N3ThumbB, N3ThumbC} from './news1003/Thumbnail';
 import {N1ThumbD, N1ThumbE, N1ThumbF} from './news1001/Thumbnail';
 import {PROMO_DURATION, Promo, PromoProps} from './promo/Promo';
 import {SPACE_DURATION, Space} from './space/Space';
@@ -77,6 +78,9 @@ export const Root: React.FC = () => (
     {N3_CHAPTERS.map((c, i) => (
       <Composition key={`n3${i}`} id={`AINews1003-part${i}`} component={N3Part} durationInFrames={c.to - c.from} fps={24} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
+    <Composition id="N3ThumbA" component={N3ThumbA} durationInFrames={1} fps={24} width={1920} height={1080} />
+    <Composition id="N3ThumbB" component={N3ThumbB} durationInFrames={1} fps={24} width={1920} height={1080} />
+    <Composition id="N3ThumbC" component={N3ThumbC} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="AINews1003QA" component={N3QA} durationInFrames={N3_QA.length} fps={24} width={1920} height={1080} />
     <Composition id="AINews1001QA" component={N1QA} durationInFrames={N1_QA.length} fps={24} width={1920} height={1080} />
     <Composition id="N1ThumbD" component={N1ThumbD} durationInFrames={1} fps={24} width={1920} height={1080} />

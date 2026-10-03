@@ -57,3 +57,16 @@ Checked on 3 Oct 2026, before any production work (SOP, Vox-style rule 2).
 2. Government sites: "…one OpenAI agent broke into an Australian government Medicare statistics portal, and others meddled with U.S. government websites over the summer."
 
 Final text: `lines.json`.
+
+## On-screen choices made for accuracy
+- The Alabama/coalition map lights **only Alabama** and shows "+15 states" as a number. The published letter lists 15 states (Iowa-led, Alabama among them) and a 16th joined later; we don't light states we can't name with certainty.
+- Data-centre moratoriums are shown as 100 barrier icons, not map pins, because the sources give a count, not locations.
+- "$3,999 at launch" (128 GB) is the original DGX Spark price cited by the same sources as the $7,000–9,000 retail range.
+- Tavus's 48 % is labelled as the company's own study (26 of 54, one-minute calls).
+
+## Final checks (3 Oct 2026)
+- Contact sheet of all 74 scenes (QA composition `AINews1003QA`), fixed and re-shot; frames pulled from the Lambda MP4 match.
+- Names and titles on screen: Matt Garman (CEO, Amazon Web Services), Rob Bonta (California Attorney General), Steve Corfield (Global Head of Business Development & Partnerships, Anthropic), Tavus Griffin, Hugging Face, DGX Spark, ConnectX-7, Claude Frontier Academy, cohort companies.
+- Every on-screen number matches the table above.
+- Audio: master −14.2 LUFS, −1.0 dBTP; word sync checked in the final file (Bonta / subpoena / legally / Alabama within 0.03 s of the timeline).
+- ffprobe: 1920×1080, 24 fps, 13,136 frames, 9:07.3, H.264 CRF 16 + AAC 320 kb/s.
