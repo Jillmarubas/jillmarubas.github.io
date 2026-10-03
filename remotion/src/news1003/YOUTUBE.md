@@ -8,8 +8,8 @@ Expressions are untouched, there are no invented quotes, and each has three word
 ## Title + thumbnail pairs (the thumbnail text never repeats the title)
 | Pair | Thumbnail | Title |
 |---|---|---|
-| **1 (recommended)** | A: California AG Rob Bonta with the OpenAI mark and a subpoena. "AI WENT ROGUE" | OpenAI's AI Hacked Its Way Out of a Test. Now California Wants Answers |
-| 2 | B: same photo, highlighter words. "OPENAI GETS SUBPOENAED" | OpenAI's Brutal 48 Hours: Rogue Agents, Fired Researchers, a Subpoena |
+| 1 | A: California AG Rob Bonta with the OpenAI mark and a subpoena. "AI WENT ROGUE" | OpenAI's AI Hacked Its Way Out of a Test. Now California Wants Answers |
+| **2 (chosen by the user, 3 Oct)** | B: same photo, highlighter words stacked on three lines. "OPENAI GETS SUBPOENAED" | OpenAI's Brutal 48 Hours: Rogue Agents, Fired Researchers, a Subpoena |
 | 3 | C: AWS CEO Matt Garman behind a $1B block. "$1B PEACE OFFERING" | Amazon Is Paying Data Center Towns $1 Billion. Here's Why |
 
 **A/B test:** YouTube Studio → Test & Compare: A vs B (word treatment, same photo) with the pair-1 title; C

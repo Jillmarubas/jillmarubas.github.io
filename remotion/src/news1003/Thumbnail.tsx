@@ -52,24 +52,42 @@ export const N3ThumbA: React.FC = () => (
 );
 
 /** B — same photo, different words: OPENAI SUBPOENAED (highlighter). */
-export const N3ThumbB: React.FC = () => (
-  <AbsoluteFill style={{background: INK, overflow: 'hidden'}}>
-    <Field />
-    <div style={{position: 'absolute', left: 1020, top: 60, transform: 'rotate(-8deg)'}}>
-      <Logo3D name="openai" w={460} h={420} at={-40} fit={0.85} />
-    </div>
-    <div style={{position: 'absolute', left: 1500, top: 470, transform: 'rotate(9deg)', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,.5))'}}>
-      <Doc w={360} title="Subpoena" lines={8} seed="t" />
-    </div>
-    <Person n="bonta" h={980} x={1060} y={250} />
-    <Scrim />
-    <div style={{position: 'absolute', left: 60, top: 230, transform: 'scale(0.66)', transformOrigin: 'left top'}}>
-      <Words words={['OPENAI', 'GETS', 'SUBPOENAED']} style="highlighter" ink={INK} />
-    </div>
-    <Grain />
-    <Vignette />
-  </AbsoluteFill>
-);
+export const N3ThumbB: React.FC = () => {
+  // three stacked lines, sized to fill the left side top to bottom without touching Bonta
+  const base: React.CSSProperties = {fontFamily: 'Geist, sans-serif', fontWeight: 900, letterSpacing: '-0.045em', lineHeight: 0.92};
+  return (
+    <AbsoluteFill style={{background: INK, overflow: 'hidden'}}>
+      <Field />
+      <div style={{position: 'absolute', left: 1250, top: 20, transform: 'rotate(-8deg)'}}>
+        <Logo3D name="openai" w={420} h={380} at={-40} fit={0.85} />
+      </div>
+      <div style={{position: 'absolute', left: 1620, top: 480, transform: 'rotate(9deg)', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,.5))'}}>
+        <Doc w={330} title="Subpoena" lines={8} seed="t" />
+      </div>
+      <Person n="bonta" h={980} x={1225} y={250} />
+      <Scrim />
+      <div style={{...base, position: 'absolute', left: 64, top: 150, transform: 'rotate(-2deg)', transformOrigin: 'left center'}}>
+        <div style={{fontSize: 252, color: INK}}>
+          <Bar color={THUMB_YELLOW} rot={-1} pad="0.02em 0.3em 0.08em" ink={INK}>
+            OPENAI
+          </Bar>
+        </div>
+        <div style={{fontSize: 252, color: INK, marginTop: 40}}>
+          <Bar color={THUMB_YELLOW} rot={1} pad="0.02em 0.3em 0.08em" ink={INK}>
+            GETS
+          </Bar>
+        </div>
+        <div style={{fontSize: 154, color: '#F4F6FB', marginTop: 56}}>
+          <Bar color={THUMB_RED} rot={-1.5} pad="0.04em 0.26em 0.1em" ink={INK}>
+            SUBPOENAED
+          </Bar>
+        </div>
+      </div>
+      <Grain />
+      <Vignette />
+    </AbsoluteFill>
+  );
+};
 
 /** C — a different story: AWS's CEO and the $1B brick. "$1B PEACE OFFERING". */
 export const N3ThumbC: React.FC = () => (
