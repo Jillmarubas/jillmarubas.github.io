@@ -119,25 +119,27 @@ export const TipAndrew: React.FC = () => {
       </Layer>
       {/* overnight → 133 PRs */}
       {t > tMorning - 0.6 && (
-        <>
-          <div style={{position: 'absolute', left: 1580, top: 230, opacity: p01(t, tMorning - 0.6, 0.3)}}>
+        <div style={{position: 'absolute', left: 1580, top: 230, opacity: p01(t, tMorning - 0.6, 0.3)}}>
             <div style={{transform: `rotate(${night * 180}deg)`, transformOrigin: '60px 60px', width: 120, height: 120}}>
               <div style={{position: 'absolute', opacity: 1 - night}}><Icon name="moon" size={120} color={C.ink2} width={1.6} /></div>
               <div style={{position: 'absolute', opacity: night, transform: 'rotate(180deg)'}}><Icon name="sun" size={120} color={C.orangeHi} width={1.6} /></div>
             </div>
-          </div>
+        </div>
+      )}
+      {t > tMorning && (
+        <div style={{position: 'absolute', inset: 0, opacity: p01(t, tMorning, 0.35)}}>
           <div style={{position: 'absolute', left: 740, top: 250, fontFamily: F.mono, fontSize: 24, letterSpacing: '0.24em', color: C.ink3, opacity: p01(t, tMorning, 0.3)}}>THE NEXT MORNING</div>
           <div style={{position: 'absolute', left: 740, top: 300, display: 'grid', gridTemplateColumns: 'repeat(19, 36px)', gap: 8}}>
             {Array.from({length: N}, (_, i) => {
-              const on = p01(t, tPR - 1.0 + i * 0.012, 0.18);
+              const on = p01(t, Math.max(tMorning + 0.1, tPR - 1.0) + i * 0.012, 0.18);
               return <div key={i} style={{width: 36, height: 36, borderRadius: 8, background: i % 9 === 0 ? C.orange : 'rgba(107,203,139,.75)', opacity: on, transform: `scale(${on})`}} />;
             })}
           </div>
           <div style={{position: 'absolute', left: 740, top: 650, fontFamily: F.display, fontWeight: 900, fontSize: 150, letterSpacing: '-0.04em', lineHeight: 1}}>
-            <Count t={t} at={tPR - 1.0} dur={1.8} to={N} />
+            <Count t={t} at={Math.max(tMorning + 0.1, tPR - 1.0)} dur={1.8} to={N} />
             <span style={{fontSize: 56, fontWeight: 800, color: C.ink2}}> pull requests</span>
           </div>
-        </>
+        </div>
       )}
     </AbsoluteFill>
   );

@@ -213,6 +213,15 @@ Reference build: `remotion/src/dc/`, the "Why people hate data centres" explaine
 - **No licensed photo:** if neither Commons nor an official press page has one (Steve Corfield), use the named silhouette card (`Silhouette` in `kit.tsx`) and say so in the delivery.
 - **Delivery of big files:** the final MP4 (~330 MB for 9 min) is over the chat limit. Upload it to the Remotion bucket under `deliveries/`; a presigned link made here is signed by the session proxy and won't work outside, so give the S3 path (console download) too.
 
+### Lessons from AI News 3 Oct, part 2 (`remotion/src/cc1003/`, explainer + tutorial, 60 fps)
+- **The user asked for an After Effects feel at 60 fps.** `cc1003/ae.tsx` is the toolkit: keyframes with per-segment easing (`kf`, AE Easy Ease / expo out / overshoot), `Layer` with real directional motion blur (180° shutter, SVG blur along the velocity), `AText` per-character animators with a range offset (`*word*` = orange), trim paths (`Draw`), counters, a 2.5D camera with parallax and DOF. All times are in **seconds**, so the same scene code works at any fps.
+- **Tutorial shots:** the dark MacBook from `src/tutorial/` on a camera rig (`cc1003/laptop.tsx`), a Claude Code terminal drawn in code (`terminal.tsx`), and `TermShot` (`shots.tsx`) for one-command shots: swing in, zoom to the prompt, a big readable command card typed in sync, callouts that track screen points (`screenToFrame`). Frame the zoom with `fxL`/`fyAt` so the terminal's left edge never crops.
+- **Word cues:** `useS().w(word, n)` searches the scene's own lines first. A word said earlier in the chapter (e.g. "work" in "mods work in…") will match the wrong place; pass `n` or check the token list printed from `timing.json`.
+- **Set a default text colour on the film root** (`color: C.ink`). Plain divs otherwise render black text on the dark background.
+- **Voice "Joey":** ElevenLabs has many Joeys; the user's choice was `Joey - Upbeat Popular News Host` (`mUfWEBhcigm8YlCDbmGP`), 1 credit per character on `eleven_multilingual_v2`. Always pass `generations_count: 1` (the default is 4).
+- **Sound:** `scripts/mix_cc1003.py` mirrors the scene windows, word lookups and keystroke times, and adds soft synthesized keystrokes and clicks under typing plus the one swoosh per scene change.
+- **Delivery:** 1080p60 for 7 min is ~200 MB (S3 `deliveries/`, uploaded with `@aws-sdk/client-s3` through `global-agent`); a 2-pass 720p60 at 480 kb/s fits the 30 MiB chat limit and stays clean for dark flat graphics.
+
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
 shot list with **one scene per script line** (shot type, place, time of day, character pose and

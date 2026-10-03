@@ -31,3 +31,10 @@ your own mods, a wrap-up allowance, and more". Checked line by line against the 
 People: Lydia (first name only, as signed), Doug Safreno and Andrew Edstrom. No licensed photos
 found for any of them, so each gets a named silhouette card (SOP rule 3).
 Logo: Claude symbol, Wikimedia Commons `Claude_AI_symbol.svg`, CC0, colour hsl(14.8 63.1% 59.6%) = #D97757.
+
+## Assets
+- Voice: ElevenLabs "Joey - Upbeat Popular News Host" (`mUfWEBhcigm8YlCDbmGP`), `eleven_multilingual_v2`, one take per chapter (`public/cc1003/vo/s0–s13.mp3`), 6,226 credits.
+- Swoosh: `public/sfx/whoosh7.mp3` (BigSoundBank, CC0). Keystrokes and mouse clicks synthesized in `scripts/mix_cc1003.py`.
+- Claude symbol: Wikimedia Commons `Claude_AI_symbol.svg` (CC0), editorial use, exact colour.
+- Laptop, terminal, desktop, icons: drawn in code. Terminal output, the example CLAUDE.md lines, the settings window and the eval score are illustrations and are labelled as such where they could be read as real data.
+- Delivered: S3 `remotionlambda-useast1-c5w9ygbemk/deliveries/claude-code-mods-2026-10-03.mp4` (1080p60, 7:10.7, -14 LUFS) and `…-soundtrack.m4a`.
