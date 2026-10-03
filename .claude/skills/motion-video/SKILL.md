@@ -11,6 +11,8 @@ three videos produced in this repo.
 
 **Always follow `SOP.md` step by step.** The sections below are the rules the SOP relies on.
 
+**Explainer + tutorial videos (software, AI tools, how-tos) use the approved MacBook style:** 16:9, 60 fps, dark MacBook, After Effects-style motion and the user's own sound effects. See the SOP section "Tech explainer + tutorial videos: the MacBook style" and copy `remotion/src/cc1003/`.
+
 ## Non-negotiables
 1. **Render on AWS Lambda,** always (the user's standing instruction). Use `remotion/render-lambda.sh`. Local rendering is only for single preview stills.
 2. **Original content only.** Learn techniques from references, but never reuse their footage, photos, logos, characters, scripts or trademarks. Use the client's own assets, public-domain data (NASA), CC0 assets (Poly Haven), or assets drawn in code. **Exception for news and Vox-style videos:** use licensed real photos of the people named, and 3D logos for editorial reference, following the SOP's Vox-style rules.
