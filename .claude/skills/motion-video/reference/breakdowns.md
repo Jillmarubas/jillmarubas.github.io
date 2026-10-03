@@ -96,3 +96,31 @@ spike in mean difference is a hard cut. A run of frames above the median differe
 - **Light-sweep product reveal:** the product starts in darkness, then a light sweeps across it over about 1 s, with the large word behind it.
 - **Black iris wipe:** a circle grows from a point until it fills the frame (about 8 frames).
 - **Ending:** a 3D booklet mockup with the call to action, then a defocus fade.
+
+---
+
+## Asset choreography: how objects move (measured across all 7 references)
+
+Method: `scratchpad/motion_study.py`. Each move is a run of frames with a visible change; its direction is the shift of the changed region's centroid.
+
+| Reference | Moves | Median length | Travel once visible | Peak speed | Entrances |
+|---|---|---|---|---|---|
+| Brand story (first Pinterest) | 12 | 133 ms | 8 % of frame | 37 % in | left 3, right 1, bottom 1, diagonal 2, pop 5 |
+| Cinematic | 14 | 380 ms | 8 % | 22 % in | right 1, top 4, bottom 2, diagonal 1, pop 6 |
+| Cream quote | 10 | 442 ms | 7 % | 49 % in | left 1, right 1, top 1, diagonal 3, pop 4 |
+| Listicle | 22 | 433 ms | 4 % | 48 % in | left 1, bottom 5, diagonal 1, pop 15 |
+| Archival | 18 | 354 ms | 13 % | 65 % in | left 3, right 3, top 2, bottom 5, diagonal 5 |
+| Editorial | 20 | 467 ms | 8 % | 65 % in | left 1, right 2, top 2, bottom 2, diagonal 5, pop 8 |
+
+**Totals:** 58 directional entrances (diagonal 17, bottom 15, left 9, top 9, right 8) and 38 pops or scales in place. There are **almost no camera zooms**.
+
+**Rules taken from this:**
+1. **The camera is locked flat on the paper; the objects move.** Scenes change with a whip pan across the paper, never a push-in.
+2. **Every object arrives from somewhere.** Rotate the entrances through left, right, top, bottom, diagonal, from the camera, and pop in place, so two objects in a row never share a direction.
+3. **Entrance:**
+   - fast in with motion blur, rotating as it travels;
+   - a small overshoot (about 3 %), then settle;
+   - 11–18 frames at 30 fps.
+4. **Nothing is ever fully still.** After landing, objects keep drifting a few millimetres and turning slowly; the can in the brand story moves in every one of its 11 dense frames.
+5. **Objects float in front of the paper.** Soft shadows fall down and to the right onto the paper; a larger offset means the object floats further off it.
+6. **Objects interact:** a pour fills a glass, a stamp presses and leaves ink, a coin flips in and spins down, one object knocks another out of frame.

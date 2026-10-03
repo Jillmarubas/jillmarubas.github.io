@@ -15,7 +15,7 @@ Follow the steps in order. Each step ends with a check; don't move on until it p
 Write these down before touching code:
 - **Topic and one-line message.** The hook question is asked in the first 2 s and answered by the end.
 - **Beats:** 4–6 scenes of 1.5–3.5 s each, plus a call-to-action scene. Total 14–24 s.
-- **Look:** pick one from `reference/breakdowns.md` (white studio, dark cinematic, cream paper with window light, black listicle, archival grey, editorial poster), **or** a house design system from `design-system/` (see "Design systems" below — e.g. **Autopilot Blue**). Choose **one accent colour** (a design system fixes it for you).
+- **Look:** use the look of the user's references (white paper for this user), **or** a house design system from `design-system/` when the user names one (see "Design systems" below — e.g. **Autopilot Blue**). Only pick another from `reference/breakdowns.md` (white studio, dark cinematic, cream paper with window light, black listicle, archival grey, editorial poster). Choose **one accent colour** (a design system fixes it for you).
 - **Frame rate:** 30 (default), 24/25 for cinematic, 60 for fast glossy tech.
 - **Assets:** what's real data, what comes from CC0, what gets modelled in code. There must be **no** third-party logos, characters or footage.
 - **Facts:** list every number, each with its source.
@@ -45,7 +45,7 @@ Write these down before touching code:
    - Use one key light per scene, contact shadows, an environment map for anything metallic, and ACES tone mapping.
 4. **Motion:** reuse `promo/motion.tsx`. Moves are 11–18 frames at 30 fps; hold 40–60 % of each scene still for reading.
 5. **Lens pass:** vignette, grain, velocity blur on fast moves, a subtle chromatic aberration if the look calls for it.
-6. **Sound:** start from the `make_*_sfx.py` generators (whooshes on cuts, impacts on landings, ticks on counters, pad bed). Put the WAV in `public/`.
+6. **Sound:** use real CC0 recordings (BigSoundBank), levelled by the loudness of their *body* rather than their peak (`scripts/prepare-cola-assets.py`), over a low-passed music bed. Before rendering on Lambda, render a sound-only composition locally and check that every cue peaks at least 12 dB above the music. Synthesized effects are a fallback; start from the `make_*_sfx.py` generators (whooshes on cuts, impacts on landings, ticks on counters, pad bed). Put the WAV in `public/`.
 7. **Fonts:** bundle them in `public/fonts` and load them through `promo/fonts.ts`. Never fetch Google Fonts at render time.
 
 **Check:** `npx tsc --noEmit` passes.
@@ -75,6 +75,16 @@ cd remotion && FRAMES_PER_LAMBDA=<n> ./render-lambda.sh <CompositionId> out/<nam
 - The script deploys the site, starts **one** render, polls `progress.json` **in S3** (polling through Lambda would use up concurrency slots), then downloads `out.mp4`.
 - Output is **private**.
 - If it's throttled: **don't retry in a loop.** Every retry leaves orphaned renderers running, which eat concurrency. Wait until CloudWatch `ConcurrentExecutions` is 0, then run once.
+- **Limits:**
+  - Remotion refuses more than **200 functions** per render, so `FRAMES_PER_LAMBDA ≥ frames / 200`.
+  - Motion-blurred 3D frames can exceed the default 30 s per-frame limit; `start-lambda-render.mjs` allows 4 minutes.
+  - Use 15 frames per Lambda for a 60 s 3D video (120 functions).
+- **Every asset download retries with backoff** (`withRetry` in `cola/assets.tsx`). Hundreds of renderers fetching the same files from S3 at once will occasionally see a failed request. A bare `Error: Event` from the renderer means a download failed.
+
+**Sound check before rendering:**
+- Mix every cue into **one** mastered file (`scripts/mix_cola_audio.py`, timings from `timeline.json`) and use a single `<Audio>`.
+- Confirm the mixer report shows every cue at least 6 dB over the music and the master at about −16 to −18 dBFS RMS with peaks at −1 dBFS.
+- After rendering, measure the MP4's own audio track, and send the user the standalone `out/cola-soundtrack.m4a` too, so they can tell a muted player from a silent file.
 
 **Check:** `npx remotion ffprobe out/<name>.mp4` shows the right duration, 1080×1920, the fps, and an audio stream.
 
@@ -110,7 +120,7 @@ the original's content.
 | Bloom | `0 18px 44px -14px` / `0 34px 80px -22px`, blue at .45 / .55 | Elevation and contact light. Never a grey shadow. |
 | Radius | 8 / 14 / 22 / 34 / 52 / pill | Hero object takes 52 (or a true superellipse, n = 4). |
 | Ease | swift `(.22,1,.36,1)` · morph `(.65,0,.35,1)` · settle `(.34,1.2,.64,1)` | Morph for size/shape, swift for position, settle only for physical controls. |
-| Durations @ 30 fps | tap 4 f · move 7 f · morph 11 f · stage 19 f | Morph (11 f) sits inside the 11–18 frame house move length. |
+| Durations @ 30 fps | tap 4 f · move 7 f · morph 11 f · stage 19 f | Morph (11 f) sits inside the 11–18 frame house move length. At 24 fps (Vox-style): tap 3 · move 5 · morph 9 · stage 15. |
 
 **Rules (check at QA, step 4):**
 - [ ] One saturated object per scene. A second blue thing reads as noise, not emphasis.
@@ -122,6 +132,117 @@ the original's content.
 
 ---
 
+## Thumbnails: the approved style (every video)
+> **ElevenLabs is for voiceover only (the user's rule, 1 Oct 2026).** Never use ElevenLabs credits for images, video, music or sound effects. Thumbnails are built in Remotion from licensed photos, 3D logos and the film's own assets. This overrides any older step below that generates images with ElevenLabs.
+
+**Updated 1 Oct 2026 (user):** thumbnails use **real, licensed photos of the people named in the script** (Wikimedia Commons CC/public domain, the same photos as the video), cut out locally with `rembg` (no paid tools), in a more provocative layout (versus, contrast, a stamp). Words stay at three at most and must be accurate: no invented quotes, no altered expressions, nothing a source doesn't support. Credit the photos in the description. Points 2 and 4 below (fictional generated people) are kept only as history.
+
+The user approved this look on 29 Sep 2026 (AI News Daily, variant G) and wants it on **every video**.
+Reference image: `reference/thumbnail-approved.jpg`. Component: `remotion/src/thumbs/HighlightThumb.tsx`.
+
+1. **Lead with the most interesting story,** not the first one in the video. Put it in its own chapter so a click lands on it quickly.
+2. **The image is a person's reaction:** a photoreal, *fictional* person (never a real or public figure, no logos or brands) reacting with a strong emotion, usually shock (wide eyes, open mouth, hand on cheek), to the story's object. For a leak, photos burst out of a glowing phone.
+   - Generate it with ElevenLabs `creative_generate_image`, model `bytedance-seedream-5-pro`, 4 variations, which returns 2048×1152 16:9. Download immediately (links expire in 2 h) and save as JPG (q92) in `public/<project>/thumb/`.
+   - Prompt template: *"Photorealistic cinematic still for a YouTube thumbnail, 16:9 widescreen. A fictional person in their late twenties (not a celebrity) on the right third, [reacting to X] with a genuinely shocked expression: wide eyes, raised eyebrows, mouth open, one hand pressed to their cheek. [The story's object] with a [accent] glow on their face. [Things flying or spilling out], a few close to the camera and motion-blurred. Background: [design system's dark colour] fading to [its light colour], glowing bokeh. Warm key light from front left, strong cool rim light from behind. The left 45 percent of the frame is calm, dark and empty, reserved for headline text. Sharp focus on the eyes, visible skin pores, shallow depth of field, subtle film grain. No text, no letters, no logos, no watermarks."*
+3. **Words: three at most**, on the left third: `[key or number, word, punch word]`, e.g. `53 · PHOTOS · LEAKED`. Geist 900, tilted −3°.
+   - **Default treatment, `marker`:** the key/number big in yellow `#FFD60A`, the middle word white, both with a dark outline in the design system's darkest colour; the punch word white on a slanted red `#FF2A3D` marker stroke.
+   - Alternatives for A/B tests: `highlighter` (first two words dark on a yellow bar, punch word on a red bar) and `glow` (yellow words, punch word red with a white outline and red glow).
+   - Yellow and red stay the same in every design system (they're the complementary pop). Only `ink` (outlines, scrim, vignette) takes the design system's darkest colour.
+4. **Build:** `<HighlightThumb src="…/thumb/x.jpg" words={['53', 'PHOTOS', 'LEAKED']} style="marker" ink={darkest} />` as a 1920×1080, 1-frame composition. It adds a slight contrast/saturation lift, a left scrim, and a vignette.
+5. **Deliver three variants that change one thing each.** Usually the `marker` default plus two others, differing either in word treatment (same photo) or in photo (same words). Recommend the `marker` one.
+6. **Check:**
+   - Shrink to 200 px wide: the face, the glow and the punch word must read at a glance.
+   - Export JPG `-q:v 2` to `out/thumbs/<project>-thumb-<X>.jpg`; each must be under 2 MB (about 200 KB is typical).
+   - The chat upload limit is 30 MiB, so thumbnails can be sent directly.
+7. **Title and copy:**
+   - The title *complements* the thumbnail text and never repeats it (thumbnail "53 PHOTOS LEAKED" ↔ title "OpenAI's Own AI Agents Went Rogue").
+   - Write `YOUTUBE.md` in the same format as `remotion/src/dcc/YOUTUBE.md`, plus a table pairing each thumbnail with its title and an **Accuracy notes** section. Anything the image implies that the sources don't confirm, such as who is in the leaked photos, gets a note.
+
+---
+
+## Long-form 16:9 explainers (Vox style)
+Reference build: `remotion/src/dc/`, the "Why people hate data centres" explainer.
+
+1. **Script first,** using `reference/vox-script-method.md`: a scene table with time, narration of 20 words or fewer per line, and what's on screen.
+   - Research every number and list it in `RESEARCH.md`.
+   - Get the user's approval before production.
+2. **Voiceover:** use ElevenLabs, one take per chapter, with voice and model fixed for the whole film.
+   - **Default narrator: Asher, voice ID `tMvyQtpCVQ0DkixuYm6J`,** on `eleven_multilingual_v2`. The user chose this voice for the data-centres explainer and asked for it to be the SOP default. Use it for every voiceover unless the user asks for a different voice.
+   - Rejected voices, never to be used: "Grounded Woman Narrator" (`6eEQXEFYsrOsaQlOdxlJ`).
+   - **A new voice needs the user's choice first.** If the user wants a voice other than Asher, send 3–4 voice preview links (they're free), then generate one short test line (at most about 60 s) and wait for their OK before generating anything longer. Never pick a new narrator yourself for a long script. That mistake once wasted about 10,800 credits on a voice the user rejected.
+   - Check the account's credits before starting: about 1 credit per character on `eleven_multilingual_v2`.
+   - A 15-minute script needs about 11k credits.
+3. **Timing:** `scripts/dc_timing.py` aligns every script line to the take with local word timestamps (faster-whisper) and writes `timing.json`.
+   - Chapters without a take get estimated times, so picture can be built first.
+4. **Build:**
+   - Scenes start at a line and run to the next scene.
+   - A `Piece` gives the house choreography: directional entrance, drift, and an exit toward the viewer with blur.
+   - Tokens live in `DESIGN.md` / `design.ts`.
+   - Charts follow the dataviz skill.
+   - **Never interpolate data points you don't have:** plot only sourced values.
+5. **Sound:**
+   - `make_dc_music.py` synthesises the music bed: new mood per chapter, texture change about every 20 s, stings on cards.
+   - `mix_dc_audio.py` ducks the music under the voice (about 13 dB) and adds the hum and whooshes.
+   - Keep big WAVs in `out/`, not `public/`, or every Lambda deploy uploads them.
+6. **Render:** render one `…-partN` composition per chapter on Lambda (picture only), concatenate, then mux `out/dc-mix.wav`.
+
+### Vox-style rules set by the user (1 Oct 2026). These override the general rules above for Vox-style videos.
+1. **24 fps,** not 30. Moves are 9–14 frames at 24 fps.
+2. **Verify every person and place before any production work.** Confirm each person's name, current title and quotes, and each place, against at least one primary or major outlet. Record every check in `VERIFY.md` with a ✅/⚠️/❌ status. Fix or flag every ⚠️/❌ line with the user before the voiceover is generated.
+3. **Real photos of every person named.** Use photos with a reusable licence: Wikimedia Commons CC-BY/CC-BY-SA, public-domain government photos (White House, Congress, FTC), or official press-kit headshots. Record the licence and author for each photo in `ASSETS.md` and credit them on screen in small type. Never use AI-generated faces of real people. If no licensed photo exists, tell the user and offer a named silhouette card instead.
+4. **3D logos with exact brand colours.** Extrude each company's official vector mark in Three.js. Take the hex values from the company's brand or press page, record them in `ASSETS.md`, and compare the render with the official mark side by side. Logos are used for editorial reference only: never altered, combined or animated into something the company didn't make.
+5. **Show, don't type.** Explain with objects and real photos (a document, a phone, a chip, a building, a chart), not words on screen. On-screen text is limited to names and titles, quoted words, numbers and sources.
+6. **Places get a replica of their surroundings.** When the script names a place (the White House, a headquarters, a city), build its setting in 3D or 2.5D from reference photos: the real building shape, its trees, plants, street and neighbouring buildings. Recreate the setting; never trace or reuse photos of it.
+7. **No generic or sloppy generation.** No stock "AI brain", glowing circuits, random robots, purple gradients or filler B-roll. Every shot must show the specific thing the line is about.
+8. **High quality:** 1920×1080, 24 fps, 4:4:4-quality source, CRF ≤ 18 H.264, loudness −14 LUFS for YouTube.
+9. **Check everything before finishing:** a contact sheet of every scene, a spelling check of every name and title, every number checked against `VERIFY.md`, a full watch-through for audio sync and pops, and `ffprobe` on the final file (24 fps, 1920×1080, duration). List what was checked in the delivery message.
+
+### Lessons from the first build under these rules (AI News, 1 Oct 2026; `remotion/src/news1001/`)
+- **3D logos share one WebGL context** (`Logo3D.tsx`): each logo draws through a single shared renderer into its own 2D canvas. One `ThreeCanvas` per logo blanked logos in long sequential renders (Chrome drops contexts past ~16).
+- **Exact brand colour:** logo front faces use an unlit material, so they render the file's hex pixel-exact. Sides and bevels are lit for depth. Extrusion depth follows the mark's short side, so wordmarks stay slim. Leave 22 % spare width so tilted wordmarks don't clip.
+- **Join Lambda parts video-only:** strip each part's silent audio before concatenating, or every join adds a gap (it drifted 0.7 s over 10 parts). Then mux the mix with `apad` + `-shortest` and check that the last frame lands at frames/24.
+- **Wikimedia rate limits:** fetch originals by md5 path from upload.wikimedia.org, fall back to standard thumbnail widths (500/1280 px), and read the licence from the file page (`licensetpl_short`, with `&#95;` unescaped).
+- **Free music and effects:** FreePD is closed. Use Incompetech (CC BY 4.0, credit in the description), Kenney.nl (CC0) and BigSoundBank (CC0). `scripts/mix_news1001.py` places the cues from the scene list.
+
+### Lessons from AI News, 3 Oct 2026 (`remotion/src/news1003/`, Autopilot Blue)
+- **One swoosh only (the user's rule, 3 Oct 2026).** Use the single short swoosh `public/sfx/whoosh7.mp3` (0.94 s, CC0), once per scene exit and a little louder into story cards. Never the 10.9 s `whoosh1.mp3`, and never music unless asked. Mixer: `scripts/mix_news1003.py`.
+- **Key pieces to the spoken word, not just the line.** `scripts/news1003_timing.py` stores every script word's time (recognised words from faster-whisper, missing ones interpolated); scenes call `useW()('subpoenaed')` to land an object on its word.
+- **Render chapters in parallel:** `SITE=<site> FRAMES_PER_LAMBDA=24 ./render-parts.sh <Prefix> <parts> <outdir>` deploys once, starts every `<Prefix>-partN`, polls S3, downloads all. The account's concurrency is now 1,000; a 9-minute film rendered in about 4 minutes.
+- **Autopilot Blue at 24 fps:** tap 3 f, move 5 f, morph 9 f, stage 15 f; arrivals 13 f on `swift`. One cobalt object per view; logos keep their own colours; shadows are blue bloom.
+- **Logos that don't extrude:** a mark whose compound path breaks in `SVGLoader` (Tavus) is shown flat in its exact colours (`FLAT` set in `Logo3D.tsx`). Wordmarks get `shadowOpacity` ≈ 0.08 so their contact shadow doesn't read as a doubled word.
+- **No licensed photo:** if neither Commons nor an official press page has one (Steve Corfield), use the named silhouette card (`Silhouette` in `kit.tsx`) and say so in the delivery.
+- **Delivery of big files:** the final MP4 (~330 MB for 9 min) is over the chat limit. Upload it to the Remotion bucket under `deliveries/`; a presigned link made here is signed by the session proxy and won't work outside, so give the S3 path (console download) too.
+
+## Story films in 2D vector (the user's default for story videos)
+Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
+shot list with **one scene per script line** (shot type, place, time of day, character pose and
+expression, what moves, any data shown inside the scene). Build a character rig with facial
+expressions first, then the locations, then the shots. Data never sits on a bare card; it
+appears inside the scene. QA a contact sheet of every line's scene.
+
+## Daily news videos: the living-gradient background (always)
+The user approved this motion (Sept 2026) and wants it on **every daily news video, whatever
+design system they choose**.
+
+- **Component:** `remotion/src/gradient/GradientLoop.tsx` → `<LivingGradient palette={…} />`.
+  Put it as the bottom layer of every news scene. Do not build a different background.
+- **Colours come from the chosen design system:** `paletteFrom([primary, secondary, lightAccent, optionalHaze])`.
+  It softens the colours toward white (default 0.35) so headlines stay readable; use 0.45 or
+  more for strong brand colours (reds, navies), and `soften: 0` only if the design system's
+  own background tints are already soft. With no design system, use `REFERENCE_PALETTE`
+  (periwinkle / mint / aqua, the user's reference).
+- **Keep the approved motion exactly:** `SPEED = 2`, `TRAVEL = 2.2`, sway 4°, blob pulse 18 %,
+  static grain at 0.16 opacity (`public/grain-1024.png`, never animated grain). Change these only
+  if the user asks.
+- **Seamless at any length:** the motion repeats every `loop` frames (default 450 = 15 s), so a
+  news video of any duration runs continuously; no cuts or restarts in the background between stories.
+- **Readability check:** after placing text, render a still and make sure body text keeps at
+  least 4.5:1 contrast over the lightest part of the gradient; add a soft card behind text if not.
+- **Resolution:** the component scales to any size. Render 4K (3840×2160) when the user asks for
+  it; the delivered 4K file needs a two-pass encode (`-tune grain`, about 14.5 Mb/s for 15 s) to
+  fit under 30 MB.
+- Demo of the same motion with another palette: composition `GradientNewsDemo`.
+
 ## Troubleshooting
 | Symptom | Cause | Fix |
 |---|---|---|
@@ -129,7 +250,15 @@ the original's content.
 | `Rate Exceeded` / `TooManyRequestsException` | Concurrency limit (10) is full, often with orphaned renderers | Lower the worker count, wait for concurrency to reach 0, then run once |
 | Black 3D frames | Textures weren't loaded when the frame was captured | Release `continueRender` after commit (double `requestAnimationFrame`) |
 | Fonts fall back or `ERR_CERT_AUTHORITY_INVALID` | The headless browser doesn't trust the proxy CA for Google Fonts | Bundle the fonts in `public/fonts` |
+| Glass looks solid white or tinted on the paper backdrop | Transmission can't see HTML behind a transparent canvas | Alpha-blended glass: `transmission 0, transparent, opacity 0.18–0.32`, clearcoat, strong environment map |
+| Frames with motion come out washed-out white | three.js `autoClear` wipes the motion-blur accumulator before every add | Set `gl.autoClear = false` while accumulating (done in `MotionBlurRenderer`) |
+| Liquid invisible inside a glass or bottle | A transmissive object isn't visible through another transmissive one | Make the liquid opaque (clearcoat, sheen) and keep only the glass transmissive |
+| Glass looks milky or tinted on the white stage | Transmission can't see an HTML backdrop | Put the paper wall in 3D so the glass refracts it |
+| Scene renders empty or black although assets loaded | The canvas never redrew after the assets arrived | `ReleaseWhenDrawn` in `cola/assets.tsx`: advance the canvas, then `continueRender` |
 | Metal looks black | No environment map | PMREM `RoomEnvironment` or an HDRI |
 | Seam on a planet | Texture wrap, or decals not wrapped | Sample noise on the sphere, draw decals at x ± width, rotate the seam to the back |
 | `ffmpeg` can't read TIFF | Remotion's ffmpeg is a minimal build | `pip install pillow numpy` and convert with Python |
 | Playwright's ffmpeg rejects MP4 | Minimal build | Use `npx remotion ffmpeg` / `ffprobe` |
+| Lambda chunks never finish (render stalls at the same %) | Per-element canvas `filter: blur()` (e.g. hundreds of blurred bubbles) makes each frame ~7× slower, so chunks time out | Pre-render each blurred element once into a cached sprite and `drawImage` it; keep a frame under ~10 s locally before sending to Lambda |
+| Frame edges compete with the subject | Busy motion background | Edge blur: CSS `backdropFilter: blur(8px)` layer with a radial `maskImage` (transparent centre, black edges) between canvas and text |
+| ElevenLabs: "This request exceeds your quota" | The account's monthly credits ran out mid-batch | Generate chapter takes one at a time and check credits first. Failed takes aren't charged |

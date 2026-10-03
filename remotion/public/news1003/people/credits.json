@@ -1,0 +1,19 @@
+{
+ "bonta": {
+  "file": "Rob_Bonta_official_portrait.jpg",
+  "license": "Public domain",
+  "author": "Douglas Despres, California AG's Office",
+  "ok": true,
+  "local": "bonta.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Rob_Bonta_official_portrait.jpg"
+ },
+ "garman": {
+  "file": "aws-matt-adam-about-hero-v2.jpg (cropped)",
+  "license": "Amazon press photo",
+  "author": "Amazon",
+  "local": "garman.jpg",
+  "ok": true,
+  "page": "https://www.aboutamazon.com/news/company-news/leadership-update-aws-adam-selipsky-matt-garman",
+  "source": "https://assets.aboutamazon.com/af/9c/addf84994238a016073aac6b3ed0/aws-matt-adam-about-hero-v2.jpg"
+ }
+}

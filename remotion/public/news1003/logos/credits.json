@@ -1,0 +1,114 @@
+{
+ "amazon": {
+  "file": "Amazon_logo.svg",
+  "license": "Public domain",
+  "author": "Amazon.com , Inc.",
+  "ok": true,
+  "local": "amazon.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Amazon_logo.svg"
+ },
+ "aws": {
+  "file": "Amazon_Web_Services_Logo.svg",
+  "license": "Apache License 2.0",
+  "author": "Amazon.com Inc.",
+  "ok": true,
+  "local": "aws.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Amazon_Web_Services_Logo.svg"
+ },
+ "claude": {
+  "file": "Claude_AI_symbol.svg",
+  "license": "CC0",
+  "author": "Claude Logo Symbol",
+  "ok": true,
+  "local": "claude.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Claude_AI_symbol.svg"
+ },
+ "accenture": {
+  "file": "Accenture.svg",
+  "license": "Public domain",
+  "author": "Accenture",
+  "ok": true,
+  "local": "accenture.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Accenture.svg"
+ },
+ "bain": {
+  "file": "Bain_&_Company_logo.svg",
+  "license": "Public domain",
+  "author": "Bain & Company",
+  "ok": true,
+  "local": "bain.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Bain_&_Company_logo.svg"
+ },
+ "deloitte": {
+  "file": "Logo_of_Deloitte.svg",
+  "license": "Public domain",
+  "author": "Unknown author Unknown author",
+  "ok": true,
+  "local": "deloitte.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Logo_of_Deloitte.svg"
+ },
+ "mckinsey": {
+  "file": "McKinsey_and_Company_Logo_1.svg",
+  "license": "Public domain",
+  "author": "Frank Trampe",
+  "ok": true,
+  "local": "mckinsey.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:McKinsey_and_Company_Logo_1.svg"
+ },
+ "morganstanley": {
+  "file": "Morgan_Stanley_Logo_1.svg",
+  "license": "Public domain",
+  "author": "The original uploader was Frank.trampe at English Wikipedia .",
+  "ok": true,
+  "local": "morganstanley.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Morgan_Stanley_Logo_1.svg"
+ },
+ "seal_ca": {
+  "file": "Seal_of_California.svg",
+  "license": "Public domain",
+  "author": "Original uploader was Zscout370 at en.wikipedia",
+  "ok": true,
+  "local": "seal_ca.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Seal_of_California.svg"
+ },
+ "seal_sec": {
+  "file": "Seal_of_the_United_States_Securities_and_Exchange_Commission.svg",
+  "license": "Public domain",
+  "author": "U.S. Government",
+  "ok": true,
+  "local": "seal_sec.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Seal_of_the_United_States_Securities_and_Exchange_Commission.svg"
+ },
+ "seal_ed": {
+  "file": "Seal_of_the_United_States_Department_of_Education.svg",
+  "license": "Public domain",
+  "author": "Original seal by the U.S. Army Heraldry Directorate",
+  "ok": true,
+  "local": "seal_ed.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Seal_of_the_United_States_Department_of_Education.svg"
+ },
+ "seal_census": {
+  "file": "Seal_of_the_United_States_Census_Bureau.svg",
+  "license": "Public domain",
+  "author": "Original: United States Bureau of the Census \u2002 Vector: Mysid",
+  "ok": true,
+  "local": "seal_census.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Seal_of_the_United_States_Census_Bureau.svg"
+ },
+ "huggingface": {
+  "file": "huggingface_logo.svg",
+  "license": "Official brand asset (huggingface.co/brand)",
+  "author": "Hugging Face",
+  "ok": true,
+  "local": "huggingface.svg",
+  "page": "https://huggingface.co/front/assets/huggingface_logo.svg"
+ },
+ "tavus": {
+  "file": "logo.svg",
+  "license": "Official site logo (editorial use)",
+  "author": "Tavus",
+  "ok": true,
+  "local": "tavus.svg",
+  "page": "https://www.tavus.io/"
+ }
+}

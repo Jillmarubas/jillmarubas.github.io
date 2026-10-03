@@ -1,0 +1,72 @@
+{
+ "ferguson": {
+  "file": "Andrew_N._Ferguson,_FTC_Commissioner_(cropped).jpg",
+  "license": "Public domain",
+  "author": "Federal Trade Commission",
+  "local": "ferguson.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Andrew_N._Ferguson,_FTC_Commissioner_(cropped).jpg"
+ },
+ "amodei": {
+  "file": "Dario_Amodei_at_TechCrunch_Disrupt_2023_01_(cropped).jpg",
+  "license": "CC BY 2.0",
+  "author": "TechCrunch",
+  "local": "amodei.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Dario_Amodei_at_TechCrunch_Disrupt_2023_01_(cropped).jpg"
+ },
+ "brockman": {
+  "file": "Disrupt_SF_TechCrunch_Disrupt_San_Francisco_2019_-_Day_2_(48838200316)_(cropped).jpg",
+  "license": "CC BY 2.0",
+  "author": "TechCrunch",
+  "local": "brockman.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Disrupt_SF_TechCrunch_Disrupt_San_Francisco_2019_-_Day_2_(48838200316)_(cropped).jpg"
+ },
+ "pichai": {
+  "file": "Sundar_Pichai_-_2023_(cropped).jpg",
+  "license": "CC BY 4.0",
+  "author": "Lukasz Kobus, European Commission",
+  "local": "pichai.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Sundar_Pichai_-_2023_(cropped).jpg"
+ },
+ "zuckerberg": {
+  "file": "F20250904AH-2824_(54778373111)_(3x4_cropped_on_Zuckerberg_following_the_rule_of_thirds).jpg",
+  "license": "Public domain",
+  "author": "The White House",
+  "local": "zuckerberg.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:F20250904AH-2824_(54778373111)_(3x4_cropped_on_Zuckerberg_following_the_rule_of_thirds).jpg"
+ },
+ "musk": {
+  "file": "Elon_Musk_-_54820081119_(cropped).jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Gage Skidmore",
+  "local": "musk.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Elon_Musk_-_54820081119_(cropped).jpg"
+ },
+ "huang": {
+  "file": "Jen-Hsun_Huang_2025.jpg",
+  "license": "Public domain",
+  "author": "The White House",
+  "local": "huang.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Jen-Hsun_Huang_2025.jpg"
+ },
+ "fang": {
+  "file": "Andy_Fang_(52165329831)_(cropped).jpg",
+  "license": "CC BY 2.0",
+  "author": "Collision Conf",
+  "local": "fang.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Andy_Fang_(52165329831)_(cropped).jpg"
+ },
+ "trump": {
+  "file": "Official_Presidential_Portrait_of_President_Donald_J._Trump_(2025).jpg",
+  "license": "Public domain",
+  "author": "Daniel Torok, The White House",
+  "local": "trump.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Official_Presidential_Portrait_of_President_Donald_J._Trump_(2025).jpg"
+ },
+ "walsh": {
+  "file": "Toby_Walsh,_portrait.jpg",
+  "license": "CC BY-SA 3.0",
+  "author": "Avobronte",
+  "local": "walsh.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Toby_Walsh,_portrait.jpg"
+ }
+}

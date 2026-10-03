@@ -1,0 +1,26 @@
+{
+ "spark_oblique": {
+  "file": "Nvidia_DGX_Spark_oblique_view_dllu.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Daniel Lu ( User:dllu )",
+  "ok": true,
+  "local": "spark_oblique.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_Spark_oblique_view_dllu.jpg"
+ },
+ "spark_front": {
+  "file": "Nvidia_DGX_front_view_dllu.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Daniel Lu ( User:dllu )",
+  "ok": true,
+  "local": "spark_front.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_front_view_dllu.jpg"
+ },
+ "spark_rear": {
+  "file": "Nvidia_DGX_Spark_rear_ports_dllu.jpg",
+  "license": "CC BY-SA 4.0",
+  "author": "Daniel Lu ( User:dllu )",
+  "ok": true,
+  "local": "spark_rear.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX_Spark_rear_ports_dllu.jpg"
+ }
+}

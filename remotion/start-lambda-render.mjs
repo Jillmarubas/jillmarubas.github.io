@@ -13,5 +13,7 @@ const {renderId, bucketName} = await renderMediaOnLambda({
   privacy: 'private',
   chromiumOptions: {gl: 'swangle'},
   framesPerLambda: Number(framesPerLambda),
+  // motion-blurred 3D frames render several sub-frames; allow up to 4 min per frame
+  timeoutInMilliseconds: 240000,
 });
 console.log(JSON.stringify({renderId, bucketName}));
