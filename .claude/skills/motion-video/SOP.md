@@ -15,7 +15,7 @@ Follow the steps in order. Each step ends with a check; don't move on until it p
 Write these down before touching code:
 - **Topic and one-line message.** The hook question is asked in the first 2 s and answered by the end.
 - **Beats:** 4–6 scenes of 1.5–3.5 s each, plus a call-to-action scene. Total 14–24 s.
-- **Look:** pick one from `reference/breakdowns.md` (white studio, dark cinematic, cream paper with window light, black listicle, archival grey, editorial poster). Choose **one accent colour**.
+- **Look:** pick one from `reference/breakdowns.md` (white studio, dark cinematic, cream paper with window light, black listicle, archival grey, editorial poster), **or** a house design system from `design-system/` (see "Design systems" below — e.g. **Autopilot Blue**). Choose **one accent colour** (a design system fixes it for you).
 - **Frame rate:** 30 (default), 24/25 for cinematic, 60 for fast glossy tech.
 - **Assets:** what's real data, what comes from CC0, what gets modelled in code. There must be **no** third-party logos, characters or footage.
 - **Facts:** list every number, each with its source.
@@ -85,6 +85,40 @@ Extract 4 frames from the Lambda output (`npx remotion ffmpeg -ss <t> -i out.mp4
 - Send the MP4.
 - Summarise the beats, the techniques used, where the data came from, render time and cost, and anything not verified (for example, audio can't be listened to here).
 - If the reference study taught something new, append it to `reference/breakdowns.md` or `reference/realism.md`.
+
+## Design systems
+When the brief picks a house design system, its tokens replace your own colour, type and
+easing choices. Everything else in this SOP still applies.
+
+### Autopilot Blue
+Silent blue-grey ground, type that dissolves downward, a single cobalt object. Read off one
+nine-second frame (Pinterest pin 1067142074228622392, Illia Holubka) — techniques only, never
+the original's content.
+
+- **Reference page:** `design-system/autopilot-blue/autopilot-blue.html` (open in a browser) · live: https://claude.ai/artifact/WSfUU9haNw5557BqXCknRc
+- **CSS tokens:** `design-system/autopilot-blue/tokens.css`
+- **Remotion tokens:** `remotion/src/autopilot/tokens.ts` (`AUTOPILOT`, `autopilotBackdrop`, `apEase`, `apFrames`)
+- **Fonts:** `import '../autopilot/fonts';` once per composition. Instrument Sans 500/600 (display), Hanken Grotesk 400/500 (body), IBM Plex Mono 400/500 (values) are bundled in `public/fonts`.
+
+| Token | Value | Use on video |
+|---|---|---|
+| Ground | `#EAEAEA` → `#DCE3ED` → `#CDDDEC`, top to floor, one low bloom at 62% / 118% | The backdrop (`autopilotBackdrop`). Never a diagonal wash. |
+| Blue | core `#0571F8`, face `#2082FD`, lift `#4D8FFC`, veil `#81A2F6` | Faces of the **one** hero object: body, lit plane, overlap rim, floor bloom. |
+| Blue ink | `#0A50B8` | Any blue text below display size (`#0571F8` only clears 3.7:1). |
+| Ink | `#10151C` / `#4B5563` / `#7B8695` | Text, secondary text, captions. |
+| Veil ramp | alpha .62 / .34 / .20 / .11 / .05 | The dissolving 5-line type stack. Doubles as the ghost-word layer. |
+| Bloom | `0 18px 44px -14px` / `0 34px 80px -22px`, blue at .45 / .55 | Elevation and contact light. Never a grey shadow. |
+| Radius | 8 / 14 / 22 / 34 / 52 / pill | Hero object takes 52 (or a true superellipse, n = 4). |
+| Ease | swift `(.22,1,.36,1)` · morph `(.65,0,.35,1)` · settle `(.34,1.2,.64,1)` | Morph for size/shape, swift for position, settle only for physical controls. |
+| Durations @ 30 fps | tap 4 f · move 7 f · morph 11 f · stage 19 f | Morph (11 f) sits inside the 11–18 frame house move length. |
+
+**Rules (check at QA, step 4):**
+- [ ] One saturated object per scene. A second blue thing reads as noise, not emphasis.
+- [ ] Ground runs top-to-floor; the bloom sits low, under the object.
+- [ ] Only overlapping blue planes get a hard line: a 1.5 px white rim at 55 % on the upper plane's lit edges.
+- [ ] Below veil-1 (.62) nothing carries information — no numbers, labels or CTAs. Repeat anything that matters at full ink.
+- [ ] The signature move is the pill widening into a card under a cursor: width, height and radius on morph over 11 f, rows fading in on move after a tap-length delay.
+- [ ] Nothing overshoots except a physical control (switch knob). Overshoot on a card is nausea.
 
 ---
 

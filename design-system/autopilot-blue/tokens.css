@@ -1,0 +1,92 @@
+/* ===================================================================
+   AUTOPILOT BLUE — v1.0
+   Read off one nine-second frame (Pinterest pin 1067142074228622392,
+   Illia Holubka): silent ground, dissolving type, a single cobalt object.
+
+   Light palette is the source of truth. Dark redefines tokens only.
+   Full reference page: ./autopilot-blue.html
+   =================================================================== */
+
+:root {
+  /* ---- ground — every neutral carries the same blue bias ---- */
+  --ground-hi: #EAEAEA;     /* top two-fifths, the resting field */
+  --ground-mid: #DCE3ED;    /* where the neutral starts turning */
+  --ground-lo: #CDDDEC;     /* the floor, light source lives here */
+  --surface: #F3F4F6;       /* panels sitting on the wash */
+  --surface-sunk: #E3E6EB;
+  --line: #D5D9E0;
+  --line-soft: #E1E4EA;
+
+  /* ---- ink ---- */
+  --ink: #10151C;
+  --ink-2: #4B5563;
+  --ink-3: #7B8695;
+  --ink-rgb: 16, 21, 28;
+
+  /* ---- blue — four faces of ONE object, not a tint scale ---- */
+  --blue-core: #0571F8;     /* body, fills, primary actions (3.7:1 — large display only) */
+  --blue-face: #2082FD;     /* lit plane, gradient origin */
+  --blue-lift: #4D8FFC;     /* edge catching light on overlap */
+  --blue-veil: #81A2F6;     /* bloom on the floor. Never a fill. */
+  --blue-ink: #0A50B8;      /* text and links, 6.1:1 on ground */
+  --blue-wash: rgba(5, 113, 248, .08);
+  --blue-rim: rgba(255, 255, 255, .55);
+
+  /* ---- veil ramp — decorative only, never load-bearing ---- */
+  --veil-1: .62; --veil-2: .34; --veil-3: .20; --veil-4: .11; --veil-5: .05;
+
+  /* ---- bloom — coloured light, never grey shadow ---- */
+  --bloom-sm: 0 6px 18px -6px rgba(5, 113, 248, .35);
+  --bloom-md: 0 18px 44px -14px rgba(5, 113, 248, .45);
+  --bloom-lg: 0 34px 80px -22px rgba(5, 113, 248, .55);
+  --lift-flat: 0 1px 0 rgba(var(--ink-rgb), .05);
+
+  /* ---- radius — superellipse n≈4 approximations ---- */
+  --r-xs: 8px; --r-sm: 14px; --r-md: 22px;
+  --r-lg: 34px; --r-xl: 52px; --r-pill: 999px;
+
+  /* ---- ease ---- */
+  --ease-swift: cubic-bezier(.22, 1, .36, 1);    /* anything changing place */
+  --ease-morph: cubic-bezier(.65, 0, .35, 1);    /* anything changing size or shape */
+  --ease-settle: cubic-bezier(.34, 1.2, .64, 1); /* only controls that should feel physical */
+  --t-tap: 120ms; --t-move: 220ms; --t-morph: 380ms; --t-stage: 640ms;
+
+  /* ---- type ---- */
+  --display: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground-hi: #0C1016; --ground-mid: #0F1620; --ground-lo: #111C2A;
+    --surface: #141A22;   --surface-sunk: #0F141B;
+    --line: #242D3A;      --line-soft: #1B222C;
+    --ink: #E9EDF3; --ink-2: #A4B0BF; --ink-3: #6D798A; --ink-rgb: 233, 237, 243;
+    --blue-core: #2E86FF; --blue-face: #4D9BFF; --blue-lift: #7FB6FF;
+    --blue-veil: #2B5A9E; --blue-ink: #8CBEFF;
+    --blue-wash: rgba(46, 134, 255, .12); --blue-rim: rgba(255, 255, 255, .30);
+    --bloom-sm: 0 6px 18px -6px rgba(46, 134, 255, .40);
+    --bloom-md: 0 18px 44px -14px rgba(46, 134, 255, .50);
+    --bloom-lg: 0 34px 80px -22px rgba(46, 134, 255, .60);
+    --lift-flat: 0 1px 0 rgba(0, 0, 0, .4);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground-hi: #0C1016; --ground-mid: #0F1620; --ground-lo: #111C2A;
+  --surface: #141A22;   --surface-sunk: #0F141B;
+  --line: #242D3A;      --line-soft: #1B222C;
+  --ink: #E9EDF3; --ink-2: #A4B0BF; --ink-3: #6D798A; --ink-rgb: 233, 237, 243;
+  --blue-core: #2E86FF; --blue-face: #4D9BFF; --blue-lift: #7FB6FF;
+  --blue-veil: #2B5A9E; --blue-ink: #8CBEFF;
+  --blue-wash: rgba(46, 134, 255, .12); --blue-rim: rgba(255, 255, 255, .30);
+  --bloom-sm: 0 6px 18px -6px rgba(46, 134, 255, .40);
+  --bloom-md: 0 18px 44px -14px rgba(46, 134, 255, .50);
+  --bloom-lg: 0 34px 80px -22px rgba(46, 134, 255, .60);
+  --lift-flat: 0 1px 0 rgba(0, 0, 0, .4);
+  color-scheme: dark;
+}
