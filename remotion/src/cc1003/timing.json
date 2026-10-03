@@ -1,0 +1,5488 @@
+{
+ "fps": 60,
+ "chapters": [
+  {
+   "title": "HOOK",
+   "key": "hook",
+   "start": 0.0,
+   "card": 0.0,
+   "vo": 0.15,
+   "hasVo": true,
+   "end": 18.436
+  },
+  {
+   "title": "THE PLAN",
+   "key": "preview",
+   "start": 18.436,
+   "card": 0.0,
+   "vo": 18.586,
+   "hasVo": true,
+   "end": 35.158
+  },
+  {
+   "title": "PART 1 \u00b7 MODS",
+   "key": "p1a",
+   "start": 35.158,
+   "card": 1.1,
+   "vo": 36.408,
+   "hasVo": true,
+   "end": 60.41
+  },
+  {
+   "title": "BUILD YOUR FIRST MOD",
+   "key": "p1b",
+   "start": 60.41,
+   "card": 0.0,
+   "vo": 60.56,
+   "hasVo": true,
+   "end": 116.699
+  },
+  {
+   "title": "PART 2 \u00b7 WRAP-UP ALLOWANCE",
+   "key": "p2",
+   "start": 116.699,
+   "card": 1.1,
+   "vo": 117.949,
+   "hasVo": true,
+   "end": 148.638
+  },
+  {
+   "title": "PART 3 \u00b7 OPUS + SONNET 5.5",
+   "key": "p3",
+   "start": 148.638,
+   "card": 1.1,
+   "vo": 149.888,
+   "hasVo": true,
+   "end": 195.485
+  },
+  {
+   "title": "PART 4 \u00b7 FREE CREDIT",
+   "key": "p4",
+   "start": 195.485,
+   "card": 1.1,
+   "vo": 196.735,
+   "hasVo": true,
+   "end": 242.332
+  },
+  {
+   "title": "PART 5 \u00b7 PROMPT-AUDIT",
+   "key": "p5",
+   "start": 242.332,
+   "card": 1.1,
+   "vo": 243.582,
+   "hasVo": true,
+   "end": 282.584
+  },
+  {
+   "title": "PART 6 \u00b7 YOU SHOULD KNOW",
+   "key": "p6",
+   "start": 282.584,
+   "card": 1.1,
+   "vo": 283.834,
+   "hasVo": true,
+   "end": 304.446
+  },
+  {
+   "title": "PART 7 \u00b7 EVALS",
+   "key": "p7",
+   "start": 304.446,
+   "card": 1.1,
+   "vo": 305.696,
+   "hasVo": true,
+   "end": 338.847
+  },
+  {
+   "title": "PART 8 \u00b7 PUBLISH",
+   "key": "p8",
+   "start": 338.847,
+   "card": 1.1,
+   "vo": 340.097,
+   "hasVo": true,
+   "end": 358.759
+  },
+  {
+   "title": "PART 9 \u00b7 PRO TIPS",
+   "key": "p9",
+   "start": 358.759,
+   "card": 1.1,
+   "vo": 360.009,
+   "hasVo": true,
+   "end": 392.927
+  },
+  {
+   "title": "YOUR TO-DO LIST",
+   "key": "wrap",
+   "start": 392.927,
+   "card": 1.1,
+   "vo": 394.177,
+   "hasVo": true,
+   "end": 414.65
+  },
+  {
+   "title": "OUTRO",
+   "key": "outro",
+   "start": 414.65,
+   "card": 0.0,
+   "vo": 414.8,
+   "hasVo": true,
+   "end": 430.703
+  }
+ ],
+ "lines": [
+  {
+   "ch": 0,
+   "i": 0,
+   "start": 0.15,
+   "end": 4.99,
+   "say": "What if you could add your own features to your AI coding assistant just by describing them?",
+   "show": "3D laptop swings in; terminal prompt; words 'your own features' orange.",
+   "words": [
+    [
+     "what",
+     0.15
+    ],
+    [
+     "if",
+     0.33
+    ],
+    [
+     "you",
+     0.43
+    ],
+    [
+     "could",
+     0.57
+    ],
+    [
+     "add",
+     0.71
+    ],
+    [
+     "your",
+     0.97
+    ],
+    [
+     "own",
+     1.19
+    ],
+    [
+     "features",
+     1.41
+    ],
+    [
+     "to",
+     1.77
+    ],
+    [
+     "your",
+     2.15
+    ],
+    [
+     "a",
+     2.29
+    ],
+    [
+     "i",
+     2.43
+    ],
+    [
+     "coding",
+     2.57
+    ],
+    [
+     "assistant",
+     3.01
+    ],
+    [
+     "just",
+     3.51
+    ],
+    [
+     "by",
+     4.01
+    ],
+    [
+     "describing",
+     4.23
+    ],
+    [
+     "them",
+     4.71
+    ]
+   ]
+  },
+  {
+   "ch": 0,
+   "i": 1,
+   "start": 5.67,
+   "end": 6.85,
+   "say": "Not someday. Today.",
+   "show": "'Not someday.' struck through by a drawn line; 'Today.' slams in with a date chip.",
+   "words": [
+    [
+     "not",
+     5.67
+    ],
+    [
+     "someday",
+     5.67
+    ],
+    [
+     "today",
+     6.85
+    ]
+   ]
+  },
+  {
+   "ch": 0,
+   "i": 2,
+   "start": 7.65,
+   "end": 8.93,
+   "say": "Claude Code just got mods.",
+   "show": "Claude mark spins in with rings and burst; 'MODS' title.",
+   "words": [
+    [
+     "claude",
+     7.65
+    ],
+    [
+     "code",
+     7.65
+    ],
+    [
+     "just",
+     7.87
+    ],
+    [
+     "got",
+     8.47
+    ],
+    [
+     "mods",
+     8.69
+    ]
+   ]
+  },
+  {
+   "ch": 0,
+   "i": 3,
+   "start": 9.67,
+   "end": 16.77,
+   "say": "In this video, I'll explain what changed, and then I'll show you exactly how to use each new feature, step by step.",
+   "show": "Two cards EXPLAIN / SHOW; step dots.",
+   "words": [
+    [
+     "in",
+     9.67
+    ],
+    [
+     "this",
+     9.79
+    ],
+    [
+     "video",
+     9.95
+    ],
+    [
+     "ill",
+     10.63
+    ],
+    [
+     "explain",
+     10.85
+    ],
+    [
+     "what",
+     11.15
+    ],
+    [
+     "changed",
+     11.43
+    ],
+    [
+     "and",
+     12.29
+    ],
+    [
+     "then",
+     12.39
+    ],
+    [
+     "ill",
+     12.53
+    ],
+    [
+     "show",
+     12.69
+    ],
+    [
+     "you",
+     12.89
+    ],
+    [
+     "exactly",
+     13.09
+    ],
+    [
+     "how",
+     13.45
+    ],
+    [
+     "to",
+     14.05
+    ],
+    [
+     "use",
+     14.15
+    ],
+    [
+     "each",
+     14.37
+    ],
+    [
+     "new",
+     14.69
+    ],
+    [
+     "feature",
+     14.97
+    ],
+    [
+     "step",
+     15.87
+    ],
+    [
+     "by",
+     16.11
+    ],
+    [
+     "step",
+     16.41
+    ]
+   ]
+  },
+  {
+   "ch": 1,
+   "i": 0,
+   "start": 18.586,
+   "end": 20.606,
+   "say": "Here's the plan. We'll build your first mod.",
+   "show": "Roadmap line draws; node 1 puzzle piece.",
+   "words": [
+    [
+     "heres",
+     18.586
+    ],
+    [
+     "the",
+     18.866
+    ],
+    [
+     "plan",
+     18.966
+    ],
+    [
+     "well",
+     19.546
+    ],
+    [
+     "build",
+     19.726
+    ],
+    [
+     "your",
+     19.906
+    ],
+    [
+     "first",
+     20.126
+    ],
+    [
+     "mod",
+     20.346
+    ]
+   ]
+  },
+  {
+   "ch": 1,
+   "i": 1,
+   "start": 21.286,
+   "end": 23.026,
+   "say": "Then we'll switch between the two new models,",
+   "show": "Node 2: two model chips.",
+   "words": [
+    [
+     "then",
+     21.286
+    ],
+    [
+     "well",
+     21.326
+    ],
+    [
+     "switch",
+     21.626
+    ],
+    [
+     "between",
+     21.866
+    ],
+    [
+     "the",
+     22.206
+    ],
+    [
+     "two",
+     22.386
+    ],
+    [
+     "new",
+     22.586
+    ],
+    [
+     "models",
+     22.746
+    ]
+   ]
+  },
+  {
+   "ch": 1,
+   "i": 2,
+   "start": 23.546,
+   "end": 25.646,
+   "say": "claim your free cloud credit before it expires,",
+   "show": "Node 3: cloud + credit + clock.",
+   "words": [
+    [
+     "claim",
+     23.546
+    ],
+    [
+     "your",
+     23.786
+    ],
+    [
+     "free",
+     23.986
+    ],
+    [
+     "cloud",
+     24.226
+    ],
+    [
+     "credit",
+     24.486
+    ],
+    [
+     "before",
+     24.786
+    ],
+    [
+     "it",
+     25.126
+    ],
+    [
+     "expires",
+     25.326
+    ]
+   ]
+  },
+  {
+   "ch": 1,
+   "i": 3,
+   "start": 26.466,
+   "end": 27.006,
+   "say": "audit your setup,",
+   "show": "Node 4: clipboard scan.",
+   "words": [
+    [
+     "audit",
+     26.466
+    ],
+    [
+     "your",
+     26.546
+    ],
+    [
+     "setup",
+     26.746
+    ]
+   ]
+  },
+  {
+   "ch": 1,
+   "i": 4,
+   "start": 27.546,
+   "end": 30.286,
+   "say": "and turn on a hidden helper most people don't know exists.",
+   "show": "Node 5: hidden eye revealed.",
+   "words": [
+    [
+     "and",
+     27.546
+    ],
+    [
+     "turn",
+     27.646
+    ],
+    [
+     "on",
+     27.866
+    ],
+    [
+     "a",
+     28.026
+    ],
+    [
+     "hidden",
+     28.146
+    ],
+    [
+     "helper",
+     28.346
+    ],
+    [
+     "most",
+     28.626
+    ],
+    [
+     "people",
+     29.086
+    ],
+    [
+     "dont",
+     29.446
+    ],
+    [
+     "know",
+     29.746
+    ],
+    [
+     "exists",
+     29.886
+    ]
+   ]
+  },
+  {
+   "ch": 1,
+   "i": 5,
+   "start": 31.026,
+   "end": 34.146,
+   "say": "By the end, you'll know what's new and how to use all of it.",
+   "show": "All nodes tick; camera pulls back.",
+   "words": [
+    [
+     "by",
+     31.026
+    ],
+    [
+     "the",
+     31.206
+    ],
+    [
+     "end",
+     31.406
+    ],
+    [
+     "youll",
+     31.966
+    ],
+    [
+     "know",
+     32.186
+    ],
+    [
+     "whats",
+     32.346
+    ],
+    [
+     "new",
+     32.666
+    ],
+    [
+     "and",
+     32.826
+    ],
+    [
+     "how",
+     33.186
+    ],
+    [
+     "to",
+     33.386
+    ],
+    [
+     "use",
+     33.486
+    ],
+    [
+     "all",
+     33.686
+    ],
+    [
+     "of",
+     33.906
+    ],
+    [
+     "it",
+     34.046
+    ]
+   ]
+  },
+  {
+   "ch": 2,
+   "i": 0,
+   "start": 36.408,
+   "end": 37.808,
+   "say": "Let's start with the biggest change.",
+   "show": "Part card 01 MODS.",
+   "words": [
+    [
+     "lets",
+     36.408
+    ],
+    [
+     "start",
+     36.688
+    ],
+    [
+     "with",
+     36.888
+    ],
+    [
+     "the",
+     37.088
+    ],
+    [
+     "biggest",
+     37.228
+    ],
+    [
+     "change",
+     37.528
+    ]
+   ]
+  },
+  {
+   "ch": 2,
+   "i": 1,
+   "start": 38.568,
+   "end": 44.088,
+   "say": "A mod is a small piece of TypeScript code inside a plugin that hooks directly into Claude Code.",
+   "show": "Diagram: mod.ts inside plugin box, hook cable plugs into Claude Code.",
+   "words": [
+    [
+     "a",
+     38.568
+    ],
+    [
+     "mod",
+     38.588
+    ],
+    [
+     "is",
+     38.848
+    ],
+    [
+     "a",
+     39.148
+    ],
+    [
+     "small",
+     39.288
+    ],
+    [
+     "piece",
+     39.508
+    ],
+    [
+     "of",
+     39.948
+    ],
+    [
+     "typescript",
+     40.188
+    ],
+    [
+     "code",
+     40.608
+    ],
+    [
+     "inside",
+     40.888
+    ],
+    [
+     "a",
+     41.368
+    ],
+    [
+     "plugin",
+     41.608
+    ],
+    [
+     "that",
+     41.868
+    ],
+    [
+     "hooks",
+     42.428
+    ],
+    [
+     "directly",
+     42.588
+    ],
+    [
+     "into",
+     43.048
+    ],
+    [
+     "claude",
+     43.468
+    ],
+    [
+     "code",
+     43.888
+    ]
+   ]
+  },
+  {
+   "ch": 2,
+   "i": 2,
+   "start": 44.828,
+   "end": 53.068,
+   "say": "It can pause or rewrite a tool call, draw new interface elements, add a new command, or even replace a built-in feature completely.",
+   "show": "Four capability tiles, each animating.",
+   "words": [
+    [
+     "it",
+     44.828
+    ],
+    [
+     "can",
+     44.888
+    ],
+    [
+     "pause",
+     45.048
+    ],
+    [
+     "or",
+     45.408
+    ],
+    [
+     "rewrite",
+     45.748
+    ],
+    [
+     "a",
+     46.068
+    ],
+    [
+     "tool",
+     46.328
+    ],
+    [
+     "call",
+     46.548
+    ],
+    [
+     "draw",
+     47.268
+    ],
+    [
+     "new",
+     47.488
+    ],
+    [
+     "interface",
+     47.748
+    ],
+    [
+     "elements",
+     48.228
+    ],
+    [
+     "add",
+     49.268
+    ],
+    [
+     "a",
+     49.468
+    ],
+    [
+     "new",
+     49.588
+    ],
+    [
+     "command",
+     49.728
+    ],
+    [
+     "or",
+     50.608
+    ],
+    [
+     "even",
+     50.728
+    ],
+    [
+     "replace",
+     51.028
+    ],
+    [
+     "a",
+     51.508
+    ],
+    [
+     "builtin",
+     51.878
+    ],
+    [
+     "feature",
+     52.248
+    ],
+    [
+     "completely",
+     52.488
+    ]
+   ]
+  },
+  {
+   "ch": 2,
+   "i": 3,
+   "start": 53.948,
+   "end": 56.048,
+   "say": "And the best part? You don't write the code.",
+   "show": "Code lines dissolve; kinetic line.",
+   "words": [
+    [
+     "and",
+     53.948
+    ],
+    [
+     "the",
+     53.968
+    ],
+    [
+     "best",
+     54.068
+    ],
+    [
+     "part",
+     54.248
+    ],
+    [
+     "you",
+     55.148
+    ],
+    [
+     "dont",
+     55.268
+    ],
+    [
+     "write",
+     55.508
+    ],
+    [
+     "the",
+     55.648
+    ],
+    [
+     "code",
+     55.808
+    ]
+   ]
+  },
+  {
+   "ch": 2,
+   "i": 4,
+   "start": 56.508,
+   "end": 59.448,
+   "say": "You describe what you want, and Claude writes the mod for you.",
+   "show": "Speech bubble \u2192 Claude mark \u2192 mod.ts writes itself.",
+   "words": [
+    [
+     "you",
+     56.508
+    ],
+    [
+     "describe",
+     56.628
+    ],
+    [
+     "what",
+     56.868
+    ],
+    [
+     "you",
+     57.208
+    ],
+    [
+     "want",
+     57.328
+    ],
+    [
+     "and",
+     58.008
+    ],
+    [
+     "claude",
+     58.188
+    ],
+    [
+     "writes",
+     58.368
+    ],
+    [
+     "the",
+     58.568
+    ],
+    [
+     "mod",
+     58.808
+    ],
+    [
+     "for",
+     58.968
+    ],
+    [
+     "you",
+     59.228
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 0,
+   "start": 60.56,
+   "end": 61.44,
+   "say": "Here's how to do it.",
+   "show": "Camera flies into the laptop.",
+   "words": [
+    [
+     "heres",
+     60.56
+    ],
+    [
+     "how",
+     60.88
+    ],
+    [
+     "to",
+     60.98
+    ],
+    [
+     "do",
+     61.1
+    ],
+    [
+     "it",
+     61.3
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 1,
+   "start": 61.82,
+   "end": 66.72,
+   "say": "Step one. Make sure you're on version two point one point two eight seven or later.",
+   "show": "STEP 1; type `claude --version`; version circled.",
+   "words": [
+    [
+     "step",
+     61.82
+    ],
+    [
+     "one",
+     62.23
+    ],
+    [
+     "make",
+     62.64
+    ],
+    [
+     "sure",
+     62.94
+    ],
+    [
+     "youre",
+     63.16
+    ],
+    [
+     "on",
+     63.42
+    ],
+    [
+     "version",
+     63.56
+    ],
+    [
+     "two",
+     63.83
+    ],
+    [
+     "point",
+     64.1
+    ],
+    [
+     "one",
+     64.37
+    ],
+    [
+     "point",
+     64.64
+    ],
+    [
+     "two",
+     64.91
+    ],
+    [
+     "eight",
+     65.18
+    ],
+    [
+     "seven",
+     65.45
+    ],
+    [
+     "or",
+     65.72
+    ],
+    [
+     "later",
+     66.4
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 2,
+   "start": 67.5,
+   "end": 72.24,
+   "say": "Mods work in both the terminal and the desktop app, but only from that version onward.",
+   "show": "Terminal + desktop chips; version gate.",
+   "words": [
+    [
+     "mods",
+     67.5
+    ],
+    [
+     "work",
+     67.76
+    ],
+    [
+     "in",
+     68.14
+    ],
+    [
+     "both",
+     68.36
+    ],
+    [
+     "the",
+     68.56
+    ],
+    [
+     "terminal",
+     68.74
+    ],
+    [
+     "and",
+     69.0
+    ],
+    [
+     "the",
+     69.46
+    ],
+    [
+     "desktop",
+     69.6
+    ],
+    [
+     "app",
+     69.9
+    ],
+    [
+     "but",
+     70.68
+    ],
+    [
+     "only",
+     70.9
+    ],
+    [
+     "from",
+     71.12
+    ],
+    [
+     "that",
+     71.4
+    ],
+    [
+     "version",
+     71.6
+    ],
+    [
+     "onward",
+     71.96
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 3,
+   "start": 73.22,
+   "end": 76.18,
+   "say": "Step two. Describe the feature you want in plain English.",
+   "show": "STEP 2; prompt box focus.",
+   "words": [
+    [
+     "step",
+     73.22
+    ],
+    [
+     "two",
+     73.66
+    ],
+    [
+     "describe",
+     74.1
+    ],
+    [
+     "the",
+     74.5
+    ],
+    [
+     "feature",
+     74.66
+    ],
+    [
+     "you",
+     74.92
+    ],
+    [
+     "want",
+     75.18
+    ],
+    [
+     "in",
+     75.38
+    ],
+    [
+     "plain",
+     75.58
+    ],
+    [
+     "english",
+     75.78
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 4,
+   "start": 76.74,
+   "end": 83.94,
+   "say": "Lydia's example is a perfect first project. She wanted to see her context window without typing slash context every time.",
+   "show": "Lydia name card; /context panel repeating.",
+   "words": [
+    [
+     "lydias",
+     76.74
+    ],
+    [
+     "example",
+     77.14
+    ],
+    [
+     "is",
+     77.46
+    ],
+    [
+     "a",
+     77.8
+    ],
+    [
+     "perfect",
+     77.9
+    ],
+    [
+     "first",
+     78.24
+    ],
+    [
+     "project",
+     78.52
+    ],
+    [
+     "she",
+     79.78
+    ],
+    [
+     "wanted",
+     79.94
+    ],
+    [
+     "to",
+     80.16
+    ],
+    [
+     "see",
+     80.38
+    ],
+    [
+     "her",
+     80.56
+    ],
+    [
+     "context",
+     80.72
+    ],
+    [
+     "window",
+     81.14
+    ],
+    [
+     "without",
+     81.52
+    ],
+    [
+     "typing",
+     81.88
+    ],
+    [
+     "slash",
+     82.36
+    ],
+    [
+     "context",
+     82.66
+    ],
+    [
+     "every",
+     83.16
+    ],
+    [
+     "time",
+     83.6
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 5,
+   "start": 84.62,
+   "end": 85.52,
+   "say": "So she asked for this:",
+   "show": "Prompt typed; key words light orange.",
+   "words": [
+    [
+     "so",
+     84.62
+    ],
+    [
+     "she",
+     84.74
+    ],
+    [
+     "asked",
+     84.9
+    ],
+    [
+     "for",
+     85.08
+    ],
+    [
+     "this",
+     85.32
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 6,
+   "start": 86.22,
+   "end": 91.38,
+   "say": "Step three. Let Claude work. It writes the mod and loads it straight into your session.",
+   "show": "STEP 3; Claude writes file, loads mod.",
+   "words": [
+    [
+     "step",
+     86.22
+    ],
+    [
+     "three",
+     86.69
+    ],
+    [
+     "let",
+     87.16
+    ],
+    [
+     "claude",
+     87.34
+    ],
+    [
+     "work",
+     87.62
+    ],
+    [
+     "it",
+     87.94
+    ],
+    [
+     "writes",
+     88.54
+    ],
+    [
+     "the",
+     88.76
+    ],
+    [
+     "mod",
+     89.0
+    ],
+    [
+     "and",
+     89.24
+    ],
+    [
+     "loads",
+     89.62
+    ],
+    [
+     "it",
+     89.84
+    ],
+    [
+     "straight",
+     90.08
+    ],
+    [
+     "into",
+     90.36
+    ],
+    [
+     "your",
+     90.58
+    ],
+    [
+     "session",
+     90.78
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 7,
+   "start": 91.88,
+   "end": 99.74,
+   "say": "Step four. Test it. Type slash context bar, and a colored bar appears above your prompt. Type it again to hide it.",
+   "show": "STEP 4; /context-bar toggles stacked bar.",
+   "words": [
+    [
+     "step",
+     91.88
+    ],
+    [
+     "four",
+     92.4
+    ],
+    [
+     "test",
+     92.92
+    ],
+    [
+     "it",
+     93.16
+    ],
+    [
+     "type",
+     93.98
+    ],
+    [
+     "slash",
+     94.28
+    ],
+    [
+     "context",
+     94.54
+    ],
+    [
+     "bar",
+     95.04
+    ],
+    [
+     "and",
+     95.76
+    ],
+    [
+     "a",
+     96.0
+    ],
+    [
+     "colored",
+     96.08
+    ],
+    [
+     "bar",
+     96.34
+    ],
+    [
+     "appears",
+     96.68
+    ],
+    [
+     "above",
+     96.94
+    ],
+    [
+     "your",
+     97.36
+    ],
+    [
+     "prompt",
+     97.56
+    ],
+    [
+     "type",
+     98.52
+    ],
+    [
+     "it",
+     98.76
+    ],
+    [
+     "again",
+     98.94
+    ],
+    [
+     "to",
+     99.16
+    ],
+    [
+     "hide",
+     99.36
+    ],
+    [
+     "it",
+     99.56
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 8,
+   "start": 100.28,
+   "end": 102.84,
+   "say": "That's a brand new feature, built in one sentence.",
+   "show": "1 sentence = 1 feature.",
+   "words": [
+    [
+     "thats",
+     100.28
+    ],
+    [
+     "a",
+     100.54
+    ],
+    [
+     "brand",
+     100.62
+    ],
+    [
+     "new",
+     100.82
+    ],
+    [
+     "feature",
+     101.08
+    ],
+    [
+     "built",
+     101.88
+    ],
+    [
+     "in",
+     102.1
+    ],
+    [
+     "one",
+     102.36
+    ],
+    [
+     "sentence",
+     102.52
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 9,
+   "start": 103.64,
+   "end": 110.54,
+   "say": "Now think about what you'd want. A shortcut for something you type fifty times a day. A piece of UI you wish existed.",
+   "show": "Idea cards: keycap x50/day; UI wireframe draws.",
+   "words": [
+    [
+     "now",
+     103.64
+    ],
+    [
+     "think",
+     103.82
+    ],
+    [
+     "about",
+     104.02
+    ],
+    [
+     "what",
+     104.24
+    ],
+    [
+     "youd",
+     104.5
+    ],
+    [
+     "want",
+     104.76
+    ],
+    [
+     "a",
+     105.68
+    ],
+    [
+     "shortcut",
+     105.78
+    ],
+    [
+     "for",
+     106.08
+    ],
+    [
+     "something",
+     106.48
+    ],
+    [
+     "you",
+     106.86
+    ],
+    [
+     "type",
+     107.06
+    ],
+    [
+     "fifty",
+     107.36
+    ],
+    [
+     "times",
+     107.66
+    ],
+    [
+     "a",
+     107.98
+    ],
+    [
+     "day",
+     108.18
+    ],
+    [
+     "a",
+     108.9
+    ],
+    [
+     "piece",
+     109.0
+    ],
+    [
+     "of",
+     109.26
+    ],
+    [
+     "u",
+     109.407
+    ],
+    [
+     "i",
+     109.554
+    ],
+    [
+     "you",
+     109.7
+    ],
+    [
+     "wish",
+     110.12
+    ],
+    [
+     "existed",
+     110.28
+    ]
+   ]
+  },
+  {
+   "ch": 3,
+   "i": 10,
+   "start": 111.46,
+   "end": 115.56,
+   "say": "If you get stuck, Anthropic has sample mods on GitHub you can copy and change.",
+   "show": "Repo card claude-code-playground/claude-code/mods.",
+   "words": [
+    [
+     "if",
+     111.46
+    ],
+    [
+     "you",
+     111.58
+    ],
+    [
+     "get",
+     111.72
+    ],
+    [
+     "stuck",
+     111.88
+    ],
+    [
+     "anthropic",
+     112.54
+    ],
+    [
+     "has",
+     113.06
+    ],
+    [
+     "sample",
+     113.22
+    ],
+    [
+     "mods",
+     113.46
+    ],
+    [
+     "on",
+     113.82
+    ],
+    [
+     "github",
+     114.02
+    ],
+    [
+     "you",
+     114.2
+    ],
+    [
+     "can",
+     114.62
+    ],
+    [
+     "copy",
+     114.78
+    ],
+    [
+     "and",
+     115.06
+    ],
+    [
+     "change",
+     115.32
+    ]
+   ]
+  },
+  {
+   "ch": 4,
+   "i": 0,
+   "start": 117.949,
+   "end": 121.409,
+   "say": "Part two is a quick explainer, because there's nothing to set up.",
+   "show": "Part card 02; 'no setup' badge.",
+   "words": [
+    [
+     "part",
+     117.949
+    ],
+    [
+     "two",
+     118.209
+    ],
+    [
+     "is",
+     118.469
+    ],
+    [
+     "a",
+     118.729
+    ],
+    [
+     "quick",
+     118.809
+    ],
+    [
+     "explainer",
+     118.989
+    ],
+    [
+     "because",
+     119.869
+    ],
+    [
+     "theres",
+     120.169
+    ],
+    [
+     "nothing",
+     120.489
+    ],
+    [
+     "to",
+     120.829
+    ],
+    [
+     "set",
+     121.009
+    ],
+    [
+     "up",
+     121.189
+    ]
+   ]
+  },
+  {
+   "ch": 4,
+   "i": 1,
+   "start": 122.089,
+   "end": 124.509,
+   "say": "Claude Code has a five-hour usage limit.",
+   "show": "5-hour ring meter fills.",
+   "words": [
+    [
+     "claude",
+     122.089
+    ],
+    [
+     "code",
+     122.449
+    ],
+    [
+     "has",
+     122.709
+    ],
+    [
+     "a",
+     123.089
+    ],
+    [
+     "fivehour",
+     123.439
+    ],
+    [
+     "usage",
+     123.789
+    ],
+    [
+     "limit",
+     124.029
+    ]
+   ]
+  },
+  {
+   "ch": 4,
+   "i": 2,
+   "start": 125.169,
+   "end": 132.009,
+   "say": "Before, if you hit it in the middle of a task, Claude stopped right there, sometimes halfway through editing your code.",
+   "show": "Half-written code cut off; LIMIT stamp.",
+   "words": [
+    [
+     "before",
+     125.169
+    ],
+    [
+     "if",
+     125.889
+    ],
+    [
+     "you",
+     126.209
+    ],
+    [
+     "hit",
+     126.309
+    ],
+    [
+     "it",
+     126.529
+    ],
+    [
+     "in",
+     126.649
+    ],
+    [
+     "the",
+     126.789
+    ],
+    [
+     "middle",
+     126.869
+    ],
+    [
+     "of",
+     127.109
+    ],
+    [
+     "a",
+     127.309
+    ],
+    [
+     "task",
+     127.349
+    ],
+    [
+     "claude",
+     128.149
+    ],
+    [
+     "stopped",
+     128.329
+    ],
+    [
+     "right",
+     128.709
+    ],
+    [
+     "there",
+     129.129
+    ],
+    [
+     "sometimes",
+     129.849
+    ],
+    [
+     "halfway",
+     130.269
+    ],
+    [
+     "through",
+     130.629
+    ],
+    [
+     "editing",
+     131.169
+    ],
+    [
+     "your",
+     131.509
+    ],
+    [
+     "code",
+     131.769
+    ]
+   ]
+  },
+  {
+   "ch": 4,
+   "i": 3,
+   "start": 132.729,
+   "end": 137.729,
+   "say": "Now it uses a small, fixed amount from your weekly limit to finish what it was doing.",
+   "show": "Slice moves from weekly bar; task completes.",
+   "words": [
+    [
+     "now",
+     132.729
+    ],
+    [
+     "it",
+     133.309
+    ],
+    [
+     "uses",
+     133.469
+    ],
+    [
+     "a",
+     133.709
+    ],
+    [
+     "small",
+     133.969
+    ],
+    [
+     "fixed",
+     134.389
+    ],
+    [
+     "amount",
+     134.749
+    ],
+    [
+     "from",
+     134.989
+    ],
+    [
+     "your",
+     135.349
+    ],
+    [
+     "weekly",
+     135.509
+    ],
+    [
+     "limit",
+     135.709
+    ],
+    [
+     "to",
+     136.189
+    ],
+    [
+     "finish",
+     136.609
+    ],
+    [
+     "what",
+     136.869
+    ],
+    [
+     "it",
+     137.189
+    ],
+    [
+     "was",
+     137.289
+    ],
+    [
+     "doing",
+     137.389
+    ]
+   ]
+  },
+  {
+   "ch": 4,
+   "i": 4,
+   "start": 138.469,
+   "end": 144.649,
+   "say": "On Pro, that happens once a week. On Max and Team Premium, it happens every time you hit the limit.",
+   "show": "Plan rows: Pro 1/week; Max + Team Premium every time.",
+   "words": [
+    [
+     "on",
+     138.469
+    ],
+    [
+     "pro",
+     138.569
+    ],
+    [
+     "that",
+     139.249
+    ],
+    [
+     "happens",
+     139.449
+    ],
+    [
+     "once",
+     139.769
+    ],
+    [
+     "a",
+     140.029
+    ],
+    [
+     "week",
+     140.229
+    ],
+    [
+     "on",
+     141.009
+    ],
+    [
+     "max",
+     141.169
+    ],
+    [
+     "and",
+     141.429
+    ],
+    [
+     "team",
+     141.709
+    ],
+    [
+     "premium",
+     141.889
+    ],
+    [
+     "it",
+     142.789
+    ],
+    [
+     "happens",
+     142.929
+    ],
+    [
+     "every",
+     143.189
+    ],
+    [
+     "time",
+     143.629
+    ],
+    [
+     "you",
+     143.969
+    ],
+    [
+     "hit",
+     144.129
+    ],
+    [
+     "the",
+     144.289
+    ],
+    [
+     "limit",
+     144.429
+    ]
+   ]
+  },
+  {
+   "ch": 4,
+   "i": 5,
+   "start": 144.649,
+   "end": 147.489,
+   "say": "No more broken, half-finished changes.",
+   "show": "Code completes, green check.",
+   "words": [
+    [
+     "no",
+     144.649
+    ],
+    [
+     "more",
+     145.469
+    ],
+    [
+     "broken",
+     145.749
+    ],
+    [
+     "halffinished",
+     146.369
+    ],
+    [
+     "changes",
+     146.989
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 0,
+   "start": 149.888,
+   "end": 151.248,
+   "say": "Next, two new models.",
+   "show": "Part card 03; two chips.",
+   "words": [
+    [
+     "next",
+     149.888
+    ],
+    [
+     "two",
+     150.548
+    ],
+    [
+     "new",
+     150.828
+    ],
+    [
+     "models",
+     150.988
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 1,
+   "start": 152.008,
+   "end": 154.248,
+   "say": "Opus five point five is now the default.",
+   "show": "Model picker: Opus 5.5 (default).",
+   "words": [
+    [
+     "opus",
+     152.008
+    ],
+    [
+     "five",
+     152.298
+    ],
+    [
+     "point",
+     152.588
+    ],
+    [
+     "five",
+     152.878
+    ],
+    [
+     "is",
+     153.168
+    ],
+    [
+     "now",
+     153.408
+    ],
+    [
+     "the",
+     153.648
+    ],
+    [
+     "default",
+     153.888
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 2,
+   "start": 155.068,
+   "end": 159.288,
+   "say": "Anthropic says it performs at roughly Fable five point one level on most work,",
+   "show": "Fable 5.1 \u2248 Opus 5.5.",
+   "words": [
+    [
+     "anthropic",
+     155.068
+    ],
+    [
+     "says",
+     155.568
+    ],
+    [
+     "it",
+     155.768
+    ],
+    [
+     "performs",
+     155.948
+    ],
+    [
+     "at",
+     156.188
+    ],
+    [
+     "roughly",
+     156.468
+    ],
+    [
+     "fable",
+     156.748
+    ],
+    [
+     "five",
+     157.103
+    ],
+    [
+     "point",
+     157.458
+    ],
+    [
+     "one",
+     157.813
+    ],
+    [
+     "level",
+     158.168
+    ],
+    [
+     "on",
+     158.448
+    ],
+    [
+     "most",
+     158.708
+    ],
+    [
+     "work",
+     158.948
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 3,
+   "start": 159.648,
+   "end": 164.388,
+   "say": "runs more than thirty percent faster than Opus five, and costs forty percent less.",
+   "show": "Speed +30%+, cost -40% bars.",
+   "words": [
+    [
+     "runs",
+     159.648
+    ],
+    [
+     "more",
+     159.908
+    ],
+    [
+     "than",
+     160.228
+    ],
+    [
+     "thirty",
+     160.508
+    ],
+    [
+     "percent",
+     160.788
+    ],
+    [
+     "faster",
+     161.068
+    ],
+    [
+     "than",
+     161.308
+    ],
+    [
+     "opus",
+     161.668
+    ],
+    [
+     "five",
+     162.188
+    ],
+    [
+     "and",
+     162.708
+    ],
+    [
+     "costs",
+     162.948
+    ],
+    [
+     "forty",
+     163.328
+    ],
+    [
+     "percent",
+     163.708
+    ],
+    [
+     "less",
+     164.088
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 4,
+   "start": 165.188,
+   "end": 168.448,
+   "say": "It also gives shorter replies and sticks closer to what you asked.",
+   "show": "Long reply shrinks; target.",
+   "words": [
+    [
+     "it",
+     165.188
+    ],
+    [
+     "also",
+     165.268
+    ],
+    [
+     "gives",
+     165.388
+    ],
+    [
+     "shorter",
+     165.748
+    ],
+    [
+     "replies",
+     166.048
+    ],
+    [
+     "and",
+     166.508
+    ],
+    [
+     "sticks",
+     166.948
+    ],
+    [
+     "closer",
+     167.188
+    ],
+    [
+     "to",
+     167.548
+    ],
+    [
+     "what",
+     167.848
+    ],
+    [
+     "you",
+     168.048
+    ],
+    [
+     "asked",
+     168.188
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 5,
+   "start": 169.268,
+   "end": 175.888,
+   "say": "Sonnet five point five is more than thirty percent faster than Sonnet five and uses far fewer tokens per task.",
+   "show": "Sonnet speed; token stack shrinks.",
+   "words": [
+    [
+     "sonnet",
+     169.268
+    ],
+    [
+     "five",
+     169.603
+    ],
+    [
+     "point",
+     169.938
+    ],
+    [
+     "five",
+     170.273
+    ],
+    [
+     "is",
+     170.608
+    ],
+    [
+     "more",
+     170.768
+    ],
+    [
+     "than",
+     170.988
+    ],
+    [
+     "thirty",
+     171.308
+    ],
+    [
+     "percent",
+     171.628
+    ],
+    [
+     "faster",
+     171.948
+    ],
+    [
+     "than",
+     172.228
+    ],
+    [
+     "sonnet",
+     172.628
+    ],
+    [
+     "five",
+     172.998
+    ],
+    [
+     "and",
+     173.368
+    ],
+    [
+     "uses",
+     173.928
+    ],
+    [
+     "far",
+     174.148
+    ],
+    [
+     "fewer",
+     174.528
+    ],
+    [
+     "tokens",
+     174.888
+    ],
+    [
+     "per",
+     175.228
+    ],
+    [
+     "task",
+     175.608
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 6,
+   "start": 176.648,
+   "end": 180.688,
+   "say": "It's best for well-defined jobs, like fixing a bug you can already reproduce.",
+   "show": "Bug + repro checklist.",
+   "words": [
+    [
+     "its",
+     176.648
+    ],
+    [
+     "best",
+     176.848
+    ],
+    [
+     "for",
+     177.008
+    ],
+    [
+     "welldefined",
+     177.368
+    ],
+    [
+     "jobs",
+     177.728
+    ],
+    [
+     "like",
+     178.188
+    ],
+    [
+     "fixing",
+     178.828
+    ],
+    [
+     "a",
+     179.168
+    ],
+    [
+     "bug",
+     179.348
+    ],
+    [
+     "you",
+     179.548
+    ],
+    [
+     "can",
+     179.788
+    ],
+    [
+     "already",
+     179.928
+    ],
+    [
+     "reproduce",
+     180.228
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 7,
+   "start": 181.708,
+   "end": 185.868,
+   "say": "Here's how to switch. To use Sonnet, type slash model sonnet.",
+   "show": "Terminal /model sonnet.",
+   "words": [
+    [
+     "heres",
+     181.708
+    ],
+    [
+     "how",
+     181.888
+    ],
+    [
+     "to",
+     181.988
+    ],
+    [
+     "switch",
+     182.088
+    ],
+    [
+     "to",
+     183.168
+    ],
+    [
+     "use",
+     183.228
+    ],
+    [
+     "sonnet",
+     183.468
+    ],
+    [
+     "type",
+     184.428
+    ],
+    [
+     "slash",
+     184.568
+    ],
+    [
+     "model",
+     184.948
+    ],
+    [
+     "sonnet",
+     185.308
+    ]
+   ]
+  },
+  {
+   "ch": 5,
+   "i": 8,
+   "start": 186.388,
+   "end": 194.288,
+   "say": "My rule of thumb: big, open-ended work stays on Opus. Small, clear tasks go to Sonnet, so you save your usage.",
+   "show": "Task sorting lanes.",
+   "words": [
+    [
+     "my",
+     186.388
+    ],
+    [
+     "rule",
+     186.668
+    ],
+    [
+     "of",
+     186.888
+    ],
+    [
+     "thumb",
+     187.028
+    ],
+    [
+     "big",
+     187.948
+    ],
+    [
+     "openended",
+     188.458
+    ],
+    [
+     "work",
+     188.968
+    ],
+    [
+     "stays",
+     189.248
+    ],
+    [
+     "on",
+     189.608
+    ],
+    [
+     "opus",
+     189.848
+    ],
+    [
+     "small",
+     191.308
+    ],
+    [
+     "clear",
+     191.388
+    ],
+    [
+     "tasks",
+     191.688
+    ],
+    [
+     "go",
+     192.048
+    ],
+    [
+     "to",
+     192.488
+    ],
+    [
+     "sonnet",
+     192.588
+    ],
+    [
+     "so",
+     193.288
+    ],
+    [
+     "you",
+     193.428
+    ],
+    [
+     "save",
+     193.588
+    ],
+    [
+     "your",
+     193.848
+    ],
+    [
+     "usage",
+     194.008
+    ]
+   ]
+  },
+  {
+   "ch": 6,
+   "i": 0,
+   "start": 196.735,
+   "end": 199.455,
+   "say": "Part four is free credit, and there are deadlines.",
+   "show": "Part card 04; deadline tag.",
+   "words": [
+    [
+     "part",
+     196.735
+    ],
+    [
+     "four",
+     196.995
+    ],
+    [
+     "is",
+     197.255
+    ],
+    [
+     "free",
+     197.655
+    ],
+    [
+     "credit",
+     197.895
+    ],
+    [
+     "and",
+     198.595
+    ],
+    [
+     "there",
+     198.775
+    ],
+    [
+     "are",
+     198.935
+    ],
+    [
+     "deadlines",
+     199.095
+    ]
+   ]
+  },
+  {
+   "ch": 6,
+   "i": 1,
+   "start": 200.355,
+   "end": 204.195,
+   "say": "Cloud sessions are now out of research preview and included in your plan.",
+   "show": "Preview badge peels; included.",
+   "words": [
+    [
+     "cloud",
+     200.355
+    ],
+    [
+     "sessions",
+     200.575
+    ],
+    [
+     "are",
+     200.935
+    ],
+    [
+     "now",
+     201.375
+    ],
+    [
+     "out",
+     201.655
+    ],
+    [
+     "of",
+     201.915
+    ],
+    [
+     "research",
+     202.015
+    ],
+    [
+     "preview",
+     202.295
+    ],
+    [
+     "and",
+     202.715
+    ],
+    [
+     "included",
+     203.155
+    ],
+    [
+     "in",
+     203.495
+    ],
+    [
+     "your",
+     203.775
+    ],
+    [
+     "plan",
+     203.875
+    ]
+   ]
+  },
+  {
+   "ch": 6,
+   "i": 2,
+   "start": 204.955,
+   "end": 214.055,
+   "say": "If you're an existing Pro or Max subscriber, you also get a one-time bonus credit. One hundred dollars on Pro. Two hundred fifty dollars on Max.",
+   "show": "Credit cards $100 / $250.",
+   "words": [
+    [
+     "if",
+     204.955
+    ],
+    [
+     "youre",
+     205.035
+    ],
+    [
+     "an",
+     205.275
+    ],
+    [
+     "existing",
+     205.395
+    ],
+    [
+     "pro",
+     205.715
+    ],
+    [
+     "or",
+     206.095
+    ],
+    [
+     "max",
+     206.435
+    ],
+    [
+     "subscriber",
+     206.635
+    ],
+    [
+     "you",
+     207.795
+    ],
+    [
+     "also",
+     207.875
+    ],
+    [
+     "get",
+     208.095
+    ],
+    [
+     "a",
+     208.395
+    ],
+    [
+     "onetime",
+     208.695
+    ],
+    [
+     "bonus",
+     208.995
+    ],
+    [
+     "credit",
+     209.355
+    ],
+    [
+     "one",
+     209.705
+    ],
+    [
+     "hundred",
+     210.055
+    ],
+    [
+     "dollars",
+     210.405
+    ],
+    [
+     "on",
+     210.755
+    ],
+    [
+     "pro",
+     211.435
+    ],
+    [
+     "two",
+     211.783
+    ],
+    [
+     "hundred",
+     212.131
+    ],
+    [
+     "fifty",
+     212.479
+    ],
+    [
+     "dollars",
+     212.827
+    ],
+    [
+     "on",
+     213.175
+    ],
+    [
+     "max",
+     213.835
+    ]
+   ]
+  },
+  {
+   "ch": 6,
+   "i": 3,
+   "start": 215.235,
+   "end": 218.255,
+   "say": "Cloud sessions spend this credit first, before your regular usage.",
+   "show": "Credit bucket drains first.",
+   "words": [
+    [
+     "cloud",
+     215.235
+    ],
+    [
+     "sessions",
+     215.235
+    ],
+    [
+     "spend",
+     215.575
+    ],
+    [
+     "this",
+     215.895
+    ],
+    [
+     "credit",
+     216.135
+    ],
+    [
+     "first",
+     216.395
+    ],
+    [
+     "before",
+     216.755
+    ],
+    [
+     "your",
+     217.235
+    ],
+    [
+     "regular",
+     217.555
+    ],
+    [
+     "usage",
+     217.895
+    ]
+   ]
+  },
+  {
+   "ch": 6,
+   "i": 4,
+   "start": 219.135,
+   "end": 225.975,
+   "say": "Here's how to get it. Open Claude Code and type slash claim credit. Do it by October seventh, or it's gone.",
+   "show": "Terminal /claim-credit; Oct 7 calendar.",
+   "words": [
+    [
+     "heres",
+     219.135
+    ],
+    [
+     "how",
+     219.315
+    ],
+    [
+     "to",
+     219.435
+    ],
+    [
+     "get",
+     219.535
+    ],
+    [
+     "it",
+     219.695
+    ],
+    [
+     "open",
+     220.735
+    ],
+    [
+     "claude",
+     220.875
+    ],
+    [
+     "code",
+     221.015
+    ],
+    [
+     "and",
+     221.395
+    ],
+    [
+     "type",
+     221.755
+    ],
+    [
+     "slash",
+     221.975
+    ],
+    [
+     "claim",
+     222.355
+    ],
+    [
+     "credit",
+     222.735
+    ],
+    [
+     "do",
+     223.595
+    ],
+    [
+     "it",
+     223.875
+    ],
+    [
+     "by",
+     224.015
+    ],
+    [
+     "october",
+     224.175
+    ],
+    [
+     "seventh",
+     224.845
+    ],
+    [
+     "or",
+     225.515
+    ],
+    [
+     "its",
+     225.595
+    ],
+    [
+     "gone",
+     225.775
+    ]
+   ]
+  },
+  {
+   "ch": 6,
+   "i": 5,
+   "start": 226.775,
+   "end": 235.495,
+   "say": "There's a second freebie. Five-hour limits went up by twenty percent for everyone, and every Pro, Max, and Team user got one full limit reset.",
+   "show": "Meter +20%; reset arrow.",
+   "words": [
+    [
+     "theres",
+     226.775
+    ],
+    [
+     "a",
+     226.915
+    ],
+    [
+     "second",
+     226.995
+    ],
+    [
+     "freebie",
+     227.295
+    ],
+    [
+     "fivehour",
+     228.085
+    ],
+    [
+     "limits",
+     228.875
+    ],
+    [
+     "went",
+     229.155
+    ],
+    [
+     "up",
+     229.435
+    ],
+    [
+     "by",
+     229.595
+    ],
+    [
+     "twenty",
+     229.895
+    ],
+    [
+     "percent",
+     230.195
+    ],
+    [
+     "for",
+     230.495
+    ],
+    [
+     "everyone",
+     230.695
+    ],
+    [
+     "and",
+     231.455
+    ],
+    [
+     "every",
+     231.655
+    ],
+    [
+     "pro",
+     231.995
+    ],
+    [
+     "max",
+     232.635
+    ],
+    [
+     "and",
+     232.935
+    ],
+    [
+     "team",
+     233.215
+    ],
+    [
+     "user",
+     233.415
+    ],
+    [
+     "got",
+     233.775
+    ],
+    [
+     "one",
+     234.255
+    ],
+    [
+     "full",
+     234.575
+    ],
+    [
+     "limit",
+     234.915
+    ],
+    [
+     "reset",
+     235.175
+    ]
+   ]
+  },
+  {
+   "ch": 6,
+   "i": 6,
+   "start": 236.315,
+   "end": 240.555,
+   "say": "To find it, go to Settings, then Usage. Use it by October twenty-second.",
+   "show": "Settings \u203a Usage click path; Oct 22 calendar.",
+   "words": [
+    [
+     "to",
+     236.315
+    ],
+    [
+     "find",
+     236.415
+    ],
+    [
+     "it",
+     236.675
+    ],
+    [
+     "go",
+     237.235
+    ],
+    [
+     "to",
+     237.335
+    ],
+    [
+     "settings",
+     237.455
+    ],
+    [
+     "then",
+     238.355
+    ],
+    [
+     "usage",
+     238.475
+    ],
+    [
+     "use",
+     238.715
+    ],
+    [
+     "it",
+     239.755
+    ],
+    [
+     "by",
+     239.895
+    ],
+    [
+     "october",
+     240.075
+    ],
+    [
+     "twentysecond",
+     240.315
+    ]
+   ]
+  },
+  {
+   "ch": 7,
+   "i": 0,
+   "start": 243.582,
+   "end": 249.642,
+   "say": "Part five. With two new models in ten days, some of your old instructions might now be working against you.",
+   "show": "Part card 05; 10-day bracket; old rules pull back.",
+   "words": [
+    [
+     "part",
+     243.582
+    ],
+    [
+     "five",
+     244.062
+    ],
+    [
+     "with",
+     244.542
+    ],
+    [
+     "two",
+     244.742
+    ],
+    [
+     "new",
+     244.982
+    ],
+    [
+     "models",
+     245.202
+    ],
+    [
+     "in",
+     245.522
+    ],
+    [
+     "ten",
+     245.742
+    ],
+    [
+     "days",
+     245.962
+    ],
+    [
+     "some",
+     246.842
+    ],
+    [
+     "of",
+     247.002
+    ],
+    [
+     "your",
+     247.142
+    ],
+    [
+     "old",
+     247.282
+    ],
+    [
+     "instructions",
+     247.462
+    ],
+    [
+     "might",
+     247.922
+    ],
+    [
+     "now",
+     248.342
+    ],
+    [
+     "be",
+     248.562
+    ],
+    [
+     "working",
+     248.762
+    ],
+    [
+     "against",
+     248.982
+    ],
+    [
+     "you",
+     249.382
+    ]
+   ]
+  },
+  {
+   "ch": 7,
+   "i": 1,
+   "start": 250.202,
+   "end": 254.462,
+   "say": "That's what prompt-audit is for. Type slash checkup prompt-audit.",
+   "show": "Terminal /checkup prompt-audit.",
+   "words": [
+    [
+     "thats",
+     250.202
+    ],
+    [
+     "what",
+     250.582
+    ],
+    [
+     "prompt",
+     250.702
+    ],
+    [
+     "audit",
+     250.902
+    ],
+    [
+     "is",
+     251.262
+    ],
+    [
+     "for",
+     251.522
+    ],
+    [
+     "type",
+     252.482
+    ],
+    [
+     "slash",
+     252.642
+    ],
+    [
+     "checkup",
+     253.142
+    ],
+    [
+     "prompt",
+     253.722
+    ],
+    [
+     "audit",
+     254.122
+    ]
+   ]
+  },
+  {
+   "ch": 7,
+   "i": 2,
+   "start": 255.462,
+   "end": 260.462,
+   "say": "Claude reads your CLAUDE.md files, skills, agents, and custom commands.",
+   "show": "Four file cards scanned.",
+   "words": [
+    [
+     "claude",
+     255.462
+    ],
+    [
+     "reads",
+     255.462
+    ],
+    [
+     "your",
+     255.682
+    ],
+    [
+     "claude",
+     255.91
+    ],
+    [
+     "dot",
+     256.138
+    ],
+    [
+     "m",
+     256.366
+    ],
+    [
+     "d",
+     256.594
+    ],
+    [
+     "files",
+     256.822
+    ],
+    [
+     "skills",
+     257.742
+    ],
+    [
+     "agents",
+     258.722
+    ],
+    [
+     "and",
+     259.522
+    ],
+    [
+     "custom",
+     259.702
+    ],
+    [
+     "commands",
+     259.942
+    ]
+   ]
+  },
+  {
+   "ch": 7,
+   "i": 3,
+   "start": 261.062,
+   "end": 267.802,
+   "say": "It flags instructions written for older models, file paths that no longer exist, and rules that contradict each other.",
+   "show": "Three flags.",
+   "words": [
+    [
+     "it",
+     261.062
+    ],
+    [
+     "flags",
+     261.122
+    ],
+    [
+     "instructions",
+     261.342
+    ],
+    [
+     "written",
+     262.022
+    ],
+    [
+     "for",
+     262.382
+    ],
+    [
+     "older",
+     262.642
+    ],
+    [
+     "models",
+     262.882
+    ],
+    [
+     "file",
+     263.782
+    ],
+    [
+     "paths",
+     264.002
+    ],
+    [
+     "that",
+     264.322
+    ],
+    [
+     "no",
+     264.642
+    ],
+    [
+     "longer",
+     264.842
+    ],
+    [
+     "exist",
+     265.142
+    ],
+    [
+     "and",
+     266.082
+    ],
+    [
+     "rules",
+     266.282
+    ],
+    [
+     "that",
+     266.542
+    ],
+    [
+     "contradict",
+     266.822
+    ],
+    [
+     "each",
+     267.202
+    ],
+    [
+     "other",
+     267.602
+    ]
+   ]
+  },
+  {
+   "ch": 7,
+   "i": 4,
+   "start": 268.462,
+   "end": 274.202,
+   "say": "Here's what I like about it. It doesn't change anything by itself. It writes a report and a patch file.",
+   "show": "Lock; report.md + changes.patch.",
+   "words": [
+    [
+     "heres",
+     268.462
+    ],
+    [
+     "what",
+     268.642
+    ],
+    [
+     "i",
+     268.742
+    ],
+    [
+     "like",
+     268.862
+    ],
+    [
+     "about",
+     269.002
+    ],
+    [
+     "it",
+     269.282
+    ],
+    [
+     "it",
+     269.842
+    ],
+    [
+     "doesnt",
+     270.082
+    ],
+    [
+     "change",
+     270.362
+    ],
+    [
+     "anything",
+     270.542
+    ],
+    [
+     "by",
+     270.942
+    ],
+    [
+     "itself",
+     271.342
+    ],
+    [
+     "it",
+     271.582
+    ],
+    [
+     "writes",
+     272.422
+    ],
+    [
+     "a",
+     272.622
+    ],
+    [
+     "report",
+     272.822
+    ],
+    [
+     "and",
+     273.142
+    ],
+    [
+     "a",
+     273.562
+    ],
+    [
+     "patch",
+     273.682
+    ],
+    [
+     "file",
+     273.882
+    ]
+   ]
+  },
+  {
+   "ch": 7,
+   "i": 5,
+   "start": 274.882,
+   "end": 277.782,
+   "say": "You read the report, then decide which fixes to apply.",
+   "show": "Checklist toggles.",
+   "words": [
+    [
+     "you",
+     274.882
+    ],
+    [
+     "read",
+     274.902
+    ],
+    [
+     "the",
+     275.082
+    ],
+    [
+     "report",
+     275.222
+    ],
+    [
+     "then",
+     276.022
+    ],
+    [
+     "decide",
+     276.242
+    ],
+    [
+     "which",
+     276.502
+    ],
+    [
+     "fixes",
+     276.882
+    ],
+    [
+     "to",
+     277.242
+    ],
+    [
+     "apply",
+     277.502
+    ]
+   ]
+  },
+  {
+   "ch": 7,
+   "i": 6,
+   "start": 278.482,
+   "end": 281.522,
+   "say": "If you've been using Claude Code for a while, run this today.",
+   "show": "Kinetic: run it today.",
+   "words": [
+    [
+     "if",
+     278.482
+    ],
+    [
+     "youve",
+     278.602
+    ],
+    [
+     "been",
+     278.822
+    ],
+    [
+     "using",
+     278.962
+    ],
+    [
+     "claude",
+     279.272
+    ],
+    [
+     "code",
+     279.582
+    ],
+    [
+     "for",
+     279.782
+    ],
+    [
+     "a",
+     280.062
+    ],
+    [
+     "while",
+     280.142
+    ],
+    [
+     "run",
+     280.762
+    ],
+    [
+     "this",
+     280.962
+    ],
+    [
+     "today",
+     281.162
+    ]
+   ]
+  },
+  {
+   "ch": 8,
+   "i": 0,
+   "start": 283.834,
+   "end": 288.154,
+   "say": "Part six is a hidden helper. It's a built-in mod called You should know.",
+   "show": "Part card 06; name revealed.",
+   "words": [
+    [
+     "part",
+     283.834
+    ],
+    [
+     "six",
+     284.114
+    ],
+    [
+     "is",
+     284.394
+    ],
+    [
+     "a",
+     284.634
+    ],
+    [
+     "hidden",
+     284.734
+    ],
+    [
+     "helper",
+     284.994
+    ],
+    [
+     "its",
+     286.054
+    ],
+    [
+     "a",
+     286.134
+    ],
+    [
+     "builtin",
+     286.374
+    ],
+    [
+     "mod",
+     286.614
+    ],
+    [
+     "called",
+     286.834
+    ],
+    [
+     "you",
+     287.234
+    ],
+    [
+     "should",
+     287.694
+    ],
+    [
+     "know",
+     287.874
+    ]
+   ]
+  },
+  {
+   "ch": 8,
+   "i": 1,
+   "start": 288.774,
+   "end": 292.234,
+   "say": "Once it's on, a small side agent reads along while Claude works.",
+   "show": "Side agent scans the log.",
+   "words": [
+    [
+     "once",
+     288.774
+    ],
+    [
+     "its",
+     288.954
+    ],
+    [
+     "on",
+     289.234
+    ],
+    [
+     "a",
+     289.654
+    ],
+    [
+     "small",
+     289.774
+    ],
+    [
+     "side",
+     289.994
+    ],
+    [
+     "agent",
+     290.354
+    ],
+    [
+     "reads",
+     290.714
+    ],
+    [
+     "along",
+     290.954
+    ],
+    [
+     "while",
+     291.274
+    ],
+    [
+     "claude",
+     291.654
+    ],
+    [
+     "works",
+     291.834
+    ]
+   ]
+  },
+  {
+   "ch": 8,
+   "i": 2,
+   "start": 292.954,
+   "end": 296.674,
+   "say": "When it spots something you or Claude might have missed, it gives you a heads up.",
+   "show": "Heads-up notice pops.",
+   "words": [
+    [
+     "when",
+     292.954
+    ],
+    [
+     "it",
+     293.054
+    ],
+    [
+     "spots",
+     293.154
+    ],
+    [
+     "something",
+     293.334
+    ],
+    [
+     "you",
+     293.834
+    ],
+    [
+     "or",
+     294.094
+    ],
+    [
+     "claude",
+     294.234
+    ],
+    [
+     "might",
+     294.474
+    ],
+    [
+     "have",
+     294.754
+    ],
+    [
+     "missed",
+     294.914
+    ],
+    [
+     "it",
+     295.674
+    ],
+    [
+     "gives",
+     295.754
+    ],
+    [
+     "you",
+     295.914
+    ],
+    [
+     "a",
+     296.134
+    ],
+    [
+     "heads",
+     296.234
+    ],
+    [
+     "up",
+     296.434
+    ]
+   ]
+  },
+  {
+   "ch": 8,
+   "i": 3,
+   "start": 297.194,
+   "end": 298.894,
+   "say": "To turn it on, type this command.",
+   "show": "Terminal /plugin enable \u2026",
+   "words": [
+    [
+     "to",
+     297.194
+    ],
+    [
+     "turn",
+     297.314
+    ],
+    [
+     "it",
+     297.534
+    ],
+    [
+     "on",
+     297.634
+    ],
+    [
+     "type",
+     298.294
+    ],
+    [
+     "this",
+     298.454
+    ],
+    [
+     "command",
+     298.694
+    ]
+   ]
+  },
+  {
+   "ch": 8,
+   "i": 4,
+   "start": 299.754,
+   "end": 303.374,
+   "say": "It's also a great mod to study if you want ideas for building your own.",
+   "show": "Magnifier over the mod.",
+   "words": [
+    [
+     "its",
+     299.754
+    ],
+    [
+     "also",
+     299.954
+    ],
+    [
+     "a",
+     300.214
+    ],
+    [
+     "great",
+     300.354
+    ],
+    [
+     "mod",
+     300.574
+    ],
+    [
+     "to",
+     300.874
+    ],
+    [
+     "study",
+     301.074
+    ],
+    [
+     "if",
+     301.334
+    ],
+    [
+     "you",
+     301.594
+    ],
+    [
+     "want",
+     301.714
+    ],
+    [
+     "ideas",
+     301.934
+    ],
+    [
+     "for",
+     302.314
+    ],
+    [
+     "building",
+     302.674
+    ],
+    [
+     "your",
+     302.894
+    ],
+    [
+     "own",
+     303.174
+    ]
+   ]
+  },
+  {
+   "ch": 9,
+   "i": 0,
+   "start": 305.696,
+   "end": 308.236,
+   "say": "Part seven is for people building apps on the Claude API.",
+   "show": "Part card 07; API badge.",
+   "words": [
+    [
+     "part",
+     305.696
+    ],
+    [
+     "seven",
+     305.796
+    ],
+    [
+     "is",
+     306.276
+    ],
+    [
+     "for",
+     306.496
+    ],
+    [
+     "people",
+     306.656
+    ],
+    [
+     "building",
+     306.896
+    ],
+    [
+     "apps",
+     307.256
+    ],
+    [
+     "on",
+     307.556
+    ],
+    [
+     "the",
+     307.916
+    ],
+    [
+     "claude",
+     308.016
+    ],
+    [
+     "a",
+     308.071
+    ],
+    [
+     "p",
+     308.126
+    ],
+    [
+     "i",
+     308.181
+    ]
+   ]
+  },
+  {
+   "ch": 9,
+   "i": 1,
+   "start": 309.676,
+   "end": 314.516,
+   "say": "An eval is a test that gives you a number, so you know if your app is actually getting better.",
+   "show": "Test \u2192 score \u2192 versions.",
+   "words": [
+    [
+     "an",
+     309.676
+    ],
+    [
+     "eval",
+     309.796
+    ],
+    [
+     "is",
+     310.056
+    ],
+    [
+     "a",
+     310.476
+    ],
+    [
+     "test",
+     310.596
+    ],
+    [
+     "that",
+     310.796
+    ],
+    [
+     "gives",
+     311.036
+    ],
+    [
+     "you",
+     311.236
+    ],
+    [
+     "a",
+     311.436
+    ],
+    [
+     "number",
+     311.536
+    ],
+    [
+     "so",
+     312.096
+    ],
+    [
+     "you",
+     312.196
+    ],
+    [
+     "know",
+     312.356
+    ],
+    [
+     "if",
+     312.536
+    ],
+    [
+     "your",
+     312.716
+    ],
+    [
+     "app",
+     312.836
+    ],
+    [
+     "is",
+     313.136
+    ],
+    [
+     "actually",
+     313.376
+    ],
+    [
+     "getting",
+     313.816
+    ],
+    [
+     "better",
+     314.096
+    ]
+   ]
+  },
+  {
+   "ch": 9,
+   "i": 2,
+   "start": 315.156,
+   "end": 319.636,
+   "say": "Claude Code can now build one for you. Ask it the question you want answered.",
+   "show": "Terminal build-eval.",
+   "words": [
+    [
+     "claude",
+     315.156
+    ],
+    [
+     "code",
+     315.456
+    ],
+    [
+     "can",
+     315.796
+    ],
+    [
+     "now",
+     316.156
+    ],
+    [
+     "build",
+     316.436
+    ],
+    [
+     "one",
+     316.676
+    ],
+    [
+     "for",
+     316.916
+    ],
+    [
+     "you",
+     317.196
+    ],
+    [
+     "ask",
+     317.876
+    ],
+    [
+     "it",
+     318.056
+    ],
+    [
+     "the",
+     318.276
+    ],
+    [
+     "question",
+     318.396
+    ],
+    [
+     "you",
+     318.716
+    ],
+    [
+     "want",
+     318.996
+    ],
+    [
+     "answered",
+     319.176
+    ]
+   ]
+  },
+  {
+   "ch": 9,
+   "i": 3,
+   "start": 320.296,
+   "end": 327.236,
+   "say": "It interviews you, pulls real examples from your tickets and codebase, picks a grader, and runs a baseline once you approve.",
+   "show": "Four-step pipeline.",
+   "words": [
+    [
+     "it",
+     320.296
+    ],
+    [
+     "interviews",
+     320.356
+    ],
+    [
+     "you",
+     320.716
+    ],
+    [
+     "pulls",
+     321.456
+    ],
+    [
+     "real",
+     321.696
+    ],
+    [
+     "examples",
+     322.016
+    ],
+    [
+     "from",
+     322.516
+    ],
+    [
+     "your",
+     322.856
+    ],
+    [
+     "tickets",
+     322.996
+    ],
+    [
+     "and",
+     323.276
+    ],
+    [
+     "codebase",
+     323.866
+    ],
+    [
+     "picks",
+     324.456
+    ],
+    [
+     "a",
+     324.676
+    ],
+    [
+     "grader",
+     324.896
+    ],
+    [
+     "and",
+     325.676
+    ],
+    [
+     "runs",
+     325.776
+    ],
+    [
+     "a",
+     325.996
+    ],
+    [
+     "baseline",
+     326.176
+    ],
+    [
+     "once",
+     326.516
+    ],
+    [
+     "you",
+     326.876
+    ],
+    [
+     "approve",
+     327.076
+    ]
+   ]
+  },
+  {
+   "ch": 9,
+   "i": 4,
+   "start": 328.196,
+   "end": 329.356,
+   "say": "Then tell it what to improve.",
+   "show": "Terminal hillclimb.",
+   "words": [
+    [
+     "then",
+     328.196
+    ],
+    [
+     "tell",
+     328.356
+    ],
+    [
+     "it",
+     328.576
+    ],
+    [
+     "what",
+     328.756
+    ],
+    [
+     "to",
+     328.936
+    ],
+    [
+     "improve",
+     329.096
+    ]
+   ]
+  },
+  {
+   "ch": 9,
+   "i": 5,
+   "start": 330.116,
+   "end": 337.556,
+   "say": "It changes your prompts, skills, or model one step at a time, and undoes anything that only helps on the training cases.",
+   "show": "Hill-climb steps; overfit step reverted.",
+   "words": [
+    [
+     "it",
+     330.116
+    ],
+    [
+     "changes",
+     330.276
+    ],
+    [
+     "your",
+     330.496
+    ],
+    [
+     "prompts",
+     330.836
+    ],
+    [
+     "skills",
+     331.536
+    ],
+    [
+     "or",
+     332.576
+    ],
+    [
+     "model",
+     332.756
+    ],
+    [
+     "one",
+     332.976
+    ],
+    [
+     "step",
+     333.396
+    ],
+    [
+     "at",
+     333.696
+    ],
+    [
+     "a",
+     333.856
+    ],
+    [
+     "time",
+     333.916
+    ],
+    [
+     "and",
+     334.276
+    ],
+    [
+     "undoes",
+     334.796
+    ],
+    [
+     "anything",
+     335.256
+    ],
+    [
+     "that",
+     335.636
+    ],
+    [
+     "only",
+     336.036
+    ],
+    [
+     "helps",
+     336.256
+    ],
+    [
+     "on",
+     336.616
+    ],
+    [
+     "the",
+     336.836
+    ],
+    [
+     "training",
+     336.936
+    ],
+    [
+     "cases",
+     337.176
+    ]
+   ]
+  },
+  {
+   "ch": 10,
+   "i": 0,
+   "start": 340.097,
+   "end": 344.857,
+   "say": "Part eight. Once you've built something good, you can now publish it to the Claude directory.",
+   "show": "Part card 08; plugin into directory.",
+   "words": [
+    [
+     "part",
+     340.097
+    ],
+    [
+     "eight",
+     340.677
+    ],
+    [
+     "once",
+     341.257
+    ],
+    [
+     "youve",
+     341.257
+    ],
+    [
+     "built",
+     341.537
+    ],
+    [
+     "something",
+     341.737
+    ],
+    [
+     "good",
+     341.977
+    ],
+    [
+     "you",
+     342.777
+    ],
+    [
+     "can",
+     342.837
+    ],
+    [
+     "now",
+     342.957
+    ],
+    [
+     "publish",
+     343.217
+    ],
+    [
+     "it",
+     343.597
+    ],
+    [
+     "to",
+     343.797
+    ],
+    [
+     "the",
+     343.957
+    ],
+    [
+     "claude",
+     344.107
+    ],
+    [
+     "directory",
+     344.257
+    ]
+   ]
+  },
+  {
+   "ch": 10,
+   "i": 1,
+   "start": 345.777,
+   "end": 353.297,
+   "say": "Anthropic's new developer portal lets you point it at your code repository, watch your plugin go through review, and pick when it goes live.",
+   "show": "Repo \u2192 review \u2192 live.",
+   "words": [
+    [
+     "anthropics",
+     345.777
+    ],
+    [
+     "new",
+     346.197
+    ],
+    [
+     "developer",
+     346.357
+    ],
+    [
+     "portal",
+     346.657
+    ],
+    [
+     "lets",
+     347.137
+    ],
+    [
+     "you",
+     347.497
+    ],
+    [
+     "point",
+     347.677
+    ],
+    [
+     "it",
+     347.957
+    ],
+    [
+     "at",
+     348.097
+    ],
+    [
+     "your",
+     348.277
+    ],
+    [
+     "code",
+     348.417
+    ],
+    [
+     "repository",
+     348.657
+    ],
+    [
+     "watch",
+     349.937
+    ],
+    [
+     "your",
+     350.117
+    ],
+    [
+     "plugin",
+     350.337
+    ],
+    [
+     "go",
+     350.617
+    ],
+    [
+     "through",
+     350.917
+    ],
+    [
+     "review",
+     351.177
+    ],
+    [
+     "and",
+     352.097
+    ],
+    [
+     "pick",
+     352.157
+    ],
+    [
+     "when",
+     352.377
+    ],
+    [
+     "it",
+     352.617
+    ],
+    [
+     "goes",
+     352.717
+    ],
+    [
+     "live",
+     352.877
+    ]
+   ]
+  },
+  {
+   "ch": 10,
+   "i": 2,
+   "start": 354.017,
+   "end": 357.577,
+   "say": "And it reaches everyone using Claude, not just Claude Code users.",
+   "show": "Audience rings expand.",
+   "words": [
+    [
+     "and",
+     354.017
+    ],
+    [
+     "it",
+     354.057
+    ],
+    [
+     "reaches",
+     354.157
+    ],
+    [
+     "everyone",
+     354.397
+    ],
+    [
+     "using",
+     354.917
+    ],
+    [
+     "claude",
+     355.587
+    ],
+    [
+     "not",
+     356.257
+    ],
+    [
+     "just",
+     356.437
+    ],
+    [
+     "claude",
+     356.687
+    ],
+    [
+     "code",
+     356.937
+    ],
+    [
+     "users",
+     357.257
+    ]
+   ]
+  },
+  {
+   "ch": 11,
+   "i": 0,
+   "start": 360.009,
+   "end": 362.009,
+   "say": "Two quick tips from inside Anthropic.",
+   "show": "Part card 09.",
+   "words": [
+    [
+     "two",
+     360.009
+    ],
+    [
+     "quick",
+     360.169
+    ],
+    [
+     "tips",
+     360.369
+    ],
+    [
+     "from",
+     360.609
+    ],
+    [
+     "inside",
+     360.949
+    ],
+    [
+     "anthropic",
+     361.249
+    ]
+   ]
+  },
+  {
+   "ch": 11,
+   "i": 1,
+   "start": 362.489,
+   "end": 365.529,
+   "say": "Doug Safreno got tired of long, vague review lists.",
+   "show": "Doug card; 15 vague items.",
+   "words": [
+    [
+     "doug",
+     362.489
+    ],
+    [
+     "safreno",
+     362.869
+    ],
+    [
+     "got",
+     363.249
+    ],
+    [
+     "tired",
+     363.509
+    ],
+    [
+     "of",
+     363.909
+    ],
+    [
+     "long",
+     364.089
+    ],
+    [
+     "vague",
+     364.309
+    ],
+    [
+     "review",
+     364.729
+    ],
+    [
+     "lists",
+     365.049
+    ]
+   ]
+  },
+  {
+   "ch": 11,
+   "i": 2,
+   "start": 366.209,
+   "end": 375.629,
+   "say": "Now he asks Claude for one outstanding item at a time, in rough priority order, ending with a simple A-or-B question. He moves through them much faster.",
+   "show": "One card at a time; A/B buttons.",
+   "words": [
+    [
+     "now",
+     366.209
+    ],
+    [
+     "he",
+     366.349
+    ],
+    [
+     "asks",
+     366.589
+    ],
+    [
+     "claude",
+     366.809
+    ],
+    [
+     "for",
+     367.129
+    ],
+    [
+     "one",
+     367.469
+    ],
+    [
+     "outstanding",
+     367.729
+    ],
+    [
+     "item",
+     368.009
+    ],
+    [
+     "at",
+     368.689
+    ],
+    [
+     "a",
+     368.869
+    ],
+    [
+     "time",
+     368.909
+    ],
+    [
+     "in",
+     369.729
+    ],
+    [
+     "rough",
+     369.789
+    ],
+    [
+     "priority",
+     369.969
+    ],
+    [
+     "order",
+     370.269
+    ],
+    [
+     "ending",
+     371.289
+    ],
+    [
+     "with",
+     371.549
+    ],
+    [
+     "a",
+     371.769
+    ],
+    [
+     "simple",
+     371.889
+    ],
+    [
+     "a",
+     372.209
+    ],
+    [
+     "or",
+     372.629
+    ],
+    [
+     "b",
+     372.849
+    ],
+    [
+     "question",
+     373.029
+    ],
+    [
+     "he",
+     374.229
+    ],
+    [
+     "moves",
+     374.309
+    ],
+    [
+     "through",
+     374.509
+    ],
+    [
+     "them",
+     374.809
+    ],
+    [
+     "much",
+     375.049
+    ],
+    [
+     "faster",
+     375.249
+    ]
+   ]
+  },
+  {
+   "ch": 11,
+   "i": 3,
+   "start": 376.649,
+   "end": 378.709,
+   "say": "Andrew Edstrom's session kept being too cautious.",
+   "show": "Andrew card; tiny steps, stops.",
+   "words": [
+    [
+     "andrew",
+     376.649
+    ],
+    [
+     "edstroms",
+     376.649
+    ],
+    [
+     "session",
+     377.249
+    ],
+    [
+     "kept",
+     377.469
+    ],
+    [
+     "being",
+     377.789
+    ],
+    [
+     "too",
+     378.089
+    ],
+    [
+     "cautious",
+     378.289
+    ]
+   ]
+  },
+  {
+   "ch": 11,
+   "i": 4,
+   "start": 379.329,
+   "end": 386.609,
+   "say": "So he had Claude read a colleague's write-up of a big, bold project. The next morning, he woke up to one hundred thirty-three pull requests.",
+   "show": "Write-up read; night\u2192morning; 133 PRs.",
+   "words": [
+    [
+     "so",
+     379.329
+    ],
+    [
+     "he",
+     379.529
+    ],
+    [
+     "had",
+     379.669
+    ],
+    [
+     "claude",
+     379.829
+    ],
+    [
+     "read",
+     380.049
+    ],
+    [
+     "a",
+     380.349
+    ],
+    [
+     "colleagues",
+     380.449
+    ],
+    [
+     "writeup",
+     380.889
+    ],
+    [
+     "of",
+     381.329
+    ],
+    [
+     "a",
+     381.449
+    ],
+    [
+     "big",
+     381.569
+    ],
+    [
+     "bold",
+     381.789
+    ],
+    [
+     "project",
+     382.009
+    ],
+    [
+     "the",
+     383.189
+    ],
+    [
+     "next",
+     383.429
+    ],
+    [
+     "morning",
+     383.569
+    ],
+    [
+     "he",
+     384.229
+    ],
+    [
+     "woke",
+     384.329
+    ],
+    [
+     "up",
+     384.469
+    ],
+    [
+     "to",
+     384.709
+    ],
+    [
+     "one",
+     384.959
+    ],
+    [
+     "hundred",
+     385.209
+    ],
+    [
+     "thirtythree",
+     385.459
+    ],
+    [
+     "pull",
+     385.709
+    ],
+    [
+     "requests",
+     386.209
+    ]
+   ]
+  },
+  {
+   "ch": 11,
+   "i": 5,
+   "start": 387.219,
+   "end": 391.929,
+   "say": "The lesson: don't just tell Claude to be bold. Show it what bold looks like.",
+   "show": "Tell \u2715 / Show \u2713.",
+   "words": [
+    [
+     "the",
+     387.219
+    ],
+    [
+     "lesson",
+     387.509
+    ],
+    [
+     "dont",
+     388.329
+    ],
+    [
+     "just",
+     388.669
+    ],
+    [
+     "tell",
+     388.849
+    ],
+    [
+     "claude",
+     389.069
+    ],
+    [
+     "to",
+     389.289
+    ],
+    [
+     "be",
+     389.569
+    ],
+    [
+     "bold",
+     389.689
+    ],
+    [
+     "show",
+     390.449
+    ],
+    [
+     "it",
+     390.769
+    ],
+    [
+     "what",
+     390.929
+    ],
+    [
+     "bold",
+     391.089
+    ],
+    [
+     "looks",
+     391.309
+    ],
+    [
+     "like",
+     391.609
+    ]
+   ]
+  },
+  {
+   "ch": 12,
+   "i": 0,
+   "start": 394.177,
+   "end": 409.277,
+   "say": "So here's your to-do list. Build a mod with one sentence. Switch to Sonnet for small tasks. Claim your credit by October seventh. Use your limit reset by October twenty-second. Run prompt-audit. And turn on You should know.",
+   "show": "Checklist ticks per item.",
+   "words": [
+    [
+     "so",
+     394.177
+    ],
+    [
+     "heres",
+     394.317
+    ],
+    [
+     "your",
+     394.617
+    ],
+    [
+     "todo",
+     394.817
+    ],
+    [
+     "list",
+     395.017
+    ],
+    [
+     "build",
+     396.317
+    ],
+    [
+     "a",
+     396.317
+    ],
+    [
+     "mod",
+     396.437
+    ],
+    [
+     "with",
+     396.697
+    ],
+    [
+     "one",
+     396.957
+    ],
+    [
+     "sentence",
+     397.177
+    ],
+    [
+     "switch",
+     398.537
+    ],
+    [
+     "to",
+     398.537
+    ],
+    [
+     "sonnet",
+     398.777
+    ],
+    [
+     "for",
+     399.157
+    ],
+    [
+     "small",
+     399.337
+    ],
+    [
+     "tasks",
+     399.537
+    ],
+    [
+     "claim",
+     400.937
+    ],
+    [
+     "your",
+     400.937
+    ],
+    [
+     "credit",
+     401.177
+    ],
+    [
+     "by",
+     401.477
+    ],
+    [
+     "october",
+     401.737
+    ],
+    [
+     "seventh",
+     402.547
+    ],
+    [
+     "use",
+     403.357
+    ],
+    [
+     "your",
+     403.497
+    ],
+    [
+     "limit",
+     403.677
+    ],
+    [
+     "reset",
+     403.937
+    ],
+    [
+     "by",
+     404.237
+    ],
+    [
+     "october",
+     404.637
+    ],
+    [
+     "twentysecond",
+     405.637
+    ],
+    [
+     "run",
+     406.637
+    ],
+    [
+     "prompt",
+     406.637
+    ],
+    [
+     "audit",
+     407.017
+    ],
+    [
+     "and",
+     407.897
+    ],
+    [
+     "turn",
+     408.097
+    ],
+    [
+     "on",
+     408.397
+    ],
+    [
+     "you",
+     408.597
+    ],
+    [
+     "should",
+     408.817
+    ],
+    [
+     "know",
+     408.997
+    ]
+   ]
+  },
+  {
+   "ch": 12,
+   "i": 1,
+   "start": 410.317,
+   "end": 413.577,
+   "say": "Claude Code is turning from a tool you use into a tool you shape.",
+   "show": "'use' morphs to 'shape'.",
+   "words": [
+    [
+     "claude",
+     410.317
+    ],
+    [
+     "code",
+     410.317
+    ],
+    [
+     "is",
+     410.537
+    ],
+    [
+     "turning",
+     410.857
+    ],
+    [
+     "from",
+     411.117
+    ],
+    [
+     "a",
+     411.397
+    ],
+    [
+     "tool",
+     411.497
+    ],
+    [
+     "you",
+     411.737
+    ],
+    [
+     "use",
+     412.017
+    ],
+    [
+     "into",
+     412.377
+    ],
+    [
+     "a",
+     412.597
+    ],
+    [
+     "tool",
+     412.777
+    ],
+    [
+     "you",
+     413.037
+    ],
+    [
+     "shape",
+     413.297
+    ]
+   ]
+  },
+  {
+   "ch": 13,
+   "i": 0,
+   "start": 414.8,
+   "end": 421.0,
+   "say": "If this helped, hit like and subscribe for daily AI news, explained and shown step by step.",
+   "show": "Cursor clicks like + subscribe.",
+   "words": [
+    [
+     "if",
+     414.8
+    ],
+    [
+     "this",
+     414.92
+    ],
+    [
+     "helped",
+     415.1
+    ],
+    [
+     "hit",
+     415.88
+    ],
+    [
+     "like",
+     415.92
+    ],
+    [
+     "and",
+     416.16
+    ],
+    [
+     "subscribe",
+     416.34
+    ],
+    [
+     "for",
+     416.72
+    ],
+    [
+     "daily",
+     417.18
+    ],
+    [
+     "a",
+     417.427
+    ],
+    [
+     "i",
+     417.673
+    ],
+    [
+     "news",
+     417.92
+    ],
+    [
+     "explained",
+     419.04
+    ],
+    [
+     "and",
+     419.42
+    ],
+    [
+     "shown",
+     419.76
+    ],
+    [
+     "step",
+     420.04
+    ],
+    [
+     "by",
+     420.4
+    ],
+    [
+     "step",
+     420.66
+    ]
+   ]
+  },
+  {
+   "ch": 13,
+   "i": 1,
+   "start": 421.5,
+   "end": 426.7,
+   "say": "And tell me in the comments: what's the first mod you're going to build? See you in the next one.",
+   "show": "Comment bubble; end card.",
+   "words": [
+    [
+     "and",
+     421.5
+    ],
+    [
+     "tell",
+     421.76
+    ],
+    [
+     "me",
+     421.98
+    ],
+    [
+     "in",
+     422.14
+    ],
+    [
+     "the",
+     422.26
+    ],
+    [
+     "comments",
+     422.36
+    ],
+    [
+     "whats",
+     423.24
+    ],
+    [
+     "the",
+     423.6
+    ],
+    [
+     "first",
+     423.7
+    ],
+    [
+     "mod",
+     423.94
+    ],
+    [
+     "youre",
+     424.26
+    ],
+    [
+     "going",
+     424.46
+    ],
+    [
+     "to",
+     424.68
+    ],
+    [
+     "build",
+     424.82
+    ],
+    [
+     "see",
+     425.78
+    ],
+    [
+     "you",
+     425.88
+    ],
+    [
+     "in",
+     426.06
+    ],
+    [
+     "the",
+     426.16
+    ],
+    [
+     "next",
+     426.26
+    ],
+    [
+     "one",
+     426.44
+    ]
+   ]
+  }
+ ],
+ "duration": 430.703
+}
