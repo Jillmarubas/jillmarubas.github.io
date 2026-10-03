@@ -18,6 +18,7 @@ import {KaijuThumb} from './kaiju/Thumb';
 import {GRADIENT_LOOP, GradientLoop, GradientLoopNewsDemo} from './gradient/GradientLoop';
 import {KAIJU_DURATION, KAIJU_QA, KaijuFilm, KaijuQA} from './kaiju/Film';
 import {CITY_CHAPTERS, CITY_DURATION, CITY_QA, CityFilm, CityPart, CityQA} from './dcc/Film';
+import {DEMO_DURATION, TutorialDemo} from './tutorial/Demo';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -70,6 +71,7 @@ export const Root: React.FC = () => (
         <Composition key={`city${i}`} id={`DataCentresCity-part${i}`} component={CityPart} durationInFrames={c.to - c.from} fps={30} width={1920} height={1080} defaultProps={{part: i}} />
       ))}
       <Composition id="NightForest" component={NightForest} durationInFrames={FOREST_LOOP} fps={30} width={1080} height={1920} />
+    <Composition id="TutorialDemo" component={TutorialDemo} durationInFrames={DEMO_DURATION} fps={30} width={1920} height={1080} />
     <Composition id="AINews1001" component={N1Film} durationInFrames={N1_DURATION} fps={24} width={1920} height={1080} defaultProps={{offset: 0}} />
     {N1_CHAPTERS.map((c, i) => (
       <Composition key={`n1${i}`} id={`AINews1001-part${i}`} component={N1Part} durationInFrames={c.to - c.from} fps={24} width={1920} height={1080} defaultProps={{part: i}} />
