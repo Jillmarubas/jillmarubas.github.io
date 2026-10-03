@@ -20,6 +20,7 @@ import {KAIJU_DURATION, KAIJU_QA, KaijuFilm, KaijuQA} from './kaiju/Film';
 import {CITY_CHAPTERS, CITY_DURATION, CITY_QA, CityFilm, CityPart, CityQA} from './dcc/Film';
 import {DEMO_DURATION, TutorialDemo} from './tutorial/Demo';
 import {CC_DURATION, CC_PARTS, CCFilm, CCPart} from './cc1003/Film';
+import {CCThumbA, CCThumbB, CCThumbC} from './cc1003/Thumbnail';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -76,6 +77,9 @@ export const Root: React.FC = () => (
     {CC_PARTS.map((p, i) => (
       <Composition key={`cc${i}`} id={`ClaudeCodeMods-part${i}`} component={CCPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
+    <Composition id="CCThumbA" component={CCThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="CCThumbB" component={CCThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="CCThumbC" component={CCThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="TutorialDemo" component={TutorialDemo} durationInFrames={DEMO_DURATION} fps={30} width={1920} height={1080} />
     <Composition id="AINews1001" component={N1Film} durationInFrames={N1_DURATION} fps={24} width={1920} height={1080} defaultProps={{offset: 0}} />
     {N1_CHAPTERS.map((c, i) => (
