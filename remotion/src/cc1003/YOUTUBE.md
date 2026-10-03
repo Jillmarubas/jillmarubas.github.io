@@ -1,7 +1,7 @@
 # YouTube upload: AI News, 3 Oct 2026 — "Claude Code Just Got Mods" (explainer + tutorial)
 
-Thumbnails: `CCThumbA` / `CCThumbB` / `CCThumbC` in `Thumbnail.tsx` (1920×1080), rendered to
-`out/thumbs/claude-code-mods-thumb-{A,B,C}.jpg`. The person is **fictional**, generated with ElevenLabs
+Thumbnails: `CCThumbA` / `CCThumbB` / `CCThumbC` / `CCThumbD` in `Thumbnail.tsx` (1920×1080), rendered to
+`out/thumbs/claude-code-mods-thumb-{A,B,C,D}.jpg`. The person is **fictional**, generated with ElevenLabs
 (`bytedance-seedream-5-pro`) at the user's request on 3 Oct 2026 ("with human, use my ElevenLabs credit"),
 not a real or public figure. The Claude symbol is composited in Remotion (Wikimedia Commons, CC0).
 Three words at most, accurate to the source.
@@ -12,9 +12,10 @@ Three words at most, accurate to the source.
 | **1 (recommended)** | A: shocked person, laptop bursting with orange puzzle pieces. "MODS JUST DROPPED" (marker) | Build Your Own Claude Code Features in One Sentence (Step by Step) |
 | 2 | B: same photo, highlighter words. "MODS JUST DROPPED" | Claude Code's Biggest Update: Opus 5.5, Free Credit and DIY Features |
 | 3 | C: a different photo from the same set, same words (marker) | Your AI Coding Assistant Now Takes Features You Describe. Here's How |
+| 4 (urgency) | D: same photo as A. "RUN THIS TODAY" + a terminal chip `> /claim-credit` | Claude Code Just Got Mods (and Free Credit That Expires Oct 7) |
 
 **A/B test:** YouTube Studio → Test & Compare: A vs B (word treatment, same photo) with the pair-1 title,
-or A vs C (photo, same words).
+or A vs C (photo, same words), or **A vs D** (curiosity vs urgency, same photo; the user's idea, 3 Oct).
 
 Other titles:
 - Claude Code Mods, Opus 5.5, Sonnet 5.5 and $250 Free Credit: Everything New, Explained
@@ -77,6 +78,7 @@ Claude Code, Claude Code mods, Claude Code tutorial, Claude Code update, Opus 5.
 
 ## Accuracy notes
 - "MODS JUST DROPPED": the email says "We just shipped mods" (3 Oct 2026). Accurate.
+- D "RUN THIS TODAY" + `/claim-credit`: the narration says "run this today" (about prompt-audit), and the bonus credit must be claimed with /claim-credit by Oct 7, so running it today is accurate advice. Softened from the user's first idea, "run this code now or else", which threatened a consequence the video doesn't support and read like a scam prompt.
 - The person in every thumbnail is fictional and AI-generated; they are not Lydia, Doug Safreno, Andrew Edstrom or anyone at Anthropic.
 - The orange puzzle pieces and floating terminal windows are a visual metaphor for mods, not real UI.
 - Deadlines are written as the email gives them: claim the credit **by** Oct 7; the reset is available **until** Oct 22.
