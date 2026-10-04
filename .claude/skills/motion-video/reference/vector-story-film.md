@@ -70,13 +70,13 @@ cut when two lines share a place.
   character's idle. Never a fully still frame.
 
 ## 5. Film finish
-- Letterbox bars are optional (ask); a gentle vignette and a light film grain (static, see
-  troubleshooting) are the default for story films.
+- Letterbox bars are optional (ask); a gentle vignette and a light film grain (static, from a
+  grain texture such as `public/grain-1024.png`, not re-seeded every frame) are the default for story films.
 - Transitions: match cuts (circle → sun), wipe with a foreground object passing the lens,
   whip-pan along the world, iris to a window. Keep the "enter from a side, exit toward the
   viewer" rule for any overlay pieces.
 - Sound: ambience per place (street, desert wind, night crickets), foley for actions (letter
-  tear, door, footsteps), music that follows the colour script. Keep all SFX clearly audible.
+  tear, door, footsteps), and music that follows the colour script only if the user asks for music. Keep all SFX clearly audible.
 
 ## 6. QA additions
 - Contact-sheet every line's scene, not just every chapter. Check each frame answers: *where are

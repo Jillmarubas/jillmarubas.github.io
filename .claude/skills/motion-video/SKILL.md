@@ -1,6 +1,6 @@
 ---
 name: motion-video
-description: Make short vertical motion-graphics videos (Reels/TikTok/Shorts, 1080×1920) in Remotion with realistic 3D assets, cinematic lighting, shadows and reflections, rendered on AWS Lambda. Use when asked to create, recreate the style of, or improve a motion-graphics / explainer / quote / brand-story / documentary-style video, to break down a reference video frame by frame, or to make 3D look real.
+description: Make motion-graphics videos in Remotion, rendered on AWS Lambda: short vertical clips (Reels/TikTok/Shorts, 1080×1920) with realistic 3D assets, cinematic lighting, shadows and reflections, and 16:9 long-form tutorials, explainers, tech-news and story films. Use when asked to create, recreate the style of, or improve a motion-graphics / explainer / tutorial / news / quote / brand-story / documentary-style / story video or its thumbnails, to break down a reference video frame by frame, or to make 3D look real.
 ---
 
 # Motion video: realistic 3D motion graphics with Remotion
@@ -17,8 +17,8 @@ three videos produced in this repo.
 1. **Render on AWS Lambda,** always (the user's standing instruction). Use `remotion/render-lambda.sh`. Local rendering is only for single preview stills.
 2. **Original content only.** Learn techniques from references, but never reuse their footage, photos, logos, characters, scripts or trademarks. Use the client's own assets, public-domain data (NASA), CC0 assets (Poly Haven), or assets drawn in code. **Exception for news and Vox-style videos:** use licensed real photos of the people named, and 3D logos for editorial reference, following the SOP's Vox-style rules.
 3. **Facts must be checkable.** Every number on screen gets verified, and the source is credited on screen when it's data (for example "Moon: NASA LRO").
-4. **The look comes from the user's references, never from my own taste.** This user's references are white or cream paper (see `reference/breakdowns.md`), so white paper is the default. Switching to a dark or cinematic look needs the user's explicit OK first.
-5. **Default 30 fps.** 24/25 fps is for cinematic or documentary looks, 60 fps only for glossy tech with fast moves. The user prefers 30, except **Vox-style explainers: 24 fps** (see the SOP's "Vox-style rules set by the user").
+4. **The look comes from the user's references, never from my own taste.** This user's references are white or cream paper (see `reference/breakdowns.md`), so white paper is the default. Switching to a dark or cinematic look needs the user's explicit OK first. The MacBook style is the approved exception: it is dark for tutorial, explainer and tech-news videos.
+5. **Default 30 fps.** 24/25 fps is for cinematic or documentary looks, 60 fps only for glossy tech with fast moves. The user prefers 30, except **Vox-style explainers: 24 fps** (see the SOP's "Vox-style rules set by the user") and **MacBook-style tutorial, explainer and tech-news videos: 60 fps** (see the SOP's "Tech explainer + tutorial videos: the MacBook style").
 
 ## The house style, as measured
 These values come from the references; the full evidence is in `reference/breakdowns.md`.
@@ -32,9 +32,9 @@ These values come from the references; the full evidence is in `reference/breakd
 
 ## Choreography: the objects move, not the camera
 Measured across all references (`reference/breakdowns.md`, "Asset choreography"): 58 directional entrances and 38 pops in place, and almost no camera zooms. So:
-- **The camera is locked flat on the paper.** Scenes change with a whip pan along the paper wall, never a push-in or zoom.
+- **The camera is locked flat on the paper.** Scenes change with a whip pan along the paper wall, never a push-in or zoom. The MacBook style is the exception: it zooms between chapters and into the laptop.
 - **Objects float in front of the paper** and cast soft shadows onto it, down and to the right.
-- **Every object enters from somewhere:** left, right, top, bottom, diagonal, from the camera, or a pop. Rotate the directions so consecutive objects differ.
+- **Every object enters from somewhere:** left, right, top, bottom, diagonal or from the camera. Rotate the directions so consecutive objects differ.
 - **Entrances:** smooth glide, rotating, no overshoot, long soft settle (`settle()` in `cola/motion3d.tsx`). After landing, objects keep drifting a few millimetres; nothing freezes.
 - **Objects interact:** pour, stamp, knock out of frame, spin down.
 - **Exits come toward the viewer** (the user's preference): at the end of each scene every object eases forward off the paper, left to right a few frames apart, drifting outward so it slips past the lens, and blurs as it gets close. Entrances stay directional (left, right, top, bottom); no scale-in pops. Implemented by `ExitContext` in `cola/motion3d.tsx` plus the near-field depth-of-field pass in `MotionBlurRenderer` (`dof` prop: sharp beyond 0.92 m, fully soft at 0.35 m, 70 px max at 1080 wide). The DOF pass runs only on frames where something is near the lens.

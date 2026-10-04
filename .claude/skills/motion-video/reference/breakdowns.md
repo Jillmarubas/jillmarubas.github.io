@@ -116,10 +116,10 @@ Method: `scratchpad/motion_study.py`. Each move is a run of frames with a visibl
 
 **Rules taken from this:**
 1. **The camera is locked flat on the paper; the objects move.** Scenes change with a whip pan across the paper, never a push-in.
-2. **Every object arrives from somewhere.** Rotate the entrances through left, right, top, bottom, diagonal, from the camera, and pop in place, so two objects in a row never share a direction.
+2. **Every object arrives from somewhere.** Rotate the entrances through left, right, top, bottom, diagonal and from the camera, so two objects in a row never share a direction. The references also pop objects in place; the house rule is directional entrances only, with no scale-in pops.
 3. **Entrance:**
    - fast in with motion blur, rotating as it travels;
-   - a small overshoot (about 3 %), then settle;
+   - no overshoot, then a long soft settle (`settle()` in `cola/motion3d.tsx`);
    - 11–18 frames at 30 fps.
 4. **Nothing is ever fully still.** After landing, objects keep drifting a few millimetres and turning slowly; the can in the brand story moves in every one of its 11 dense frames.
 5. **Objects float in front of the paper.** Soft shadows fall down and to the right onto the paper; a larger offset means the object floats further off it.

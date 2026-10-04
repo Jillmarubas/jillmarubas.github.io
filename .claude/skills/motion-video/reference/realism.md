@@ -65,5 +65,5 @@ Always give metals an environment map. Without reflections, metal renders black.
 
 ## 6. Limits of Lambda (software WebGL)
 
-- **Per-frame cost** at 1080×1920: simple 3D is about 2–3 s; 4K textures with displacement is about 5–6 s. At a 10-Lambda concurrency limit, use 8 workers.
+- **Per-frame cost** at 1080×1920: simple 3D is about 2–3 s; 4K textures with displacement is about 5–6 s. Size the work per Lambda with `FRAMES_PER_LAMBDA` (SOP step 0).
 - **Not available here:** ray-traced global illumination, true soft area shadows, caustics. For those, render the hero asset in **Blender Cycles on a GPU instance**, export a PNG sequence with alpha, and composite it in Remotion.
