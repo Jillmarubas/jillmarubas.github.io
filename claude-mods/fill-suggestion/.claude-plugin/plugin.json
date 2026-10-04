@@ -1,0 +1,5 @@
+{
+  "name": "fill-suggestion",
+  "version": "0.1.0",
+  "description": "Types Claude's suggested next message into the prompt box for you; press Enter to send it or edit it first"
+}
