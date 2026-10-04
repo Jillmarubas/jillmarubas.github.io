@@ -133,7 +133,7 @@ the original's content.
 ---
 
 ## Thumbnails: the approved style (every video)
-> **ElevenLabs is for voiceover only (the user's rule, 1 Oct 2026).** Never use ElevenLabs credits for images, video, music or sound effects. Thumbnails are built in Remotion from licensed photos, 3D logos and the film's own assets. This overrides any older step below that generates images with ElevenLabs.
+> **ElevenLabs is for voiceover only (the user's rule, 1 Oct 2026).** Never use ElevenLabs credits for images, video, music or sound effects. Thumbnails are built in Remotion from licensed photos, 3D logos and the film's own assets.
 
 The user approved this look on 29 Sep 2026 (AI News Daily, variant G) and wants it on **every video**.
 Reference image: `reference/thumbnail-approved.jpg`. Component: `remotion/src/thumbs/HighlightThumb.tsx`.
