@@ -14,6 +14,7 @@ import {COLA_DURATION, ColaOrigin} from './cola/ColaOrigin';
 import {DC_CHAPTERS, DC_DURATION, DCFilm, DCPart} from './dc/DC';
 import {FOREST_LOOP, NightForest} from './forest/NightForest';
 import {RainyTavern, TAVERN_FULL, TAVERN_TEST} from './tavern/RainyTavern';
+import {SM_DURATION, StarMender} from './ep01/StarMender';
 import {VEO_FULL, VEO_TEST, VeoTavern} from './tavern/VeoTavern';
 import {MULTI_FULL, MULTI_TEST, MultiTavern} from './tavern/MultiTavern';
 import {STILL_FULL, STILL_TEST, StillTavern} from './tavern/StillTavern';
@@ -77,6 +78,7 @@ export const Root: React.FC = () => (
       {CITY_CHAPTERS.map((c, i) => (
         <Composition key={`city${i}`} id={`DataCentresCity-part${i}`} component={CityPart} durationInFrames={c.to - c.from} fps={30} width={1920} height={1080} defaultProps={{part: i}} />
       ))}
+      <Composition id="StarMender" component={StarMender} durationInFrames={SM_DURATION} fps={30} width={1920} height={1080} />
       <Composition id="TavernVeoTest" component={VeoTavern} durationInFrames={VEO_TEST} fps={30} width={1920} height={1080} defaultProps={{frames: VEO_TEST, sound: true}} />
       <Composition id="TavernVeoFull" component={VeoTavern} durationInFrames={VEO_FULL} fps={30} width={1920} height={1080} defaultProps={{frames: VEO_FULL, sound: true}} />
       <Composition id="TavernMultiTest" component={MultiTavern} durationInFrames={MULTI_TEST} fps={30} width={1920} height={1080} defaultProps={{frames: MULTI_TEST, sound: true}} />
