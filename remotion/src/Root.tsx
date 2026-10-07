@@ -14,6 +14,7 @@ import {COLA_DURATION, ColaOrigin} from './cola/ColaOrigin';
 import {DC_CHAPTERS, DC_DURATION, DCFilm, DCPart} from './dc/DC';
 import {FOREST_LOOP, NightForest} from './forest/NightForest';
 import {RainyTavern, TAVERN_FULL, TAVERN_TEST} from './tavern/RainyTavern';
+import {REAL_TAVERN_FULL, REAL_TAVERN_TEST, RealTavern} from './tavern/RealTavern';
 import {Thumbnail} from './dcc/Thumbnail';
 import {KaijuThumb} from './kaiju/Thumb';
 import {GRADIENT_LOOP, GradientLoop, GradientLoopNewsDemo} from './gradient/GradientLoop';
@@ -73,6 +74,8 @@ export const Root: React.FC = () => (
       {CITY_CHAPTERS.map((c, i) => (
         <Composition key={`city${i}`} id={`DataCentresCity-part${i}`} component={CityPart} durationInFrames={c.to - c.from} fps={30} width={1920} height={1080} defaultProps={{part: i}} />
       ))}
+      <Composition id="TavernRealTest" component={RealTavern} durationInFrames={REAL_TAVERN_TEST} fps={30} width={1920} height={1080} defaultProps={{frames: REAL_TAVERN_TEST, sound: true}} />
+      <Composition id="TavernRealFull" component={RealTavern} durationInFrames={REAL_TAVERN_FULL} fps={30} width={1920} height={1080} defaultProps={{frames: REAL_TAVERN_FULL, sound: true}} />
       <Composition id="TavernTest" component={RainyTavern} durationInFrames={TAVERN_TEST} fps={30} width={1920} height={1080} defaultProps={{frames: TAVERN_TEST, sound: true}} />
       <Composition id="TavernFull" component={RainyTavern} durationInFrames={TAVERN_FULL} fps={30} width={1920} height={1080} defaultProps={{frames: TAVERN_FULL, sound: true}} />
       <Composition id="NightForest" component={NightForest} durationInFrames={FOREST_LOOP} fps={30} width={1080} height={1920} />
