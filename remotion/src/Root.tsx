@@ -15,6 +15,7 @@ import {DC_CHAPTERS, DC_DURATION, DCFilm, DCPart} from './dc/DC';
 import {FOREST_LOOP, NightForest} from './forest/NightForest';
 import {RainyTavern, TAVERN_FULL, TAVERN_TEST} from './tavern/RainyTavern';
 import {SM_DURATION, StarMender} from './ep01/StarMender';
+import {GF_DURATION, GoldenFire} from './goldenfire/GoldenFire';
 import {VEO_FULL, VEO_TEST, VeoTavern} from './tavern/VeoTavern';
 import {MULTI_FULL, MULTI_TEST, MultiTavern} from './tavern/MultiTavern';
 import {STILL_FULL, STILL_TEST, StillTavern} from './tavern/StillTavern';
@@ -57,6 +58,7 @@ export const Root: React.FC = () => (
         } satisfies PromoProps
       }
     />
+    <Composition id="GoldenFire" component={GoldenFire} durationInFrames={GF_DURATION} fps={30} width={1920} height={1080} />
     <Composition id="MoonDistance" component={Space} durationInFrames={SPACE_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="RealMoon" component={RealMoon} durationInFrames={REAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="ColaOrigin" component={ColaOrigin} durationInFrames={COLA_DURATION} fps={30} width={1080} height={1920} defaultProps={{sound: true}} />
