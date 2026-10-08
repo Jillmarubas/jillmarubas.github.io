@@ -141,3 +141,11 @@ export const GoldenFire: React.FC<{from?: number}> = () => {
     </AbsoluteFill>
   );
 };
+
+// The full film split into parts so each Lambda render stays small; parts are joined with ffmpeg.
+export const GF_PARTS = [0, 2928, 5856, GF_DURATION].slice(0, -1).map((from, i, a) => ({from, to: a[i + 1] ?? GF_DURATION}));
+export const GoldenFirePart: React.FC<{part: number}> = ({part}) => (
+  <Sequence from={-GF_PARTS[part].from}>
+    <GoldenFire />
+  </Sequence>
+);
