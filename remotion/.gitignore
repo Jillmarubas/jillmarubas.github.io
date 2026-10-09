@@ -6,3 +6,6 @@ public/real/
 # fetched by scripts/fetch-cola-assets.py (CC0, ~18 MB)
 public/ph/
 public/sfx/*.wav
+public/tavern/music.mp3
+public/ep01/
+public/gf/

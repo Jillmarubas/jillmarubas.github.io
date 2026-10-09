@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<defs>
+ <mask id="cres"><rect width="1024" height="1024" fill="#000"/><circle cx="512" cy="330" r="118" fill="#fff"/><circle cx="566" cy="292" r="104" fill="#000"/></mask>
+</defs>
+<rect width="1024" height="1024" fill="#fff"/>
+<circle cx="512" cy="512" r="468" fill="none" stroke="#000" stroke-width="6"/>
+<circle cx="512" cy="512" r="450" fill="none" stroke="#000" stroke-width="2"/>
+<rect width="1024" height="1024" fill="#000" mask="url(#cres)"/>
+<path d="M648,210 Q648,232 670,232 Q648,232 648,254 Q648,232 626,232 Q648,232 648,210 Z" fill="#000"/>
+<path d="M382,249 Q382,262 395,262 Q382,262 382,275 Q382,262 369,262 Q382,262 382,249 Z" fill="#000"/>
+<path d="M676,362 Q676,372 686,372 Q676,372 676,382 Q676,372 666,372 Q676,372 676,362 Z" fill="#000"/>
+<path d="M600,172 Q600,180 608,180 Q600,180 600,188 Q600,180 592,180 Q600,180 600,172 Z" fill="#000"/>
+<g fill="#fff" stroke="#000" stroke-width="9" stroke-linejoin="round">
+ <path d="M512 478 C468 454 398 448 330 462 L330 566 C398 553 468 559 512 584 Z"/>
+ <path d="M512 478 C556 454 626 448 694 462 L694 566 C626 553 556 559 512 584 Z"/>
+</g>
+<g fill="none" stroke="#000" stroke-width="4" stroke-linecap="round">
+ <path d="M362 494 C410 484 456 488 488 502"/><path d="M362 518 C410 508 456 512 488 526"/><path d="M362 542 C410 532 456 536 488 550"/>
+ <path d="M662 494 C614 484 568 488 536 502"/><path d="M662 518 C614 508 568 512 536 526"/><path d="M662 542 C614 532 568 536 536 550"/>
+</g>
+<text x="512" y="690" text-anchor="middle" font-family="CG" font-style="italic" font-weight="500" font-size="78" fill="#000">The Late Night</text>
+<line x1="372" y1="722" x2="462" y2="722" stroke="#000" stroke-width="3"/>
+<line x1="562" y1="722" x2="652" y2="722" stroke="#000" stroke-width="3"/>
+<path d="M512,713 Q512,722 521,722 Q512,722 512,731 Q512,722 503,722 Q512,722 512,713 Z" fill="#000"/>
+<text x="525" y="826" text-anchor="middle" font-family="CG" font-weight="600" font-size="112" letter-spacing="26" fill="#000">STORY</text>
+</svg>
