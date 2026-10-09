@@ -12,8 +12,8 @@ Every prompt ends with: `Realistic motion, exactly two arms and two hands, no te
 | A05 | studio_dj_front | She raises one hand in the air on the drop and bounces, laughing. |
 | A06 | studio_dj_left34 | She turns a knob and slides the crossfader, head bobbing. Slow orbit to the right. |
 | A07 | studio_dj_left34 | She dances side to side behind the table, braids swinging, big smile. |
-| A08 | studio_dj_right34 | She leans to the laptop and scrolls to pick the next track, then goes back to the mixer. |
-| A09 | studio_dj_right34 | She puts both headphone cups on her ears and nods hard to the beat. |
+| A08 | studio_dj_right34 (redo) | She leans to the laptop and scrolls to pick the next track, then goes back to the mixer. |
+| A09 | studio_dj_right34 (redo) | She puts both headphone cups on her ears and nods hard to the beat. |
 | A10 | studio_dj_ots | Close-up: her hand turns the filter knob slowly, the jog wheel glows. |
 | A11 | studio_dj_ots | Close-up: her fingers tap the glowing pads in rhythm. |
 | A12 | studio_dj_ots | Close-up: she nudges the jog wheel and slides the crossfader, waveforms move on the laptop. |
@@ -21,7 +21,7 @@ Every prompt ends with: `Realistic motion, exactly two arms and two hands, no te
 | A14 | cat_sofa | The sleeping cat's ear twitches and its tail moves slowly; rain on the window. Static camera. |
 | A15 | dj_water | She picks up the glass of water, takes a sip, puts it down and smiles, then goes back to mixing. |
 | A16 | studio_dj_front | Break: she stretches her arms up and rolls her neck, relaxed smile. |
-| A17 | studio_dj_right34 | She makes a heart with her hands toward the camera, then keeps mixing. |
+| A17 | studio_dj_right34 (redo) | She makes a heart with her hands toward the camera, then keeps mixing. |
 | A18 | studio_dj_front | Outro: she waves goodbye to the camera with a smile, the neon glows. Slow pull-back. |
 
 18 clips ≈ 135 credits. Cutaways (A01, A13, A14) cover the long crossfades between tracks.
