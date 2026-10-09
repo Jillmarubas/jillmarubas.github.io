@@ -9,3 +9,5 @@
   uploads images → Claude checks them → Claude generates clips → Claude edits in Remotion.
 - Budget: Pro plan = 600 credits/month; one ~36-clip video ≈ 270 credits.
 - Reuse the existing DJ character and stage references (Drive folder "DJ") for consistency.
+- **Always send the reference images together with each image prompt** (SendUserFile from
+  `assets/aurum-beats/`, in upload order); the user works on a phone and doesn't keep them.
