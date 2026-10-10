@@ -8,7 +8,7 @@ import {AppShot} from './shot';
 import {Asst, ChatGPT, G, GEO, ScreenCursor, Status, UserMsg, typedAt} from './app';
 import {FileChip, Wave} from './widgets';
 import {CUES} from './cues';
-import {CmdCard, Glass, Icon, IconTile, Ring, StepBadge} from './ui';
+import {Glass, Icon, IconTile, Ring, StepBadge} from './ui';
 
 const FILE = {name: 'team-meeting.m4a', meta: 'Audio · 38 MB'};
 
@@ -213,17 +213,17 @@ export const NotesDemo: React.FC = () => {
   return (
     <AppShot
       t={t}
-      cam={[[0, 1.6, GEO.cx, GEO.compY - 160], [s1.enter + 0.3, 1.6, GEO.cx, GEO.compY - 160], [s1.enter + 1.0, 1.5, GEO.cx, 480], [dur, 1.52, GEO.cx, 484]]}
+      cam={[[0, 1.6, GEO.cx, GEO.midY - 30], [s1.enter + 0.3, 1.6, GEO.cx, GEO.midY - 30], [s1.enter + 1.0, 1.5, GEO.cx, 480], [dur, 1.52, GEO.cx, 484]]}
       screen={() => (
         <ChatGPT
-          cursor={<ScreenCursor t={t} keys={[[Math.max(0, tPlus - 0.7), GEO.plus.x + 160, GEO.plus.y - 140], [tPlus, GEO.plus.x, GEO.plus.y, true], [tFile, GEO.plus.x + 60, GEO.compY - 82, true], [tFile + 0.6, GEO.plus.x + 120, GEO.compY - 30]]} />}
+          cursor={<ScreenCursor t={t} keys={[[Math.max(0, tPlus - 0.7), GEO.midPlus.x + 160, GEO.midPlus.y + 140], [tPlus, GEO.midPlus.x, GEO.midPlus.y, true], [tFile, GEO.midPlus.x + 60, GEO.midY + GEO.compH + 28, true], [tFile + 0.6, GEO.midPlus.x + 120, GEO.midY + 140]]} />}
           t={t}
           tabHi={1}
-          composer={{text: comp, caret: true, attach: attached && t < s1.enter ? chip : undefined, hot: typing ? 1 - p01(t, typing.enter, 0.3) : 0}}
+          composer={{text: comp, caret: true, attach: attached && t < s1.enter ? chip : undefined, hot: typing ? 1 - p01(t, typing.enter, 0.3) : 0, mid: 1 - p01(t, s1.enter, 0.45, E.inOut)}}
           thread={
             <>
               <div style={{position: 'absolute', inset: 0, transform: `translateY(${-scroll}px)`}}>
-                {t < s1.enter && <div style={{position: 'absolute', left: GEO.colX, width: GEO.colW, top: 400, textAlign: 'center', fontSize: 30, fontWeight: 500}}>What can I help with?</div>}
+                {t < s1.enter && <div style={{position: 'absolute', left: GEO.colX, width: GEO.colW, top: GEO.helloY, textAlign: 'center', fontSize: 30, fontWeight: 500}}>What can I help with?</div>}
                 <UserMsg y={pos.u1} text={c.type.text} p={p01(t, s1.enter, 0.35)} attach={chip} />
                 {t > s1.enter + 0.2 && t < s1.enter + 1.0 && (
                   <Asst y={pos.a1}>
@@ -257,7 +257,7 @@ export const NotesDemo: React.FC = () => {
                 </Asst>
               </div>
               {menu > 0 && (
-                <div style={{position: 'absolute', left: GEO.plus.x - 14, top: GEO.compY - 104, width: 250, borderRadius: 14, background: '#2F2F2F', boxShadow: '0 12px 30px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08)', padding: 6, opacity: menu, fontSize: 14.5}}>
+                <div style={{position: 'absolute', left: GEO.plus.x - 14, top: GEO.midY + GEO.compH + 8, width: 250, borderRadius: 14, background: '#2F2F2F', boxShadow: '0 12px 30px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08)', padding: 6, opacity: menu, fontSize: 14.5}}>
                   {['Add photos & files', 'Take screenshot'].map((m, i) => (
                     <div key={m} style={{display: 'flex', gap: 10, alignItems: 'center', padding: '9px 12px', borderRadius: 9, background: i === 0 ? 'rgba(255,255,255,.08)' : undefined}}>
                       <Icon name={i ? 'desktop' : 'file'} size={16} color={G.text2} width={2} /> {m}
@@ -275,16 +275,6 @@ export const NotesDemo: React.FC = () => {
           {badge(2, L(1) - 0.1, 'Say what you want', L(2) - 0.3)}
           {badge(3, L(2) - 0.1, 'Ask a follow-up', L(3) - 0.3)}
           {badge(4, L(3) - 0.1, 'Make it sendable')}
-          {steps.map((s, i) => (
-            <div key={i} style={{position: 'absolute', left: 0, right: 0, top: s.text.length > 60 ? 850 : 870, display: 'flex', justifyContent: 'center'}}>
-              <CmdCard t={t} at={s.at - 0.3} text={s.text} typed={typedAt(s.text, s.at, s.enter, t)} label="ASK THIS" done={t > s.enter} out={i < 2 ? steps[i + 1].at - 0.5 : s.enter + 1.2} />
-            </div>
-          ))}
-          <Layer t={t} at={enter(0.2, {from: 'd', dist: 50, out: s1.at - 0.5})} style={{left: 0, right: 0, top: 880, display: 'flex', justifyContent: 'center'}}>
-            <Glass pad={0} r={999} style={{padding: '16px 30px', fontFamily: F.mono, fontSize: 24}}>
-              MP3 · WAV · M4A · FLAC <span style={{color: C.accHi}}>· up to 512 MB</span>
-            </Glass>
-          </Layer>
         </>
       )}
     />

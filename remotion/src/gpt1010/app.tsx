@@ -25,7 +25,9 @@ export const GEO = (() => {
   const header = top + 52;
   const compH = 58;
   const compY = WIN.y + WIN.h - 26 - compH;
-  return {top, mainX, mainW, cx, colW, colX, header, threadY: header + 26, compY, compH, chatTab: {x: cx - 46, y: top + 26}, plus: {x: colX + 30, y: compY + compH / 2}, send: {x: colX + colW - 30, y: compY + compH / 2}, picker: {x: WIN.x + SIDE + 92, y: top + 26}};
+  // a new chat: the composer sits in the middle under the greeting, then slides down on the first send
+  const midY = Math.round(top + (WIN.h - CHROME) / 2 + 10);
+  return {top, mainX, mainW, cx, colW, colX, header, threadY: header + 26, compY, compH, midY, helloY: midY - 120, midPlus: {x: colX + 30, y: midY + compH / 2}, chatTab: {x: cx - 46, y: top + 26}, plus: {x: colX + 30, y: compY + compH / 2}, send: {x: colX + colW - 30, y: compY + compH / 2}, picker: {x: WIN.x + SIDE + 92, y: top + 26}};
 })();
 
 /** Typed text at time t: `text` typed from `at`, finished just before `enter`. */
@@ -82,11 +84,12 @@ const SideItem: React.FC<{icon: string; label: string; hi?: boolean}> = ({icon, 
   </div>
 );
 
-export type Composer = {text?: string; caret?: boolean; placeholder?: string; attach?: React.ReactNode; hot?: number};
+export type Composer = {text?: string; caret?: boolean; placeholder?: string; attach?: React.ReactNode; hot?: number; mid?: number};
 
 /** ChatGPT in the browser. `thread` is laid out by the scene in screen points (absolute children). */
 export const ChatGPT: React.FC<{t: number; thread?: React.ReactNode; composer?: Composer; tabHi?: number; model?: string; overlay?: React.ReactNode; cursor?: React.ReactNode; chats?: string[]}> = ({t, thread, composer = {}, tabHi = 0, model = 'GPT-6', overlay, cursor, chats = ['Weekend in Ipoh', 'Gym plan for October', 'Excel formula help', 'Birthday gift ideas', 'Rewrite my cover letter']}) => {
-  const {text = '', caret = false, placeholder = 'Ask anything', attach, hot = 0} = composer;
+  const {text = '', caret = false, placeholder = 'Ask anything', attach, hot = 0, mid = 0} = composer;
+  const compTop = lerp(GEO.compY, GEO.midY, mid);
   const ax = (x: number) => x - WIN.x;
   const ay = (y: number) => y - WIN.y - CHROME;
   const has = text.length > 0 || !!attach;
@@ -129,7 +132,7 @@ export const ChatGPT: React.FC<{t: number; thread?: React.ReactNode; composer?: 
         <div style={{position: 'absolute', left: -(WIN.x + SIDE), top: -(WIN.y + CHROME + 52), width: 1512, height: 945}}>{thread}</div>
       </div>
       {/* composer */}
-      <div style={{position: 'absolute', left: ax(GEO.colX), top: ay(GEO.compY) - (ch - GEO.compH), width: GEO.colW, height: ch, borderRadius: 28, background: G.comp, boxShadow: hot > 0 ? `0 0 0 ${2 * hot}px rgba(16,163,127,.85), 0 0 ${30 * hot}px rgba(16,163,127,.4)` : '0 0 0 1px rgba(255,255,255,.06)', boxSizing: 'border-box'}}>
+      <div style={{position: 'absolute', left: ax(GEO.colX), top: ay(compTop) - (ch - GEO.compH), width: GEO.colW, height: ch, borderRadius: 28, background: G.comp, boxShadow: hot > 0 ? `0 0 0 ${2 * hot}px rgba(16,163,127,.85), 0 0 ${30 * hot}px rgba(16,163,127,.4)` : '0 0 0 1px rgba(255,255,255,.06)', boxSizing: 'border-box'}}>
         {attach && <div style={{position: 'absolute', left: 16, top: 12}}>{attach}</div>}
         <div style={{position: 'absolute', left: 14, bottom: 13, width: 32, height: 32, borderRadius: 16, display: 'grid', placeItems: 'center'}}>
           <Icon name="plus" size={20} color={G.text} width={2} />
@@ -144,7 +147,7 @@ export const ChatGPT: React.FC<{t: number; thread?: React.ReactNode; composer?: 
           </svg>
         </div>
       </div>
-      <div style={{position: 'absolute', left: ax(GEO.colX), width: GEO.colW, top: ay(GEO.compY + GEO.compH + 6), textAlign: 'center', fontSize: 11.5, color: G.text3}}>ChatGPT can make mistakes. Check important info.</div>
+      <div style={{position: 'absolute', left: ax(GEO.colX), width: GEO.colW, top: ay(GEO.compY + GEO.compH + 6), opacity: 1 - mid, textAlign: 'center', fontSize: 11.5, color: G.text3}}>ChatGPT can make mistakes. Check important info.</div>
       {overlay}
       {/* the pointer sits above everything (header, thread, composer), in screen points */}
       <div style={{position: 'absolute', left: -WIN.x, top: -(WIN.y + CHROME), width: 1512, height: 945, zIndex: 100, pointerEvents: 'none'}}>{cursor}</div>

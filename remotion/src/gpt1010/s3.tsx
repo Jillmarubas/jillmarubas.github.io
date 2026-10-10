@@ -10,7 +10,7 @@ import {AppShot} from './shot';
 import {Asst, ChatGPT, G, GEO, ScreenCursor, Status, UserMsg, typedAt} from './app';
 import {BIKE, BILL, BikeExplorer, BillSplitter, MAP, RouteMap} from './widgets';
 import {CUES} from './cues';
-import {Callout, CmdCard, Glass, Icon, StepBadge} from './ui';
+import {Callout, Glass, Icon, StepBadge} from './ui';
 import {Cursor} from '../tutorial/kit';
 import {cursorAt} from '../tutorial/timeline';
 import {FPS} from './design';
@@ -18,11 +18,6 @@ import {FPS} from './design';
 const Badge: React.FC<{t: number; at: number; n: number; label: string; out?: number}> = (p) => (
   <div style={{position: 'absolute', right: 60, top: 54}}>
     <StepBadge {...p} />
-  </div>
-);
-const Prompt: React.FC<{t: number; text: string; at: number; enter: number; out: number}> = ({t, text, at, enter: en, out}) => (
-  <div style={{position: 'absolute', left: 0, right: 0, top: text.length > 60 ? 850 : 870, display: 'flex', justifyContent: 'center'}}>
-    <CmdCard t={t} at={at - 0.3} text={text} typed={typedAt(text, at, en, t)} label="ASK THIS" done={t > en} out={out} />
   </div>
 );
 
@@ -37,9 +32,9 @@ export const FrameCursor: React.FC<{t: number; keys: [number, number, number, bo
   );
 };
 
-const compFocus = (z: number): [number, number, number] => [z, GEO.cx, GEO.compY - 140];
+const compFocus = (z: number): [number, number, number] => [z, GEO.cx, GEO.midY - 30];
 const Hello: React.FC<{o?: number}> = ({o = 1}) => (
-  <div style={{position: 'absolute', left: GEO.colX, width: GEO.colW, top: 400, textAlign: 'center', fontSize: 30, fontWeight: 500, color: G.text, opacity: o}}>What can I help with?</div>
+  <div style={{position: 'absolute', left: GEO.colX, width: GEO.colW, top: GEO.helloY, textAlign: 'center', fontSize: 30, fontWeight: 500, color: G.text, opacity: o}}>What can I help with?</div>
 );
 
 // ---------- 3.0–3.1 "Here's how to try it. Step one. Open ChatGPT and make sure you are in the Chat tab."
@@ -51,13 +46,13 @@ export const TryOpen: React.FC = () => {
     <AppShot
       t={t}
       swing={-26}
-      cam={[[0, 0.84, 756, 472], [1.0, 1, 756, 472], [Math.max(1.2, L(1) + 0.2), 1, 756, 472], [L(1) + 1.2, 1.9, tab.x, tab.y + 150], [dur, 1.95, tab.x, tab.y + 150]]}
+      cam={[[0, 0.84, 756, 472], [1.0, 1, 756, 472], [Math.max(1.2, L(1) + 0.2), 1, 756, 472], [L(1) + 1.2, 1.9, tab.x, tab.y + 200], [dur, 1.95, tab.x, tab.y + 200]]}
       screen={() => (
         <ChatGPT
           cursor={<ScreenCursor t={t} keys={[[L(1) + 0.3, tab.x + 220, tab.y + 330], [tTab, tab.x - 6, tab.y + 2, true], [dur, tab.x + 2, tab.y + 10]]} />}
           t={t}
           tabHi={p01(t, tTab, 0.3)}
-          composer={{caret: true}}
+          composer={{caret: true, mid: 1}}
           thread={
             <>
               <Hello />
@@ -71,11 +66,6 @@ export const TryOpen: React.FC = () => {
         return (
           <>
             <Badge t={t} at={L(1) - 0.1} n={1} label="Open the Chat tab" />
-            <Layer t={t} at={enter(w('open') - 0.1, {from: 'd', dist: 60})} style={{left: 0, right: 0, top: 880, display: 'flex', justifyContent: 'center'}}>
-              <Glass pad={0} r={999} style={{padding: '18px 34px', fontFamily: F.mono, fontSize: 36}}>
-                chatgpt.com <span style={{color: C.accHi}}>› Chat</span>
-              </Glass>
-            </Layer>
             <Callout t={t} at={tTab + 0.15} x={f.x + 20} y={f.y} dx={180} dy={90} label="Chat tab" sub="GPT-6 lives here" />
             <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(60% 50% at 50% 42%, rgba(6,8,8,.85), rgba(6,8,8,.4))', opacity: 1 - p01(t, L(1) - 0.3, 0.3)}} />
             <div style={{position: 'absolute', left: 0, right: 0, top: 360, textAlign: 'center', opacity: 1 - p01(t, L(1) - 0.3, 0.3)}}>
@@ -105,13 +95,13 @@ export const TryBill: React.FC = () => {
   return (
     <AppShot
       t={t}
-      cam={[[0, 1.95, tab.x, tab.y + 150], [Math.max(0.5, tA - 0.2), ...compFocus(1.75)], [tE + 0.1, ...compFocus(1.75)], [tE + 0.8, 1.55, GEO.cx, wy + 190], [L(3), 1.55, GEO.cx, wy + 190], [L(3) + 0.8, 1.8, GEO.colX + 360, wy + 200], [dur, 1.82, GEO.colX + 360, wy + 200]]}
+      cam={[[0, 1.95, tab.x, tab.y + 200], [Math.max(0.5, tA - 0.2), ...compFocus(1.75)], [tE + 0.1, ...compFocus(1.75)], [tE + 0.8, 1.55, GEO.cx, wy + 190], [L(3), 1.55, GEO.cx, wy + 190], [L(3) + 0.8, 1.8, GEO.colX + 360, wy + 200], [dur, 1.82, GEO.colX + 360, wy + 200]]}
       screen={() => (
         <ChatGPT
           cursor={<ScreenCursor t={t} keys={[[L(3), plus.x + 160, plus.y + 220], [tPlus, plus.x, plus.y, true], [tTip, tip.x, tip.y, true], [dur, tip.x + 14, tip.y + 30]]} />}
           t={t}
           tabHi={1}
-          composer={{text: t < tE ? typedAt(c.type.text, tA, tE, t) : '', caret: true, hot: p01(t, tA - 0.3, 0.3) * (1 - p01(t, tE, 0.3))}}
+          composer={{text: t < tE ? typedAt(c.type.text, tA, tE, t) : '', caret: true, hot: p01(t, tA - 0.3, 0.3) * (1 - p01(t, tE, 0.3)), mid: 1 - p01(t, tE, 0.45, E.inOut)}}
           thread={
             <>
               <Hello o={t < tE ? 1 : 0} />
@@ -134,7 +124,6 @@ export const TryBill: React.FC = () => {
           <>
             <Badge t={t} at={0} n={2} label="Ask for a tool" out={L(3) - 0.3} />
             <Badge t={t} at={L(3) - 0.1} n={3} label="Use what it builds" />
-            <Prompt t={t} text={c.type.text} at={tA} enter={tE} out={tE + 1.2} />
             <Layer t={t} at={enter(w('essay') - 0.1, {from: 'l', dist: 80, out: tE + 0.6})} style={{left: 110, top: 300}}>
               <Glass pad={28} style={{width: 420}}>
                 <div style={{display: 'flex', alignItems: 'center', gap: 16, fontFamily: F.ui, fontWeight: 700, fontSize: 34}}>
@@ -179,7 +168,7 @@ const TryShot: React.FC<{
           cursor={ks && <ScreenCursor t={t} keys={ks} />}
           t={t}
           tabHi={1}
-          composer={{text: t < tE ? typedAt(type.text, tA, tE, t) : '', caret: true, hot: p01(t, tA - 0.3, 0.3) * (1 - p01(t, tE, 0.3))}}
+          composer={{text: t < tE ? typedAt(type.text, tA, tE, t) : '', caret: true, hot: p01(t, tA - 0.3, 0.3) * (1 - p01(t, tE, 0.3)), mid: 1 - p01(t, tE, 0.45, E.inOut)}}
           thread={
             <>
               <Hello o={t < tE ? 1 : 0} />
@@ -199,7 +188,6 @@ const TryShot: React.FC<{
       over={(rig) => (
         <>
           <Badge t={t} at={0.1} n={n} label={label} />
-          <Prompt t={t} text={type.text} at={tA} enter={tE} out={tE + 1.1} />
           {over?.(rig, tE)}
         </>
       )}

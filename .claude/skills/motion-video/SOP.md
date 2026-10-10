@@ -283,7 +283,12 @@ Reference builds (start a new video by copying the closer one; don't rebuild the
 **What makes it informative (keep all of these)**
 - **Part stinger:** a big numbered title that collapses into a corner tag for the rest of the chapter (`PartTag`).
 - **Step badges, top right:** "STEP 1 · Check your version" (`StepBadge`).
-- **Command card, bottom centre:** every command typed in sync with the terminal, large enough to read (`CmdCard`).
+- **No subtitle-style caption cards** (the user's rule, 10 Oct 2026: "take out these subtitles … this is slop").
+  Never put a bottom card that repeats what is already on the laptop screen: no "ASK THIS"/"TYPE THIS"
+  prompt card (`CmdCard`), no URL pill, no settings-path pill, no list of formats. Frame the camera on the
+  typing instead, and put prompts and paths in `YOUTUBE.md`. In the ChatGPT app the composer starts in the
+  middle under "What can I help with?" (`mid: 1`) and slides to the bottom on the first send, as it does
+  in the real app, so the typing shot fills the frame.
 - **Callouts:** dot + drawn leader line + label pointing at the exact screen line (`Callout`, `screenToFrame`).
 - **Explainers between tutorial steps:** glass cards, icons drawn on, bar charts of sourced numbers only, counters, before/after.
 

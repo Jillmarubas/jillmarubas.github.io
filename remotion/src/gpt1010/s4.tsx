@@ -8,7 +8,7 @@ import {screenToFrame} from './laptop';
 import {AppShot} from './shot';
 import {Asst, ChatGPT, G, GEO, Status, UserMsg, typedAt} from './app';
 import {CUES} from './cues';
-import {Callout, CmdCard, Glass, Icon, StepBadge} from './ui';
+import {Callout, Glass, Icon, StepBadge} from './ui';
 
 const Lane: React.FC<{label: string; icon: string; y: number; t: number; at: number; children: React.ReactNode}> = ({label, icon, y, t, at, children}) => (
   <div style={{position: 'absolute', left: 200, top: y, width: 1520, opacity: p01(t, at, 0.3)}}>
@@ -157,14 +157,15 @@ export const StreamDemo: React.FC = () => {
   return (
     <AppShot
       t={t}
-      cam={[[0, 1.75, GEO.cx, GEO.compY - 140], [tE + 0.1, 1.75, GEO.cx, GEO.compY - 140], [tE + 0.8, 1.8, GEO.cx, ay + 120], [L(2), 1.8, GEO.cx, ay + 120], [L(2) + 1.0, 1.5, GEO.cx, ay + 230], [dur, 1.52, GEO.cx, ay + 236]]}
+      cam={[[0, 1.75, GEO.cx, GEO.midY - 30], [tE + 0.1, 1.75, GEO.cx, GEO.midY - 30], [tE + 0.8, 1.8, GEO.cx, ay + 120], [L(2), 1.8, GEO.cx, ay + 120], [L(2) + 1.0, 1.5, GEO.cx, ay + 230], [dur, 1.52, GEO.cx, ay + 236]]}
       screen={() => (
         <ChatGPT
           t={t}
           tabHi={1}
-          composer={{text: t < tE ? typedAt(c.text, tA, tE, t) : '', caret: true, hot: p01(t, tA - 0.3, 0.3) * (1 - p01(t, tE, 0.3))}}
+          composer={{text: t < tE ? typedAt(c.text, tA, tE, t) : '', caret: true, hot: p01(t, tA - 0.3, 0.3) * (1 - p01(t, tE, 0.3)), mid: 1 - p01(t, tE, 0.45, E.inOut)}}
           thread={
             <div style={{position: 'absolute', inset: 0, transform: `translateY(${-scroll}px)`}}>
+              {t < tE && <div style={{position: 'absolute', left: GEO.colX, width: GEO.colW, top: GEO.helloY, textAlign: 'center', fontSize: 30, fontWeight: 500}}>What can I help with?</div>}
               <UserMsg y={Y} text={c.text} p={p01(t, tE, 0.35)} />
               {t > tE + 0.2 && (
                 <Asst y={ay}>
@@ -199,9 +200,6 @@ export const StreamDemo: React.FC = () => {
             </div>
             <div style={{position: 'absolute', right: 60, top: 54}}>
               <StepBadge t={t} at={L(2) - 0.1} n={3} label="Keep reading" />
-            </div>
-            <div style={{position: 'absolute', left: 0, right: 0, top: 850, display: 'flex', justifyContent: 'center'}}>
-              <CmdCard t={t} at={tA - 0.3} text={c.text} typed={typedAt(c.text, tA, tE, t)} label="ASK THIS" done={t > tE} out={tE + 1.1} />
             </div>
             <Callout t={t} at={w('top') + 0.1} x={f.x} y={f.y} dx={330} dy={0} label="Still searching…" sub="but already writing" out={L(2) - 0.2} />
             <Layer t={t} at={enter(w('second') - 0.2, {from: 'd', dist: 50})} style={{left: 0, right: 0, top: 900, display: 'flex', justifyContent: 'center'}}>

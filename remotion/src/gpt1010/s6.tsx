@@ -302,11 +302,6 @@ export const CodexOff: React.FC = () => {
           <div style={{position: 'absolute', right: 60, top: 54}}>
             <StepBadge t={t} at={0} n={4} label="Or switch it off" />
           </div>
-          <Layer t={t} at={enter(tGear + 0.3, {from: 'd', dist: 50})} style={{left: 0, right: 0, top: 890, display: 'flex', justifyContent: 'center'}}>
-            <Glass pad={0} r={999} style={{padding: '16px 32px', fontFamily: F.mono, fontSize: 28, whiteSpace: 'nowrap'}}>
-              Settings › General › Composer › Show predictions: <span style={{color: on ? C.accHi : C.red}}>{on ? 'on' : 'off'}</span>
-            </Glass>
-          </Layer>
         </>
       )}
     />
