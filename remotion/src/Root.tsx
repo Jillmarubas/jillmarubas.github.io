@@ -25,6 +25,7 @@ import {GPT_DURATION, GPT_PARTS, GPTFilm, GPTPart} from './gpt1010/Film';
 import {GPTThumbA, GPTThumbB, GPTThumbC} from './gpt1010/Thumbnail';
 import {VS_DURATION, VS_PARTS, VSFilm, VSPart} from './vs1010/Film';
 import {VSThumbA, VSThumbB, VSThumbC} from './vs1010/Thumbnail';
+import {AsherThumb1, AsherThumb2, AsherThumb3, AsherThumb4, AsherThumb5} from './vs1010/AsherThumbs';
 import {IconRow, IconTile} from './vs1010/Icons';
 import {LUMO_DUR, LUMO_FPS, LumoAd} from './lumo/Ad';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
@@ -97,6 +98,11 @@ export const Root: React.FC = () => (
     <Composition id="VSThumbA" component={VSThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="VSThumbB" component={VSThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="VSThumbC" component={VSThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb1" component={AsherThumb1} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb2" component={AsherThumb2} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb3" component={AsherThumb3} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb4" component={AsherThumb4} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb5" component={AsherThumb5} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="GPTThumbA" component={GPTThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="GPTThumbB" component={GPTThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="GPTThumbC" component={GPTThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
