@@ -38,10 +38,10 @@ export const HookApp: React.FC = () => {
               t={t}
               thread={
                 <>
-                  <UserMsg y={Y} text="Split a RM240 dinner bill between 5 friends" p={p01(t, 0.4, 0.4)} />
+                  <UserMsg y={Y} text="Split a $240 dinner bill between 5 friends" p={p01(t, 0.4, 0.4)} />
                   <Asst y={ansY} p={1 - collapse}>
                     <div style={{transform: `scaleY(${1 - collapse})`, transformOrigin: '50% 0', filter: `blur(${collapse * 6}px)`}}>
-                      <Stream p={p01(t, 0.8, 1.6, E.linear)} text="Sure. RM240 divided by 5 is RM48 each. If you add a 10% tip, the total becomes RM264, so each person pays RM52.80. If someone ordered more, you could split the shared dishes evenly and add each person's own items on top." />
+                      <Stream p={p01(t, 0.8, 1.6, E.linear)} text="Sure. $240 divided by 5 is $48 each. If you add a 10% tip, the total becomes $264, so each person pays $52.80. If someone ordered more, you could split the shared dishes evenly and add each person's own items on top." />
                     </div>
                   </Asst>
                   <Asst y={ansY} p={pW}>

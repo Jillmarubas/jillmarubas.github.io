@@ -36,7 +36,7 @@ Sources
 | 19 | Tab accepts into the box, doesn't send | RN, CP | ✅ |
 | 20 | On by default; Settings › General › Composer › Show predictions | CP | ✅ |
 
-Example prompts (bill splitter RM240, bike, KL–Penang trip, Penang weather, meeting notes) are the
+Example prompts (bill splitter $240, bike, KL–Penang trip, Penang weather, meeting notes) are the
 user's own, as the script says. Screens are drawn in code and labelled as illustrations; tool outputs
 shown (per-person amounts, map stops, notes) are illustrative.
 

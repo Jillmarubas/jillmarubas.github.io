@@ -41,7 +41,7 @@ export const BillSplitter: React.FC<{t: number; p: number; people: number; prevP
   const btn = (s: string) => <div style={{width: 46, height: 46, borderRadius: 12, background: 'rgba(255,255,255,.08)', display: 'grid', placeItems: 'center', fontSize: 24, fontWeight: 500}}>{s}</div>;
   return (
     <Card w={BILL.w} h={BILL.h} p={p} title="Bill splitter" icon="dollar">
-      {row(70, 'Total bill', 0, <div style={{width: 200, height: 46, borderRadius: 12, background: '#1F1F1F', boxShadow: '0 0 0 1px rgba(255,255,255,.1)', display: 'flex', alignItems: 'center', padding: '0 16px', boxSizing: 'border-box', fontSize: 18, fontWeight: 600}}>RM {total.toFixed(2)}</div>)}
+      {row(70, 'Total bill', 0, <div style={{width: 200, height: 46, borderRadius: 12, background: '#1F1F1F', boxShadow: '0 0 0 1px rgba(255,255,255,.1)', display: 'flex', alignItems: 'center', padding: '0 16px', boxSizing: 'border-box', fontSize: 18, fontWeight: 600}}>${total.toFixed(2)}</div>)}
       {row(130, 'People', 1, (
         <div style={{display: 'flex', alignItems: 'center', gap: 0}}>
           {btn('−')}
@@ -58,7 +58,7 @@ export const BillSplitter: React.FC<{t: number; p: number; people: number; prevP
       ))}
       <div style={{position: 'absolute', left: 22, right: 22, top: 256, height: 96, borderRadius: 14, background: 'rgba(16,163,127,.12)', boxShadow: '0 0 0 1px rgba(16,163,127,.35)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', ...reveal(p, 3)}}>
         <span style={{fontSize: 16, color: G.text2}}>Each person pays</span>
-        <span style={{fontFamily: F.display, fontWeight: 800, fontSize: 42, letterSpacing: '-0.02em', color: '#fff', fontVariantNumeric: 'tabular-nums', transform: `scale(${pop(changeAt) * pop(tipAt)})`}}>RM {shown.toFixed(2)}</span>
+        <span style={{fontFamily: F.display, fontWeight: 800, fontSize: 42, letterSpacing: '-0.02em', color: '#fff', fontVariantNumeric: 'tabular-nums', transform: `scale(${pop(changeAt) * pop(tipAt)})`}}>${shown.toFixed(2)}</span>
       </div>
     </Card>
   );

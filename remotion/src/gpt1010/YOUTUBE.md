@@ -37,7 +37,7 @@ ChatGPT just stopped answering only in text. With GPT-6 and Intelligent UI, it c
 6:17 Outro
 
 💬 Prompts from the video (my examples, not OpenAI's)
-Make me a bill splitter for 5 friends. The bill is RM240.
+Make me a bill splitter for 5 friends. The bill is $240.
 Explain how a 7-speed bike works. Show me the parts.
 Plan a 3-day road trip from Kuala Lumpur to Penang. Show the stops.
 What are the weekend weather and traffic like in Penang? Search the web.
@@ -73,6 +73,6 @@ ChatGPT, GPT-6, GPT 6, Intelligent UI, ChatGPT update, ChatGPT tutorial, GPT-6 S
 ## Accuracy notes
 - "NOT JUST TEXT": the release notes say answers can now mix text, visuals and interactive parts. Plain text still appears for simple questions, so "not just" (not "no more") is the accurate wording.
 - "IT BUILDS TOOLS": the release notes list calculators, bill splitters and games; OpenAI's post shows a dinner bill splitter.
-- The bill splitter, bike explorer, map, transcript, meeting notes and Codex threads are illustrations; the meeting (Aina, Ravi, RM18,000) is a made-up example, not a real recording.
+- The bill splitter, bike explorer, map, transcript, meeting notes and Codex threads are illustrations; the meeting (Aina, Ravi, $18,000) is a made-up example, not a real recording.
 - Free and Go: OpenAI said the rollout would follow starting 8 Oct, and the video says it may not be on every account yet.
 - Script fix during verification: the line on transcript accuracy now says "transcripts can have mistakes, and accuracy can vary by language", which is what OpenAI's help page says.

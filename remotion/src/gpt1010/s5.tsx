@@ -185,7 +185,7 @@ const Bullet: React.FC<{children: React.ReactNode}> = ({children}) => (
   </div>
 );
 const NOTES = [
-  {h: 'Decisions', items: ['Launch moves to 3 November', 'Budget capped at RM18,000']},
+  {h: 'Decisions', items: ['Launch moves to 3 November', 'Budget capped at $18,000']},
   {h: 'Open questions', items: ['Who owns the social posts?']},
   {h: 'Next steps', items: ['Aina: send the brief by Friday', 'Ravi: book the venue']},
 ];
@@ -242,7 +242,7 @@ export const NotesDemo: React.FC = () => {
                 </Asst>
                 <UserMsg y={pos.u2} text={c.type2.text} p={p01(t, s2.enter, 0.35)} />
                 <Asst y={pos.a2} p={p01(t, s2.enter + 0.6, 0.4)}>
-                  They agreed to cap the budget at <b>RM18,000</b>, with RM2,000 kept aside for ads. Ravi will confirm the venue cost before Friday.
+                  They agreed to cap the budget at <b>$18,000</b>, with $2,000 kept aside for ads. Ravi will confirm the venue cost before Friday.
                 </Asst>
                 <UserMsg y={pos.u3} text={c.type3.text} p={p01(t, s3.enter, 0.35)} />
                 <Asst y={pos.a3} p={p01(t, s3.enter + 0.6, 0.4)}>
@@ -251,7 +251,7 @@ export const NotesDemo: React.FC = () => {
                       <Icon name="mail" size={18} color={C.accHi} /> Email draft
                     </div>
                     <div style={{fontSize: 16, fontWeight: 700}}>Subject: Follow-up on the launch plan</div>
-                    <div style={{fontSize: 15.5, lineHeight: 1.55, marginTop: 8, color: G.text}}>Hi team, thanks for today. We agreed to move the launch to 3 November and cap the budget at RM18,000. Aina will send the brief by Friday, and Ravi will book the venue.</div>
+                    <div style={{fontSize: 15.5, lineHeight: 1.55, marginTop: 8, color: G.text}}>Hi team, thanks for today. We agreed to move the launch to 3 November and cap the budget at $18,000. Aina will send the brief by Friday, and Ravi will book the venue.</div>
                   </div>
                 </Asst>
               </div>
@@ -296,7 +296,7 @@ export const NotesCheck: React.FC = () => {
   const {t, w, dur} = useS();
   const checks = [
     {at: w('names'), label: 'Names', tok: 'Aina'},
-    {at: w('numbers'), label: 'Numbers', tok: 'RM18,000'},
+    {at: w('numbers'), label: 'Numbers', tok: '$18,000'},
     {at: w('dates'), label: 'Dates', tok: '3 November'},
   ];
   const hi = (tok: string) => {
@@ -315,7 +315,7 @@ export const NotesCheck: React.FC = () => {
           <div style={{fontFamily: F.mono, fontSize: 20, letterSpacing: '0.24em', color: C.ink3}}>TRANSCRIPT · {FILE.name}</div>
           <div style={{fontFamily: F.ui, fontSize: 32, lineHeight: 1.75, marginTop: 26, color: C.ink}}>
             <div><span style={{color: C.accHi, fontWeight: 700}}>Speaker 1:</span> So {hi('Aina')} sends the brief by Friday.</div>
-            <div><span style={{color: C.accHi, fontWeight: 700}}>Speaker 2:</span> And we cap it at {hi('RM18,000')}.</div>
+            <div><span style={{color: C.accHi, fontWeight: 700}}>Speaker 2:</span> And we cap it at {hi('$18,000')}.</div>
             <div><span style={{color: C.accHi, fontWeight: 700}}>Speaker 1:</span> Launch moves to {hi('3 November')}.</div>
           </div>
           <div style={{position: 'absolute', left: 44, right: 44, bottom: 40}}>

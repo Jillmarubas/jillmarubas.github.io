@@ -6,7 +6,7 @@ import {at} from './plan';
 export type Typed = {text: string; at: number; enter?: number};
 
 export const PROMPTS = {
-  bill: 'Make me a bill splitter for 5 friends. The bill is RM240.',
+  bill: 'Make me a bill splitter for 5 friends. The bill is $240.',
   bike: 'Explain how a 7-speed bike works. Show me the parts.',
   trip: 'Plan a 3-day road trip from Kuala Lumpur to Penang. Show the stops.',
   penang: 'What are the weekend weather and traffic like in Penang? Search the web.',
