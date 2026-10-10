@@ -25,6 +25,7 @@ import {GPT_DURATION, GPT_PARTS, GPTFilm, GPTPart} from './gpt1010/Film';
 import {GPTThumbA, GPTThumbB, GPTThumbC} from './gpt1010/Thumbnail';
 import {VS_DURATION, VS_PARTS, VSFilm, VSPart} from './vs1010/Film';
 import {VSThumbA, VSThumbB, VSThumbC} from './vs1010/Thumbnail';
+import {LUMO_DUR, LUMO_FPS, LumoAd} from './lumo/Ad';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -89,6 +90,7 @@ export const Root: React.FC = () => (
     {VS_PARTS.map((p, i) => (
       <Composition key={`vs${i}`} id={`AIVersus-part${i}`} component={VSPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
+    <Composition id="LumoAd" component={LumoAd} durationInFrames={LUMO_DUR * LUMO_FPS} fps={LUMO_FPS} width={1920} height={1080} />
     <Composition id="VSThumbA" component={VSThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="VSThumbB" component={VSThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="VSThumbC" component={VSThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
