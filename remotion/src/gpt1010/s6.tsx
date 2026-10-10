@@ -185,6 +185,7 @@ export const CodexUse: React.FC = () => {
       cam={[[0, 1.7, 880, btn.y + 200], [L(1) - 0.3, 1.7, 880, btn.y + 200], [L(1) + 0.3, 1.5, CGEO.colX + 380, 520], [tSug - 0.2, 1.5, CGEO.colX + 380, 520], [tSug + 0.5, ...boxFocus(1.9)], [dur, ...boxFocus(1.92)]]}
       screen={() => (
         <Codex
+          cursor={<ScreenCursor t={t} keys={[[Math.max(0, tUp - 0.9), btn.x - 200, btn.y + 160], [tUp, btn.x + 10, btn.y + 2, true], [tUp + 0.8, btn.x - 60, btn.y + 140]]} />}
           t={t}
           banner={banner}
           box={{text, ghost: ghostOn ? PROMPTS.ghost : '', caret: (t > tA - 0.3 && t < tE) || (accepted && !sent2), hint: ghostOn ? 1 : 0, hot: ghostOn ? 0.6 : accepted && !sent2 ? 1 : 0}}
@@ -193,7 +194,6 @@ export const CodexUse: React.FC = () => {
               <Bubble y={Y + 10} text={PROMPTS.codex} p={p01(t, tE, 0.35)} />
               <Reply y={Y + 90} p={p01(t, tReply, 0.5)} />
               <Bubble y={Y + 330} text={PROMPTS.ghost + PROMPTS.edit} p={p01(t, eE, 0.35)} />
-              <ScreenCursor t={t} keys={[[Math.max(0, tUp - 0.9), btn.x - 200, btn.y + 160], [tUp, btn.x + 10, btn.y + 2, true], [tUp + 0.8, btn.x - 60, btn.y + 140]]} />
             </>
           }
         />

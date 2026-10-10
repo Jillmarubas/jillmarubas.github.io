@@ -85,7 +85,7 @@ const SideItem: React.FC<{icon: string; label: string; hi?: boolean}> = ({icon, 
 export type Composer = {text?: string; caret?: boolean; placeholder?: string; attach?: React.ReactNode; hot?: number};
 
 /** ChatGPT in the browser. `thread` is laid out by the scene in screen points (absolute children). */
-export const ChatGPT: React.FC<{t: number; thread?: React.ReactNode; composer?: Composer; tabHi?: number; model?: string; overlay?: React.ReactNode; chats?: string[]}> = ({t, thread, composer = {}, tabHi = 0, model = 'GPT-6', overlay, chats = ['Weekend in Ipoh', 'Gym plan for October', 'Excel formula help', 'Birthday gift ideas', 'Rewrite my cover letter']}) => {
+export const ChatGPT: React.FC<{t: number; thread?: React.ReactNode; composer?: Composer; tabHi?: number; model?: string; overlay?: React.ReactNode; cursor?: React.ReactNode; chats?: string[]}> = ({t, thread, composer = {}, tabHi = 0, model = 'GPT-6', overlay, cursor, chats = ['Weekend in Ipoh', 'Gym plan for October', 'Excel formula help', 'Birthday gift ideas', 'Rewrite my cover letter']}) => {
   const {text = '', caret = false, placeholder = 'Ask anything', attach, hot = 0} = composer;
   const ax = (x: number) => x - WIN.x;
   const ay = (y: number) => y - WIN.y - CHROME;
@@ -146,6 +146,8 @@ export const ChatGPT: React.FC<{t: number; thread?: React.ReactNode; composer?: 
       </div>
       <div style={{position: 'absolute', left: ax(GEO.colX), width: GEO.colW, top: ay(GEO.compY + GEO.compH + 6), textAlign: 'center', fontSize: 11.5, color: G.text3}}>ChatGPT can make mistakes. Check important info.</div>
       {overlay}
+      {/* the pointer sits above everything (header, thread, composer), in screen points */}
+      <div style={{position: 'absolute', left: -WIN.x, top: -(WIN.y + CHROME), width: 1512, height: 945, zIndex: 100, pointerEvents: 'none'}}>{cursor}</div>
     </Browser>
   );
 };
@@ -197,7 +199,7 @@ export const CGEO = (() => {
 })();
 
 /** The Codex desktop app (illustration): thread list, a thread, and the message box. */
-export const Codex: React.FC<{t: number; thread?: React.ReactNode; box?: {text?: string; ghost?: string; caret?: boolean; hint?: number; hot?: number}; overlay?: React.ReactNode; banner?: React.ReactNode}> = ({t, thread, box = {}, overlay, banner}) => {
+export const Codex: React.FC<{t: number; thread?: React.ReactNode; box?: {text?: string; ghost?: string; caret?: boolean; hint?: number; hot?: number}; overlay?: React.ReactNode; banner?: React.ReactNode; cursor?: React.ReactNode}> = ({t, thread, box = {}, overlay, banner, cursor}) => {
   const {text = '', ghost = '', caret = false, hint = 0, hot = 0} = box;
   const ax = (x: number) => x - WIN.x;
   const ay = (y: number) => y - WIN.y;
@@ -248,6 +250,7 @@ export const Codex: React.FC<{t: number; thread?: React.ReactNode; box?: {text?:
         </div>
       </div>
       {overlay}
+      <div style={{position: 'absolute', left: -WIN.x, top: -WIN.y, width: 1512, height: 945, zIndex: 100, pointerEvents: 'none'}}>{cursor}</div>
     </div>
   );
 };

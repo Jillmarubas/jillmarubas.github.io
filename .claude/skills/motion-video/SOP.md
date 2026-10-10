@@ -253,6 +253,9 @@ Reference builds (start a new video by copying the closer one; don't rebuild the
   (`WIN` in `laptop.tsx` = `{x: 0, y: 34, w: 1512, h: 911}`), the desktop behind it is pure black, and the
   lid is nearly square at the hinge (`tutorial/MacBook.tsx`), so the film's coloured background never reads
   through the laptop. Check the screen edges and the hinge corners in QA stills.
+- **The cursor is always on top.** Pass it through the app's `cursor` prop (`ChatGPT`, `Codex` in `app.tsx`),
+  never inside `thread`: the thread is clipped below the header, so a cursor there disappears under tabs
+  and menus. QA a still on every click.
 
 **Format and motion**
 - 1920×1080, **60 fps**. Every scene uses the After Effects toolkit in `cc1003/ae.tsx`:

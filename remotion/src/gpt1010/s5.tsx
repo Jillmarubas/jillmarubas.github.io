@@ -216,6 +216,7 @@ export const NotesDemo: React.FC = () => {
       cam={[[0, 1.6, GEO.cx, GEO.compY - 160], [s1.enter + 0.3, 1.6, GEO.cx, GEO.compY - 160], [s1.enter + 1.0, 1.5, GEO.cx, 480], [dur, 1.52, GEO.cx, 484]]}
       screen={() => (
         <ChatGPT
+          cursor={<ScreenCursor t={t} keys={[[Math.max(0, tPlus - 0.7), GEO.plus.x + 160, GEO.plus.y - 140], [tPlus, GEO.plus.x, GEO.plus.y, true], [tFile, GEO.plus.x + 60, GEO.compY - 82, true], [tFile + 0.6, GEO.plus.x + 120, GEO.compY - 30]]} />}
           t={t}
           tabHi={1}
           composer={{text: comp, caret: true, attach: attached && t < s1.enter ? chip : undefined, hot: typing ? 1 - p01(t, typing.enter, 0.3) : 0}}
@@ -264,7 +265,6 @@ export const NotesDemo: React.FC = () => {
                   ))}
                 </div>
               )}
-              <ScreenCursor t={t} keys={[[Math.max(0, tPlus - 0.7), GEO.plus.x + 160, GEO.plus.y - 140], [tPlus, GEO.plus.x, GEO.plus.y, true], [tFile, GEO.plus.x + 60, GEO.compY - 82, true], [tFile + 0.6, GEO.plus.x + 120, GEO.compY - 30]]} />
             </>
           }
         />

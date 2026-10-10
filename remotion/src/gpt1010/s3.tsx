@@ -54,13 +54,13 @@ export const TryOpen: React.FC = () => {
       cam={[[0, 0.84, 756, 472], [1.0, 1, 756, 472], [Math.max(1.2, L(1) + 0.2), 1, 756, 472], [L(1) + 1.2, 1.9, tab.x, tab.y + 150], [dur, 1.95, tab.x, tab.y + 150]]}
       screen={() => (
         <ChatGPT
+          cursor={<ScreenCursor t={t} keys={[[L(1) + 0.3, tab.x + 220, tab.y + 330], [tTab, tab.x - 6, tab.y + 2, true], [dur, tab.x + 2, tab.y + 10]]} />}
           t={t}
           tabHi={p01(t, tTab, 0.3)}
           composer={{caret: true}}
           thread={
             <>
               <Hello />
-              <ScreenCursor t={t} keys={[[L(1) + 0.3, tab.x + 220, tab.y + 330], [tTab, tab.x - 6, tab.y + 2, true], [dur, tab.x + 2, tab.y + 10]]} />
             </>
           }
           overlay={null}
@@ -108,6 +108,7 @@ export const TryBill: React.FC = () => {
       cam={[[0, 1.95, tab.x, tab.y + 150], [Math.max(0.5, tA - 0.2), ...compFocus(1.75)], [tE + 0.1, ...compFocus(1.75)], [tE + 0.8, 1.55, GEO.cx, wy + 190], [L(3), 1.55, GEO.cx, wy + 190], [L(3) + 0.8, 1.8, GEO.colX + 360, wy + 200], [dur, 1.82, GEO.colX + 360, wy + 200]]}
       screen={() => (
         <ChatGPT
+          cursor={<ScreenCursor t={t} keys={[[L(3), plus.x + 160, plus.y + 220], [tPlus, plus.x, plus.y, true], [tTip, tip.x, tip.y, true], [dur, tip.x + 14, tip.y + 30]]} />}
           t={t}
           tabHi={1}
           composer={{text: t < tE ? typedAt(c.type.text, tA, tE, t) : '', caret: true, hot: p01(t, tA - 0.3, 0.3) * (1 - p01(t, tE, 0.3))}}
@@ -123,7 +124,6 @@ export const TryBill: React.FC = () => {
               <Asst y={wy} p={pW}>
                 <BillSplitter t={t} p={pW} prevPeople={5} people={6} changeAt={tPlus} tip={10} tipAt={tTip} />
               </Asst>
-              <ScreenCursor t={t} keys={[[L(3), plus.x + 160, plus.y + 220], [tPlus, plus.x, plus.y, true], [tTip, tip.x, tip.y, true], [dur, tip.x + 14, tip.y + 30]]} />
             </>
           }
         />
@@ -176,6 +176,7 @@ const TryShot: React.FC<{
       cam={[[0, ...compFocus(1.75)], [tE + 0.1, ...compFocus(1.75)], [tE + 0.8, 1.5, GEO.cx, wy + wh / 2 - 10], [dur, 1.54, GEO.cx, wy + wh / 2 - 10]]}
       screen={() => (
         <ChatGPT
+          cursor={ks && <ScreenCursor t={t} keys={ks} />}
           t={t}
           tabHi={1}
           composer={{text: t < tE ? typedAt(type.text, tA, tE, t) : '', caret: true, hot: p01(t, tA - 0.3, 0.3) * (1 - p01(t, tE, 0.3))}}
@@ -191,7 +192,6 @@ const TryShot: React.FC<{
               <Asst y={wy} p={pW}>
                 {widget(t, pW, tE)}
               </Asst>
-              {ks && <ScreenCursor t={t} keys={ks} />}
             </>
           }
         />

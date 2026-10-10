@@ -35,6 +35,7 @@ export const HookApp: React.FC = () => {
         <div style={{position: 'absolute', inset: 0, transform: `scale(${z})`, transformOrigin: '960px 560px', opacity: p01(t, 0, 0.5)}}>
           <LaptopRig rig={rig} app="Safari" wake={clamp((t - 0.3) / 0.6)}>
             <ChatGPT
+              cursor={<ScreenCursor t={t} keys={[[tBuild + 0.3, plus.x + 120, plus.y + 160], [tPlus, plus.x, plus.y, true], [dur, plus.x + 10, plus.y + 18]]} />}
               t={t}
               thread={
                 <>
@@ -47,7 +48,6 @@ export const HookApp: React.FC = () => {
                   <Asst y={ansY} p={pW}>
                     <BillSplitter t={t} p={pW} prevPeople={5} people={6} changeAt={tPlus} />
                   </Asst>
-                  <ScreenCursor t={t} keys={[[tBuild + 0.3, plus.x + 120, plus.y + 160], [tPlus, plus.x, plus.y, true], [dur, plus.x + 10, plus.y + 18]]} />
                 </>
               }
             />
