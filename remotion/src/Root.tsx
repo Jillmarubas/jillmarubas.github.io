@@ -23,6 +23,7 @@ import {CC_DURATION, CC_PARTS, CCFilm, CCPart} from './cc1003/Film';
 import {CCThumbA, CCThumbB, CCThumbC, CCThumbD} from './cc1003/Thumbnail';
 import {GPT_DURATION, GPT_PARTS, GPTFilm, GPTPart} from './gpt1010/Film';
 import {GPTThumbA, GPTThumbB, GPTThumbC} from './gpt1010/Thumbnail';
+import {VS_DURATION, VS_PARTS, VSFilm, VSPart} from './vs1010/Film';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -82,6 +83,10 @@ export const Root: React.FC = () => (
     <Composition id="ChatGPTClick" component={GPTFilm} durationInFrames={GPT_DURATION} fps={60} width={1920} height={1080} />
     {GPT_PARTS.map((p, i) => (
       <Composition key={`gpt${i}`} id={`ChatGPTClick-part${i}`} component={GPTPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
+    ))}
+    <Composition id="AIVersus" component={VSFilm} durationInFrames={VS_DURATION} fps={60} width={1920} height={1080} />
+    {VS_PARTS.map((p, i) => (
+      <Composition key={`vs${i}`} id={`AIVersus-part${i}`} component={VSPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
     <Composition id="GPTThumbA" component={GPTThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="GPTThumbB" component={GPTThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />

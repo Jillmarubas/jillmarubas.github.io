@@ -1,0 +1,21 @@
+{
+ "gemini": {
+  "file": "Google_Gemini_icon_2025.svg",
+  "license": "Public domain",
+  "author": "Google LLC",
+  "ok": true,
+  "local": "gemini_icon25.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Google_Gemini_icon_2025.svg"
+ },
+ "claude": {
+  "file": "Claude_AI_symbol.svg",
+  "license": "CC0",
+  "author": "Claude Logo Symbol",
+  "ok": true,
+  "local": "claude.svg",
+  "page": "https://commons.wikimedia.org/wiki/File:Claude_AI_symbol.svg"
+ },
+ "openai": {
+  "note": "OpenAI mark, white, from gpt1010 (editorial use)"
+ }
+}
