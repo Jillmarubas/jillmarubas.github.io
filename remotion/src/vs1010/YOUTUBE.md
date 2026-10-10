@@ -9,9 +9,8 @@ Other titles:
 - ChatGPT vs Claude vs Gemini: What Each One Is Best At (Every Plan Compared)
 - I Compared Every ChatGPT, Claude and Gemini Plan So You Don't Have To
 
-Thumbnail words (3 max, never repeat the title): **"ONLY NEED ONE"** (or **"SAME $20?"**).
-Thumbnail idea: the three app tiles side by side with a big VS, one tile glowing. Use the Asher host image
-(AI-generated, disclosed below) on the right if you want a face.
+Thumbnail: **out/thumbs-asher/thumb-3.png** (AsherThumb3): the Asher image from Higgsfield (AI-generated, disclosed
+below) holding the three app icons, "ONLY NEED" white + "ONE" yellow, arrow to the icons. Alternatives: AsherThumb1, 2, 4, 5.
 
 ## Description
 
@@ -78,7 +77,7 @@ Summarize this in ten bullet points. Then list anything that looks like a deadli
 🖼 Credits
 Narration: ElevenLabs ("Asher"). Swoosh: BigSoundBank.com (CC0). Typing, Enter-key and mouse-click sounds: my own recordings.
 ChatGPT and OpenAI, Claude and Anthropic, Gemini and Google are trademarks of their owners, shown for comparison and commentary. Gemini icon: Google LLC (public domain, Wikimedia Commons). Claude symbol: Wikimedia Commons (CC0).
-App screens are illustrations drawn for this video, not screen recordings. Not sponsored.
+App screens are illustrations drawn for this video, not screen recordings. The person in the thumbnail is an AI-generated character. Not sponsored.
 
 💬 Which one do you use, and why? Tell me in the comments.
 
