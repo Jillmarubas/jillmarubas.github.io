@@ -35,7 +35,7 @@ export const CUES = (() => {
     HookApp: {plus: hook.w('splitter') + 0.45},
     TryOpen: {tab: open.w('tab') - 0.05},
     TryBill: {type: {text: PROMPTS.bill, at: bill.w('ask') - 0.1, enter: bill.Le(2) + 0.15}, plus: bill.w('change') + 0.1, tip: bill.w('happens') + 0.05},
-    TryBike: {type: {text: PROMPTS.bike, at: bike.L(4) + 0.05, enter: bike.w('question') + 0.25}, tabs: [bike.w('breaks'), bike.w('five') + 0.05, bike.w('systems') + 0.05, bike.w('tap') + 0.1]},
+    TryBike: {type: {text: PROMPTS.bike, at: bike.L(4) + 0.05, enter: bike.w('question') + 0.25}, tabs: [bike.w('example'), bike.w('explains') + 0.05, bike.w('diagram') + 0.05, bike.w('explore') + 0.1]},
     TryMap: {type: {text: PROMPTS.trip, at: trip.L(5) - 0.25, enter: trip.w('road') + 0.05}},
     TipReasoning: {open: reas.w('pro') + 0.35, pick: reas.w('levels') - 0.1},
     StreamDemo: {type: {text: PROMPTS.penang, at: str.w('ask') - 0.05, enter: str.Le(0) + 0.3}},

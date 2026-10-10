@@ -21,7 +21,7 @@ Sources
 | 4 | Comparisons may come side by side; "how it works" may come as a diagram to explore; simple questions still get plain text | IUI, Blog | ✅ |
 | 5 | Rollout began 7 Oct for Plus, Pro, Business, Enterprise; Free and Go starting 8 Oct; it's a rollout | Forum ("expanding to Free and Go starting October 8"), RN | ✅ |
 | 6 | Plus/Pro/Business/Enterprise use GPT-6 Sol; Free and Go use GPT-6 Luna | RN, Forum table | ✅ |
-| 7 | OpenAI's demo breaks a 7-speed bike into five systems you can tap through | Blog example "7-Speed Bicycle"; press describe five: frame, wheels, drivetrain, brakes, cockpit | ✅ |
+| 7 | OpenAI's demo breaks a 7-speed bike into five systems you can tap through | Blog example "7-Speed Bicycle"; the "five systems" detail came only from press coverage, not an OpenAI page | ⚠️ → **edited** (10 Oct, after verification): "OpenAI's own example explains a seven-speed bike as a diagram you can explore" (Blog example + IUI "a diagram to explore"); chapter 3 re-recorded |
 | 8 | Road-trip stops can appear on a map | Blog | ✅ |
 | 9 | Works from Instant up to Extra High; the Pro reasoning option doesn't support it | RN ("Pro reasoning option continues to use GPT-6 Astra") | ✅ |
 | 10 | GPT-6 starts answering while still thinking/using tools; more is added without a new prompt | Forum ("can begin answering while it continues to think"), Blog | ✅ |

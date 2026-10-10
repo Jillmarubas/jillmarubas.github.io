@@ -94,8 +94,8 @@
     "show": "STEP 3; cursor changes friends 5→6; amount updates."
    },
    {
-    "say": "Step four. Now try a learning question. OpenAI's own demo breaks a seven-speed bike into five systems you can tap through.",
-    "show": "STEP 4; bike diagram, five tabs."
+    "say": "Step four. Now try a learning question. OpenAI's own example explains a seven-speed bike as a diagram you can explore.",
+    "show": "STEP 4; bike diagram with tabs to explore."
    },
    {
     "say": "Step five. Try a plan. OpenAI says road trip stops can appear on a map.",

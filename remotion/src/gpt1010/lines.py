@@ -29,7 +29,7 @@ seg('p1b', 'TRY INTELLIGENT UI', [
  ("Step one. Open ChatGPT and make sure you are in the Chat tab.", "STEP 1; Chat tab clicked."),
  ("Step two. Ask for a tool, not an essay. A bill splitter is a good first test.", "STEP 2; prompt typed."),
  ("Step three. Use what it builds. If ChatGPT gives you a tool, change the numbers and see what happens.", "STEP 3; cursor changes friends 5→6; amount updates."),
- ("Step four. Now try a learning question. OpenAI's own demo breaks a seven-speed bike into five systems you can tap through.", "STEP 4; bike diagram, five tabs."),
+ ("Step four. Now try a learning question. OpenAI's own example explains a seven-speed bike as a diagram you can explore.", "STEP 4; bike diagram with tabs to explore."),
  ("Step five. Try a plan. OpenAI says road trip stops can appear on a map.", "STEP 5; map with stops."),
  ("Two tips. First, ChatGPT chooses the format. If you get plain text, it may have judged text to be the best answer. Or the rollout hasn't reached you yet.", "Tip 1 card."),
  ("Second, Intelligent UI works from Instant up to Extra High reasoning. The Pro reasoning option does not support it. So if you use Pro reasoning, switch levels first.", "Reasoning picker; Pro crossed."),

@@ -230,7 +230,10 @@ the Vox-style news rules:
   "show, don't type" applies only to the explainer scenes.
 
 The news rules still hold:
-- verify every claim against its source first (`VERIFY.md`) and fix or flag mismatches before the voiceover
+- verify every claim against its source first (`VERIFY.md`) and fix or flag mismatches before the voiceover.
+  **Once a story is verified, edit the script yourself to match the sources** (the user's rule, 10 Oct 2026):
+  reword or cut any detail that only press coverage or the researcher supports, and log each edit in
+  `VERIFY.md` (old line, new line, source). Tell the user what changed when you deliver.
 - real licensed photos of people named, or a named silhouette card when none exists
 - logos in their exact colours, for editorial reference
 - sources credited in the video and the description
