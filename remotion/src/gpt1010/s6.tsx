@@ -182,7 +182,7 @@ export const CodexUse: React.FC = () => {
     <AppShot
       t={t}
       app="Codex"
-      cam={[[0, 1.7, btn.x - 300, btn.y + 200], [L(1) - 0.3, 1.7, btn.x - 300, btn.y + 200], [L(1) + 0.3, 1.5, CGEO.colX + 380, 520], [tSug - 0.2, 1.5, CGEO.colX + 380, 520], [tSug + 0.5, ...boxFocus(1.9)], [dur, ...boxFocus(1.92)]]}
+      cam={[[0, 1.7, 880, btn.y + 200], [L(1) - 0.3, 1.7, 880, btn.y + 200], [L(1) + 0.3, 1.5, CGEO.colX + 380, 520], [tSug - 0.2, 1.5, CGEO.colX + 380, 520], [tSug + 0.5, ...boxFocus(1.9)], [dur, ...boxFocus(1.92)]]}
       screen={() => (
         <Codex
           t={t}

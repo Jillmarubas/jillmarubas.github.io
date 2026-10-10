@@ -42,9 +42,8 @@ export const LaptopRig: React.FC<{rig: Rig; children: React.ReactNode; app?: str
 };
 
 
-export const WIN = {x: 40, y: 50, w: 1432, h: 870}; // the app window's place on the screen (screen points)
+export const WIN = {x: 0, y: 34, w: 1512, h: 911}; // the app window fills the screen under the menu bar (screen points)
 
-// Dark desktop with a warm glow, in the film's palette.
-export const CcWallpaper: React.FC = () => (
-  <div style={{position: 'absolute', inset: 0, background: ['radial-gradient(60% 55% at 80% 85%, rgba(16,163,127,.30) 0%, rgba(16,163,127,0) 70%)', 'radial-gradient(55% 50% at 12% 20%, rgba(70,90,140,.28) 0%, rgba(70,90,140,0) 70%)', 'linear-gradient(160deg, #15161b 0%, #0d0e12 60%, #09090c 100%)'].join(',')}} />
-);
+// Plain black desktop: the app window fills the screen, so nothing of the film's background
+// colour can read through around it.
+export const CcWallpaper: React.FC = () => <div style={{position: 'absolute', inset: 0, background: '#000'}} />;

@@ -62,7 +62,7 @@ const Lights: React.FC = () => (
 );
 
 export const Browser: React.FC<{url: string; children: React.ReactNode}> = ({url, children}) => (
-  <div style={{position: 'absolute', left: WIN.x, top: WIN.y, width: WIN.w, height: WIN.h, borderRadius: 12, overflow: 'hidden', background: G.bg, boxShadow: '0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.1)', fontFamily: F.ui, color: G.text}}>
+  <div style={{position: 'absolute', left: WIN.x, top: WIN.y, width: WIN.w, height: WIN.h, borderRadius: 0, overflow: 'hidden', background: G.bg, boxShadow: '0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.1)', fontFamily: F.ui, color: G.text}}>
     <div style={{position: 'absolute', left: 0, right: 0, top: 0, height: CHROME, background: '#2B2B2D', borderBottom: '1px solid rgba(0,0,0,.5)', display: 'flex', alignItems: 'center', padding: '0 16px'}}>
       <Lights />
       <div style={{position: 'absolute', left: '50%', top: 8, transform: 'translateX(-50%)', width: 420, height: 28, borderRadius: 8, background: '#1D1D1F', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontSize: 13, color: '#D0D0D0'}}>
@@ -202,7 +202,7 @@ export const Codex: React.FC<{t: number; thread?: React.ReactNode; box?: {text?:
   const ax = (x: number) => x - WIN.x;
   const ay = (y: number) => y - WIN.y;
   return (
-    <div style={{position: 'absolute', left: WIN.x, top: WIN.y, width: WIN.w, height: WIN.h, borderRadius: 12, overflow: 'hidden', background: '#1A1B1E', boxShadow: '0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.1)', fontFamily: F.ui, color: G.text}}>
+    <div style={{position: 'absolute', left: WIN.x, top: WIN.y, width: WIN.w, height: WIN.h, borderRadius: 0, overflow: 'hidden', background: '#1A1B1E', boxShadow: '0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.1)', fontFamily: F.ui, color: G.text}}>
       <div style={{position: 'absolute', left: 0, top: 0, bottom: 0, width: CODEX.sideW, background: '#141517', borderRight: '1px solid rgba(255,255,255,.06)', padding: '14px 12px', boxSizing: 'border-box'}}>
         <Lights />
         <div style={{display: 'flex', alignItems: 'center', gap: 10, margin: '22px 6px 18px', fontSize: 16, fontWeight: 700}}>

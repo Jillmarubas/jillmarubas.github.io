@@ -36,12 +36,13 @@ export const MacBook: React.FC<{children: React.ReactNode; wake?: number}> = ({c
           top: lidY - 3,
           width: lidW + 6,
           height: lidH + 6,
-          borderRadius: 30,
+          // Round on top, nearly square at the hinge so the lid meets the base with no gap.
+          borderRadius: '30px 30px 5px 5px',
           background: `linear-gradient(180deg, #4a4c52 0%, ${MAC.body.edge} 12%, #1c1d20 100%)`,
           boxShadow: '0 40px 90px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(0,0,0,.6)',
         }}
       />
-      <div style={{position: 'absolute', left: lidX, top: lidY, width: lidW, height: lidH, borderRadius: 27, background: MAC.body.bezel, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,.06)'}} />
+      <div style={{position: 'absolute', left: lidX, top: lidY, width: lidW, height: lidH, borderRadius: '27px 27px 3px 3px', background: MAC.body.bezel, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,.06)'}} />
 
       {/* Display. */}
       <div style={{position: 'absolute', left: lidX + bezel.side, top: lidY + bezel.top, width: screenW, height: screenH, borderRadius: '12px 12px 4px 4px', overflow: 'hidden', background: '#000'}}>
