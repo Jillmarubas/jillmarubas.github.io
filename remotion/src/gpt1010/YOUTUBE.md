@@ -5,14 +5,18 @@ Thumbnails: `GPTThumbA` / `GPTThumbB` / `GPTThumbC` in `Thumbnail.tsx` (1920×10
 the film's own bill-splitter answer with the cursor on "+". OpenAI mark composited for news reporting.
 Three words at most, accurate to the source.
 
+Host thumbnail (recommended): the user generated it in Higgsfield with "Asher", the channel's fictional
+AI-generated host (glasses, stubble, olive overshirt), pointing at a MacBook showing the bill splitter,
+"NOT JUST TEXT" with "TEXT" struck through in green. Asher is not a real person; the description says so.
+
 ## Title + thumbnail pairs (the thumbnail text never repeats the title)
 | Pair | Thumbnail | Title |
 |---|---|---|
-| **1 (recommended)** | A: "NOT JUST TEXT" (marker) + bill splitter | ChatGPT Now Builds Answers You Can Click (GPT-6 Intelligent UI, Step by Step) |
+| **1 (recommended)** | Asher host thumbnail, "NOT JUST TEXT" (or A: marker + bill splitter) | ChatGPT Now Builds Answers You Can Click (GPT-6 Intelligent UI, Step by Step) |
 | 2 | B: same image, highlighter words | GPT-6 Is Here: How to Use Intelligent UI, Audio Uploads and More |
 | 3 | C: "IT BUILDS TOOLS" (marker) | ChatGPT Can Now Build You a Bill Splitter. Here's How to Try It |
 
-**A/B test:** YouTube Studio → Test & Compare: A vs B (word treatment) or A vs C (different words), with the pair-1 title.
+**A/B test:** YouTube Studio → Test & Compare: Asher host thumbnail vs A (face vs no face), with the pair-1 title.
 
 Other titles:
 - GPT-6 in ChatGPT: Intelligent UI, Faster Answers, Audio Uploads and Codex Predictions
@@ -57,7 +61,7 @@ Settings › General › Composer › Show predictions: off
 • OpenAI announcement on the Developer Community: https://community.openai.com/t/gpt-6-and-intelligent-ui-in-chatgpt/1404139
 
 🖼 Credits
-Narration: ElevenLabs ("Asher"). Swoosh: BigSoundBank.com (CC0). Typing, Enter-key and mouse-click sounds: my own recordings.
+Narration: ElevenLabs ("Asher"). Asher, the host in the thumbnail, is an AI-generated character, not a real person. Swoosh: BigSoundBank.com (CC0). Typing, Enter-key and mouse-click sounds: my own recordings.
 ChatGPT, Codex and the OpenAI logo are trademarks of OpenAI, shown for news reporting.
 ChatGPT and Codex screens are illustrations drawn for this video, not screen recordings. The 44% figure is OpenAI's own measurement.
 
