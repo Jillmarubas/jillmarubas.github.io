@@ -1,0 +1,997 @@
+[
+ {
+  "key": "h00",
+  "kind": "host",
+  "title": "HOOK",
+  "lines": [
+   {
+    "say": "ChatGPT, Claude and Gemini all cost about twenty dollars a month.",
+    "show": "Asher at the desk, front camera."
+   },
+   {
+    "say": "All three can chat, search the web, read your files and do deep research.",
+    "show": "Three logos pop in beside him."
+   },
+   {
+    "say": "So which one should you actually use? And which one should you pay for?",
+    "show": "Push in."
+   },
+   {
+    "say": "That's what this video is about. No hype, no sponsor. Just what each one is built for, what it costs, and who it's for, straight from their own pages, as of October tenth.",
+    "show": "OCT 10 2026 · official pages chip."
+   },
+   {
+    "say": "By the end, you'll know exactly which one fits you.",
+    "show": "Hold on Asher."
+   }
+  ]
+ },
+ {
+  "key": "h01",
+  "kind": "host",
+  "title": "THE PLAN",
+  "lines": [
+   {
+    "say": "Here's the plan.",
+    "show": "Asher, front camera."
+   },
+   {
+    "say": "First, a quick look at all three and the models behind them. Then every price, from free to five hundred dollars a month.",
+    "show": "Roadmap appears in the corner."
+   },
+   {
+    "say": "Then nine rounds: everyday answers, writing and documents, research, images and video, coding, working with your apps, big files, voice, and privacy.",
+    "show": "Nine round chips."
+   },
+   {
+    "say": "In every round, I'll also show you a prompt you can copy and try yourself, in any of the three.",
+    "show": "Prompt card flips."
+   },
+   {
+    "say": "And at the end, my pick for you, based on how you work. Let's go.",
+    "show": "Cut to the MacBook."
+   }
+  ]
+ },
+ {
+  "key": "d02",
+  "kind": "demo",
+  "title": "MEET THE THREE",
+  "lines": [
+   {
+    "say": "Let's start with who's who.",
+    "show": "MacBook; three app icons in the dock."
+   },
+   {
+    "say": "ChatGPT is made by OpenAI. Three days ago, on October seventh, it moved to GPT six. Paid plans get GPT six Sol, and Free and Go get GPT six Luna.",
+    "show": "ChatGPT window; GPT-6 Sol / Luna chips."
+   },
+   {
+    "say": "The headline feature is Intelligent UI. Answers can now mix text with visuals and parts you can tap, like a bill splitter or a map, right in the chat.",
+    "show": "Bill-splitter widget from the last video."
+   },
+   {
+    "say": "Claude is made by Anthropic. In the last three weeks it got a whole new family of models. Opus five point five on September twenty-second, Sonnet five point five on September twenty-eighth, and Haiku five point five on October seventh.",
+    "show": "Claude window; three model chips land on a timeline."
+   },
+   {
+    "say": "Opus is the most capable. Sonnet is faster and cheaper. Haiku is the smallest and fastest.",
+    "show": "Chips sort by size."
+   },
+   {
+    "say": "Gemini is made by Google. Its top model in the app is Gemini three point one Pro, and Google says it handles up to a million tokens of context. That's well over a thousand pages of text at once.",
+    "show": "Gemini window; 1M tokens counter; stack of pages."
+   },
+   {
+    "say": "And Gemini lives inside Google's apps, like Gmail, Docs and Drive.",
+    "show": "Gmail, Docs, Drive icons orbit."
+   },
+   {
+    "say": "One thing before we compare. These apps change almost every week. Everything you'll see here comes from each company's own pricing and help pages, checked on October tenth. Links are in the description.",
+    "show": "Sources card."
+   }
+  ]
+ },
+ {
+  "key": "d03",
+  "kind": "demo",
+  "title": "EVERY PRICE",
+  "lines": [
+   {
+    "say": "Now the money. All prices are in US dollars, per month. Some countries pay a local price.",
+    "show": "Price table builds: three columns."
+   },
+   {
+    "say": "All three have a free plan. We'll come back to those in a second.",
+    "show": "FREE row: $0 $0 $0."
+   },
+   {
+    "say": "Then there's a cheap tier. ChatGPT Go is eight dollars. Google AI Plus is four ninety-nine. Claude doesn't have one. It goes straight from free to Pro.",
+    "show": "Cheap row: Go $8, AI Plus $4.99, Claude dash."
+   },
+   {
+    "say": "ChatGPT Go gets more messages, uploads, images and voice chats than Free, and a longer memory. But OpenAI says Go may show ads.",
+    "show": "Go card; ADS tag."
+   },
+   {
+    "say": "Google AI Plus gets you two times the Free usage, video generation, Gemini inside Gmail, and four hundred gigabytes of Google storage.",
+    "show": "AI Plus card; 400 GB."
+   },
+   {
+    "say": "Then the main tier, the one most people pay for. ChatGPT Plus is twenty dollars. Claude Pro is twenty dollars, or seventeen a month if you pay for a year. And Google AI Pro is nineteen ninety-nine.",
+    "show": "Main row: $20, $20 ($17/yr), $19.99."
+   },
+   {
+    "say": "So at the main tier, the price is basically the same. The difference is what you get.",
+    "show": "The three $20s line up."
+   },
+   {
+    "say": "ChatGPT Plus adds advanced reasoning, more deep research, projects, scheduled tasks, custom GPTs, and more Codex for coding. And Plus is the first ChatGPT plan with no ads.",
+    "show": "Plus card ticks."
+   },
+   {
+    "say": "Claude Pro adds Claude Code, Research, the bigger Opus model, Claude in Chrome and Microsoft three sixty-five, and you can hand off and schedule tasks.",
+    "show": "Pro card ticks."
+   },
+   {
+    "say": "Google AI Pro adds four times the Free usage, the one-million-token context window, more video, Jules for coding, and five terabytes of storage. It also includes YouTube Premium Lite.",
+    "show": "AI Pro card ticks; 5 TB."
+   },
+   {
+    "say": "And then there are the power tiers.",
+    "show": "Power row slides up."
+   },
+   {
+    "say": "ChatGPT Pro comes in three sizes: one hundred, two hundred or five hundred dollars a month. Only the five hundred dollar plan gets Ultrafast.",
+    "show": "Pro 100 / 200 / 500."
+   },
+   {
+    "say": "Claude Max comes in two: one hundred dollars for five times Pro's usage, or two hundred for twenty times. Both now include the same amount in monthly API credits.",
+    "show": "Max 5x $100, Max 20x $200; API credit chip."
+   },
+   {
+    "say": "And Google AI Ultra starts at ninety-nine ninety-nine for five times Pro's usage, or one ninety-nine ninety-nine for twenty times, with first access to Deep Think.",
+    "show": "Ultra $99.99 / $199.99."
+   },
+   {
+    "say": "Unless you use AI all day for work, you don't need a power tier. Start free, and upgrade only when you hit a limit.",
+    "show": "Power row dims; arrow back to FREE."
+   }
+  ]
+ },
+ {
+  "key": "h03",
+  "kind": "host",
+  "title": "PRICE VERDICT",
+  "lines": [
+   {
+    "say": "So on price, it's a tie at the top. Twenty dollars buys you the main plan everywhere.",
+    "show": "Asher, side camera."
+   },
+   {
+    "say": "The real difference is at the bottom. Google has the cheapest paid plan, at four ninety-nine. And Claude has no cheap plan at all.",
+    "show": "Asher, front camera."
+   }
+  ]
+ },
+ {
+  "key": "d04",
+  "kind": "demo",
+  "title": "THE FREE PLANS",
+  "lines": [
+   {
+    "say": "Most people start free, so let's look closely at what free gets you.",
+    "show": "Three free columns."
+   },
+   {
+    "say": "ChatGPT Free now runs on GPT six Luna, and it gets Intelligent UI too. That rollout started on October eighth. It can search the web, make images and do voice chats, with lower limits than paid plans.",
+    "show": "ChatGPT Free column ticks."
+   },
+   {
+    "say": "Two catches. Ads may appear on Free. And some new features, like audio uploads, are only on paid plans for now.",
+    "show": "ADS tag; audio upload locked."
+   },
+   {
+    "say": "Claude Free gives you Sonnet and Haiku, the faster models, but not Opus. You get web search, memory across conversations, connected apps, and Artifacts, where Claude builds files, documents and small apps you can use.",
+    "show": "Claude Free column ticks."
+   },
+   {
+    "say": "You can make up to five projects. But there's no Claude Code and no Research on Free.",
+    "show": "5 projects; two locks."
+   },
+   {
+    "say": "Gemini's free plan is the most generous on paper. You get image creation and editing, Gemini Live for voice, Canvas, Gems, and even Deep Research, all for free.",
+    "show": "Gemini Free column; Deep Research ticks."
+   },
+   {
+    "say": "Plus fifteen gigabytes of Google storage, which you probably already have.",
+    "show": "15 GB."
+   },
+   {
+    "say": "There's no video generation on free Gemini. That starts with AI Plus.",
+    "show": "Video locked."
+   }
+  ]
+ },
+ {
+  "key": "h04",
+  "kind": "host",
+  "title": "FREE VERDICT",
+  "lines": [
+   {
+    "say": "If you're not paying anything, Gemini's free plan gives you the most features, especially Deep Research.",
+    "show": "Asher, front."
+   },
+   {
+    "say": "But ChatGPT Free just got a lot better with GPT six. And Claude Free is great for writing and building documents.",
+    "show": "Asher, side."
+   },
+   {
+    "say": "Honestly? Use all three for free. They don't cost anything.",
+    "show": "Asher smiles; front."
+   }
+  ]
+ },
+ {
+  "key": "d05",
+  "kind": "demo",
+  "title": "ROUND 1 · EVERYDAY ANSWERS",
+  "lines": [
+   {
+    "say": "Round one. Everyday answers. The questions you ask ten times a day.",
+    "show": "Round card 1."
+   },
+   {
+    "say": "This is where ChatGPT just jumped ahead. With Intelligent UI, an answer isn't only text any more.",
+    "show": "ChatGPT window."
+   },
+   {
+    "say": "Ask it to plan a trip, and the stops can show up on a map. Ask how something works, and you can get a diagram to explore. Ask it to compare two things, and they can come side by side.",
+    "show": "Map, diagram, side-by-side widgets."
+   },
+   {
+    "say": "And GPT six can start answering while it's still thinking, so the first words show up sooner.",
+    "show": "Text streams while a thinking chip spins."
+   },
+   {
+    "say": "ChatGPT also has voice chat, image creation and memory, all on the free plan, with more on paid plans.",
+    "show": "Voice, image, memory icons."
+   },
+   {
+    "say": "Gemini is strong here too, especially on your phone. Gemini Live lets you talk to it, and it's free.",
+    "show": "Gemini Live wave."
+   },
+   {
+    "say": "And on September thirtieth, Gemini got skills. Those are saved instructions that run on their own when your prompt matches. Google says Gems will move into skills.",
+    "show": "Skill card; Gem icon morphs into skill."
+   },
+   {
+    "say": "Claude gives clean, careful answers, with web search and memory on every plan.",
+    "show": "Claude answer."
+   },
+   {
+    "say": "But for quick everyday questions, it doesn't have anything like Intelligent UI.",
+    "show": "Plain text answer."
+   },
+   {
+    "say": "Try this in all three. Type: Compare three ways to get from the airport to the city center. Show cost, time and comfort.",
+    "show": "Prompt typed into ChatGPT."
+   },
+   {
+    "say": "In ChatGPT, you may get a side-by-side comparison you can tap. In the others, you'll usually get a table. Same question, different kind of answer.",
+    "show": "Three answers side by side (illustration)."
+   }
+  ]
+ },
+ {
+  "key": "h05",
+  "kind": "host",
+  "title": "ROUND 1 VERDICT",
+  "lines": [
+   {
+    "say": "Round one goes to ChatGPT. Intelligent UI makes everyday answers easier to use, and it's on the free plan.",
+    "show": "Asher, front; ChatGPT chip lights."
+   }
+  ]
+ },
+ {
+  "key": "d06",
+  "kind": "demo",
+  "title": "ROUND 2 · WRITING AND DOCUMENTS",
+  "lines": [
+   {
+    "say": "Round two. Writing and documents. Emails, reports, slides, anything you'll send to someone else.",
+    "show": "Round card 2."
+   },
+   {
+    "say": "This is Claude's home turf. On September sixteenth, Anthropic added Claude Design, Slides and Docs right inside any conversation.",
+    "show": "Claude window; Design / Slides / Docs tabs."
+   },
+   {
+    "say": "So you can ask Claude for a deck or a document, and it builds the real thing, not just text you have to paste somewhere.",
+    "show": "A slide deck builds itself."
+   },
+   {
+    "say": "And Artifacts, the files and small apps Claude makes, are now on every plan, including Free.",
+    "show": "Artifact panel; FREE badge."
+   },
+   {
+    "say": "Projects let you keep your files and instructions in one place, so Claude remembers the context for each piece of work.",
+    "show": "Project sidebar."
+   },
+   {
+    "say": "ChatGPT has projects and custom GPTs on Plus. A custom GPT is a version of ChatGPT you set up once for a task you repeat, like writing in your company's style.",
+    "show": "ChatGPT project + custom GPT."
+   },
+   {
+    "say": "Gemini's big advantage is where it lives. With Google AI Plus or higher, Gemini works inside Gmail and Google Vids, and it can pull from your Docs and Drive.",
+    "show": "Gemini side panel inside Gmail."
+   },
+   {
+    "say": "If your work is already in Google Docs, that saves a lot of copy and paste.",
+    "show": "Doc slides into Gemini."
+   },
+   {
+    "say": "Here's a prompt to try. Type: Turn these notes into a one-page plan with a title, three goals and a timeline. Then paste your notes.",
+    "show": "Prompt typed into Claude."
+   },
+   {
+    "say": "In Claude, add: Make it a document I can download. And watch it build the file instead of just writing text.",
+    "show": "Docs artifact appears (illustration)."
+   },
+   {
+    "say": "The trick that works in all three is the same: say who it's for, how long it should be, and what format you want.",
+    "show": "WHO · LENGTH · FORMAT chips."
+   }
+  ]
+ },
+ {
+  "key": "h06",
+  "kind": "host",
+  "title": "ROUND 2 VERDICT",
+  "lines": [
+   {
+    "say": "Round two goes to Claude. Building real documents, decks and designs in the chat is what it's made for.",
+    "show": "Asher, front."
+   },
+   {
+    "say": "But if your whole team lives in Google Docs and Gmail, Gemini might save you more time.",
+    "show": "Asher, side."
+   }
+  ]
+ },
+ {
+  "key": "d07",
+  "kind": "demo",
+  "title": "ROUND 3 · RESEARCH",
+  "lines": [
+   {
+    "say": "Round three. Research. When you need a real answer with sources, not a guess.",
+    "show": "Round card 3."
+   },
+   {
+    "say": "All three have a deep research mode. You ask a big question, and it searches many sources, reads them, and writes you a report with links.",
+    "show": "Deep research flow: query, sources fan out, report."
+   },
+   {
+    "say": "The difference is who gets it.",
+    "show": "Three lock icons."
+   },
+   {
+    "say": "Gemini includes Deep Research even on the free plan.",
+    "show": "Gemini lock opens: FREE."
+   },
+   {
+    "say": "ChatGPT gives more deep research on Plus, and the most on Pro, together with agent mode.",
+    "show": "ChatGPT: PLUS, PRO max."
+   },
+   {
+    "say": "Claude's Research needs Pro or higher. Free users still get normal web search.",
+    "show": "Claude: PRO."
+   },
+   {
+    "say": "Gemini also has a big advantage for reading. Its one-million-token context on AI Pro means you can give it a huge pile of documents at once.",
+    "show": "Pile of PDFs drops into Gemini."
+   },
+   {
+    "say": "One tip for all three: always click the sources and check the important facts yourself. Research modes can still get things wrong.",
+    "show": "Cursor clicks a source link; CHECK IT tag."
+   },
+   {
+    "say": "Try this: Research the best budget laptops for students this year. Compare five, with prices in US dollars, and list your sources.",
+    "show": "Prompt typed into Gemini Deep Research."
+   },
+   {
+    "say": "Deep research can take several minutes. That's normal. It's reading a lot of pages for you.",
+    "show": "Progress bar; pages flip."
+   },
+   {
+    "say": "When the report comes back, ask a follow-up, like: Which one has the best battery? Show me where you found that.",
+    "show": "Follow-up typed."
+   }
+  ]
+ },
+ {
+  "key": "h07",
+  "kind": "host",
+  "title": "ROUND 3 VERDICT",
+  "lines": [
+   {
+    "say": "Round three goes to Gemini, mainly because Deep Research is free. If you pay, ChatGPT and Claude are both strong too.",
+    "show": "Asher, front."
+   }
+  ]
+ },
+ {
+  "key": "d08",
+  "kind": "demo",
+  "title": "ROUND 4 · IMAGES AND VIDEO",
+  "lines": [
+   {
+    "say": "Round four. Images and video.",
+    "show": "Round card 4."
+   },
+   {
+    "say": "Gemini has the most here. Its image model is called Nano Banana. Nano Banana Pro can make images up to four K, keep up to five people looking consistent, and write clear text inside the image.",
+    "show": "Gemini image grid; 4K chip; 5 faces."
+   },
+   {
+    "say": "Every image and video Google makes carries an invisible SynthID watermark, and you can even upload an image and ask Gemini if Google AI made it.",
+    "show": "SynthID scan line."
+   },
+   {
+    "say": "For video, Google AI Plus and Pro can generate short videos, and Ultra gets the full Veo three point one.",
+    "show": "Video player; Veo 3.1 chip."
+   },
+   {
+    "say": "ChatGPT makes images on every plan, with more on Go and Plus, and the most and fastest on Pro.",
+    "show": "ChatGPT image generation."
+   },
+   {
+    "say": "And Claude? Claude's plans list designs, slides, documents and Artifacts, but not photo or video generation.",
+    "show": "Claude: design card, no camera icon."
+   },
+   {
+    "say": "So if you need pictures, Claude isn't the one to pick.",
+    "show": "Claude chip dims."
+   },
+   {
+    "say": "Try this in Gemini or ChatGPT: Make a poster for a bake sale on Saturday. Big title, cupcakes, warm colors, and the text: Bake Sale, Saturday, ten A M",
+    "show": "Prompt typed; poster appears (illustration)."
+   },
+   {
+    "say": "Then check the text in the image. Spelling inside pictures has improved a lot, but it's still worth a look before you print.",
+    "show": "Zoom on poster text; CHECK tag."
+   }
+  ]
+ },
+ {
+  "key": "h08",
+  "kind": "host",
+  "title": "ROUND 4 VERDICT",
+  "lines": [
+   {
+    "say": "Round four goes to Gemini. Images, text inside images, and video, all in one app.",
+    "show": "Asher, side."
+   }
+  ]
+ },
+ {
+  "key": "d09",
+  "kind": "demo",
+  "title": "ROUND 5 · CODING",
+  "lines": [
+   {
+    "say": "Round five. Coding. Even if you're not a developer, this is where AI can build tools for you.",
+    "show": "Round card 5."
+   },
+   {
+    "say": "Claude has Claude Code. It works right in your project. It reads your files, makes the changes, and runs the commands, while you watch and approve.",
+    "show": "Terminal: Claude Code editing files."
+   },
+   {
+    "say": "It's included from Pro at twenty dollars, but not on Free.",
+    "show": "PRO tag."
+   },
+   {
+    "say": "And on October seventh, Anthropic started giving Max and Team plans monthly API credits on top, for people who build their own apps with Claude.",
+    "show": "API credit chip."
+   },
+   {
+    "say": "ChatGPT has Codex. It's included in ChatGPT plans, with more on Plus and the most on Pro.",
+    "show": "Codex window."
+   },
+   {
+    "say": "And on October ninth, Codex got Composer predictions, in beta for personal Pro users. It suggests your next message, and you press Tab to use it.",
+    "show": "Codex composer; ghost text; Tab."
+   },
+   {
+    "say": "Google has Jules, its coding agent, with higher limits on AI Pro, and a coding app called Antigravity.",
+    "show": "Jules + Antigravity icons."
+   },
+   {
+    "say": "All three can write and explain code right in the chat, even for free.",
+    "show": "Code block in each app."
+   },
+   {
+    "say": "You don't need to be a programmer to try this. Type: Build me a simple tip calculator I can use in my browser. Explain how to open it.",
+    "show": "Prompt typed."
+   },
+   {
+    "say": "Claude can build it as an Artifact you can click right away. ChatGPT can build it as an interactive answer. Gemini can build it in Canvas.",
+    "show": "Three small calculators (illustration)."
+   }
+  ]
+ },
+ {
+  "key": "h09",
+  "kind": "host",
+  "title": "ROUND 5 VERDICT",
+  "lines": [
+   {
+    "say": "Round five goes to Claude. Claude Code at twenty dollars is the easiest way to let AI actually build something on your computer.",
+    "show": "Asher, front."
+   },
+   {
+    "say": "But if you already pay for ChatGPT, Codex is right there, and it's getting better fast.",
+    "show": "Asher, side."
+   }
+  ]
+ },
+ {
+  "key": "d10",
+  "kind": "demo",
+  "title": "ROUND 6 · WORKING WITH YOUR APPS",
+  "lines": [
+   {
+    "say": "Round six. Working with your apps. This is where these tools stop being chatbots and start doing tasks for you.",
+    "show": "Round card 6."
+   },
+   {
+    "say": "Gemini is built into Google. With a paid plan, it's in Gmail and Google Vids. And on September tenth, Google released a Gemini desktop app for Windows that can connect to Gmail and Drive.",
+    "show": "Gemini Windows app; Gmail and Drive connect."
+   },
+   {
+    "say": "On AI Pro and Ultra, there's also Chrome auto browse, where Gemini can click through websites for you.",
+    "show": "Chrome window; cursor moves on its own."
+   },
+   {
+    "say": "Claude connects to your apps on every plan, even Free. And on Pro, you get Claude in Chrome and in Microsoft three sixty-five, like Word and Excel.",
+    "show": "Claude connectors grid."
+   },
+   {
+    "say": "On September sixteenth, Anthropic also brought Cowork into every Claude conversation, rolling out to Pro and Max. That lets Claude take on longer tasks for you.",
+    "show": "Cowork task list ticks."
+   },
+   {
+    "say": "ChatGPT has scheduled tasks on Plus, so it can do something every morning, like a news summary. And Pro gets the most agent mode, where ChatGPT uses a browser to finish a task for you.",
+    "show": "Scheduled task at 8:00; agent browser."
+   },
+   {
+    "say": "Here's one to try if you have Gmail connected. Ask: Find every email about my order from last week and tell me which ones need a reply.",
+    "show": "Prompt typed; email list (illustration)."
+   },
+   {
+    "say": "Before you connect any app, read what it's allowed to see. You can disconnect it any time in settings.",
+    "show": "Permissions card."
+   }
+  ]
+ },
+ {
+  "key": "h10",
+  "kind": "host",
+  "title": "ROUND 6 VERDICT",
+  "lines": [
+   {
+    "say": "Round six depends on where you work. If you live in Google, Gemini. If you use Microsoft three sixty-five, Claude.",
+    "show": "Asher, front."
+   },
+   {
+    "say": "And if you want tasks to run on a schedule, ChatGPT makes that easy.",
+    "show": "Asher, side."
+   }
+  ]
+ },
+ {
+  "key": "d11",
+  "kind": "demo",
+  "title": "ROUND 7 · BIG FILES AND AUDIO",
+  "lines": [
+   {
+    "say": "Round seven. Big files and audio. Long PDFs, spreadsheets, meeting recordings.",
+    "show": "Round card 7."
+   },
+   {
+    "say": "Gemini can hold the most at once. A million tokens of context on AI Pro, so a whole book or a big folder of reports fits in one chat.",
+    "show": "Book slides into Gemini; 1M meter fills."
+   },
+   {
+    "say": "And Google AI Pro comes with five terabytes of storage for all those files.",
+    "show": "5 TB."
+   },
+   {
+    "say": "ChatGPT got audio uploads on October sixth. On paid plans, you can upload a recording up to five hundred and twelve megabytes and get a transcript, a summary, and answers to your questions.",
+    "show": "Audio file uploads; transcript."
+   },
+   {
+    "say": "OpenAI says transcripts can have mistakes, so check names and numbers.",
+    "show": "CHECK tag on a number."
+   },
+   {
+    "say": "Claude can read your files on every plan, and it can create files and run code to work with your data, even on Free.",
+    "show": "Spreadsheet in Claude; chart appears."
+   },
+   {
+    "say": "For a long report you need to really understand, Claude's careful writing is a big plus.",
+    "show": "Claude summary card."
+   },
+   {
+    "say": "Try this with any long PDF: Summarize this in ten bullet points. Then list anything that looks like a deadline, a cost or a risk.",
+    "show": "PDF drop; prompt typed."
+   },
+   {
+    "say": "And then ask: Where in the document does it say that? A good answer will point you to the exact section.",
+    "show": "Highlight jumps to page."
+   }
+  ]
+ },
+ {
+  "key": "h11",
+  "kind": "host",
+  "title": "ROUND 7 VERDICT",
+  "lines": [
+   {
+    "say": "Round seven goes to Gemini for sheer size. But for recordings, ChatGPT's new audio uploads are the easiest.",
+    "show": "Asher, front."
+   }
+  ]
+ },
+ {
+  "key": "d11b",
+  "kind": "demo",
+  "title": "ROUND 8 · VOICE AND YOUR PHONE",
+  "lines": [
+   {
+    "say": "Round eight. Voice. Talking to AI instead of typing, usually on your phone.",
+    "show": "Round card 8; phone mockup."
+   },
+   {
+    "say": "ChatGPT Voice runs on new voice models. Paid plans get GPT Live one, and Free gets a smaller version, GPT Live one mini, with limited use.",
+    "show": "ChatGPT voice orb; LIVE-1 / mini chips."
+   },
+   {
+    "say": "Video and screen sharing are in ChatGPT's Advanced voice on the phone apps, for eligible subscribers.",
+    "show": "Phone camera view; PAID tag."
+   },
+   {
+    "say": "Gemini Live is free, and on Android and iPhone you can turn on your camera or share your screen and ask about what you see.",
+    "show": "Gemini Live; camera view; FREE tag."
+   },
+   {
+    "say": "Claude has voice mode on every plan, on your phone, the desktop app and the web. It's in beta, and on Free it uses Haiku.",
+    "show": "Claude voice wave; BETA tag."
+   },
+   {
+    "say": "Try this on your phone. Open voice mode and say: I'm cooking dinner for four with chicken, rice and spinach. Walk me through it one step at a time, and wait for me to say next.",
+    "show": "Kitchen, phone on the counter (illustration)."
+   },
+   {
+    "say": "Voice is perfect when your hands are busy.",
+    "show": "Hands chopping; voice wave."
+   }
+  ]
+ },
+ {
+  "key": "h11b",
+  "kind": "host",
+  "title": "ROUND 8 VERDICT",
+  "lines": [
+   {
+    "say": "Round eight goes to Gemini. Live with your camera, for free, is hard to beat.",
+    "show": "Asher, side."
+   }
+  ]
+ },
+ {
+  "key": "d11c",
+  "kind": "demo",
+  "title": "ROUND 9 · PRIVACY AND MEMORY",
+  "lines": [
+   {
+    "say": "Round nine. Privacy and memory. The round nobody talks about, but you should.",
+    "show": "Round card 9; lock icon."
+   },
+   {
+    "say": "All three can remember things about you between chats. That's handy, but you should know where the switches are.",
+    "show": "Memory cards in all three."
+   },
+   {
+    "say": "In ChatGPT, memory and training are two separate switches. A setting called Improve the model for everyone decides whether your chats can help train OpenAI's models. You can turn it off in Data controls, and your history stays.",
+    "show": "ChatGPT Data controls toggle."
+   },
+   {
+    "say": "ChatGPT also has Temporary chat. Those chats don't go in your history, don't create memories, and aren't used for training.",
+    "show": "Temporary chat badge."
+   },
+   {
+    "say": "Claude only uses your chats for training if you choose to allow it, or if a chat is flagged for a safety review. If you opt in, Anthropic says it may keep that data, de-identified, for up to five years.",
+    "show": "Claude privacy toggle; 5 YEARS note."
+   },
+   {
+    "say": "Claude has Incognito chats too. They're not saved to your history or memory, and they're not used for training.",
+    "show": "Incognito badge."
+   },
+   {
+    "say": "Gemini has a setting called Keep Activity. With it on, Google says a sample of chats is reviewed by people to improve its services, and reviewed chats can be kept for up to three years, even if you delete your activity.",
+    "show": "Gemini Keep Activity toggle; reviewer icon; 3 YEARS note."
+   },
+   {
+    "say": "Gemini's temporary chats and chats with Keep Activity off aren't used to improve Google AI. They're kept for seventy-two hours.",
+    "show": "Temporary chat; 72 HOURS."
+   },
+   {
+    "say": "Google's own advice is simple: don't type anything confidential into Gemini. Honestly, that's good advice for all three.",
+    "show": "Warning card."
+   },
+   {
+    "say": "And if you use these at work, check your company's plan. Business plans usually have different rules about training.",
+    "show": "Work badge."
+   }
+  ]
+ },
+ {
+  "key": "h11c",
+  "kind": "host",
+  "title": "ROUND 9 VERDICT",
+  "lines": [
+   {
+    "say": "Round nine goes to Claude. It only trains on your chats if you choose to allow it. With the others, it's worth checking that switch yourself.",
+    "show": "Asher, front."
+   },
+   {
+    "say": "Whichever one you use, take two minutes today and check those settings.",
+    "show": "Asher, side."
+   }
+  ]
+ },
+ {
+  "key": "d11d",
+  "kind": "demo",
+  "title": "FIVE PROMPTS THAT WORK IN ALL THREE",
+  "lines": [
+   {
+    "say": "Before the final verdict, here are five prompts that work great in all three. They're also in the description, so you can copy them.",
+    "show": "Five prompt cards fan out."
+   },
+   {
+    "say": "One. Explain this like I'm new to it, then give me one example from everyday life. This is the fastest way to learn anything.",
+    "show": "Card 1 flips."
+   },
+   {
+    "say": "Two. Ask me five questions first, then write it. Use this for anything personal, like a cover letter or a speech. The questions make the answer fit you.",
+    "show": "Card 2 flips; question list."
+   },
+   {
+    "say": "Three. Give me three versions: short, medium and detailed. Then you pick, instead of rewriting.",
+    "show": "Card 3; three lengths."
+   },
+   {
+    "say": "Four. What's wrong with this, and how would you fix it? Paste your own writing, plan or code, and get honest feedback.",
+    "show": "Card 4; red marks."
+   },
+   {
+    "say": "Five. Check your answer. What might be wrong or missing? This one catches a lot of mistakes, in every app.",
+    "show": "Card 5; checkmark."
+   },
+   {
+    "say": "Use the same prompt in two apps and compare the answers. That's the best way to find the one you like.",
+    "show": "Same card goes into two windows."
+   }
+  ]
+ },
+ {
+  "key": "d11e",
+  "kind": "demo",
+  "title": "MISTAKES TO AVOID",
+  "lines": [
+   {
+    "say": "And three mistakes I see all the time.",
+    "show": "Three warning cards."
+   },
+   {
+    "say": "Mistake one. Paying before you need to. All three free plans are good. Upgrade when you hit a limit you keep running into, not before.",
+    "show": "Card 1: $ crossed out."
+   },
+   {
+    "say": "Mistake two. Trusting numbers, names and dates without checking. All three can be confidently wrong. If it matters, click the source or check it yourself.",
+    "show": "Card 2: CHECK tag on a date."
+   },
+   {
+    "say": "Mistake three. Writing one-line prompts. Tell it who you are, what you need, who it's for, and what format you want. Four extra seconds, and the answer gets much better.",
+    "show": "Card 3: short prompt grows into a full prompt."
+   }
+  ]
+ },
+ {
+  "key": "d11f",
+  "kind": "demo",
+  "title": "PRO TIPS · CHATGPT",
+  "lines": [
+   {
+    "say": "Now, whichever one you pick, here are tips to get more out of it. Starting with ChatGPT.",
+    "show": "ChatGPT window; TIPS tab."
+   },
+   {
+    "say": "Tip one. Use projects. Put your files and instructions for one piece of work in a project, and every chat inside it starts with that context.",
+    "show": "Project sidebar; files pinned."
+   },
+   {
+    "say": "Tip two. If Intelligent UI shows you more visuals than you want, you can switch to a simpler layout in Personalization.",
+    "show": "Settings: Layout and Visuals › Simple."
+   },
+   {
+    "say": "Tip three. Use Temporary chat for anything you don't want remembered, like a gift idea or a private question.",
+    "show": "Temporary chat toggle."
+   },
+   {
+    "say": "Tip four. On Plus, set up a scheduled task. For example: Every weekday at eight, give me a two-minute summary of AI news, with links.",
+    "show": "Scheduled task card at 8:00."
+   },
+   {
+    "say": "And tip five. Check what ChatGPT remembers about you. You can review, correct or delete any memory.",
+    "show": "Memory list; delete icon."
+   }
+  ]
+ },
+ {
+  "key": "d11g",
+  "kind": "demo",
+  "title": "PRO TIPS · CLAUDE",
+  "lines": [
+   {
+    "say": "Next, Claude.",
+    "show": "Claude window; TIPS tab."
+   },
+   {
+    "say": "Tip one. Ask for the real file. Say: Make this a document, a slide deck or a design. Claude builds it as an Artifact or with the new Docs, Slides and Design, instead of a wall of text.",
+    "show": "Slides artifact builds."
+   },
+   {
+    "say": "Tip two. Use projects for ongoing work, and keep your files and instructions there. On Free you get up to five.",
+    "show": "Project list; 5 badge."
+   },
+   {
+    "say": "Tip three. If you want one chat without memory, but still want to find it later, turn off Memory in the plus menu before your first message. If you don't want it saved at all, use an Incognito chat.",
+    "show": "Plus menu: Memory toggle; Incognito icon."
+   },
+   {
+    "say": "Tip four. Connect the apps you already use. Even on Free, Claude can work with connected tools, so it can read the files and messages you allow it to.",
+    "show": "Connectors grid."
+   },
+   {
+    "say": "And tip five. On Pro, try voice mode on your phone for thinking out loud. It's a great way to plan something while you walk.",
+    "show": "Phone voice wave."
+   }
+  ]
+ },
+ {
+  "key": "d11h",
+  "kind": "demo",
+  "title": "PRO TIPS · GEMINI",
+  "lines": [
+   {
+    "say": "And Gemini.",
+    "show": "Gemini window; TIPS tab."
+   },
+   {
+    "say": "Tip one. Turn your repeat tasks into skills. If you always ask for the same kind of thing, like a weekly meal plan or a meeting summary, save it as a skill, and Gemini can run it automatically when your prompt matches.",
+    "show": "Skill builder; trigger match."
+   },
+   {
+    "say": "Tip two. Use Deep Research for big decisions, even on the free plan. Ask it to compare, list sources and show prices in your currency.",
+    "show": "Deep Research report."
+   },
+   {
+    "say": "Tip three. Use Canvas when you're writing or building something you'll keep editing, so the draft stays open next to the chat.",
+    "show": "Canvas panel beside chat."
+   },
+   {
+    "say": "Tip four. On a computer, try the Gemini app for Windows. One keyboard shortcut opens it on top of whatever you're doing.",
+    "show": "Windows desktop; shortcut keys."
+   },
+   {
+    "say": "And tip five. Remember Google's own warning, and keep confidential things out of your chats, or use a temporary chat.",
+    "show": "Temporary chat; warning card."
+   }
+  ]
+ },
+ {
+  "key": "d12",
+  "kind": "demo",
+  "title": "WHICH ONE SHOULD YOU PAY FOR?",
+  "lines": [
+   {
+    "say": "So here's the scoreboard.",
+    "show": "Scoreboard builds."
+   },
+   {
+    "say": "ChatGPT won everyday answers. Claude won writing and documents, coding, and privacy. Gemini won research, images and video, big files, and voice. And working with your apps depends on what you use.",
+    "show": "Round chips fly to each column."
+   },
+   {
+    "say": "On points, that's Gemini four, Claude three, ChatGPT one. But points aren't the whole story.",
+    "show": "Tally: 4 · 3 · 1."
+   },
+   {
+    "say": "And you don't need a winner. You need the one that fits how you work. So let me make it simple.",
+    "show": "Scoreboard clears."
+   },
+   {
+    "say": "If you're a student, start with Gemini free. Deep Research, Canvas and image creation cost nothing. And in the US, Google has offered eligible college students a free year of a Google AI plan.",
+    "show": "Student card: Gemini Free."
+   },
+   {
+    "say": "If you want one app for everything, and you'll use it every day, get ChatGPT Plus. Intelligent UI, voice, images, deep research and Codex, with no ads.",
+    "show": "Everyday card: ChatGPT Plus."
+   },
+   {
+    "say": "If you write a lot, make documents and decks, or want AI to build things for you, get Claude Pro. Claude Code and the new Design, Slides and Docs are worth the twenty dollars.",
+    "show": "Builder card: Claude Pro."
+   },
+   {
+    "say": "If your life is in Gmail, Docs and Drive, or you make images and video, get Google AI Pro. You also get five terabytes of storage, which you might be paying for already.",
+    "show": "Google card: AI Pro."
+   },
+   {
+    "say": "And if money is tight, Google AI Plus at four ninety-nine is the cheapest way to pay for any of them.",
+    "show": "Budget card: AI Plus."
+   },
+   {
+    "say": "One more tip. Don't pay for two of these at once until you've used one for a full month. Most people only need one.",
+    "show": "Two cards; one fades."
+   }
+  ]
+ },
+ {
+  "key": "h13",
+  "kind": "host",
+  "title": "FINAL VERDICT",
+  "lines": [
+   {
+    "say": "If you made me pick just one for most people, I'd say this.",
+    "show": "Asher, front; push in."
+   },
+   {
+    "say": "Start with Gemini and ChatGPT for free. Use them for a week.",
+    "show": "Asher, side."
+   },
+   {
+    "say": "Then pay for the one you keep opening without thinking about it. That's the one that fits you.",
+    "show": "Asher, front."
+   },
+   {
+    "say": "And remember, these apps change almost every week. ChatGPT got GPT six three days ago, and Claude got three new models in three weeks. What's true today might change next month, and I'll keep you updated.",
+    "show": "Asher, front."
+   }
+  ]
+ },
+ {
+  "key": "h14",
+  "kind": "host",
+  "title": "OUTRO",
+  "lines": [
+   {
+    "say": "If this helped, like the video and subscribe. It really helps the channel.",
+    "show": "Asher, front."
+   },
+   {
+    "say": "And tell me in the comments: which one do you use, and why?",
+    "show": "Comment box types."
+   },
+   {
+    "say": "See you in the next one.",
+    "show": "Asher nods; end card."
+   }
+  ]
+ }
+]

@@ -230,12 +230,32 @@ the Vox-style news rules:
   "show, don't type" applies only to the explainer scenes.
 
 The news rules still hold:
-- verify every claim against its source first (`VERIFY.md`) and fix or flag mismatches before the voiceover
+- verify every claim against its source first (`VERIFY.md`) and fix or flag mismatches before the voiceover.
+  **Once a story is verified, edit the script yourself to match the sources** (the user's rule, 10 Oct 2026):
+  reword or cut any detail that only press coverage or the researcher supports, and log each edit in
+  `VERIFY.md` (old line, new line, source). Tell the user what changed when you deliver.
 - real licensed photos of people named, or a named silhouette card when none exists
 - logos in their exact colours, for editorial reference
 - sources credited in the video and the description
-- the living-gradient background (already built in) Reference build: `remotion/src/cc1003/` ("Claude Code Just Got Mods", 7:10).
-Start a new video by copying that folder; don't rebuild the pieces.
+- the living-gradient background (already built in)
+
+Reference builds (start a new video by copying the closer one; don't rebuild the pieces):
+- `remotion/src/cc1003/` ("Claude Code Just Got Mods", 7:10): terminal tutorials (`terminal.tsx`, `TermShot`).
+- `remotion/src/gpt1010/` ("ChatGPT Now Builds Answers You Can Click", 6:33): app tutorials. ChatGPT in a
+  browser and the Codex desktop app are drawn in code (`app.tsx`), and the answers ChatGPT builds are widgets
+  (`widgets.tsx`). The scene list lives in `plan.ts` and every typed prompt, click and key press in `cues.ts`,
+  shared by the scenes and the mixer.
+
+**The user's standing rules from the gpt1010 build (10 Oct 2026)**
+- **Money on screen is in US dollars only** (`$240`, `$18,000`), whatever the script's locale or examples.
+  Change the amounts in example prompts too.
+- **No background showing through the MacBook.** The app window fills the screen under the menu bar
+  (`WIN` in `laptop.tsx` = `{x: 0, y: 34, w: 1512, h: 911}`), the desktop behind it is pure black, and the
+  lid is nearly square at the hinge (`tutorial/MacBook.tsx`), so the film's coloured background never reads
+  through the laptop. Check the screen edges and the hinge corners in QA stills.
+- **The cursor is always on top.** Pass it through the app's `cursor` prop (`ChatGPT`, `Codex` in `app.tsx`),
+  never inside `thread`: the thread is clipped below the header, so a cursor there disappears under tabs
+  and menus. QA a still on every click.
 
 **Format and motion**
 - 1920×1080, **60 fps**. Every scene uses the After Effects toolkit in `cc1003/ae.tsx`:
@@ -253,14 +273,22 @@ Start a new video by copying that folder; don't rebuild the pieces.
 - The space-black laptop from `src/tutorial/` on the `LaptopRig` camera (`cc1003/laptop.tsx`):
   - swings in in 3D, then zooms to whatever the voice is describing
   - frame zooms with `fxL`/`fyAt` so the left edge of the text never crops
-- Terminal and app screens are drawn in code (`cc1003/terminal.tsx`), never fake screen recordings.
-  Label illustrative numbers or settings as "illustration".
+- Terminal and app screens are drawn in code (`cc1003/terminal.tsx`, `gpt1010/app.tsx`), never fake screen
+  recordings. Label illustrative numbers or settings as "illustration".
+- Draw only the UI the sources confirm (for example "Settings › General › Composer › Show predictions").
+  Fill unknown menu items, tabs and settings rows with neutral grey placeholder bars, never invented labels.
+  Example data (meetings, names, search results) is clearly made up, or shown as placeholder lines.
 - For a one-command shot, use `TermShot` (`cc1003/shots.tsx`).
 
 **What makes it informative (keep all of these)**
 - **Part stinger:** a big numbered title that collapses into a corner tag for the rest of the chapter (`PartTag`).
 - **Step badges, top right:** "STEP 1 · Check your version" (`StepBadge`).
-- **Command card, bottom centre:** every command typed in sync with the terminal, large enough to read (`CmdCard`).
+- **No subtitle-style caption cards** (the user's rule, 10 Oct 2026: "take out these subtitles … this is slop").
+  Never put a bottom card that repeats what is already on the laptop screen: no "ASK THIS"/"TYPE THIS"
+  prompt card (`CmdCard`), no URL pill, no settings-path pill, no list of formats. Frame the camera on the
+  typing instead, and put prompts and paths in `YOUTUBE.md`. In the ChatGPT app the composer starts in the
+  middle under "What can I help with?" (`mid: 1`) and slides to the bottom on the first send, as it does
+  in the real app, so the typing shot fills the frame.
 - **Callouts:** dot + drawn leader line + label pointing at the exact screen line (`Callout`, `screenToFrame`).
 - **Explainers between tutorial steps:** glass cards, icons drawn on, bar charts of sourced numbers only, counters, before/after.
 
@@ -269,10 +297,14 @@ Start a new video by copying that folder; don't rebuild the pieces.
   - the one swoosh `public/sfx/whoosh7.mp3` per scene change
   - the user's own recordings in `public/cc1003/sfx/`: `typing-laptop.wav` under typed commands (bursts that loop with a crossfade), `enter-key.wav` on each submit, `mouse-click.wav` on cursor clicks
 - **Never synthesize keystrokes or clicks.** The user rejected them as sounding "like static".
-- Mixer: `scripts/mix_cc1003.py`. Master to −14 LUFS, −1 dBTP.
+- Mixer: `scripts/mix_gpt1010.py`, which reads `out/<video>/cues.json` from `scripts/gpt1010_cues.mjs`
+  (the bundled `cues.ts` + `plan.ts`), so every typing burst, Enter, Tab and click lands where the picture
+  shows it. Re-run the dump and the mix whenever a prompt's text or timing changes. Master to −14 LUFS, −1 dBTP.
 
 **Voice**
-- Use the voice the user names in the script. The cc1003 build used ElevenLabs "Joey - Upbeat Popular News Host" (`mUfWEBhcigm8YlCDbmGP`).
+- Use the voice the user names. cc1003 used ElevenLabs "Joey - Upbeat Popular News Host" (`mUfWEBhcigm8YlCDbmGP`);
+  gpt1010 used **Asher** (`tMvyQtpCVQ0DkixuYm6J`) on model `eleven_v4`, as the user asked.
+- Verify every story (`VERIFY.md`) before the voiceover is generated and before anything is committed.
 - Always `generations_count: 1`.
 
 **QA before rendering**
@@ -281,6 +313,9 @@ Start a new video by copying that folder; don't rebuild the pieces.
   - empty frames after a stinger
   - overlapping callouts or tags
   - counters showing before their moment
+  - near-empty openings: after joining the parts, run ffmpeg `blackdetect` and look at every hit that
+    isn't a Part stinger. Bring the first element of such a scene in at once rather than on a late word.
+  - the film background showing through the laptop (see the gpt1010 rules above)
 - Render parts on Lambda (`render-parts.sh`, `FRAMES_PER_LAMBDA=40`), join them picture-only, mux the mix, and check the frame count.
 
 **Delivery**
@@ -291,6 +326,8 @@ Start a new video by copying that folder; don't rebuild the pieces.
 **Thumbnails**
 - Follow "Thumbnails: the approved style" above.
 - ElevenLabs stays voiceover-only (the user's rule, confirmed 3 Oct 2026).
+- With no photo, build the thumbnail in Remotion around the film's own hero visual (gpt1010: the bill-splitter
+  widget with the cursor on "+"), with the brand mark top left. Same three-word rule.
 
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
