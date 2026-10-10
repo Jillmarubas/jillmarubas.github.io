@@ -130,7 +130,7 @@ export const CodexFree: React.FC = () => {
   );
   return (
     <AbsoluteFill>
-      <Layer t={t} at={enter(w('free') - 0.4, {from: 'l', dist: 180})} style={{left: 220, top: 250}}>
+      <Layer t={t} at={enter(0.35, {from: 'l', dist: 180})} style={{left: 220, top: 250}}>
         <Glass w={700} h={540} pad={46} glow={p01(t, w('free'), 0.4)}>
           <div style={{fontFamily: F.mono, fontSize: 22, letterSpacing: '0.24em', color: C.accHi}}>WHILE IN BETA</div>
           <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 70, letterSpacing: '-0.03em', marginTop: 16}}>Suggestions</div>
@@ -139,7 +139,7 @@ export const CodexFree: React.FC = () => {
           {meter(0.32, 'rgba(255,255,255,.3)')}
         </Glass>
       </Layer>
-      <Layer t={t} at={enter(w('anything') - 0.3, {from: 'r', dist: 180})} style={{left: 1000, top: 250}}>
+      <Layer t={t} at={enter(Math.min(w('anything') - 0.3, 1.2), {from: 'r', dist: 180})} style={{left: 1000, top: 250}}>
         <Glass w={700} h={540} pad={46}>
           <div style={{fontFamily: F.mono, fontSize: 22, letterSpacing: '0.24em', color: C.ink3}}>WHEN YOU SEND</div>
           <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 70, letterSpacing: '-0.03em', marginTop: 16}}>Your message</div>

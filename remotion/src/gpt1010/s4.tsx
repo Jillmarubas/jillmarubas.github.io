@@ -89,7 +89,7 @@ export const WaitNew: React.FC = () => {
 // ---------- 4.3 "OpenAI gives one number… forty-four percent sooner with GPT six Instant than with GPT five point six Instant."
 export const Speed44: React.FC = () => {
   const {t, w} = useS();
-  const tRace = w('average') - 0.2;
+  const tRace = Math.min(w('average') - 0.2, 1.4);
   const grow = (stop: number) => Math.min(stop, p01(t, tRace, 2.2, E.linear));
   const t44 = w('fortyfour');
   const rows = [
@@ -101,7 +101,7 @@ export const Speed44: React.FC = () => {
     <AbsoluteFill>
       <div style={{position: 'absolute', left: 0, right: 0, top: 120, textAlign: 'center'}}>
         <div style={{fontFamily: F.mono, fontSize: 24, letterSpacing: '0.26em', color: C.accHi, opacity: p01(t, w('number') - 0.2, 0.3)}}>ONE NUMBER · QUESTIONS THAT NEED A WEB SEARCH</div>
-        <AText t={t} text="Time to the *first words*" at={w('first') - 0.3} size={78} by="word" style={{marginTop: 14}} />
+        <AText t={t} text="Time to the *first words*" at={0.3} size={78} by="word" style={{marginTop: 14}} />
       </div>
       <div style={{position: 'absolute', left: 180, top: 380, width: 940}}>
         {rows.map((r, i) => {
