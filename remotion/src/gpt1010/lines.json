@@ -1,0 +1,274 @@
+[
+ {
+  "key": "hook",
+  "title": "HOOK",
+  "lines": [
+   {
+    "say": "ChatGPT just stopped answering only in text.",
+    "show": "Laptop swings in; a text-only answer collapses."
+   },
+   {
+    "say": "Ask it to split a dinner bill, and it can build a working bill splitter inside the chat.",
+    "show": "Bill splitter widget builds itself in the chat."
+   },
+   {
+    "say": "This started rolling out on October seventh, and Free users are included.",
+    "show": "Date chip OCT 7; FREE badge."
+   },
+   {
+    "say": "Today I'll explain what changed. Then I'll show you how to use it, step by step.",
+    "show": "EXPLAIN / SHOW cards."
+   }
+  ]
+ },
+ {
+  "key": "preview",
+  "title": "THE PLAN",
+  "lines": [
+   {
+    "say": "Here's the plan. Part one is GPT six and a feature called Intelligent UI.",
+    "show": "Roadmap node 1."
+   },
+   {
+    "say": "Part two is a speed change, where answers start before the thinking ends.",
+    "show": "Node 2."
+   },
+   {
+    "say": "Part three is audio uploads, for meetings and lectures.",
+    "show": "Node 3."
+   },
+   {
+    "say": "Part four is a quick one for Codex users.",
+    "show": "Node 4."
+   }
+  ]
+ },
+ {
+  "key": "p1a",
+  "title": "PART 1 · INTELLIGENT UI",
+  "lines": [
+   {
+    "say": "On October seventh, OpenAI brought GPT six to the Chat tab in ChatGPT. With it comes Intelligent UI.",
+    "show": "Part card; Chat tab lights; GPT-6 chip."
+   },
+   {
+    "say": "Until now, almost every answer was text. Now ChatGPT can mix text, visuals and interactive parts in one answer. OpenAI lists graphics, tappable buttons, forms and charts.",
+    "show": "Text answer morphs; four building blocks."
+   },
+   {
+    "say": "ChatGPT picks the format based on your question. Comparing two phones? You may get them side by side. Asking how something works? You may get a diagram to explore. Simple question? You still get plain text.",
+    "show": "Three question → format pairs."
+   },
+   {
+    "say": "Who gets it? The rollout started on October seventh for Plus, Pro, Business and Enterprise. OpenAI said Free and Go would follow, starting October eighth. It is a rollout, so it may not be on your account yet.",
+    "show": "Plan timeline Oct 7 / Oct 8."
+   },
+   {
+    "say": "Plus, Pro, Business and Enterprise use GPT six Sol. Free and Go use GPT six Luna.",
+    "show": "Two model cards Sol / Luna."
+   },
+   {
+    "say": "Why does this matter? Some answers are easier to see than to read. A plan is easier to follow when you can see how it fits together.",
+    "show": "Wall of text vs a visual plan."
+   }
+  ]
+ },
+ {
+  "key": "p1b",
+  "title": "TRY INTELLIGENT UI",
+  "lines": [
+   {
+    "say": "Here's how to try it.",
+    "show": "Fly into the laptop: ChatGPT in the browser."
+   },
+   {
+    "say": "Step one. Open ChatGPT and make sure you are in the Chat tab.",
+    "show": "STEP 1; Chat tab clicked."
+   },
+   {
+    "say": "Step two. Ask for a tool, not an essay. A bill splitter is a good first test.",
+    "show": "STEP 2; prompt typed."
+   },
+   {
+    "say": "Step three. Use what it builds. If ChatGPT gives you a tool, change the numbers and see what happens.",
+    "show": "STEP 3; cursor changes friends 5→6; amount updates."
+   },
+   {
+    "say": "Step four. Now try a learning question. OpenAI's own demo breaks a seven-speed bike into five systems you can tap through.",
+    "show": "STEP 4; bike diagram, five tabs."
+   },
+   {
+    "say": "Step five. Try a plan. OpenAI says road trip stops can appear on a map.",
+    "show": "STEP 5; map with stops."
+   },
+   {
+    "say": "Two tips. First, ChatGPT chooses the format. If you get plain text, it may have judged text to be the best answer. Or the rollout hasn't reached you yet.",
+    "show": "Tip 1 card."
+   },
+   {
+    "say": "Second, Intelligent UI works from Instant up to Extra High reasoning. The Pro reasoning option does not support it. So if you use Pro reasoning, switch levels first.",
+    "show": "Reasoning picker; Pro crossed."
+   }
+  ]
+ },
+ {
+  "key": "p2a",
+  "title": "PART 2 · ANSWERS START SOONER",
+  "lines": [
+   {
+    "say": "Part two is about waiting.",
+    "show": "Part card; spinner."
+   },
+   {
+    "say": "With reasoning models, you had to wait for the thinking to finish before you saw an answer.",
+    "show": "Old: long thinking bar, then answer."
+   },
+   {
+    "say": "GPT six doesn't make you wait like that. It starts writing while it is still thinking or using tools. More findings get added as it goes, and you don't have to ask again. So you can read the first part early.",
+    "show": "New: answer streams beside thinking."
+   },
+   {
+    "say": "OpenAI gives one number, for questions that need a web search. On average, the first words arrive forty-four percent sooner with GPT six Instant than with GPT five point six Instant. That is OpenAI's own measurement.",
+    "show": "Bar race: 44% sooner; source label."
+   }
+  ]
+ },
+ {
+  "key": "p2b",
+  "title": "SEE IT YOURSELF",
+  "lines": [
+   {
+    "say": "Step one. Ask a question that needs fresh information.",
+    "show": "STEP 1; Penang prompt typed."
+   },
+   {
+    "say": "Step two. Watch the top of the answer. The first lines may appear while ChatGPT is still working.",
+    "show": "STEP 2; first lines appear while searching."
+   },
+   {
+    "say": "Step three. Keep reading as more arrives. You don't need to send a second prompt. Let it finish.",
+    "show": "STEP 3; more sections append."
+   }
+  ]
+ },
+ {
+  "key": "p3a",
+  "title": "PART 3 · AUDIO UPLOADS",
+  "lines": [
+   {
+    "say": "Part three landed on October sixth. You can now upload audio files to ChatGPT.",
+    "show": "Part card; audio file flies into chat."
+   },
+   {
+    "say": "It can write a transcript, summarize the recording, and answer questions about it. Think meetings, interviews and lectures.",
+    "show": "Three outputs; three use cases."
+   },
+   {
+    "say": "This one is for paid ChatGPT subscriptions and workspaces. It is not on the Free plan right now.",
+    "show": "Paid ✓ / Free ✕."
+   },
+   {
+    "say": "Files can be up to five hundred twelve megabytes. It accepts common formats like MP3, WAV, M4A and FLAC. Files identified as video are not supported, so use an audio-only file.",
+    "show": "512 MB gauge; format chips; video ✕."
+   }
+  ]
+ },
+ {
+  "key": "p3b",
+  "title": "RECORDING TO NOTES",
+  "lines": [
+   {
+    "say": "Step one. Start a new chat and attach your audio file.",
+    "show": "STEP 1; attach file."
+   },
+   {
+    "say": "Step two. Say what you want.",
+    "show": "STEP 2; prompt."
+   },
+   {
+    "say": "Step three. Ask a follow-up question about the recording.",
+    "show": "STEP 3; follow-up."
+   },
+   {
+    "say": "Step four. Turn it into something you can send.",
+    "show": "STEP 4; email draft."
+   },
+   {
+    "say": "Step five. Check it. OpenAI warns that transcripts can have mistakes, and accuracy can vary by language. Check names, numbers and dates against the recording.",
+    "show": "STEP 5; checklist over transcript."
+   }
+  ]
+ },
+ {
+  "key": "p4a",
+  "title": "PART 4 · CODEX PREDICTIONS",
+  "lines": [
+   {
+    "say": "Part four is a small one for Codex users.",
+    "show": "Part card."
+   },
+   {
+    "say": "On October ninth, OpenAI added Composer predictions, in beta. After Codex replies, it may suggest your next message in the message box.",
+    "show": "Codex reply, ghost suggestion."
+   },
+   {
+    "say": "It is for personal ChatGPT Pro users aged eighteen and older, in the latest Codex desktop app. It works in local and SSH threads using GPT six Astra or GPT six point one Sol.",
+    "show": "Eligibility checklist."
+   },
+   {
+    "say": "While it is in beta, the suggestions themselves are free. They don't use your Codex limits or credits. Anything you send still counts as normal.",
+    "show": "Free suggestions vs metered sends."
+   }
+  ]
+ },
+ {
+  "key": "p4b",
+  "title": "USE IT OR SWITCH IT OFF",
+  "lines": [
+   {
+    "say": "Step one. Update the Codex desktop app to the latest version.",
+    "show": "STEP 1; update."
+   },
+   {
+    "say": "Step two. Send a message and wait for the reply. A suggestion may appear in the message box.",
+    "show": "STEP 2; ghost text."
+   },
+   {
+    "say": "Step three. Press Tab to accept it. Accepting does not send it. Read it, edit it, then send.",
+    "show": "STEP 3; Tab keycap; text fills; edit."
+   },
+   {
+    "say": "Step four. Don't want it? It is on by default, so turn it off in settings.",
+    "show": "STEP 4; Settings › General › Composer toggle off."
+   }
+  ]
+ },
+ {
+  "key": "wrap",
+  "title": "YOUR TO-DO LIST",
+  "lines": [
+   {
+    "say": "So here's your to-do list. One. Ask ChatGPT for a tool, like a bill splitter. Two. Ask it to explain something with parts you can tap. Three. If you are on a paid plan, upload one recording and ask for notes. Four. Check every transcript against the audio. Five. Codex users on Pro, press Tab on a prediction, or switch it off.",
+    "show": "Checklist ticks."
+   },
+   {
+    "say": "ChatGPT is moving from writing answers to building them.",
+    "show": "'writing' morphs to 'building'."
+   }
+  ]
+ },
+ {
+  "key": "outro",
+  "title": "OUTRO",
+  "lines": [
+   {
+    "say": "If this helped, like and subscribe for AI news, explained and shown step by step.",
+    "show": "Like + subscribe clicks."
+   },
+   {
+    "say": "And tell me in the comments: what is the first tool you will ask ChatGPT to build? See you in the next one.",
+    "show": "Comment bubble; end card."
+   }
+  ]
+ }
+]

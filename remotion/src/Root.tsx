@@ -21,6 +21,8 @@ import {CITY_CHAPTERS, CITY_DURATION, CITY_QA, CityFilm, CityPart, CityQA} from 
 import {DEMO_DURATION, TutorialDemo} from './tutorial/Demo';
 import {CC_DURATION, CC_PARTS, CCFilm, CCPart} from './cc1003/Film';
 import {CCThumbA, CCThumbB, CCThumbC, CCThumbD} from './cc1003/Thumbnail';
+import {GPT_DURATION, GPT_PARTS, GPTFilm, GPTPart} from './gpt1010/Film';
+import {GPTThumbA, GPTThumbB, GPTThumbC} from './gpt1010/Thumbnail';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -77,6 +79,13 @@ export const Root: React.FC = () => (
     {CC_PARTS.map((p, i) => (
       <Composition key={`cc${i}`} id={`ClaudeCodeMods-part${i}`} component={CCPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
+    <Composition id="ChatGPTClick" component={GPTFilm} durationInFrames={GPT_DURATION} fps={60} width={1920} height={1080} />
+    {GPT_PARTS.map((p, i) => (
+      <Composition key={`gpt${i}`} id={`ChatGPTClick-part${i}`} component={GPTPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
+    ))}
+    <Composition id="GPTThumbA" component={GPTThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="GPTThumbB" component={GPTThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="GPTThumbC" component={GPTThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CCThumbA" component={CCThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CCThumbB" component={CCThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CCThumbC" component={CCThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
