@@ -1,5 +1,6 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Easing, interpolate, OffthreadVideo, random, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {blackLevel, equalPower, grains, masterFade, PictureGrain} from '../ambience/kit';
 
 /*
  * "Rainy Night Sanctuary": sleep ambience. A brown-noise bed, an ElevenLabs narration and the
@@ -72,39 +73,11 @@ const LOOP_PICTURE_REGIONS: [number, number][] = [
 const RAIN_XFADE = sec(0.5);
 const PICTURE_DISSOLVE = 16;
 
-type Grain = {from: number; src: number; len: number};
-
-/**
- * Lays short slices of the clip end to end, each overlapping the next by `overlap` frames.
- * Seeded random lengths and in-points, so the extension never repeats on a fixed period.
- */
-const grains = (seed: string, regions: [number, number][], start: number, end: number, minLen: number, maxLen: number, overlap: number): Grain[] => {
-  const out: Grain[] = [];
-  let from = start;
-  for (let i = 0; from < end; i++) {
-    const [a, b] = regions[Math.floor(random(`${seed}-r${i}`) * regions.length)];
-    const len = Math.min(b - a, Math.round(minLen + random(`${seed}-l${i}`) * (maxLen - minLen)));
-    const src = a + Math.floor(random(`${seed}-s${i}`) * (b - a - len + 1));
-    out.push({from, src, len});
-    from += len - overlap;
-  }
-  return out;
-};
-
 export const RAIN_GRAINS = grains('rain', RAIN_AUDIO_REGIONS, CLIP_FRAMES - RAIN_XFADE, RAINY_DURATION, 32, 52, RAIN_XFADE);
 export const PICTURE_GRAINS = grains('picture', LOOP_PICTURE_REGIONS, CLIP_FRAMES - PICTURE_DISSOLVE, RAINY_DURATION, 36, 51, PICTURE_DISSOLVE);
 
 /** Master fade applied to every track, by composition frame. */
-const master = (f: number) =>
-  interpolate(f, [0, FADE_IN], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.sin)}) *
-  interpolate(f, [RAINY_DURATION - FADE_OUT, RAINY_DURATION - 1], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.sin)});
-
-/** Equal-power in/out envelope for a slice `len` frames long that overlaps its neighbours by `x` frames. */
-const equalPower = (f: number, len: number, x: number, fadeIn = true) => {
-  const tin = fadeIn && f < x ? Math.sin((Math.PI / 2) * (f / x)) : 1;
-  const tout = f >= len - x ? Math.cos((Math.PI / 2) * ((f - (len - x)) / x)) : 1;
-  return tin * tout;
-};
+const master = (f: number) => masterFade(f, RAINY_DURATION, FADE_IN, FADE_OUT);
 
 const clipGain = (f: number, mix: RainyMix) =>
   f < THUNDER_UP[0]
@@ -115,10 +88,7 @@ const CLIP = staticFile('rain/bedroom.mp4');
 
 export const RainyNight: React.FC<RainyNightProps> = ({mix}) => {
   const frame = useCurrentFrame();
-  const black = Math.max(
-    interpolate(frame, [0, PICTURE_FADE_IN], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
-    interpolate(frame, [RAINY_DURATION - FADE_OUT, RAINY_DURATION - 1], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
-  );
+  const black = blackLevel(frame, RAINY_DURATION, PICTURE_FADE_IN, FADE_OUT);
 
   return (
     <AbsoluteFill style={{backgroundColor: 'black'}}>
@@ -134,7 +104,7 @@ export const RainyNight: React.FC<RainyNightProps> = ({mix}) => {
       {/* Picture after 8 s: muted, flicker-free slices of the clip, dissolved into each other. */}
       {PICTURE_GRAINS.map((g, i) => (
         <Sequence key={`p${i}`} from={g.from} durationInFrames={g.len} name={`picture ${i}`}>
-          <PictureGrain src={g.src} len={g.len} />
+          <PictureGrain clip={CLIP} src={g.src} len={g.len} dissolve={PICTURE_DISSOLVE} />
         </Sequence>
       ))}
 
@@ -164,16 +134,6 @@ export const RainyNight: React.FC<RainyNightProps> = ({mix}) => {
       </Sequence>
 
       <AbsoluteFill style={{backgroundColor: 'black', opacity: black}} />
-    </AbsoluteFill>
-  );
-};
-
-const PictureGrain: React.FC<{src: number; len: number}> = ({src, len}) => {
-  const f = useCurrentFrame();
-  const opacity = interpolate(f, [0, PICTURE_DISSOLVE], [0, 1], {extrapolateRight: 'clamp'});
-  return (
-    <AbsoluteFill style={{opacity}}>
-      <OffthreadVideo src={CLIP} trimBefore={src} trimAfter={src + len} muted />
     </AbsoluteFill>
   );
 };
