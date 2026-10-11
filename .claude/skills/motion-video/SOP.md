@@ -329,6 +329,16 @@ Reference builds (start a new video by copying the closer one; don't rebuild the
 - With no photo, build the thumbnail in Remotion around the film's own hero visual (gpt1010: the bill-splitter
   widget with the cursor on "+"), with the brand mark top left. Same three-word rule.
 
+**Asher host thumbnails (the user's workflow, 10 Oct 2026; `remotion/src/vs1010/AsherThumbs.tsx`)**
+- The user generates the Asher image in Higgsfield; Claude writes the prompts only (no compositing unless asked).
+- Generate in two steps: (1) Asher in the pose holding plain blank black tiles, fingers close together, 4 variations,
+  pick clean hands; (2) inpaint only the tiles into the logos, with the logo renders (`IconTile`) as references.
+  Never ask Higgsfield to add text: every re-render risks a sixth finger.
+- Keep the left or top-left dark and empty. If he lands on the wrong side, remove the background or flip before step 2.
+- Then add the words in Remotion over the untouched image: flat Geist 900 (no 3D, no red underline), white + one
+  yellow `#F2C14E` word, optional white arrow to the subject. Deliver 5 options; vs1010 pick: "ONLY NEED / ONE" + arrow.
+- Disclose the AI-generated character in the description and tick "altered or synthetic content" on upload.
+
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
 shot list with **one scene per script line** (shot type, place, time of day, character pose and
