@@ -10,10 +10,11 @@ import {blackLevel, equalPower, grains, masterFade, PictureGrain} from '../ambie
  * Measured sources (ffmpeg ebur128 / astats):
  *   music.mp3      197.592 s, 48 kHz stereo, -16.5 LUFS, peak -3.4 dBFS, all energy < 1 kHz;
  *                  a slow B-major drone with its own 2 s fade-in and ~12 s fade-out.
- *   fireplace.mp4  8.000 s = 192 frames @ 24 fps, 1920x1080, AAC 48 kHz stereo: fire crackle
- *                  -36.7 LUFS, mostly 2-16 kHz; three hard pops at 0.63, 4.06 and 6.02 s that
- *                  reach 0 dBFS (clipped in the source); every other crackle peaks <= -10 dBFS.
- *                  The camera dollies slowly left (~90 px over the clip).
+ *   fireplace.mp4  8.000 s = 192 frames @ 24 fps, 1920x1080, AAC 48 kHz stereo, locked-off
+ *                  camera (0 px movement): fire crackle -39.4 LUFS with a low rumble; pops at
+ *                  1.85 s (-2.8 dBFS), 3.12 s (-10.8) and 4.78 s (-8.3); every other crackle
+ *                  peaks <= -14.5 dBFS. Two fire flares brighten the room on frames 33-47, and
+ *                  the mug's steam only appears from about frame 48.
  */
 
 export const FIRE_FPS = 24;
@@ -28,8 +29,9 @@ export const FIRE_DURATION = Math.ceil(197.592 * FIRE_FPS); // 4743 = 197.625 s
  * noise did under the voice (0.2): 0.4 puts it at about -24.5 LUFS, a few dB under the narrated
  * film, so the combined video gets quieter as it goes rather than louder. The crackle sits about
  * 16 dB under the music, as the rain did under the brown noise; it lives above 1 kHz, where the
- * music has nothing, so it stays audible. The three pops are ridden down to `pops`, which brings
- * them to about -14 dBFS, level with the ordinary crackles instead of 12 dB over them.
+ * music has nothing, so it stays audible (this clip's crackle is 4.6 dB quieter above 1.5 kHz
+ * than the first take's, hence unity gain). The three pops are ridden down to `pops`, which
+ * brings the loudest to about -15 dBFS, level with the ordinary crackles.
  */
 export type FireplaceMix = {
   music: number;
@@ -39,8 +41,8 @@ export type FireplaceMix = {
 
 export const FIREPLACE_MIX: FireplaceMix = {
   music: 0.4,
-  crackle: 0.65,
-  pops: 0.15,
+  crackle: 1.0,
+  pops: 0.25,
 };
 
 export type FireplaceProps = {mix: FireplaceMix};
@@ -51,23 +53,25 @@ const PICTURE_FADE_IN = sec(1.5);
 
 /* Pops in clip frames, inclusive, with a frame of margin either side (volume steps per frame). */
 const POPS: [number, number][] = [
-  [14, 16], // 0.63 s
-  [96, 98], // 4.06 s
-  [143, 146], // 6.02 s
+  [43, 45], // 1.85 s
+  [73, 75], // 3.12 s
+  [113, 115], // 4.78 s
 ];
 
-/* Pop-free crackle, and the end of the clip where the camera has the least drift, [first, end). */
+/* Pop-free crackle, and the picture after the flares once the steam is up, [first, end). */
 const CRACKLE_REGIONS: [number, number][] = [
-  [18, 95],
-  [100, 142],
-  [148, 190],
+  [2, 41],
+  [47, 71],
+  [77, 111],
+  [117, 190],
 ];
-const LOOP_PICTURE_REGIONS: [number, number][] = [[144, 192]];
+const LOOP_PICTURE_REGIONS: [number, number][] = [[52, 192]];
 const CRACKLE_XFADE = sec(0.5);
-const PICTURE_DISSOLVE = 16;
+/* The camera is locked off, so picture slices can be long and dissolve slowly. */
+const PICTURE_DISSOLVE = sec(1);
 
 export const CRACKLE_GRAINS = grains('crackle', CRACKLE_REGIONS, FIRE_CLIP_FRAMES - CRACKLE_XFADE, FIRE_DURATION, 32, 48, CRACKLE_XFADE);
-export const FIRE_PICTURE_GRAINS = grains('fire-picture', LOOP_PICTURE_REGIONS, FIRE_CLIP_FRAMES - PICTURE_DISSOLVE, FIRE_DURATION, 32, 48, PICTURE_DISSOLVE);
+export const FIRE_PICTURE_GRAINS = grains('fire-picture', LOOP_PICTURE_REGIONS, FIRE_CLIP_FRAMES - PICTURE_DISSOLVE, FIRE_DURATION, 60, 120, PICTURE_DISSOLVE);
 
 const master = (f: number) => masterFade(f, FIRE_DURATION, FADE_IN, FADE_OUT);
 const clipGain = (f: number, mix: FireplaceMix) => (POPS.some(([a, b]) => f >= a && f <= b) ? mix.pops : mix.crackle);
@@ -88,7 +92,7 @@ export const MidnightFireplace: React.FC<FireplaceProps> = ({mix}) => {
         />
       </Sequence>
 
-      {/* Picture after 8 s: muted slices of the clip's last 2 s, dissolved into each other. */}
+      {/* Picture after 8 s: muted, flare-free slices of the clip, dissolved into each other. */}
       {FIRE_PICTURE_GRAINS.map((g, i) => (
         <Sequence key={`p${i}`} from={g.from} durationInFrames={g.len} name={`picture ${i}`}>
           <PictureGrain clip={CLIP} src={g.src} len={g.len} dissolve={PICTURE_DISSOLVE} />
