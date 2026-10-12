@@ -27,6 +27,7 @@ import {FIRE_DURATION, FIRE_FPS, FIREPLACE_MIX, MidnightFireplace} from './firep
 import {SANCTUARY_DURATION, SanctuaryNights} from './fireplace/SanctuaryNights';
 import {SNOW_DURATION, SNOW_FPS, SNOWFALL_MIX, SnowfallCabin} from './snowfall/SnowfallCabin';
 import {MidnightRainforest, RAINFOREST_DURATION, RAINFOREST_FPS, RAINFOREST_MIX} from './rainforest/MidnightRainforest';
+import {MidnightOcean, OCEAN_DURATION, OCEAN_FPS, OCEAN_MIX} from './ocean/MidnightOcean';
 
 export const Root: React.FC = () => (
   <>
@@ -108,6 +109,7 @@ export const Root: React.FC = () => (
     <Composition id="MidnightFireplaceSanctuary" component={MidnightFireplace} durationInFrames={FIRE_DURATION} fps={FIRE_FPS} width={1920} height={1080} defaultProps={{mix: FIREPLACE_MIX}} />
     <Composition id="SnowfallCabinSanctuary" component={SnowfallCabin} durationInFrames={SNOW_DURATION} fps={SNOW_FPS} width={1920} height={1080} defaultProps={{mix: SNOWFALL_MIX}} />
     <Composition id="MidnightRainforestSanctuary" component={MidnightRainforest} durationInFrames={RAINFOREST_DURATION} fps={RAINFOREST_FPS} width={1920} height={1080} defaultProps={{mix: RAINFOREST_MIX}} />
-    <Composition id="SanctuaryNights" component={SanctuaryNights} durationInFrames={SANCTUARY_DURATION} fps={RAIN_FPS} width={1920} height={1080} defaultProps={{rain: RAINY_MIX, fire: FIREPLACE_MIX, snow: SNOWFALL_MIX, rainforest: RAINFOREST_MIX}} />
+    <Composition id="MidnightOceanRetreat" component={MidnightOcean} durationInFrames={OCEAN_DURATION} fps={OCEAN_FPS} width={1920} height={1080} defaultProps={{mix: OCEAN_MIX}} />
+    <Composition id="SanctuaryNights" component={SanctuaryNights} durationInFrames={SANCTUARY_DURATION} fps={RAIN_FPS} width={1920} height={1080} defaultProps={{rain: RAINY_MIX, fire: FIREPLACE_MIX, snow: SNOWFALL_MIX, rainforest: RAINFOREST_MIX, ocean: OCEAN_MIX}} />
     </>
 );

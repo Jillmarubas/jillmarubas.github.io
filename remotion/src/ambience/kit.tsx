@@ -3,7 +3,7 @@ import {AbsoluteFill, Audio, Easing, interpolate, OffthreadVideo, random, Sequen
 
 /*
  * Shared pieces for the sleep-ambience films (RainyNightSanctuary, MidnightFireplaceSanctuary,
- * SnowfallCabinSanctuary, MidnightRainforestSanctuary):
+ * SnowfallCabinSanctuary, MidnightRainforestSanctuary, MidnightOceanRetreat):
  * extending a short generated clip past its own length without repeating on a fixed period.
  */
 
