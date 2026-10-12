@@ -1,6 +1,6 @@
 import React from 'react';
-import {AbsoluteFill, Audio, OffthreadVideo, Sequence, staticFile, useCurrentFrame} from 'remotion';
-import {blackLevel, equalPower, grains, masterFade, PictureGrain} from '../ambience/kit';
+import {staticFile} from 'remotion';
+import {AmbienceFilm, ambienceGrains} from '../ambience/kit';
 
 /*
  * "Midnight Fireplace Sanctuary": sleep ambience, same rules as RainyNightSanctuary, no narration.
@@ -70,51 +70,29 @@ const CRACKLE_XFADE = sec(0.5);
 /* The camera is locked off, so picture slices can be long and dissolve slowly. */
 const PICTURE_DISSOLVE = sec(1);
 
-export const CRACKLE_GRAINS = grains('crackle', CRACKLE_REGIONS, FIRE_CLIP_FRAMES - CRACKLE_XFADE, FIRE_DURATION, 32, 48, CRACKLE_XFADE);
-export const FIRE_PICTURE_GRAINS = grains('fire-picture', LOOP_PICTURE_REGIONS, FIRE_CLIP_FRAMES - PICTURE_DISSOLVE, FIRE_DURATION, 60, 120, PICTURE_DISSOLVE);
+const SPEC = ambienceGrains(
+  {audio: 'crackle', picture: 'fire-picture'},
+  {
+    clip: staticFile('fireplace/fireplace.mp4'),
+    music: staticFile('fireplace/music.mp3'),
+    duration: FIRE_DURATION,
+    clipFrames: FIRE_CLIP_FRAMES,
+    fadeIn: FADE_IN,
+    fadeOut: FADE_OUT,
+    pictureFadeIn: PICTURE_FADE_IN,
+    events: POPS,
+    audioRegions: CRACKLE_REGIONS,
+    pictureRegions: LOOP_PICTURE_REGIONS,
+    audioXfade: CRACKLE_XFADE,
+    pictureDissolve: PICTURE_DISSOLVE,
+  },
+  [32, 48],
+  [60, 120],
+);
 
-const master = (f: number) => masterFade(f, FIRE_DURATION, FADE_IN, FADE_OUT);
-const clipGain = (f: number, mix: FireplaceMix) => (POPS.some(([a, b]) => f >= a && f <= b) ? mix.pops : mix.crackle);
+export const CRACKLE_GRAINS = SPEC.audioGrains;
+export const FIRE_PICTURE_GRAINS = SPEC.pictureGrains;
 
-const CLIP = staticFile('fireplace/fireplace.mp4');
-
-export const MidnightFireplace: React.FC<FireplaceProps> = ({mix}) => {
-  const frame = useCurrentFrame();
-  const black = blackLevel(frame, FIRE_DURATION, PICTURE_FADE_IN, FADE_OUT);
-
-  return (
-    <AbsoluteFill style={{backgroundColor: 'black'}}>
-      {/* The clip, whole, with its crackle in sync; it hands over to the extension over its last 0.5 s. */}
-      <Sequence durationInFrames={FIRE_CLIP_FRAMES} name="Higgsfield clip">
-        <OffthreadVideo
-          src={CLIP}
-          volume={(f) => clipGain(f, mix) * equalPower(f, FIRE_CLIP_FRAMES, CRACKLE_XFADE, false) * master(f)}
-        />
-      </Sequence>
-
-      {/* Picture after 8 s: muted, flare-free slices of the clip, dissolved into each other. */}
-      {FIRE_PICTURE_GRAINS.map((g, i) => (
-        <Sequence key={`p${i}`} from={g.from} durationInFrames={g.len} name={`picture ${i}`}>
-          <PictureGrain clip={CLIP} src={g.src} len={g.len} dissolve={PICTURE_DISSOLVE} />
-        </Sequence>
-      ))}
-
-      {/* Crackle after 8 s: pop-free slices of the clip's audio, crossfaded. */}
-      {CRACKLE_GRAINS.map((g, i) => (
-        <Sequence key={`c${i}`} from={g.from} durationInFrames={g.len} name={`crackle ${i}`} layout="none">
-          <Audio
-            src={CLIP}
-            trimBefore={g.src}
-            trimAfter={g.src + g.len}
-            volume={(f) => mix.crackle * equalPower(f, g.len, CRACKLE_XFADE) * master(g.from + f)}
-          />
-        </Sequence>
-      ))}
-
-      {/* The music: one pass, start to finish. */}
-      <Audio src={staticFile('fireplace/music.mp3')} volume={(f) => mix.music * master(f)} name="Music" />
-
-      <AbsoluteFill style={{backgroundColor: 'black', opacity: black}} />
-    </AbsoluteFill>
-  );
-};
+export const MidnightFireplace: React.FC<FireplaceProps> = ({mix}) => (
+  <AmbienceFilm spec={SPEC} gains={{music: mix.music, clip: mix.crackle, events: mix.pops}} />
+);

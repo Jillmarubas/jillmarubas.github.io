@@ -25,6 +25,7 @@ import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 import {RAIN_FPS, RAINY_DURATION, RAINY_MIX, RainyNight} from './rain/RainyNight';
 import {FIRE_DURATION, FIRE_FPS, FIREPLACE_MIX, MidnightFireplace} from './fireplace/MidnightFireplace';
 import {SANCTUARY_DURATION, SanctuaryNights} from './fireplace/SanctuaryNights';
+import {SNOW_DURATION, SNOW_FPS, SNOWFALL_MIX, SnowfallCabin} from './snowfall/SnowfallCabin';
 
 export const Root: React.FC = () => (
   <>
@@ -104,6 +105,7 @@ export const Root: React.FC = () => (
     <Composition id="N1Test" component={N1Test} durationInFrames={120} fps={24} width={1920} height={1080} defaultProps={{logos: ['anthropic', 'kimi', 'oura'], place: 'whitehouse' as 'whitehouse' | 'ftc' | 'none'}} />
     <Composition id="RainyNightSanctuary" component={RainyNight} durationInFrames={RAINY_DURATION} fps={RAIN_FPS} width={1920} height={1080} defaultProps={{mix: RAINY_MIX}} />
     <Composition id="MidnightFireplaceSanctuary" component={MidnightFireplace} durationInFrames={FIRE_DURATION} fps={FIRE_FPS} width={1920} height={1080} defaultProps={{mix: FIREPLACE_MIX}} />
-    <Composition id="SanctuaryNights" component={SanctuaryNights} durationInFrames={SANCTUARY_DURATION} fps={RAIN_FPS} width={1920} height={1080} defaultProps={{rain: RAINY_MIX, fire: FIREPLACE_MIX}} />
+    <Composition id="SnowfallCabinSanctuary" component={SnowfallCabin} durationInFrames={SNOW_DURATION} fps={SNOW_FPS} width={1920} height={1080} defaultProps={{mix: SNOWFALL_MIX}} />
+    <Composition id="SanctuaryNights" component={SanctuaryNights} durationInFrames={SANCTUARY_DURATION} fps={RAIN_FPS} width={1920} height={1080} defaultProps={{rain: RAINY_MIX, fire: FIREPLACE_MIX, snow: SNOWFALL_MIX}} />
     </>
 );

@@ -1,8 +1,9 @@
 import React from 'react';
-import {AbsoluteFill, Easing, interpolate, OffthreadVideo, random, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Easing, interpolate, OffthreadVideo, random, Sequence, useCurrentFrame} from 'remotion';
 
 /*
- * Shared pieces for the sleep-ambience films (RainyNightSanctuary, MidnightFireplaceSanctuary):
+ * Shared pieces for the sleep-ambience films (RainyNightSanctuary, MidnightFireplaceSanctuary,
+ * SnowfallCabinSanctuary):
  * extending a short generated clip past its own length without repeating on a fixed period.
  */
 
@@ -51,6 +52,84 @@ export const PictureGrain: React.FC<{clip: string; src: number; len: number; dis
   return (
     <AbsoluteFill style={{opacity}}>
       <OffthreadVideo src={clip} trimBefore={src} trimAfter={src + len} muted />
+    </AbsoluteFill>
+  );
+};
+
+/**
+ * A music-led ambience film with no narration: the music plays once, start to finish; the clip
+ * plays once, whole, with its own sound in sync and its sharp events ridden down; then the clip's
+ * clean audio and picture continue as seeded, crossfaded slices to the end.
+ */
+export type AmbienceSpec = {
+  clip: string;
+  music: string;
+  duration: number;
+  clipFrames: number;
+  fadeIn: number;
+  fadeOut: number;
+  pictureFadeIn: number;
+  /** Sharp events in clip frames, inclusive, ridden down to the `events` gain. */
+  events: [number, number][];
+  /** Event-free audio and picture stretches of the clip, [first, end). */
+  audioRegions: [number, number][];
+  pictureRegions: [number, number][];
+  audioXfade: number;
+  pictureDissolve: number;
+  audioGrains: Grain[];
+  pictureGrains: Grain[];
+};
+
+export type AmbienceGains = {music: number; clip: number; events: number};
+
+/** Builds the audio and picture grain lists for a spec; seeds keep each film's timeline fixed. */
+export const ambienceGrains = (
+  seed: {audio: string; picture: string},
+  s: Omit<AmbienceSpec, 'audioGrains' | 'pictureGrains'>,
+  audioLen: [number, number],
+  pictureLen: [number, number],
+): AmbienceSpec => ({
+  ...s,
+  audioGrains: grains(seed.audio, s.audioRegions, s.clipFrames - s.audioXfade, s.duration, audioLen[0], audioLen[1], s.audioXfade),
+  pictureGrains: grains(seed.picture, s.pictureRegions, s.clipFrames - s.pictureDissolve, s.duration, pictureLen[0], pictureLen[1], s.pictureDissolve),
+});
+
+export const AmbienceFilm: React.FC<{spec: AmbienceSpec; gains: AmbienceGains}> = ({spec, gains}) => {
+  const frame = useCurrentFrame();
+  const master = (f: number) => masterFade(f, spec.duration, spec.fadeIn, spec.fadeOut);
+  const clipGain = (f: number) => (spec.events.some(([a, b]) => f >= a && f <= b) ? gains.events : gains.clip);
+  const black = blackLevel(frame, spec.duration, spec.pictureFadeIn, spec.fadeOut);
+
+  return (
+    <AbsoluteFill style={{backgroundColor: 'black'}}>
+      {/* The clip, whole, with its own sound in sync; it hands over to the extension over its last audioXfade frames. */}
+      <Sequence durationInFrames={spec.clipFrames} name="Higgsfield clip">
+        <OffthreadVideo src={spec.clip} volume={(f) => clipGain(f) * equalPower(f, spec.clipFrames, spec.audioXfade, false) * master(f)} />
+      </Sequence>
+
+      {/* Picture after the clip: muted, event-free slices, dissolved into each other. */}
+      {spec.pictureGrains.map((g, i) => (
+        <Sequence key={`p${i}`} from={g.from} durationInFrames={g.len} name={`picture ${i}`}>
+          <PictureGrain clip={spec.clip} src={g.src} len={g.len} dissolve={spec.pictureDissolve} />
+        </Sequence>
+      ))}
+
+      {/* Sound after the clip: event-free slices of its audio, crossfaded. */}
+      {spec.audioGrains.map((g, i) => (
+        <Sequence key={`a${i}`} from={g.from} durationInFrames={g.len} name={`ambience ${i}`} layout="none">
+          <Audio
+            src={spec.clip}
+            trimBefore={g.src}
+            trimAfter={g.src + g.len}
+            volume={(f) => gains.clip * equalPower(f, g.len, spec.audioXfade) * master(g.from + f)}
+          />
+        </Sequence>
+      ))}
+
+      {/* The music: one pass, start to finish. */}
+      <Audio src={spec.music} volume={(f) => gains.music * master(f)} name="Music" />
+
+      <AbsoluteFill style={{backgroundColor: 'black', opacity: black}} />
     </AbsoluteFill>
   );
 };
