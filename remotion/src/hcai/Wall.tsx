@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Img, random, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, random, staticFile, useCurrentFrame} from 'remotion';
 import TIMING from './timing.json';
 import BEATS from './beats.json';
 import './fonts';
@@ -9,12 +9,13 @@ import {BOARDS, ChapterCard, TitleCard, Upd} from './specials';
 import {fr, HC_CHAPTERS} from './Film';
 
 /*
- * "The Hidden Cost of AI", wall edition. Every chapter is one big paper wall. Each picture is pinned to the wall
- * on its word and the camera glides to it; earlier pictures stay pinned around it, so the chapter builds into a
- * map of everything it covered. Key words and numbers are paper labels pinned beside their picture. Charts and
- * maps are sheets on the wall, and pictures that arrive while one is up are pinned in columns beside it. A topic
- * change ("clear" in shots.txt) starts a new row, and the camera pulls back on the way to show the section so far.
- * The late-night chat screens, chapter cards and kickers stay fixed to the screen.
+ * "The Hidden Cost of AI", wall edition. Every chapter is one big paper wall with all its pictures already on it.
+ * When a picture is mentioned the camera glides to it and frames it; when the next one is mentioned it slides on.
+ * A picture mentioned again sends the camera back to it. Key words and numbers are paper labels that appear beside
+ * their picture as they're spoken, and maps and charts are sheets that draw themselves when mentioned; pictures that
+ * come up while a sheet is on screen sit in columns beside it. A topic change ("clear" in shots.txt) starts a new
+ * row, and the camera pulls back on the way to show the section so far. The late-night chat screens, chapter cards
+ * and kickers stay fixed to the screen.
  */
 type Beat = {ch: number; line: number; t: number; kind: string; ref?: string; [k: string]: string | number | undefined};
 type Chap = {title: string; key: string; start: number; card: number; vo: number; end: number};
@@ -35,7 +36,7 @@ type Pin = {
   board?: {name: string; ups: Upd[]; dur: number; content: Rect}; // ups in frames from the board's start
 };
 type Group = {pins: Pin[]; dockTo: number; cluster: number; w: number; h: number; x: number; y: number};
-type Focus = {at: number; group: number; first: boolean}; // first: the first focus of a new topic
+type Focus = {at: number; group: number; first: boolean; cl: number}; // first: the first focus of a new topic (cl)
 type Night = {start: number; end: number; ups: Upd[]; pieces: {b: Beat; at: number}[]};
 type WallData = {groups: Group[]; pins: Pin[]; focuses: Focus[]; clusterEnd: number[]; nights: Night[]; kickers: {at: number; text: string}[]};
 
@@ -80,7 +81,7 @@ const build = (ci: number): WallData => {
   };
   const focus = (at: number, group: number) => {
     const last = focuses[focuses.length - 1];
-    focuses.push({at, group, first: firstOfCluster && (!last || last.group !== group)});
+    focuses.push({at, group, first: firstOfCluster && (!last || last.group !== group), cl});
     firstOfCluster = false;
   };
   const newGroup = (p: Pin) => {
@@ -143,8 +144,16 @@ const build = (ci: number): WallData => {
     }
     if (PICTURE.has(b.kind)) {
       const kind = pictureKind(b);
-      const [w, h] = pieceSize(kind, String(b.ref), true);
-      const gi = newGroup(pin({kind, ref: String(b.ref), at, w, h}));
+      const ref = String(b.ref);
+      const seen = groups.findIndex((g) => g.pins[0].ref === ref && PICTURE.has(g.pins[0].kind));
+      if (seen >= 0) {
+        // mentioned again: the camera goes back to it
+        cur = seen;
+        focus(at, seen);
+        continue;
+      }
+      const [w, h] = pieceSize(kind, ref, true);
+      const gi = newGroup(pin({kind, ref, at, w, h}));
       cur = gi;
       focus(at, gi);
     } else if (LABEL.has(b.kind)) {
@@ -338,7 +347,8 @@ const planCamera = (w: WallData): Move[] => {
     d = Math.min(1.4, Math.max(0.6, 0.55 + 0.3 * dist));
     if (fo.first && i > 0) {
       // a new topic: pull back to show the section so far, then travel on
-      const prevGroups = w.groups.filter((q) => q.cluster === g.cluster - 1);
+      const seenBefore = new Set(w.focuses.filter((q) => q.cl === fo.cl - 1).map((q) => q.group));
+      const prevGroups = w.groups.filter((_, gi) => seenBefore.has(gi));
       const start = Math.max(prevT + 0.8, fo.at - 1.7, prev.t0 + prev.d);
       if (fo.at + 0.5 - start >= 1.1 && prevGroups.length) {
         t0 = start;
@@ -399,11 +409,10 @@ const PinView: React.FC<{p: Pin; f: number}> = ({p, f}) => {
       </div>
     );
   }
-  // pulled onto the wall: drops in from a little above, slightly large and turned, and settles flat
-  const k = settle((f - at) / 12);
-  const lift = 1 - k;
-  const turn = (random(`t${p.id}`) > 0.5 ? 1 : -1) * 6 * lift;
-  const shadow = `drop-shadow(${5 + 16 * lift}px ${9 + 30 * lift}px ${12 + 26 * lift}px rgba(29,27,24,${0.24 + 0.12 * lift}))`;
+  // pictures are on the wall from the start; a label is pressed on as it's spoken
+  const label = p.kind === 't' || p.kind === 'n';
+  const lift = label ? 1 - settle((f - at) / 9) : 0;
+  const shadow = `drop-shadow(${5 + 10 * lift}px ${9 + 16 * lift}px ${12 + 14 * lift}px rgba(29,27,24,0.24))`;
   return (
     <div
       style={{
@@ -412,8 +421,8 @@ const PinView: React.FC<{p: Pin; f: number}> = ({p, f}) => {
         top: p.y,
         width: p.w,
         height: p.h,
-        opacity: e01(f, at - 1, 5),
-        transform: `translateY(${-70 * lift}px) rotate(${p.rot + turn}deg) scale(${1 + 0.1 * lift})`,
+        opacity: label ? e01(f, at - 1, 5) : 1,
+        transform: `rotate(${p.rot}deg) scale(${1 + 0.12 * lift})`,
         filter: shadow,
       }}
     >
@@ -437,7 +446,7 @@ const NightPiece: React.FC<{b: Beat}> = ({b}) => {
 const NightStage: React.FC<{n: Night; f: number}> = ({n, f}) => {
   const at = fr(n.start);
   const end = fr(n.end);
-  const o = Math.min(1, (f - at) / 3) * (1 - Math.min(1, Math.max(0, (f - end) / 14)));
+  const o = Math.min(1, (f - at) / 3) * (1 - Math.min(1, Math.max(0, (f - end) / 8)));
   if (o <= 0) return null;
   const Chat = BOARDS.chat;
   const first = n.pieces[0];
@@ -511,7 +520,7 @@ export const HCWall: React.FC<{offset?: number; overview?: number}> = ({offset =
         }}
       />
       <AbsoluteFill style={{transformOrigin: '0 0', transform: `translate(${W / 2}px,${H / 2}px) scale(${cam.z}) translate(${-cam.x}px,${-cam.y}px)`}}>
-        {wall.pins.filter((p) => fr(p.at) <= f + 2 && onScreen(p)).map((p) => (
+        {wall.pins.filter((p) => (PICTURE.has(p.kind) || fr(p.at) <= f + 2) && onScreen(p)).map((p) => (
           <PinView key={p.id} p={p} f={f} />
         ))}
       </AbsoluteFill>
@@ -523,6 +532,7 @@ export const HCWall: React.FC<{offset?: number; overview?: number}> = ({offset =
         const o = e01(f, fr(k.at), 10) * (1 - e01(f, fr(end) - 8, 8));
         return o > 0 ? <Kicker key={i} text={k.text} o={o} /> : null;
       })}
+      {cardOn && <AbsoluteFill style={{background: C.paper, opacity: 1 - e01(f - fr(ch.start), fr(ch.vo + 0.1 - ch.start) - 14, 14)}} />}
       {cardOn && <ChapterCard f={f - fr(ch.start)} n={ci} title={ch.title} dur={fr(ch.vo + 0.1 - ch.start)} />}
       {titleOn && <TitleCard f={f - fr(lastLine.end + 0.45)} />}
       <Lens />
