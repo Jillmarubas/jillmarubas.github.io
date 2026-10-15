@@ -1,1 +1,23 @@
-{"edits": []}
+{"edits": [
+  {"ch": 3, "from": 657.3, "to": 666.6, "mode": "anim", "ref": "c3sweat", "note": "ch3 2D: sweat evaporates and carries heat away"},
+  {"ch": 3, "from": 666.6, "to": 681.0, "mode": "anim", "ref": "c3loop", "note": "ch3 2D: servers to water to cooling tower to sky"},
+  {"ch": 3, "from": 681.0, "to": 695.9, "mode": "anim", "ref": "c3gone", "note": "ch3 2D: vapour never comes back; consumption vs use"},
+  {"ch": 3, "from": 695.9, "to": 709.6, "mode": "anim", "ref": "c3twice", "note": "ch3 2D: power plant water too; AI drinks twice"},
+  {"ch": 3, "from": 709.6, "to": 719.6, "mode": "anim", "ref": "c3dalles", "note": "ch3 2D: back to the isometric Dalles; hydropower, cool climate"},
+  {"ch": 3, "from": 719.6, "to": 733.8, "mode": "anim", "ref": "c3secret", "note": "ch3 2D: water rights, the question, trade secret, sued"},
+  {"ch": 3, "from": 733.8, "to": 740.3, "mode": "anim", "ref": "c3court", "note": "ch3 2D: case back and forth, settled late 2022"},
+  {"ch": 3, "from": 740.3, "to": 748.05, "mode": "anim", "ref": "c3gallons", "note": "ch3 2D: 355M gallons; the cold open's ? gallons a day answered"},
+  {"ch": 3, "from": 748.05, "to": 755.1, "mode": "anim", "ref": "c3quarter", "note": "ch3 2D: 29% of city water; nearly tripled"},
+  {"ch": 3, "from": 755.1, "to": 762.7, "mode": "anim", "ref": "c3know", "note": "ch3 2D: a quarter to one company; residents not allowed to know"},
+  {"ch": 3, "from": 762.7, "to": 772.5, "mode": "anim", "ref": "c3fair", "note": "ch3 2D: Google's side; the river; not a desert"},
+  {"ch": 3, "from": 772.5, "to": 777.58, "mode": "anim", "ref": "c3deserts", "note": "ch3 2D: data centres in dry places"},
+  {"ch": 3, "from": 786.27, "to": 800.2, "mode": "anim", "ref": "c3uruguay", "note": "ch3 2D: Uruguay 2023 drought, salty tap water, bottled water"},
+  {"ch": 3, "from": 800.2, "to": 817.78, "mode": "anim", "ref": "c3protest", "note": "ch3 2D: protests; redesign to air cooling"},
+  {"ch": 3, "from": 824.31, "to": 842.5, "mode": "anim", "ref": "c3growth", "note": "ch3 2D: Chile air cooling; 2022 Microsoft +34%, Google +20%"},
+  {"ch": 3, "from": 842.5, "to": 848.8, "mode": "anim", "ref": "c3oneanswer", "note": "ch3 2D: how much water per answer? a confused gauge"},
+  {"ch": 3, "from": 848.8, "to": 861.5, "mode": "anim", "ref": "c3bottle", "note": "ch3 2D: UC Riverside, 10-50 questions = 500 ml"},
+  {"ch": 3, "from": 861.5, "to": 871.4, "mode": "anim", "ref": "c3teaspoon", "note": "ch3 2D: Altman, 1/15 teaspoon"},
+  {"ch": 3, "from": 871.4, "to": 884.6, "mode": "anim", "ref": "c3compare", "note": "ch3 2D: bottle vs drops; keep the question"},
+  {"ch": 3, "from": 884.6, "to": 894.9, "mode": "anim", "ref": "c3machines", "note": "ch3 2D: so far machines; water drains to dark"},
+  {"ch": 3, "from": 894.9, "to": 906.0, "mode": "anim", "ref": "c3people", "note": "ch3 2D: built by people, millions of them"}
+]}
