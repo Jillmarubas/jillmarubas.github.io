@@ -424,7 +424,7 @@ export const C3Loop: React.FC<AnimProps> = ({f, t0}) => {
   const back: [number, number][] = [[1690, 805], [1100, 805], [1100, 580]];
   return (
     <Bg c={P.navy}>
-      <Cam f={f} t0={t0} keys={[[t0, 560, 580, 1.12, 10, 4], [670.3, 560, 580, 1.12, 10, 4], [671.9, 820, 540, 1.0, 4, 2], [673.6, 1300, 540, 0.9, -6, 2], [676.3, 1760, 430, 0.95, -10, 4], [678.6, 1760, 380, 0.95, -6, 2], [680.4, 1180, 520, 0.68, 0, 0]]}>
+      <Cam f={f} t0={t0} keys={[[t0, 560, 580, 1.12, 10, 4], [670.3, 560, 580, 1.12, 10, 4], [671.9, 820, 540, 1.0, 4, 2], [673.6, 1300, 540, 0.9, -6, 2], [676.3, 1760, 430, 0.95, -10, 4], [678.6, 1760, 380, 0.95, -6, 2], [679.9, 1180, 520, 0.68, 0, 0]]}>
         <World w={2400} h={1200}>
           <rect x={-600} y={880} width={3600} height={500} fill="#0B1638" />
           {/* the data hall */}
@@ -469,7 +469,7 @@ export const C3Loop: React.FC<AnimProps> = ({f, t0}) => {
             );
           })}
         </World>
-        <WTag x={540} y={270} k={pop(f, w(670.43), 12)} bg={P.orange} color={P.ink} size={42}>
+        <WTag x={540} y={270} k={pop(f, w(670.43), 12) * (1 - ease(f, w(673.3), 8)) + ease(f, w(679.6), 10)} bg={P.orange} color={P.ink} size={42}>
           1 · Hot air from the servers
         </WTag>
         <WTag x={1080} y={665} k={pop(f, w(671.93), 12)} bg={P.white} size={42}>
@@ -481,10 +481,10 @@ export const C3Loop: React.FC<AnimProps> = ({f, t0}) => {
         <WTag x={1400} y={900} k={pop(f, w(674.6), 12)} bg={P.sky} size={36}>
           cooled water goes round again
         </WTag>
-        <WTag x={2020} y={270} k={pop(f, w(676.41), 12)} bg={P.white} size={42} anchor="l">
+        <WTag x={1800} y={150} k={pop(f, w(676.41), 12)} bg={P.white} size={42}>
           4 · some evaporates into the sky
         </WTag>
-        <WTag x={2020} y={370} k={pop(f, w(678.75), 12)} bg={P.red} color={P.white} size={42} anchor="l">
+        <WTag x={1800} y={250} k={pop(f, w(678.75), 12)} bg={P.red} color={P.white} size={42}>
           …and the heat leaves with it
         </WTag>
       </Cam>
@@ -543,7 +543,7 @@ export const C3Gone: React.FC<AnimProps> = ({f, t0}) => {
             <Cross x={1550} y={480} k={x2} />
           </g>
         </World>
-        <WTag x={1250} y={1060} k={pop(f, w(685.5), 12) * (1 - defs)} bg={P.white} size={36}>
+        <WTag x={1250} y={900} k={pop(f, w(685.5), 12) * (1 - defs)} bg={P.white} size={36}>
           back into the river?
         </WTag>
         <WTag x={1720} y={720} k={pop(f, w(687.0), 12) * (1 - defs)} bg={P.white} size={36}>
@@ -568,7 +568,9 @@ export const C3Gone: React.FC<AnimProps> = ({f, t0}) => {
           </div>
         </div>
       )}
-      <Label f={f} at={w(681.4)} title="The important part" bg={P.ink} color={P.white} />
+      <div style={{opacity: 1 - defs}}>
+        <Label f={f} at={w(681.4)} title="The important part" bg={P.ink} color={P.white} />
+      </div>
     </Bg>
   );
 };
@@ -658,13 +660,13 @@ export const C3Dalles: React.FC<AnimProps> = ({f, t0}) => {
         <World w={3600} h={2200}>
           <Dalles f={f} dam={dam} />
         </World>
-        <WTag x={DC_TOP[0]} y={DC_TOP[1]} k={pop(f, w(711.27), 12)} bg={P.ink} color={P.white} size={50}>
+        <WTag x={DC_TOP[0]} y={DC_TOP[1]} k={pop(f, w(711.27), 12)} bg={P.ink} color={P.white} size={60}>
           Google · here since the mid-2000s
         </WTag>
-        <WTag x={iso(1100, 125)[0]} y={iso(1100, 125)[1]} k={pop(f, w(715.6), 12)} bg={P.water} color={P.white} size={52}>
+        <WTag x={iso(1100, 125)[0]} y={iso(1100, 125)[1]} k={pop(f, w(715.6), 12)} bg={P.water} color={P.white} size={60}>
           Columbia River
         </WTag>
-        <WTag x={iso(203, 30, 40)[0]} y={iso(203, 30, 40)[1]} k={pop(f, w(714.6), 12)} bg={P.yellow} size={50}>
+        <WTag x={iso(203, 30, 40)[0]} y={iso(203, 30, 40)[1]} k={pop(f, w(714.6), 12)} bg={P.yellow} size={60}>
           hydropower dam
         </WTag>
       </Cam>
@@ -774,7 +776,7 @@ export const C3Court: React.FC<AnimProps> = ({f, t0}) => {
             <CityHall />
           </Put>
           {run > 0 && run < 1 && (
-            <g transform={`translate(${docX},${docY}) scale(0.6) rotate(${Math.sin(ph) * 20})`}>
+            <g transform={`translate(${docX},${docY}) scale(1.1) rotate(${Math.sin(ph) * 20})`}>
               <Doc title="FILING" />
             </g>
           )}
@@ -812,7 +814,7 @@ export const C3Gallons: React.FC<AnimProps> = ({f, t0}) => {
   const ans = ease(f, w(746.5), 8);
   return (
     <AbsoluteFill style={{background: `linear-gradient(${P.sky}, #9BD9FF)`, overflow: 'hidden'}}>
-      <Cam f={f} t0={t0} keys={[[t0, 1916, 980, 0.98, 0, 0], [743.0, 1960, 940, 1.02, -3, 3], [748.0, 2010, 900, 1.12, -6, 4]]}>
+      <Cam f={f} t0={t0} keys={[[t0, 1916, 980, 0.98, 0, 0], [743.0, 1960, 940, 1.02, -3, 3], [748.0, 1980, 930, 1.08, -4, 3]]}>
         <World w={3600} h={2200}>
           <Dalles f={f} glow={ease(f, w(744.6), 14)} />
         </World>
@@ -887,9 +889,10 @@ export const C3Quarter: React.FC<AnimProps> = ({f, t0}) => {
       <div style={{position: 'absolute', left: 1240, top: 150, opacity: ease(f, w(748.5), 8), transform: `scale(${pop(f, w(748.5), 12)})`, transformOrigin: '0 50%'}}>
         <Tag bg={P.orange} color={P.ink} size={44}>More than a quarter</Tag>
       </div>
-      <div style={{position: 'absolute', left: 1240, top: 260, opacity: ease(f, w(752.72), 8)}}>
+      <div style={{position: 'absolute', left: 1240, top: 260, opacity: ease(f, w(752.3), 8)}}>
         <Tag bg={P.yellow} color={P.ink} size={40}>Nearly tripled in five years</Tag>
       </div>
+      <div style={{position: 'absolute', inset: 0, opacity: ease(f, w(752.3), 8)}}>
       <Bars
         f={f}
         style={{left: 1160, top: 380}}
@@ -897,10 +900,11 @@ export const C3Quarter: React.FC<AnimProps> = ({f, t0}) => {
         h={360}
         barW={150}
         items={[
-          {label: '2016', value: 1, at: w(753.3), color: '#7C8AA8', text: '≈ ⅓'},
-          {label: '2021', value: 2.9, at: w(753.9), color: P.orange, text: '355M gal'},
+          {label: '2016', value: 1, at: w(752.4), color: '#7C8AA8', text: '≈ ⅓'},
+          {label: '2021', value: 2.9, at: w(752.9), color: P.orange, text: '355M gal'},
         ]}
       />
+      </div>
       <Note style={{position: 'absolute', left: 200, bottom: 50}} size={20}>
         Source · The Oregonian, Dec 2022 · 2016 bar drawn at about a third of 2021 (“nearly tripled”)
       </Note>
@@ -913,12 +917,12 @@ export const C3Know: React.FC<AnimProps> = ({f, t0}) => {
   const w = (a: number) => at(t0, a);
   return (
     <AbsoluteFill style={{background: `linear-gradient(${P.sky}, #9BD9FF)`, overflow: 'hidden'}}>
-      <Cam f={f} t0={t0} keys={[[t0, 1420, 800, 1.1, 6, 4], [756.5, 1440, 800, 1.1, 6, 4], [757.8, 1900, 940, 0.92, -4, 4], [759.0, 1900, 940, 0.92, -4, 4], [760.4, 1320, 720, 0.82, 4, 4], [762.7, 1340, 730, 0.86, 2, 4]]}>
+      <Cam f={f} t0={t0} keys={[[t0, 1420, 800, 1.1, 6, 4], [756.5, 1440, 800, 1.1, 6, 4], [757.8, 2000, 940, 0.92, -4, 4], [759.0, 2000, 940, 0.92, -4, 4], [760.4, 1320, 720, 0.82, 4, 4], [762.7, 1340, 730, 0.86, 2, 4]]}>
         <World w={3600} h={2200}>
           <Dalles f={f} people={1} farm={1} townFlow={1} glow={ease(f, w(756.62), 12)} ask={pop(f, w(760.22), 12)} />
         </World>
-        <WTag x={PIPE_MID[0] + 30} y={PIPE_MID[1] - 10} k={pop(f, w(756.7), 12)} bg={P.yellow} size={40} anchor="l">
-          ¼ of the town's water → one company
+        <WTag x={PIPE_MID[0] + 30} y={PIPE_MID[1] - 10} k={pop(f, w(756.7), 12) * (1 - ease(f, w(759.6), 8))} bg={P.yellow} size={40} anchor="l">
+          ¼ of the water → one company
         </WTag>
       </Cam>
       <Label f={f} at={w(755.3)} title="A quarter of a town's water" sub="homes, gardens, farms… and one company" bg={P.ink} color={P.white} />
@@ -1063,7 +1067,7 @@ export const C3Uruguay: React.FC<AnimProps> = ({f, t0}) => {
         <WTag x={700} y={330} k={pop(f, w(789.6), 12) * (1 - ease(f, w(793.0), 8))} bg={P.white} size={40}>
           reservoirs running low
         </WTag>
-        <WTag x={1820} y={250} k={pop(f, w(793.29), 12)} bg={P.white} size={40}>
+        <WTag x={1820} y={250} k={pop(f, w(793.29), 12) * (1 - ease(f, w(797.6), 8))} bg={P.white} size={40}>
           Montevideo, the capital
         </WTag>
         <WTag x={2010} y={820} k={pop(f, w(795.34), 12)} bg="#9DB59A" color={P.ink} size={40}>
@@ -1142,7 +1146,7 @@ export const C3Protest: React.FC<AnimProps> = ({f, t0}) => {
             ))}
           </g>
         </World>
-        <WTag x={2260} y={450} k={pop(f, w(802.43), 12)} bg={P.white} size={40}>
+        <WTag x={2260} y={450} k={pop(f, w(802.43), 12) * (1 - ease(f, w(814.8), 8))} bg={P.white} size={50}>
           Google's planned data centre
         </WTag>
         <WTag x={700} y={470} k={pop(f, w(804.6), 12) * (1 - ease(f, w(810.8), 8))} bg={P.yellow} size={52}>
@@ -1151,10 +1155,10 @@ export const C3Protest: React.FC<AnimProps> = ({f, t0}) => {
         <WTag x={1340} y={640} k={pop(f, w(809.48), 12) * (1 - ease(f, w(811.0), 8))} bg={P.white} size={50}>
           families buying water in bottles
         </WTag>
-        <WTag x={2780} y={410} k={pop(f, w(813.5), 12)} bg={P.sky} size={40}>
+        <WTag x={2790} y={520} k={pop(f, w(813.5), 12)} bg={P.sky} size={40}>
           redesign: air cooling
         </WTag>
-        <WTag x={2260} y={1010} k={pop(f, w(815.05), 12)} bg={P.white} size={40}>
+        <WTag x={2260} y={450} k={pop(f, w(815.05), 12)} bg={P.yellow} size={44}>
           far less water
         </WTag>
       </Cam>
@@ -1192,6 +1196,9 @@ export const C3Growth: React.FC<AnimProps> = ({f, t0}) => {
           </div>
         </AbsoluteFill>
       )}
+      <Pop f={f} at={w(828.46)} x={960} y={540} size={200} color={P.sky} until={w(832.2)}>
+        2022
+      </Pop>
       <Pop f={f} at={w(825.9)} x={960} y={540} size={90} until={w(828.1)}>
         Not just one company
       </Pop>
@@ -1329,10 +1336,10 @@ export const C3Teaspoon: React.FC<AnimProps> = ({f, t0}) => {
     <Bg c={P.plum}>
       <Cam f={f} t0={t0} keys={[[t0, 960, 540, 1.0, 6, 2], [869.4, 1080, 560, 1.12, -4, 2], [871.4, 1160, 560, 1.22, 0, 0]]}>
         <World>
-          <Put x={520} y={600} s={1.55} f={f} at={w(866.0)}>
+          <Put x={520} y={600} s={1.55} f={f} at={w(865.13)}>
             <Doc title="Blog · June 2025" />
           </Put>
-          <Put x={1240} y={560} s={1.5} f={f} at={w(868.4)}>
+          <Put x={1240} y={560} s={1.5} f={f} at={w(866.6)}>
             <Spoon slices={sl} fill={filled} f={f} />
           </Put>
         </World>
@@ -1468,7 +1475,7 @@ export const C3People: React.FC<AnimProps> = ({f, t0}) => {
   const shirts = [P.yellow, P.pink, P.teal, P.orange, P.sky, P.purple];
   return (
     <Bg c={P.night}>
-      <Cam f={f} t0={t0} keys={[[t0, 960, 540, 1.25, 0, 0], [899.3, 1000, 540, 1.25, 0, 0], [901.7, 960, 540, 0.42, 0, 0], [905.4, 960, 540, 0.38, 0, 0]]}>
+      <Cam f={f} t0={t0} keys={[[t0, 960, 540, 1.15, 0, 0], [899.3, 1000, 540, 1.2, 0, 0], [901.7, 1060, 540, 0.62, 0, 0], [905.4, 1060, 540, 0.56, 0, 0]]}>
         <World>
           {/* millions of people: rings spreading out from the first one */}
           {many > 0 &&
@@ -1487,7 +1494,7 @@ export const C3People: React.FC<AnimProps> = ({f, t0}) => {
             })}
           {/* the phone and the AI on it */}
           <g opacity={1 - many * 0.9}>
-            <Put x={830} y={540} s={1.6} f={f} at={w(895.53)}>
+            <Put x={880} y={540} s={1.8} f={f} at={w(895.53)}>
               <g>
                 <rect x={-45} y={-90} width={90} height={180} rx={16} fill={P.ink} />
                 <rect x={-38} y={-78} width={76} height={150} rx={8} fill="#F4F6FB" />
@@ -1497,8 +1504,8 @@ export const C3People: React.FC<AnimProps> = ({f, t0}) => {
               </g>
             </Put>
             {machines > 0 &&
-              [[520, 330], [1150, 300], [560, 780]].map(([x, y], i) => (
-                <g key={i} transform={`translate(${x},${y}) scale(${0.5 * machines})`} opacity={machines}>
+              [[580, 360], [1240, 380], [620, 760]].map(([x, y], i) => (
+                <g key={i} transform={`translate(${x},${y}) scale(${0.8 * machines})`} opacity={machines}>
                   {i === 0 ? <Chip f={f} on={1} c="#1D6B3A" /> : i === 1 ? <Rack f={f} busy={1} /> : <CoolingTower f={f} />}
                 </g>
               ))}

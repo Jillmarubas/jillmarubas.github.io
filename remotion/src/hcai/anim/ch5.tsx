@@ -599,7 +599,7 @@ export const C5Water: React.FC<AnimProps> = ({f, t0}) => {
             const side = i % 2 ? 1 : -1;
             return <circle key={i} cx={2000 + side * (170 + k * 90)} cy={560 + k * 60 - Math.sin(k * Math.PI) * 30} r={6} fill="#A8F4FF" opacity={1 - k} />;
           })}
-          <text x={2000} y={740} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={34} fill={P.white}>
+          <text x={1700} y={690} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={34} fill={P.white}>
             Rinse every wafer
           </text>
           {/* used water out */}
@@ -846,6 +846,7 @@ export const C5Trucks: React.FC<AnimProps> = ({f, t0}) => {
 export const C5Metals: React.FC<AnimProps> = ({f, t0}) => {
   const w = (a: number) => at(t0, a);
   const out = ease(f, w(1329.2), 14);
+  const mid = 1 - ease(f, w(1330.85), 8);
   const ga = pop(f, w(1331.12), 14);
   const ge = pop(f, w(1331.88), 14);
   const chunk = (cx: number, cy: number, k: number, c: string, seed: string) =>
@@ -872,7 +873,7 @@ export const C5Metals: React.FC<AnimProps> = ({f, t0}) => {
             <Put x={600} y={500} s={1.5} f={f} at={0}>
               <Barrel />
             </Put>
-            <Put x={1320} y={500} s={1.4} f={f} at={w(1327.8)}>
+            <Put x={1320} y={500} s={1.4} f={f} at={w(1327.8)} o={out > 0 ? 0 : 1}>
               <Chip c="#1D6B3A" f={f} on={1} />
             </Put>
             <text x={960} y={540} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={130} fill={P.white} opacity={ease(f, w(1327.84), 8)}>
@@ -881,6 +882,23 @@ export const C5Metals: React.FC<AnimProps> = ({f, t0}) => {
             <STag x={600} y={760} size={40} text="Oil, then" />
             <STag x={1320} y={760} size={40} text="Chips, now" bg={P.yellow} k={pop(f, w(1327.9), 10)} />
           </g>
+          {out > 0 && mid > 0 && (
+            <g opacity={mid}>
+              <Put x={lerp(1320, 960, out)} y={500} s={lerp(1.4, 1.7, out)}>
+                <Chip c="#1D6B3A" f={f} on={1} />
+              </Put>
+              {Array.from({length: 8}, (_, i) => {
+                const a = (i / 8) * Math.PI * 2 + f / 30;
+                const k = pop(f, w(1329.7) + i * 2, 10);
+                return k > 0 ? (
+                  <g key={i} transform={`translate(${960 + Math.cos(a) * 300},${500 + Math.sin(a) * 210}) scale(${k * 0.9})`}>
+                    <polygon points="-30,14 -22,-18 4,-30 30,-12 26,18 -4,26" fill={['#9FB3CF', '#8D93A3', COPPER, '#C9D2E6'][i % 4]} />
+                    <polygon points="-22,-18 4,-30 30,-12 2,-4" fill={P.white} opacity={0.45} />
+                  </g>
+                ) : null;
+              })}
+            </g>
+          )}
         </World>
       </Cam>
       <svg width={1920} height={1080} style={{position: 'absolute', inset: 0}}>
@@ -1172,7 +1190,7 @@ export const C5Honest: React.FC<AnimProps> = ({f, t0}) => {
             <STag key={name} x={1360} y={y} k={pop(f, w(a), 10)} size={32} anchor="start" text={name} bg={name.startsWith('AI') ? P.yellow : P.white} />
           ))}
           {[['More batteries', 1388.44], ['More devices', 1389.3], ['More power storage', 1390.44]].map(([t, a], i) => (
-            <STag key={t as string} x={900} y={790 + i * 62} k={pop(f, w(a as number), 10)} size={30} text={`+ ${t}`} bg={P.yellow} />
+            <STag key={t as string} x={900} y={745 + i * 58} k={pop(f, w(a as number), 10)} size={30} text={`+ ${t}`} bg={P.yellow} />
           ))}
           {/* the same chain */}
           {chain > 0 &&
@@ -1314,6 +1332,14 @@ export const C5Study: React.FC<AnimProps> = ({f, t0}) => {
         <World>
           {bar(950, lo, 1.2, 'Low estimate', '1.2 million t', '#3FA36B', 'l')}
           {bar(1400, hi, 5, 'High estimate', '5 million t', P.green, 'h')}
+          {[[950, lo], [1400, hi]].map(([x, k]) => (
+            <g key={x} opacity={ease(f, w(1405.0), 12) * (1 - Math.min(1, k * 4))}>
+              <rect x={x} y={base - 300} width={230} height={300} rx={8} fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth={5} strokeDasharray="18 14" strokeDashoffset={-f * 2} />
+              <text x={x + 115} y={base - 120} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={110} fill="rgba(255,255,255,0.45)">
+                ?
+              </text>
+            </g>
+          ))}
           <line x1={900} y1={base} x2={1700} y2={base} stroke={P.white} strokeWidth={4} />
         </World>
       </Cam>

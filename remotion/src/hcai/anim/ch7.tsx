@@ -1176,6 +1176,11 @@ export const C7Post: React.FC<AnimProps> = ({f, t0}) => {
         <World>
           <line x1={360} y1={230} x2={1560} y2={230} stroke="rgba(255,255,255,0.3)" strokeWidth={8} strokeLinecap="round" />
           <line x1={560} y1={230} x2={lerp(560, 1360, ease(f, w(1800.2), 40))} y2={230} stroke={P.yellow} strokeWidth={8} strokeLinecap="round" opacity={ease(f, w(1800.2), 6)} />
+          {f > w(1798.79) &&
+            [0, 1, 2].map((j) => {
+              const k = ((f - w(1798.79)) / 36 + j / 3) % 1;
+              return <circle key={j} cx={560} cy={230} r={24 + k * 80} fill="none" stroke={P.yellow} strokeWidth={6} opacity={(1 - k) * 0.8} />;
+            })}
           <circle cx={560} cy={230} r={20 * pop(f, w(1798.79), 12)} fill={P.yellow} />
           <circle cx={1360} cy={230} r={20 * pop(f, w(1803.13), 12)} fill={P.white} />
           <text x={560} y={300} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={36} fill={P.yellow} opacity={ease(f, w(1798.79), 10)}>
