@@ -49,8 +49,9 @@ elif d.get("postRenderData"): print("done")
 else: print("%s frames" % d.get("framesRendered"))' "$P")
     case "$S" in
       done)
-        # downloads can drop on long files; retry instead of aborting the whole run
-        for n in 1 2 3 4 5 6; do curl -sS --retry 4 -o "$OUTDIR/part$i.mp4" "${BASES[$i]}/out.mp4" && break; echo "part$i download retry $n"; sleep $((n * 5)); done
+        # downloads can drop on long files: start clean, then resume (-C -) from where a dropped one stopped
+        rm -f "$OUTDIR/part$i.mp4"
+        for n in 1 2 3 4 5 6 7 8; do curl -sS --retry 4 -C - -o "$OUTDIR/part$i.mp4" "${BASES[$i]}/out.mp4" && break; echo "part$i download resume $n"; sleep $((n * 3)); done
         DONE[$i]=1; left=$((left - 1)); echo "part$i saved" ;;
       fail*) echo "part$i $S"; exit 1 ;;
       *) echo "part$i $S" ;;
