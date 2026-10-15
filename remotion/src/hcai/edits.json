@@ -1,13 +1,85 @@
 {
   "_doc": "Scene replacements from review notes, applied by scripts/hcai_strip.py after it picks the scenes. Each edit removes the scenes and chat screens that start in [from, to) of chapter ch and puts one scene at `from` (seconds on the film's timeline); it runs until the next scene. mode anim = a 2D animation, anim3d = a 3D scene, image = a full-frame still (user-supplied, in public/hcai/user).",
   "edits": [
-    {"ch": 0, "from": 1.5, "to": 18.1, "mode": "anim", "ref": "laptop", "note": "0:01 MacBook with an LLM app; 0:04-0:14 informative 2D animation"},
-    {"ch": 0, "from": 24.13, "to": 28.6, "mode": "anim", "ref": "town", "note": "0:25 2D animation, saturated"},
-    {"ch": 0, "from": 28.63, "to": 32.7, "mode": "image", "ref": "newspaper", "note": "0:28 the user's newspaper image"},
-    {"ch": 0, "from": 32.7, "to": 36.3, "mode": "anim", "ref": "goliath", "note": "0:33 2D animation"},
-    {"ch": 0, "from": 36.36, "to": 40.1, "mode": "anim3d", "ref": "glass", "note": "0:36 in 3D"},
-    {"ch": 0, "from": 46.23, "to": 56.1, "mode": "anim", "ref": "coins", "note": "0:46 coins with the typography"},
-    {"ch": 0, "from": 72.44, "to": 83.4, "mode": "anim", "ref": "chain", "note": "1:21 2D animation"},
-    {"ch": 0, "from": 83.45, "to": 97.0, "mode": "anim3d", "ref": "thinker", "note": "1:23 and 1:28 3D person with question marks above the head"}
+    {
+      "ch": 0,
+      "from": 1.5,
+      "to": 18.1,
+      "mode": "anim",
+      "ref": "laptop",
+      "note": "0:01 MacBook with an LLM app; 0:04-0:14 informative 2D animation"
+    },
+    {
+      "ch": 0,
+      "from": 24.13,
+      "to": 28.6,
+      "mode": "anim",
+      "ref": "town",
+      "note": "0:25 2D animation, saturated"
+    },
+    {
+      "ch": 0,
+      "from": 28.63,
+      "to": 32.7,
+      "mode": "image",
+      "ref": "newspaper",
+      "note": "0:28 the user's newspaper image"
+    },
+    {
+      "ch": 0,
+      "from": 32.7,
+      "to": 36.3,
+      "mode": "anim",
+      "ref": "goliath",
+      "note": "0:33 2D animation"
+    },
+    {
+      "ch": 0,
+      "from": 36.36,
+      "to": 40.1,
+      "mode": "anim3d",
+      "ref": "glass",
+      "note": "0:36 in 3D"
+    },
+    {
+      "ch": 0,
+      "from": 46.23,
+      "to": 56.1,
+      "mode": "anim",
+      "ref": "coins",
+      "note": "0:46 coins with the typography"
+    },
+    {
+      "ch": 0,
+      "from": 72.44,
+      "to": 83.4,
+      "mode": "anim",
+      "ref": "chain",
+      "note": "1:21 2D animation"
+    },
+    {
+      "ch": 0,
+      "from": 83.45,
+      "to": 97.0,
+      "mode": "anim3d",
+      "ref": "thinker",
+      "note": "1:23 and 1:28 3D person with question marks above the head"
+    },
+    {
+      "ch": 1,
+      "from": 137.37,
+      "to": 146.6,
+      "mode": "image",
+      "ref": "gpu",
+      "note": "ch1 0:40 the user's GPU image (was a desktop CPU photo)"
+    },
+    {
+      "ch": 1,
+      "from": 337.87,
+      "to": 346.0,
+      "mode": "image",
+      "ref": "gpu2",
+      "note": "ch1 4:00 same GPU image, closer"
+    }
   ]
 }

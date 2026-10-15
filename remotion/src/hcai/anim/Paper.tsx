@@ -6,7 +6,7 @@ import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {AF, AnimProps, Note, P, Tag, at, ease, lerp, pop} from './akit';
 
 /** Pictures the user makes; null until the file is in public/hcai/user. */
-export const USER_IMAGES: Record<string, string | null> = {newspaper: 'hcai/user/newspaper.jpg', gpu: null};
+export const USER_IMAGES: Record<string, string | null> = {newspaper: 'hcai/user/newspaper.jpg', gpu: 'hcai/user/gpu.jpg', gpu2: 'hcai/user/gpu.jpg'};
 
 const Stamp: React.FC<{text: string; k: number; x: number; y: number; rot: number; color?: string; size?: number; solid?: boolean}> = ({text, k, x, y, rot, color = P.red, size = 84, solid}) =>
   k <= 0 ? null : (
@@ -111,3 +111,26 @@ export const Goliath: React.FC<AnimProps> = ({f, t0}) => {
     </AbsoluteFill>
   );
 };
+
+/** A full-frame picture the user made, with a slow camera move and an optional label at a spoken word. */
+const userShot = (key: string, opts: {from: number; to: number; ox: string; label?: string; sub?: string; word?: number}): React.FC<AnimProps> => {
+  const Shot: React.FC<AnimProps> = ({f, t0, dur}) => {
+    const src = USER_IMAGES[key];
+    const k = ease(f, 0, dur);
+    const o = opts.word ? ease(f, at(t0, opts.word), 10) : 0;
+    return (
+      <AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
+        {src && <Img src={staticFile(src)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${lerp(opts.from, opts.to, k)})`, transformOrigin: opts.ox}} />}
+        {opts.label && (
+          <div style={{position: 'absolute', left: 90, bottom: 90, opacity: o, transform: `translateY(${(1 - o) * 20}px)`}}>
+            <Tag bg={P.white} color={P.ink} size={50}>{opts.label}</Tag>
+            {opts.sub && <Note style={{marginTop: 14, marginLeft: 10}} size={24}>{opts.sub}</Note>}
+          </div>
+        )}
+      </AbsoluteFill>
+    );
+  };
+  return Shot;
+};
+export const Gpu = userShot('gpu', {from: 1.02, to: 1.12, ox: '52% 52%', label: 'GPU', sub: 'graphics processing unit', word: 139.1});
+export const Gpu2 = userShot('gpu2', {from: 1.25, to: 1.4, ox: '52% 50%'});

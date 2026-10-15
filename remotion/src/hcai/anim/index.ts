@@ -4,7 +4,7 @@ import {AnimProps} from './akit';
 import {Chain} from './Chain';
 import {Coins} from './Coins';
 import {Laptop} from './Laptop';
-import {Goliath, Newspaper} from './Paper';
+import {Goliath, Gpu, Gpu2, Newspaper} from './Paper';
 import {Glass, Thinker} from './Three3D';
 import {Town} from './Town';
 
@@ -17,4 +17,6 @@ export const ANIMS: Record<string, React.FC<AnimProps>> = {
   coins: Coins,
   chain: Chain,
   thinker: Thinker,
+  gpu: Gpu,
+  gpu2: Gpu2,
 };
