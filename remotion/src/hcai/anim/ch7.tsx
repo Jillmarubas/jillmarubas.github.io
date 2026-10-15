@@ -518,15 +518,15 @@ export const C7Stream: React.FC<AnimProps> = ({f, t0}) => {
           <Flow pts={[[910, 300], [1240, 300], [1240, 470]]} f={f} c={P.sky} n={4} r={8} speed={7} o={ease(f, w(1716.4), 10)} />
         </World>
         {/* the same energy as AI questions */}
-        <div style={{position: 'absolute', left: 1270, top: 500, display: 'grid', gridTemplateColumns: 'repeat(20, 22px)', gap: 5}}>
+        <div style={{position: 'absolute', left: 1270, top: 520, display: 'grid', gridTemplateColumns: 'repeat(20, 22px)', gap: 5}}>
           {Array.from({length: 240}, (_, i) => {
             const on = i < n && f >= w(1716.45) + i * 0.2;
             return <div key={i} style={{width: 22, height: 18, borderRadius: '8px 8px 8px 2px', background: on ? P.sky : 'transparent', transform: on ? `scale(${Math.min(1.1, pop(f, w(1716.45) + i * 0.2, 6))})` : undefined}} />;
           })}
         </div>
-        <div style={{position: 'absolute', left: 1270, top: 330, opacity: ease(f, w(1716.4), 8)}}>
+        <div style={{position: 'absolute', left: 1270, top: 300, opacity: ease(f, w(1716.4), 8)}}>
           <Counter f={f} start={w(1716.45)} dur={48} to={n} prefix="≈ " size={90} color={P.sky} />
-          <div style={{fontFamily: AF.head, fontWeight: 700, fontSize: 32, color: P.white, marginTop: 4}}>AI questions · 80 ÷ 0.34</div>
+          <div style={{fontFamily: AF.head, fontWeight: 700, fontSize: 32, color: P.white, marginTop: 4, whiteSpace: 'nowrap'}}>AI questions (80 ÷ 0.34)</div>
         </div>
       </Cam>
       <Caption f={f} at={w(1714.49)} source="IEA, George Kamiya (2020) · by some estimates">
@@ -620,27 +620,27 @@ export const C7DeepSeek: React.FC<AnimProps> = ({f, t0}) => {
           {/* B: the claim: a small stack next to a tall one */}
           <rect x={1920} y={840} width={1920} height={240} fill="#120D33" />
           {Array.from({length: 3}, (_, i) => (
-            <g key={i} transform={`translate(2400,${820 - i * 22}) scale(0.9)`} opacity={ease(f, w(1734.99) + i * 2, 6)}>
+            <g key={i} transform={`translate(2400,${800 - i * 30}) scale(1.3)`} opacity={ease(f, w(1734.99) + i * 2, 6)}>
               <Coin label="$" />
             </g>
           ))}
-          {Array.from({length: 26}, (_, i) => (
-            <g key={i} transform={`translate(3260,${820 - i * 22}) scale(0.9)`} opacity={ease(f, w(1736.27) + i * 0.8, 5)}>
+          {Array.from({length: 19}, (_, i) => (
+            <g key={i} transform={`translate(3260,${800 - i * 30}) scale(1.3)`} opacity={ease(f, w(1736.27) + i * 0.8, 5)}>
               <Coin label="$" />
             </g>
           ))}
-          <text x={2400} y={910} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={40} fill={P.yellow} opacity={ease(f, w(1735.0), 10)}>
+          <text x={2400} y={910} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={44} fill={P.yellow} opacity={ease(f, w(1735.0), 10)}>
             DeepSeek's claimed cost
           </text>
-          <text x={3260} y={910} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={40} fill={P.white} opacity={ease(f, w(1736.3), 10)}>
+          <text x={3260} y={910} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={44} fill={P.white} opacity={ease(f, w(1736.3), 10)}>
             US companies' spending
           </text>
           <g opacity={ease(f, w(1733.5), 10)}>
-            <rect x={2240} y={520} width={320} height={84} rx={42} fill={P.white} />
-            <text x={2400} y={574} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={34} fill={P.ink}>
+            <rect x={2220} y={480} width={360} height={90} rx={45} fill={P.white} />
+            <text x={2400} y={538} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={34} fill={P.ink}>
               a powerful model
             </text>
-            <path d="M2400 610 V720" stroke={P.white} strokeWidth={5} strokeDasharray="10 8" />
+            <path d="M2400 580 V700" stroke={P.white} strokeWidth={5} strokeDasharray="10 8" />
           </g>
         </World>
         <div style={{position: 'absolute', left: 960, top: 380, transform: `translate(-50%,-50%) scale(${pop(f, w(1729.87), 12)})`, opacity: 1 - phaseB, textAlign: 'center'}}>
@@ -1046,7 +1046,7 @@ const CoalChart: React.FC<{f: number; exp: number; act: number}> = ({f, exp, act
       <text x={CH.x1} y={CH.y0 + 50} textAnchor="end" fontFamily="Poppins" fontWeight={700} fontSize={32} fill={P.ink}>
         engines get more efficient →
       </text>
-      <text x={CH.x1} y={CH.y1 - 10} textAnchor="end" fontFamily="IBM Plex Mono" fontWeight={600} fontSize={26} fill="rgba(16,19,34,0.6)">
+      <text x={CH.x0 + 24} y={CH.y0 - 24} fontFamily="IBM Plex Mono" fontWeight={600} fontSize={28} fill="rgba(16,19,34,0.6)">
         ILLUSTRATION
       </text>
       <circle cx={CH.p0[0]} cy={CH.p0[1]} r={14} fill={P.ink} />
@@ -1061,7 +1061,7 @@ const CoalChart: React.FC<{f: number; exp: number; act: number}> = ({f, exp, act
       {act > 0 && (
         <g>
           <path d={ACTUAL} pathLength={1} stroke={P.red} strokeWidth={14} fill="none" strokeLinecap="round" strokeDasharray={`${act} 2`} />
-          <text x={1600} y={240} textAnchor="end" fontFamily="Poppins" fontWeight={800} fontSize={44} fill={P.red} opacity={clamp01(act * 3 - 2)}>
+          <text x={1660} y={455} textAnchor="end" fontFamily="Poppins" fontWeight={800} fontSize={44} fill={P.red} opacity={clamp01(act * 3 - 2)}>
             actual: more
           </text>
         </g>
@@ -1088,10 +1088,10 @@ export const C7Steam: React.FC<AnimProps> = ({f, t0}) => {
                 <Put x={x} y={560} s={1.2} f={f} at={w(1778.73) + i * 6}>
                   <SteamEngine f={f + i * 7} c={i ? '#2F5A8F' : '#7A3B2E'} />
                 </Put>
-                <Put x={x - 230} y={760} s={1}>
+                <Put x={x - 260} y={790} s={1.6}>
                   <Coal n={n} />
                 </Put>
-                <Flow pts={[[x - 230, 640], [x - 170, 600]]} f={f} c={P.ink} n={i ? 1 : 3} r={8} speed={3} line={false} />
+                <Flow pts={[[x - 250, 640], [x - 170, 600]]} f={f} c={P.ink} n={i ? 1 : 3} r={8} speed={3} line={false} />
                 <text x={x} y={870} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={44} fill={P.white} opacity={ease(f, w(1779.2) + i * 6, 10)}>
                   {i ? 'Newer engine' : 'Older engine'}
                 </text>
@@ -1158,7 +1158,7 @@ export const C7More: React.FC<AnimProps> = ({f, t0}) => {
       <Pop f={f} at={w(1786.77)} x={960} y={150} size={100} color={P.red} until={w(1788.6)}>
         It used more.
       </Pop>
-      <Pop f={f} at={w(1793.97)} x={960} y={130} size={96} color={P.ink}>
+      <Pop f={f} at={w(1793.97)} x={960} y={110} size={96} color={P.ink}>
         <span style={{background: P.yellow, borderRadius: 30, padding: '8px 36px'}}>The Jevons paradox</span>
       </Pop>
     </Bg>
@@ -1185,7 +1185,7 @@ export const C7Post: React.FC<AnimProps> = ({f, t0}) => {
             a post online
           </text>
         </World>
-        <div style={{position: 'absolute', left: 460, top: 400, width: 1000, borderRadius: 34, background: P.white, padding: '34px 44px', boxSizing: 'border-box', opacity: ease(f, w(1802.0), 10), transform: `translateY(${(1 - ease(f, w(1802.0), 14)) * 40}px)`, boxShadow: '0 30px 70px rgba(0,0,0,0.4)'}}>
+        <div style={{position: 'absolute', left: 460, top: 400, width: 1000, borderRadius: 34, background: P.white, padding: '34px 44px', boxSizing: 'border-box', opacity: ease(f, w(1800.19), 10), transform: `translateY(${(1 - ease(f, w(1800.19), 14)) * 40}px)`, boxShadow: '0 30px 70px rgba(0,0,0,0.4)'}}>
           <div style={{display: 'flex', alignItems: 'center', gap: 26}}>
             <svg width={100} height={100} viewBox="0 0 100 100">
               <circle cx={50} cy={50} r={50} fill="#D5DBE8" />
@@ -1193,7 +1193,7 @@ export const C7Post: React.FC<AnimProps> = ({f, t0}) => {
               <path d="M18 86 C24 62 76 62 82 86 Z" fill="#9AA6BD" />
             </svg>
             <div>
-              <div style={{fontFamily: AF.head, fontWeight: 800, fontSize: 46, color: P.ink, lineHeight: 1.1}}>Satya Nadella</div>
+              <div style={{fontFamily: AF.head, fontWeight: 800, fontSize: 46, color: P.ink, lineHeight: 1.1, opacity: ease(f, w(1802.11), 10)}}>Satya Nadella</div>
               <div style={{fontFamily: AF.head, fontWeight: 600, fontSize: 32, color: '#5B6B8C', opacity: ease(f, w(1800.19), 10)}}>CEO, Microsoft</div>
             </div>
           </div>
