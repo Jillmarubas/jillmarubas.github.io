@@ -1481,10 +1481,10 @@ export const C3People: React.FC<AnimProps> = ({f, t0}) => {
         <World>
           {/* millions of people: rings spreading out from the first one */}
           {many > 0 &&
-            Array.from({length: 74 * 32}, (_, i) => {
-              const c = (i % 74) - 37, r = Math.floor(i / 74) - 16;
+            Array.from({length: 44 * 20}, (_, i) => {
+              const c = (i % 44) - 22, r = Math.floor(i / 44) - 10;
               const x = 1110 + c * 92, y = 560 + r * 118;
-              const d = Math.hypot(c, r * 1.3) / 40;
+              const d = Math.hypot(c, r * 1.3) / 24;
               if (d > many || (c === 0 && r === 0)) return null;
               const fill = shirts[i % shirts.length];
               return (
