@@ -18,6 +18,8 @@ SEG = json.load(open(os.path.join(O, 'vo_segments.json')))
 # --strip: the film-strip edition (src/hcai/strip.json) → out/hcai/mix_strip.wav
 STRIP = json.load(open(os.path.join(ROOT, 'src/hcai/strip.json'))) if '--strip' in sys.argv else None
 OUT = 'mix_strip.wav' if STRIP else 'mix.wav'
+# --no-sfx: voice and music only (the user is making their own effects; their files go in out/hcai/sfx_user/)
+NO_SFX = '--no-sfx' in sys.argv
 N = int((T['duration'] + 1) * SR)
 db = lambda x: 10 ** (x / 20)
 _cache = {}
@@ -144,6 +146,7 @@ put('sting_title', [l for l in T['lines'] if l['ch'] == 0][-1]['end'] + 0.4, gai
 # the cursor: one click at the very start, one at the very end
 put('key', 0.6)
 
+if NO_SFX: fx[:] = 0
 mix = vo + mus + fx
 peak = np.abs(mix).max()
 print('pre-master peak', round(20 * np.log10(peak), 1), 'dBFS')
