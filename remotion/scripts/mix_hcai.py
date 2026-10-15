@@ -7,7 +7,7 @@
   and ambience beds for the hot aisle, the turbines, the empty office and the night hum.
 - Master: two-pass loudnorm to -14 LUFS, -1 dBTP (YouTube).
 """
-import json, os, subprocess
+import json, os, subprocess, sys
 import numpy as np
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 O = os.path.join(ROOT, 'out/hcai')
@@ -15,6 +15,9 @@ SR = 48000
 T = json.load(open(os.path.join(ROOT, 'src/hcai/timing.json')))
 B = json.load(open(os.path.join(ROOT, 'src/hcai/beats.json')))
 SEG = json.load(open(os.path.join(O, 'vo_segments.json')))
+# --strip: the film-strip edition (src/hcai/strip.json) → out/hcai/mix_strip.wav
+STRIP = json.load(open(os.path.join(ROOT, 'src/hcai/strip.json'))) if '--strip' in sys.argv else None
+OUT = 'mix_strip.wav' if STRIP else 'mix.wav'
 N = int((T['duration'] + 1) * SR)
 db = lambda x: 10 ** (x / 20)
 _cache = {}
@@ -129,9 +132,13 @@ for b in B:
         put(name, b['t'] - 0.3, d)
     else:
         put(name, b['t'] - (0.05 if name in ('key', 'enter', 'gavel', 'stamp') else 0.15))
-# a soft swoosh on every scene clear, and on every chapter card
-for b in B:
-    if b['kind'] == 'clear': put('swoosh', b['t'] + 0.05)
+# a soft swoosh on every scene clear (film-strip edition: on every slide of the strip), and on every chapter card
+if STRIP:
+    for prev, f in zip(STRIP['frames'], STRIP['frames'][1:]):
+        if f['ch'] == prev['ch']: put('swoosh', f['at'] - 0.25, gain_db=-21)
+else:
+    for b in B:
+        if b['kind'] == 'clear': put('swoosh', b['t'] + 0.05)
 for ci, ch in enumerate(T['chapters'][1:], 1): put('swoosh', ch['start'] + 0.1, gain_db=-12)
 put('sting_title', [l for l in T['lines'] if l['ch'] == 0][-1]['end'] + 0.4, gain_db=-3)
 # the cursor: one click at the very start, one at the very end
@@ -140,7 +147,7 @@ put('key', 0.6)
 mix = vo + mus + fx
 peak = np.abs(mix).max()
 print('pre-master peak', round(20 * np.log10(peak), 1), 'dBFS')
-raw = os.path.join(O, 'mix_raw.wav')
+raw = os.path.join(O, OUT.replace('.wav', '_raw.wav'))
 pcm = (np.clip(mix / max(1.0, peak), -1, 1) * 32767).astype(np.int16)
 import wave
 with wave.open(raw, 'wb') as w:
@@ -152,7 +159,7 @@ print('music under voice', round(20 * np.log10(m_rms / vo_level), 1), 'dB re voi
 r = subprocess.run(['ffmpeg', '-hide_banner', '-i', raw, '-af', 'alimiter=limit=0.84:attack=3:release=60:level=disabled,loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'], capture_output=True, text=True).stderr
 js = json.loads(r[r.rfind('{'):r.rfind('}') + 1])
 af = f"alimiter=limit=0.84:attack=3:release=60:level=disabled,loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={js['input_i']}:measured_TP={js['input_tp']}:measured_LRA={js['input_lra']}:measured_thresh={js['input_thresh']}:offset={js['target_offset']}:linear=true"
-subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', raw, '-af', af, '-ar', str(SR), os.path.join(O, 'mix.wav')], check=True)
-r = subprocess.run(['ffmpeg', '-hide_banner', '-i', os.path.join(O, 'mix.wav'), '-af', 'loudnorm=I=-14:TP=-1:print_format=json', '-f', 'null', '-'], capture_output=True, text=True).stderr
+subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', raw, '-af', af, '-ar', str(SR), os.path.join(O, OUT)], check=True)
+r = subprocess.run(['ffmpeg', '-hide_banner', '-i', os.path.join(O, OUT), '-af', 'loudnorm=I=-14:TP=-1:print_format=json', '-f', 'null', '-'], capture_output=True, text=True).stderr
 js = json.loads(r[r.rfind('{'):r.rfind('}') + 1])
 print('master', js['input_i'], 'LUFS', js['input_tp'], 'dBTP')

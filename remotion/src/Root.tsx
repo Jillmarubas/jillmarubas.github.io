@@ -24,6 +24,7 @@ import {CCThumbA, CCThumbB, CCThumbC, CCThumbD} from './cc1003/Thumbnail';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 import {HC_CHAPTERS, HC_DURATION, HCFilm, HCPart} from './hcai/Film';
 import {HCWall, HCWallPart} from './hcai/Wall';
+import {HCStrip, HCStripPart} from './hcai/Strip';
 
 export const Root: React.FC = () => (
   <>
@@ -61,6 +62,10 @@ export const Root: React.FC = () => (
     <Composition id="BgC" component={BgFizz} durationInFrames={BG_DURATION} fps={30} width={1080} height={1920} />
     {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
       <Composition key={`hco${i}`} id={`HiddenCostAI-wall-overview${i}`} component={HCWall} durationInFrames={1} fps={24} width={1920} height={1080} defaultProps={{offset: 0, overview: i}} />
+    ))}
+    <Composition id="HiddenCostAI-strip" component={HCStrip} durationInFrames={HC_DURATION} fps={24} width={1920} height={1080} defaultProps={{offset: 0}} />
+    {HC_CHAPTERS.map((c, i) => (
+      <Composition key={`hcs${i}`} id={`HiddenCostAI-strip-part${i}`} component={HCStripPart} durationInFrames={c.to - c.from} fps={24} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
     <Composition id="HiddenCostAI-wall" component={HCWall} durationInFrames={HC_DURATION} fps={24} width={1920} height={1080} defaultProps={{offset: 0}} />
     {HC_CHAPTERS.map((c, i) => (
