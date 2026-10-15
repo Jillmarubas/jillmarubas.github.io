@@ -1,0 +1,2050 @@
+{
+"cloud_puff": {
+"id": "cloud_puff",
+"type": "p",
+"src": "hcai/img/cloud_puff.jpg",
+"w": 1024,
+"h": 577,
+"credit": "Image Catalog · CC0 1.0 · Flickr"
+},
+"dc_roof": {
+"id": "dc_roof",
+"type": "p",
+"src": "hcai/img/dc_roof.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Rsparks3 · CC0 · Wikimedia Commons"
+},
+"newspaper": {
+"id": "newspaper",
+"type": "c",
+"src": "hcai/cut/newspaper.webp",
+"w": 1200,
+"h": 637,
+"credit": "Bernerlover · CC BY 4.0 · Wikimedia Commons"
+},
+"dalles": {
+"id": "dalles",
+"type": "p",
+"src": "hcai/img/dalles.jpg",
+"w": 1920,
+"h": 1438,
+"credit": "Sam Beebe · CC BY 2.0 · Wikimedia Commons"
+},
+"google": {
+"id": "google",
+"type": "l",
+"src": "hcai/logo/google.png",
+"w": 1270,
+"h": 418,
+"credit": ""
+},
+"dalles_cityhall": {
+"id": "dalles_cityhall",
+"type": "p",
+"src": "hcai/img/dalles_cityhall.jpg",
+"w": 1920,
+"h": 1282,
+"credit": "Gary Halvorson, Oregon State Archives · CC BY 4.0 · Wikimedia Commons"
+},
+"googleplex": {
+"id": "googleplex",
+"type": "p",
+"src": "hcai/img/googleplex.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "David Nagle · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"water_glass": {
+"id": "water_glass",
+"type": "c",
+"src": "hcai/cut/water_glass.webp",
+"w": 341,
+"h": 566,
+"credit": "StuffNThings · CC BY 2.0 · Flickr"
+},
+"laptop_dark": {
+"id": "laptop_dark",
+"type": "p",
+"src": "hcai/img/laptop_dark.jpg",
+"w": 1920,
+"h": 1282,
+"credit": "Shixart1985 · CC BY 2.0 · Wikimedia Commons"
+},
+"tmi": {
+"id": "tmi",
+"type": "p",
+"src": "hcai/img/tmi.jpg",
+"w": 1920,
+"h": 1279,
+"credit": "Constellation Energy · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"cooling_tower_cut": {
+"id": "cooling_tower_cut",
+"type": "p",
+"src": "hcai/img/cooling_tower_cut.jpg",
+"w": 768,
+"h": 1024,
+"credit": "benuski · CC BY-SA 2.0 · Flickr"
+},
+"pylon": {
+"id": "pylon",
+"type": "c",
+"src": "hcai/cut/pylon.webp",
+"w": 768,
+"h": 1024,
+"credit": "lydia_shiningbrightly · CC BY 2.0 · Flickr"
+},
+"question_mark": {
+"id": "question_mark",
+"type": "c",
+"src": "hcai/cut/question_mark.webp",
+"w": 418,
+"h": 495,
+"credit": "ToGa Wanderings · CC BY 2.0 · Flickr"
+},
+"billboard": {
+"id": "billboard",
+"type": "c",
+"src": "hcai/cut/billboard.webp",
+"w": 1184,
+"h": 591,
+"credit": "Captain Galaxy · CC BY 4.0 · Wikimedia Commons"
+},
+"dc_ashburn": {
+"id": "dc_ashburn",
+"type": "p",
+"src": "hcai/img/dc_ashburn.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Vahurzpu · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"steel_beam": {
+"id": "steel_beam",
+"type": "c",
+"src": "hcai/cut/steel_beam.webp",
+"w": 1200,
+"h": 702,
+"credit": "W.carter · CC0 · Wikimedia Commons"
+},
+"glass_pane": {
+"id": "glass_pane",
+"type": "p",
+"src": "hcai/img/glass_pane.jpg",
+"w": 1024,
+"h": 768,
+"credit": "jasoneppink · CC BY 2.0 · Flickr"
+},
+"smartphone": {
+"id": "smartphone",
+"type": "c",
+"src": "hcai/cut/smartphone.webp",
+"w": 1115,
+"h": 983,
+"credit": "Skitterphoto · CC0 · Wikimedia Commons"
+},
+"fiber_glow": {
+"id": "fiber_glow",
+"type": "c",
+"src": "hcai/cut/fiber_glow.webp",
+"w": 517,
+"h": 642,
+"credit": "Groman123 · CC BY-SA 2.0 · Flickr"
+},
+"street_trench": {
+"id": "street_trench",
+"type": "p",
+"src": "hcai/img/street_trench.jpg",
+"w": 1920,
+"h": 1536,
+"credit": "Tessa Bury · CC BY 4.0 · Wikimedia Commons"
+},
+"highway": {
+"id": "highway",
+"type": "p",
+"src": "hcai/img/highway.jpg",
+"w": 1920,
+"h": 1284,
+"credit": "U.S. Fish and Wildlife Service · Public domain · Wikimedia Commons"
+},
+"server_room": {
+"id": "server_room",
+"type": "p",
+"src": "hcai/img/server_room.jpg",
+"w": 1920,
+"h": 1120,
+"credit": "The National Archives (UK) · CC BY 3.0 · Wikimedia Commons"
+},
+"chip": {
+"id": "chip",
+"type": "c",
+"src": "hcai/cut/chip.webp",
+"w": 1006,
+"h": 1200,
+"credit": "Jacek Halicki · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"gpu_card": {
+"id": "gpu_card",
+"type": "c",
+"src": "hcai/cut/gpu_card.webp",
+"w": 1200,
+"h": 665,
+"credit": "Jacek Halicki · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"arcade": {
+"id": "arcade",
+"type": "p",
+"src": "hcai/img/arcade.jpg",
+"w": 1024,
+"h": 806,
+"credit": "Sergiy Galyonkin · CC BY-SA 2.0 · Flickr"
+},
+"explosion": {
+"id": "explosion",
+"type": "c",
+"src": "hcai/cut/explosion.webp",
+"w": 664,
+"h": 796,
+"credit": "Freidwall · CC BY 2.0 · Flickr"
+},
+"water_ripple": {
+"id": "water_ripple",
+"type": "p",
+"src": "hcai/img/water_ripple.jpg",
+"w": 1024,
+"h": 623,
+"credit": "Alan Cleaver · CC BY 2.0 · Flickr"
+},
+"lab": {
+"id": "lab",
+"type": "p",
+"src": "hcai/img/lab.jpg",
+"w": 1024,
+"h": 683,
+"credit": "U.S. Army Combat Capabilities Developmen · CC BY 2.0 · Flickr"
+},
+"abacus": {
+"id": "abacus",
+"type": "c",
+"src": "hcai/cut/abacus.webp",
+"w": 1141,
+"h": 948,
+"credit": "Deinodactyla · CC0 · Wikimedia Commons"
+},
+"math_board": {
+"id": "math_board",
+"type": "p",
+"src": "hcai/img/math_board.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Roman Mager roman_lazygeek · CC0 · Wikimedia Commons"
+},
+"nvidia": {
+"id": "nvidia",
+"type": "l",
+"src": "hcai/logo/nvidia.png",
+"w": 1268,
+"h": 235,
+"credit": ""
+},
+"h100": {
+"id": "h100",
+"type": "c",
+"src": "hcai/cut/h100.webp",
+"w": 1200,
+"h": 727,
+"credit": "极客湾Geekerwan · CC BY 3.0 · Wikimedia Commons"
+},
+"space_heater": {
+"id": "space_heater",
+"type": "c",
+"src": "hcai/cut/space_heater.webp",
+"w": 934,
+"h": 1068,
+"credit": "Tony Webster from Minneapolis, Minnesota · CC BY 2.0 · Wikimedia Commons"
+},
+"server_aisle": {
+"id": "server_aisle",
+"type": "p",
+"src": "hcai/img/server_aisle.jpg",
+"w": 250,
+"h": 167,
+"credit": "NOIRLab/NSF/AURA/T. Slovinský · CC BY 4.0 · Wikimedia Commons"
+},
+"hot_aisle": {
+"id": "hot_aisle",
+"type": "p",
+"src": "hcai/img/hot_aisle.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Christopher Bowns · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"oven": {
+"id": "oven",
+"type": "c",
+"src": "hcai/cut/oven.webp",
+"w": 1200,
+"h": 773,
+"credit": "Infrogmation · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"fan": {
+"id": "fan",
+"type": "c",
+"src": "hcai/cut/fan.webp",
+"w": 662,
+"h": 1200,
+"credit": "Mk2010 · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"raised_floor": {
+"id": "raised_floor",
+"type": "p",
+"src": "hcai/img/raised_floor.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Public domain · Wikimedia Commons"
+},
+"speaker_cone": {
+"id": "speaker_cone",
+"type": "c",
+"src": "hcai/cut/speaker_cone.webp",
+"w": 706,
+"h": 1200,
+"credit": "Jacek Halicki · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"loudoun_dc": {
+"id": "loudoun_dc",
+"type": "p",
+"src": "hcai/img/loudoun_dc.jpg",
+"w": 1920,
+"h": 1225,
+"credit": "Theodore Christopher · CC0 · Wikimedia Commons"
+},
+"mall": {
+"id": "mall",
+"type": "p",
+"src": "hcai/img/mall.jpg",
+"w": 1920,
+"h": 1080,
+"credit": "Mike Kalasnik · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"suburb": {
+"id": "suburb",
+"type": "p",
+"src": "hcai/img/suburb.jpg",
+"w": 1920,
+"h": 1277,
+"credit": "James H Dunning · CC BY 2.5 · Wikimedia Commons"
+},
+"farmland": {
+"id": "farmland",
+"type": "p",
+"src": "hcai/img/farmland.jpg",
+"w": 1920,
+"h": 1274,
+"credit": "Jerrye & Roy Klotz, MD · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"router": {
+"id": "router",
+"type": "c",
+"src": "hcai/cut/router.webp",
+"w": 1200,
+"h": 901,
+"credit": "Solijon Solayev · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"books": {
+"id": "books",
+"type": "c",
+"src": "hcai/cut/books.webp",
+"w": 1200,
+"h": 1164,
+"credit": "Ch. Maderthoner · CC0 · Wikimedia Commons"
+},
+"code_screen": {
+"id": "code_screen",
+"type": "p",
+"src": "hcai/img/code_screen.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Sai Kiran Anagani _imkiran · CC0 · Wikimedia Commons"
+},
+"calendar": {
+"id": "calendar",
+"type": "c",
+"src": "hcai/cut/calendar.webp",
+"w": 1200,
+"h": 1050,
+"credit": "Claudio Elias · Public domain · Wikimedia Commons"
+},
+"factory": {
+"id": "factory",
+"type": "p",
+"src": "hcai/img/factory.jpg",
+"w": 1920,
+"h": 1502,
+"credit": "Unknown · Public domain · Wikimedia Commons"
+},
+"money_stack": {
+"id": "money_stack",
+"type": "c",
+"src": "hcai/cut/money_stack.webp",
+"w": 1200,
+"h": 816,
+"credit": "Andrew Magill from Boulder, USA · CC BY 2.0 · Wikimedia Commons"
+},
+"assembly_line": {
+"id": "assembly_line",
+"type": "p",
+"src": "hcai/img/assembly_line.jpg",
+"w": 1920,
+"h": 1181,
+"credit": "Steve Jurvetson from Los Altos, USA · CC BY 2.0 · Wikimedia Commons"
+},
+"student": {
+"id": "student",
+"type": "c",
+"src": "hcai/cut/student.webp",
+"w": 1002,
+"h": 1200,
+"credit": "Roby Pernawan · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"programmer_laptop": {
+"id": "programmer_laptop",
+"type": "p",
+"src": "hcai/img/programmer_laptop.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "User:Kowalski7cc · CC0 · Wikimedia Commons"
+},
+"dinner_plate": {
+"id": "dinner_plate",
+"type": "c",
+"src": "hcai/cut/dinner_plate.webp",
+"w": 1200,
+"h": 836,
+"credit": "Acabashi · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"photo_frame": {
+"id": "photo_frame",
+"type": "p",
+"src": "hcai/img/photo_frame.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Robert-brook · CC0 · Wikimedia Commons"
+},
+"film_reel": {
+"id": "film_reel",
+"type": "c",
+"src": "hcai/cut/film_reel.webp",
+"w": 961,
+"h": 1200,
+"credit": "CEphoto, Uwe Aranas · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"crane": {
+"id": "crane",
+"type": "p",
+"src": "hcai/img/crane.jpg",
+"w": 1369,
+"h": 1920,
+"credit": "August Geyler · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"openai": {
+"id": "openai",
+"type": "l",
+"src": "hcai/logo/openai.png",
+"w": 1261,
+"h": 348,
+"credit": ""
+},
+"softbank": {
+"id": "softbank",
+"type": "l",
+"src": "hcai/logo/softbank.png",
+"w": 1270,
+"h": 188,
+"credit": ""
+},
+"oracle": {
+"id": "oracle",
+"type": "l",
+"src": "hcai/logo/oracle.png",
+"w": 1280,
+"h": 469,
+"credit": ""
+},
+"abilene": {
+"id": "abilene",
+"type": "p",
+"src": "hcai/img/abilene.jpg",
+"w": 1920,
+"h": 867,
+"credit": "Flofor15 · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"power_plug": {
+"id": "power_plug",
+"type": "c",
+"src": "hcai/cut/power_plug.webp",
+"w": 730,
+"h": 820,
+"credit": "Guam · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"lightning": {
+"id": "lightning",
+"type": "p",
+"src": "hcai/img/lightning.jpg",
+"w": 1920,
+"h": 1074,
+"credit": "Hansueli Krapf · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"iea": {
+"id": "iea",
+"type": "l",
+"src": "hcai/logo/iea.png",
+"w": 1252,
+"h": 483,
+"credit": ""
+},
+"tokyo": {
+"id": "tokyo",
+"type": "p",
+"src": "hcai/img/tokyo.jpg",
+"w": 1920,
+"h": 1080,
+"credit": "David Kernan · CC BY 4.0 · Wikimedia Commons"
+},
+"dublin_night": {
+"id": "dublin_night",
+"type": "p",
+"src": "hcai/img/dublin_night.jpg",
+"w": 1920,
+"h": 1278,
+"credit": "William Murphy from Dublin, Ireland · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"dublin_homes": {
+"id": "dublin_homes",
+"type": "p",
+"src": "hcai/img/dublin_homes.jpg",
+"w": 1920,
+"h": 1282,
+"credit": "William Murphy · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"power_plant": {
+"id": "power_plant",
+"type": "p",
+"src": "hcai/img/power_plant.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Radomianin · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"moon": {
+"id": "moon",
+"type": "c",
+"src": "hcai/cut/moon.webp",
+"w": 1200,
+"h": 1200,
+"credit": "Gregory H. Revera · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"alarm_clock": {
+"id": "alarm_clock",
+"type": "c",
+"src": "hcai/cut/alarm_clock.webp",
+"w": 782,
+"h": 1200,
+"credit": "CC BY 4.0 · Wikimedia Commons"
+},
+"leaf": {
+"id": "leaf",
+"type": "c",
+"src": "hcai/cut/leaf.webp",
+"w": 1122,
+"h": 1200,
+"credit": "Krzysztof Golik · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"solar": {
+"id": "solar",
+"type": "p",
+"src": "hcai/img/solar.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Grendelkhan · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"wind_farm": {
+"id": "wind_farm",
+"type": "p",
+"src": "hcai/img/wind_farm.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Crisco 1492 · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"tmi_1979": {
+"id": "tmi_1979",
+"type": "p",
+"src": "hcai/img/tmi_1979.jpg",
+"w": 1920,
+"h": 1843,
+"credit": "United States Department of Energy · Public domain · Wikimedia Commons"
+},
+"tmi_control": {
+"id": "tmi_control",
+"type": "p",
+"src": "hcai/img/tmi_control.jpg",
+"w": 1920,
+"h": 1080,
+"credit": "Nuclear Regulatory Commission from US · CC BY 2.0 · Wikimedia Commons"
+},
+"tmi_carter": {
+"id": "tmi_carter",
+"type": "p",
+"src": "hcai/img/tmi_carter.jpg",
+"w": 250,
+"h": 168,
+"credit": "Unknown authorUnknown author or not prov · Public domain · Wikimedia Commons"
+},
+"tmi_quiet": {
+"id": "tmi_quiet",
+"type": "p",
+"src": "hcai/img/tmi_quiet.jpg",
+"w": 1920,
+"h": 1411,
+"credit": "Z22 · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"amazon": {
+"id": "amazon",
+"type": "l",
+"src": "hcai/logo/amazon.png",
+"w": 1280,
+"h": 386,
+"credit": ""
+},
+"reactor_core": {
+"id": "reactor_core",
+"type": "p",
+"src": "hcai/img/reactor_core.jpg",
+"w": 1440,
+"h": 1920,
+"credit": "Sashaaac · CC BY 4.0 · Wikimedia Commons"
+},
+"stopwatch": {
+"id": "stopwatch",
+"type": "c",
+"src": "hcai/cut/stopwatch.webp",
+"w": 971,
+"h": 1200,
+"credit": "Stefan (Diskussion). Original uploader w · Public domain · Wikimedia Commons"
+},
+"supercomputer": {
+"id": "supercomputer",
+"type": "p",
+"src": "hcai/img/supercomputer.jpg",
+"w": 1920,
+"h": 1152,
+"credit": "Oleg Alexandrov · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"smokestack": {
+"id": "smokestack",
+"type": "p",
+"src": "hcai/img/smokestack.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Vasily Iakovlev · CC BY 4.0 · Wikimedia Commons"
+},
+"refinery": {
+"id": "refinery",
+"type": "p",
+"src": "hcai/img/refinery.jpg",
+"w": 1920,
+"h": 1425,
+"credit": "Walter Siegmund · CC BY 2.5 · Wikimedia Commons"
+},
+"steel_mill": {
+"id": "steel_mill",
+"type": "p",
+"src": "hcai/img/steel_mill.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Marek Ślusarczyk (Tupungato) Photo galle · CC BY 3.0 · Wikimedia Commons"
+},
+"semi_truck": {
+"id": "semi_truck",
+"type": "c",
+"src": "hcai/cut/semi_truck.webp",
+"w": 1200,
+"h": 682,
+"credit": ".mw-parser-output .commons-creator-table · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"lungs": {
+"id": "lungs",
+"type": "c",
+"src": "hcai/cut/lungs.webp",
+"w": 1184,
+"h": 1181,
+"credit": "Edeh Sophia · CC0 · Wikimedia Commons"
+},
+"child_inhaler": {
+"id": "child_inhaler",
+"type": "c",
+"src": "hcai/cut/child_inhaler.webp",
+"w": 1200,
+"h": 934,
+"credit": "The U.S. Food and Drug Administration · Public domain · Wikimedia Commons"
+},
+"gavel": {
+"id": "gavel",
+"type": "c",
+"src": "hcai/cut/gavel.webp",
+"w": 1200,
+"h": 833,
+"credit": "Blogtrepreneur · CC BY 2.0 · Wikimedia Commons"
+},
+"sun": {
+"id": "sun",
+"type": "c",
+"src": "hcai/cut/sun.webp",
+"w": 1200,
+"h": 1196,
+"credit": "NASA/SDO (AIA) · Public domain · Wikimedia Commons"
+},
+"sweat": {
+"id": "sweat",
+"type": "c",
+"src": "hcai/cut/sweat.webp",
+"w": 887,
+"h": 997,
+"credit": "Sasener · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"columbia": {
+"id": "columbia",
+"type": "p",
+"src": "hcai/img/columbia.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Mattsjc · CC BY 4.0 · Wikimedia Commons"
+},
+"coal_plant": {
+"id": "coal_plant",
+"type": "p",
+"src": "hcai/img/coal_plant.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Arnoldius · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"google_dalles": {
+"id": "google_dalles",
+"type": "p",
+"src": "hcai/img/google_dalles.jpg",
+"w": 1920,
+"h": 1217,
+"credit": "Tony Webster from Minneapolis, Minnesota · CC BY 2.0 · Wikimedia Commons"
+},
+"oregonian": {
+"id": "oregonian",
+"type": "p",
+"src": "hcai/img/oregonian.jpg",
+"w": 1920,
+"h": 1285,
+"credit": "Steve Morgan · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"garden_hose": {
+"id": "garden_hose",
+"type": "p",
+"src": "hcai/img/garden_hose.jpg",
+"w": 1920,
+"h": 1282,
+"credit": "Shixart1985 · CC BY 2.0 · Wikimedia Commons"
+},
+"water_pipes": {
+"id": "water_pipes",
+"type": "p",
+"src": "hcai/img/water_pipes.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Cjp24 · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"desert": {
+"id": "desert",
+"type": "p",
+"src": "hcai/img/desert.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Nicholas Hartmann · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"dry_lake": {
+"id": "dry_lake",
+"type": "p",
+"src": "hcai/img/dry_lake.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Gannu03 · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"paso_severino": {
+"id": "paso_severino",
+"type": "p",
+"src": "hcai/img/paso_severino.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "CITY MVD · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"water_bottle": {
+"id": "water_bottle",
+"type": "c",
+"src": "hcai/cut/water_bottle.webp",
+"w": 362,
+"h": 1060,
+"credit": "Jiafei Slay Queen · CC0 · Wikimedia Commons"
+},
+"santiago": {
+"id": "santiago",
+"type": "p",
+"src": "hcai/img/santiago.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "3BRBS · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"altman": {
+"id": "altman",
+"type": "h",
+"src": "hcai/cut/altman.webp",
+"w": 1200,
+"h": 1195,
+"credit": "TechCrunch · CC BY 2.0 · Wikimedia Commons",
+"name": "Sam Altman",
+"role": "CEO, OpenAI"
+},
+"robot_arm": {
+"id": "robot_arm",
+"type": "c",
+"src": "hcai/cut/robot_arm.webp",
+"w": 1200,
+"h": 905,
+"credit": "Oleg Yunakov · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"ear": {
+"id": "ear",
+"type": "c",
+"src": "hcai/cut/ear.webp",
+"w": 700,
+"h": 1200,
+"credit": "צולם על ידי he:משתמש:אנדר-ויק · Public domain · Wikimedia Commons"
+},
+"index_cards": {
+"id": "index_cards",
+"type": "c",
+"src": "hcai/cut/index_cards.webp",
+"w": 1200,
+"h": 650,
+"credit": "ArnoldReinhold · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"reading_glasses": {
+"id": "reading_glasses",
+"type": "c",
+"src": "hcai/cut/reading_glasses.webp",
+"w": 1150,
+"h": 464,
+"credit": "CC BY 4.0 · Wikimedia Commons"
+},
+"time": {
+"id": "time",
+"type": "l",
+"src": "hcai/logo/time.png",
+"w": 1272,
+"h": 389,
+"credit": ""
+},
+"empty_office": {
+"id": "empty_office",
+"type": "p",
+"src": "hcai/img/empty_office.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Ser Amantio di Nicolao · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"mortarboard": {
+"id": "mortarboard",
+"type": "c",
+"src": "hcai/cut/mortarboard.webp",
+"w": 962,
+"h": 1200,
+"credit": "Jebulon · CC0 · Wikimedia Commons"
+},
+"clock": {
+"id": "clock",
+"type": "c",
+"src": "hcai/cut/clock.webp",
+"w": 1151,
+"h": 1123,
+"credit": "Sridhar Rao · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"kitchen_table": {
+"id": "kitchen_table",
+"type": "p",
+"src": "hcai/img/kitchen_table.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Afifa Afrin · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"sofa": {
+"id": "sofa",
+"type": "c",
+"src": "hcai/cut/sofa.webp",
+"w": 1200,
+"h": 706,
+"credit": "Padams12 at English Wikipedia · Public domain · Wikimedia Commons"
+},
+"contract_torn": {
+"id": "contract_torn",
+"type": "c",
+"src": "hcai/cut/contract_torn.webp",
+"w": 959,
+"h": 1200,
+"credit": "English: Erica (Thorp) de Berry (1890-19 · Public domain · Wikimedia Commons"
+},
+"petition": {
+"id": "petition",
+"type": "c",
+"src": "hcai/cut/petition.webp",
+"w": 1200,
+"h": 826,
+"credit": "No restrictions · Wikimedia Commons"
+},
+"hazard_sign": {
+"id": "hazard_sign",
+"type": "c",
+"src": "hcai/cut/hazard_sign.webp",
+"w": 1200,
+"h": 900,
+"credit": "Aciarium · CC BY 4.0 · Wikimedia Commons"
+},
+"nairobi_court": {
+"id": "nairobi_court",
+"type": "p",
+"src": "hcai/img/nairobi_court.jpg",
+"w": 1920,
+"h": 715,
+"credit": "Wing · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"padlock": {
+"id": "padlock",
+"type": "c",
+"src": "hcai/cut/padlock.webp",
+"w": 519,
+"h": 907,
+"credit": ".mw-parser-output .commons-creator-table · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"call_center": {
+"id": "call_center",
+"type": "p",
+"src": "hcai/img/call_center.jpg",
+"w": 1920,
+"h": 1437,
+"credit": "Petiatil on Wikipedia-en. · Public domain · Wikimedia Commons"
+},
+"meta": {
+"id": "meta",
+"type": "l",
+"src": "hcai/logo/meta.png",
+"w": 1280,
+"h": 258,
+"credit": ""
+},
+"wapo": {
+"id": "wapo",
+"type": "l",
+"src": "hcai/logo/wapo.png",
+"w": 1278,
+"h": 197,
+"credit": ""
+},
+"manila": {
+"id": "manila",
+"type": "p",
+"src": "hcai/img/manila.jpg",
+"w": 1920,
+"h": 1203,
+"credit": "SwarmCheng · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"stock_ticker": {
+"id": "stock_ticker",
+"type": "p",
+"src": "hcai/img/stock_ticker.jpg",
+"w": 1920,
+"h": 1082,
+"credit": "Francisco Gonzalez · CC BY 2.0 · Wikimedia Commons"
+},
+"nairobi_night": {
+"id": "nairobi_night",
+"type": "p",
+"src": "hcai/img/nairobi_night.jpg",
+"w": 1920,
+"h": 1281,
+"credit": "Daniel Case · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"sand": {
+"id": "sand",
+"type": "c",
+"src": "hcai/cut/sand.webp",
+"w": 1200,
+"h": 667,
+"credit": "W.carter · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"wafer": {
+"id": "wafer",
+"type": "c",
+"src": "hcai/cut/wafer.webp",
+"w": 1124,
+"h": 974,
+"credit": "Rob Bulmahn · CC BY 2.0 · Wikimedia Commons"
+},
+"cleanroom": {
+"id": "cleanroom",
+"type": "p",
+"src": "hcai/img/cleanroom.jpg",
+"w": 1920,
+"h": 1287,
+"credit": "Aileen Devlin/Jefferson Lab from Newport · Public domain · Wikimedia Commons"
+},
+"die_shot": {
+"id": "die_shot",
+"type": "c",
+"src": "hcai/cut/die_shot.webp",
+"w": 1200,
+"h": 823,
+"credit": "Mister rf · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"hair": {
+"id": "hair",
+"type": "p",
+"src": "hcai/img/hair.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Kritzolina · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"tsmc": {
+"id": "tsmc",
+"type": "l",
+"src": "hcai/logo/tsmc.png",
+"w": 1280,
+"h": 323,
+"credit": ""
+},
+"lab_water": {
+"id": "lab_water",
+"type": "c",
+"src": "hcai/cut/lab_water.webp",
+"w": 685,
+"h": 1200,
+"credit": "Donald Trung Quoc Don (Chữ Hán: 徵國單) - W · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"taiwan_drought": {
+"id": "taiwan_drought",
+"type": "p",
+"src": "hcai/img/taiwan_drought.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "總統府 · CC BY 2.0 · Wikimedia Commons"
+},
+"rice_paddy": {
+"id": "rice_paddy",
+"type": "p",
+"src": "hcai/img/rice_paddy.jpg",
+"w": 1920,
+"h": 1245,
+"credit": "Fred Hsu (Wikipedia:User:Fred Hsu on en. · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"tanker_truck": {
+"id": "tanker_truck",
+"type": "c",
+"src": "hcai/cut/tanker_truck.webp",
+"w": 1200,
+"h": 758,
+"credit": "Sulthan Naufal · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"chess": {
+"id": "chess",
+"type": "c",
+"src": "hcai/cut/chess.webp",
+"w": 891,
+"h": 1009,
+"credit": ".mw-parser-output .commons-creator-table · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"copper_spools": {
+"id": "copper_spools",
+"type": "p",
+"src": "hcai/img/copper_spools.jpg",
+"w": 1920,
+"h": 1251,
+"credit": "Tony Webster from Portland, Oregon · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"lithium": {
+"id": "lithium",
+"type": "c",
+"src": "hcai/cut/lithium.webp",
+"w": 1200,
+"h": 839,
+"credit": "Ural-66 · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"amnesty": {
+"id": "amnesty",
+"type": "l",
+"src": "hcai/logo/amnesty.png",
+"w": 1186,
+"h": 409,
+"credit": ""
+},
+"cobalt_mine": {
+"id": "cobalt_mine",
+"type": "p",
+"src": "hcai/img/cobalt_mine.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "The International Institute for Environm · CC BY 2.5 · Wikimedia Commons"
+},
+"mine_pit": {
+"id": "mine_pit",
+"type": "p",
+"src": "hcai/img/mine_pit.jpg",
+"w": 1920,
+"h": 1277,
+"credit": "Julien Harneis, https://www.flickr.com/p · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"ewaste": {
+"id": "ewaste",
+"type": "p",
+"src": "hcai/img/ewaste.jpg",
+"w": 1920,
+"h": 1446,
+"credit": "Reconrabbit · CC0 · Wikimedia Commons"
+},
+"substation": {
+"id": "substation",
+"type": "p",
+"src": "hcai/img/substation.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Novoklimov · CC BY 4.0 · Wikimedia Commons"
+},
+"auction_gavel": {
+"id": "auction_gavel",
+"type": "c",
+"src": "hcai/cut/auction_gavel.webp",
+"w": 858,
+"h": 779,
+"credit": "Quince Media · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"md_farm": {
+"id": "md_farm",
+"type": "p",
+"src": "hcai/img/md_farm.jpg",
+"w": 1920,
+"h": 1134,
+"credit": "Acroterion · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"transmission": {
+"id": "transmission",
+"type": "p",
+"src": "hcai/img/transmission.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Aktron · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"dc_night": {
+"id": "dc_night",
+"type": "p",
+"src": "hcai/img/dc_night.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Lapalmauz · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"window": {
+"id": "window",
+"type": "c",
+"src": "hcai/cut/window.webp",
+"w": 1047,
+"h": 990,
+"credit": "pterjan · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"loudoun_sign": {
+"id": "loudoun_sign",
+"type": "p",
+"src": "hcai/img/loudoun_sign.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "EikwaR · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"led_bulb": {
+"id": "led_bulb",
+"type": "c",
+"src": "hcai/cut/led_bulb.webp",
+"w": 1122,
+"h": 937,
+"credit": "Loadmaster (David R. Tribble) · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"deepseek": {
+"id": "deepseek",
+"type": "l",
+"src": "hcai/logo/deepseek.png",
+"w": 1280,
+"h": 272,
+"credit": ""
+},
+"deepmind": {
+"id": "deepmind",
+"type": "l",
+"src": "hcai/logo/deepmind.png",
+"w": 1280,
+"h": 297,
+"credit": ""
+},
+"weather_map": {
+"id": "weather_map",
+"type": "p",
+"src": "hcai/img/weather_map.jpg",
+"w": 1920,
+"h": 1600,
+"credit": "NASA Goddard Space Flight Center from Gr · CC BY 2.0 · Wikimedia Commons"
+},
+"control_room": {
+"id": "control_room",
+"type": "p",
+"src": "hcai/img/control_room.jpg",
+"w": 1920,
+"h": 825,
+"credit": "Janejenkins · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"steam_engine": {
+"id": "steam_engine",
+"type": "p",
+"src": "hcai/img/steam_engine.jpg",
+"w": 1920,
+"h": 1178,
+"credit": "Benjamin, Park, 1849-1922 · No restrictions · Wikimedia Commons"
+},
+"coal": {
+"id": "coal",
+"type": "p",
+"src": "hcai/img/coal.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Nostrifikator · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"price_tag": {
+"id": "price_tag",
+"type": "c",
+"src": "hcai/cut/price_tag.webp",
+"w": 1200,
+"h": 801,
+"credit": "Maksym Kozlenko · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"rocket": {
+"id": "rocket",
+"type": "p",
+"src": "hcai/img/rocket.jpg",
+"w": 1277,
+"h": 1920,
+"credit": "NASA/Sandra Joseph and Kevin O'Connell · Public domain · Wikimedia Commons"
+},
+"measuring_tape": {
+"id": "measuring_tape",
+"type": "c",
+"src": "hcai/cut/measuring_tape.webp",
+"w": 1200,
+"h": 547,
+"credit": "Clément Bucco-Lechat · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"toolbox": {
+"id": "toolbox",
+"type": "c",
+"src": "hcai/cut/toolbox.webp",
+"w": 1200,
+"h": 693,
+"credit": "Rieul Techer · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"puzzle": {
+"id": "puzzle",
+"type": "p",
+"src": "hcai/img/puzzle.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Profpcde · CC0 · Wikimedia Commons"
+},
+"curtain": {
+"id": "curtain",
+"type": "c",
+"src": "hcai/cut/curtain.webp",
+"w": 732,
+"h": 1197,
+"credit": "IAVAI · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"eu_flag": {
+"id": "eu_flag",
+"type": "p",
+"src": "hcai/img/eu_flag.jpg",
+"w": 1920,
+"h": 1282,
+"credit": "MPD01605 · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"brussels": {
+"id": "brussels",
+"type": "p",
+"src": "hcai/img/brussels.jpg",
+"w": 1920,
+"h": 1285,
+"credit": "Ash Crow · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"dalles_sunset": {
+"id": "dalles_sunset",
+"type": "p",
+"src": "hcai/img/dalles_sunset.jpg",
+"w": 1920,
+"h": 1272,
+"credit": "Gary Halvorson, Oregon State Archives · CC BY 4.0 · Wikimedia Commons"
+},
+"hands": {
+"id": "hands",
+"type": "p",
+"src": "hcai/img/hands.jpg",
+"w": 1920,
+"h": 1121,
+"credit": "Cangjie6 · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"dc_campus": {
+"id": "dc_campus",
+"type": "p",
+"src": "hcai/img/dc_campus.jpg",
+"w": 1920,
+"h": 1225,
+"credit": "Theodore Christopher · CC0 · Wikimedia Commons"
+},
+"thermometer": {
+"id": "thermometer",
+"type": "c",
+"src": "hcai/cut/thermometer.webp",
+"w": 1200,
+"h": 560,
+"credit": "Jacek Halicki · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"globe": {
+"id": "globe",
+"type": "c",
+"src": "hcai/cut/globe.webp",
+"w": 1194,
+"h": 1200,
+"credit": "Public domain · Wikimedia Commons"
+},
+"microsoft": {
+"id": "microsoft",
+"type": "l",
+"src": "hcai/logo/microsoft.png",
+"w": 1280,
+"h": 273,
+"credit": ""
+},
+"power_switch": {
+"id": "power_switch",
+"type": "c",
+"src": "hcai/cut/power_switch.webp",
+"w": 777,
+"h": 1200,
+"credit": "DemonDays64 · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"hard_hat": {
+"id": "hard_hat",
+"type": "c",
+"src": "hcai/cut/hard_hat.webp",
+"w": 1200,
+"h": 1068,
+"credit": "Ashley Pomeroy · CC BY 4.0 · Wikimedia Commons"
+},
+"steam": {
+"id": "steam",
+"type": "p",
+"src": "hcai/img/steam.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Brocken Inaglory · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"documents": {
+"id": "documents",
+"type": "c",
+"src": "hcai/cut/documents.webp",
+"w": 1200,
+"h": 900,
+"credit": "Nicolas Bouliane · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"microscope": {
+"id": "microscope",
+"type": "c",
+"src": "hcai/cut/microscope.webp",
+"w": 873,
+"h": 1200,
+"credit": "Ann 2000 · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"rock": {
+"id": "rock",
+"type": "p",
+"src": "hcai/img/rock.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Adoscam · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"ohio_house": {
+"id": "ohio_house",
+"type": "p",
+"src": "hcai/img/ohio_house.jpg",
+"w": 1920,
+"h": 1275,
+"credit": "Sixflashphoto · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"forest": {
+"id": "forest",
+"type": "p",
+"src": "hcai/img/forest.jpg",
+"w": 1920,
+"h": 1440,
+"credit": "Famartin · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"fence": {
+"id": "fence",
+"type": "p",
+"src": "hcai/img/fence.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "David Ratledge · CC BY 4.0 · Wikimedia Commons"
+},
+"eiffel": {
+"id": "eiffel",
+"type": "c",
+"src": "hcai/cut/eiffel.webp",
+"w": 1010,
+"h": 1200,
+"credit": ".mw-parser-output .commons-creator-table · No restrictions · Wikimedia Commons"
+},
+"feather": {
+"id": "feather",
+"type": "p",
+"src": "hcai/img/feather.jpg",
+"w": 1280,
+"h": 1534,
+"credit": "Thomas G. Kaye, Michael Pittman, Gerald  · CC BY 4.0 · Wikimedia Commons"
+},
+"faucet": {
+"id": "faucet",
+"type": "c",
+"src": "hcai/cut/faucet.webp",
+"w": 749,
+"h": 1200,
+"credit": "Vien Hoang · CC0 · Wikimedia Commons"
+},
+"courthouse": {
+"id": "courthouse",
+"type": "p",
+"src": "hcai/img/courthouse.jpg",
+"w": 1280,
+"h": 802,
+"credit": "Unknown authorUnknown author · Public domain · Wikimedia Commons"
+},
+"nairobi_skyline": {
+"id": "nairobi_skyline",
+"type": "p",
+"src": "hcai/img/nairobi_skyline.jpg",
+"w": 1280,
+"h": 850,
+"credit": "afromusing · CC BY 2.0 · Wikimedia Commons"
+},
+"water_drop": {
+"id": "water_drop",
+"type": "p",
+"src": "hcai/img/water_drop.jpg",
+"w": 1920,
+"h": 1279,
+"credit": "José Manuel Suárez from Spain · CC BY 2.0 · Wikimedia Commons"
+},
+"copper_ore": {
+"id": "copper_ore",
+"type": "c",
+"src": "hcai/cut/copper_ore.webp",
+"w": 1177,
+"h": 1055,
+"credit": "“Jonathan Zander (Digon3)\" · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"cloud_soft": {
+"id": "cloud_soft",
+"type": "c",
+"src": "hcai/cut/cloud_soft.webp",
+"w": 803,
+"h": 592,
+"credit": "Glg, edited by User:drini · CC BY-SA 2.0 de · Wikimedia Commons"
+},
+"concrete": {
+"id": "concrete",
+"type": "c",
+"src": "hcai/cut/concrete.webp",
+"w": 1200,
+"h": 719,
+"credit": "katorisi · CC BY 2.5 · Wikimedia Commons"
+},
+"copper_wire": {
+"id": "copper_wire",
+"type": "c",
+"src": "hcai/cut/copper_wire.webp",
+"w": 1068,
+"h": 768,
+"credit": "Pavlo Polishchuk · CC BY 4.0 · Wikimedia Commons"
+},
+"sub_cable": {
+"id": "sub_cable",
+"type": "c",
+"src": "hcai/cut/sub_cable.webp",
+"w": 568,
+"h": 556,
+"credit": "Harry Robert Kempe (section author) · Public domain · Wikimedia Commons"
+},
+"light_bulb": {
+"id": "light_bulb",
+"type": "c",
+"src": "hcai/cut/light_bulb.webp",
+"w": 722,
+"h": 1200,
+"credit": "KMJ · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"fan_blades": {
+"id": "fan_blades",
+"type": "p",
+"src": "hcai/img/fan_blades.jpg",
+"w": 1280,
+"h": 853,
+"credit": "Seeweb · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"school": {
+"id": "school",
+"type": "p",
+"src": "hcai/img/school.jpg",
+"w": 1280,
+"h": 943,
+"credit": "McGhiever · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"speech_bubbles": {
+"id": "speech_bubbles",
+"type": "c",
+"src": "hcai/cut/speech_bubbles.webp",
+"w": 934,
+"h": 938,
+"credit": "paomedia · CC0 · Wikimedia Commons"
+},
+"stethoscope": {
+"id": "stethoscope",
+"type": "c",
+"src": "hcai/cut/stethoscope.webp",
+"w": 593,
+"h": 482,
+"credit": "HujiStat · Public domain · Wikimedia Commons"
+},
+"weights": {
+"id": "weights",
+"type": "c",
+"src": "hcai/cut/weights.webp",
+"w": 753,
+"h": 446,
+"credit": "Oktaeder · Copyrighted free use · Wikimedia Commons"
+},
+"brain_model": {
+"id": "brain_model",
+"type": "c",
+"src": "hcai/cut/brain_model.webp",
+"w": 1029,
+"h": 899,
+"credit": "CC BY 4.0 · Wikimedia Commons"
+},
+"smr": {
+"id": "smr",
+"type": "p",
+"src": "hcai/img/smr.jpg",
+"w": 909,
+"h": 696,
+"credit": "U.S. Government Accountability Office fr · Public domain · Wikimedia Commons"
+},
+"snail": {
+"id": "snail",
+"type": "c",
+"src": "hcai/cut/snail.webp",
+"w": 818,
+"h": 409,
+"credit": "Photo by Catherina Onezia/Seychelles Isl · CC BY 4.0 · Wikimedia Commons"
+},
+"musk": {
+"id": "musk",
+"type": "h",
+"src": "hcai/cut/musk.webp",
+"w": 963,
+"h": 1200,
+"credit": "Debbie Rowe · CC BY-SA 3.0 · Wikimedia Commons",
+"name": "Elon Musk",
+"role": "Founder, xAI"
+},
+"gas_turbine": {
+"id": "gas_turbine",
+"type": "p",
+"src": "hcai/img/gas_turbine.jpg",
+"w": 1024,
+"h": 673,
+"credit": "Pro-Per Energy Services · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"generator": {
+"id": "generator",
+"type": "c",
+"src": "hcai/cut/generator.webp",
+"w": 1142,
+"h": 880,
+"credit": "User:EPO · Attribution · Wikimedia Commons"
+},
+"gas_flame": {
+"id": "gas_flame",
+"type": "p",
+"src": "hcai/img/gas_flame.jpg",
+"w": 1320,
+"h": 1182,
+"credit": "George Shuklin · Public domain · Wikimedia Commons"
+},
+"boxtown": {
+"id": "boxtown",
+"type": "p",
+"src": "hcai/img/boxtown.jpg",
+"w": 1280,
+"h": 960,
+"credit": "Thomas R Machnitzki (thomas@machnitzki.c · CC BY 3.0 · Wikimedia Commons"
+},
+"inhaler": {
+"id": "inhaler",
+"type": "c",
+"src": "hcai/cut/inhaler.webp",
+"w": 1070,
+"h": 886,
+"credit": "BruceBlaus · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"tv": {
+"id": "tv",
+"type": "c",
+"src": "hcai/cut/tv.webp",
+"w": 1200,
+"h": 752,
+"credit": "Unknown authorUnknown author · Public domain · Wikimedia Commons"
+},
+"stamp": {
+"id": "stamp",
+"type": "c",
+"src": "hcai/cut/stamp.webp",
+"w": 661,
+"h": 1200,
+"credit": "Zv0486~commonswiki · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"steam_tower": {
+"id": "steam_tower",
+"type": "p",
+"src": "hcai/img/steam_tower.jpg",
+"w": 1280,
+"h": 1347,
+"credit": "High Contrast · CC BY 3.0 de · Wikimedia Commons"
+},
+"ice_cube": {
+"id": "ice_cube",
+"type": "c",
+"src": "hcai/cut/ice_cube.webp",
+"w": 856,
+"h": 600,
+"credit": "Darren Hester · CC BY-SA 2.5 · Wikimedia Commons"
+},
+"dalles_dam": {
+"id": "dalles_dam",
+"type": "p",
+"src": "hcai/img/dalles_dam.jpg",
+"w": 1280,
+"h": 867,
+"credit": "Robert Ashworth from Bellingham, WA., US · CC BY 2.0 · Wikimedia Commons"
+},
+"water_tap": {
+"id": "water_tap",
+"type": "c",
+"src": "hcai/cut/water_tap.webp",
+"w": 782,
+"h": 1200,
+"credit": "Juhanson · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"tap_water_glass": {
+"id": "tap_water_glass",
+"type": "p",
+"src": "hcai/img/tap_water_glass.jpg",
+"w": 523,
+"h": 800,
+"credit": "Klaus Ohlenschläger · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"ucr": {
+"id": "ucr",
+"type": "p",
+"src": "hcai/img/ucr.jpg",
+"w": 1600,
+"h": 1200,
+"credit": "Original uploader was Amerique at en.wik · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"encyclopedia": {
+"id": "encyclopedia",
+"type": "p",
+"src": "hcai/img/encyclopedia.jpg",
+"w": 960,
+"h": 539,
+"credit": "Ahm masum · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"poetry_book": {
+"id": "poetry_book",
+"type": "c",
+"src": "hcai/cut/poetry_book.webp",
+"w": 681,
+"h": 1200,
+"credit": "Тарас Шевченко .mw-parser-output .common · Public domain · Wikimedia Commons"
+},
+"dark_alley": {
+"id": "dark_alley",
+"type": "p",
+"src": "hcai/img/dark_alley.jpg",
+"w": 1280,
+"h": 1920,
+"credit": "Sergio Miranda from Maia, Portugal · CC BY 2.0 · Wikimedia Commons"
+},
+"san_francisco": {
+"id": "san_francisco",
+"type": "p",
+"src": "hcai/img/san_francisco.jpg",
+"w": 1920,
+"h": 574,
+"credit": "Daniel L. Lu (user:dllu) Camera location · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"kibera": {
+"id": "kibera",
+"type": "p",
+"src": "hcai/img/kibera.jpg",
+"w": 1280,
+"h": 932,
+"credit": "Kreuzschnabel · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"eye": {
+"id": "eye",
+"type": "c",
+"src": "hcai/cut/eye.webp",
+"w": 948,
+"h": 1200,
+"credit": "Jalal Volker · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"kenya_parliament": {
+"id": "kenya_parliament",
+"type": "p",
+"src": "hcai/img/kenya_parliament.jpg",
+"w": 1280,
+"h": 1707,
+"credit": "Daryona · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"law_book": {
+"id": "law_book",
+"type": "p",
+"src": "hcai/img/law_book.jpg",
+"w": 1673,
+"h": 1195,
+"credit": "Whoisjohngalt · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"chemical_barrel": {
+"id": "chemical_barrel",
+"type": "c",
+"src": "hcai/cut/chemical_barrel.webp",
+"w": 752,
+"h": 650,
+"credit": "PEO ACWA · CC BY 2.0 · Wikimedia Commons"
+},
+"thumbs_up": {
+"id": "thumbs_up",
+"type": "c",
+"src": "hcai/cut/thumbs_up.webp",
+"w": 758,
+"h": 1057,
+"credit": "Vaikunda Raja · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"coins": {
+"id": "coins",
+"type": "c",
+"src": "hcai/cut/coins.webp",
+"w": 1200,
+"h": 1151,
+"credit": "Quiorm · Copyrighted free use · Wikimedia Commons"
+},
+"letter": {
+"id": "letter",
+"type": "c",
+"src": "hcai/cut/letter.webp",
+"w": 1012,
+"h": 603,
+"credit": "Wilbur Underhill Jr. · Public domain · Wikimedia Commons"
+},
+"white_house": {
+"id": "white_house",
+"type": "p",
+"src": "hcai/img/white_house.jpg",
+"w": 1614,
+"h": 1196,
+"credit": "CC BY-SA 3.0 · Wikimedia Commons"
+},
+"silicon": {
+"id": "silicon",
+"type": "c",
+"src": "hcai/cut/silicon.webp",
+"w": 896,
+"h": 643,
+"credit": "Enricoros at English Wikipedia · Public domain · Wikimedia Commons"
+},
+"furnace": {
+"id": "furnace",
+"type": "p",
+"src": "hcai/img/furnace.jpg",
+"w": 1280,
+"h": 1792,
+"credit": "Unknown authorUnknown author · Public domain · Wikimedia Commons"
+},
+"ingot": {
+"id": "ingot",
+"type": "c",
+"src": "hcai/cut/ingot.webp",
+"w": 831,
+"h": 1200,
+"credit": "J Doll · CC BY 3.0 · Wikimedia Commons"
+},
+"fab": {
+"id": "fab",
+"type": "p",
+"src": "hcai/img/fab.jpg",
+"w": 1920,
+"h": 1280,
+"credit": "Kevin CW Lu · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"gallium": {
+"id": "gallium",
+"type": "p",
+"src": "hcai/img/gallium.jpg",
+"w": 1024,
+"h": 768,
+"credit": "en:user:foobar · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"germanium": {
+"id": "germanium",
+"type": "c",
+"src": "hcai/cut/germanium.webp",
+"w": 881,
+"h": 907,
+"credit": "Jurii · CC BY 3.0 · Wikimedia Commons"
+},
+"battery_bank": {
+"id": "battery_bank",
+"type": "p",
+"src": "hcai/img/battery_bank.jpg",
+"w": 1920,
+"h": 1080,
+"credit": "Kecko from Eastern Switzerland · CC BY 2.0 · Wikimedia Commons"
+},
+"cobalt_ore": {
+"id": "cobalt_ore",
+"type": "c",
+"src": "hcai/cut/cobalt_ore.webp",
+"w": 1122,
+"h": 801,
+"credit": "Hi-Res Images of Chemical Elements · CC BY 3.0 · Wikimedia Commons"
+},
+"ev": {
+"id": "ev",
+"type": "c",
+"src": "hcai/cut/ev.webp",
+"w": 1200,
+"h": 617,
+"credit": "original: Michael Movchinedited by Felix · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"old_barn": {
+"id": "old_barn",
+"type": "p",
+"src": "hcai/img/old_barn.jpg",
+"w": 1280,
+"h": 960,
+"credit": "Kim Fyson · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"farmer": {
+"id": "farmer",
+"type": "p",
+"src": "hcai/img/farmer.jpg",
+"w": 1280,
+"h": 840,
+"credit": ".mw-parser-output .commons-creator-table · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"bed": {
+"id": "bed",
+"type": "p",
+"src": "hcai/img/bed.jpg",
+"w": 1280,
+"h": 960,
+"credit": "Mossleegrange · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"envelope_sealed": {
+"id": "envelope_sealed",
+"type": "c",
+"src": "hcai/cut/envelope_sealed.webp",
+"w": 252,
+"h": 254,
+"credit": "English: Anna E. Ticknor (1823-1896) · Public domain · Wikimedia Commons"
+},
+"nda": {
+"id": "nda",
+"type": "c",
+"src": "hcai/cut/nda.webp",
+"w": 915,
+"h": 1200,
+"credit": "Graydon J. Gerber, Naval Ocean Systems C · Public domain · Wikimedia Commons"
+},
+"tax_form": {
+"id": "tax_form",
+"type": "c",
+"src": "hcai/cut/tax_form.webp",
+"w": 917,
+"h": 1200,
+"credit": "United States Government · Public domain · Wikimedia Commons"
+},
+"construction_workers": {
+"id": "construction_workers",
+"type": "p",
+"src": "hcai/img/construction_workers.jpg",
+"w": 1728,
+"h": 1152,
+"credit": "Boudoirphotographyguide · CC BY 4.0 · Wikimedia Commons"
+},
+"arrow_down": {
+"id": "arrow_down",
+"type": "c",
+"src": "hcai/cut/arrow_down.webp",
+"w": 1200,
+"h": 1080,
+"credit": "Courtesy of NIAID Ryan Kissinger · Public domain · Wikimedia Commons"
+},
+"crystal": {
+"id": "crystal",
+"type": "c",
+"src": "hcai/cut/crystal.webp",
+"w": 1200,
+"h": 977,
+"credit": "Ra'ike (Wikipedia) · CC0 · Wikimedia Commons"
+},
+"jevons": {
+"id": "jevons",
+"type": "h",
+"src": "hcai/cut/jevons.webp",
+"w": 726,
+"h": 867,
+"credit": "Unknown (via University of Manchester Li · CC BY-SA 4.0 · Wikimedia Commons",
+"name": "William Stanley Jevons",
+"role": "Economist, 1835–1882"
+},
+"nadella": {
+"id": "nadella",
+"type": "h",
+"src": "hcai/cut/nadella.webp",
+"w": 606,
+"h": 686,
+"credit": "Briansmale · CC BY-SA 4.0 · Wikimedia Commons",
+"name": "Satya Nadella",
+"role": "CEO, Microsoft"
+},
+"dublin_dc": {
+"id": "dublin_dc",
+"type": "p",
+"src": "hcai/img/dublin_dc.jpg",
+"w": 1024,
+"h": 622,
+"credit": "Thomas Nugent · CC BY-SA 2.0 · Wikimedia Commons"
+},
+"magnifier": {
+"id": "magnifier",
+"type": "c",
+"src": "hcai/cut/magnifier.webp",
+"w": 688,
+"h": 1200,
+"credit": "Tomomarusan · CC BY 2.5 · Wikimedia Commons"
+},
+"office_chair": {
+"id": "office_chair",
+"type": "c",
+"src": "hcai/cut/office_chair.webp",
+"w": 693,
+"h": 1200,
+"credit": "Photograph: Frank C. Müller, Baden-Baden · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"monitor": {
+"id": "monitor",
+"type": "p",
+"src": "hcai/img/monitor.jpg",
+"w": 1055,
+"h": 1160,
+"credit": "File:Computer_monitor.jpg by Zzubnik Der · Public domain · Wikimedia Commons"
+},
+"oil_barrel": {
+"id": "oil_barrel",
+"type": "c",
+"src": "hcai/cut/oil_barrel.webp",
+"w": 627,
+"h": 921,
+"credit": "Meggar at English Wikipedia · CC BY-SA 3.0 · Wikimedia Commons"
+},
+"mute": {
+"id": "mute",
+"type": "c",
+"src": "hcai/cut/mute.webp",
+"w": 1200,
+"h": 1200,
+"credit": "Aksel Tinfat · CC0 · Wikimedia Commons"
+},
+"ear_muffs": {
+"id": "ear_muffs",
+"type": "c",
+"src": "hcai/cut/ear_muffs.webp",
+"w": 1200,
+"h": 352,
+"credit": "JiriMatejicek · CC BY-SA 4.0 · Wikimedia Commons"
+},
+"hourglass": {
+"id": "hourglass",
+"type": "c",
+"src": "hcai/cut/hourglass.webp",
+"w": 1200,
+"h": 781,
+"credit": "CC BY 4.0 · Wikimedia Commons"
+},
+"tw_reservoir2": {
+"id": "tw_reservoir2",
+"type": "p",
+"src": "hcai/img/tw_reservoir2.jpg",
+"w": 1920,
+"h": 800,
+"credit": "總統府 · CC BY 2.0 · Wikimedia Commons"
+},
+"uk_industry2": {
+"id": "uk_industry2",
+"type": "p",
+"src": "hcai/img/uk_industry2.jpg",
+"w": 1920,
+"h": 1065,
+"credit": "Scanned by Mr Stephen · Public domain · Wikimedia Commons"
+},
+"lbnl2": {
+"id": "lbnl2",
+"type": "p",
+"src": "hcai/img/lbnl2.jpg",
+"w": 1920,
+"h": 1279,
+"credit": "U.S. Department of Energy from United St · Public domain · Wikimedia Commons"
+},
+"boxtown2": {
+"id": "boxtown2",
+"type": "p",
+"src": "hcai/img/boxtown2.jpg",
+"w": 1024,
+"h": 768,
+"credit": "Thomas R Machnitzki (thomas@machnitzki.c · CC BY 3.0 · Wikimedia Commons"
+}
+}

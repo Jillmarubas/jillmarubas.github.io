@@ -48,7 +48,10 @@ if d.get("fatalErrorTimestamp"): print("fail " + json.dumps(d.get("errors"))[:40
 elif d.get("postRenderData"): print("done")
 else: print("%s frames" % d.get("framesRendered"))' "$P")
     case "$S" in
-      done) curl -sS -o "$OUTDIR/part$i.mp4" "${BASES[$i]}/out.mp4"; DONE[$i]=1; left=$((left - 1)); echo "part$i saved" ;;
+      done)
+        # downloads can drop on long files; retry instead of aborting the whole run
+        for n in 1 2 3 4 5 6; do curl -sS --retry 4 -o "$OUTDIR/part$i.mp4" "${BASES[$i]}/out.mp4" && break; echo "part$i download retry $n"; sleep $((n * 5)); done
+        DONE[$i]=1; left=$((left - 1)); echo "part$i saved" ;;
       fail*) echo "part$i $S"; exit 1 ;;
       *) echo "part$i $S" ;;
     esac

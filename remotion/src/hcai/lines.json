@@ -1,0 +1,1262 @@
+[
+ {
+  "key": "COLD OPEN",
+  "title": "COLD OPEN",
+  "lines": [
+   {
+    "say": "You type a question.",
+    "v": [
+     "Black screen. A cursor blinks inside a chat box."
+    ],
+    "m": [
+     "Silence. One keyboard click."
+    ]
+   },
+   {
+    "say": "Something small. What should I make for dinner?"
+   },
+   {
+    "say": "You hit enter."
+   },
+   {
+    "say": "Less than a second later... an answer.",
+    "m": [
+     "Click."
+    ]
+   },
+   {
+    "say": "It feels like nothing. No weight. No sound. Like the answer came out of the air."
+   },
+   {
+    "say": "It didn't come out of the air.",
+    "v": [
+     "Hard cut. Drone shot: a grey, windowless building the size of several football fields. Heat shimmer rising off the roof."
+    ]
+   },
+   {
+    "say": "It came from somewhere like this."
+   },
+   {
+    "say": "In 2021, a newspaper asked this small town a simple question.",
+    "t": [
+     "The Dalles, Oregon — population ~16,000"
+    ]
+   },
+   {
+    "say": "How much of your water is Google using?"
+   },
+   {
+    "say": "The city wouldn't say."
+   },
+   {
+    "say": "So the newspaper went to court."
+   },
+   {
+    "say": "A newspaper. Against one of the most valuable companies on Earth."
+   },
+   {
+    "say": "Over water."
+   },
+   {
+    "say": "Hold on to that. We'll come back to what they found."
+   },
+   {
+    "say": "Because this story doesn't stay in Oregon.",
+    "v": [
+     "Slow push-in on a world map. A single red dot: Nairobi, Kenya."
+    ]
+   },
+   {
+    "say": "It goes to an office in Nairobi, where young workers earned less than two dollars an hour reading some of the darkest things human beings have ever written... so that you would never have to."
+   },
+   {
+    "say": "It goes to the site of the worst nuclear accident in American history, where a reactor is being brought back to life.",
+    "v": [
+     "The map pulls out. More dots light up: Pennsylvania. Memphis. Dublin. Taiwan. The Congo."
+    ]
+   },
+   {
+    "say": "It goes to a neighborhood in Memphis that says it was never asked."
+   },
+   {
+    "say": "And then it goes somewhere much closer."
+   },
+   {
+    "say": "Your electricity bill."
+   },
+   {
+    "say": "Every time you ask AI a question, a chain of power, water, metal and human hands starts moving, somewhere far away.",
+    "m": [
+     "A low drone starts to build."
+    ]
+   },
+   {
+    "say": "Today, we follow that chain. Link by link."
+   },
+   {
+    "say": "And at the very end, I'll answer the question everyone argues about, and almost nobody gets right:"
+   },
+   {
+    "say": "What does ONE question to AI actually cost?"
+   }
+  ]
+ },
+ {
+  "key": "CHAPTER 1",
+  "title": "THE CLOUD IS A BUILDING",
+  "lines": [
+   {
+    "say": "We call it \"the cloud.\"",
+    "t": [
+     "THE HIDDEN COST OF AI",
+     "Chapter 1: The Cloud Is a Building"
+    ],
+    "m": [
+     "Title sting. Cut to black.",
+     "Calm, curious music."
+    ]
+   },
+   {
+    "say": "It's one of the most successful words in the history of marketing. A cloud is soft. White. Floating. It weighs nothing."
+   },
+   {
+    "say": "But there is no cloud."
+   },
+   {
+    "say": "There are buildings. Concrete, steel, copper and glass. Thousands of them."
+   },
+   {
+    "say": "So let's follow your dinner question, step by step."
+   },
+   {
+    "say": "When you hit enter, your words become pulses of light. Those pulses race through fiber-optic cables under your street, along highways, sometimes across the ocean floor, until they reach a data center.",
+    "v": [
+     "Animated line: from a phone, under the street, along the ocean floor, into a building."
+    ]
+   },
+   {
+    "say": "Inside that data center, your question lands on a very special kind of chip."
+   },
+   {
+    "say": "It's called a GPU, a graphics processing unit. Originally, these chips were built to draw video games. Explosions. Shadows. Water reflections.",
+    "v": [
+     "Close-up macro shot of a GPU board. Slow rotation."
+    ]
+   },
+   {
+    "say": "Then researchers discovered they were also incredibly good at something else: doing millions of simple math problems at the same time."
+   },
+   {
+    "say": "And that is all modern AI really is underneath. Math. An unbelievable amount of math, done all at once."
+   },
+   {
+    "say": "One of the most popular AI chips in the world, Nvidia's H100, can draw up to 700 watts of power."
+   },
+   {
+    "say": "That's one chip.",
+    "t": [
+     "1 chip ≈ a small space heater, running nonstop"
+    ]
+   },
+   {
+    "say": "A large AI data center can hold tens of thousands of them. The newest \"AI factories\" are being planned with hundreds of thousands."
+   },
+   {
+    "say": "Now, here's the part of physics nobody puts in the advertisement.",
+    "v": [
+     "Slow walk down a server aisle. Blinking blue lights, endless racks."
+    ]
+   },
+   {
+    "say": "Almost every watt that goes into a chip comes out as heat."
+   },
+   {
+    "say": "Walk into the \"hot aisle\" of a data center and it hits you like opening an oven door. Warm air pushes against your face. The fans roar so loud that workers wear ear protection. The floor vibrates under your shoes."
+   },
+   {
+    "say": "This is what \"the cloud\" sounds like.",
+    "m": [
+     "Sound design: fans, a deep electrical hum."
+    ]
+   },
+   {
+    "say": "If you want to see the cloud with your own eyes, go to Northern Virginia.",
+    "v": [
+     "Aerial footage: Loudoun County, Virginia. Rows of identical grey buildings next to houses."
+    ],
+    "t": [
+     "Loudoun County, Virginia — \"Data Center Alley\""
+    ]
+   },
+   {
+    "say": "Loudoun County has more data center capacity than almost anywhere else on the planet. Grey boxes the size of shopping malls, right next to neighborhoods, schools and farmland."
+   },
+   {
+    "say": "There are two big jobs these buildings do for AI."
+   },
+   {
+    "say": "The first is training."
+   },
+   {
+    "say": "Training is when a company feeds a model a huge part of the internet: books, articles, code, conversations. The machines run for weeks or months, adjusting billions of tiny settings until the model learns to predict the next word.",
+    "v": [
+     "Simple animation: a giant brain-shaped cloud of dots being \"filled\" with text."
+    ]
+   },
+   {
+    "say": "Think of training like building a factory. You do it once, and it's massively expensive."
+   },
+   {
+    "say": "The second job is inference."
+   },
+   {
+    "say": "Inference is what happens every time you ask a question. The factory is built. Now it's producing. One answer at a time."
+   },
+   {
+    "say": "And here's what changed everything."
+   },
+   {
+    "say": "For years, people worried mostly about training. But today, hundreds of millions of people use AI chatbots every single week. Students. Coders. Doctors. People asking what to make for dinner."
+   },
+   {
+    "say": "One answer is tiny."
+   },
+   {
+    "say": "Billions of answers are not."
+   },
+   {
+    "say": "And the questions are getting heavier.",
+    "v": [
+     "A counter on screen ticks up faster and faster."
+    ]
+   },
+   {
+    "say": "A simple text answer is the lightest thing AI does. Ask it to make an image, and it works much harder. Ask it to make a video, harder still. And the newest \"reasoning\" models don't answer right away. They think first, sometimes for many seconds or minutes, running through possibilities before they reply. All that thinking is more math. More chips. More power."
+   },
+   {
+    "say": "That's why the buildings keep getting bigger.",
+    "v": [
+     "Construction footage: cranes, concrete, a flat Texas landscape."
+    ],
+    "t": [
+     "Stargate — announced January 2025 — up to $500 billion"
+    ]
+   },
+   {
+    "say": "In January 2025, OpenAI, SoftBank and Oracle announced a project called Stargate, with plans to spend up to 500 billion dollars on AI infrastructure in the United States. The first giant site rose out of the flat ground near Abilene, Texas."
+   },
+   {
+    "say": "Five hundred billion dollars. That's more than the yearly economy of many countries. Most of it goes to buildings, chips and power."
+   },
+   {
+    "say": "Every one of those answers needs a chip. Every chip needs power. And every watt of power turns into heat that has to go somewhere."
+   },
+   {
+    "say": "So these buildings need two things to survive."
+   },
+   {
+    "say": "Electricity. And a way to get rid of heat."
+   },
+   {
+    "say": "Let's start with electricity, because this is where the story gets strange."
+   }
+  ]
+ },
+ {
+  "key": "CHAPTER 2",
+  "title": "THE POWER",
+  "lines": [
+   {
+    "say": "In 2024, data centers around the world used about 415 terawatt-hours of electricity.",
+    "t": [
+     "Chapter 2: The Power"
+    ],
+    "m": [
+     "Music shifts. Lower, heavier."
+    ]
+   },
+   {
+    "say": "That number means nothing to most people, so let's make it real."
+   },
+   {
+    "say": "That's roughly one and a half percent of all the electricity used on Earth. More than many entire countries use in a year.",
+    "v": [
+     "Animated globe. Countries light up one by one."
+    ]
+   },
+   {
+    "say": "And it is growing fast."
+   },
+   {
+    "say": "The International Energy Agency projects that by 2030, data centers could use around 945 terawatt-hours."
+   },
+   {
+    "say": "That's more than double. About as much electricity as the whole country of Japan uses today. And the biggest driver of that growth is AI.",
+    "t": [
+     "2030 data centers ≈ all of Japan's electricity today"
+    ]
+   },
+   {
+    "say": "In the United States, data centers used about 4.4% of the country's electricity in 2023. A US government-funded study estimated that by 2028, it could be as high as 12%."
+   },
+   {
+    "say": "Some places are already feeling it.",
+    "v": [
+     "Aerial shot: Dublin at night."
+    ]
+   },
+   {
+    "say": "In Ireland, data centers used about 21% of all the country's electricity in 2023. That was more than all of the homes in Ireland's cities and towns combined."
+   },
+   {
+    "say": "The grid around Dublin got so stretched that the operator effectively stopped connecting new data centers in the area for years."
+   },
+   {
+    "say": "So here's the problem the tech companies face."
+   },
+   {
+    "say": "They need enormous amounts of power. They need it all day and all night, because people ask questions at 3 a.m. too. And they've promised the world it will be clean."
+   },
+   {
+    "say": "Solar doesn't work at night. Wind doesn't blow on command."
+   },
+   {
+    "say": "So where do you find clean power that never turns off?"
+   },
+   {
+    "say": "On March 28, 1979, a reactor at the Three Mile Island nuclear plant in Pennsylvania partially melted down. Thousands of families fled. For a generation of Americans, those cooling towers became the symbol of nuclear fear.",
+    "v": [
+     "Archive footage: March 1979, news broadcasts, cooling towers, worried crowds."
+    ],
+    "t": [
+     "March 28, 1979 — Three Mile Island, Pennsylvania"
+    ],
+    "m": [
+     "A beat of silence."
+    ]
+   },
+   {
+    "say": "The damaged reactor never ran again."
+   },
+   {
+    "say": "But there was a second reactor on the same island. It kept running for forty more years, until 2019, when it shut down. Not because it was dangerous. Because it couldn't make enough money."
+   },
+   {
+    "say": "The cooling towers went quiet."
+   },
+   {
+    "say": "Then, in September 2024, Microsoft signed a twenty-year deal to buy the power from that reactor if it was brought back online."
+   },
+   {
+    "say": "A shut-down nuclear plant, on the most famous nuclear site in America, restarted... largely to help power AI.",
+    "t": [
+     "Three Mile Island Unit 1 → renamed \"Crane Clean Energy Center\""
+    ]
+   },
+   {
+    "say": "And Microsoft isn't alone. Google signed a deal for small modular nuclear reactors. Amazon invested in nuclear startups too."
+   },
+   {
+    "say": "When the richest companies on Earth start bringing nuclear plants back from retirement, that tells you something about the size of the hunger."
+   },
+   {
+    "say": "But nuclear has one big weakness."
+   },
+   {
+    "say": "It's slow. New reactors take years, sometimes more than a decade."
+   },
+   {
+    "say": "And the AI race is not waiting years."
+   },
+   {
+    "say": "In 2024, Elon Musk's AI company, xAI, moved into an old factory in Memphis and turned it into one of the largest AI supercomputers in the world. They called it Colossus. Musk said it was built in about four months.",
+    "v": [
+     "Drone footage: a huge industrial building in Memphis, Tennessee. Large white turbine units lined up outside."
+    ],
+    "t": [
+     "Memphis, Tennessee — 2024"
+    ]
+   },
+   {
+    "say": "But there wasn't enough power from the grid to run it right away."
+   },
+   {
+    "say": "So they brought their own."
+   },
+   {
+    "say": "Gas turbines. Big portable power generators that burn methane gas, parked right next to the building."
+   },
+   {
+    "say": "An environmental law group, using aerial images, said it counted around thirty-five of them."
+   },
+   {
+    "say": "Now, look at where this happened.",
+    "v": [
+     "Street-level footage: small houses, a church, an industrial skyline behind them."
+    ]
+   },
+   {
+    "say": "The facility sits near neighborhoods in South Memphis, including a historically Black community called Boxtown. People there already lived next to industrial pollution: refineries, a steel mill, heavy truck traffic. The county already struggled with high asthma rates."
+   },
+   {
+    "say": "Gas turbines release nitrogen oxides, the kind of pollution that makes breathing harder, especially for children and the elderly."
+   },
+   {
+    "say": "Residents packed public meetings. Some said they found out about it from the news. Local health officials eventually approved permits for a smaller number of turbines."
+   },
+   {
+    "say": "The company has said it's adding pollution controls, investing in the local power grid, and bringing jobs and money to Memphis."
+   },
+   {
+    "say": "Both of those things can be true at the same time. That's what makes this story hard."
+   },
+   {
+    "say": "Now zoom out to the big picture.",
+    "m": [
+     "Music drops to a single held note."
+    ]
+   },
+   {
+    "say": "Google once promised to be net zero by 2030. But its own environmental report showed its greenhouse gas emissions were up 48% compared to 2019. Google said a major reason was data centers, and the energy needed for AI."
+   },
+   {
+    "say": "Microsoft promised to be carbon negative by 2030. Its emissions went up about 29% from its 2020 starting point."
+   },
+   {
+    "say": "These are not my numbers. These come from the companies themselves."
+   },
+   {
+    "say": "But electricity is only half the problem.",
+    "v": [
+     "A slow-motion shot of steam rising from a cooling tower."
+    ]
+   },
+   {
+    "say": "Remember: almost every watt becomes heat."
+   },
+   {
+    "say": "And to fight heat at this scale, you need water."
+   },
+   {
+    "say": "Which brings us back to a small town in Oregon... and that lawsuit."
+   }
+  ]
+ },
+ {
+  "key": "CHAPTER 3",
+  "title": "THE WATER",
+  "lines": [
+   {
+    "say": "Think about what your body does on a hot day.",
+    "t": [
+     "Chapter 3: The Water"
+    ],
+    "m": [
+     "Soft, cold ambient tones. Dripping water."
+    ]
+   },
+   {
+    "say": "You sweat. The sweat evaporates off your skin, and as it evaporates, it carries heat away. You cool down."
+   },
+   {
+    "say": "Many data centers cool themselves in exactly the same way."
+   },
+   {
+    "say": "Hot air from the servers heats up water. That water flows into cooling towers, where some of it evaporates into the sky. The heat leaves with it.",
+    "v": [
+     "Animation: hot air from servers → cooling tower → water evaporating into the sky."
+    ]
+   },
+   {
+    "say": "Here's the important part."
+   },
+   {
+    "say": "That evaporated water doesn't flow back into the river. It doesn't go back to the town. It's gone, carried away as vapor. Scientists call this water consumption, not just water use."
+   },
+   {
+    "say": "And there's a second, hidden layer. The power plants that make electricity for data centers often use huge amounts of water for cooling too. So AI drinks twice: once at the data center, and once at the power plant."
+   },
+   {
+    "say": "Now, back to The Dalles.",
+    "v": [
+     "Return to The Dalles. Columbia River. Green hills. The Google facility in the distance."
+    ]
+   },
+   {
+    "say": "Google has been in this town since the mid-2000s. Cheap hydropower from the Columbia River. Cool climate. A perfect place for a data center."
+   },
+   {
+    "say": "In 2021, the city was planning to give Google more water rights. A local newspaper wanted to know how much water Google was already using."
+   },
+   {
+    "say": "The city said that information was a trade secret. Google's secret."
+   },
+   {
+    "say": "So the newspaper sued."
+   },
+   {
+    "say": "For more than a year, the case went back and forth. Then, in late 2022, the city settled and released the numbers.",
+    "m": [
+     "Tension builds slightly."
+    ]
+   },
+   {
+    "say": "In 2021, Google's data centers in The Dalles used around 355 million gallons of water. That was more than a quarter of all the water used by the entire city. And it had nearly tripled in five years.",
+    "t": [
+     "2021: Google used ~355 million gallons in The Dalles"
+    ]
+   },
+   {
+    "say": "A quarter of a town's water. Going to one company. And until a newspaper went to court, the people who lived there weren't allowed to know.",
+    "v": [
+     "Stock footage: a resident watering a garden. A farmer checking an irrigation line."
+    ]
+   },
+   {
+    "say": "Now, to be fair, Google pointed out it also paid for local water infrastructure, and that the area has a lot of water from the river system. The Dalles is not a desert."
+   },
+   {
+    "say": "But many data centers are being built in places that are."
+   },
+   {
+    "say": "Across the dry American Southwest, around Phoenix, in Texas, in parts of Spain and Chile, data centers are being planned and built in places already worried about drought.",
+    "v": [
+     "Map: arrows pointing to Arizona, Texas, northern Mexico, Chile, Spain."
+    ]
+   },
+   {
+    "say": "In 2023, Uruguay went through its worst drought in decades. In the capital, Montevideo, tap water turned salty because the reservoirs ran so low. People lined up for bottled water.",
+    "v": [
+     "Footage: Montevideo, Uruguay, 2023. Empty reservoir. People carrying bottled water."
+    ]
+   },
+   {
+    "say": "At the same time, Google was planning a data center there. Protesters took to the streets, angry that a tech company might get water while families were buying it in bottles. Google later said it would redesign the project to use a cooling system that needs far less water."
+   },
+   {
+    "say": "The same thing happened in Chile, where a court pushed back on Google's permit near Santiago, and Google again said it would switch to air cooling."
+   },
+   {
+    "say": "And this isn't just about one company.",
+    "v": [
+     "Graphs rising on screen."
+    ]
+   },
+   {
+    "say": "In 2022, the same year AI started to explode, Microsoft's water consumption jumped 34%. Google's went up about 20%. Outside researchers said a big part of that was likely AI."
+   },
+   {
+    "say": "So how much water does ONE AI answer actually use?"
+   },
+   {
+    "say": "Here's where it gets confusing.",
+    "v": [
+     "Split screen. Left: a 500ml water bottle. Right: a teaspoon with a few drops."
+    ]
+   },
+   {
+    "say": "In 2023, researchers at the University of California, Riverside estimated that a conversation of roughly 10 to 50 questions with ChatGPT could \"drink\" about a 500 millilitre bottle of water."
+   },
+   {
+    "say": "But in 2025, OpenAI's CEO, Sam Altman, wrote that the average ChatGPT question uses about one-fifteenth of a teaspoon of water."
+   },
+   {
+    "say": "A bottle of water. Or a few drops.",
+    "t": [
+     "A bottle per conversation... or a few drops per question?"
+    ]
+   },
+   {
+    "say": "They can't both be right."
+   },
+   {
+    "say": "Can they?"
+   },
+   {
+    "say": "Keep that question in your head. I promise, before this video ends, we'll settle it.",
+    "m": [
+     "A sharp musical sting."
+    ]
+   },
+   {
+    "say": "Because so far, we've only talked about machines. Power plants. Cooling towers. Chips.",
+    "v": [
+     "Fade from water to darkness."
+    ]
+   },
+   {
+    "say": "But here's the part that surprised me most when I started researching this video."
+   },
+   {
+    "say": "The AI you use every day wasn't just built by machines."
+   },
+   {
+    "say": "It was built by people."
+   },
+   {
+    "say": "Millions of them."
+   },
+   {
+    "say": "And most of them, you will never hear about."
+   }
+  ]
+ },
+ {
+  "key": "CHAPTER 4",
+  "title": "THE HANDS",
+  "lines": [
+   {
+    "say": "To understand this chapter, you need to understand one uncomfortable fact.",
+    "t": [
+     "Chapter 4: The Hands"
+    ],
+    "m": [
+     "Quiet piano. Slower pace."
+    ]
+   },
+   {
+    "say": "When an AI model learns from the internet, it learns from ALL of the internet."
+   },
+   {
+    "say": "The encyclopedias and the poems. But also the hate. The violence. The abuse. The darkest corners that most of us never see."
+   },
+   {
+    "say": "Early AI models could produce horrifying things. Racist rants. Violent threats. Descriptions of abuse. Not because anyone wanted them to, but because they learned it from us.",
+    "v": [
+     "Blurred, abstract text scrolling, unreadable."
+    ]
+   },
+   {
+    "say": "So AI companies had a problem. How do you teach a machine to recognize the worst content in the world, so it can refuse to repeat it?"
+   },
+   {
+    "say": "You show it examples."
+   },
+   {
+    "say": "Thousands and thousands of examples, each one labeled by a human: this is violence. This is abuse. This is hate."
+   },
+   {
+    "say": "Someone has to read them first."
+   },
+   {
+    "say": "In late 2021, OpenAI hired an outsourcing company called Sama for exactly this work. Sama was based in San Francisco but employed workers in Nairobi, Kenya. It marketed itself as an \"ethical AI\" company that helped lift people out of poverty.",
+    "v": [
+     "A modern office building in Nairobi, Kenya. Morning traffic outside."
+    ],
+    "t": [
+     "Nairobi, Kenya — late 2021"
+    ]
+   },
+   {
+    "say": "In 2023, an investigation by TIME magazine revealed what that job looked like."
+   },
+   {
+    "say": "The workers were young Kenyans, many recent graduates. Their job was to read text passages pulled from the darkest parts of the internet and label them.",
+    "v": [
+     "Slow pan across an empty office. Rows of desks. Monitors glowing."
+    ]
+   },
+   {
+    "say": "Descriptions of child sexual abuse. Murder. Suicide. Torture. Self-harm."
+   },
+   {
+    "say": "According to TIME, workers were expected to read and label roughly 150 to 250 passages in a nine-hour shift."
+   },
+   {
+    "say": "Sit with that for a second.",
+    "m": [
+     "Music drops out. Only room tone."
+    ]
+   },
+   {
+    "say": "Nine hours. One screen. Passage after passage. You can't skip one. Skipping isn't doing your job. Your eyes start to ache. Your shoulders tighten. You go home, you sit down to eat with your family, and the words are still there behind your eyes."
+   },
+   {
+    "say": "One worker told TIME that reading one of those passages left him with recurring visions. He described the work in two words."
+   },
+   {
+    "say": "So what were they paid?",
+    "v": [
+     "Text appears one figure at a time."
+    ],
+    "t": [
+     "\"That was torture.\" — Sama worker, to TIME (2023)"
+    ]
+   },
+   {
+    "say": "According to TIME, the workers took home between about $1.32 and $2 an hour, depending on their role."
+   },
+   {
+    "say": "The contract said OpenAI paid Sama around $12.50 an hour for the work.",
+    "t": [
+     "OpenAI → Sama: ~$12.50 per hour",
+     "Sama → workers: ~$1.32 – $2 per hour"
+    ]
+   },
+   {
+    "say": "Workers said the counseling they were offered was rare and not enough. Sama disputed that, and said wellness support was available."
+   },
+   {
+    "say": "In February 2022, Sama ended the contract with OpenAI eight months early."
+   },
+   {
+    "say": "But the story didn't end when the contract did."
+   },
+   {
+    "say": "In 2023, a group of former workers in Kenya filed a petition asking the country's parliament to investigate. They wanted laws to protect people who do this kind of work, and they wanted the work recognized as a real health hazard, like working with dangerous chemicals."
+   },
+   {
+    "say": "Some of the workers who moderated content for big tech companies in Kenya later took those companies to court. Several said they had been diagnosed with post-traumatic stress disorder."
+   },
+   {
+    "say": "Researchers even have a name for this hidden workforce: \"ghost work.\" Work that makes technology look automatic... because the humans doing it are kept out of sight."
+   },
+   {
+    "say": "OpenAI said that this kind of work was a necessary part of making AI safe, and that it had not set the productivity targets."
+   },
+   {
+    "say": "Now here's the connection most people never make.",
+    "v": [
+     "Return to a chatbot screen. A polite, friendly answer types out."
+    ]
+   },
+   {
+    "say": "That polite, careful, friendly tone your AI uses? That's not natural. It's taught."
+   },
+   {
+    "say": "Part of it comes from a method called reinforcement learning from human feedback. In plain words: people read AI answers and rank them. This answer is better. This one is worse. This one is harmful. Do that millions of times, and the AI learns how to behave."
+   },
+   {
+    "say": "Every \"please,\" every \"I'm sorry, I can't help with that,\" every careful answer was shaped by human hands.",
+    "v": [
+     "Montage: laptops in small apartments, internet cafés, kitchen tables."
+    ]
+   },
+   {
+    "say": "And today that's a giant industry."
+   },
+   {
+    "say": "There's a company called Scale AI, one of the biggest players in this world. In 2025, Meta invested over 14 billion dollars into it."
+   },
+   {
+    "say": "Behind companies like this are huge networks of workers, often in Kenya, the Philippines, India, Venezuela, and other places where wages are low."
+   },
+   {
+    "say": "In 2023, the Washington Post reported on workers in the Philippines doing AI labeling on a Scale AI platform called Remotasks. Many said they were paid far below the minimum wage, and that payments were often delayed or cancelled."
+   },
+   {
+    "say": "In 2024, nearly a hundred Kenyan data workers wrote an open letter to the President of the United States. They said their working conditions amounted to modern-day slavery."
+   },
+   {
+    "say": "To be fair, the picture is changing. Some AI companies now hire doctors, lawyers and scientists, and pay them very well, to train more advanced models. Some workers say this work changed their lives for the better.",
+    "m": [
+     "A slow, low tone."
+    ]
+   },
+   {
+    "say": "But that creates a two-tier system. Experts on top, well paid. And underneath them, a hidden army doing the hardest, most traumatic work for a few dollars an hour."
+   },
+   {
+    "say": "When we talk about the cost of AI, we usually talk about money. Billions in investment. Trillions in stock market value.",
+    "v": [
+     "A single empty desk. The monitor switches off."
+    ]
+   },
+   {
+    "say": "We rarely talk about a young graduate in Nairobi who can't sleep."
+   },
+   {
+    "say": "But even the workers are only one link in the chain.",
+    "v": [
+     "Fade to a close-up of raw grey rock in a gloved hand."
+    ]
+   },
+   {
+    "say": "Because before there's a chatbot... before there's a data center... before there's a chip..."
+   },
+   {
+    "say": "There's a rock in the ground."
+   }
+  ]
+ },
+ {
+  "key": "CHAPTER 5",
+  "title": "THE ROCKS",
+  "lines": [
+   {
+    "say": "Every AI chip begins as sand.",
+    "t": [
+     "Chapter 5: The Rocks"
+    ],
+    "m": [
+     "Deep, earthy percussion."
+    ]
+   },
+   {
+    "say": "Ordinary sand, rich in silicon. It's melted, purified until it's almost perfect, and grown into a gleaming crystal cylinder. That cylinder is sliced into thin wafers. Then, in one of the cleanest rooms on Earth, billions of tiny switches are carved into each wafer, each one thousands of times thinner than a human hair."
+   },
+   {
+    "say": "And almost all of the world's most advanced chips are made by one company, on one island.",
+    "v": [
+     "Clean-room footage: workers in white suits, yellow light, robotic arms."
+    ]
+   },
+   {
+    "say": "The Taiwan Semiconductor Manufacturing Company, TSMC, makes the vast majority of the world's most advanced chips, including the ones inside most AI systems.",
+    "t": [
+     "TSMC — Taiwan"
+    ]
+   },
+   {
+    "say": "Here's something most people don't know: making chips takes an enormous amount of water. Ultra-pure water to rinse every wafer, again and again."
+   },
+   {
+    "say": "In 2021, Taiwan suffered one of its worst droughts in more than half a century. Reservoirs dried up. Farmers were told to stop watering some of their fields so that water could keep flowing to factories. And TSMC trucked in water to keep its chip plants running.",
+    "v": [
+     "Dry reservoir in Taiwan, 2021. Cracked mud."
+    ]
+   },
+   {
+    "say": "Think about that. The world's AI depended, in part, on a fleet of water trucks driving across one island."
+   },
+   {
+    "say": "And that island sits about a hundred miles from China, which claims Taiwan as its own territory. That's why governments now talk about chips the same way they once talked about oil.",
+    "v": [
+     "Map: Taiwan, with China about 100 miles across the strait."
+    ]
+   },
+   {
+    "say": "Chips also need rare materials.",
+    "v": [
+     "Glittering grey metal chunks. Then a mine."
+    ]
+   },
+   {
+    "say": "Take gallium and germanium, two metals used in chips and electronics. China produces the vast majority of the world's gallium, roughly 98% by some estimates."
+   },
+   {
+    "say": "In 2023, China started restricting exports of these metals. In late 2024, it banned shipping them to the United States. Suddenly, a metal most people have never heard of became a weapon in a global tech war."
+   },
+   {
+    "say": "Then there's copper, for the wiring in every data center and every new power line. And the giant battery systems that keep data centers running if the power cuts out. Many batteries use cobalt and lithium.",
+    "v": [
+     "Footage: copper wire spools, power lines."
+    ]
+   },
+   {
+    "say": "Around 70% of the world's cobalt comes from the Democratic Republic of the Congo. Human rights groups have documented people, including children, digging by hand in dangerous mines.",
+    "v": [
+     "Archival footage: artisanal cobalt mining in the Democratic Republic of the Congo."
+    ]
+   },
+   {
+    "say": "Now, it's important to be honest here. Most of that cobalt goes into phones and electric cars, not AI specifically. But as AI drives demand for more batteries, more devices and more power storage, it becomes part of that same chain."
+   },
+   {
+    "say": "And then, the end of the chain.",
+    "v": [
+     "Piles of discarded circuit boards. A recycling yard."
+    ]
+   },
+   {
+    "say": "AI chips don't last forever. Companies race to replace them every few years with faster, newer models. The old ones become waste."
+   },
+   {
+    "say": "A 2024 study in the journal Nature Computational Science estimated that generative AI could create between 1.2 and 5 million tonnes of electronic waste by 2030."
+   },
+   {
+    "say": "At the high end, that's roughly the weight of 500 Eiffel Towers. In electronic scrap.",
+    "t": [
+     "5 million tonnes ≈ ~500 Eiffel Towers"
+    ]
+   },
+   {
+    "say": "So far, everything we've talked about happens far away. Oregon. Kenya. Taiwan. The Congo.",
+    "v": [
+     "Slow pull-back from a scrap pile."
+    ]
+   },
+   {
+    "say": "Here's where it stops being far away."
+   }
+  ]
+ },
+ {
+  "key": "CHAPTER 6",
+  "title": "WHO PAYS",
+  "lines": [
+   {
+    "say": "When a giant data center plugs into the grid, someone has to build the new power plants. The new power lines. The new substations.",
+    "v": [
+     "Close-up: a paper electricity bill. A hand circles the total with a pen."
+    ],
+    "t": [
+     "Chapter 6: Who Pays?"
+    ],
+    "m": [
+     "Music becomes tighter, more personal."
+    ]
+   },
+   {
+    "say": "And often, the cost of all that gets spread across everyone connected to the grid."
+   },
+   {
+    "say": "Including you."
+   },
+   {
+    "say": "In the eastern United States, there's a grid operator called PJM. It keeps the lights on for about 65 million people across thirteen states and Washington, D.C., including Virginia's Data Center Alley.",
+    "v": [
+     "Map of the eastern United States, highlighting 13 states and Washington, D.C."
+    ],
+    "t": [
+     "PJM — the grid serving ~65 million people"
+    ]
+   },
+   {
+    "say": "Every year, PJM holds an auction to make sure there will be enough power plants available in the future."
+   },
+   {
+    "say": "In 2024, the price in that auction jumped from about $29 to about $270."
+   },
+   {
+    "say": "That's almost ten times higher in one year.",
+    "t": [
+     "$28.92 → $269.92 (per megawatt-day)"
+    ]
+   },
+   {
+    "say": "PJM's independent market monitor said data center demand was a major reason."
+   },
+   {
+    "say": "And in 2025, people across states like Maryland, New Jersey, Pennsylvania and Ohio saw their electricity bills go up."
+   },
+   {
+    "say": "A family in Ohio who has never typed a single question into a chatbot... may still be paying for the AI boom on their power bill.",
+    "m": [
+     "A beat."
+    ]
+   },
+   {
+    "say": "And sometimes, the cost isn't money. It's land.",
+    "v": [
+     "Rolling Maryland farmland. Survey stakes in a field. A farmer leaning on a fence."
+    ]
+   },
+   {
+    "say": "Power has to travel from where it's made to where it's used. So when data centers cluster in Northern Virginia, new high-voltage power lines have to be built to bring electricity in."
+   },
+   {
+    "say": "In Maryland, a proposed transmission line, about 67 miles long, would cut across family farms and forests to help carry power toward the growing demand, including Virginia's data centers."
+   },
+   {
+    "say": "Some of those farms had been in the same families for generations. Landowners faced the possibility of having steel towers built across their fields, through eminent domain. That's when the law lets a project use private land, even if the owner says no."
+   },
+   {
+    "say": "Farmers who would never use the data centers. Hosting the power lines that feed them."
+   },
+   {
+    "say": "Then there's what it's like to live next door.",
+    "v": [
+     "Suburban street at night. A data center glows behind the houses."
+    ]
+   },
+   {
+    "say": "In parts of Northern Virginia, residents have complained about a constant low hum from data center cooling equipment. Day and night. A sound you feel in your chest more than you hear. The kind of noise that makes it hard to fall asleep, even with the windows shut."
+   },
+   {
+    "say": "Many of these projects arrive in secret.",
+    "v": [
+     "Footage: a city council meeting, residents at the microphone."
+    ]
+   },
+   {
+    "say": "Data center deals are often negotiated under code names, with local officials signing non-disclosure agreements. Residents sometimes don't learn which company is behind a project until it's already approved."
+   },
+   {
+    "say": "And many states compete to attract data centers with big tax breaks. In Virginia, the state's own watchdog found that its sales tax break for data center equipment costs the state hundreds of millions of dollars a year."
+   },
+   {
+    "say": "What do towns get back?"
+   },
+   {
+    "say": "Building a data center creates many construction jobs, but only for a while. Once it's running, a giant facility may only need a few dozen permanent workers."
+   },
+   {
+    "say": "But to be fair, there's another side to this.",
+    "v": [
+     "A bright, modern school building. Then a Loudoun County road sign."
+    ]
+   },
+   {
+    "say": "Data centers pay a lot of property tax. In Loudoun County, Virginia, data centers bring in a large share of the county's tax money, and that has helped pay for schools and keep homeowners' tax rates lower."
+   },
+   {
+    "say": "So some communities win. Some pay. And very often, the people who pay are not the people who decided."
+   },
+   {
+    "say": "That's the pattern we saw in Memphis. In The Dalles. In Nairobi.",
+    "v": [
+     "Callback: the turbines in Memphis."
+    ]
+   },
+   {
+    "say": "The benefits are spread across the whole world. The costs land on specific places, and specific people."
+   },
+   {
+    "say": "Now, I've spent a lot of this video on the costs.",
+    "m": [
+     "Music softens, opening up."
+    ]
+   },
+   {
+    "say": "So it's only fair to give the other side its full say."
+   },
+   {
+    "say": "Because the AI industry has some strong answers. And some of them are true."
+   }
+  ]
+ },
+ {
+  "key": "CHAPTER 7",
+  "title": "THE OTHER SIDE",
+  "lines": [
+   {
+    "say": "Argument number one: a single question is tiny.",
+    "t": [
+     "Chapter 7: The Other Side"
+    ],
+    "m": [
+     "Lighter, more hopeful tone."
+    ]
+   },
+   {
+    "say": "In 2025, Sam Altman said the average ChatGPT question uses about 0.34 watt-hours of electricity."
+   },
+   {
+    "say": "That's about what an oven uses in roughly one second. Or an efficient LED bulb in a couple of minutes.",
+    "t": [
+     "1 AI question ≈ an oven running for about 1 second"
+    ]
+   },
+   {
+    "say": "Google published its own numbers too. It said the median text question to its Gemini AI used about 0.24 watt-hours and about 0.26 millilitres of water, roughly five drops. And it said the energy per question had dropped about 33 times in a single year."
+   },
+   {
+    "say": "To compare, streaming one hour of video uses, by some estimates, around 80 watt-hours. That's a couple of hundred AI questions.",
+    "v": [
+     "Comparison graphic: a TV playing a show next to a stack of chat bubbles."
+    ]
+   },
+   {
+    "say": "Argument number two: AI is getting more efficient. Fast."
+   },
+   {
+    "say": "Every new generation of chips does more work for the same power. In early 2025, a Chinese company called DeepSeek shocked the industry by claiming it trained a powerful model for a small fraction of what American companies were spending."
+   },
+   {
+    "say": "Argument number three: AI could help fix the very problems it creates."
+   },
+   {
+    "say": "Back in 2016, Google's DeepMind used AI to cut the energy used to cool Google's data centers by up to 40%. AI is now being used to forecast weather, design better batteries, discover new materials and manage power grids.",
+    "v": [
+     "Footage: weather maps, wind turbines, a lab with molecules on screen."
+    ]
+   },
+   {
+    "say": "And the tech giants are some of the biggest buyers of solar and wind power in the world."
+   },
+   {
+    "say": "These are real points. They matter."
+   },
+   {
+    "say": "But there's a problem. And it has a name.",
+    "m": [
+     "The music pauses."
+    ]
+   },
+   {
+    "say": "In 1865, an English economist named William Stanley Jevons noticed something strange.",
+    "v": [
+     "Archival engraving: a Victorian steam engine, coal smoke."
+    ],
+    "t": [
+     "1865 — The Jevons Paradox"
+    ]
+   },
+   {
+    "say": "Steam engines were getting much more efficient. They needed less coal to do the same work. So you'd expect Britain to use less coal."
+   },
+   {
+    "say": "It used more."
+   },
+   {
+    "say": "Because when something becomes cheaper and more efficient, people use far more of it."
+   },
+   {
+    "say": "That's called the Jevons paradox."
+   },
+   {
+    "say": "And in January 2025, right after DeepSeek's announcement, Microsoft's CEO Satya Nadella posted about the Jevons paradox himself. His point: as AI gets cheaper, demand for it will skyrocket."
+   },
+   {
+    "say": "That's exactly why the energy agency projects data center electricity could more than double by 2030, even as each answer gets more efficient.",
+    "v": [
+     "The counter from Chapter 1 returns, spinning faster than ever."
+    ]
+   },
+   {
+    "say": "Each question gets cheaper."
+   },
+   {
+    "say": "So we ask a lot more questions."
+   }
+  ]
+ },
+ {
+  "key": "ENDING",
+  "title": "THE ANSWER",
+  "lines": [
+   {
+    "say": "So, let's go back to the question I promised to answer.",
+    "t": [
+     "So... what does one question cost?"
+    ],
+    "m": [
+     "Return of the cold-open drone, quieter."
+    ]
+   },
+   {
+    "say": "A bottle of water per conversation... or a few drops per question?"
+   },
+   {
+    "say": "The truth is, they're measuring different things.",
+    "v": [
+     "The split screen returns. Bottle on the left, drops on the right."
+    ]
+   },
+   {
+    "say": "The 2023 university estimate looked at an older model. It counted a whole conversation, not one question. And it counted the hidden water too: the water used at the power plants that make the electricity."
+   },
+   {
+    "say": "The newer company numbers look at newer, more efficient models. They measure a single, typical text question. And they mostly don't include things like generating images, making videos, or the newer \"reasoning\" models that think for much longer before answering."
+   },
+   {
+    "say": "So both numbers are real.",
+    "t": [
+     "Both numbers are real. Both numbers are partial."
+    ]
+   },
+   {
+    "say": "And both are incomplete."
+   },
+   {
+    "say": "And here's the answer to the big question."
+   },
+   {
+    "say": "One question to AI costs almost nothing.",
+    "m": [
+     "Music drops to near-silence."
+    ]
+   },
+   {
+    "say": "That's the trick.",
+    "v": [
+     "The cursor blinks again."
+    ]
+   },
+   {
+    "say": "That's why it feels like a cloud. That's why it feels weightless."
+   },
+   {
+    "say": "The cost was never in one question."
+   },
+   {
+    "say": "It's in billions of questions, every single day. It's in the new power plants being built for tomorrow's questions. It's in the gas turbines in Memphis, the water in The Dalles, the reactor in Pennsylvania."
+   },
+   {
+    "say": "And some costs never fit into a watt-hour at all."
+   },
+   {
+    "say": "A worker in Nairobi who still can't sleep. A family in Ohio staring at a bigger bill. A town that had to go to court just to learn how much of its own water was gone."
+   },
+   {
+    "say": "Now, I'm not telling you to stop using AI.",
+    "v": [
+     "Montage of every location from the video, one after another."
+    ]
+   },
+   {
+    "say": "I use it. This channel is about it. It's one of the most powerful tools humans have ever built, and it may help solve problems we can't solve alone."
+   },
+   {
+    "say": "But we can't make good decisions about something we can't see."
+   },
+   {
+    "say": "And right now, a lot of it is still hidden."
+   },
+   {
+    "say": "Some governments are starting to change that. In Europe, new rules now require large data centers to report how much energy and water they use. The European Union's AI law also asks the companies building the biggest AI models to document how much energy they consume.",
+    "v": [
+     "EU flag. Brussels parliament building. Documents on screen."
+    ]
+   },
+   {
+    "say": "In the United States, some states and cities have started debating similar rules, and asking whether data centers should pay more of the cost of the grid they depend on."
+   },
+   {
+    "say": "So what can you actually do?"
+   },
+   {
+    "say": "You can ask your local officials one simple question whenever a data center is proposed near you: How much water and power will it use, and who pays for the new grid?"
+   },
+   {
+    "say": "You can support journalists, like that newspaper in Oregon, who go to court to get these numbers."
+   },
+   {
+    "say": "And you can use AI with your eyes open. Not with guilt. With awareness."
+   },
+   {
+    "say": "The cloud was never a cloud."
+   },
+   {
+    "say": "It's a building. A power line. A river. A mine. A person."
+   },
+   {
+    "say": "And the more of us who know that, the more likely it is that the people who build AI will have to show us the full bill."
+   },
+   {
+    "say": "Back in The Dalles, the town got its answer. And Google kept building.",
+    "v": [
+     "Return to The Dalles. Wide shot of the river at sunset."
+    ]
+   },
+   {
+    "say": "Most towns haven't asked the question yet.",
+    "m": [
+     "Long pause."
+    ]
+   },
+   {
+    "say": "Maybe yours is one of them."
+   },
+   {
+    "say": "Tell me in the comments.",
+    "v": [
+     "The black screen. The cursor blinks. One last click."
+    ],
+    "t": [
+     "Would you still ask AI to plan your dinner... if you could see the bill?"
+    ],
+    "m": [
+     "Click. Silence."
+    ]
+   },
+   {
+    "say": "And if this changed the way you see the cloud, share it with one person who uses AI every day."
+   },
+   {
+    "say": "I'll see you in the next one."
+   }
+  ]
+ }
+]
