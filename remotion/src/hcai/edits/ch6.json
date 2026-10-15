@@ -1,1 +1,23 @@
-{"edits": []}
+{"edits": [
+{"ch": 6, "from": 1435.633, "to": 1442.45, "mode": "anim", "ref": "c6grid", "note": "new plants, lines, substations"},
+{"ch": 6, "from": 1442.45, "to": 1449.95, "mode": "anim", "ref": "c6spread", "note": "cost spread over everyone, including you"},
+{"ch": 6, "from": 1449.95, "to": 1463.85, "mode": "anim", "ref": "c6pjm", "note": "PJM map: 65M people, 13 states + DC, Data Center Alley"},
+{"ch": 6, "from": 1463.85, "to": 1470.2, "mode": "anim", "ref": "c6auction", "note": "capacity auction"},
+{"ch": 6, "from": 1470.2, "to": 1479.85, "mode": "anim", "ref": "c6price", "note": "$28.92 -> $269.92 per MW-day (S25)"},
+{"ch": 6, "from": 1479.85, "to": 1487.95, "mode": "anim", "ref": "c6monitor", "note": "market monitor; keep map at 1487.963"},
+{"ch": 6, "from": 1491.903, "to": 1505.0, "mode": "anim", "ref": "c6family", "note": "the bill; Ohio family"},
+{"ch": 6, "from": 1505.0, "to": 1520.65, "mode": "anim", "ref": "c6land", "note": "land; made vs used; new lines; keep map at 1520.663"},
+{"ch": 6, "from": 1527.273, "to": 1537.95, "mode": "anim", "ref": "c6route", "note": "MPRP ~67 miles; generations"},
+{"ch": 6, "from": 1537.95, "to": 1550.15, "mode": "anim", "ref": "c6eminent", "note": "steel towers, eminent domain"},
+{"ch": 6, "from": 1550.15, "to": 1556.8, "mode": "anim", "ref": "c6farmers", "note": "farmers host the lines"},
+{"ch": 6, "from": 1556.8, "to": 1568.6, "mode": "anim", "ref": "c6nextdoor", "note": "hum next door"},
+{"ch": 6, "from": 1568.6, "to": 1577.45, "mode": "anim", "ref": "c6sleep", "note": "feel it, can't sleep"},
+{"ch": 6, "from": 1577.45, "to": 1593.45, "mode": "anim", "ref": "c6secret", "note": "code names, NDAs"},
+{"ch": 6, "from": 1593.45, "to": 1598.55, "mode": "anim", "ref": "c6taxrace", "note": "states compete with tax breaks; keep map at 1598.563"},
+{"ch": 6, "from": 1606.433, "to": 1610.4, "mode": "anim", "ref": "c6jlarc", "note": "$928.6M (FY2023, JLARC) (S28)"},
+{"ch": 6, "from": 1610.4, "to": 1620.5, "mode": "anim", "ref": "c6jobs", "note": "construction vs a few dozen permanent jobs"},
+{"ch": 6, "from": 1620.5, "to": 1636.85, "mode": "anim", "ref": "c6loudoun", "note": "Loudoun property tax"},
+{"ch": 6, "from": 1636.85, "to": 1643.95, "mode": "anim", "ref": "c6winpay", "note": "some win, some pay"},
+{"ch": 6, "from": 1643.95, "to": 1654.67, "mode": "anim", "ref": "c6pattern", "note": "Memphis, The Dalles, Nairobi; keep map at 1654.683"},
+{"ch": 6, "from": 1659.713, "to": 1669.94, "mode": "anim", "ref": "c6otherside", "note": "the other side"}
+]}

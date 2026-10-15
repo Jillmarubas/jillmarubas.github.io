@@ -1,1 +1,204 @@
-{"edits": []}
+{
+ "edits": [
+  {
+   "ch": 4,
+   "from": 908.7,
+   "to": 918.0,
+   "mode": "anim",
+   "ref": "c4fact",
+   "note": "one uncomfortable fact: the model learns from ALL of the internet"
+  },
+  {
+   "ch": 4,
+   "from": 918.0,
+   "to": 928.4,
+   "mode": "anim",
+   "ref": "c4iceberg",
+   "note": "iceberg: encyclopedias and poems on top, hate/violence/abuse below (blurred)"
+  },
+  {
+   "ch": 4,
+   "from": 928.4,
+   "to": 940.0,
+   "mode": "anim",
+   "ref": "c4early",
+   "note": "early model output, redacted with stamps; learned it from us"
+  },
+  {
+   "ch": 4,
+   "from": 940.0,
+   "to": 961.0,
+   "mode": "anim",
+   "ref": "c4teach",
+   "note": "recognise and refuse; examples labelled by a human"
+  },
+  {
+   "ch": 4,
+   "from": 961.0,
+   "to": 978.0,
+   "mode": "anim",
+   "ref": "c4sama",
+   "note": "OpenAI hires Sama; San Francisco to Nairobi; 'ethical AI'"
+  },
+  {
+   "ch": 4,
+   "from": 978.0,
+   "to": 998.0,
+   "mode": "anim",
+   "ref": "c4office",
+   "note": "TIME investigation; isometric office; one labelling screen"
+  },
+  {
+   "ch": 4,
+   "from": 998.0,
+   "to": 1009.2,
+   "mode": "anim",
+   "ref": "c4quota",
+   "note": "150-250 passages in a nine-hour shift"
+  },
+  {
+   "ch": 4,
+   "from": 1009.2,
+   "to": 1027.4,
+   "mode": "anim",
+   "ref": "c4shift",
+   "note": "nine hours, one screen; home to dinner, the words still there"
+  },
+  {
+   "ch": 4,
+   "from": 1027.4,
+   "to": 1036.3,
+   "mode": "anim",
+   "ref": "c4visions",
+   "note": "recurring visions; 'That was torture.'"
+  },
+  {
+   "ch": 4,
+   "from": 1036.3,
+   "to": 1052.0,
+   "mode": "anim",
+   "ref": "c4pay",
+   "note": "$12.50 vs $1.32-$2 an hour on one scale"
+  },
+  {
+   "ch": 4,
+   "from": 1052.0,
+   "to": 1060.2,
+   "mode": "anim",
+   "ref": "c4counsel",
+   "note": "counselling: workers vs Sama"
+  },
+  {
+   "ch": 4,
+   "from": 1060.2,
+   "to": 1069.0,
+   "mode": "anim",
+   "ref": "c4ended",
+   "note": "contract cut 8 months early; the story continues"
+  },
+  {
+   "ch": 4,
+   "from": 1069.0,
+   "to": 1085.6,
+   "mode": "anim",
+   "ref": "c4petition",
+   "note": "2023 petition to parliament; health hazard like chemicals"
+  },
+  {
+   "ch": 4,
+   "from": 1085.6,
+   "to": 1097.0,
+   "mode": "anim",
+   "ref": "c4court",
+   "note": "court case; PTSD diagnosis file"
+  },
+  {
+   "ch": 4,
+   "from": 1097.0,
+   "to": 1109.0,
+   "mode": "anim",
+   "ref": "c4ghost",
+   "note": "ghost work: the app swings open to show the workers"
+  },
+  {
+   "ch": 4,
+   "from": 1109.0,
+   "to": 1120.0,
+   "mode": "anim",
+   "ref": "c4targets",
+   "note": "OpenAI's statement; the connection (night chat 1120.17-1126.31 stays)"
+  },
+  {
+   "ch": 4,
+   "from": 1126.3,
+   "to": 1143.0,
+   "mode": "anim",
+   "ref": "c4rlhf",
+   "note": "RLHF: people rank answers, millions of times"
+  },
+  {
+   "ch": 4,
+   "from": 1143.0,
+   "to": 1150.0,
+   "mode": "anim",
+   "ref": "c4please",
+   "note": "every please and sorry, threads to people at laptops"
+  },
+  {
+   "ch": 4,
+   "from": 1150.0,
+   "to": 1165.7,
+   "mode": "anim",
+   "ref": "c4industry",
+   "note": "a giant industry; Scale AI; Meta $14B+; networks of workers"
+  },
+  {
+   "ch": 4,
+   "from": 1176.66,
+   "to": 1189.9,
+   "mode": "anim",
+   "ref": "c4remotasks",
+   "note": "Remotasks in the Philippines; below minimum wage; delayed/cancelled pay"
+  },
+  {
+   "ch": 4,
+   "from": 1189.9,
+   "to": 1200.7,
+   "mode": "anim",
+   "ref": "c4letter",
+   "note": "97 workers' open letter; 'modern-day slavery'"
+  },
+  {
+   "ch": 4,
+   "from": 1200.7,
+   "to": 1214.1,
+   "mode": "anim",
+   "ref": "c4experts",
+   "note": "doctors, lawyers, scientists, well paid"
+  },
+  {
+   "ch": 4,
+   "from": 1214.1,
+   "to": 1224.5,
+   "mode": "anim",
+   "ref": "c4twotier",
+   "note": "two tiers: experts on top, hidden army below"
+  },
+  {
+   "ch": 4,
+   "from": 1224.5,
+   "to": 1237.1,
+   "mode": "anim",
+   "ref": "c4money",
+   "note": "billions and trillions; a graduate in Nairobi who can't sleep"
+  },
+  {
+   "ch": 4,
+   "from": 1237.1,
+   "to": 1248.6,
+   "mode": "anim",
+   "ref": "c4chain",
+   "note": "one link in the chain; back to the rock"
+  }
+ ]
+}

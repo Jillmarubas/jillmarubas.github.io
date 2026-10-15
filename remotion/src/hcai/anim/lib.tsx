@@ -14,15 +14,154 @@
 //     );
 //   };
 import React from 'react';
-import {AbsoluteFill, random} from 'remotion';
+import {AbsoluteFill, random, useCurrentFrame} from 'remotion';
 import {AF, P, Note, Tag, ease, lerp, pop} from './akit';
 import {settle} from '../kit';
 
 /* ================================================================== stage and camera */
-/** A full-frame ground: a flat colour with a soft radial light, or a two-colour gradient. */
-export const Bg: React.FC<{c?: string; c2?: string; angle?: number; children?: React.ReactNode}> = ({c = P.navy, c2, angle = 160, children}) => (
-  <AbsoluteFill style={{background: c2 ? `linear-gradient(${angle}deg, ${c}, ${c2})` : `radial-gradient(ellipse 90% 85% at 50% 40%, ${c} 0%, ${shade(c, 0.62)} 100%)`, overflow: 'hidden'}}>{children}</AbsoluteFill>
-);
+/* A living background (review note: "make the background more interesting"): the base colour, slow drifting glows
+ * in its own hues, one faint themed pattern and a vignette. The pattern is picked from the colours so neighbouring
+ * scenes differ: circuit traces with running pulses or a perspective data floor on dark grounds, contour lines or a dot
+ * grid on light ones. Pass `pattern` to choose, or `pattern="none"` for a plain ground. */
+type Pattern = 'circuit' | 'floor' | 'topo' | 'dots' | 'none';
+const hash = (s: string) => {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+};
+const luma = (hex: string) => {
+  if (!hex.startsWith('#') || hex.length < 7) return 0.3;
+  const n = parseInt(hex.slice(1, 7), 16);
+  return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
+};
+const CIRCUIT = (() => {
+  const traces: [number, number][][] = [];
+  for (let i = 0; i < 34; i++) {
+    let x = Math.round(random(`cx${i}`) * 48) * 40, y = Math.round(random(`cy${i}`) * 27) * 40;
+    const pts: [number, number][] = [[x, y]];
+    for (let j = 0; j < 4; j++) {
+      if (j % 2 === 0) x += (random(`dx${i}${j}`) > 0.5 ? 1 : -1) * (80 + Math.round(random(`lx${i}${j}`) * 6) * 40);
+      else y += (random(`dy${i}${j}`) > 0.5 ? 1 : -1) * (40 + Math.round(random(`ly${i}${j}`) * 4) * 40);
+      pts.push([x, y]);
+    }
+    traces.push(pts);
+  }
+  return traces;
+})();
+const along = (pts: [number, number][], u: number): [number, number] => {
+  const seg = pts.slice(1).map((p, i) => Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1]));
+  let d = u * seg.reduce((a, b) => a + b, 0);
+  for (let i = 0; i < seg.length; i++) {
+    if (d <= seg[i]) return [lerp(pts[i][0], pts[i + 1][0], d / seg[i]), lerp(pts[i][1], pts[i + 1][1], d / seg[i])];
+    d -= seg[i];
+  }
+  return pts[pts.length - 1];
+};
+const BgPattern: React.FC<{kind: Pattern; f: number; ink: string; glow: string}> = ({kind, f, ink, glow}) => {
+  if (kind === 'circuit')
+    return (
+      <svg width={1920} height={1080} style={{position: 'absolute', inset: 0}}>
+        <g stroke={ink} strokeWidth={2.5} fill="none" opacity={0.3}>
+          {CIRCUIT.map((t, i) => (
+            <path key={i} d={'M' + t.map((p) => p.join(',')).join(' L')} />
+          ))}
+        </g>
+        <g fill={ink} opacity={0.45}>
+          {CIRCUIT.map((t, i) => (
+            <circle key={i} cx={t[t.length - 1][0]} cy={t[t.length - 1][1]} r={5} />
+          ))}
+        </g>
+        {CIRCUIT.filter((_, i) => i % 2 === 0).map((t, i) => {
+          const [x, y] = along(t, ((f / 140 + i * 0.37) % 1 + 1) % 1);
+          return <circle key={i} cx={x} cy={y} r={6} fill={glow} opacity={0.9} style={{filter: `drop-shadow(0 0 10px ${glow})`}} />;
+        })}
+      </svg>
+    );
+  if (kind === 'floor') {
+    const hz = 560; // horizon
+    return (
+      <svg width={1920} height={1080} style={{position: 'absolute', inset: 0}}>
+        <defs>
+          <linearGradient id="bgfloorfade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor={ink} stopOpacity={0} />
+            <stop offset="1" stopColor={ink} stopOpacity={0.55} />
+          </linearGradient>
+        </defs>
+        <g stroke="url(#bgfloorfade)" strokeWidth={2}>
+          {Array.from({length: 25}, (_, i) => (
+            <line key={i} x1={960 + (i - 12) * 30} y1={hz} x2={960 + (i - 12) * 260} y2={1080} />
+          ))}
+          {Array.from({length: 12}, (_, i) => {
+            const k = ((i + (f / 40) % 1) / 12) ** 2.2; // rows move toward the viewer
+            const y = hz + (1080 - hz) * k;
+            return <line key={i} x1={0} y1={y} x2={1920} y2={y} />;
+          })}
+        </g>
+        <rect x={0} y={hz - 3} width={1920} height={6} fill={glow} opacity={0.35} style={{filter: `drop-shadow(0 0 14px ${glow})`}} />
+      </svg>
+    );
+  }
+  if (kind === 'topo')
+    return (
+      <svg width={1920} height={1080} style={{position: 'absolute', inset: 0}} opacity={0.28}>
+        <g fill="none" stroke={ink} strokeWidth={2}>
+          {Array.from({length: 9}, (_, i) =>
+            [0, 1].map((k) => {
+              const cx = k ? 1500 : 380, cy = k ? 260 : 820, r = 60 + i * 70;
+              const wob = (a: number) => r * (1 + 0.12 * Math.sin(a * 3 + i + f / 90 + k) + 0.06 * Math.sin(a * 5 - i));
+              const d = Array.from({length: 49}, (_, j) => {
+                const a = (j / 48) * Math.PI * 2;
+                return `${j ? 'L' : 'M'}${cx + Math.cos(a) * wob(a) * 1.4},${cy + Math.sin(a) * wob(a)}`;
+              }).join(' ');
+              return <path key={`${i}-${k}`} d={d + 'Z'} />;
+            }),
+          )}
+        </g>
+      </svg>
+    );
+  if (kind === 'dots')
+    return (
+      <AbsoluteFill
+        style={{
+          backgroundImage: `radial-gradient(${ink} 2.2px, transparent 2.6px)`,
+          backgroundSize: '44px 44px',
+          backgroundPosition: `${(f * 0.3) % 44}px ${(f * 0.15) % 44}px`,
+          opacity: 0.32,
+        }}
+      />
+    );
+  return null;
+};
+export const Bg: React.FC<{c?: string; c2?: string; angle?: number; pattern?: Pattern; children?: React.ReactNode}> = ({c = P.navy, c2, angle = 160, pattern, children}) => {
+  const f = useCurrentFrame();
+  const dark = luma(c) < 0.45;
+  const h = hash(c + (c2 ?? '') + angle);
+  const kind: Pattern = pattern ?? (dark ? (h % 2 ? 'circuit' : 'floor') : h % 2 ? 'topo' : 'dots');
+  const ink = dark ? '#9FC2FF' : '#FFFFFF';
+  const glow = dark ? P.sky : P.white;
+  const lite = dark ? shade(c, 2.4) : shade(c, 1.18);
+  const deep = shade(c, dark ? 0.5 : 0.82);
+  const t = f / 24;
+  const blob = (x: number, y: number, r: number, col: string, a: number) => `radial-gradient(circle ${r}px at ${x}px ${y}px, ${col} 0%, transparent 70%)`;
+  return (
+    <AbsoluteFill style={{background: c2 ? `linear-gradient(${angle}deg, ${c}, ${c2})` : `radial-gradient(ellipse 90% 85% at 50% 40%, ${c} 0%, ${shade(c, 0.62)} 100%)`, overflow: 'hidden'}}>
+      {/* drifting glows in the scene's own colours */}
+      <AbsoluteFill
+        style={{
+          backgroundImage: [
+            blob(480 + Math.sin(t * 0.21 + h) * 260, 300 + Math.cos(t * 0.17) * 140, 620, lite, 0),
+            blob(1500 + Math.cos(t * 0.15 + h) * 240, 760 + Math.sin(t * 0.19) * 120, 560, lite, 0),
+            blob(1100 + Math.sin(t * 0.11) * 300, 120, 420, deep, 0),
+          ].join(','),
+          opacity: dark ? 0.85 : 0.6,
+        }}
+      />
+      {kind !== 'none' && <BgPattern kind={kind} f={f} ink={ink} glow={glow} />}
+      <AbsoluteFill style={{background: 'radial-gradient(ellipse 75% 70% at 50% 50%, transparent 60%, rgba(0,0,0,0.28) 100%)'}} />
+      {children}
+    </AbsoluteFill>
+  );
+};
 /** Camera keyframes: [film time (s), centre x, centre y, zoom, turn (deg, optional), tilt (deg, optional)]. */
 export type CamKey = [number, number, number, number, number?, number?];
 export const camAt = (t: number, keys: CamKey[]) => {
