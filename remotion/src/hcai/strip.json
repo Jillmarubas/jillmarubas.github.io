@@ -2359,237 +2359,152 @@
 },
 {
 "ch": 8,
-"at": 1830.447,
-"kind": "t",
-"ref": "What does one question cost?",
-"mode": "type",
-"hold": 6.58,
+"at": 1829.03,
+"kind": "anim",
+"ref": "c8split",
+"mode": "anim",
+"hold": 9.92,
 "n": 180,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1837.027,
-"kind": "c",
-"ref": "measuring_tape",
-"mode": "object",
-"hold": 4.82,
+"at": 1838.95,
+"kind": "anim",
+"ref": "c8older",
+"mode": "anim",
+"hold": 11.95,
 "n": 181,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1841.847,
-"kind": "t",
-"ref": "older model",
-"mode": "type",
-"hold": 9.22,
+"at": 1850.9,
+"kind": "anim",
+"ref": "c8newer",
+"mode": "anim",
+"hold": 6.6,
 "n": 182,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1851.067,
-"kind": "t",
-"ref": "newer models",
-"mode": "type",
-"hold": 4.29,
+"at": 1857.5,
+"kind": "anim",
+"ref": "c8notcounted",
+"mode": "anim",
+"hold": 8.35,
 "n": 183,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1855.357,
-"kind": "board",
-"ref": "chat",
-"board": {
-"name": "chat",
-"ups": [
-{
-"at": 4,
-"o": {
-"mode": "mini",
-"text": "What should I make for dinner?"
-}
-}
-],
-"dur": 153
-},
-"mode": "board",
-"hold": 6.37,
+"at": 1865.85,
+"kind": "anim",
+"ref": "c8both",
+"mode": "anim",
+"hold": 4.45,
 "n": 184,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1861.7269999999999,
-"kind": "c",
-"ref": "hourglass",
-"mode": "object",
-"hold": 5.53,
-"n": 185,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1867.2569999999998,
-"kind": "board",
-"ref": "split",
-"board": {
-"name": "split",
-"ups": [
-{
-"at": 4,
-"o": {
-"show": "2",
-"verdict": "1"
-}
-},
-{
-"at": 43,
-"o": {
-"show": "2",
-"verdict": "2"
-}
-}
-],
-"dur": 87
-},
-"mode": "board",
-"hold": 3.61,
-"n": 186,
 "captions": [
 {
-"at": 1867.2569999999998,
+"at": 1866.007,
 "text": "BOTH NUMBERS ARE REAL. BOTH NUMBERS ARE PARTIAL."
 }
 ]
 },
 {
 "ch": 8,
-"at": 1870.867,
-"kind": "t",
-"ref": "The answer:",
-"mode": "type",
-"hold": 5.24,
+"at": 1870.3,
+"kind": "anim",
+"ref": "c8answer",
+"mode": "anim",
+"hold": 12.7,
+"n": 185,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1883.0,
+"kind": "anim",
+"ref": "c8billions",
+"mode": "anim",
+"hold": 5.4,
+"n": 186,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1888.4,
+"kind": "anim",
+"ref": "c8places",
+"mode": "anim",
+"hold": 7.9,
 "n": 187,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1876.107,
-"kind": "t",
-"ref": "One question costs almost *nothing*.",
-"mode": "type",
-"hold": 7.78,
+"at": 1896.3,
+"kind": "anim",
+"ref": "c8watthour",
+"mode": "anim",
+"hold": 14.0,
 "n": 188,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1883.887,
-"kind": "t",
-"ref": "The cost was never in *one* question.",
-"mode": "type",
-"hold": 8.0,
+"at": 1910.3,
+"kind": "anim",
+"ref": "c8notstop",
+"mode": "anim",
+"hold": 6.3,
 "n": 189,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1891.887,
-"kind": "p",
-"ref": "gas_turbine",
-"mode": "strip",
-"hold": 7.11,
+"at": 1916.6,
+"kind": "anim",
+"ref": "c8tools",
+"mode": "anim",
+"hold": 6.15,
 "n": 190,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1898.997,
-"kind": "t",
-"ref": "Some costs don't fit in a *watt-hour*.",
-"mode": "type",
-"hold": 4.32,
+"at": 1922.75,
+"kind": "anim",
+"ref": "c8hidden",
+"mode": "anim",
+"hold": 7.75,
 "n": 191,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1903.317,
-"kind": "board",
-"ref": "bill",
-"board": {
-"name": "bill",
-"ups": [
-{
-"at": 4,
-"o": {
-"circle": "1"
-}
-}
-],
-"dur": 208
-},
-"mode": "board",
-"hold": 8.67,
+"at": 1930.5,
+"kind": "anim",
+"ref": "c8eurules",
+"mode": "anim",
+"hold": 8.4,
 "n": 192,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1911.987,
-"kind": "t",
-"ref": "Not \"stop using AI\".",
-"mode": "type",
-"hold": 8.54,
-"n": 193,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1920.527,
-"kind": "p",
-"ref": "puzzle",
-"mode": "strip",
-"hold": 8.3,
-"n": 194,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1928.827,
-"kind": "c",
-"ref": "curtain",
-"mode": "object",
-"hold": 3.86,
-"n": 195,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1932.687,
-"kind": "p",
-"ref": "eu_flag",
-"mode": "strip",
-"hold": 7.58,
-"n": 196,
 "captions": [
 {
-"at": 1932.687,
+"at": 1930.787,
 "text": "SOURCES · EU ENERGY EFFICIENCY DIRECTIVE · EU AI ACT"
 }
 ]
 },
 {
 "ch": 8,
-"at": 1940.267,
-"kind": "t",
-"ref": "EU AI Act",
-"mode": "type",
-"hold": 7.21,
-"n": 197,
+"at": 1938.9,
+"kind": "anim",
+"ref": "c8aiact",
+"mode": "anim",
+"hold": 8.577,
+"n": 193,
 "captions": []
 },
 {
@@ -2611,89 +2526,77 @@
 },
 "mode": "board",
 "hold": 7.23,
+"n": 194,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1954.707,
+"kind": "anim",
+"ref": "c8grid",
+"mode": "anim",
+"hold": 3.793,
+"n": 195,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1958.5,
+"kind": "anim",
+"ref": "c8ask",
+"mode": "anim",
+"hold": 10.6,
+"n": 196,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1969.1,
+"kind": "anim",
+"ref": "c8press",
+"mode": "anim",
+"hold": 5.4,
+"n": 197,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1974.5,
+"kind": "anim",
+"ref": "c8eyes",
+"mode": "anim",
+"hold": 5.8,
 "n": 198,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1954.7069999999999,
-"kind": "c",
-"ref": "pylon",
-"mode": "object",
-"hold": 5.0,
+"at": 1980.3,
+"kind": "anim",
+"ref": "c8chain",
+"mode": "anim",
+"hold": 7.3,
 "n": 199,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1959.7069999999999,
-"kind": "p",
-"ref": "dalles_cityhall",
-"mode": "strip",
-"hold": 8.58,
+"at": 1987.6,
+"kind": "anim",
+"ref": "c8fullbill",
+"mode": "anim",
+"hold": 7.7,
 "n": 200,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1968.287,
-"kind": "t",
-"ref": "Who pays for the new grid?",
-"mode": "type",
-"hold": 9.72,
+"at": 1995.3,
+"kind": "anim",
+"ref": "c8dalles",
+"mode": "anim",
+"hold": 7.277,
 "n": 201,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1978.007,
-"kind": "t",
-"ref": "Not guilt.",
-"mode": "type",
-"hold": 4.26,
-"n": 202,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1982.267,
-"kind": "p",
-"ref": "dc_ashburn",
-"mode": "strip",
-"hold": 11.67,
-"n": 203,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1993.937,
-"kind": "board",
-"ref": "bill",
-"board": {
-"name": "bill",
-"ups": [
-{
-"at": 4,
-"o": {
-"circle": "1"
-}
-}
-],
-"dur": 124
-},
-"mode": "board",
-"hold": 5.15,
-"n": 204,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1999.087,
-"kind": "p",
-"ref": "google_dalles",
-"mode": "strip",
-"hold": 3.49,
-"n": 205,
 "captions": []
 },
 {
@@ -2715,7 +2618,7 @@
 },
 "mode": "board",
 "hold": 21.815,
-"n": 206,
+"n": 202,
 "captions": []
 }
 ],
