@@ -117,6 +117,13 @@ for ci, ch in enumerate(T['chapters']):
     if night:
         night['end'] = ch['end']
 
+# replacements from review notes (src/hcai/edits.json): drop what starts inside an edit's span, put its scene there
+for e in json.load(open(os.path.join(ROOT, 'src/hcai/edits.json')))['edits']:
+    frames = [f for f in frames if not (f['ch'] == e['ch'] and e['from'] - 0.05 <= f['at'] < e['to'])]
+    nights = [n for n in nights if not (n['ch'] == e['ch'] and e['from'] - 0.2 <= n['start'] < e['to'])]
+    frames.append({'ch': e['ch'], 'at': e['from'], 'kind': e['mode'], 'ref': e['ref'], 'mode': e['mode'], 'cluster': -1})
+frames.sort(key=lambda f: (f['ch'], f['at']))
+
 # a chart's time on screen (the counter counts up over it), and frame numbers like real film
 for i, f in enumerate(frames):
     nxt = frames[i + 1]['at'] if i + 1 < len(frames) and frames[i + 1]['ch'] == f['ch'] else T['chapters'][f['ch']]['end']

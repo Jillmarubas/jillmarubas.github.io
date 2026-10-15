@@ -9,6 +9,11 @@ const FONTS: [string, string, string, string][] = [
   ['IBM Plex Sans', 'normal', '700', 'IBMPlexSans-700-normal.woff2'],
   ['IBM Plex Mono', 'normal', '500', 'IBMPlexMono-500-normal.woff2'],
   ['Caveat', 'normal', '600', 'Caveat-600-normal.woff2'],
+  // the 2D animations (src/hcai/anim) and the street-map style
+  ['Poppins', 'normal', '700', 'Poppins-700-normal.woff2'],
+  ['Poppins', 'normal', '800', 'Poppins-800-normal.woff2'],
+  ['Inter', 'normal', '500', 'Inter-500-normal.woff2'],
+  ['Inter', 'normal', '700', 'Inter-700-normal.woff2'],
 ];
 const handle = delayRender('Loading hcai fonts');
 Promise.all(

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {continueRender, delayRender, Img, random, staticFile} from 'remotion';
-import {geoAlbersUsa, geoEqualEarth, geoIdentity, geoMercator, geoPath} from 'd3-geo';
+import {geoAlbersUsa, geoDistance, geoEqualEarth, geoIdentity, geoMercator, geoPath} from 'd3-geo';
 import type {Feature, FeatureCollection, Geometry} from 'geojson';
 import {C, F, FPS, H, W} from './design';
 import {Accent, asset, clamp, e01, settle} from './kit';
@@ -135,6 +135,50 @@ export const MapBoard: React.FC<BoardProps> = ({f, ups}) => {
       }
   return view === 'us' ? <USBoard f={f} pins={pins} /> : <WorldBoard f={f} pins={pins} view={view} ups={ups} />;
 };
+/* Street-map style (review note: "make the maps look like Google Maps"): blue water, pale land, grey borders and
+ * country names, red drop pins with dark centres, a zoom control and a true scale bar. When the pins added on a board
+ * sit close together the map flies in to them. */
+const GM = {water: '#AADAFF', land: '#F4F3EF', border: '#B7B3AB', label: '#6F737A', pin: '#EA4335', pinEdge: '#B31412', text: '#202124'};
+const halo = '0 0 3px #fff, 0 0 3px #fff, 0 0 6px #fff, 0 0 6px #fff';
+const GPin: React.FC<{x: number; y: number; f: number; at: number; label?: string; side?: string}> = ({x, y, f, at, label, side}) => {
+  const k = settle((f - at) / 10);
+  if (f < at) return null;
+  const bounce = Math.sin(Math.min(1, (f - at) / 14) * Math.PI) * (1 - Math.min(1, (f - at) / 14)) * 14;
+  return (
+    <div style={{position: 'absolute', left: x, top: y}}>
+      <div style={{position: 'absolute', left: -16, top: -6, width: 32, height: 12, borderRadius: '50%', background: 'rgba(0,0,0,0.25)', opacity: k}} />
+      <svg width={54} height={80} viewBox="0 0 24 36" style={{position: 'absolute', left: -27, top: -80 - (1 - k) * 70 - bounce, overflow: 'visible'}}>
+        <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 24 12 24s12-15 12-24C24 5.4 18.6 0 12 0z" fill={GM.pin} stroke={GM.pinEdge} strokeWidth={1} />
+        <circle cx={12} cy={12} r={4.4} fill="#7A120C" />
+      </svg>
+      {label && (
+        <div style={{position: 'absolute', ...labelPos(side), top: -62, whiteSpace: 'nowrap', fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 32, color: GM.text, textShadow: halo, opacity: e01(f, at + 6, 10), ...(side === 'l' ? {} : {left: 34})}}>
+          {label}
+        </div>
+      )}
+    </div>
+  );
+};
+const niceKm = (km: number) => {
+  const e = Math.pow(10, Math.floor(Math.log10(km)));
+  return [1, 2, 5, 10].map((m) => m * e).filter((v) => v <= km).pop() ?? e;
+};
+const MapChrome: React.FC<{kmPerPx: number}> = ({kmPerPx}) => {
+  const km = niceKm(kmPerPx * 160);
+  const px = km / kmPerPx;
+  return (
+    <>
+      <div style={{position: 'absolute', right: 48, bottom: 150, width: 64, borderRadius: 10, background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.25)', fontFamily: 'Inter, sans-serif', fontWeight: 500, fontSize: 40, color: '#5F6368', textAlign: 'center', lineHeight: '64px'}}>
+        <div style={{borderBottom: '1px solid #E0E0E0'}}>+</div>
+        <div>−</div>
+      </div>
+      <div style={{position: 'absolute', right: 48, bottom: 70, display: 'flex', alignItems: 'flex-end', gap: 12, fontFamily: 'Inter, sans-serif', fontWeight: 500, fontSize: 22, color: '#3C4043', textShadow: halo}}>
+        <span>{km.toLocaleString('en-US')} km</span>
+        <div style={{width: px, height: 10, borderLeft: '3px solid #3C4043', borderRight: '3px solid #3C4043', borderBottom: '3px solid #3C4043'}} />
+      </div>
+    </>
+  );
+};
 const WorldBoard: React.FC<{f: number; pins: Pin[]; view: string; ups: Upd[]}> = ({f, pins, view, ups}) => {
   const g = useGeo('world');
   if (!g) return null;
@@ -145,33 +189,57 @@ const WorldBoard: React.FC<{f: number; pins: Pin[]; view: string; ups: Upd[]}> =
     const k = settle((f - views[i].at) / 30);
     if (k > 0) cur = {c: [cur.c[0] + (views[i].v.c[0] - cur.c[0]) * k, cur.c[1] + (views[i].v.c[1] - cur.c[1]) * k], s: cur.s + (views[i].v.s - cur.s) * k};
   }
+  // fly in when this board's new pins are close together
+  const fresh = pins.filter((p) => p.at >= 0 && PLACES[p.k]);
+  if (fresh.length && view === 'world') {
+    const ll = fresh.map((p) => PLACES[p.k]);
+    const lon = ll.map((p) => p[0]), lat = ll.map((p) => p[1]);
+    const span = Math.max(Math.max(...lon) - Math.min(...lon), (Math.max(...lat) - Math.min(...lat)) * 1.6, 10);
+    if (span < 45) {
+      const k = settle((f - fresh[0].at + 4) / 40);
+      const to = {c: [(Math.max(...lon) + Math.min(...lon)) / 2, (Math.max(...lat) + Math.min(...lat)) / 2] as [number, number], s: Math.min(6, 75 / span)};
+      cur = {c: [cur.c[0] + (to.c[0] - cur.c[0]) * k, cur.c[1] + (to.c[1] - cur.c[1]) * k], s: cur.s + (to.s - cur.s) * k};
+    }
+  }
   const push = 1 + 0.06 * settle(f / 240); // slow push-in
   const proj = geoEqualEarth().scale(330 * cur.s * push).center([0, 0]).rotate([-cur.c[0], 0]).translate([W / 2, H / 2]);
   const off = proj([cur.c[0], cur.c[1]])!;
   proj.translate([W / 2 - (off[0] - W / 2), H / 2 - (off[1] - H / 2)]);
   const path = geoPath(proj);
+  const a = proj.invert!([W / 2, H / 2]);
+  const b = proj.invert!([W / 2 + 100, H / 2]);
+  const kmPerPx = a && b ? (geoDistance(a, b) * 6371) / 100 : 100;
   return (
-    <div style={{position: 'absolute', inset: 0, opacity: e01(f, 0, 12)}}>
+    <div style={{position: 'absolute', inset: 0, background: GM.water, opacity: e01(f, 0, 12)}}>
       <svg width={W} height={H}>
         {g.features.map((ft, i) => (
-          <path key={i} d={path(ft as Feature) ?? ''} fill="#E3DDD1" stroke="#B9B1A2" strokeWidth={0.8} />
+          <path key={i} d={path(ft as Feature) ?? ''} fill={GM.land} stroke={GM.border} strokeWidth={1.2} />
         ))}
+        {g.features.map((ft, i) => {
+          const name = String(ft.properties?.name ?? '');
+          const area = path.area(ft as Feature);
+          if (!name || area < 14000) return null;
+          const [x, y] = path.centroid(ft as Feature);
+          if (!isFinite(x) || x < 40 || x > W - 40 || y < 40 || y > H - 40) return null;
+          const size = Math.max(16, Math.min(30, Math.sqrt(area) / 12));
+          return (
+            <text key={`l${i}`} x={x} y={y} textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight={500} fontSize={size} fill={GM.label} stroke="#fff" strokeWidth={4} paintOrder="stroke" letterSpacing="0.02em">
+              {name}
+            </text>
+          );
+        })}
       </svg>
-      {pins.map((p) => {
-        const ll = PLACES[p.k];
-        if (!ll) return null;
-        const xy = proj(ll);
-        if (!xy) return null;
-        const o = e01(f, p.at, 10);
-        const pulse = (f - p.at) % 36 / 36;
-        return (
-          <div key={p.k} style={{position: 'absolute', left: xy[0], top: xy[1], opacity: o}}>
-            <div style={{position: 'absolute', left: -30 * pulse - 8, top: -30 * pulse - 8, width: 16 + 60 * pulse, height: 16 + 60 * pulse, borderRadius: '50%', border: `3px solid ${C.hum}`, opacity: 1 - pulse}} />
-            <div style={{position: 'absolute', left: -10, top: -10 - (1 - o) * 30, width: 20, height: 20, borderRadius: 10, background: C.hum, border: `4px solid ${C.card}`}} />
-            {p.label && <div style={{position: 'absolute', ...labelPos(p.side), whiteSpace: 'nowrap', fontFamily: F.sans, fontWeight: 700, fontSize: 30, color: C.ink, background: C.card, padding: '2px 12px', opacity: e01(f, p.at + 4, 10)}}>{p.label}</div>}
-          </div>
-        );
-      })}
+      {(() => {
+        const xy = pins.map((p) => (PLACES[p.k] ? proj(PLACES[p.k]) : null));
+        return pins.map((p, i) => {
+          const q = xy[i];
+          if (!q) return null;
+          // a pin with a neighbour just to its right puts its name on the left
+          const crowded = xy.some((o, j) => o && j !== i && o[0] > q[0] && o[0] - q[0] < 220 && Math.abs(o[1] - q[1]) < 70);
+          return <GPin key={p.k} x={q[0]} y={q[1]} f={f} at={p.at} label={p.label} side={p.side ?? (crowded ? 'l' : undefined)} />;
+        });
+      })()}
+      <MapChrome kmPerPx={kmPerPx} />
     </div>
   );
 };
@@ -186,13 +254,19 @@ const USBoard: React.FC<{f: number; pins: Pin[]; highlight?: string[]}> = ({f, p
   const k = proj.scale();
   const [tx, ty] = proj.translate();
   const x0 = (W - w) / 2, y0 = (H - h) / 2 + 10;
+  // a true scale bar: the Albers grid is in its own units, so measure 100 px of it on the ground
+  const a = albers.invert!([(w / 2 - tx) / k, (h / 2 - ty) / k]);
+  const b = albers.invert!([(w / 2 + 100 - tx) / k, (h / 2 - ty) / k]);
+  const kmPerPx = a && b ? (geoDistance(a, b) * 6371) / 100 : 3;
   return (
-    <div style={{position: 'absolute', left: x0, top: y0, width: w, height: h, opacity: e01(f, 0, 12)}}>
+    <div style={{position: 'absolute', inset: 0, background: '#E6E3DC', opacity: e01(f, 0, 12)}}>
+    <MapChrome kmPerPx={kmPerPx} />
+    <div style={{position: 'absolute', left: x0, top: y0, width: w, height: h}}>
       <svg width={w} height={h}>
         {g.features.map((ft) => {
           const name = String((ft.properties as {name: string}).name);
           const hi = highlight?.includes(name);
-          return <path key={name} d={path(ft as Feature) ?? ''} fill={hi ? C.hum : '#E3DDD1'} fillOpacity={hi ? 0.25 + 0.6 * e01(f, 8 + (highlight!.indexOf(name) % 14) * 2, 10) : 1} stroke="#B9B1A2" strokeWidth={1.2} />;
+          return <path key={name} d={path(ft as Feature) ?? ''} fill={hi ? GM.pin : GM.land} fillOpacity={hi ? 0.25 + 0.6 * e01(f, 8 + (highlight!.indexOf(name) % 14) * 2, 10) : 1} stroke={GM.border} strokeWidth={1.6} strokeDasharray="7 5" />;
         })}
       </svg>
       {pins.map((p) => {
@@ -200,14 +274,9 @@ const USBoard: React.FC<{f: number; pins: Pin[]; highlight?: string[]}> = ({f, p
         const q = ll && albers(ll);
         if (!q) return null;
         const x = q[0] * k + tx, y = q[1] * k + ty;
-        const o = e01(f, p.at, 10);
-        return (
-          <div key={p.k} style={{position: 'absolute', left: x, top: y, opacity: o}}>
-            <div style={{position: 'absolute', left: -11, top: -11 - (1 - o) * 30, width: 22, height: 22, borderRadius: 11, background: C.hum, border: `4px solid ${C.card}`}} />
-            {p.label && <div style={{position: 'absolute', ...labelPos(p.side), whiteSpace: 'nowrap', fontFamily: F.sans, fontWeight: 700, fontSize: 30, color: C.ink, background: C.card, padding: '2px 12px'}}>{p.label}</div>}
-          </div>
-        );
+        return <GPin key={p.k} x={x} y={y} f={f} at={p.at} label={p.label} side={p.side} />;
       })}
+    </div>
     </div>
   );
 };
