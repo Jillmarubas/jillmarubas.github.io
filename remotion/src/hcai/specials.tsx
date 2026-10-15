@@ -140,6 +140,42 @@ export const MapBoard: React.FC<BoardProps> = ({f, ups}) => {
  * sit close together the map flies in to them. */
 const GM = {water: '#AADAFF', land: '#F4F3EF', border: '#B7B3AB', label: '#6F737A', pin: '#EA4335', pinEdge: '#B31412', text: '#202124'};
 const halo = '0 0 3px #fff, 0 0 3px #fff, 0 0 6px #fff, 0 0 6px #fff';
+// a photo of the place, shown on a card beside a pin when the pin first drops (review note)
+const PIN_PHOTO: Record<string, string> = {
+  nairobi: 'nairobi_skyline', the_dalles: 'dalles', tmi: 'tmi', memphis: 'boxtown', dublin: 'dublin_night', taiwan: 'taiwan_drought',
+  congo: 'cobalt_mine', kinshasa: 'cobalt_mine', loudoun: 'loudoun_dc', chile: 'santiago', manila: 'manila', ohio: 'ohio_house',
+};
+const CW = 330, CH = 270;
+type Box = {l: number; t: number; left: boolean; below: boolean};
+/** Where each card goes: the first corner beside its pin that stays on screen and clear of the cards already placed. */
+const placeCards = (pts: [number, number][], off: [number, number] = [0, 0]): Box[] => {
+  const out: Box[] = [];
+  for (const [x, y] of pts) {
+    const opts = [
+      {left: false, below: false}, {left: true, below: false}, {left: false, below: true}, {left: true, below: true},
+    ].map((o) => ({...o, l: o.left ? x - 40 - CW : x + 40, t: o.below ? y + 10 : y - 300}));
+    const ok = (b: Box) =>
+      b.l + off[0] > 20 && b.l + off[0] + CW < W - 20 && b.t + off[1] > 20 && b.t + off[1] + CH < H - 20 &&
+      out.every((o) => b.l + CW < o.l || o.l + CW < b.l || b.t + CH < o.t || o.t + CH < b.t);
+    out.push(opts.find(ok) ?? opts[0]);
+  }
+  return out;
+};
+const PlaceCard: React.FC<{b: Box; f: number; at: number; label: string; photo: string}> = ({b, f, at, label, photo}) => {
+  const a = asset(photo);
+  if (!a || f < at + 4) return null;
+  const k = settle((f - at - 4) / 12);
+  const {left, below} = b;
+  return (
+    <div style={{position: 'absolute', left: b.l, top: b.t, width: 330, background: '#fff', borderRadius: 14, overflow: 'hidden', boxShadow: '0 6px 22px rgba(0,0,0,0.3)', opacity: k, transform: `scale(${0.6 + 0.4 * k})`, transformOrigin: `${left ? '100%' : '0'} ${below ? '0' : '100%'}`}}>
+      <Img src={staticFile(a.src)} style={{width: 330, height: 190, objectFit: 'cover', display: 'block'}} />
+      <div style={{padding: '10px 14px 12px'}}>
+        <div style={{fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 28, color: GM.text, whiteSpace: 'nowrap'}}>{label}</div>
+        <div style={{fontFamily: F.mono, fontSize: 12, color: '#80868B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginTop: 2}}>{a.credit}</div>
+      </div>
+    </div>
+  );
+};
 const GPin: React.FC<{x: number; y: number; f: number; at: number; label?: string; side?: string}> = ({x, y, f, at, label, side}) => {
   const k = settle((f - at) / 10);
   if (f < at) return null;
@@ -231,12 +267,20 @@ const WorldBoard: React.FC<{f: number; pins: Pin[]; view: string; ups: Upd[]}> =
       </svg>
       {(() => {
         const xy = pins.map((p) => (PLACES[p.k] ? proj(PLACES[p.k]) : null));
+        const carded = pins.map((p, i) => (p.at >= 0 && p.label && PIN_PHOTO[p.k] && xy[i] ? i : -1)).filter((i) => i >= 0);
+        const boxes = placeCards(carded.map((i) => xy[i] as [number, number]));
         return pins.map((p, i) => {
           const q = xy[i];
           if (!q) return null;
           // a pin with a neighbour just to its right puts its name on the left
           const crowded = xy.some((o, j) => o && j !== i && o[0] > q[0] && o[0] - q[0] < 220 && Math.abs(o[1] - q[1]) < 70);
-          return <GPin key={p.k} x={q[0]} y={q[1]} f={f} at={p.at} label={p.label} side={p.side ?? (crowded ? 'l' : undefined)} />;
+          const photo = p.at >= 0 && p.label && PIN_PHOTO[p.k];
+          return (
+            <React.Fragment key={p.k}>
+              <GPin x={q[0]} y={q[1]} f={f} at={p.at} label={photo ? undefined : p.label} side={p.side ?? (crowded ? 'l' : undefined)} />
+              {photo && <PlaceCard b={boxes[carded.indexOf(i)]} f={f} at={p.at} label={p.label} photo={photo} />}
+            </React.Fragment>
+          );
         });
       })()}
       <MapChrome kmPerPx={kmPerPx} />
@@ -274,7 +318,13 @@ const USBoard: React.FC<{f: number; pins: Pin[]; highlight?: string[]}> = ({f, p
         const q = ll && albers(ll);
         if (!q) return null;
         const x = q[0] * k + tx, y = q[1] * k + ty;
-        return <GPin key={p.k} x={x} y={y} f={f} at={p.at} label={p.label} side={p.side} />;
+        const photo = p.at >= 0 && p.label && PIN_PHOTO[p.k];
+        return (
+          <React.Fragment key={p.k}>
+            <GPin x={x} y={y} f={f} at={p.at} label={photo ? undefined : p.label} side={p.side} />
+            {photo && <PlaceCard b={placeCards([[x, y]], [x0, y0])[0]} f={f} at={p.at} label={p.label} photo={photo} />}
+          </React.Fragment>
+        );
       })}
     </div>
     </div>

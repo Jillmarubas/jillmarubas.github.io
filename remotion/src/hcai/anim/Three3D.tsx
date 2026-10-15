@@ -35,13 +35,13 @@ const backdrop = () => {
   c.height = 512;
   const x = c.getContext('2d')!;
   const g = x.createLinearGradient(0, 0, 1024, 0);
-  g.addColorStop(0, P.blue);
-  g.addColorStop(0.55, P.sky);
-  g.addColorStop(1, P.teal);
+  g.addColorStop(0, P.night);
+  g.addColorStop(0.5, P.navy);
+  g.addColorStop(1, P.plum);
   x.fillStyle = g;
   x.fillRect(0, 0, 1024, 512);
-  x.fillStyle = 'rgba(255,255,255,0.4)';
-  for (let i = 0; i < 6; i++) x.fillRect(80 + i * 160, 0, 18, 512);
+  x.fillStyle = 'rgba(120,200,255,0.55)';
+  for (let i = 0; i < 6; i++) x.fillRect(80 + i * 160, 0, 10, 512); // light strips the glass bends
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
@@ -59,19 +59,20 @@ const GlassScene: React.FC<{f: number}> = ({f}) => {
       <Cam pos={[Math.sin(a) * d, lerp(1.6, 2.4, ease(f, 0, 92)), Math.cos(a) * d]} look={[0, 0.85, 0]} />
       <ambientLight intensity={0.4} />
       <directionalLight position={[3, 5, 4]} intensity={2.2} />
+      <directionalLight position={[-3, 2, -4]} intensity={3} color={P.sky} />
       <mesh position={[0, 1.5, -3.2]}>
         <planeGeometry args={[14, 7]} />
         <meshBasicMaterial map={tex} toneMapped={false} />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
         <circleGeometry args={[6, 64]} />
-        <meshStandardMaterial color="#EAF4FF" roughness={0.5} />
+        <meshStandardMaterial color="#18224A" roughness={0.25} metalness={0.2} />
       </mesh>
       <mesh geometry={glass}>
         <meshPhysicalMaterial color="#ffffff" transmission={1} roughness={0.04} thickness={0.35} ior={1.5} metalness={0} side={THREE.DoubleSide} />
       </mesh>
       <mesh geometry={water}>
-        <meshPhysicalMaterial color={P.water} transmission={0.55} roughness={0.08} thickness={1.2} ior={1.33} side={THREE.DoubleSide} />
+        <meshPhysicalMaterial color={P.water} transmission={0.35} roughness={0.08} thickness={1.2} ior={1.33} side={THREE.DoubleSide} emissive={P.water} emissiveIntensity={0.25} />
       </mesh>
       <mesh position={[0, 1.25, 0]} rotation={[-Math.PI / 2 + wob, 0, wob]}>
         <circleGeometry args={[0.64, 64]} />
@@ -90,13 +91,13 @@ export const Glass: React.FC<AnimProps> = ({f, t0}) => {
   const {width, height} = useVideoConfig();
   const w = (abs: number) => at(t0, abs);
   return (
-    <AbsoluteFill style={{background: P.sky}}>
+    <AbsoluteFill style={{background: P.night}}>
       <ThreeCanvas width={width} height={height} gl={{antialias: true, toneMapping: THREE.ACESFilmicToneMapping}} camera={{fov: 32, near: 0.1, far: 50, position: [0, 1.4, 4.2]}}>
         <GlassScene f={f} />
       </ThreeCanvas>
       <div style={{position: 'absolute', left: 0, right: 0, bottom: 80, textAlign: 'center', opacity: ease(f, w(37.05), 10)}}>
         <Tag bg={P.white} color={P.ink} size={40}>Hold on to that</Tag>
-        <Note style={{marginTop: 12, opacity: ease(f, w(38.6), 10)}} color={P.ink} size={24}>
+        <Note style={{marginTop: 12, opacity: ease(f, w(38.6), 10)}} color={P.white} size={24}>
           What the court records showed · Chapter 3, The water
         </Note>
       </div>

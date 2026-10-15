@@ -15,8 +15,8 @@ const Stamp: React.FC<{text: string; k: number; x: number; y: number; rot: numbe
     </div>
   );
 
-const DrawnFront: React.FC = () => (
-  <div style={{width: 1200, height: 1500, background: '#F7F3EA', padding: '60px 70px', boxSizing: 'border-box', fontFamily: 'Fraunces, serif', color: '#1C1B19', boxShadow: '0 40px 80px rgba(0,0,0,0.45)'}}>
+const DrawnFront: React.FC<{children?: React.ReactNode}> = ({children}) => (
+  <div style={{position: 'relative', width: 1200, height: 1500, background: '#F7F3EA', padding: '60px 70px', boxSizing: 'border-box', fontFamily: 'Fraunces, serif', color: '#1C1B19', boxShadow: '0 40px 80px rgba(0,0,0,0.45)'}}>
     <div style={{textAlign: 'center', fontWeight: 900, fontSize: 92, letterSpacing: '-0.01em', borderBottom: '6px double #1C1B19', paddingBottom: 14}}>The Local Herald</div>
     <div style={{display: 'flex', justifyContent: 'space-between', fontFamily: AF.mono, fontSize: 20, padding: '10px 0', borderBottom: '2px solid #1C1B19'}}>
       <span>OREGON</span>
@@ -34,6 +34,7 @@ const DrawnFront: React.FC = () => (
         </div>
       ))}
     </div>
+    {children}
   </div>
 );
 
@@ -48,12 +49,15 @@ export const Newspaper: React.FC<AnimProps> = ({f, t0}) => {
       {src ? (
         <Img src={staticFile(src)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${lerp(1.04, 1.14, k)}) translateY(${lerp(10, -20, k)}px)`}} />
       ) : (
-        <div style={{position: 'absolute', left: 960, top: 590, transform: `translate(-50%,-50%) perspective(2600px) rotateX(${lerp(30, 16, k)}deg) rotateZ(${lerp(-8, -3, k)}deg) scale(${lerp(0.56, 0.7, k)})`}}>
-          <DrawnFront />
+        <div style={{position: 'absolute', left: 960, top: 545, transform: `translate(-50%,-50%) perspective(2600px) rotateX(${lerp(24, 12, k)}deg) rotateZ(${lerp(-6, -2, k)}deg) scale(${lerp(0.52, 0.62, k)})`}}>
+          <DrawnFront>
+            <Stamp text="NO COMMENT" k={noComment} x={780} y={1010} rot={-8} />
+            <Stamp text="TAKEN TO COURT" k={court} x={560} y={1250} rot={5} />
+          </DrawnFront>
         </div>
       )}
-      <Stamp text="NO COMMENT" k={noComment} x={1330} y={760} rot={-8} />
-      <Stamp text="TAKEN TO COURT" k={court} x={720} y={930} rot={5} />
+      {src && <Stamp text="NO COMMENT" k={noComment} x={1250} y={640} rot={-8} />}
+      {src && <Stamp text="TAKEN TO COURT" k={court} x={760} y={840} rot={5} />}
     </AbsoluteFill>
   );
 };
