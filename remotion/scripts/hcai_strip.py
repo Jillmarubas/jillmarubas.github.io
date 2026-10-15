@@ -118,7 +118,11 @@ for ci, ch in enumerate(T['chapters']):
         night['end'] = ch['end']
 
 # replacements from review notes (src/hcai/edits.json): drop what starts inside an edit's span, put its scene there
-for e in json.load(open(os.path.join(ROOT, 'src/hcai/edits.json')))['edits']:
+import glob
+EDITS = json.load(open(os.path.join(ROOT, 'src/hcai/edits.json')))['edits']
+for p in sorted(glob.glob(os.path.join(ROOT, 'src/hcai/edits/*.json'))):  # one file per chapter
+    EDITS += json.load(open(p))['edits']
+for e in EDITS:
     frames = [f for f in frames if not (f['ch'] == e['ch'] and e['from'] - 0.05 <= f['at'] < e['to'])]
     nights = [n for n in nights if not (n['ch'] == e['ch'] and e['from'] - 0.2 <= n['start'] < e['to'])]
     frames.append({'ch': e['ch'], 'at': e['from'], 'kind': e['mode'], 'ref': e['ref'], 'mode': e['mode'], 'cluster': -1})
