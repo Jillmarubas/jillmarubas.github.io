@@ -5,6 +5,7 @@
 "at": 18.23,
 "kind": "p",
 "ref": "dc_campus",
+"mode": "strip",
 "hold": 5.9,
 "n": 1,
 "captions": []
@@ -14,7 +15,8 @@
 "at": 24.130000000000003,
 "kind": "p",
 "ref": "dalles",
-"hold": 6.88,
+"mode": "strip",
+"hold": 4.5,
 "n": 2,
 "captions": [
 {
@@ -29,11 +31,22 @@
 },
 {
 "ch": 0,
-"at": 31.01,
-"kind": "p",
-"ref": "courthouse",
-"hold": 9.19,
+"at": 28.630000000000003,
+"kind": "t",
+"ref": "*No comment.*",
+"mode": "type",
+"hold": 7.727,
 "n": 3,
+"captions": []
+},
+{
+"ch": 0,
+"at": 36.357,
+"kind": "c",
+"ref": "water_glass",
+"mode": "object",
+"hold": 3.843,
+"n": 4,
 "captions": []
 },
 {
@@ -64,25 +77,22 @@
 }
 }
 ],
-"dur": 190
+"dur": 145
 },
-"hold": 7.93,
-"n": 4,
+"mode": "board",
+"hold": 6.03,
+"n": 5,
 "captions": []
 },
 {
 "ch": 0,
-"at": 48.13,
-"kind": "p",
-"ref": "laptop_dark",
-"hold": 8.07,
-"n": 5,
-"captions": [
-{
-"at": 48.13,
-"text": "<$2/hr"
-}
-]
+"at": 46.230000000000004,
+"kind": "n",
+"ref": "<$2/hr",
+"mode": "type",
+"hold": 9.97,
+"n": 6,
+"captions": []
 },
 {
 "ch": 0,
@@ -126,8 +136,9 @@
 ],
 "dur": 145
 },
+"mode": "board",
 "hold": 6.03,
-"n": 6,
+"n": 7,
 "captions": []
 },
 {
@@ -135,8 +146,9 @@
 "at": 62.230000000000004,
 "kind": "p",
 "ref": "boxtown",
+"mode": "strip",
 "hold": 4.93,
-"n": 7,
+"n": 8,
 "captions": []
 },
 {
@@ -187,8 +199,9 @@
 ],
 "dur": 127
 },
+"mode": "board",
 "hold": 5.28,
-"n": 8,
+"n": 9,
 "captions": []
 },
 {
@@ -239,8 +252,9 @@
 ],
 "dur": 264
 },
+"mode": "board",
 "hold": 11.01,
-"n": 9,
+"n": 10,
 "captions": []
 },
 {
@@ -248,8 +262,19 @@
 "at": 83.45,
 "kind": "c",
 "ref": "question_mark",
-"hold": 13.586,
-"n": 10,
+"mode": "object",
+"hold": 4.86,
+"n": 11,
+"captions": []
+},
+{
+"ch": 0,
+"at": 88.31,
+"kind": "t",
+"ref": "What does *ONE* question cost?",
+"mode": "type",
+"hold": 8.726,
+"n": 12,
 "captions": []
 },
 {
@@ -257,8 +282,9 @@
 "at": 101.106,
 "kind": "p",
 "ref": "cloud_puff",
+"mode": "strip",
 "hold": 6.82,
-"n": 11,
+"n": 13,
 "captions": []
 },
 {
@@ -266,8 +292,9 @@
 "at": 107.926,
 "kind": "p",
 "ref": "feather",
+"mode": "strip",
 "hold": 3.16,
-"n": 12,
+"n": 14,
 "captions": []
 },
 {
@@ -275,8 +302,9 @@
 "at": 111.086,
 "kind": "c",
 "ref": "concrete",
+"mode": "object",
 "hold": 6.17,
-"n": 13,
+"n": 15,
 "captions": []
 },
 {
@@ -297,8 +325,9 @@
 ],
 "dur": 124
 },
+"mode": "board",
 "hold": 5.15,
-"n": 14,
+"n": 16,
 "captions": []
 },
 {
@@ -306,8 +335,9 @@
 "at": 122.406,
 "kind": "c",
 "ref": "fiber_glow",
+"mode": "object",
 "hold": 8.0,
-"n": 15,
+"n": 17,
 "captions": []
 },
 {
@@ -315,8 +345,9 @@
 "at": 130.406,
 "kind": "c",
 "ref": "sub_cable",
+"mode": "object",
 "hold": 6.96,
-"n": 16,
+"n": 18,
 "captions": []
 },
 {
@@ -324,17 +355,19 @@
 "at": 137.366,
 "kind": "c",
 "ref": "chip",
-"hold": 7.46,
-"n": 17,
+"mode": "object",
+"hold": 9.26,
+"n": 19,
 "captions": []
 },
 {
 "ch": 1,
-"at": 144.826,
-"kind": "p",
-"ref": "arcade",
-"hold": 9.11,
-"n": 18,
+"at": 146.626,
+"kind": "t",
+"ref": "Shadows.",
+"mode": "type",
+"hold": 7.31,
+"n": 20,
 "captions": []
 },
 {
@@ -360,8 +393,9 @@
 ],
 "dur": 189
 },
+"mode": "board",
 "hold": 7.89,
-"n": 19,
+"n": 21,
 "captions": []
 },
 {
@@ -369,8 +403,9 @@
 "at": 161.826,
 "kind": "c",
 "ref": "abacus",
+"mode": "object",
 "hold": 8.965,
-"n": 20,
+"n": 22,
 "captions": []
 },
 {
@@ -378,13 +413,10 @@
 "at": 170.791,
 "kind": "c",
 "ref": "h100",
+"mode": "object",
 "hold": 8.725,
-"n": 21,
+"n": 23,
 "captions": [
-{
-"at": 173.006,
-"text": "700 W"
-},
 {
 "at": 175.146,
 "text": "1 chip ≈ a small space heater, running nonstop"
@@ -406,24 +438,31 @@
 }
 }
 ],
-"dur": 181
+"dur": 102
 },
-"hold": 7.55,
-"n": 22,
-"captions": [
+"mode": "board",
+"hold": 4.27,
+"n": 24,
+"captions": []
+},
 {
-"at": 184.006,
-"text": "100,000s"
-}
-]
+"ch": 1,
+"at": 183.786,
+"kind": "n",
+"ref": "100,000s",
+"mode": "type",
+"hold": 3.28,
+"n": 25,
+"captions": []
 },
 {
 "ch": 1,
 "at": 187.066,
 "kind": "p",
 "ref": "server_aisle",
+"mode": "strip",
 "hold": 8.08,
-"n": 23,
+"n": 26,
 "captions": []
 },
 {
@@ -431,8 +470,9 @@
 "at": 195.14600000000002,
 "kind": "p",
 "ref": "hot_aisle",
+"mode": "strip",
 "hold": 7.68,
-"n": 24,
+"n": 27,
 "captions": []
 },
 {
@@ -440,8 +480,9 @@
 "at": 202.826,
 "kind": "p",
 "ref": "fan_blades",
+"mode": "strip",
 "hold": 6.46,
-"n": 25,
+"n": 28,
 "captions": []
 },
 {
@@ -449,8 +490,9 @@
 "at": 209.286,
 "kind": "c",
 "ref": "speaker_cone",
+"mode": "object",
 "hold": 4.67,
-"n": 26,
+"n": 29,
 "captions": []
 },
 {
@@ -471,8 +513,9 @@
 ],
 "dur": 185
 },
+"mode": "board",
 "hold": 7.71,
-"n": 27,
+"n": 30,
 "captions": [
 {
 "at": 213.956,
@@ -485,8 +528,19 @@
 "at": 221.666,
 "kind": "p",
 "ref": "mall",
-"hold": 12.7,
-"n": 28,
+"mode": "strip",
+"hold": 5.28,
+"n": 31,
+"captions": []
+},
+{
+"ch": 1,
+"at": 226.946,
+"kind": "t",
+"ref": "Two jobs.",
+"mode": "type",
+"hold": 7.42,
+"n": 32,
 "captions": []
 },
 {
@@ -494,8 +548,9 @@
 "at": 234.366,
 "kind": "c",
 "ref": "router",
+"mode": "object",
 "hold": 6.59,
-"n": 29,
+"n": 33,
 "captions": []
 },
 {
@@ -513,19 +568,31 @@
 }
 }
 ],
-"dur": 141
+"dur": 87
 },
-"hold": 5.89,
-"n": 30,
+"mode": "board",
+"hold": 3.63,
+"n": 34,
 "captions": []
 },
 {
 "ch": 1,
-"at": 246.846,
-"kind": "p",
-"ref": "factory",
-"hold": 8.77,
-"n": 31,
+"at": 244.586,
+"kind": "t",
+"ref": "predict the next *word*",
+"mode": "type",
+"hold": 5.06,
+"n": 35,
+"captions": []
+},
+{
+"ch": 1,
+"at": 249.64600000000002,
+"kind": "c",
+"ref": "money_stack",
+"mode": "object",
+"hold": 5.97,
+"n": 36,
 "captions": []
 },
 {
@@ -544,10 +611,21 @@
 }
 }
 ],
-"dur": 268
+"dur": 169
 },
-"hold": 11.18,
-"n": 32,
+"mode": "board",
+"hold": 7.05,
+"n": 37,
+"captions": []
+},
+{
+"ch": 1,
+"at": 262.666,
+"kind": "t",
+"ref": "What changed?",
+"mode": "type",
+"hold": 4.13,
+"n": 38,
 "captions": []
 },
 {
@@ -568,8 +646,9 @@
 ],
 "dur": 169
 },
+"mode": "board",
 "hold": 7.03,
-"n": 33,
+"n": 39,
 "captions": []
 },
 {
@@ -577,8 +656,9 @@
 "at": 273.82599999999996,
 "kind": "c",
 "ref": "stethoscope",
+"mode": "object",
 "hold": 3.48,
-"n": 34,
+"n": 40,
 "captions": []
 },
 {
@@ -586,8 +666,9 @@
 "at": 277.306,
 "kind": "p",
 "ref": "water_drop",
+"mode": "strip",
 "hold": 4.0,
-"n": 35,
+"n": 41,
 "captions": []
 },
 {
@@ -595,8 +676,9 @@
 "at": 281.306,
 "kind": "c",
 "ref": "weights",
+"mode": "object",
 "hold": 6.48,
-"n": 36,
+"n": 42,
 "captions": []
 },
 {
@@ -604,8 +686,9 @@
 "at": 287.78599999999994,
 "kind": "p",
 "ref": "photo_frame",
+"mode": "strip",
 "hold": 8.88,
-"n": 37,
+"n": 43,
 "captions": []
 },
 {
@@ -613,8 +696,9 @@
 "at": 296.666,
 "kind": "c",
 "ref": "hourglass",
+"mode": "object",
 "hold": 7.3,
-"n": 38,
+"n": 44,
 "captions": []
 },
 {
@@ -622,8 +706,9 @@
 "at": 303.96599999999995,
 "kind": "p",
 "ref": "math_board",
+"mode": "strip",
 "hold": 4.28,
-"n": 39,
+"n": 45,
 "captions": []
 },
 {
@@ -631,40 +716,44 @@
 "at": 308.246,
 "kind": "p",
 "ref": "crane",
-"hold": 17.24,
-"n": 40,
+"mode": "strip",
+"hold": 7.04,
+"n": 46,
 "captions": [
 {
 "at": 309.726,
 "text": "STARGATE · ANNOUNCED JANUARY 2025 · UP TO $500 BILLION"
-},
-{
-"at": 317.626,
-"text": "up to $500B"
 }
 ]
+},
+{
+"ch": 1,
+"at": 315.28599999999994,
+"kind": "t",
+"ref": "Stargate",
+"mode": "type",
+"hold": 10.2,
+"n": 47,
+"captions": []
 },
 {
 "ch": 1,
 "at": 325.486,
 "kind": "p",
 "ref": "abilene",
+"mode": "strip",
 "hold": 8.38,
-"n": 41,
-"captions": [
-{
-"at": 327.766,
-"text": "$500,000,000,000"
-}
-]
+"n": 48,
+"captions": []
 },
 {
 "ch": 1,
 "at": 333.866,
 "kind": "p",
 "ref": "dc_campus",
+"mode": "strip",
 "hold": 4.0,
-"n": 42,
+"n": 49,
 "captions": []
 },
 {
@@ -672,62 +761,86 @@
 "at": 337.866,
 "kind": "c",
 "ref": "chip",
-"hold": 9.12,
-"n": 43,
+"mode": "object",
+"hold": 8.22,
+"n": 50,
 "captions": []
 },
 {
 "ch": 1,
-"at": 346.986,
-"kind": "p",
-"ref": "lightning",
-"hold": 8.832,
-"n": 44,
+"at": 346.08599999999996,
+"kind": "t",
+"ref": "Two things.",
+"mode": "type",
+"hold": 7.42,
+"n": 51,
+"captions": []
+},
+{
+"ch": 1,
+"at": 353.506,
+"kind": "t",
+"ref": "This is where it gets *strange*.",
+"mode": "type",
+"hold": 2.312,
+"n": 52,
 "captions": []
 },
 {
 "ch": 2,
-"at": 360.52799999999996,
-"kind": "p",
-"ref": "dc_campus",
-"hold": 9.85,
-"n": 45,
+"at": 362.02799999999996,
+"kind": "n",
+"ref": "415 TWh",
+"mode": "type",
+"hold": 6.64,
+"n": 53,
 "captions": [
 {
-"at": 360.52799999999996,
+"at": 362.02799999999996,
 "text": "SOURCE · IEA, ENERGY AND AI (2025)"
 },
 {
-"at": 360.52799999999996,
+"at": 362.02799999999996,
 "text": "2024"
 }
 ]
 },
 {
 "ch": 2,
-"at": 370.37800000000004,
+"at": 368.66799999999995,
+"kind": "t",
+"ref": "Let's make it real.",
+"mode": "type",
+"hold": 6.91,
+"n": 54,
+"captions": []
+},
+{
+"ch": 2,
+"at": 375.57800000000003,
 "kind": "board",
 "ref": "globe",
 "board": {
 "name": "globe",
 "ups": [
 {
-"at": 4,
+"at": -200,
 "o": {
 "pct": "1.5"
 }
 },
 {
-"at": 128,
+"at": 4,
 "o": {
 "light": "1"
 }
 }
 ],
-"dur": 285
+"dur": 160
 },
-"hold": 11.86,
-"n": 46,
+"mode": "board",
+"hold": 6.66,
+"n": 55,
 "captions": []
 },
 {
@@ -768,8 +881,9 @@
 ],
 "dur": 230
 },
+"mode": "board",
 "hold": 9.57,
-"n": 47,
+"n": 56,
 "captions": [
 {
 "at": 388.128,
@@ -782,97 +896,119 @@
 "at": 391.808,
 "kind": "p",
 "ref": "tokyo",
-"hold": 5.37,
-"n": 48,
+"mode": "strip",
+"hold": 3.12,
+"n": 57,
 "captions": []
 },
 {
 "ch": 2,
-"at": 397.178,
-"kind": "board",
-"ref": "map",
-"board": {
-"name": "map",
-"ups": [
-{
-"at": 4,
-"o": {
-"view": "us"
-}
-}
-],
-"dur": 177
+"at": 394.928,
+"kind": "t",
+"ref": "The driver: *AI*.",
+"mode": "type",
+"hold": 4.336,
+"n": 58,
+"captions": []
 },
-"hold": 7.39,
-"n": 49,
+{
+"ch": 2,
+"at": 399.26399999999995,
+"kind": "n",
+"ref": "4.4%",
+"mode": "type",
+"hold": 7.164,
+"n": 59,
 "captions": [
 {
-"at": 397.178,
+"at": 399.26399999999995,
 "text": "SOURCE · LAWRENCE BERKELEY NATIONAL LAB (2024)"
-},
-{
-"at": 399.484,
-"text": "4.4%"
 }
 ]
 },
 {
 "ch": 2,
-"at": 404.568,
-"kind": "p",
-"ref": "lbnl2",
-"hold": 5.72,
-"n": 50,
-"captions": [
-{
-"at": 406.648,
-"text": "up to 12%"
-}
-]
+"at": 406.428,
+"kind": "n",
+"ref": "up to 12%",
+"mode": "type",
+"hold": 3.86,
+"n": 60,
+"captions": []
 },
 {
 "ch": 2,
 "at": 410.28799999999995,
 "kind": "p",
 "ref": "dublin_night",
-"hold": 9.78,
-"n": 51,
-"captions": [
-{
-"at": 412.488,
-"text": "SOURCE · CSO IRELAND (2023)"
+"mode": "strip",
+"hold": 4.04,
+"n": 61,
+"captions": []
 },
 {
-"at": 414.548,
-"text": "21%"
+"ch": 2,
+"at": 414.328,
+"kind": "n",
+"ref": "21%",
+"mode": "type",
+"hold": 10.0,
+"n": 62,
+"captions": [
+{
+"at": 414.328,
+"text": "SOURCE · CSO IRELAND (2023)"
 }
 ]
 },
 {
 "ch": 2,
-"at": 420.068,
+"at": 424.328,
 "kind": "p",
-"ref": "dublin_homes",
-"hold": 14.58,
-"n": 52,
+"ref": "dublin_dc",
+"mode": "strip",
+"hold": 6.28,
+"n": 63,
 "captions": []
 },
 {
 "ch": 2,
-"at": 434.64799999999997,
-"kind": "p",
-"ref": "power_plant",
-"hold": 8.42,
-"n": 53,
+"at": 430.60799999999995,
+"kind": "t",
+"ref": "The problem.",
+"mode": "type",
+"hold": 6.6,
+"n": 64,
 "captions": []
 },
 {
 "ch": 2,
-"at": 443.068,
+"at": 437.20799999999997,
 "kind": "c",
-"ref": "leaf",
-"hold": 14.16,
-"n": 54,
+"ref": "moon",
+"mode": "object",
+"hold": 6.65,
+"n": 65,
+"captions": []
+},
+{
+"ch": 2,
+"at": 443.85799999999995,
+"kind": "p",
+"ref": "solar",
+"mode": "strip",
+"hold": 6.27,
+"n": 66,
+"captions": []
+},
+{
+"ch": 2,
+"at": 450.128,
+"kind": "t",
+"ref": "Clean. Always on.",
+"mode": "type",
+"hold": 7.1,
+"n": 67,
 "captions": [
 {
 "at": 453.788,
@@ -885,8 +1021,9 @@
 "at": 457.22799999999995,
 "kind": "p",
 "ref": "tmi_1979",
+"mode": "strip",
 "hold": 6.5,
-"n": 55,
+"n": 68,
 "captions": [
 {
 "at": 457.22799999999995,
@@ -899,44 +1036,64 @@
 "at": 463.72799999999995,
 "kind": "p",
 "ref": "tmi",
-"hold": 17.48,
-"n": 56,
-"captions": [
-{
-"at": 474.908,
-"text": "40 years"
+"mode": "strip",
+"hold": 5.36,
+"n": 69,
+"captions": []
 },
 {
-"at": 476.208,
+"ch": 2,
+"at": 469.08799999999997,
+"kind": "t",
+"ref": "Unit 2: never ran again.",
+"mode": "type",
+"hold": 5.6,
+"n": 70,
+"captions": []
+},
+{
+"ch": 2,
+"at": 474.688,
+"kind": "n",
+"ref": "40 years",
+"mode": "type",
+"hold": 4.48,
+"n": 71,
+"captions": []
+},
+{
+"ch": 2,
+"at": 479.16799999999995,
+"kind": "t",
+"ref": "Not unsafe.",
+"mode": "type",
+"hold": 6.04,
+"n": 72,
+"captions": [
+{
+"at": 479.16799999999995,
 "text": "2019"
 }
 ]
 },
 {
 "ch": 2,
-"at": 481.20799999999997,
-"kind": "c",
-"ref": "money_stack",
-"hold": 10.08,
-"n": 57,
-"captions": [
-{
-"at": 485.428,
-"text": "Sept 2024"
-},
-{
-"at": 487.898,
-"text": "20-year deal"
-}
-]
+"at": 485.20799999999997,
+"kind": "n",
+"ref": "Sept 2024",
+"mode": "type",
+"hold": 6.08,
+"n": 73,
+"captions": []
 },
 {
 "ch": 2,
 "at": 491.28799999999995,
 "kind": "c",
 "ref": "power_switch",
-"hold": 8.7,
-"n": 58,
+"mode": "object",
+"hold": 7.14,
+"n": 74,
 "captions": [
 {
 "at": 492.608,
@@ -946,11 +1103,12 @@
 },
 {
 "ch": 2,
-"at": 499.988,
-"kind": "l",
-"ref": "microsoft",
-"hold": 7.7,
-"n": 59,
+"at": 498.428,
+"kind": "t",
+"ref": "to help power *AI*",
+"mode": "type",
+"hold": 9.26,
+"n": 75,
 "captions": []
 },
 {
@@ -958,8 +1116,19 @@
 "at": 507.688,
 "kind": "p",
 "ref": "reactor_core",
-"hold": 11.4,
-"n": 60,
+"mode": "strip",
+"hold": 8.18,
+"n": 76,
+"captions": []
+},
+{
+"ch": 2,
+"at": 515.8679999999999,
+"kind": "t",
+"ref": "The size of the *hunger*.",
+"mode": "type",
+"hold": 3.22,
+"n": 77,
 "captions": []
 },
 {
@@ -967,13 +1136,20 @@
 "at": 519.088,
 "kind": "c",
 "ref": "snail",
-"hold": 13.4,
-"n": 61,
-"captions": [
-{
-"at": 522.808,
-"text": "10+ years"
+"mode": "object",
+"hold": 3.5,
+"n": 78,
+"captions": []
 },
+{
+"ch": 2,
+"at": 522.588,
+"kind": "n",
+"ref": "10+ years",
+"mode": "type",
+"hold": 9.9,
+"n": 79,
+"captions": [
 {
 "at": 527.408,
 "text": "MEMPHIS, TENNESSEE · 2024"
@@ -985,57 +1161,42 @@
 "at": 532.4879999999999,
 "kind": "p",
 "ref": "factory",
-"hold": 7.3,
-"n": 62,
+"mode": "strip",
+"hold": 9.0,
+"n": 80,
 "captions": []
 },
 {
 "ch": 2,
-"at": 539.788,
-"kind": "h",
-"ref": "musk",
-"hold": 7.24,
-"n": 63,
-"captions": [
-{
-"at": 541.708,
-"text": "~4 months"
-}
-]
-},
-{
-"ch": 2,
-"at": 547.028,
-"kind": "p",
-"ref": "gas_turbine",
-"hold": 8.63,
-"n": 64,
+"at": 541.4879999999999,
+"kind": "n",
+"ref": "~4 months",
+"mode": "type",
+"hold": 4.44,
+"n": 81,
 "captions": []
 },
 {
 "ch": 2,
-"at": 555.658,
-"kind": "board",
-"ref": "icons",
-"board": {
-"name": "icons",
-"ups": [
-{
-"at": 4,
-"o": {
-"n": "35",
-"asset": "generator",
-"label": "~35 gas turbines counted from aerial images"
-}
-}
-],
-"dur": 117
+"at": 545.928,
+"kind": "t",
+"ref": "So they brought their *own*.",
+"mode": "type",
+"hold": 6.94,
+"n": 82,
+"captions": []
 },
-"hold": 4.87,
-"n": 65,
+{
+"ch": 2,
+"at": 552.8679999999999,
+"kind": "c",
+"ref": "generator",
+"mode": "object",
+"hold": 7.66,
+"n": 83,
 "captions": [
 {
-"at": 555.658,
+"at": 554.068,
 "text": "SOURCE · SOUTHERN ENVIRONMENTAL LAW CENTER (2025)"
 }
 ]
@@ -1045,8 +1206,9 @@
 "at": 560.528,
 "kind": "p",
 "ref": "boxtown",
+"mode": "strip",
 "hold": 3.49,
-"n": 66,
+"n": 84,
 "captions": []
 },
 {
@@ -1067,8 +1229,9 @@
 ],
 "dur": 169
 },
+"mode": "board",
 "hold": 7.05,
-"n": 67,
+"n": 85,
 "captions": []
 },
 {
@@ -1076,17 +1239,19 @@
 "at": 571.068,
 "kind": "p",
 "ref": "refinery",
-"hold": 10.26,
-"n": 68,
+"mode": "strip",
+"hold": 7.36,
+"n": 86,
 "captions": []
 },
 {
 "ch": 2,
-"at": 581.328,
-"kind": "c",
-"ref": "lungs",
-"hold": 4.73,
-"n": 69,
+"at": 578.428,
+"kind": "t",
+"ref": "NOx",
+"mode": "type",
+"hold": 7.63,
+"n": 87,
 "captions": []
 },
 {
@@ -1104,24 +1269,41 @@
 }
 }
 ],
-"dur": 308
+"dur": 152
 },
-"hold": 12.83,
-"n": 70,
-"captions": [
+"mode": "board",
+"hold": 6.33,
+"n": 88,
+"captions": []
+},
 {
-"at": 592.608,
-"text": "15 turbines permitted"
-}
-]
+"ch": 2,
+"at": 592.3879999999999,
+"kind": "n",
+"ref": "15 turbines permitted",
+"mode": "type",
+"hold": 6.5,
+"n": 89,
+"captions": []
 },
 {
 "ch": 2,
 "at": 598.8879999999999,
 "kind": "c",
 "ref": "pylon",
-"hold": 10.3,
-"n": 71,
+"mode": "object",
+"hold": 4.98,
+"n": 90,
+"captions": []
+},
+{
+"ch": 2,
+"at": 603.8679999999999,
+"kind": "t",
+"ref": "Both can be true.",
+"mode": "type",
+"hold": 5.32,
+"n": 91,
 "captions": []
 },
 {
@@ -1129,8 +1311,9 @@
 "at": 609.188,
 "kind": "c",
 "ref": "globe",
+"mode": "object",
 "hold": 8.21,
-"n": 72,
+"n": 92,
 "captions": []
 },
 {
@@ -1151,8 +1334,9 @@
 ],
 "dur": 147
 },
+"mode": "board",
 "hold": 6.13,
-"n": 73,
+"n": 93,
 "captions": []
 },
 {
@@ -1160,8 +1344,9 @@
 "at": 623.528,
 "kind": "p",
 "ref": "dc_roof",
+"mode": "strip",
 "hold": 7.97,
-"n": 74,
+"n": 94,
 "captions": []
 },
 {
@@ -1187,13 +1372,24 @@
 }
 }
 ],
-"dur": 214
+"dur": 135
 },
-"hold": 8.93,
-"n": 75,
+"mode": "board",
+"hold": 5.61,
+"n": 95,
+"captions": []
+},
+{
+"ch": 2,
+"at": 637.108,
+"kind": "t",
+"ref": "Their own reports.",
+"mode": "type",
+"hold": 3.32,
+"n": 96,
 "captions": [
 {
-"at": 634.868,
+"at": 637.108,
 "text": "SOURCES · GOOGLE 2024 ENVIRONMENTAL REPORT · MICROSOFT 2024 SUSTAINABILITY REPORT"
 }
 ]
@@ -1203,8 +1399,9 @@
 "at": 640.428,
 "kind": "p",
 "ref": "steam_tower",
+"mode": "strip",
 "hold": 6.48,
-"n": 76,
+"n": 97,
 "captions": []
 },
 {
@@ -1212,8 +1409,9 @@
 "at": 646.908,
 "kind": "p",
 "ref": "water_drop",
+"mode": "strip",
 "hold": 3.33,
-"n": 77,
+"n": 98,
 "captions": []
 },
 {
@@ -1234,8 +1432,9 @@
 ],
 "dur": 88
 },
+"mode": "board",
 "hold": 3.667,
-"n": 78,
+"n": 99,
 "captions": []
 },
 {
@@ -1243,8 +1442,9 @@
 "at": 658.515,
 "kind": "c",
 "ref": "sun",
+"mode": "object",
 "hold": 6.9,
-"n": 79,
+"n": 100,
 "captions": []
 },
 {
@@ -1252,8 +1452,9 @@
 "at": 665.415,
 "kind": "c",
 "ref": "ice_cube",
+"mode": "object",
 "hold": 5.87,
-"n": 80,
+"n": 101,
 "captions": []
 },
 {
@@ -1289,46 +1490,81 @@
 }
 }
 ],
-"dur": 339
+"dur": 251
 },
-"hold": 14.13,
-"n": 81,
+"mode": "board",
+"hold": 10.47,
+"n": 102,
 "captions": []
 },
 {
 "ch": 3,
-"at": 685.415,
-"kind": "p",
-"ref": "columbia",
-"hold": 13.02,
-"n": 82,
+"at": 681.755,
+"kind": "t",
+"ref": "Here's the important part.",
+"mode": "type",
+"hold": 6.3,
+"n": 103,
 "captions": []
 },
 {
 "ch": 3,
-"at": 698.435,
+"at": 688.055,
 "kind": "p",
-"ref": "coal_plant",
-"hold": 10.14,
-"n": 83,
+"ref": "steam",
+"mode": "strip",
+"hold": 5.28,
+"n": 104,
 "captions": []
 },
 {
 "ch": 3,
-"at": 708.5749999999999,
-"kind": "p",
-"ref": "power_plant",
-"hold": 5.8,
-"n": 84,
+"at": 693.3349999999999,
+"kind": "t",
+"ref": "water *consumption*",
+"mode": "type",
+"hold": 3.84,
+"n": 105,
 "captions": []
 },
 {
 "ch": 3,
-"at": 714.375,
+"at": 697.175,
+"kind": "t",
+"ref": "A hidden layer.",
+"mode": "type",
+"hold": 7.98,
+"n": 106,
+"captions": []
+},
+{
+"ch": 3,
+"at": 705.155,
+"kind": "t",
+"ref": "AI drinks *twice*",
+"mode": "type",
+"hold": 5.6,
+"n": 107,
+"captions": []
+},
+{
+"ch": 3,
+"at": 710.755,
 "kind": "p",
-"ref": "dalles_dam",
-"hold": 9.84,
-"n": 85,
+"ref": "dalles",
+"mode": "strip",
+"hold": 6.92,
+"n": 108,
+"captions": []
+},
+{
+"ch": 3,
+"at": 717.675,
+"kind": "t",
+"ref": "A perfect place.",
+"mode": "type",
+"hold": 6.54,
+"n": 109,
 "captions": [
 {
 "at": 719.915,
@@ -1341,8 +1577,9 @@
 "at": 724.2149999999999,
 "kind": "p",
 "ref": "oregonian",
+"mode": "strip",
 "hold": 6.64,
-"n": 86,
+"n": 110,
 "captions": []
 },
 {
@@ -1350,27 +1587,39 @@
 "at": 730.855,
 "kind": "c",
 "ref": "stamp",
-"hold": 7.8,
-"n": 87,
+"mode": "object",
+"hold": 6.1,
+"n": 111,
 "captions": []
 },
 {
 "ch": 3,
-"at": 738.655,
-"kind": "c",
-"ref": "documents",
-"hold": 10.17,
-"n": 88,
+"at": 736.9549999999999,
+"kind": "n",
+"ref": "late 2022",
+"mode": "type",
+"hold": 7.42,
+"n": 112,
 "captions": [
-{
-"at": 738.655,
-"text": "late 2022"
-},
 {
 "at": 740.375,
 "text": "2021 · GOOGLE USED ~355 MILLION GALLONS IN THE DALLES"
+},
+{
+"at": 740.375,
+"text": "SOURCE · THE OREGONIAN (2022)"
 }
 ]
+},
+{
+"ch": 3,
+"at": 744.375,
+"kind": "n",
+"ref": "355M gallons",
+"mode": "type",
+"hold": 4.45,
+"n": 113,
+"captions": []
 },
 {
 "ch": 3,
@@ -1385,50 +1634,53 @@
 "o": {
 "pct": "29"
 }
-},
-{
-"at": 156,
-"o": {
-"pct": "29"
-}
 }
 ],
-"dur": 201
+"dur": 97
 },
-"hold": 8.39,
-"n": 89,
-"captions": [
-{
-"at": 753.075,
-"text": "~3× in 5 years"
-}
-]
-},
-{
-"ch": 3,
-"at": 757.2149999999999,
-"kind": "l",
-"ref": "google",
-"hold": 6.58,
-"n": 90,
+"mode": "board",
+"hold": 4.03,
+"n": 114,
 "captions": []
 },
 {
 "ch": 3,
-"at": 763.795,
-"kind": "l",
-"ref": "google",
-"hold": 6.26,
-"n": 91,
+"at": 752.855,
+"kind": "n",
+"ref": "~3× in 5 years",
+"mode": "type",
+"hold": 9.08,
+"n": 115,
 "captions": []
 },
 {
 "ch": 3,
-"at": 770.055,
+"at": 761.935,
+"kind": "t",
+"ref": "They weren't allowed to *know*.",
+"mode": "type",
+"hold": 4.56,
+"n": 116,
+"captions": []
+},
+{
+"ch": 3,
+"at": 766.495,
 "kind": "p",
-"ref": "columbia",
-"hold": 7.53,
-"n": 92,
+"ref": "water_pipes",
+"mode": "strip",
+"hold": 5.24,
+"n": 117,
+"captions": []
+},
+{
+"ch": 3,
+"at": 771.735,
+"kind": "t",
+"ref": "Not a desert.",
+"mode": "type",
+"hold": 5.85,
+"n": 118,
 "captions": []
 },
 {
@@ -1449,8 +1701,9 @@
 ],
 "dur": 209
 },
+"mode": "board",
 "hold": 8.69,
-"n": 93,
+"n": 119,
 "captions": []
 },
 {
@@ -1458,8 +1711,9 @@
 "at": 786.275,
 "kind": "p",
 "ref": "dry_lake",
+"mode": "strip",
 "hold": 9.98,
-"n": 94,
+"n": 120,
 "captions": [
 {
 "at": 787.395,
@@ -1472,8 +1726,9 @@
 "at": 796.255,
 "kind": "p",
 "ref": "paso_severino",
+"mode": "strip",
 "hold": 7.09,
-"n": 95,
+"n": 121,
 "captions": []
 },
 {
@@ -1491,10 +1746,21 @@
 }
 }
 ],
-"dur": 347
+"dur": 215
 },
-"hold": 14.44,
-"n": 96,
+"mode": "board",
+"hold": 8.97,
+"n": 122,
+"captions": []
+},
+{
+"ch": 3,
+"at": 812.3149999999999,
+"kind": "t",
+"ref": "redesigned: *air cooling*",
+"mode": "type",
+"hold": 5.47,
+"n": 123,
 "captions": []
 },
 {
@@ -1521,8 +1787,9 @@
 ],
 "dur": 157
 },
+"mode": "board",
 "hold": 6.53,
-"n": 97,
+"n": 124,
 "captions": []
 },
 {
@@ -1530,8 +1797,9 @@
 "at": 824.3149999999999,
 "kind": "c",
 "ref": "fan",
+"mode": "object",
 "hold": 3.99,
-"n": 98,
+"n": 125,
 "captions": []
 },
 {
@@ -1564,16 +1832,27 @@
 }
 }
 ],
-"dur": 456
+"dur": 378
 },
-"hold": 19.02,
-"n": 99,
+"mode": "board",
+"hold": 15.73,
+"n": 126,
 "captions": [
 {
 "at": 828.335,
 "text": "SOURCE · AP NEWS (2023), COMPANY REPORTS"
 }
 ]
+},
+{
+"ch": 3,
+"at": 844.035,
+"kind": "t",
+"ref": "How much water per *answer*?",
+"mode": "type",
+"hold": 3.29,
+"n": 127,
+"captions": []
 },
 {
 "ch": 3,
@@ -1610,8 +1889,9 @@
 ],
 "dur": 422
 },
+"mode": "board",
 "hold": 17.59,
-"n": 100,
+"n": 128,
 "captions": [
 {
 "at": 848.935,
@@ -1628,8 +1908,9 @@
 "at": 864.915,
 "kind": "h",
 "ref": "altman",
+"mode": "object",
 "hold": 6.59,
-"n": 101,
+"n": 129,
 "captions": []
 },
 {
@@ -1684,10 +1965,21 @@
 }
 }
 ],
-"dur": 357
+"dur": 214
 },
-"hold": 14.89,
-"n": 102,
+"mode": "board",
+"hold": 8.93,
+"n": 130,
+"captions": []
+},
+{
+"ch": 3,
+"at": 880.435,
+"kind": "t",
+"ref": "We'll settle it.",
+"mode": "type",
+"hold": 5.96,
+"n": 131,
 "captions": []
 },
 {
@@ -1695,8 +1987,9 @@
 "at": 886.395,
 "kind": "p",
 "ref": "power_plant",
+"mode": "strip",
 "hold": 11.5,
-"n": 103,
+"n": 132,
 "captions": []
 },
 {
@@ -1704,17 +1997,29 @@
 "at": 897.895,
 "kind": "c",
 "ref": "robot_arm",
+"mode": "object",
 "hold": 7.438,
-"n": 104,
+"n": 133,
 "captions": []
 },
 {
 "ch": 4,
-"at": 915.023,
-"kind": "c",
-"ref": "router",
-"hold": 5.71,
-"n": 105,
+"at": 911.483,
+"kind": "t",
+"ref": "One uncomfortable fact.",
+"mode": "type",
+"hold": 4.7,
+"n": 134,
+"captions": []
+},
+{
+"ch": 4,
+"at": 916.183,
+"kind": "t",
+"ref": "*ALL* of the internet.",
+"mode": "type",
+"hold": 4.55,
+"n": 135,
 "captions": []
 },
 {
@@ -1762,31 +2067,41 @@
 }
 }
 ],
-"dur": 566
+"dur": 413
 },
-"hold": 23.6,
-"n": 106,
+"mode": "board",
+"hold": 17.19,
+"n": 136,
 "captions": []
 },
 {
 "ch": 4,
-"at": 944.333,
-"kind": "board",
-"ref": "blurtext",
-"board": {
-"name": "blurtext",
-"ups": [
-{
-"at": 4,
-"o": {
-"word": "worst"
-}
-}
-],
-"dur": 142
+"at": 937.923,
+"kind": "t",
+"ref": "…from *us*.",
+"mode": "type",
+"hold": 3.66,
+"n": 137,
+"captions": []
 },
-"hold": 5.92,
-"n": 107,
+{
+"ch": 4,
+"at": 941.583,
+"kind": "t",
+"ref": "The problem.",
+"mode": "type",
+"hold": 4.52,
+"n": 138,
+"captions": []
+},
+{
+"ch": 4,
+"at": 946.103,
+"kind": "t",
+"ref": "*Refuse.*",
+"mode": "type",
+"hold": 4.15,
+"n": 139,
 "captions": []
 },
 {
@@ -1824,8 +2139,9 @@
 ],
 "dur": 188
 },
+"mode": "board",
 "hold": 7.85,
-"n": 108,
+"n": 140,
 "captions": []
 },
 {
@@ -1833,8 +2149,9 @@
 "at": 958.103,
 "kind": "c",
 "ref": "reading_glasses",
+"mode": "object",
 "hold": 3.64,
-"n": 109,
+"n": 141,
 "captions": []
 },
 {
@@ -1842,8 +2159,9 @@
 "at": 961.7429999999999,
 "kind": "l",
 "ref": "openai",
+"mode": "object",
 "hold": 6.7,
-"n": 110,
+"n": 142,
 "captions": [
 {
 "at": 961.7429999999999,
@@ -1856,8 +2174,9 @@
 "at": 968.443,
 "kind": "p",
 "ref": "san_francisco",
+"mode": "strip",
 "hold": 8.1,
-"n": 111,
+"n": 143,
 "captions": []
 },
 {
@@ -1865,8 +2184,9 @@
 "at": 976.543,
 "kind": "p",
 "ref": "kibera",
+"mode": "strip",
 "hold": 7.12,
-"n": 112,
+"n": 144,
 "captions": [
 {
 "at": 978.163,
@@ -1879,8 +2199,9 @@
 "at": 983.663,
 "kind": "p",
 "ref": "empty_office",
+"mode": "strip",
 "hold": 4.19,
-"n": 113,
+"n": 145,
 "captions": []
 },
 {
@@ -1904,28 +2225,36 @@
 }
 }
 ],
-"dur": 409
+"dur": 321
 },
-"hold": 17.06,
-"n": 114,
+"mode": "board",
+"hold": 13.39,
+"n": 146,
 "captions": [
 {
 "at": 998.163,
 "text": "SOURCE · TIME, BILLY PERRIGO (2023)"
-},
-{
-"at": 1001.463,
-"text": "150–250"
 }
 ]
 },
 {
 "ch": 4,
-"at": 1004.913,
+"at": 1001.2429999999999,
+"kind": "n",
+"ref": "150–250",
+"mode": "type",
+"hold": 5.84,
+"n": 147,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1007.083,
 "kind": "c",
-"ref": "clock",
-"hold": 6.28,
-"n": 115,
+"ref": "office_chair",
+"mode": "object",
+"hold": 4.11,
+"n": 148,
 "captions": []
 },
 {
@@ -1945,8 +2274,9 @@
 ],
 "dur": 149
 },
+"mode": "board",
 "hold": 6.19,
-"n": 116,
+"n": 149,
 "captions": []
 },
 {
@@ -1954,8 +2284,9 @@
 "at": 1017.3829999999999,
 "kind": "c",
 "ref": "eye",
+"mode": "object",
 "hold": 11.08,
-"n": 117,
+"n": 150,
 "captions": []
 },
 {
@@ -1963,8 +2294,9 @@
 "at": 1028.463,
 "kind": "l",
 "ref": "time",
+"mode": "object",
 "hold": 3.31,
-"n": 118,
+"n": 151,
 "captions": []
 },
 {
@@ -1990,8 +2322,9 @@
 ],
 "dur": 78
 },
+"mode": "board",
 "hold": 3.26,
-"n": 119,
+"n": 152,
 "captions": []
 },
 {
@@ -2012,8 +2345,9 @@
 ],
 "dur": 106
 },
+"mode": "board",
 "hold": 4.4,
-"n": 120,
+"n": 153,
 "captions": []
 },
 {
@@ -2037,10 +2371,11 @@
 }
 }
 ],
-"dur": 323
+"dur": 354
 },
-"hold": 13.45,
-"n": 121,
+"mode": "board",
+"hold": 14.73,
+"n": 154,
 "captions": [
 {
 "at": 1045.423,
@@ -2050,28 +2385,36 @@
 },
 {
 "ch": 4,
-"at": 1052.883,
-"kind": "c",
-"ref": "sofa",
-"hold": 9.66,
-"n": 122,
+"at": 1054.163,
+"kind": "t",
+"ref": "\"rare and not enough\"",
+"mode": "type",
+"hold": 6.14,
+"n": 155,
 "captions": []
 },
 {
 "ch": 4,
-"at": 1062.543,
-"kind": "c",
-"ref": "contract_torn",
-"hold": 11.72,
-"n": 123,
-"captions": [
-{
-"at": 1062.543,
-"text": "Feb 2022"
+"at": 1060.3029999999999,
+"kind": "n",
+"ref": "Feb 2022",
+"mode": "type",
+"hold": 4.62,
+"n": 156,
+"captions": []
 },
 {
-"at": 1065.143,
-"text": "8 months early"
+"ch": 4,
+"at": 1064.923,
+"kind": "n",
+"ref": "8 months early",
+"mode": "type",
+"hold": 9.34,
+"n": 157,
+"captions": [
+{
+"at": 1069.343,
+"text": "2023"
 }
 ]
 },
@@ -2080,8 +2423,9 @@
 "at": 1074.263,
 "kind": "p",
 "ref": "kenya_parliament",
+"mode": "strip",
 "hold": 7.66,
-"n": 124,
+"n": 158,
 "captions": []
 },
 {
@@ -2089,8 +2433,9 @@
 "at": 1081.923,
 "kind": "c",
 "ref": "hazard_sign",
+"mode": "object",
 "hold": 9.34,
-"n": 125,
+"n": 159,
 "captions": []
 },
 {
@@ -2098,55 +2443,49 @@
 "at": 1091.263,
 "kind": "p",
 "ref": "nairobi_court",
-"hold": 13.26,
-"n": 126,
+"mode": "strip",
+"hold": 9.36,
+"n": 160,
 "captions": []
 },
 {
 "ch": 4,
-"at": 1104.523,
-"kind": "c",
-"ref": "robot_arm",
-"hold": 8.36,
-"n": 127,
+"at": 1100.623,
+"kind": "t",
+"ref": "\"ghost work\"",
+"mode": "type",
+"hold": 7.14,
+"n": 161,
 "captions": []
 },
 {
 "ch": 4,
-"at": 1112.883,
-"kind": "c",
-"ref": "padlock",
-"hold": 5.45,
-"n": 128,
+"at": 1107.763,
+"kind": "t",
+"ref": "kept *out of sight*",
+"mode": "type",
+"hold": 8.22,
+"n": 162,
 "captions": []
 },
 {
 "ch": 4,
-"at": 1118.3329999999999,
-"kind": "board",
-"ref": "chat",
-"board": {
-"name": "chat",
-"ups": [
-{
-"at": 4,
-"o": {
-"mode": "mini",
-"text": "Can you help me?"
-}
+"at": 1115.983,
+"kind": "t",
+"ref": "\"did not set the targets\"",
+"mode": "type",
+"hold": 12.46,
+"n": 163,
+"captions": []
 },
 {
-"at": 48,
-"o": {
-"mode": "answer",
-"answer": "Of course! I'd be glad to help. What do you need?"
-}
-}
-],
-"dur": 386
-},
-"hold": 16.1,
-"n": 129,
+"ch": 4,
+"at": 1128.443,
+"kind": "t",
+"ref": "reinforcement learning from *human* feedback",
+"mode": "type",
+"hold": 5.99,
+"n": 164,
 "captions": []
 },
 {
@@ -2184,8 +2523,9 @@
 ],
 "dur": 115
 },
+"mode": "board",
 "hold": 4.8,
-"n": 130,
+"n": 165,
 "captions": []
 },
 {
@@ -2203,19 +2543,31 @@
 }
 }
 ],
-"dur": 232
+"dur": 97
 },
-"hold": 9.67,
-"n": 131,
+"mode": "board",
+"hold": 4.05,
+"n": 166,
 "captions": []
 },
 {
 "ch": 4,
-"at": 1148.903,
+"at": 1143.283,
+"kind": "t",
+"ref": "\"please\"",
+"mode": "type",
+"hold": 8.56,
+"n": 167,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1151.843,
 "kind": "p",
-"ref": "hands",
-"hold": 11.06,
-"n": 132,
+"ref": "call_center",
+"mode": "strip",
+"hold": 9.2,
+"n": 168,
 "captions": [
 {
 "at": 1154.023,
@@ -2225,17 +2577,13 @@
 },
 {
 "ch": 4,
-"at": 1159.963,
-"kind": "l",
-"ref": "meta",
-"hold": 5.83,
-"n": 133,
-"captions": [
-{
-"at": 1161.263,
-"text": "$14B+"
-}
-]
+"at": 1161.043,
+"kind": "n",
+"ref": "$14B+",
+"mode": "type",
+"hold": 4.75,
+"n": 169,
+"captions": []
 },
 {
 "ch": 4,
@@ -2255,8 +2603,9 @@
 ],
 "dur": 261
 },
+"mode": "board",
 "hold": 10.87,
-"n": 134,
+"n": 170,
 "captions": []
 },
 {
@@ -2264,17 +2613,29 @@
 "at": 1176.663,
 "kind": "p",
 "ref": "manila",
-"hold": 12.08,
-"n": 135,
+"mode": "strip",
+"hold": 6.45,
+"n": 171,
 "captions": []
 },
 {
 "ch": 4,
-"at": 1188.743,
-"kind": "c",
-"ref": "stamp",
-"hold": 16.04,
-"n": 136,
+"at": 1183.113,
+"kind": "t",
+"ref": "Remotasks",
+"mode": "type",
+"hold": 3.21,
+"n": 172,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1186.3229999999999,
+"kind": "t",
+"ref": "far below *minimum wage*",
+"mode": "type",
+"hold": 8.32,
+"n": 173,
 "captions": [
 {
 "at": 1190.123,
@@ -2284,21 +2645,48 @@
 },
 {
 "ch": 4,
-"at": 1204.783,
-"kind": "c",
-"ref": "stethoscope",
-"hold": 10.42,
-"n": 137,
+"at": 1194.643,
+"kind": "p",
+"ref": "white_house",
+"mode": "strip",
+"hold": 7.18,
+"n": 174,
 "captions": []
 },
 {
 "ch": 4,
-"at": 1215.203,
+"at": 1201.8229999999999,
+"kind": "t",
+"ref": "The picture is changing.",
+"mode": "type",
+"hold": 11.46,
+"n": 175,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1213.283,
+"kind": "t",
+"ref": "lives changed for the better",
+"mode": "type",
+"hold": 3.39,
+"n": 176,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1216.673,
 "kind": "board",
 "ref": "tiers",
 "board": {
 "name": "tiers",
 "ups": [
+{
+"at": -200,
+"o": {
+"show": "1"
+}
+},
 {
 "at": 4,
 "o": {
@@ -2306,45 +2694,37 @@
 }
 },
 {
-"at": 39,
-"o": {
-"show": "1"
-}
-},
-{
-"at": 79,
+"at": 43,
 "o": {
 "show": "2"
 }
 }
 ],
-"dur": 300
+"dur": 284
 },
-"hold": 12.5,
-"n": 138,
+"mode": "board",
+"hold": 11.85,
+"n": 177,
 "captions": []
 },
 {
 "ch": 4,
-"at": 1227.703,
-"kind": "c",
-"ref": "money_stack",
-"hold": 7.18,
-"n": 139,
-"captions": [
-{
-"at": 1228.743,
-"text": "$ billions"
-}
-]
+"at": 1228.523,
+"kind": "n",
+"ref": "$ billions",
+"mode": "type",
+"hold": 6.36,
+"n": 178,
+"captions": []
 },
 {
 "ch": 4,
 "at": 1234.883,
 "kind": "p",
 "ref": "nairobi_night",
+"mode": "strip",
 "hold": 4.09,
-"n": 140,
+"n": 179,
 "captions": []
 },
 {
@@ -2365,8 +2745,9 @@
 ],
 "dur": 167
 },
+"mode": "board",
 "hold": 6.95,
-"n": 141,
+"n": 180,
 "captions": []
 },
 {
@@ -2374,8 +2755,9 @@
 "at": 1245.923,
 "kind": "p",
 "ref": "rock",
+"mode": "strip",
 "hold": 2.627,
-"n": 142,
+"n": 181,
 "captions": []
 },
 {
@@ -2383,8 +2765,9 @@
 "at": 1253.12,
 "kind": "c",
 "ref": "sand",
+"mode": "object",
 "hold": 6.74,
-"n": 143,
+"n": 182,
 "captions": []
 },
 {
@@ -2392,8 +2775,9 @@
 "at": 1259.86,
 "kind": "c",
 "ref": "ingot",
+"mode": "object",
 "hold": 7.02,
-"n": 144,
+"n": 183,
 "captions": []
 },
 {
@@ -2401,8 +2785,9 @@
 "at": 1266.8799999999999,
 "kind": "c",
 "ref": "die_shot",
+"mode": "object",
 "hold": 10.17,
-"n": 145,
+"n": 184,
 "captions": []
 },
 {
@@ -2421,28 +2806,26 @@
 }
 }
 ],
-"dur": 231
+"dur": 119
 },
-"hold": 9.61,
-"n": 146,
+"mode": "board",
+"hold": 4.95,
+"n": 185,
 "captions": [
 {
 "at": 1278.2,
 "text": "TSMC · TAIWAN"
-},
-{
-"at": 1282.22,
-"text": "~90% of advanced chips"
 }
 ]
 },
 {
 "ch": 5,
-"at": 1286.66,
-"kind": "c",
-"ref": "gpu_card",
-"hold": 5.02,
-"n": 147,
+"at": 1282.0,
+"kind": "n",
+"ref": "~90% of advanced chips",
+"mode": "type",
+"hold": 9.68,
+"n": 186,
 "captions": []
 },
 {
@@ -2450,8 +2833,9 @@
 "at": 1291.68,
 "kind": "p",
 "ref": "water_drop",
+"mode": "strip",
 "hold": 7.48,
-"n": 148,
+"n": 187,
 "captions": []
 },
 {
@@ -2459,8 +2843,9 @@
 "at": 1299.16,
 "kind": "p",
 "ref": "taiwan_drought",
+"mode": "strip",
 "hold": 7.72,
-"n": 149,
+"n": 188,
 "captions": [
 {
 "at": 1299.16,
@@ -2477,8 +2862,9 @@
 "at": 1306.8799999999999,
 "kind": "p",
 "ref": "fab",
+"mode": "strip",
 "hold": 11.07,
-"n": 150,
+"n": 189,
 "captions": []
 },
 {
@@ -2499,8 +2885,9 @@
 ],
 "dur": 232
 },
+"mode": "board",
 "hold": 9.67,
-"n": 151,
+"n": 190,
 "captions": []
 },
 {
@@ -2508,8 +2895,9 @@
 "at": 1327.62,
 "kind": "c",
 "ref": "oil_barrel",
+"mode": "object",
 "hold": 3.28,
-"n": 152,
+"n": 191,
 "captions": []
 },
 {
@@ -2517,8 +2905,9 @@
 "at": 1330.8999999999999,
 "kind": "p",
 "ref": "gallium",
+"mode": "strip",
 "hold": 4.13,
-"n": 153,
+"n": 192,
 "captions": [
 {
 "at": 1331.06,
@@ -2542,42 +2931,50 @@
 }
 }
 ],
-"dur": 185
+"dur": 76
 },
-"hold": 7.69,
-"n": 154,
-"captions": [
-{
-"at": 1338.42,
-"text": "~98%"
-}
-]
+"mode": "board",
+"hold": 3.17,
+"n": 193,
+"captions": []
 },
 {
 "ch": 5,
-"at": 1342.72,
-"kind": "c",
-"ref": "padlock",
-"hold": 10.18,
-"n": 155,
+"at": 1338.2,
+"kind": "n",
+"ref": "~98%",
+"mode": "type",
+"hold": 7.22,
+"n": 194,
 "captions": [
 {
-"at": 1342.72,
+"at": 1341.12,
 "text": "NOTE · THE US BAN WAS SUSPENDED FROM NOV 2025 TO NOV 2026"
 },
 {
-"at": 1342.72,
+"at": 1341.24,
 "text": "2023"
 }
 ]
 },
 {
 "ch": 5,
+"at": 1345.42,
+"kind": "n",
+"ref": "Dec 2024",
+"mode": "type",
+"hold": 7.48,
+"n": 195,
+"captions": []
+},
+{
+"ch": 5,
 "at": 1352.8999999999999,
 "kind": "c",
 "ref": "chess",
+"mode": "object",
 "hold": 3.84,
-"n": 156,
+"n": 196,
 "captions": []
 },
 {
@@ -2585,8 +2982,9 @@
 "at": 1356.74,
 "kind": "p",
 "ref": "copper_spools",
+"mode": "strip",
 "hold": 9.48,
-"n": 157,
+"n": 197,
 "captions": []
 },
 {
@@ -2594,14 +2992,10 @@
 "at": 1366.22,
 "kind": "c",
 "ref": "cobalt_ore",
+"mode": "object",
 "hold": 6.13,
-"n": 158,
-"captions": [
-{
-"at": 1368.2,
-"text": "~70%"
-}
-]
+"n": 198,
+"captions": []
 },
 {
 "ch": 5,
@@ -2619,19 +3013,21 @@
 }
 }
 ],
-"dur": 250
+"dur": 189
 },
-"hold": 10.43,
-"n": 159,
+"mode": "board",
+"hold": 7.89,
+"n": 199,
 "captions": []
 },
 {
 "ch": 5,
-"at": 1382.78,
-"kind": "c",
-"ref": "smartphone",
-"hold": 7.44,
-"n": 160,
+"at": 1380.24,
+"kind": "t",
+"ref": "To be fair:",
+"mode": "type",
+"hold": 9.98,
+"n": 200,
 "captions": []
 },
 {
@@ -2639,8 +3035,9 @@
 "at": 1390.22,
 "kind": "p",
 "ref": "battery_bank",
+"mode": "strip",
 "hold": 4.2,
-"n": 161,
+"n": 201,
 "captions": []
 },
 {
@@ -2648,8 +3045,9 @@
 "at": 1394.42,
 "kind": "p",
 "ref": "ewaste",
+"mode": "strip",
 "hold": 8.72,
-"n": 162,
+"n": 202,
 "captions": []
 },
 {
@@ -2657,8 +3055,9 @@
 "at": 1403.1399999999999,
 "kind": "p",
 "ref": "ewaste",
-"hold": 14.97,
-"n": 163,
+"mode": "strip",
+"hold": 8.55,
+"n": 203,
 "captions": [
 {
 "at": 1404.24,
@@ -2669,6 +3068,16 @@
 "text": "2024"
 }
 ]
+},
+{
+"ch": 5,
+"at": 1411.69,
+"kind": "n",
+"ref": "1.2–5 million tonnes",
+"mode": "type",
+"hold": 6.42,
+"n": 204,
+"captions": []
 },
 {
 "ch": 5,
@@ -2685,8 +3094,9 @@
 ],
 "dur": 153
 },
+"mode": "board",
 "hold": 6.38,
-"n": 164,
+"n": 205,
 "captions": [
 {
 "at": 1418.11,
@@ -2728,10 +3138,21 @@
 }
 }
 ],
-"dur": 187
+"dur": 137
 },
-"hold": 7.793,
-"n": 165,
+"mode": "board",
+"hold": 5.71,
+"n": 206,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1430.2,
+"kind": "t",
+"ref": "Here it stops being *far away*.",
+"mode": "type",
+"hold": 2.083,
+"n": 207,
 "captions": []
 },
 {
@@ -2749,8 +3170,9 @@
 ],
 "dur": 193
 },
+"mode": "board",
 "hold": 8.06,
-"n": 166,
+"n": 208,
 "captions": []
 },
 {
@@ -2770,8 +3192,9 @@
 ],
 "dur": 79
 },
+"mode": "board",
 "hold": 3.28,
-"n": 167,
+"n": 209,
 "captions": []
 },
 {
@@ -2795,8 +3218,9 @@
 ],
 "dur": 99
 },
+"mode": "board",
 "hold": 4.115,
-"n": 168,
+"n": 210,
 "captions": [
 {
 "at": 1450.053,
@@ -2819,22 +3243,19 @@
 ],
 "dur": 225
 },
+"mode": "board",
 "hold": 9.395,
-"n": 169,
-"captions": [
-{
-"at": 1455.913,
-"text": "65 million people"
-}
-]
+"n": 211,
+"captions": []
 },
 {
 "ch": 6,
 "at": 1462.533,
 "kind": "p",
 "ref": "loudoun_dc",
+"mode": "strip",
 "hold": 6.46,
-"n": 170,
+"n": 212,
 "captions": []
 },
 {
@@ -2842,8 +3263,9 @@
 "at": 1468.993,
 "kind": "p",
 "ref": "power_plant",
+"mode": "strip",
 "hold": 6.838,
-"n": 171,
+"n": 213,
 "captions": [
 {
 "at": 1470.333,
@@ -2876,22 +3298,19 @@
 ],
 "dur": 171
 },
+"mode": "board",
 "hold": 7.142,
-"n": 172,
-"captions": [
-{
-"at": 1477.403,
-"text": "~9×"
-}
-]
+"n": 214,
+"captions": []
 },
 {
 "ch": 6,
 "at": 1482.973,
 "kind": "p",
 "ref": "loudoun_dc",
+"mode": "strip",
 "hold": 4.99,
-"n": 173,
+"n": 215,
 "captions": []
 },
 {
@@ -2912,8 +3331,9 @@
 ],
 "dur": 95
 },
+"mode": "board",
 "hold": 3.94,
-"n": 174,
+"n": 216,
 "captions": [
 {
 "at": 1487.963,
@@ -2938,8 +3358,9 @@
 ],
 "dur": 88
 },
+"mode": "board",
 "hold": 3.65,
-"n": 175,
+"n": 217,
 "captions": []
 },
 {
@@ -2947,8 +3368,9 @@
 "at": 1495.5529999999999,
 "kind": "p",
 "ref": "ohio_house",
+"mode": "strip",
 "hold": 8.19,
-"n": 176,
+"n": 218,
 "captions": []
 },
 {
@@ -2968,8 +3390,9 @@
 ],
 "dur": 81
 },
+"mode": "board",
 "hold": 3.37,
-"n": 177,
+"n": 219,
 "captions": []
 },
 {
@@ -2977,8 +3400,9 @@
 "at": 1507.113,
 "kind": "p",
 "ref": "md_farm",
+"mode": "strip",
 "hold": 7.5,
-"n": 178,
+"n": 220,
 "captions": []
 },
 {
@@ -2986,8 +3410,9 @@
 "at": 1514.613,
 "kind": "p",
 "ref": "loudoun_dc",
+"mode": "strip",
 "hold": 6.05,
-"n": 179,
+"n": 221,
 "captions": []
 },
 {
@@ -3008,22 +3433,19 @@
 ],
 "dur": 159
 },
+"mode": "board",
 "hold": 6.61,
-"n": 180,
-"captions": [
-{
-"at": 1523.753,
-"text": "~67 miles"
-}
-]
+"n": 222,
+"captions": []
 },
 {
 "ch": 6,
 "at": 1527.273,
 "kind": "p",
 "ref": "forest",
+"mode": "strip",
 "hold": 9.2,
-"n": 181,
+"n": 223,
 "captions": []
 },
 {
@@ -3031,26 +3453,29 @@
 "at": 1536.473,
 "kind": "p",
 "ref": "old_barn",
-"hold": 10.52,
-"n": 182,
+"mode": "strip",
+"hold": 7.24,
+"n": 224,
 "captions": []
 },
 {
 "ch": 6,
-"at": 1546.993,
-"kind": "p",
-"ref": "fence",
-"hold": 7.38,
-"n": 183,
+"at": 1543.713,
+"kind": "t",
+"ref": "eminent domain",
+"mode": "type",
+"hold": 5.62,
+"n": 225,
 "captions": []
 },
 {
 "ch": 6,
-"at": 1554.373,
-"kind": "p",
-"ref": "transmission",
-"hold": 4.96,
-"n": 184,
+"at": 1549.333,
+"kind": "t",
+"ref": "even if the owner says *no*",
+"mode": "type",
+"hold": 10.0,
+"n": 226,
 "captions": []
 },
 {
@@ -3058,8 +3483,9 @@
 "at": 1559.333,
 "kind": "p",
 "ref": "dc_night",
+"mode": "strip",
 "hold": 8.54,
-"n": 185,
+"n": 227,
 "captions": []
 },
 {
@@ -3067,8 +3493,9 @@
 "at": 1567.873,
 "kind": "c",
 "ref": "moon",
+"mode": "object",
 "hold": 6.3,
-"n": 186,
+"n": 228,
 "captions": []
 },
 {
@@ -3076,8 +3503,9 @@
 "at": 1574.173,
 "kind": "p",
 "ref": "bed",
+"mode": "strip",
 "hold": 4.74,
-"n": 187,
+"n": 229,
 "captions": []
 },
 {
@@ -3085,8 +3513,9 @@
 "at": 1578.913,
 "kind": "c",
 "ref": "envelope_sealed",
+"mode": "object",
 "hold": 6.54,
-"n": 188,
+"n": 230,
 "captions": []
 },
 {
@@ -3094,8 +3523,9 @@
 "at": 1585.453,
 "kind": "c",
 "ref": "nda",
+"mode": "object",
 "hold": 6.7,
-"n": 189,
+"n": 231,
 "captions": []
 },
 {
@@ -3103,8 +3533,9 @@
 "at": 1592.153,
 "kind": "c",
 "ref": "stamp",
+"mode": "object",
 "hold": 6.41,
-"n": 190,
+"n": 232,
 "captions": [
 {
 "at": 1593.613,
@@ -3128,38 +3559,51 @@
 }
 }
 ],
-"dur": 330
+"dur": 189
 },
-"hold": 13.77,
-"n": 191,
-"captions": [
+"mode": "board",
+"hold": 7.87,
+"n": 233,
+"captions": []
+},
 {
-"at": 1606.653,
-"text": "$928.6M"
-}
-]
+"ch": 6,
+"at": 1606.433,
+"kind": "n",
+"ref": "$928.6M",
+"mode": "type",
+"hold": 5.9,
+"n": 234,
+"captions": []
 },
 {
 "ch": 6,
 "at": 1612.333,
 "kind": "p",
 "ref": "construction_workers",
-"hold": 14.02,
-"n": 192,
-"captions": [
+"mode": "strip",
+"hold": 6.32,
+"n": 235,
+"captions": []
+},
 {
-"at": 1618.873,
-"text": "a few dozen jobs"
-}
-]
+"ch": 6,
+"at": 1618.653,
+"kind": "n",
+"ref": "a few dozen jobs",
+"mode": "type",
+"hold": 7.7,
+"n": 236,
+"captions": []
 },
 {
 "ch": 6,
 "at": 1626.353,
 "kind": "p",
 "ref": "loudoun_sign",
+"mode": "strip",
 "hold": 6.82,
-"n": 193,
+"n": 237,
 "captions": []
 },
 {
@@ -3167,8 +3611,29 @@
 "at": 1633.173,
 "kind": "p",
 "ref": "school",
-"hold": 14.07,
-"n": 194,
+"mode": "strip",
+"hold": 4.4,
+"n": 238,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1637.5729999999999,
+"kind": "t",
+"ref": "Some win.",
+"mode": "type",
+"hold": 5.48,
+"n": 239,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1643.0529999999999,
+"kind": "t",
+"ref": "…not the people who *decided*.",
+"mode": "type",
+"hold": 4.19,
+"n": 240,
 "captions": []
 },
 {
@@ -3176,8 +3641,9 @@
 "at": 1647.243,
 "kind": "p",
 "ref": "dalles",
+"mode": "strip",
 "hold": 7.44,
-"n": 195,
+"n": 241,
 "captions": []
 },
 {
@@ -3196,65 +3662,97 @@
 }
 }
 ],
-"dur": 366
+"dur": 121
 },
-"hold": 15.253,
-"n": 196,
+"mode": "board",
+"hold": 5.03,
+"n": 242,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1659.713,
+"kind": "t",
+"ref": "The costs.",
+"mode": "type",
+"hold": 6.68,
+"n": 243,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1666.393,
+"kind": "t",
+"ref": "Strong answers.",
+"mode": "type",
+"hold": 3.543,
+"n": 244,
 "captions": []
 },
 {
 "ch": 7,
-"at": 1677.546,
-"kind": "h",
-"ref": "altman",
-"hold": 7.42,
-"n": 197,
+"at": 1673.666,
+"kind": "t",
+"ref": "*1.* One question is tiny.",
+"mode": "type",
+"hold": 7.263,
+"n": 245,
 "captions": [
 {
-"at": 1677.546,
+"at": 1676.626,
 "text": "SOURCE · SAM ALTMAN (JUNE 2025)"
-},
-{
-"at": 1681.149,
-"text": "0.34 Wh"
 }
 ]
 },
 {
 "ch": 7,
-"at": 1684.966,
-"kind": "c",
-"ref": "oven",
-"hold": 5.9,
-"n": 198,
+"at": 1680.9289999999999,
+"kind": "n",
+"ref": "0.34 Wh",
+"mode": "type",
+"hold": 5.357,
+"n": 246,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1686.286,
+"kind": "n",
+"ref": "≈ 1 second",
+"mode": "type",
+"hold": 3.7,
+"n": 247,
 "captions": [
 {
-"at": 1684.966,
+"at": 1686.286,
 "text": "1 AI QUESTION ≈ AN OVEN RUNNING FOR ABOUT 1 SECOND"
-},
-{
-"at": 1686.506,
-"text": "≈ 1 second"
 }
 ]
 },
 {
 "ch": 7,
-"at": 1690.866,
-"kind": "l",
-"ref": "google",
-"hold": 12.29,
-"n": 199,
+"at": 1689.9859999999999,
+"kind": "n",
+"ref": "≈ 2 minutes",
+"mode": "type",
+"hold": 5.26,
+"n": 248,
 "captions": [
-{
-"at": 1690.866,
-"text": "≈ 2 minutes"
-},
 {
 "at": 1691.086,
 "text": "SOURCE · GOOGLE (AUGUST 2025)"
 }
 ]
+},
+{
+"ch": 7,
+"at": 1695.2459999999999,
+"kind": "t",
+"ref": "Gemini",
+"mode": "type",
+"hold": 7.91,
+"n": 249,
+"captions": []
 },
 {
 "ch": 7,
@@ -3271,16 +3769,22 @@
 }
 }
 ],
-"dur": 181
+"dur": 99
 },
-"hold": 7.54,
-"n": 200,
-"captions": [
+"mode": "board",
+"hold": 4.13,
+"n": 250,
+"captions": []
+},
 {
-"at": 1707.506,
-"text": "33× less"
-}
-]
+"ch": 7,
+"at": 1707.286,
+"kind": "n",
+"ref": "33× less",
+"mode": "type",
+"hold": 3.41,
+"n": 251,
+"captions": []
 },
 {
 "ch": 7,
@@ -3310,10 +3814,11 @@
 }
 }
 ],
-"dur": 331
+"dur": 207
 },
-"hold": 13.79,
-"n": 201,
+"mode": "board",
+"hold": 8.63,
+"n": 252,
 "captions": [
 {
 "at": 1710.696,
@@ -3323,11 +3828,32 @@
 },
 {
 "ch": 7,
-"at": 1724.4859999999999,
-"kind": "c",
-"ref": "gpu_card",
-"hold": 21.36,
-"n": 202,
+"at": 1719.326,
+"kind": "t",
+"ref": "*2.* More efficient.",
+"mode": "type",
+"hold": 10.32,
+"n": 253,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1729.646,
+"kind": "l",
+"ref": "deepseek",
+"mode": "object",
+"hold": 9.32,
+"n": 254,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1738.966,
+"kind": "t",
+"ref": "*3.* AI could help fix it.",
+"mode": "type",
+"hold": 6.88,
+"n": 255,
 "captions": []
 },
 {
@@ -3335,35 +3861,54 @@
 "at": 1745.846,
 "kind": "l",
 "ref": "deepmind",
-"hold": 9.28,
-"n": 203,
+"mode": "object",
+"hold": 5.72,
+"n": 256,
 "captions": [
 {
 "at": 1745.846,
 "text": "SOURCE · DEEPMIND (2016)"
-},
-{
-"at": 1751.786,
-"text": "up to 40%"
 }
 ]
 },
 {
 "ch": 7,
-"at": 1755.126,
-"kind": "p",
-"ref": "weather_map",
-"hold": 8.3,
-"n": 204,
+"at": 1751.566,
+"kind": "n",
+"ref": "up to 40%",
+"mode": "type",
+"hold": 7.82,
+"n": 257,
 "captions": []
 },
 {
 "ch": 7,
-"at": 1763.426,
+"at": 1759.386,
 "kind": "p",
-"ref": "solar",
-"hold": 11.74,
-"n": 205,
+"ref": "control_room",
+"mode": "strip",
+"hold": 6.54,
+"n": 258,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1765.926,
+"kind": "t",
+"ref": "Real points.",
+"mode": "type",
+"hold": 4.88,
+"n": 259,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1770.806,
+"kind": "t",
+"ref": "It has a *name*.",
+"mode": "type",
+"hold": 4.36,
+"n": 260,
 "captions": [
 {
 "at": 1772.086,
@@ -3376,46 +3921,62 @@
 "at": 1775.166,
 "kind": "h",
 "ref": "jevons",
+"mode": "object",
 "hold": 6.52,
-"n": 206,
-"captions": [
-{
-"at": 1775.166,
-"text": "1865"
-}
-]
+"n": 261,
+"captions": []
 },
 {
 "ch": 7,
 "at": 1781.686,
 "kind": "p",
 "ref": "coal",
-"hold": 7.58,
-"n": 207,
+"mode": "strip",
+"hold": 5.02,
+"n": 262,
 "captions": []
 },
 {
 "ch": 7,
-"at": 1789.266,
-"kind": "c",
-"ref": "price_tag",
-"hold": 9.3,
-"n": 208,
+"at": 1786.706,
+"kind": "t",
+"ref": "Coal use went *up*.",
+"mode": "type",
+"hold": 5.59,
+"n": 263,
 "captions": []
 },
 {
 "ch": 7,
-"at": 1798.566,
-"kind": "l",
-"ref": "deepseek",
-"hold": 4.41,
-"n": 209,
-"captions": [
+"at": 1792.2959999999998,
+"kind": "board",
+"ref": "people",
+"board": {
+"name": "people",
+"ups": [
 {
-"at": 1798.566,
-"text": "Jan 2025"
+"at": 4,
+"o": {
+"n": "60"
 }
-]
+}
+],
+"dur": 90
+},
+"mode": "board",
+"hold": 3.73,
+"n": 264,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1796.026,
+"kind": "n",
+"ref": "Jan 2025",
+"mode": "type",
+"hold": 6.95,
+"n": 265,
+"captions": []
 },
 {
 "ch": 7,
@@ -3435,8 +3996,9 @@
 ],
 "dur": 162
 },
+"mode": "board",
 "hold": 6.73,
-"n": 210,
+"n": 266,
 "captions": []
 },
 {
@@ -3444,8 +4006,9 @@
 "at": 1809.706,
 "kind": "p",
 "ref": "rocket",
+"mode": "strip",
 "hold": 6.33,
-"n": 211,
+"n": 267,
 "captions": []
 },
 {
@@ -3466,8 +4029,9 @@
 ],
 "dur": 79
 },
+"mode": "board",
 "hold": 3.3,
-"n": 212,
+"n": 268,
 "captions": []
 },
 {
@@ -3497,38 +4061,49 @@
 ],
 "dur": 152
 },
+"mode": "board",
 "hold": 6.341,
-"n": 213,
+"n": 269,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1831.7769999999998,
-"kind": "board",
-"ref": "split",
-"board": {
-"name": "split",
-"ups": [
-{
-"at": 4,
-"o": {
-"show": "2"
-}
-}
-],
-"dur": 196
-},
-"hold": 8.15,
-"n": 214,
+"at": 1830.447,
+"kind": "t",
+"ref": "What does one question cost?",
+"mode": "type",
+"hold": 6.58,
+"n": 270,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1839.927,
-"kind": "p",
-"ref": "ucr",
-"hold": 15.43,
-"n": 215,
+"at": 1837.027,
+"kind": "c",
+"ref": "measuring_tape",
+"mode": "object",
+"hold": 4.82,
+"n": 271,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1841.847,
+"kind": "t",
+"ref": "older model",
+"mode": "type",
+"hold": 9.22,
+"n": 272,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1851.067,
+"kind": "t",
+"ref": "newer models",
+"mode": "type",
+"hold": 4.29,
+"n": 273,
 "captions": []
 },
 {
@@ -3549,8 +4124,9 @@
 ],
 "dur": 153
 },
+"mode": "board",
 "hold": 6.37,
-"n": 216,
+"n": 274,
 "captions": []
 },
 {
@@ -3558,8 +4134,9 @@
 "at": 1861.7269999999999,
 "kind": "c",
 "ref": "hourglass",
+"mode": "object",
 "hold": 5.53,
-"n": 217,
+"n": 275,
 "captions": []
 },
 {
@@ -3585,10 +4162,11 @@
 }
 }
 ],
-"dur": 444
+"dur": 87
 },
-"hold": 18.5,
-"n": 218,
+"mode": "board",
+"hold": 3.61,
+"n": 276,
 "captions": [
 {
 "at": 1867.2569999999998,
@@ -3598,24 +4176,32 @@
 },
 {
 "ch": 8,
-"at": 1885.7569999999998,
-"kind": "board",
-"ref": "counter",
-"board": {
-"name": "counter",
-"ups": [
-{
-"at": 4,
-"o": {
-"to": "2500000000",
-"label": "ChatGPT prompts a day (OpenAI, July 2025)"
-}
-}
-],
-"dur": 147
+"at": 1870.867,
+"kind": "t",
+"ref": "The answer:",
+"mode": "type",
+"hold": 5.24,
+"n": 277,
+"captions": []
 },
-"hold": 6.13,
-"n": 219,
+{
+"ch": 8,
+"at": 1876.107,
+"kind": "t",
+"ref": "One question costs almost *nothing*.",
+"mode": "type",
+"hold": 7.78,
+"n": 278,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1883.887,
+"kind": "t",
+"ref": "The cost was never in *one* question.",
+"mode": "type",
+"hold": 8.0,
+"n": 279,
 "captions": []
 },
 {
@@ -3623,26 +4209,51 @@
 "at": 1891.887,
 "kind": "p",
 "ref": "gas_turbine",
-"hold": 8.78,
-"n": 220,
+"mode": "strip",
+"hold": 7.11,
+"n": 280,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1900.667,
-"kind": "p",
-"ref": "nairobi_night",
-"hold": 12.86,
-"n": 221,
+"at": 1898.997,
+"kind": "t",
+"ref": "Some costs don't fit in a *watt-hour*.",
+"mode": "type",
+"hold": 4.32,
+"n": 281,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1913.527,
-"kind": "p",
-"ref": "programmer_laptop",
-"hold": 7.0,
-"n": 222,
+"at": 1903.317,
+"kind": "board",
+"ref": "bill",
+"board": {
+"name": "bill",
+"ups": [
+{
+"at": 4,
+"o": {
+"circle": "1"
+}
+}
+],
+"dur": 208
+},
+"mode": "board",
+"hold": 8.67,
+"n": 282,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1911.987,
+"kind": "t",
+"ref": "Not \"stop using AI\".",
+"mode": "type",
+"hold": 8.54,
+"n": 283,
 "captions": []
 },
 {
@@ -3650,8 +4261,9 @@
 "at": 1920.527,
 "kind": "p",
 "ref": "puzzle",
+"mode": "strip",
 "hold": 8.3,
-"n": 223,
+"n": 284,
 "captions": []
 },
 {
@@ -3659,8 +4271,9 @@
 "at": 1928.827,
 "kind": "c",
 "ref": "curtain",
+"mode": "object",
 "hold": 3.86,
-"n": 224,
+"n": 285,
 "captions": []
 },
 {
@@ -3668,8 +4281,9 @@
 "at": 1932.687,
 "kind": "p",
 "ref": "eu_flag",
-"hold": 11.6,
-"n": 225,
+"mode": "strip",
+"hold": 7.58,
+"n": 286,
 "captions": [
 {
 "at": 1932.687,
@@ -3679,11 +4293,12 @@
 },
 {
 "ch": 8,
-"at": 1944.287,
-"kind": "c",
-"ref": "documents",
-"hold": 3.19,
-"n": 226,
+"at": 1940.267,
+"kind": "t",
+"ref": "EU AI Act",
+"mode": "type",
+"hold": 7.21,
+"n": 287,
 "captions": []
 },
 {
@@ -3703,8 +4318,9 @@
 ],
 "dur": 174
 },
+"mode": "board",
 "hold": 7.23,
-"n": 227,
+"n": 288,
 "captions": []
 },
 {
@@ -3712,8 +4328,9 @@
 "at": 1954.7069999999999,
 "kind": "c",
 "ref": "pylon",
+"mode": "object",
 "hold": 5.0,
-"n": 228,
+"n": 289,
 "captions": []
 },
 {
@@ -3721,44 +4338,39 @@
 "at": 1959.7069999999999,
 "kind": "p",
 "ref": "dalles_cityhall",
-"hold": 9.92,
-"n": 229,
+"mode": "strip",
+"hold": 8.58,
+"n": 290,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1969.627,
-"kind": "c",
-"ref": "newspaper",
-"hold": 6.68,
-"n": 230,
+"at": 1968.287,
+"kind": "t",
+"ref": "Who pays for the new grid?",
+"mode": "type",
+"hold": 9.72,
+"n": 291,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1976.307,
-"kind": "c",
-"ref": "eye",
-"hold": 4.0,
-"n": 231,
+"at": 1978.007,
+"kind": "t",
+"ref": "Not guilt.",
+"mode": "type",
+"hold": 4.26,
+"n": 292,
 "captions": []
 },
 {
 "ch": 8,
-"at": 1980.307,
-"kind": "c",
-"ref": "cloud_soft",
-"hold": 6.02,
-"n": 232,
-"captions": []
-},
-{
-"ch": 8,
-"at": 1986.327,
+"at": 1982.267,
 "kind": "p",
-"ref": "hands",
-"hold": 7.61,
-"n": 233,
+"ref": "dc_ashburn",
+"mode": "strip",
+"hold": 11.67,
+"n": 293,
 "captions": []
 },
 {
@@ -3778,8 +4390,9 @@
 ],
 "dur": 124
 },
+"mode": "board",
 "hold": 5.15,
-"n": 234,
+"n": 294,
 "captions": []
 },
 {
@@ -3787,8 +4400,9 @@
 "at": 1999.087,
 "kind": "p",
 "ref": "google_dalles",
+"mode": "strip",
 "hold": 3.49,
-"n": 235,
+"n": 295,
 "captions": []
 },
 {
@@ -3808,8 +4422,9 @@
 ],
 "dur": 524
 },
+"mode": "board",
 "hold": 21.815,
-"n": 236,
+"n": 296,
 "captions": []
 }
 ],
@@ -3830,6 +4445,20 @@
 "at": 222,
 "o": {
 "mode": "answer"
+}
+}
+]
+},
+{
+"ch": 4,
+"start": 1120.173,
+"end": 1126.313,
+"ups": [
+{
+"at": 4,
+"o": {
+"mode": "answer",
+"answer": "Of course! I'd be glad to help. What do you need?"
 }
 }
 ]

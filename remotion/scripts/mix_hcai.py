@@ -167,7 +167,10 @@ else:
             return
         x = load(f)
         loud = x[np.abs(x).max(1) > 0.01]  # level by the audible part, so sparse hits don't come out loud
-        x = x / max(rms(loud if len(loud) else x), 1e-4) * vo_level * db(gain_db if gain_db is not None else ULEVEL.get(name, -14))
+        g = gain_db if gain_db is not None else ULEVEL.get(name, -14)
+        x = x / max(rms(loud if len(loud) else x), 1e-4) * vo_level * db(g)
+        peak = np.abs(x).max()
+        if peak > vo_level * db(g + 20): x *= vo_level * db(g + 20) / peak  # very quiet files: don't lift the clicks (or hiss) too far
         if dur:
             reps = int(np.ceil(dur * SR / len(x))) + 1
             x = fade(np.concatenate([x] * reps)[: int(dur * SR)], 0.8, 1.5)
@@ -193,7 +196,7 @@ else:
         takes = [n for n in ('film_advance', 'film_advance_1', 'film_advance_2', 'film_advance_3') if os.path.exists(os.path.join(UD, n + '.mp3'))] or ['film_advance']
         k = 0
         for prev, f in zip(STRIP['frames'], STRIP['frames'][1:]):
-            if f['ch'] == prev['ch']:
+            if f['ch'] == prev['ch'] and f.get('mode', 'strip') == 'strip':  # only when the strip itself moves
                 uput(takes[k % len(takes)], f['at'] - 0.4)
                 k += 1
     for ci, ch in enumerate(T['chapters'][1:], 1): uput('chapter_turn', ch['start'] + 0.1)

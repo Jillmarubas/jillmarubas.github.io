@@ -18,7 +18,10 @@ MIN_HOLD = 6.0  # seconds a frame stays before the next idea may replace it
 TOPIC_HOLD = 3.0  # sooner at a topic change ("clear" in shots.txt), or when a chart arrives
 LEAD = 0.22  # the strip settles a little before the word
 CAPTION_AHEAD = 3.0  # a tag spoken just before a new frame belongs to that frame
-PRI = {'p': 1, 'h': 2, 'c': 3, 'l': 4}  # boards are 0
+PRI = {'p': 2, 'h': 3, 'c': 4, 'l': 5}  # charts and maps 0; key numbers and statements (typography) 1; plain labels 3
+import re
+is_year = lambda x: bool(re.fullmatch(r'(19|20)\d\d', x.strip()))
+is_statement = lambda x: len(x.replace('*', '').strip()) >= 5 and ('*' in x or x.rstrip().endswith(('.', '?', ':', '!')))
 fr = lambda s: round(s * FPS)
 OPT_SKIP = {'ch', 'line', 't', 'kind', 'ref'}
 opts = lambda b: {k: str(v) for k, v in b.items() if k not in OPT_SKIP}
@@ -42,10 +45,14 @@ for ci, ch in enumerate(T['chapters']):
                     night['end'] = b['t']
                     night = None
                 continue
-            if k in ('s', 't'):
+            if k == 's':
                 continue
-            if k in ('k', 'n'):
+            if k == 'k' or (k == 'n' and is_year(str(b['ref']))):
                 captions.append({'ch': ci, 't': b['t'], 'text': str(b['ref'])})
+                continue
+            if k in ('t', 'n'):
+                if not night:
+                    cands.append((1 if k == 'n' or is_statement(str(b['ref'])) else 3, b, None, None))
                 continue
             if k.startswith('x:'):
                 name = k[2:]
@@ -81,7 +88,8 @@ for ci, ch in enumerate(T['chapters']):
                 cur['board']['ups'].append({'at': fr(c0[1]['t'] - cur['at']), 'o': c0[3]})  # the chart just framed updates in place
                 i += 1
                 continue
-            ok = lambda c: cur is None or (c[1]['t'] - LEAD - cur['at']) >= (TOPIC_HOLD if (new_topic or c[0] == 0) else MIN_HOLD)
+            # charts, key lines and numbers may come in sooner than a picture would
+            ok = lambda c: cur is None or (c[1]['t'] - LEAD - cur['at']) >= (TOPIC_HOLD if (new_topic or c[0] <= 1) else MIN_HOLD)
             if not ok(cands[i]):
                 i += 1
                 continue
@@ -96,6 +104,8 @@ for ci, ch in enumerate(T['chapters']):
             else:
                 kind = 'p' if b['kind'] == 'c' and A.get(str(b['ref']), {}).get('type') == 'p' else b['kind']
                 f = {'ch': ci, 'at': at, 'kind': kind, 'ref': str(b['ref']), 'cluster': cluster}
+            # how it's shown: photos on the film strip, charts and maps full-screen, words as typography, objects on paper
+            f['mode'] = {'p': 'strip', 'board': 'board', 't': 'type', 'n': 'type'}.get(f['kind'], 'object')
             frames.append(f)
             cur = f
             new_topic = False
@@ -124,6 +134,8 @@ for f in frames:
     f.pop('cluster', None)
 json.dump({'frames': frames, 'nights': nights}, open(os.path.join(ROOT, 'src/hcai/strip.json'), 'w'), indent=0, ensure_ascii=False)
 holds = [f['hold'] for f in frames]
+import collections
+print('modes', dict(collections.Counter(f['mode'] for f in frames)))
 print(f"{len(frames)} frames, {len(nights)} night screens; hold avg {sum(holds) / len(holds):.1f}s, min {min(holds):.1f}s, max {max(holds):.1f}s")
 for ci in range(len(T['chapters'])):
     print(f"  ch{ci}: {sum(1 for f in frames if f['ch'] == ci)} frames")
