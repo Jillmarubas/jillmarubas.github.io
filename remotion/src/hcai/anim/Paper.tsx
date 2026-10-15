@@ -6,11 +6,11 @@ import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {AF, AnimProps, Note, P, Tag, at, ease, lerp, pop} from './akit';
 
 /** Pictures the user makes; null until the file is in public/hcai/user. */
-export const USER_IMAGES: Record<string, string | null> = {newspaper: null, gpu: null};
+export const USER_IMAGES: Record<string, string | null> = {newspaper: 'hcai/user/newspaper.jpg', gpu: null};
 
-const Stamp: React.FC<{text: string; k: number; x: number; y: number; rot: number; color?: string}> = ({text, k, x, y, rot, color = P.red}) =>
+const Stamp: React.FC<{text: string; k: number; x: number; y: number; rot: number; color?: string; size?: number; solid?: boolean}> = ({text, k, x, y, rot, color = P.red, size = 84, solid}) =>
   k <= 0 ? null : (
-    <div style={{position: 'absolute', left: x, top: y, transform: `translate(-50%,-50%) rotate(${rot}deg) scale(${lerp(2.2, 1, Math.min(1, k))})`, opacity: Math.min(1, k * 2), border: `10px solid ${color}`, borderRadius: 18, padding: '12px 34px', fontFamily: AF.head, fontWeight: 800, fontSize: 84, color, letterSpacing: '0.04em', whiteSpace: 'nowrap', background: 'rgba(255,255,255,0.12)', mixBlendMode: 'multiply'}}>
+    <div style={{position: 'absolute', left: x, top: y, transform: `translate(-50%,-50%) rotate(${rot}deg) scale(${lerp(2.2, 1, Math.min(1, k))})`, opacity: Math.min(1, k * 2), border: `${size / 8.4}px solid ${color}`, borderRadius: size / 4.7, padding: `${size / 7}px ${size / 2.5}px`, fontFamily: AF.head, fontWeight: 800, fontSize: size, color, letterSpacing: '0.04em', whiteSpace: 'nowrap', background: solid ? 'rgba(240,236,228,0.96)' : 'rgba(255,255,255,0.12)', mixBlendMode: solid ? undefined : 'multiply'}}>
       {text}
     </div>
   );
@@ -47,7 +47,12 @@ export const Newspaper: React.FC<AnimProps> = ({f, t0}) => {
   return (
     <AbsoluteFill style={{background: src ? '#000' : `linear-gradient(160deg, ${P.plum}, ${P.night})`, overflow: 'hidden'}}>
       {src ? (
-        <Img src={staticFile(src)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${lerp(1.04, 1.14, k)}) translateY(${lerp(10, -20, k)}px)`}} />
+        // the user's front page; the stamps ride with it and sit over its printed dates (the image says 2023; the story is 2021)
+        <AbsoluteFill style={{transform: `scale(${lerp(1.02, 1.09, k)}) translateY(${lerp(6, -10, k)}px)`, transformOrigin: '22% 45%'}}>
+          <Img src={staticFile(src)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover'}} />
+          <Stamp text="NO COMMENT" k={noComment} x={330} y={412} rot={-6} size={52} solid />
+          <Stamp text="TAKEN TO COURT" k={court} x={520} y={785} rot={4} size={54} solid />
+        </AbsoluteFill>
       ) : (
         <div style={{position: 'absolute', left: 960, top: 545, transform: `translate(-50%,-50%) perspective(2600px) rotateX(${lerp(24, 12, k)}deg) rotateZ(${lerp(-6, -2, k)}deg) scale(${lerp(0.52, 0.62, k)})`}}>
           <DrawnFront>
@@ -56,8 +61,6 @@ export const Newspaper: React.FC<AnimProps> = ({f, t0}) => {
           </DrawnFront>
         </div>
       )}
-      {src && <Stamp text="NO COMMENT" k={noComment} x={1250} y={640} rot={-8} />}
-      {src && <Stamp text="TAKEN TO COURT" k={court} x={760} y={840} rot={5} />}
     </AbsoluteFill>
   );
 };
