@@ -21,7 +21,9 @@ enc() {
   local d=$(python3 -c "print($b-$a)")
   local kbps=$(python3 -c "print(int(28*8*1024*1024/$d/1000 - 100))")
   ffmpeg -loglevel error -y -ss "$a" -to "$b" -i "$SRC" -c:v libx264 -preset slow -b:v ${kbps}k -pass 1 -passlogfile "$DIR/$name" -an -f mp4 /dev/null
-  ffmpeg -loglevel error -y -ss "$a" -to "$b" -i "$SRC" -c:v libx264 -preset slow -b:v ${kbps}k -pass 2 -passlogfile "$DIR/$name" -c:a aac -b:a 96k -movflags +faststart "$DIR/${TAG}_$name.mp4"
+  ffmpeg -loglevel error -y -ss "$a" -to "$b" -i "$SRC" -c:v libx264 -preset slow -b:v ${kbps}k -pass 2 -passlogfile "$DIR/$name" -c:a aac -b:a 96k -movflags +faststart "$DIR/${TAG}_$name.part.mp4"
+  # only a finished encode gets the final name, so a killed run never looks done
+  mv "$DIR/${TAG}_$name.part.mp4" "$DIR/${TAG}_$name.mp4"
   rm -f "$DIR/$name"*.log*
   echo "$name $(du -m "$DIR/${TAG}_$name.mp4" | cut -f1) MB at ${kbps}k"
 }
