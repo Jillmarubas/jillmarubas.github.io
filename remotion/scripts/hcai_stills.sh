@@ -19,10 +19,10 @@ for f in S['frames']:
         for k in (0.4, 0.85):
             print(f"{round((f['at'] + f['hold'] * k) * 24)} {f['ref']}")
 PY
-rm -f "$OUT"/s*.jpg "$OUT"/sheet*.jpg
+rm -f "$OUT"/s[0-9]*.jpg "$OUT"/sheet*.jpg
 while read -r FR REF; do echo "$FR $REF"; done < "$OUT/frames.txt" | xargs -P 4 -L 1 sh -c 'npx remotion still '"$B"' HiddenCostAI-strip '"$OUT"'/s$(printf %05d $0)-$1.jpg --frame=$0 --scale='"$SCALE"' --gl=swangle --log=error > /dev/null 2>&1 || echo "still failed: frame $0 ($1)"'
-N=$(ls "$OUT"/s*.jpg | wc -l)
+N=$(ls "$OUT"/s[0-9]*.jpg | wc -l)
 for i in $(seq 0 16 $((N - 1))); do
-  ffmpeg -nostdin -loglevel error -y -pattern_type glob -i "$OUT/s*.jpg" -vf "select='between(n\,$i\,$((i + 15)))',tile=4x4" -frames:v 1 "$OUT/sheet$((i / 16 + 1)).jpg"
+  ffmpeg -nostdin -loglevel error -y -pattern_type glob -i "$OUT/s[0-9]*.jpg" -vf "select='between(n\,$i\,$((i + 15)))',tile=4x4" -frames:v 1 "$OUT/sheet$((i / 16 + 1)).jpg"
 done
 echo "$N stills; sheets: $(ls "$OUT"/sheet*.jpg | tr '\n' ' ')"
