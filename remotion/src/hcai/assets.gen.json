@@ -173,7 +173,7 @@
 "src": "hcai/img/server_room.jpg",
 "w": 1920,
 "h": 1120,
-"credit": "The National Archives (UK) · CC BY 3.0 · Wikimedia Commons"
+"credit": "The National Archives · CC BY 3.0 · Wikimedia Commons"
 },
 "chip": {
 "id": "chip",
@@ -221,7 +221,7 @@
 "src": "hcai/img/lab.jpg",
 "w": 1024,
 "h": 683,
-"credit": "U.S. Army Combat Capabilities Developmen · CC BY 2.0 · Flickr"
+"credit": "U.S. Army Combat Capabilities… · CC BY 2.0 · Flickr"
 },
 "abacus": {
 "id": "abacus",
@@ -261,7 +261,7 @@
 "src": "hcai/cut/space_heater.webp",
 "w": 934,
 "h": 1068,
-"credit": "Tony Webster from Minneapolis, Minnesota · CC BY 2.0 · Wikimedia Commons"
+"credit": "Tony Webster · CC BY 2.0 · Wikimedia Commons"
 },
 "server_aisle": {
 "id": "server_aisle",
@@ -389,7 +389,7 @@
 "src": "hcai/cut/money_stack.webp",
 "w": 1200,
 "h": 816,
-"credit": "Andrew Magill from Boulder, USA · CC BY 2.0 · Wikimedia Commons"
+"credit": "Andrew Magill · CC BY 2.0 · Wikimedia Commons"
 },
 "assembly_line": {
 "id": "assembly_line",
@@ -397,7 +397,7 @@
 "src": "hcai/img/assembly_line.jpg",
 "w": 1920,
 "h": 1181,
-"credit": "Steve Jurvetson from Los Altos, USA · CC BY 2.0 · Wikimedia Commons"
+"credit": "Steve Jurvetson · CC BY 2.0 · Wikimedia Commons"
 },
 "student": {
 "id": "student",
@@ -413,7 +413,7 @@
 "src": "hcai/img/programmer_laptop.jpg",
 "w": 1920,
 "h": 1280,
-"credit": "User:Kowalski7cc · CC0 · Wikimedia Commons"
+"credit": "Kowalski7cc · CC0 · Wikimedia Commons"
 },
 "dinner_plate": {
 "id": "dinner_plate",
@@ -517,7 +517,7 @@
 "src": "hcai/img/dublin_night.jpg",
 "w": 1920,
 "h": 1278,
-"credit": "William Murphy from Dublin, Ireland · CC BY-SA 2.0 · Wikimedia Commons"
+"credit": "William Murphy · CC BY-SA 2.0 · Wikimedia Commons"
 },
 "dublin_homes": {
 "id": "dublin_homes",
@@ -549,7 +549,7 @@
 "src": "hcai/cut/alarm_clock.webp",
 "w": 782,
 "h": 1200,
-"credit": "CC BY 4.0 · Wikimedia Commons"
+"credit": "Auckland Museum Tamaki Paenga Hira · CC BY 4.0 · Wikimedia Commons"
 },
 "leaf": {
 "id": "leaf",
@@ -589,7 +589,7 @@
 "src": "hcai/img/tmi_control.jpg",
 "w": 1920,
 "h": 1080,
-"credit": "Nuclear Regulatory Commission from US · CC BY 2.0 · Wikimedia Commons"
+"credit": "Nuclear Regulatory Commission · CC BY 2.0 · Wikimedia Commons"
 },
 "tmi_carter": {
 "id": "tmi_carter",
@@ -597,7 +597,7 @@
 "src": "hcai/img/tmi_carter.jpg",
 "w": 250,
 "h": 168,
-"credit": "Unknown authorUnknown author or not prov · Public domain · Wikimedia Commons"
+"credit": "Unknown author · Public domain · Wikimedia Commons"
 },
 "tmi_quiet": {
 "id": "tmi_quiet",
@@ -629,7 +629,7 @@
 "src": "hcai/cut/stopwatch.webp",
 "w": 971,
 "h": 1200,
-"credit": "Stefan (Diskussion). Original uploader w · Public domain · Wikimedia Commons"
+"credit": "Stefan · Public domain · Wikimedia Commons"
 },
 "supercomputer": {
 "id": "supercomputer",
@@ -661,7 +661,7 @@
 "src": "hcai/img/steel_mill.jpg",
 "w": 1920,
 "h": 1280,
-"credit": "Marek Ślusarczyk (Tupungato) Photo galle · CC BY 3.0 · Wikimedia Commons"
+"credit": "Marek Ślusarczyk · CC BY 3.0 · Wikimedia Commons"
 },
 "semi_truck": {
 "id": "semi_truck",
@@ -669,7 +669,7 @@
 "src": "hcai/cut/semi_truck.webp",
 "w": 1200,
 "h": 682,
-"credit": ".mw-parser-output .commons-creator-table · CC BY-SA 4.0 · Wikimedia Commons"
+"credit": "Pierre André Leclercq · CC BY-SA 4.0 · Wikimedia Commons"
 },
 "lungs": {
 "id": "lungs",
@@ -701,7 +701,7 @@
 "src": "hcai/cut/sun.webp",
 "w": 1200,
 "h": 1196,
-"credit": "NASA/SDO (AIA) · Public domain · Wikimedia Commons"
+"credit": "NASA/SDO · Public domain · Wikimedia Commons"
 },
 "sweat": {
 "id": "sweat",
@@ -733,7 +733,7 @@
 "src": "hcai/img/google_dalles.jpg",
 "w": 1920,
 "h": 1217,
-"credit": "Tony Webster from Minneapolis, Minnesota · CC BY 2.0 · Wikimedia Commons"
+"credit": "Tony Webster · CC BY 2.0 · Wikimedia Commons"
 },
 "oregonian": {
 "id": "oregonian",
@@ -823,7 +823,7 @@
 "src": "hcai/cut/ear.webp",
 "w": 700,
 "h": 1200,
-"credit": "צולם על ידי he:משתמש:אנדר-ויק · Public domain · Wikimedia Commons"
+"credit": "Ander-vik · Public domain · Wikimedia Commons"
 },
 "index_cards": {
 "id": "index_cards",
@@ -839,7 +839,7 @@
 "src": "hcai/cut/reading_glasses.webp",
 "w": 1150,
 "h": 464,
-"credit": "CC BY 4.0 · Wikimedia Commons"
+"credit": "Auckland Museum Tāmaki Paenga Hira · CC BY 4.0 · Wikimedia Commons"
 },
 "time": {
 "id": "time",
@@ -895,7 +895,7 @@
 "src": "hcai/cut/contract_torn.webp",
 "w": 959,
 "h": 1200,
-"credit": "English: Erica (Thorp) de Berry (1890-19 · Public domain · Wikimedia Commons"
+"credit": "Erica de Berry · Public domain · Wikimedia Commons"
 },
 "petition": {
 "id": "petition",
@@ -927,7 +927,7 @@
 "src": "hcai/cut/padlock.webp",
 "w": 519,
 "h": 907,
-"credit": ".mw-parser-output .commons-creator-table · CC BY-SA 4.0 · Wikimedia Commons"
+"credit": "Jonatan Svensson Glad · CC BY-SA 4.0 · Wikimedia Commons"
 },
 "call_center": {
 "id": "call_center",
@@ -999,7 +999,7 @@
 "src": "hcai/img/cleanroom.jpg",
 "w": 1920,
 "h": 1287,
-"credit": "Aileen Devlin/Jefferson Lab from Newport · Public domain · Wikimedia Commons"
+"credit": "Aileen Devlin/Jefferson Lab · Public domain · Wikimedia Commons"
 },
 "die_shot": {
 "id": "die_shot",
@@ -1031,7 +1031,7 @@
 "src": "hcai/cut/lab_water.webp",
 "w": 685,
 "h": 1200,
-"credit": "Donald Trung Quoc Don (Chữ Hán: 徵國單) - W · CC BY-SA 4.0 · Wikimedia Commons"
+"credit": "Donald Trung Quoc Don · CC BY-SA 4.0 · Wikimedia Commons"
 },
 "taiwan_drought": {
 "id": "taiwan_drought",
@@ -1047,7 +1047,7 @@
 "src": "hcai/img/rice_paddy.jpg",
 "w": 1920,
 "h": 1245,
-"credit": "Fred Hsu (Wikipedia:User:Fred Hsu on en. · CC BY-SA 3.0 · Wikimedia Commons"
+"credit": "Fred Hsu · CC BY-SA 3.0 · Wikimedia Commons"
 },
 "tanker_truck": {
 "id": "tanker_truck",
@@ -1063,7 +1063,7 @@
 "src": "hcai/cut/chess.webp",
 "w": 891,
 "h": 1009,
-"credit": ".mw-parser-output .commons-creator-table · CC BY-SA 4.0 · Wikimedia Commons"
+"credit": "Dietmar Rabich · CC BY-SA 4.0 · Wikimedia Commons"
 },
 "copper_spools": {
 "id": "copper_spools",
@@ -1071,7 +1071,7 @@
 "src": "hcai/img/copper_spools.jpg",
 "w": 1920,
 "h": 1251,
-"credit": "Tony Webster from Portland, Oregon · CC BY-SA 2.0 · Wikimedia Commons"
+"credit": "Tony Webster · CC BY-SA 2.0 · Wikimedia Commons"
 },
 "lithium": {
 "id": "lithium",
@@ -1095,7 +1095,7 @@
 "src": "hcai/img/cobalt_mine.jpg",
 "w": 1920,
 "h": 1440,
-"credit": "The International Institute for Environm · CC BY 2.5 · Wikimedia Commons"
+"credit": "The International Institute for… · CC BY 2.5 · Wikimedia Commons"
 },
 "mine_pit": {
 "id": "mine_pit",
@@ -1103,7 +1103,7 @@
 "src": "hcai/img/mine_pit.jpg",
 "w": 1920,
 "h": 1277,
-"credit": "Julien Harneis, https://www.flickr.com/p · CC BY-SA 2.0 · Wikimedia Commons"
+"credit": "Julien Harneis · CC BY-SA 2.0 · Wikimedia Commons"
 },
 "ewaste": {
 "id": "ewaste",
@@ -1175,7 +1175,7 @@
 "src": "hcai/cut/led_bulb.webp",
 "w": 1122,
 "h": 937,
-"credit": "Loadmaster (David R. Tribble) · CC BY-SA 4.0 · Wikimedia Commons"
+"credit": "Loadmaster · CC BY-SA 4.0 · Wikimedia Commons"
 },
 "deepseek": {
 "id": "deepseek",
@@ -1199,7 +1199,7 @@
 "src": "hcai/img/weather_map.jpg",
 "w": 1920,
 "h": 1600,
-"credit": "NASA Goddard Space Flight Center from Gr · CC BY 2.0 · Wikimedia Commons"
+"credit": "NASA Goddard Space Flight Center · CC BY 2.0 · Wikimedia Commons"
 },
 "control_room": {
 "id": "control_room",
@@ -1215,7 +1215,7 @@
 "src": "hcai/img/steam_engine.jpg",
 "w": 1920,
 "h": 1178,
-"credit": "Benjamin, Park, 1849-1922 · No restrictions · Wikimedia Commons"
+"credit": "Park Benjamin · No restrictions · Wikimedia Commons"
 },
 "coal": {
 "id": "coal",
@@ -1415,7 +1415,7 @@
 "src": "hcai/cut/eiffel.webp",
 "w": 1010,
 "h": 1200,
-"credit": ".mw-parser-output .commons-creator-table · No restrictions · Wikimedia Commons"
+"credit": "Louis-Émile Durandelle · No restrictions · Wikimedia Commons"
 },
 "feather": {
 "id": "feather",
@@ -1423,7 +1423,7 @@
 "src": "hcai/img/feather.jpg",
 "w": 1280,
 "h": 1534,
-"credit": "Thomas G. Kaye, Michael Pittman, Gerald  · CC BY 4.0 · Wikimedia Commons"
+"credit": "Thomas G. Kaye et al. · CC BY 4.0 · Wikimedia Commons"
 },
 "faucet": {
 "id": "faucet",
@@ -1439,7 +1439,7 @@
 "src": "hcai/img/courthouse.jpg",
 "w": 1280,
 "h": 802,
-"credit": "Unknown authorUnknown author · Public domain · Wikimedia Commons"
+"credit": "Unknown author · Public domain · Wikimedia Commons"
 },
 "nairobi_skyline": {
 "id": "nairobi_skyline",
@@ -1455,7 +1455,7 @@
 "src": "hcai/img/water_drop.jpg",
 "w": 1920,
 "h": 1279,
-"credit": "José Manuel Suárez from Spain · CC BY 2.0 · Wikimedia Commons"
+"credit": "José Manuel Suárez · CC BY 2.0 · Wikimedia Commons"
 },
 "copper_ore": {
 "id": "copper_ore",
@@ -1463,7 +1463,7 @@
 "src": "hcai/cut/copper_ore.webp",
 "w": 1177,
 "h": 1055,
-"credit": "“Jonathan Zander (Digon3)\" · CC BY-SA 3.0 · Wikimedia Commons"
+"credit": "Jonathan Zander · CC BY-SA 3.0 · Wikimedia Commons"
 },
 "cloud_soft": {
 "id": "cloud_soft",
@@ -1471,7 +1471,7 @@
 "src": "hcai/cut/cloud_soft.webp",
 "w": 803,
 "h": 592,
-"credit": "Glg, edited by User:drini · CC BY-SA 2.0 de · Wikimedia Commons"
+"credit": "Glg, edited by drini · CC BY-SA 2.0 de · Wikimedia Commons"
 },
 "concrete": {
 "id": "concrete",
@@ -1495,7 +1495,7 @@
 "src": "hcai/cut/sub_cable.webp",
 "w": 568,
 "h": 556,
-"credit": "Harry Robert Kempe (section author) · Public domain · Wikimedia Commons"
+"credit": "Harry Robert Kempe · Public domain · Wikimedia Commons"
 },
 "light_bulb": {
 "id": "light_bulb",
@@ -1551,7 +1551,7 @@
 "src": "hcai/cut/brain_model.webp",
 "w": 1029,
 "h": 899,
-"credit": "CC BY 4.0 · Wikimedia Commons"
+"credit": "Wellcome Collection · CC BY 4.0 · Wikimedia Commons"
 },
 "smr": {
 "id": "smr",
@@ -1559,7 +1559,7 @@
 "src": "hcai/img/smr.jpg",
 "w": 909,
 "h": 696,
-"credit": "U.S. Government Accountability Office fr · Public domain · Wikimedia Commons"
+"credit": "U.S. Government Accountability Office · Public domain · Wikimedia Commons"
 },
 "snail": {
 "id": "snail",
@@ -1567,7 +1567,7 @@
 "src": "hcai/cut/snail.webp",
 "w": 818,
 "h": 409,
-"credit": "Photo by Catherina Onezia/Seychelles Isl · CC BY 4.0 · Wikimedia Commons"
+"credit": "Catherina Onezia/Seychelles Islands… · CC BY 4.0 · Wikimedia Commons"
 },
 "musk": {
 "id": "musk",
@@ -1593,7 +1593,7 @@
 "src": "hcai/cut/generator.webp",
 "w": 1142,
 "h": 880,
-"credit": "User:EPO · Attribution · Wikimedia Commons"
+"credit": "EPO · Attribution · Wikimedia Commons"
 },
 "gas_flame": {
 "id": "gas_flame",
@@ -1609,7 +1609,7 @@
 "src": "hcai/img/boxtown.jpg",
 "w": 1280,
 "h": 960,
-"credit": "Thomas R Machnitzki (thomas@machnitzki.c · CC BY 3.0 · Wikimedia Commons"
+"credit": "Thomas R Machnitzki · CC BY 3.0 · Wikimedia Commons"
 },
 "inhaler": {
 "id": "inhaler",
@@ -1625,7 +1625,7 @@
 "src": "hcai/cut/tv.webp",
 "w": 1200,
 "h": 752,
-"credit": "Unknown authorUnknown author · Public domain · Wikimedia Commons"
+"credit": "Unknown author · Public domain · Wikimedia Commons"
 },
 "stamp": {
 "id": "stamp",
@@ -1657,7 +1657,7 @@
 "src": "hcai/img/dalles_dam.jpg",
 "w": 1280,
 "h": 867,
-"credit": "Robert Ashworth from Bellingham, WA., US · CC BY 2.0 · Wikimedia Commons"
+"credit": "Robert Ashworth · CC BY 2.0 · Wikimedia Commons"
 },
 "water_tap": {
 "id": "water_tap",
@@ -1681,7 +1681,7 @@
 "src": "hcai/img/ucr.jpg",
 "w": 1600,
 "h": 1200,
-"credit": "Original uploader was Amerique at en.wik · CC BY-SA 3.0 · Wikimedia Commons"
+"credit": "Amerique · CC BY-SA 3.0 · Wikimedia Commons"
 },
 "encyclopedia": {
 "id": "encyclopedia",
@@ -1697,7 +1697,7 @@
 "src": "hcai/cut/poetry_book.webp",
 "w": 681,
 "h": 1200,
-"credit": "Тарас Шевченко .mw-parser-output .common · Public domain · Wikimedia Commons"
+"credit": "Taras Shevchenko · Public domain · Wikimedia Commons"
 },
 "dark_alley": {
 "id": "dark_alley",
@@ -1705,7 +1705,7 @@
 "src": "hcai/img/dark_alley.jpg",
 "w": 1280,
 "h": 1920,
-"credit": "Sergio Miranda from Maia, Portugal · CC BY 2.0 · Wikimedia Commons"
+"credit": "Sergio Miranda · CC BY 2.0 · Wikimedia Commons"
 },
 "san_francisco": {
 "id": "san_francisco",
@@ -1713,7 +1713,7 @@
 "src": "hcai/img/san_francisco.jpg",
 "w": 1920,
 "h": 574,
-"credit": "Daniel L. Lu (user:dllu) Camera location · CC BY-SA 4.0 · Wikimedia Commons"
+"credit": "Daniel L. Lu · CC BY-SA 4.0 · Wikimedia Commons"
 },
 "kibera": {
 "id": "kibera",
@@ -1785,7 +1785,7 @@
 "src": "hcai/img/white_house.jpg",
 "w": 1614,
 "h": 1196,
-"credit": "CC BY-SA 3.0 · Wikimedia Commons"
+"credit": "Matt H. Wade · CC BY-SA 3.0 · Wikimedia Commons"
 },
 "silicon": {
 "id": "silicon",
@@ -1801,7 +1801,7 @@
 "src": "hcai/img/furnace.jpg",
 "w": 1280,
 "h": 1792,
-"credit": "Unknown authorUnknown author · Public domain · Wikimedia Commons"
+"credit": "Unknown author · Public domain · Wikimedia Commons"
 },
 "ingot": {
 "id": "ingot",
@@ -1841,7 +1841,7 @@
 "src": "hcai/img/battery_bank.jpg",
 "w": 1920,
 "h": 1080,
-"credit": "Kecko from Eastern Switzerland · CC BY 2.0 · Wikimedia Commons"
+"credit": "Kecko · CC BY 2.0 · Wikimedia Commons"
 },
 "cobalt_ore": {
 "id": "cobalt_ore",
@@ -1857,7 +1857,7 @@
 "src": "hcai/cut/ev.webp",
 "w": 1200,
 "h": 617,
-"credit": "original: Michael Movchinedited by Felix · CC BY-SA 3.0 · Wikimedia Commons"
+"credit": "Michael Movchin · CC BY-SA 3.0 · Wikimedia Commons"
 },
 "old_barn": {
 "id": "old_barn",
@@ -1873,7 +1873,7 @@
 "src": "hcai/img/farmer.jpg",
 "w": 1280,
 "h": 840,
-"credit": ".mw-parser-output .commons-creator-table · CC BY-SA 4.0 · Wikimedia Commons"
+"credit": "Geoff Charles · CC BY-SA 4.0 · Wikimedia Commons"
 },
 "bed": {
 "id": "bed",
@@ -1889,7 +1889,7 @@
 "src": "hcai/cut/envelope_sealed.webp",
 "w": 252,
 "h": 254,
-"credit": "English: Anna E. Ticknor (1823-1896) · Public domain · Wikimedia Commons"
+"credit": "Anna E. Ticknor · Public domain · Wikimedia Commons"
 },
 "nda": {
 "id": "nda",
@@ -1897,7 +1897,7 @@
 "src": "hcai/cut/nda.webp",
 "w": 915,
 "h": 1200,
-"credit": "Graydon J. Gerber, Naval Ocean Systems C · Public domain · Wikimedia Commons"
+"credit": "Graydon J. Gerber, Naval Ocean Systems… · Public domain · Wikimedia Commons"
 },
 "tax_form": {
 "id": "tax_form",
@@ -1929,7 +1929,7 @@
 "src": "hcai/cut/crystal.webp",
 "w": 1200,
 "h": 977,
-"credit": "Ra'ike (Wikipedia) · CC0 · Wikimedia Commons"
+"credit": "Ra'ike · CC0 · Wikimedia Commons"
 },
 "jevons": {
 "id": "jevons",
@@ -1937,7 +1937,7 @@
 "src": "hcai/cut/jevons.webp",
 "w": 726,
 "h": 867,
-"credit": "Unknown (via University of Manchester Li · CC BY-SA 4.0 · Wikimedia Commons",
+"credit": "University of Manchester Libraries · CC BY-SA 4.0 · Wikimedia Commons",
 "name": "William Stanley Jevons",
 "role": "Economist, 1835–1882"
 },
@@ -1973,7 +1973,7 @@
 "src": "hcai/cut/office_chair.webp",
 "w": 693,
 "h": 1200,
-"credit": "Photograph: Frank C. Müller, Baden-Baden · CC BY-SA 4.0 · Wikimedia Commons"
+"credit": "Frank C. Müller, Baden-Baden · CC BY-SA 4.0 · Wikimedia Commons"
 },
 "monitor": {
 "id": "monitor",
@@ -1981,7 +1981,7 @@
 "src": "hcai/img/monitor.jpg",
 "w": 1055,
 "h": 1160,
-"credit": "File:Computer_monitor.jpg by Zzubnik Der · Public domain · Wikimedia Commons"
+"credit": "Zzubnik, AGreue · Public domain · Wikimedia Commons"
 },
 "oil_barrel": {
 "id": "oil_barrel",
@@ -2013,7 +2013,7 @@
 "src": "hcai/cut/hourglass.webp",
 "w": 1200,
 "h": 781,
-"credit": "CC BY 4.0 · Wikimedia Commons"
+"credit": "Wellcome Collection · CC BY 4.0 · Wikimedia Commons"
 },
 "tw_reservoir2": {
 "id": "tw_reservoir2",
@@ -2037,7 +2037,7 @@
 "src": "hcai/img/lbnl2.jpg",
 "w": 1920,
 "h": 1279,
-"credit": "U.S. Department of Energy from United St · Public domain · Wikimedia Commons"
+"credit": "U.S. Department of Energy · Public domain · Wikimedia Commons"
 },
 "boxtown2": {
 "id": "boxtown2",
@@ -2045,6 +2045,6 @@
 "src": "hcai/img/boxtown2.jpg",
 "w": 1024,
 "h": 768,
-"credit": "Thomas R Machnitzki (thomas@machnitzki.c · CC BY 3.0 · Wikimedia Commons"
+"credit": "Thomas R Machnitzki · CC BY 3.0 · Wikimedia Commons"
 }
 }

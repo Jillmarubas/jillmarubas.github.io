@@ -22,15 +22,48 @@ def get(url, tries=10, page=False):
         except Exception: time.sleep(3)
     return None
 strip = lambda h: re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', h or ''))).strip()
+# authors the scraper can't read cleanly (credit-line markup, other scripts, "Last, First, dates")
+AUTHOR = {'steam_engine': 'Park Benjamin', 'ev': 'Michael Movchin', 'ear': 'Ander-vik', 'poetry_book': 'Taras Shevchenko',
+          'jevons': 'University of Manchester Libraries', 'eiffel': 'Louis-Émile Durandelle'}
+def clean_author(a):
+    """Tidy a scraped author for an on-screen credit: drop wiki clutter (life dates, user links, upload notes,
+    URLs, quotes), keep the name."""
+    a = re.sub(r'https?://\S+', '', a)
+    a = re.sub(r'[“”"]', '', a)
+    a = re.sub(r'^(the )?original uploader was (.+?) at .*$', r'\2', a, flags=re.I)
+    a = re.sub(r'^(original:|photograph:|photo by|english:|File:\S+ by)\s*', '', a, flags=re.I)
+    a = re.sub(r'\s*Derivative work:\s*', ', ', a)
+    a = re.sub(r'\bUser:', '', a)
+    a = re.sub(r'\([^)]*\)?', '', a)  # life dates, (talk), (user:…), (via …); also a bracket cut off by truncation
+    a = re.sub(r'\b\d{3,4}\s*[-–]\s*\d{0,4}\b', '', a)  # life dates written without brackets
+    a = re.split(r' - | Camera location| Photo gallery|\. Original uploader| from [A-Z]', a)[0]
+    a = re.sub(r'\s+', ' ', a).strip(' ,;-')
+    if a.lower().startswith('unknown author'): return 'Unknown author'
+    names = [n.strip() for n in a.split(',') if n.strip()]
+    if len(names) >= 3: a = names[0] + ' et al.'
+    return a[:60]
+def short(a, n=40):
+    """Cut a credit at a word boundary."""
+    return a if len(a) <= n else a[:n].rsplit(' ', 1)[0].rstrip(' ,;') + '…'
 def commons_meta(title):
     h = get('https://commons.wikimedia.org/wiki/' + urllib.parse.quote(title.replace(' ', '_')), page=True)
     h = h.decode('utf-8', 'replace') if h else ''
-    lic = re.findall(r'class="licensetpl_short"[^>]*>(.*?)</span>', h, re.S)
-    lic = strip(lic[0]) if lic else ('Public domain' if 'Public domain' in h or 'public domain' in h else 'see file page')
-    m = re.search(r'id="fileinfotpl_aut"[^>]*>.*?</td>\s*<td[^>]*>(.*?)</td>', h, re.S)
+    h = re.sub(r'<style[^>]*>.*?</style>', '', h, flags=re.S)  # Creator templates carry their CSS inline
+    lics = [strip(x) for x in re.findall(r'class="licensetpl_short"[^>]*>(.*?)</span>', h, re.S)]
+    # dual-licensed files list GFDL first: take the most permissive (public domain / CC0, CC BY, CC BY-SA, then the rest)
+    rank = lambda l: 0 if re.search(r'public domain|CC0|PD', l, re.I) else 1 if re.search(r'CC BY \d', l) and 'SA' not in l else 2 if 'CC BY' in l else 3
+    lic = sorted(lics, key=rank)[0] if lics else ('Public domain' if 'Public domain' in h or 'public domain' in h else 'see file page')
+    m = re.search(r'id="fileinfotpl_aut"[^>]*>.*?</td>(.*?)</tr>', h, re.S)
     author = strip(m.group(1)) if m else ''
-    author = re.sub(r'\s*\(talk.*?\)', '', author).split('  ')[0][:60]
-    return lic, author
+    author = re.sub(r'\s*\(talk.*?\)', '', author).split('  ')[0]
+    by = re.search(r'taken or created by (.+?)\.\s*To ', author)  # a photographer's own attribution template
+    if by: author = by.group(1)
+    if not author:  # museum files: the credit line names the institution to attribute
+        m = re.search(r'id="fileinfotpl_art_credit_line"[^>]*>.*?</td>(.*?)</tr>', h, re.S)
+        cl = strip(m.group(1)) if m else ''
+        if 'Wellcome Collection' in cl: author = 'Wellcome Collection'
+        elif cl.startswith('Collection of '): author = cl[len('Collection of '):].split(',')[0]
+    return lic, clean_author(author)
 def fetch(aid, pick, a):
     mode = None
     if ':' in pick: pick, mode = pick.split(':')
@@ -43,6 +76,7 @@ def fetch(aid, pick, a):
     else:
         c = json.load(open(os.path.join(CD, aid + '.json')))['cands'][int(pick)]
         lic, author = commons_meta(c['title'])
+        author = AUTHOR.get(aid, author)
         src, page = 'Wikimedia Commons', 'https://commons.wikimedia.org/wiki/' + urllib.parse.quote(c['title'].replace(' ', '_'))
         th = c['thumb']
         data = None
@@ -71,8 +105,17 @@ picks = json.load(open(os.path.join(ROOT, 'out/hcai/picks.json')))
 assets = {a['id']: a for a in json.load(open(os.path.join(ROOT, 'src/hcai/assets.json')))}
 metaf = os.path.join(ROOT, 'out/hcai/meta.json')
 meta = json.load(open(metaf)) if os.path.exists(metaf) else {}
-only = set(sys.argv[1:])
-todo = [(i, p) for i, p in picks.items() if i in assets and (i in only if only else (i not in meta or meta[i].get('pick') != p))]
+only = set(a for a in sys.argv[1:] if not a.startswith('--'))
+if '--credits' in sys.argv:  # re-read licence and author for these Commons files only; no downloads
+    for aid in only:
+        if meta[aid]['source'] == 'Wikimedia Commons':
+            title = urllib.parse.unquote(meta[aid]['page'].rsplit('/wiki/', 1)[1])
+            meta[aid]['license'], meta[aid]['author'] = commons_meta(title)
+            print('credit', aid, meta[aid]['license'], '|', meta[aid]['author'], flush=True)
+    for aid, m in meta.items(): m['author'] = AUTHOR.get(aid) or clean_author(m['author'])
+    only = set(); todo = []
+else:
+    todo = [(i, p) for i, p in picks.items() if i in assets and (i in only if only else (i not in meta or meta[i].get('pick') != p))]
 with ThreadPoolExecutor(3) as ex:
     for aid, m in ex.map(lambda t: fetch(t[0], t[1], assets[t[0]]), todo):
         if m is None: print('FAIL download', aid, flush=True); continue
@@ -117,7 +160,7 @@ for aid, m in meta.items():
         src = f'hcai/cut/{aid}.webp'
     m['done'] = True
     w, h = Image.open(out).size
-    credit = ' · '.join(x for x in [m['author'][:40], m['license'], m['source']] if x)
+    credit = ' · '.join(x for x in [short(m['author']), m['license'], m['source']] if x)
     if kind == 'l': credit = ''
     g = {'id': aid, 'type': kind, 'src': src, 'w': w, 'h': h, 'credit': credit}
     if aid in PEOPLE: g['name'], g['role'] = PEOPLE[aid]
