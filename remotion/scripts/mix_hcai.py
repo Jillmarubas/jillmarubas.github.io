@@ -20,6 +20,7 @@ STRIP = json.load(open(os.path.join(ROOT, 'src/hcai/strip.json'))) if '--strip' 
 OUT = 'mix_strip.wav' if STRIP else 'mix.wav'
 # --no-sfx: voice and music only (the user is making their own effects; their files go in out/hcai/sfx_user/)
 NO_SFX = '--no-sfx' in sys.argv
+USER_SFX = '--user-sfx' in sys.argv
 N = int((T['duration'] + 1) * SR)
 db = lambda x: 10 ** (x / 20)
 _cache = {}
@@ -124,27 +125,80 @@ def put(name, t, dur=None, gain_db=None):
     else:
         x = fade(x, 0.003, 0.05)
     place(fx, x, t)
-for b in B:
-    if b['kind'] != 's': continue
-    name = b['ref']
-    if name in BED:
-        d = BED[name]
-        if name == 'room_tone': d = L(4, 16)['start'] - b['t']
-        if name == 'hum_night': d = L(6, 16)['end'] - b['t'] + 0.5
-        put(name, b['t'] - 0.3, d)
-    else:
-        put(name, b['t'] - (0.05 if name in ('key', 'enter', 'gavel', 'stamp') else 0.15))
-# a soft swoosh on every scene clear (film-strip edition: on every slide of the strip), and on every chapter card
-if STRIP:
-    for prev, f in zip(STRIP['frames'], STRIP['frames'][1:]):
-        if f['ch'] == prev['ch']: put('swoosh', f['at'] - 0.25, gain_db=-21)
-else:
+if not USER_SFX:
     for b in B:
-        if b['kind'] == 'clear': put('swoosh', b['t'] + 0.05)
-for ci, ch in enumerate(T['chapters'][1:], 1): put('swoosh', ch['start'] + 0.1, gain_db=-12)
-put('sting_title', [l for l in T['lines'] if l['ch'] == 0][-1]['end'] + 0.4, gain_db=-3)
-# the cursor: one click at the very start, one at the very end
-put('key', 0.6)
+        if b['kind'] != 's': continue
+        name = b['ref']
+        if name in BED:
+            d = BED[name]
+            if name == 'room_tone': d = L(4, 16)['start'] - b['t']
+            if name == 'hum_night': d = L(6, 16)['end'] - b['t'] + 0.5
+            put(name, b['t'] - 0.3, d)
+        else:
+            put(name, b['t'] - (0.05 if name in ('key', 'enter', 'gavel', 'stamp') else 0.15))
+    # a soft swoosh on every scene clear (film-strip edition: on every slide of the strip), and on every chapter card
+    if STRIP:
+        for prev, f in zip(STRIP['frames'], STRIP['frames'][1:]):
+            if f['ch'] == prev['ch']: put('swoosh', f['at'] - 0.25, gain_db=-21)
+    else:
+        for b in B:
+            if b['kind'] == 'clear': put('swoosh', b['t'] + 0.05)
+    for ci, ch in enumerate(T['chapters'][1:], 1): put('swoosh', ch['start'] + 0.1, gain_db=-12)
+    put('sting_title', [l for l in T['lines'] if l['ch'] == 0][-1]['end'] + 0.4, gain_db=-3)
+    # the cursor: one click at the very start, one at the very end
+    put('key', 0.6)
+else:
+    # the user's own effects (out/hcai/sfx_user/<name>.mp3): each goes where the old cue was; a file not there yet is skipped
+    UD = os.path.join(O, 'sfx_user')
+    RENAME = {'enter': 'enter_send', 'gavel': 'court_gavel', 'sting_title': 'title_hit', 'stamp': 'rubber_stamp', 'digging': 'mine_digging',
+              'fans': 'datacenter_fans', 'turbines': 'gas_turbines', 'cooling_tower': 'cooling_tower', 'drips': 'water_drips',
+              'protest': 'protest_crowd', 'room_tone': 'office_night', 'trucks': 'mining_trucks', 'ewaste': 'ewaste_clatter',
+              'pen': 'pen_signature', 'powerline': 'power_lines', 'hum_night': 'night_hum', 'steam_engine': 'steam_engine'}
+    ULEVEL = {'film_advance': -24, 'chapter_turn': -16, 'typing': -12, 'enter_send': -9, 'title_hit': -4, 'key_click': -9,
+              'court_gavel': -9, 'rubber_stamp': -9, 'pen_signature': -11, 'ewaste_clatter': -14, 'water_drips': -15, 'mine_digging': -16,
+              'mining_trucks': -17, 'cooling_tower': -18, 'power_lines': -18, 'datacenter_fans': -18, 'gas_turbines': -18,
+              'protest_crowd': -20, 'office_night': -17, 'night_hum': -13, 'steam_engine': -16}
+    UBED = {'datacenter_fans': 6.0, 'gas_turbines': 6.5, 'office_night': 0, 'night_hum': 0}
+    missing = set()
+    def uput(name, t, dur=None, gain_db=None):
+        f = os.path.join(UD, name + '.mp3')
+        if not os.path.exists(f):
+            missing.add(name)
+            return
+        x = load(f)
+        loud = x[np.abs(x).max(1) > 0.01]  # level by the audible part, so sparse hits don't come out loud
+        x = x / max(rms(loud if len(loud) else x), 1e-4) * vo_level * db(gain_db if gain_db is not None else ULEVEL.get(name, -14))
+        if dur:
+            reps = int(np.ceil(dur * SR / len(x))) + 1
+            x = fade(np.concatenate([x] * reps)[: int(dur * SR)], 0.8, 1.5)
+        else:
+            x = fade(x, 0.003, 1.0 if len(x) > 3 * SR else 0.05)
+        place(fx, x, t)
+    for b in B:
+        if b['kind'] != 's': continue
+        name = RENAME.get(b['ref'])
+        if b['ref'] == 'key':
+            name = 'typing' if b['t'] < 60 else 'key_click'
+        if not name: continue  # dropped: stings, oven, wind turbine, TV static, meeting, sand
+        if name in UBED:
+            d = UBED[name]
+            if name == 'office_night': d = L(4, 16)['start'] - b['t']
+            if name == 'night_hum': d = L(6, 16)['end'] - b['t'] + 0.5
+            uput(name, b['t'] - 0.3, d)
+        elif name == 'typing':
+            uput(name, b['t'] + 0.35)  # the question starts typing about 10 frames after the screen appears
+        else:
+            uput(name, b['t'] - (0.05 if name in ('enter_send', 'court_gavel', 'rubber_stamp', 'key_click') else 0.15))
+    if STRIP:  # the strip's slides: up to three takes of the film advance, in turn
+        takes = [n for n in ('film_advance', 'film_advance_1', 'film_advance_2', 'film_advance_3') if os.path.exists(os.path.join(UD, n + '.mp3'))] or ['film_advance']
+        k = 0
+        for prev, f in zip(STRIP['frames'], STRIP['frames'][1:]):
+            if f['ch'] == prev['ch']:
+                uput(takes[k % len(takes)], f['at'] - 0.4)
+                k += 1
+    for ci, ch in enumerate(T['chapters'][1:], 1): uput('chapter_turn', ch['start'] + 0.1)
+    uput('title_hit', [l for l in T['lines'] if l['ch'] == 0][-1]['end'] + 0.4, gain_db=-3)
+    print('effects not here yet:', ', '.join(sorted(missing)) or 'none')
 
 if NO_SFX: fx[:] = 0
 mix = vo + mus + fx

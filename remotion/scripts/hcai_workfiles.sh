@@ -11,7 +11,7 @@ TAR=out/hcai-workfiles.tar
 export GLOBAL_AGENT_HTTP_PROXY=${HTTPS_PROXY:-}
 case "${1:-}" in
   save)
-    tar -cf "$TAR" public/hcai out/hcai/vo out/hcai/music out/hcai/sfx out/hcai/vo_segments.json out/hcai/picks.json \
+    tar -cf "$TAR" public/hcai out/hcai/vo out/hcai/music out/hcai/sfx out/hcai/sfx_user out/hcai/vo_segments.json out/hcai/picks.json \
       out/hcai/meta.json out/hcai/water_bottle_rembg.webp out/hcai/question_mark_rembg.webp out/hcai/cands/*.json
     node -r global-agent/bootstrap scripts/upload-delivery.mjs "$TAR" "$KEY" application/x-tar ;;
   restore)
