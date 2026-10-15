@@ -52,7 +52,7 @@ Sources
 - EU Energy Efficiency Directive data centre reporting; EU AI Act
 - AEP Ohio data centre tariff: Public Utilities Commission of Ohio (July 2025)
 
-Images: Wikimedia Commons and Openverse (Flickr) contributors under Creative Commons and public-domain licences; full list in the pinned comment.
+Images: Wikimedia Commons and Openverse (Flickr) contributors under Creative Commons and public-domain licences. Author, licence and source for every image: https://github.com/Jillmarubas/jillmarubas.github.io/blob/main/remotion/src/hcai/ASSETS.md
 Voice, music and sound effects: ElevenLabs.
 
 ## Accuracy notes
