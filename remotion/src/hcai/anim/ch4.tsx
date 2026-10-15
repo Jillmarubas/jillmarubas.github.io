@@ -1010,7 +1010,7 @@ export const C4Pay: React.FC<AnimProps> = ({f, t0}) => {
       <Note size={28} style={{position: 'absolute', left: X0, top: 852, opacity: ease(f, w(1044.36), 10)}}>
         take-home, depending on their role
       </Note>
-      <div style={{position: 'absolute', left: 1180, top: 755, opacity: ease(f, w(1050.9), 10)}}>
+      <div style={{position: 'absolute', left: 1330, top: 755, opacity: ease(f, w(1050.9), 10)}}>
         <Tag bg={P.yellow} color={P.ink} size={36}>
           ≈ 11–16% of the hourly rate
         </Tag>
@@ -1316,7 +1316,7 @@ export const C4Ghost: React.FC<AnimProps> = ({f, t0}) => {
       </svg>
       {/* the product: it looks automatic */}
       {panel > 0 && (
-        <div style={{position: 'absolute', left: 560, top: 330, width: 800, height: 600, transformOrigin: '0% 50%', transform: `perspective(1800px) rotateY(${-82 * open}deg) translateY(${(1 - panel) * 40}px)`, opacity: panel * (1 - 0.7 * open)}}>
+        <div style={{position: 'absolute', left: 560, top: 330, width: 800, height: 600, transformOrigin: '0% 50%', transform: `perspective(1800px) rotateY(${-82 * open}deg) translateY(${(1 - panel) * 40}px)`, opacity: panel * (1 - open)}}>
           <div style={{width: '100%', height: '100%', background: P.white, borderRadius: 40, boxShadow: '0 40px 90px rgba(0,0,0,0.45)', padding: 44, boxSizing: 'border-box', position: 'relative'}}>
             <div style={{fontFamily: AF.head, fontWeight: 800, fontSize: 36, color: P.ink}}>Your AI app</div>
             <div style={{marginTop: 30, marginLeft: 'auto', width: 380, height: 70, borderRadius: 26, background: '#DCE6FF'}} />
@@ -1715,21 +1715,21 @@ export const C4Remotasks: React.FC<AnimProps> = ({f, t0}) => {
             ILLUSTRATION · NOT TO SCALE
           </text>
           <g opacity={ease(f, w(1187.34), 10)}>
-            <rect x={3000} y={300} width={460} height={480} rx={26} fill={P.white} />
+            <rect x={3000} y={300} width={580} height={480} rx={26} fill={P.white} />
             <text x={3040} y={370} fontFamily={AF.head} fontWeight={800} fontSize={40} fill={P.ink}>
               Payments
             </text>
             {[0, 1].map((r) => (
               <g key={r}>
-                <rect x={3040} y={430 + r * 160} width={380} height={120} rx={16} fill="#EEF1F7" />
+                <rect x={3040} y={430 + r * 160} width={500} height={120} rx={16} fill="#EEF1F7" />
                 <text x={3064} y={500 + r * 160} fontFamily={AF.head} fontWeight={700} fontSize={32} fill={P.ink}>
                   Payment
                 </text>
               </g>
             ))}
           </g>
-          <Stamp x={3290} y={490} text="DELAYED" k={pop(f, w(1188.2), 10)} c={P.orange} size={34} rot={-8} />
-          <Stamp x={3290} y={650} text="CANCELLED" k={pop(f, w(1188.96), 10)} c={P.red} size={34} rot={-6} />
+          <Stamp x={3400} y={490} text="DELAYED" k={pop(f, w(1188.2), 10)} c={P.orange} size={34} rot={-8} />
+          <Stamp x={3400} y={650} text="CANCELLED" k={pop(f, w(1188.96), 10)} c={P.red} size={34} rot={-6} />
         </World>
       </Cam>
       <Lab f={f} at={0} title="The Philippines" sub="Washington Post report, August 2023" until={w(1184.3)} />

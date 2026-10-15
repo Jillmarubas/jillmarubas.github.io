@@ -305,8 +305,8 @@ export const C6Spread: React.FC<AnimProps> = ({f, t0}) => {
     return {x: 960 + (c - 3) * (170 + r * 34), y: 470 + r * 112, s, i};
   });
   const you = houses[rows * cols - 4];
-  const pile: Pt = [960, 230];
-  const keys: CamKey[] = [[t0, 960, 540, 1], [1448.75, 960, 540, 1], [1449.9, you.x, you.y - 40, 1.8]];
+  const pile: Pt = [960, 300];
+  const keys: CamKey[] = [[t0, 960, 540, 1], [1448.55, 960, 540, 1], [1449.45, you.x, you.y - 40, 1.8]];
   return (
     <Bg c={P.navy}>
       <Cam f={f} t0={t0} keys={keys}>
@@ -344,15 +344,15 @@ export const C6Spread: React.FC<AnimProps> = ({f, t0}) => {
             );
           })}
           {/* you */}
-          {f > w(1448.8) && (
+          {f > w(1448.7) && (
             <g>
               <circle cx={you.x} cy={you.y - 20} r={100 + 8 * Math.sin(f / 3)} fill="none" stroke={P.yellow} strokeWidth={8} opacity={ease(f, w(1448.8), 6)} />
-              <Put x={you.x + 135} y={you.y - 60} s={0.5} f={f} at={w(1449.15)}>
+              <Put x={you.x + 135} y={you.y - 60} s={0.5} f={f} at={w(1448.9)}>
                 <Bill total="↑" hot={1} />
               </Put>
             </g>
           )}
-          <WTag x={you.x} y={you.y - 150} text="You" bg={P.yellow} size={44} k={pop(f, w(1449.15), 10)} />
+          <WTag x={you.x} y={you.y - 150} text="You" bg={P.yellow} size={44} k={pop(f, w(1448.85), 10)} />
         </World>
       </Cam>
       <div style={{position: 'absolute', left: 0, right: 0, top: 60, textAlign: 'center', opacity: ease(f, w(1444.1), 10) * (1 - ease(f, w(1448.7), 8))}}>
@@ -393,7 +393,7 @@ export const C6PJM: React.FC<AnimProps> = ({f, t0}) => {
             ))}
             {order.map((s, j) => {
               const k = pop(f, w(1458.2) + j * 2.2, 10);
-              return <path key={s.name} d={s.d} fill={k > 0 ? P.yellow : P.sky} fillOpacity={k > 0 ? Math.min(1, k) * (1 - 0.45 * zoomIn) : 0.35 * hl} stroke={k > 0 ? '#B38600' : 'none'} strokeWidth={sw} />;
+              return <path key={s.name} d={s.d} fill={k > 0 ? P.yellow : P.sky} fillOpacity={k > 0 ? Math.min(1, k) * (1 - 0.2 * zoomIn) : 0.35 * hl} stroke={k > 0 ? '#B38600' : 'none'} strokeWidth={sw} />;
             })}
             {/* lights on in every PJM state */}
             {lights > 0 &&
@@ -480,8 +480,8 @@ export const C6Auction: React.FC<AnimProps> = ({f, t0}) => {
                 {b.el}
                 <g transform={`translate(70,${-40 - 90 * up + Math.sin(f / 5 + i) * 6 * up})`}>
                   <rect x={-3} y={0} width={6} height={70} fill="#C9D2E6" />
-                  <rect x={-34} y={-40} width={68} height={44} rx={8} fill={b.c} />
-                  <text y={-10} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={22} fill={P.white}>MW</text>
+                  <rect x={-46} y={-50} width={92} height={54} rx={10} fill={b.c} />
+                  <text y={-12} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={30} fill={P.white}>MW</text>
                 </g>
               </g>
             ) : null;
@@ -507,10 +507,10 @@ export const C6Auction: React.FC<AnimProps> = ({f, t0}) => {
 };
 
 /* ================================================================== "the price in that auction jumped from about $29 to about $270. Almost ten times higher in one year." */
-const PX = 600 / 269.92;
+const PX = 560 / 269.92;
 export const C6Price: React.FC<AnimProps> = ({f, t0}) => {
   const w = (a: number) => at(t0, a);
-  const B = 860;
+  const B = 780;
   const small = 28.92 * PX;
   const k1 = ease(f, w(1473.3), 12);
   const k2 = ease(f, w(1474.7), w(1476.4) - w(1474.7));
@@ -524,7 +524,7 @@ export const C6Price: React.FC<AnimProps> = ({f, t0}) => {
           {/* 2024/25 */}
           <rect x={430} y={B - small * k1} width={260} height={small * k1} rx={10} fill={P.sky} />
           <text x={560} y={B - small - 26} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={60} fill={P.white} opacity={ease(f, w(1473.4), 8)}>$28.92</text>
-          <text x={560} y={B + 60} textAnchor="middle" fontFamily="Poppins" fontWeight={700} fontSize={40} fill={P.white} opacity={ease(f, w(1472.6), 8)}>2024/25</text>
+          <text x={560} y={B + 60} textAnchor="middle" fontFamily="Poppins" fontWeight={700} fontSize={40} fill={P.white} opacity={ease(f, 0, 10)}>2024/25</text>
           {/* 2025/26 */}
           {k2 > 0 && <rect x={930} y={B - v2 * PX} width={260} height={v2 * PX} rx={10} fill={P.orange} />}
           {k2 > 0 && (
@@ -532,9 +532,9 @@ export const C6Price: React.FC<AnimProps> = ({f, t0}) => {
               ${v2.toFixed(2)}
             </text>
           )}
-          <text x={1060} y={B + 60} textAnchor="middle" fontFamily="Poppins" fontWeight={700} fontSize={40} fill={P.white} opacity={ease(f, w(1474.7), 8)}>2025/26</text>
+          <text x={1060} y={B + 60} textAnchor="middle" fontFamily="Poppins" fontWeight={700} fontSize={40} fill={P.white} opacity={ease(f, 0, 10)}>2025/26</text>
           <text x={1060} y={B + 104} textAnchor="middle" fontFamily="Poppins" fontWeight={500} fontSize={30} fill="rgba(255,255,255,0.75)" opacity={ease(f, w(1475.2), 8)}>set at the July 2024 auction</text>
-          <Arrow a={[700, B - small - 90]} b={[915, B - 560]} f={f} at={w(1472.3) + 30} c={P.yellow} wpx={8} />
+          <Arrow a={[700, B - small - 90]} b={[915, B - 520]} f={f} at={w(1474.7)} c={P.yellow} wpx={8} />
           {/* the small bar, stacked until it matches */}
           {stack > 0 &&
             Array.from({length: 10}, (_, i) => {
@@ -549,7 +549,7 @@ export const C6Price: React.FC<AnimProps> = ({f, t0}) => {
           )}
         </World>
       </Cam>
-      <Label f={f} at={w(1471.4)} title="PJM capacity price" sub="dollars per megawatt-day" bg={P.white} />
+      <Label f={f} at={2} title="PJM capacity price" sub="dollars per megawatt-day" bg={P.white} />
       <Caption f={f} at={w(1477.5)} source="PJM 2025/26 Base Residual Auction results, July 2024">
         Almost ten times higher in one year
       </Caption>
@@ -604,7 +604,9 @@ export const C6Monitor: React.FC<AnimProps> = ({f, t0}) => {
           <WTag x={960} y={1010} text="2025: bills go up" bg={P.yellow} size={48} k={pop(f, w(1485.6), 12)} />
         </World>
       </Cam>
-      <Label f={f} at={w(1480.0)} title="PJM's Independent Market Monitor" sub="Monitoring Analytics · watches the market" bg={P.white} />
+      <AbsoluteFill style={{opacity: 1 - ease(f, w(1485.3), 8)}}>
+        <Label f={f} at={w(1480.0)} title="PJM's Independent Market Monitor" sub="Monitoring Analytics · watches the market" bg={P.white} />
+      </AbsoluteFill>
     </Bg>
   );
 };
@@ -612,7 +614,7 @@ export const C6Monitor: React.FC<AnimProps> = ({f, t0}) => {
 /* ================================================================== the bill goes up; a family in Ohio who has never used a chatbot */
 export const C6Family: React.FC<AnimProps> = ({f, t0}) => {
   const w = (a: number) => at(t0, a);
-  const keys: CamKey[] = [[t0, 840, 640, 2.9], [1494.6, 840, 640, 2.9], [1496.1, 1010, 560, 0.95, -4, 0], [1502.2, 1060, 560, 0.95, 4, 0], [1504.6, 900, 620, 1.2, 0, 0]];
+  const keys: CamKey[] = [[t0, 840, 640, 2.9], [1494.6, 840, 640, 2.9], [1496.1, 1010, 560, 0.95, -4, 0], [1502.2, 1060, 560, 0.95, 4, 0], [1504.6, 1000, 610, 1.1, 0, 0]];
   const circ = ease(f, w(1492.6), 22);
   const per = 2 * Math.PI * Math.sqrt((96 * 96 + 36 * 36) / 2);
   const ang = -Math.PI / 2 + circ * Math.PI * 2;
@@ -684,7 +686,7 @@ export const C6Family: React.FC<AnimProps> = ({f, t0}) => {
           {/* the money goes out along the wire to the data centres */}
           {f > w(1500.9) && <Flow pts={wireP} f={f} c={P.yellow} n={7} r={11} speed={7} line={false} o={ease(f, w(1500.9), 10)} />}
           <WTag x={985} y={540} text="Never used a chatbot" bg={P.ink} color={P.white} size={30} k={pop(f, w(1497.2), 12)} />
-          <WTag x={1780} y={520} text="AI data centres" bg={P.white} size={40} k={pop(f, w(1502.4), 12)} />
+          <WTag x={1640} y={520} text="AI data centres" bg={P.white} size={40} k={pop(f, w(1502.4), 12)} />
         </World>
       </Cam>
       <Label f={f} at={w(1495.2)} title="A family in Ohio" sub="has never typed a question into a chatbot" bg={P.white} />
@@ -698,7 +700,7 @@ export const C6Land: React.FC<AnimProps> = ({f, t0}) => {
   const w = (a: number) => at(t0, a);
   const t = t0 + f / 24;
   const out = ease(f, w(1508.4), 10);
-  const flip = ease(f, w(1506.8), 12);
+  const flip = ease(f, w(1506.95), 12);
   const sx = Math.cos(Math.PI * flip);
   const G = 760;
   const keys: CamKey[] = [[t0, 1500, 560, 0.64], [1512.8, 1500, 560, 0.64], [1514.4, 2450, 600, 0.95], [1515.8, 2300, 590, 0.9], [1518.6, 1500, 560, 0.64]];
@@ -893,7 +895,6 @@ export const C6Route: React.FC<AnimProps> = ({f, t0}) => {
                     </Put>
                   );
                 })}
-                <path d="M1240 860 H1680" stroke="#8B5A2B" strokeWidth={8} />
               </World>
             </Cam>
             <div style={{position: 'absolute', left: 1180, top: 300, display: 'flex', gap: 24, opacity: ease(f, w(1536.7), 8)}}>
@@ -914,10 +915,10 @@ export const C6Eminent: React.FC<AnimProps> = ({f, t0}) => {
   const w = (a: number) => at(t0, a);
   const G = 780;
   const ghost = ease(f, w(1540.5), 10);
-  const solid = ease(f, w(1549.7), 10);
+  const solid = ease(f, w(1549.5), 8);
   const towers = [1000, 1380, 1760];
   const hit = (() => {
-    const d = f - w(1549.5);
+    const d = f - w(1549.4);
     return d < 0 ? 0 : d < 4 ? d / 4 : d < 10 ? 1 - (d - 4) / 6 : 0;
   })();
   const card = ease(f, w(1543.4), 12);
@@ -959,8 +960,8 @@ export const C6Eminent: React.FC<AnimProps> = ({f, t0}) => {
             <Person c={P.blue} f={f} />
           </g>
           <WTag x={330} y={G + 120} text="Landowner" bg={P.white} size={40} k={pop(f, w(1538.1), 12)} />
-          {f > w(1549.3) && (
-            <g transform={`translate(470,${G - 330}) scale(${pop(f, w(1549.3), 10)})`}>
+          {f > w(1549.1) && (
+            <g transform={`translate(170,${G - 250}) scale(${pop(f, w(1549.1), 10)})`}>
               <Bubble text="No." w={180} c={P.white} color={P.red} size={56} />
             </g>
           )}
@@ -1135,7 +1136,7 @@ export const C6Sleep: React.FC<AnimProps> = ({f, t0}) => {
             const d = Array.from({length: 13}, (_, j) => `${j ? 'L' : 'M'}${x + Math.sin(j * 0.9 + f / 6) * 22} ${180 + j * 55}`).join(' ');
             return <path key={i} d={d} stroke={P.sky} strokeWidth={9} fill="none" strokeLinecap="round" opacity={0.65 * (1 - (x - 660) / 1400)} />;
           })}
-          <g transform="translate(1440,330) scale(0.7)">
+          <g transform="translate(790,330) scale(0.55)">
             <Clock f={f * 4} />
           </g>
           {/* the bed */}
@@ -1163,7 +1164,7 @@ export const C6Sleep: React.FC<AnimProps> = ({f, t0}) => {
           <WTag x={450} y={690} text="Window shut" bg={P.white} size={34} k={pop(f, w(1576.1), 12)} />
         </World>
       </Cam>
-      <div style={{position: 'absolute', left: 120, top: 80, opacity: ease(f, w(1569.8), 10) * (1 - ease(f, w(1572.4), 10)), display: 'flex', flexDirection: 'column', gap: 24, background: 'rgba(11,22,56,0.75)', padding: '26px 30px', borderRadius: 24}}>
+      <div style={{position: 'absolute', left: 1060, top: 80, opacity: ease(f, w(1569.8), 10) * (1 - ease(f, w(1572.4), 10)), display: 'flex', flexDirection: 'column', gap: 24, background: 'rgba(11,22,56,0.75)', padding: '26px 30px', borderRadius: 24}}>
         <Meter f={f} start={w(1569.9)} value={9} max={10} label="Felt in your chest" text="a lot" color={P.yellow} w={700} />
         <Meter f={f} start={w(1570.8)} value={3.5} max={10} label="Heard" text="less" color={P.sky} w={700} />
         <Note size={20}>Low sound: illustration</Note>
@@ -1191,8 +1192,8 @@ export const C6Secret: React.FC<AnimProps> = ({f, t0}) => {
             {f > w(1582.3) && <rect x={300} y={232} width={520} height={84} rx={10} fill={P.yellow} opacity={ease(f, w(1582.3), 6)} />}
             <text x={560} y={296} textAnchor="middle" fontFamily='"IBM Plex Mono", monospace' fontWeight={700} fontSize={64} fill={P.ink}>PROJECT X</text>
             <text x={290} y={420} fontFamily="Poppins" fontWeight={700} fontSize={40} fill={P.ink}>Company:</text>
-            <rect x={490} y={386} width={340} height={46} rx={6} fill={P.ink} opacity={1 - reveal} />
-            <text x={500} y={421} fontFamily="Poppins" fontWeight={800} fontSize={34} fill={P.red} opacity={reveal}>named only now</text>
+            <rect x={515} y={386} width={330} height={46} rx={6} fill={P.ink} opacity={1 - reveal} />
+            <text x={520} y={421} fontFamily="Poppins" fontWeight={800} fontSize={34} fill={P.red} opacity={reveal}>named only now</text>
             <g transform="translate(560,520) rotate(-8)" opacity={ease(f, w(1579.1), 6) * (1 - ok)}>
               <rect x={-210} y={-40} width={420} height={80} rx={10} fill="none" stroke={P.red} strokeWidth={7} />
               <text y={18} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={48} fill={P.red}>CONFIDENTIAL</text>
@@ -1260,7 +1261,7 @@ export const C6TaxRace: React.FC<AnimProps> = ({f, t0}) => {
           <DataCentre f={f} />
         </g>
         {caps.map((p, i) => (
-          <Put key={i} x={p[0]} y={p[1]} s={0.85} f={f} at={w(1594.5) + i * 3}>
+          <Put key={i} x={p[0]} y={p[1]} s={0.85} f={f} at={w(1593.8) + i * 3}>
             <Capitol />
           </Put>
         ))}
@@ -1445,7 +1446,7 @@ export const C6Loudoun: React.FC<AnimProps> = ({f, t0}) => {
 /* ================================================================== "Some communities win. Some pay. The people who pay are not the people who decided." */
 export const C6WinPay: React.FC<AnimProps> = ({f, t0}) => {
   const w = (a: number) => at(t0, a);
-  const L = ease(f, 0, 12), R = ease(f, w(1638.3), 12);
+  const L = ease(f, -8, 12), R = ease(f, w(1638.3), 12);
   const b = ease(f, w(1640.0), 12);
   return (
     <Bg c={P.navy}>
@@ -1463,7 +1464,7 @@ export const C6WinPay: React.FC<AnimProps> = ({f, t0}) => {
             ))}
             <Flow pts={[[480, 100], [480, 480]]} f={f} c={P.yellow} n={5} r={14} speed={7} />
           </svg>
-          <div style={{position: 'absolute', left: 0, right: 0, top: 160, textAlign: 'center', transform: `scale(${pop(f, w(1637.7), 12)})`}}>
+          <div style={{position: 'absolute', left: 0, right: 0, top: 160, textAlign: 'center', transform: `scale(${pop(f, w(1637.5), 12)})`}}>
             <Tag bg={P.white} color={P.green} size={64}>Some win</Tag>
           </div>
         </div>
@@ -1581,7 +1582,7 @@ export const C6Pattern: React.FC<AnimProps> = ({f, t0}) => {
             ) : null;
           })}
         </Cam>
-        <Label f={f} at={w(1644.2)} title="The same pattern" sub="chapters 2, 3 and 4" bg={P.yellow} />
+        <Label f={f} at={0} title="The same pattern" sub="chapters 2, 3 and 4" bg={P.yellow} />
       </AbsoluteFill>
       {g > 0 && (
         <AbsoluteFill style={{opacity: g}}>

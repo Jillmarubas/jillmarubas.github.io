@@ -1962,17 +1962,17 @@
 "kind": "anim",
 "ref": "c6eminent",
 "mode": "anim",
-"hold": 12.2,
+"hold": 12.35,
 "n": 146,
 "captions": []
 },
 {
 "ch": 6,
-"at": 1550.15,
+"at": 1550.3,
 "kind": "anim",
 "ref": "c6farmers",
 "mode": "anim",
-"hold": 6.65,
+"hold": 6.5,
 "n": 147,
 "captions": []
 },

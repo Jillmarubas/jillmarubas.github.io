@@ -872,7 +872,7 @@ export const C2Crane: React.FC<AnimProps> = ({f, t0}) => {
           )}
           {docK > 0 &&
             Array.from({length: 20}, (_, i) => <rect key={i} x={700 + i * 26} y={405} width={20} height={26} rx={4} fill={ease(f, w(487.9) + i * 1.2, 4) > 0.5 ? P.yellow : '#2A3B7A'} opacity={Math.min(1, docK)} />)}
-          <T x={1240} y={430} size={40} anchor="start" o={ease(f, w(488.0), 8) * Math.min(1, docK)}>20 years</T>
+          <T x={680} y={432} size={40} anchor="end" o={ease(f, w(488.0), 8) * Math.min(1, docK)}>20 years</T>
         </World>
       </Cam>
       <Lbl f={f} at={w(485.15)} title="September 2024" bg={P.yellow} />
@@ -1262,7 +1262,7 @@ export const C2Street: React.FC<AnimProps> = ({f, t0}) => {
 /* ================================================================== 571.07 Boxtown: refineries, a steel mill, trucks; high asthma rates */
 export const C2Pollution: React.FC<AnimProps> = ({f, t0}) => {
   const w = (a: number) => at(t0, a);
-  const O: V = [900, 260];
+  const O: V = [900, 300];
   const at2 = (x: number, y: number, z = 0): V => {
     const p = iso(x, y, z);
     return [p[0] + O[0], p[1] + O[1]];
@@ -1270,7 +1270,7 @@ export const C2Pollution: React.FC<AnimProps> = ({f, t0}) => {
   const homes = Array.from({length: 20}, (_, i) => ({x: 200 + (i % 5) * 110, y: 260 + Math.floor(i / 5) * 110})).sort((a, b) => a.x + a.y - (b.x + b.y));
   return (
     <Bg c="#8FD16B" c2="#5DBB4F" angle={180}>
-      <Cam f={f} t0={t0} keys={[[t0, 960, 650, 1.05, -8, 0], [577.6, 960, 640, 0.92, 8, 0]]}>
+      <Cam f={f} t0={t0} keys={[[t0, 960, 590, 0.86, -8, 0], [577.6, 960, 590, 0.8, 8, 0]]}>
         <World>
           {/* highway */}
           <polyline points={pts([at2(-600, 820), at2(1500, 820)])} stroke="#5C5F6E" strokeWidth={70} />
@@ -1284,7 +1284,7 @@ export const C2Pollution: React.FC<AnimProps> = ({f, t0}) => {
             );
           })}
           {/* refinery, steel mill */}
-          <Put x={at2(-180, 320)[0]} y={at2(-180, 320)[1]} s={1.3} f={f} at={w(571.29)}>
+          <Put x={at2(-150, 400)[0]} y={at2(-150, 400)[1]} s={1.3} f={f} at={w(571.29)}>
             <Refinery f={f} />
           </Put>
           <Put x={at2(500, -120)[0]} y={at2(500, -120)[1]} s={1.2} f={f} at={w(571.97)}>
@@ -1303,7 +1303,7 @@ export const C2Pollution: React.FC<AnimProps> = ({f, t0}) => {
             );
           })}
           {/* the turbines site */}
-          <Put x={at2(960, 520)[0]} y={at2(960, 520)[1]} s={0.55}>
+          <Put x={at2(900, 250)[0]} y={at2(900, 250)[1]} s={0.55}>
             <g>
               <rect x={-150} y={-60} width={300} height={120} rx={8} fill="#D5DBE6" />
               {[0, 1, 2, 3].map((i) => (
@@ -1313,13 +1313,13 @@ export const C2Pollution: React.FC<AnimProps> = ({f, t0}) => {
               ))}
             </g>
           </Put>
-          <STag x={at2(-180, 320)[0]} y={at2(-180, 320)[1] + 80} text="Refineries" size={32} k={pop(f, w(571.29), 12)} />
+          <STag x={at2(-150, 400)[0]} y={at2(-150, 400)[1] + 80} text="Refineries" size={32} k={pop(f, w(571.29), 12)} />
           <STag x={at2(500, -120)[0]} y={at2(500, -120)[1] + 110} text="A steel mill" size={32} k={pop(f, w(571.97), 12)} />
-          <STag x={at2(500, 820)[0]} y={at2(500, 820)[1] + 70} text="Heavy truck traffic" size={32} k={pop(f, w(572.71), 12)} />
-          <STag x={at2(960, 520)[0]} y={at2(960, 520)[1] + 90} text="xAI turbines" size={30} bg={P.ink} color={P.white} k={pop(f, w(571.6), 12)} />
+          <STag x={at2(300, 820)[0]} y={at2(300, 820)[1] - 70} text="Heavy truck traffic" size={32} k={pop(f, w(572.71), 12)} />
+          <STag x={at2(900, 250)[0]} y={at2(900, 250)[1] + 90} text="xAI turbines" size={30} bg={P.ink} color={P.white} k={pop(f, w(571.6), 12)} />
         </World>
       </Cam>
-      <Lbl f={f} at={0} title="Boxtown, South Memphis" sub="a historically Black community" bg={P.ink} color={P.white} subC={P.ink} />
+      <Lbl f={f} at={0} title="Boxtown, South Memphis" sub="a historically Black community" bg={P.ink} color={P.white} subC={P.ink} right />
       <Cap f={f} at={w(574.31)} dark>The county already struggled with high asthma rates</Cap>
     </Bg>
   );
