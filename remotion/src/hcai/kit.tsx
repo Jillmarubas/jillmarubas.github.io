@@ -12,7 +12,7 @@ export const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as co
 const glide = Easing.bezier(0.33, 0, 0.15, 1);
 export const settle = (x: number) => (x <= 0 ? 0 : x >= 1 ? 1 : glide(x));
 export const inOut = Easing.bezier(0.45, 0, 0.2, 1);
-export const e01 = (f: number, a: number, d: number, ease: (x: number) => number = inOut) => interpolate(f, [a, a + d], [0, 1], {...clamp, easing: ease});
+export const e01 = (f: number, a: number, d: number, ease: (x: number) => number = inOut) => (d > 0 ? interpolate(f, [a, a + d], [0, 1], {...clamp, easing: ease}) : f >= a ? 1 : 0);
 
 type Asset = {id: string; type: string; src: string; w: number; h: number; credit: string; name?: string; role?: string};
 const A = ASSETS as unknown as Record<string, Asset>;

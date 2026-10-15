@@ -53,9 +53,10 @@ else: print("%s frames" % d.get("framesRendered"))' "$P")
         rm -f "$OUTDIR/part$i.mp4"
         for n in 1 2 3 4 5 6 7 8; do curl -sS --retry 4 -C - -o "$OUTDIR/part$i.mp4" "${BASES[$i]}/out.mp4" && break; echo "part$i download resume $n"; sleep $((n * 3)); done
         DONE[$i]=1; left=$((left - 1)); echo "part$i saved" ;;
-      fail*) echo "part$i $S"; exit 1 ;;
+      fail*) echo "part$i $S"; DONE[$i]=1; left=$((left - 1)); FAILED="${FAILED:-} $i" ;;  # keep saving the others
       *) echo "part$i $S" ;;
     esac
   done
 done
+[ -z "${FAILED:-}" ] || { echo "failed parts:$FAILED"; exit 1; }
 echo "all parts saved in $OUTDIR"

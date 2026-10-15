@@ -61,6 +61,10 @@ for ci, ch in enumerate(T['chapters']):
                     night['ups'].append({'at': fr(b['t'] - night['start']), 'o': o})
                     continue
                 if name == 'chat' and o.get('mode') != 'mini' and not (cur and cur['kind'] == 'board' and cur['ref'] == 'chat'):
+                    if o.get('mode') == 'answer' and not o.get('text'):  # an answer screen shows the question just asked, already sent
+                        asked = [x for x in beats if x['kind'] == 'x:chat' and x.get('text') and x['t'] < b['t']]
+                        if asked:
+                            o = {**o, 'text': str(asked[-1]['text'])}
                     night = {'ch': ci, 'start': b['t'] - 0.15, 'end': ch['end'], 'ups': [{'at': fr(0.15), 'o': o}]}
                     nights.append(night)
                     continue

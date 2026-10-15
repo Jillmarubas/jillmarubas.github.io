@@ -152,7 +152,7 @@ const TypeScene: React.FC<{fm: Frame; f: number}> = ({fm, f}) => {
   const lf = f - fr(fm.at) + 6;
   const plain = fm.ref.replace(/\*/g, '');
   const num = fm.kind === 'n';
-  const size = num ? Math.min(260, typeSize(plain.length) * 1.2) : typeSize(plain.length);
+  const size = num ? Math.min(260, typeSize(plain.length) * 1.2, 1500 / (0.56 * plain.length)) : typeSize(plain.length); // a long number line stays inside the frame
   // words with their accent (an *accent* can span several words)
   const words: {w: string; hot: boolean}[] = [];
   let hot = false;
@@ -172,7 +172,7 @@ const TypeScene: React.FC<{fm: Frame; f: number}> = ({fm, f}) => {
     <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', transform: `scale(${drift})`}}>
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       {num ? (
-        <div style={{fontFamily: F.display, fontWeight: 900, fontSize: size, color: C.hum, letterSpacing: '-0.02em', lineHeight: 1, opacity: e01(lf, 0, 8), transform: `translateY(${(1 - settle(lf / 14)) * 50}px)`, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap'}}>
+        <div style={{fontFamily: F.display, fontWeight: 900, fontSize: size, color: C.hum, letterSpacing: '-0.02em', lineHeight: 1, opacity: e01(lf, 0, 8), transform: `translateY(${(1 - settle(lf / 14)) * 50}px)`, fontVariantNumeric: 'tabular-nums', maxWidth: 1560, textAlign: 'center'}}>
           <Count text={plain} f={lf} />
         </div>
       ) : (

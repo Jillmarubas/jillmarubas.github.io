@@ -35,7 +35,7 @@ export const Chat: React.FC<BoardProps> = ({f, ups}) => {
   const blinkOnly = ups[0].o.mode === 'blink';
   const night = !mini;
   const typeStart = t0 + 10;
-  const typed = blinkOnly ? 0 : Math.floor(interpolate(f, [typeStart, typeStart + text.length * 2.2], [0, text.length], clamp));
+  const typed = blinkOnly || !text.length ? 0 : Math.floor(interpolate(f, [typeStart, typeStart + text.length * 2.2], [0, text.length], clamp));
   const ansAt = firstAt(ups, (u) => u.o.mode === 'answer');
   const sent = ansAt > 0 && f >= ansAt - 18;
   const answer = ups.find((u) => u.o.answer)?.o.answer ?? 'Here are three easy ideas: a quick vegetable stir-fry, a one-pan lemon chicken, or pasta with garlic and spinach.';
@@ -494,7 +494,7 @@ export const Split: React.FC<BoardProps> = ({f, ups}) => {
 export const Quote: React.FC<BoardProps> = ({f, ups}) => {
   const text = ups[0].o.text ?? '';
   const by = ups[0].o.by ?? '';
-  const n = Math.floor(interpolate(f, [8, 8 + text.length * 1.6], [0, text.length], clamp));
+  const n = text.length ? Math.floor(interpolate(f, [8, 8 + text.length * 1.6], [0, text.length], clamp)) : 0;
   return (
     <div style={{position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 220px'}}>
       <div style={{fontFamily: F.display, fontWeight: 900, fontSize: 150, color: C.hum, lineHeight: 0.6, opacity: e01(f, 0, 8)}}>“</div>
@@ -528,13 +528,16 @@ export const Pay: React.FC<BoardProps> = ({f, ups}) => {
       </div>
     </>
   );
+  // Sama and the workers start centred; the frame glides right as the client comes in on the left
   return (
     <div style={{position: 'absolute', inset: 0}}>
+      <div style={{position: 'absolute', inset: 0, transform: `translateX(${-(X[2] - X[1]) / 2 * (1 - k2)}px)`}}>
       {box('OpenAI', 'client', X[0], k2)}
       {box('Sama', 'outsourcing firm', X[1], Math.max(k1, k2))}
       {box('Workers', 'Nairobi, Kenya', X[2], k1, true)}
       {flow(X[0], X[1], '~$12.50', 'per hour · contract', k2)}
       {flow(X[1], X[2], '$1.32–$2', 'per hour · take-home', k1, true)}
+      </div>
       <Mono size={16} style={{position: 'absolute', left: 0, right: 0, bottom: 170, textAlign: 'center'}}>
         Source · TIME, Billy Perrigo (January 2023)
       </Mono>
