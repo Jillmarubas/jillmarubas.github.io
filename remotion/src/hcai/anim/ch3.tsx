@@ -834,7 +834,7 @@ export const C3Gallons: React.FC<AnimProps> = ({f, t0}) => {
         </div>
       </Cam>
       <Label f={f} at={w(740.5)} title="2021 · The Dalles" sub="what Google's data centres used" bg={P.ink} color={P.white} />
-      <div style={{position: 'absolute', right: 80, top: 60, textAlign: 'right', background: 'rgba(11,22,56,0.82)', borderRadius: 30, padding: '24px 36px', opacity: ease(f, w(744.3), 8)}}>
+      <div style={{position: 'absolute', left: 80, bottom: 70, textAlign: 'left', background: 'rgba(11,22,56,0.85)', borderRadius: 30, padding: '24px 36px', opacity: ease(f, w(744.3), 8)}}>
         <Counter f={f} start={w(744.6)} dur={36} to={355000000} size={104} color={P.yellow} />
         <div style={{fontFamily: AF.head, fontWeight: 700, fontSize: 40, color: P.white, opacity: ease(f, w(746.63), 8)}}>gallons of water in one year</div>
         <Note style={{marginTop: 8, opacity: ease(f, w(747.0), 8)}} size={20}>
@@ -1216,6 +1216,7 @@ export const C3Growth: React.FC<AnimProps> = ({f, t0}) => {
                 );
               })}
             </svg>
+            <div style={{position: 'absolute', inset: 0, opacity: ease(f, w(832.3), 8)}}>
             <Bars
               f={f}
               style={{left: 560, top: 250}}
@@ -1227,6 +1228,7 @@ export const C3Growth: React.FC<AnimProps> = ({f, t0}) => {
                 {label: 'Google', value: 20, at: w(837.03), color: P.yellow, text: '+~20%'},
               ]}
             />
+            </div>
           </div>
           <Label f={f} at={w(828.46)} title="2022: water consumption vs 2021" sub="the year AI started to explode" bg={P.white} />
           <Caption f={f} at={w(838.95)} source="AP News, 9 Sep 2023">
@@ -1475,19 +1477,19 @@ export const C3People: React.FC<AnimProps> = ({f, t0}) => {
   const shirts = [P.yellow, P.pink, P.teal, P.orange, P.sky, P.purple];
   return (
     <Bg c={P.night}>
-      <Cam f={f} t0={t0} keys={[[t0, 960, 540, 1.15, 0, 0], [899.3, 1000, 540, 1.2, 0, 0], [901.7, 1060, 540, 0.62, 0, 0], [905.4, 1060, 540, 0.56, 0, 0]]}>
+      <Cam f={f} t0={t0} keys={[[t0, 900, 540, 1.15, 0, 0], [898.9, 920, 540, 1.2, 0, 0], [899.6, 1000, 540, 1.2, 0, 0], [901.7, 1060, 540, 0.66, 0, 0], [905.4, 1060, 540, 0.6, 0, 0]]}>
         <World>
           {/* millions of people: rings spreading out from the first one */}
           {many > 0 &&
             Array.from({length: 74 * 32}, (_, i) => {
               const c = (i % 74) - 37, r = Math.floor(i / 74) - 16;
-              const x = 1110 + c * 64, y = 560 + r * 84;
+              const x = 1110 + c * 92, y = 560 + r * 118;
               const d = Math.hypot(c, r * 1.3) / 40;
               if (d > many || (c === 0 && r === 0)) return null;
-              const fill = grey > 0 ? `rgba(124,138,168,${lerp(1, 0.45, grey)})` : shirts[i % shirts.length];
+              const fill = shirts[i % shirts.length];
               return (
-                <g key={i} transform={`translate(${x},${y})`}>
-                  <circle cy={-22} r={13} fill={grey > 0.5 ? fill : skins[i % skins.length]} />
+                <g key={i} transform={`translate(${x},${y}) scale(1.5)`} opacity={lerp(1, 0.3, grey)}>
+                  <circle cy={-22} r={13} fill={skins[i % skins.length]} />
                   <rect x={-17} y={-6} width={34} height={36} rx={14} fill={fill} />
                 </g>
               );
