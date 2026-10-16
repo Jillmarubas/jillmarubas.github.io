@@ -1,0 +1,6469 @@
+[
+{
+"ch": 0,
+"line": 0,
+"t": 1.2999999999999998,
+"kind": "clear"
+},
+{
+"ch": 0,
+"line": 0,
+"t": 1.65,
+"kind": "x:chat",
+"mode": "type",
+"text": "What should I make for dinner?",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 0,
+"t": 1.65,
+"kind": "s",
+"ref": "key"
+},
+{
+"ch": 0,
+"line": 2,
+"t": 6.43,
+"kind": "s",
+"ref": "enter"
+},
+{
+"ch": 0,
+"line": 3,
+"t": 10.73,
+"kind": "x:chat",
+"mode": "answer",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 4,
+"t": 12.39,
+"kind": "t",
+"ref": "*Nothing.*"
+},
+{
+"ch": 0,
+"line": 4,
+"t": 13.61,
+"kind": "c",
+"ref": "feather"
+},
+{
+"ch": 0,
+"line": 4,
+"t": 14.55,
+"kind": "c",
+"ref": "mute"
+},
+{
+"ch": 0,
+"line": 4,
+"t": 17.25,
+"kind": "c",
+"ref": "cloud_puff"
+},
+{
+"ch": 0,
+"line": 5,
+"t": 18.099999999999998,
+"kind": "clear"
+},
+{
+"ch": 0,
+"line": 5,
+"t": 18.45,
+"kind": "s",
+"ref": "sting"
+},
+{
+"ch": 0,
+"line": 5,
+"t": 18.45,
+"kind": "p",
+"ref": "dc_campus"
+},
+{
+"ch": 0,
+"line": 6,
+"t": 20.17,
+"kind": "p",
+"ref": "dc_roof"
+},
+{
+"ch": 0,
+"line": 7,
+"t": 21.36,
+"kind": "clear"
+},
+{
+"ch": 0,
+"line": 7,
+"t": 21.71,
+"kind": "k",
+"ref": "THE DALLES, OREGON · POP. ~16,000"
+},
+{
+"ch": 0,
+"line": 7,
+"t": 21.83,
+"kind": "n",
+"ref": "2021"
+},
+{
+"ch": 0,
+"line": 7,
+"t": 23.21,
+"kind": "c",
+"ref": "newspaper"
+},
+{
+"ch": 0,
+"line": 7,
+"t": 24.35,
+"kind": "p",
+"ref": "dalles"
+},
+{
+"ch": 0,
+"line": 8,
+"t": 26.47,
+"kind": "c",
+"ref": "faucet"
+},
+{
+"ch": 0,
+"line": 8,
+"t": 27.05,
+"kind": "l",
+"ref": "google"
+},
+{
+"ch": 0,
+"line": 9,
+"t": 28.41,
+"kind": "p",
+"ref": "dalles_cityhall"
+},
+{
+"ch": 0,
+"line": 9,
+"t": 28.85,
+"kind": "t",
+"ref": "*No comment.*"
+},
+{
+"ch": 0,
+"line": 10,
+"t": 31.23,
+"kind": "p",
+"ref": "courthouse"
+},
+{
+"ch": 0,
+"line": 10,
+"t": 31.23,
+"kind": "s",
+"ref": "gavel"
+},
+{
+"ch": 0,
+"line": 11,
+"t": 31.85,
+"kind": "c",
+"ref": "newspaper"
+},
+{
+"ch": 0,
+"line": 11,
+"t": 32.93,
+"kind": "t",
+"ref": "vs."
+},
+{
+"ch": 0,
+"line": 11,
+"t": 34.53,
+"kind": "p",
+"ref": "googleplex"
+},
+{
+"ch": 0,
+"line": 12,
+"t": 36.577,
+"kind": "c",
+"ref": "water_glass"
+},
+{
+"ch": 0,
+"line": 13,
+"t": 37.09,
+"kind": "t",
+"ref": "Hold that thought."
+},
+{
+"ch": 0,
+"line": 14,
+"t": 40.0,
+"kind": "clear"
+},
+{
+"ch": 0,
+"line": 14,
+"t": 40.35,
+"kind": "x:map",
+"view": "world",
+"pins": "nairobi:on",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 14,
+"t": 41.77,
+"kind": "x:map",
+"pins": "the_dalles:Oregon",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 15,
+"t": 43.11,
+"kind": "p",
+"ref": "nairobi_skyline"
+},
+{
+"ch": 0,
+"line": 15,
+"t": 43.61,
+"kind": "x:map",
+"pins": "nairobi:Nairobi",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 15,
+"t": 46.45,
+"kind": "n",
+"ref": "<$2/hr"
+},
+{
+"ch": 0,
+"line": 15,
+"t": 48.35,
+"kind": "c",
+"ref": "laptop_dark"
+},
+{
+"ch": 0,
+"line": 16,
+"t": 56.35,
+"kind": "x:map",
+"pins": "tmi:Pennsylvania",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 16,
+"t": 59.33,
+"kind": "p",
+"ref": "tmi"
+},
+{
+"ch": 0,
+"line": 16,
+"t": 60.89,
+"kind": "c",
+"ref": "cooling_tower_cut"
+},
+{
+"ch": 0,
+"line": 17,
+"t": 62.45,
+"kind": "p",
+"ref": "boxtown"
+},
+{
+"ch": 0,
+"line": 17,
+"t": 63.17,
+"kind": "x:map",
+"pins": "memphis:Memphis",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 17,
+"t": 64.67,
+"kind": "t",
+"ref": "*Never asked.*"
+},
+{
+"ch": 0,
+"line": 18,
+"t": 67.31,
+"kind": "x:map",
+"pins": "dublin:Dublin,taiwan:Taiwan,congo:Congo",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 19,
+"t": 68.22,
+"kind": "clear"
+},
+{
+"ch": 0,
+"line": 19,
+"t": 69.19,
+"kind": "x:bill",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 20,
+"t": 70.54,
+"kind": "clear"
+},
+{
+"ch": 0,
+"line": 20,
+"t": 72.59,
+"kind": "x:chain",
+"links": "power,water,metal,hands",
+"show": "0",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 20,
+"t": 73.61,
+"kind": "x:chain",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 20,
+"t": 74.31,
+"kind": "x:chain",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 20,
+"t": 74.63,
+"kind": "x:chain",
+"show": "3",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 20,
+"t": 75.31,
+"kind": "x:chain",
+"show": "4",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 21,
+"t": 79.73,
+"kind": "x:chain",
+"links": "power,water,metal,hands",
+"ref": ""
+},
+{
+"ch": 0,
+"line": 22,
+"t": 81.80000000000001,
+"kind": "clear"
+},
+{
+"ch": 0,
+"line": 22,
+"t": 83.67,
+"kind": "c",
+"ref": "question_mark"
+},
+{
+"ch": 0,
+"line": 23,
+"t": 88.53,
+"kind": "t",
+"ref": "What does *ONE* question cost?"
+},
+{
+"ch": 0,
+"line": 23,
+"t": 90.83,
+"kind": "s",
+"ref": "sting_title"
+},
+{
+"ch": 1,
+"line": 0,
+"t": 100.13600000000001,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 0,
+"t": 101.326,
+"kind": "c",
+"ref": "cloud_puff"
+},
+{
+"ch": 1,
+"line": 1,
+"t": 104.366,
+"kind": "c",
+"ref": "billboard"
+},
+{
+"ch": 1,
+"line": 1,
+"t": 105.626,
+"kind": "c",
+"ref": "cloud_soft"
+},
+{
+"ch": 1,
+"line": 1,
+"t": 108.146,
+"kind": "c",
+"ref": "feather"
+},
+{
+"ch": 1,
+"line": 2,
+"t": 109.666,
+"kind": "t",
+"ref": "There is *no* cloud."
+},
+{
+"ch": 1,
+"line": 3,
+"t": 110.41600000000001,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 3,
+"t": 110.966,
+"kind": "p",
+"ref": "dc_ashburn"
+},
+{
+"ch": 1,
+"line": 3,
+"t": 111.306,
+"kind": "c",
+"ref": "concrete"
+},
+{
+"ch": 1,
+"line": 3,
+"t": 112.086,
+"kind": "c",
+"ref": "steel_beam"
+},
+{
+"ch": 1,
+"line": 3,
+"t": 112.986,
+"kind": "c",
+"ref": "copper_wire"
+},
+{
+"ch": 1,
+"line": 3,
+"t": 113.506,
+"kind": "c",
+"ref": "glass_pane"
+},
+{
+"ch": 1,
+"line": 3,
+"t": 114.486,
+"kind": "p",
+"ref": "dc_campus"
+},
+{
+"ch": 1,
+"line": 4,
+"t": 117.406,
+"kind": "x:chat",
+"mode": "mini",
+"text": "What should I make for dinner?",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 5,
+"t": 119.27600000000001,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 5,
+"t": 120.126,
+"kind": "c",
+"ref": "smartphone"
+},
+{
+"ch": 1,
+"line": 5,
+"t": 122.626,
+"kind": "c",
+"ref": "fiber_glow"
+},
+{
+"ch": 1,
+"line": 5,
+"t": 127.126,
+"kind": "p",
+"ref": "street_trench"
+},
+{
+"ch": 1,
+"line": 5,
+"t": 128.346,
+"kind": "p",
+"ref": "highway"
+},
+{
+"ch": 1,
+"line": 5,
+"t": 130.626,
+"kind": "c",
+"ref": "sub_cable"
+},
+{
+"ch": 1,
+"line": 5,
+"t": 133.066,
+"kind": "p",
+"ref": "dc_ashburn"
+},
+{
+"ch": 1,
+"line": 6,
+"t": 133.786,
+"kind": "p",
+"ref": "server_room"
+},
+{
+"ch": 1,
+"line": 6,
+"t": 137.586,
+"kind": "c",
+"ref": "chip"
+},
+{
+"ch": 1,
+"line": 7,
+"t": 137.856,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 7,
+"t": 139.131,
+"kind": "c",
+"ref": "gpu_card"
+},
+{
+"ch": 1,
+"line": 7,
+"t": 140.226,
+"kind": "t",
+"ref": "Graphics Processing Unit"
+},
+{
+"ch": 1,
+"line": 7,
+"t": 145.046,
+"kind": "p",
+"ref": "arcade"
+},
+{
+"ch": 1,
+"line": 7,
+"t": 145.906,
+"kind": "c",
+"ref": "explosion"
+},
+{
+"ch": 1,
+"line": 7,
+"t": 146.846,
+"kind": "t",
+"ref": "Shadows."
+},
+{
+"ch": 1,
+"line": 7,
+"t": 148.206,
+"kind": "c",
+"ref": "water_ripple"
+},
+{
+"ch": 1,
+"line": 8,
+"t": 149.826,
+"kind": "p",
+"ref": "lab"
+},
+{
+"ch": 1,
+"line": 8,
+"t": 154.086,
+"kind": "x:grid",
+"label": "1+1 ×1,000,000",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 9,
+"t": 162.046,
+"kind": "c",
+"ref": "abacus"
+},
+{
+"ch": 1,
+"line": 9,
+"t": 163.446,
+"kind": "c",
+"ref": "math_board"
+},
+{
+"ch": 1,
+"line": 9,
+"t": 166.326,
+"kind": "x:grid",
+"label": "all at once",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 10,
+"t": 167.116,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 10,
+"t": 170.106,
+"kind": "l",
+"ref": "nvidia"
+},
+{
+"ch": 1,
+"line": 10,
+"t": 171.011,
+"kind": "c",
+"ref": "h100"
+},
+{
+"ch": 1,
+"line": 10,
+"t": 173.006,
+"kind": "n",
+"ref": "700 W"
+},
+{
+"ch": 1,
+"line": 11,
+"t": 175.146,
+"kind": "k",
+"ref": "1 chip ≈ a small space heater, running nonstop"
+},
+{
+"ch": 1,
+"line": 11,
+"t": 175.486,
+"kind": "c",
+"ref": "space_heater"
+},
+{
+"ch": 1,
+"line": 12,
+"t": 179.666,
+"kind": "x:grid",
+"label": "tens of thousands of chips",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 12,
+"t": 182.186,
+"kind": "p",
+"ref": "crane"
+},
+{
+"ch": 1,
+"line": 12,
+"t": 184.006,
+"kind": "n",
+"ref": "100,000s"
+},
+{
+"ch": 1,
+"line": 13,
+"t": 185.67600000000002,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 13,
+"t": 187.286,
+"kind": "p",
+"ref": "server_aisle"
+},
+{
+"ch": 1,
+"line": 13,
+"t": 188.726,
+"kind": "c",
+"ref": "billboard"
+},
+{
+"ch": 1,
+"line": 14,
+"t": 190.606,
+"kind": "c",
+"ref": "light_bulb"
+},
+{
+"ch": 1,
+"line": 14,
+"t": 193.146,
+"kind": "c",
+"ref": "thermometer"
+},
+{
+"ch": 1,
+"line": 15,
+"t": 194.286,
+"kind": "s",
+"ref": "fans"
+},
+{
+"ch": 1,
+"line": 15,
+"t": 195.366,
+"kind": "p",
+"ref": "hot_aisle"
+},
+{
+"ch": 1,
+"line": 15,
+"t": 198.346,
+"kind": "c",
+"ref": "oven"
+},
+{
+"ch": 1,
+"line": 15,
+"t": 198.346,
+"kind": "s",
+"ref": "oven"
+},
+{
+"ch": 1,
+"line": 15,
+"t": 199.606,
+"kind": "c",
+"ref": "fan"
+},
+{
+"ch": 1,
+"line": 15,
+"t": 203.046,
+"kind": "c",
+"ref": "fan_blades"
+},
+{
+"ch": 1,
+"line": 15,
+"t": 205.046,
+"kind": "c",
+"ref": "ear_muffs"
+},
+{
+"ch": 1,
+"line": 15,
+"t": 205.886,
+"kind": "p",
+"ref": "raised_floor"
+},
+{
+"ch": 1,
+"line": 16,
+"t": 209.506,
+"kind": "c",
+"ref": "speaker_cone"
+},
+{
+"ch": 1,
+"line": 17,
+"t": 210.756,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 17,
+"t": 211.106,
+"kind": "k",
+"ref": "LOUDOUN COUNTY, VIRGINIA · \"DATA CENTER ALLEY\""
+},
+{
+"ch": 1,
+"line": 17,
+"t": 214.106,
+"kind": "x:map",
+"view": "us",
+"pins": "loudoun:Loudoun County",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 18,
+"t": 215.286,
+"kind": "p",
+"ref": "loudoun_dc"
+},
+{
+"ch": 1,
+"line": 18,
+"t": 219.146,
+"kind": "c",
+"ref": "globe"
+},
+{
+"ch": 1,
+"line": 18,
+"t": 221.886,
+"kind": "p",
+"ref": "mall"
+},
+{
+"ch": 1,
+"line": 18,
+"t": 223.446,
+"kind": "p",
+"ref": "suburb"
+},
+{
+"ch": 1,
+"line": 18,
+"t": 224.266,
+"kind": "p",
+"ref": "school"
+},
+{
+"ch": 1,
+"line": 18,
+"t": 225.066,
+"kind": "p",
+"ref": "farmland"
+},
+{
+"ch": 1,
+"line": 19,
+"t": 226.256,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 19,
+"t": 227.166,
+"kind": "t",
+"ref": "Two jobs."
+},
+{
+"ch": 1,
+"line": 20,
+"t": 230.086,
+"kind": "t",
+"ref": "*1.* Training"
+},
+{
+"ch": 1,
+"line": 21,
+"t": 234.586,
+"kind": "c",
+"ref": "router"
+},
+{
+"ch": 1,
+"line": 21,
+"t": 235.546,
+"kind": "c",
+"ref": "books"
+},
+{
+"ch": 1,
+"line": 21,
+"t": 236.006,
+"kind": "c",
+"ref": "newspaper"
+},
+{
+"ch": 1,
+"line": 21,
+"t": 237.146,
+"kind": "c",
+"ref": "code_screen"
+},
+{
+"ch": 1,
+"line": 21,
+"t": 237.246,
+"kind": "c",
+"ref": "speech_bubbles"
+},
+{
+"ch": 1,
+"line": 21,
+"t": 239.766,
+"kind": "c",
+"ref": "calendar"
+},
+{
+"ch": 1,
+"line": 21,
+"t": 241.106,
+"kind": "x:grid",
+"label": "billions of settings",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 21,
+"t": 244.806,
+"kind": "t",
+"ref": "predict the next *word*"
+},
+{
+"ch": 1,
+"line": 22,
+"t": 245.316,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 22,
+"t": 247.066,
+"kind": "p",
+"ref": "factory"
+},
+{
+"ch": 1,
+"line": 22,
+"t": 249.866,
+"kind": "c",
+"ref": "money_stack"
+},
+{
+"ch": 1,
+"line": 23,
+"t": 252.546,
+"kind": "t",
+"ref": "*2.* Inference"
+},
+{
+"ch": 1,
+"line": 24,
+"t": 255.766,
+"kind": "x:chat",
+"mode": "mini",
+"text": "What should I make for dinner?",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 24,
+"t": 258.746,
+"kind": "p",
+"ref": "assembly_line"
+},
+{
+"ch": 1,
+"line": 24,
+"t": 259.946,
+"kind": "c",
+"ref": "speech_bubbles"
+},
+{
+"ch": 1,
+"line": 25,
+"t": 261.476,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 25,
+"t": 262.886,
+"kind": "t",
+"ref": "What changed?"
+},
+{
+"ch": 1,
+"line": 26,
+"t": 265.966,
+"kind": "t",
+"ref": "Training"
+},
+{
+"ch": 1,
+"line": 26,
+"t": 266.946,
+"kind": "x:counter",
+"to": "800000000",
+"label": "weekly ChatGPT users (OpenAI, Oct 2025)",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 26,
+"t": 272.226,
+"kind": "c",
+"ref": "student"
+},
+{
+"ch": 1,
+"line": 26,
+"t": 272.706,
+"kind": "c",
+"ref": "programmer_laptop"
+},
+{
+"ch": 1,
+"line": 26,
+"t": 274.046,
+"kind": "c",
+"ref": "stethoscope"
+},
+{
+"ch": 1,
+"line": 26,
+"t": 276.126,
+"kind": "c",
+"ref": "dinner_plate"
+},
+{
+"ch": 1,
+"line": 27,
+"t": 276.676,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 27,
+"t": 277.526,
+"kind": "c",
+"ref": "water_drop"
+},
+{
+"ch": 1,
+"line": 28,
+"t": 278.506,
+"kind": "x:counter",
+"to": "2500000000",
+"label": "ChatGPT prompts a day (OpenAI, July 2025)",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 29,
+"t": 279.89599999999996,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 29,
+"t": 281.526,
+"kind": "c",
+"ref": "weights"
+},
+{
+"ch": 1,
+"line": 30,
+"t": 283.146,
+"kind": "x:chat",
+"mode": "mini",
+"text": "Write a recipe",
+"ref": ""
+},
+{
+"ch": 1,
+"line": 30,
+"t": 288.006,
+"kind": "c",
+"ref": "photo_frame"
+},
+{
+"ch": 1,
+"line": 30,
+"t": 290.846,
+"kind": "c",
+"ref": "film_reel"
+},
+{
+"ch": 1,
+"line": 30,
+"t": 293.346,
+"kind": "c",
+"ref": "brain_model"
+},
+{
+"ch": 1,
+"line": 30,
+"t": 296.886,
+"kind": "c",
+"ref": "hourglass"
+},
+{
+"ch": 1,
+"line": 30,
+"t": 304.186,
+"kind": "c",
+"ref": "math_board"
+},
+{
+"ch": 1,
+"line": 30,
+"t": 305.266,
+"kind": "c",
+"ref": "chip"
+},
+{
+"ch": 1,
+"line": 30,
+"t": 305.946,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 1,
+"line": 31,
+"t": 306.63599999999997,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 31,
+"t": 308.466,
+"kind": "p",
+"ref": "crane"
+},
+{
+"ch": 1,
+"line": 32,
+"t": 309.726,
+"kind": "k",
+"ref": "STARGATE · ANNOUNCED JANUARY 2025 · UP TO $500 BILLION"
+},
+{
+"ch": 1,
+"line": 32,
+"t": 311.886,
+"kind": "l",
+"ref": "openai"
+},
+{
+"ch": 1,
+"line": 32,
+"t": 312.386,
+"kind": "l",
+"ref": "softbank"
+},
+{
+"ch": 1,
+"line": 32,
+"t": 313.386,
+"kind": "l",
+"ref": "oracle"
+},
+{
+"ch": 1,
+"line": 32,
+"t": 315.506,
+"kind": "t",
+"ref": "Stargate"
+},
+{
+"ch": 1,
+"line": 32,
+"t": 317.626,
+"kind": "n",
+"ref": "up to $500B"
+},
+{
+"ch": 1,
+"line": 32,
+"t": 325.706,
+"kind": "p",
+"ref": "abilene"
+},
+{
+"ch": 1,
+"line": 33,
+"t": 327.766,
+"kind": "n",
+"ref": "$500,000,000,000"
+},
+{
+"ch": 1,
+"line": 33,
+"t": 331.366,
+"kind": "c",
+"ref": "globe"
+},
+{
+"ch": 1,
+"line": 33,
+"t": 334.086,
+"kind": "p",
+"ref": "dc_campus"
+},
+{
+"ch": 1,
+"line": 33,
+"t": 334.306,
+"kind": "c",
+"ref": "chip"
+},
+{
+"ch": 1,
+"line": 33,
+"t": 335.066,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 1,
+"line": 34,
+"t": 335.816,
+"kind": "clear"
+},
+{
+"ch": 1,
+"line": 34,
+"t": 338.086,
+"kind": "c",
+"ref": "chip"
+},
+{
+"ch": 1,
+"line": 34,
+"t": 339.086,
+"kind": "c",
+"ref": "power_plug"
+},
+{
+"ch": 1,
+"line": 34,
+"t": 342.526,
+"kind": "c",
+"ref": "thermometer"
+},
+{
+"ch": 1,
+"line": 35,
+"t": 346.306,
+"kind": "t",
+"ref": "Two things."
+},
+{
+"ch": 1,
+"line": 36,
+"t": 347.206,
+"kind": "c",
+"ref": "lightning"
+},
+{
+"ch": 1,
+"line": 36,
+"t": 350.026,
+"kind": "c",
+"ref": "thermometer"
+},
+{
+"ch": 1,
+"line": 37,
+"t": 353.726,
+"kind": "t",
+"ref": "This is where it gets *strange*."
+},
+{
+"ch": 2,
+"line": 0,
+"t": 358.91799999999995,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 0,
+"t": 359.268,
+"kind": "k",
+"ref": "SOURCE · IEA, ENERGY AND AI (2025)"
+},
+{
+"ch": 2,
+"line": 0,
+"t": 359.388,
+"kind": "n",
+"ref": "2024"
+},
+{
+"ch": 2,
+"line": 0,
+"t": 360.748,
+"kind": "p",
+"ref": "dc_campus"
+},
+{
+"ch": 2,
+"line": 0,
+"t": 362.248,
+"kind": "n",
+"ref": "415 TWh"
+},
+{
+"ch": 2,
+"line": 1,
+"t": 368.888,
+"kind": "t",
+"ref": "Let's make it real."
+},
+{
+"ch": 2,
+"line": 2,
+"t": 369.738,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 2,
+"t": 370.528,
+"kind": "x:globe",
+"pct": "1.5",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 2,
+"t": 375.728,
+"kind": "x:globe",
+"light": "1",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 3,
+"t": 378.608,
+"kind": "t",
+"ref": "Growing *fast*."
+},
+{
+"ch": 2,
+"line": 4,
+"t": 380.888,
+"kind": "l",
+"ref": "iea"
+},
+{
+"ch": 2,
+"line": 4,
+"t": 382.388,
+"kind": "x:bars",
+"set": "twh",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 4,
+"t": 385.188,
+"kind": "x:bars",
+"set": "twh",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 5,
+"t": 388.128,
+"kind": "k",
+"ref": "2030 DATA CENTERS ≈ ALL OF JAPAN'S ELECTRICITY TODAY"
+},
+{
+"ch": 2,
+"line": 5,
+"t": 388.708,
+"kind": "x:bars",
+"set": "twh",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 5,
+"t": 392.028,
+"kind": "x:bars",
+"set": "twh",
+"show": "3",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 5,
+"t": 392.028,
+"kind": "p",
+"ref": "tokyo"
+},
+{
+"ch": 2,
+"line": 5,
+"t": 395.148,
+"kind": "t",
+"ref": "The driver: *AI*."
+},
+{
+"ch": 2,
+"line": 6,
+"t": 396.518,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 6,
+"t": 396.868,
+"kind": "k",
+"ref": "SOURCE · LAWRENCE BERKELEY NATIONAL LAB (2024)"
+},
+{
+"ch": 2,
+"line": 6,
+"t": 397.328,
+"kind": "x:map",
+"view": "us",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 6,
+"t": 399.484,
+"kind": "n",
+"ref": "4.4%"
+},
+{
+"ch": 2,
+"line": 6,
+"t": 404.788,
+"kind": "p",
+"ref": "lbnl2"
+},
+{
+"ch": 2,
+"line": 6,
+"t": 406.648,
+"kind": "n",
+"ref": "up to 12%"
+},
+{
+"ch": 2,
+"line": 7,
+"t": 409.618,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 7,
+"t": 410.508,
+"kind": "p",
+"ref": "dublin_night"
+},
+{
+"ch": 2,
+"line": 8,
+"t": 412.488,
+"kind": "k",
+"ref": "SOURCE · CSO IRELAND (2023)"
+},
+{
+"ch": 2,
+"line": 8,
+"t": 412.628,
+"kind": "x:map",
+"view": "europe",
+"pins": "dublin:Ireland",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 8,
+"t": 414.548,
+"kind": "n",
+"ref": "21%"
+},
+{
+"ch": 2,
+"line": 8,
+"t": 420.288,
+"kind": "p",
+"ref": "dublin_homes"
+},
+{
+"ch": 2,
+"line": 9,
+"t": 423.148,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 2,
+"line": 9,
+"t": 424.548,
+"kind": "p",
+"ref": "dublin_dc"
+},
+{
+"ch": 2,
+"line": 9,
+"t": 426.548,
+"kind": "t",
+"ref": "*Paused.*"
+},
+{
+"ch": 2,
+"line": 10,
+"t": 429.798,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 10,
+"t": 430.828,
+"kind": "t",
+"ref": "The problem."
+},
+{
+"ch": 2,
+"line": 11,
+"t": 434.868,
+"kind": "p",
+"ref": "power_plant"
+},
+{
+"ch": 2,
+"line": 11,
+"t": 437.428,
+"kind": "c",
+"ref": "moon"
+},
+{
+"ch": 2,
+"line": 11,
+"t": 439.938,
+"kind": "c",
+"ref": "alarm_clock"
+},
+{
+"ch": 2,
+"line": 11,
+"t": 443.288,
+"kind": "c",
+"ref": "leaf"
+},
+{
+"ch": 2,
+"line": 12,
+"t": 444.078,
+"kind": "p",
+"ref": "solar"
+},
+{
+"ch": 2,
+"line": 12,
+"t": 444.078,
+"kind": "s",
+"ref": "wind_turbine"
+},
+{
+"ch": 2,
+"line": 12,
+"t": 445.068,
+"kind": "c",
+"ref": "moon"
+},
+{
+"ch": 2,
+"line": 12,
+"t": 445.848,
+"kind": "p",
+"ref": "wind_farm"
+},
+{
+"ch": 2,
+"line": 13,
+"t": 450.348,
+"kind": "t",
+"ref": "Clean. Always on."
+},
+{
+"ch": 2,
+"line": 14,
+"t": 453.438,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 14,
+"t": 453.788,
+"kind": "s",
+"ref": "tv_static"
+},
+{
+"ch": 2,
+"line": 14,
+"t": 453.788,
+"kind": "k",
+"ref": "MARCH 28, 1979 · THREE MILE ISLAND, PENNSYLVANIA"
+},
+{
+"ch": 2,
+"line": 14,
+"t": 455.388,
+"kind": "n",
+"ref": "1979"
+},
+{
+"ch": 2,
+"line": 14,
+"t": 457.448,
+"kind": "p",
+"ref": "tmi_1979"
+},
+{
+"ch": 2,
+"line": 14,
+"t": 460.208,
+"kind": "p",
+"ref": "tmi_control"
+},
+{
+"ch": 2,
+"line": 14,
+"t": 462.088,
+"kind": "p",
+"ref": "tmi_carter"
+},
+{
+"ch": 2,
+"line": 14,
+"t": 463.948,
+"kind": "p",
+"ref": "tmi"
+},
+{
+"ch": 2,
+"line": 14,
+"t": 465.728,
+"kind": "c",
+"ref": "cooling_tower_cut"
+},
+{
+"ch": 2,
+"line": 15,
+"t": 469.308,
+"kind": "t",
+"ref": "Unit 2: never ran again."
+},
+{
+"ch": 2,
+"line": 16,
+"t": 472.108,
+"kind": "t",
+"ref": "Unit 1"
+},
+{
+"ch": 2,
+"line": 16,
+"t": 474.908,
+"kind": "n",
+"ref": "40 years"
+},
+{
+"ch": 2,
+"line": 16,
+"t": 476.208,
+"kind": "n",
+"ref": "2019"
+},
+{
+"ch": 2,
+"line": 16,
+"t": 479.388,
+"kind": "t",
+"ref": "Not unsafe."
+},
+{
+"ch": 2,
+"line": 16,
+"t": 481.428,
+"kind": "c",
+"ref": "money_stack"
+},
+{
+"ch": 2,
+"line": 17,
+"t": 483.768,
+"kind": "p",
+"ref": "tmi_quiet"
+},
+{
+"ch": 2,
+"line": 18,
+"t": 485.428,
+"kind": "n",
+"ref": "Sept 2024"
+},
+{
+"ch": 2,
+"line": 18,
+"t": 486.888,
+"kind": "l",
+"ref": "microsoft"
+},
+{
+"ch": 2,
+"line": 18,
+"t": 487.898,
+"kind": "n",
+"ref": "20-year deal"
+},
+{
+"ch": 2,
+"line": 18,
+"t": 491.508,
+"kind": "c",
+"ref": "power_switch"
+},
+{
+"ch": 2,
+"line": 19,
+"t": 492.608,
+"kind": "k",
+"ref": "THREE MILE ISLAND UNIT 1 → RENAMED \"CRANE CLEAN ENERGY CENTER\""
+},
+{
+"ch": 2,
+"line": 19,
+"t": 496.368,
+"kind": "p",
+"ref": "tmi"
+},
+{
+"ch": 2,
+"line": 19,
+"t": 498.648,
+"kind": "t",
+"ref": "to help power *AI*"
+},
+{
+"ch": 2,
+"line": 20,
+"t": 500.208,
+"kind": "l",
+"ref": "microsoft"
+},
+{
+"ch": 2,
+"line": 20,
+"t": 502.098,
+"kind": "l",
+"ref": "google"
+},
+{
+"ch": 2,
+"line": 20,
+"t": 503.948,
+"kind": "p",
+"ref": "smr"
+},
+{
+"ch": 2,
+"line": 20,
+"t": 506.228,
+"kind": "l",
+"ref": "amazon"
+},
+{
+"ch": 2,
+"line": 20,
+"t": 507.908,
+"kind": "p",
+"ref": "reactor_core"
+},
+{
+"ch": 2,
+"line": 21,
+"t": 510.168,
+"kind": "c",
+"ref": "money_stack"
+},
+{
+"ch": 2,
+"line": 21,
+"t": 513.188,
+"kind": "p",
+"ref": "tmi_quiet"
+},
+{
+"ch": 2,
+"line": 21,
+"t": 516.088,
+"kind": "t",
+"ref": "The size of the *hunger*."
+},
+{
+"ch": 2,
+"line": 22,
+"t": 516.4979999999999,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 22,
+"t": 518.448,
+"kind": "t",
+"ref": "One weakness."
+},
+{
+"ch": 2,
+"line": 23,
+"t": 519.308,
+"kind": "c",
+"ref": "snail"
+},
+{
+"ch": 2,
+"line": 23,
+"t": 521.208,
+"kind": "c",
+"ref": "calendar"
+},
+{
+"ch": 2,
+"line": 23,
+"t": 522.808,
+"kind": "n",
+"ref": "10+ years"
+},
+{
+"ch": 2,
+"line": 24,
+"t": 524.508,
+"kind": "c",
+"ref": "stopwatch"
+},
+{
+"ch": 2,
+"line": 25,
+"t": 527.058,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 25,
+"t": 527.408,
+"kind": "k",
+"ref": "MEMPHIS, TENNESSEE · 2024"
+},
+{
+"ch": 2,
+"line": 25,
+"t": 530.748,
+"kind": "t",
+"ref": "xAI"
+},
+{
+"ch": 2,
+"line": 25,
+"t": 532.708,
+"kind": "p",
+"ref": "factory"
+},
+{
+"ch": 2,
+"line": 25,
+"t": 535.688,
+"kind": "p",
+"ref": "supercomputer"
+},
+{
+"ch": 2,
+"line": 25,
+"t": 538.328,
+"kind": "t",
+"ref": "Colossus"
+},
+{
+"ch": 2,
+"line": 25,
+"t": 540.008,
+"kind": "h",
+"ref": "musk"
+},
+{
+"ch": 2,
+"line": 25,
+"t": 541.708,
+"kind": "n",
+"ref": "~4 months"
+},
+{
+"ch": 2,
+"line": 26,
+"t": 544.108,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 2,
+"line": 27,
+"t": 546.148,
+"kind": "t",
+"ref": "So they brought their *own*."
+},
+{
+"ch": 2,
+"line": 28,
+"t": 547.048,
+"kind": "s",
+"ref": "turbines"
+},
+{
+"ch": 2,
+"line": 28,
+"t": 547.248,
+"kind": "c",
+"ref": "gas_turbine"
+},
+{
+"ch": 2,
+"line": 28,
+"t": 549.308,
+"kind": "c",
+"ref": "generator"
+},
+{
+"ch": 2,
+"line": 28,
+"t": 550.548,
+"kind": "c",
+"ref": "gas_flame"
+},
+{
+"ch": 2,
+"line": 28,
+"t": 553.088,
+"kind": "c",
+"ref": "generator"
+},
+{
+"ch": 2,
+"line": 29,
+"t": 554.068,
+"kind": "k",
+"ref": "SOURCE · SOUTHERN ENVIRONMENTAL LAW CENTER (2025)"
+},
+{
+"ch": 2,
+"line": 29,
+"t": 554.148,
+"kind": "t",
+"ref": "Southern Environmental Law Center"
+},
+{
+"ch": 2,
+"line": 29,
+"t": 555.808,
+"kind": "x:icons",
+"n": "35",
+"asset": "generator",
+"label": "~35 gas turbines counted from aerial images",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 30,
+"t": 559.578,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 30,
+"t": 560.748,
+"kind": "p",
+"ref": "boxtown"
+},
+{
+"ch": 2,
+"line": 31,
+"t": 564.168,
+"kind": "x:map",
+"view": "us",
+"pins": "memphis:South Memphis",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 31,
+"t": 566.908,
+"kind": "p",
+"ref": "boxtown2"
+},
+{
+"ch": 2,
+"line": 31,
+"t": 570.188,
+"kind": "p",
+"ref": "smokestack"
+},
+{
+"ch": 2,
+"line": 31,
+"t": 571.288,
+"kind": "p",
+"ref": "refinery"
+},
+{
+"ch": 2,
+"line": 31,
+"t": 572.148,
+"kind": "p",
+"ref": "steel_mill"
+},
+{
+"ch": 2,
+"line": 31,
+"t": 572.848,
+"kind": "c",
+"ref": "semi_truck"
+},
+{
+"ch": 2,
+"line": 31,
+"t": 576.108,
+"kind": "c",
+"ref": "inhaler"
+},
+{
+"ch": 2,
+"line": 32,
+"t": 578.648,
+"kind": "t",
+"ref": "NOx"
+},
+{
+"ch": 2,
+"line": 32,
+"t": 581.548,
+"kind": "c",
+"ref": "lungs"
+},
+{
+"ch": 2,
+"line": 32,
+"t": 583.348,
+"kind": "c",
+"ref": "child_inhaler"
+},
+{
+"ch": 2,
+"line": 33,
+"t": 585.528,
+"kind": "s",
+"ref": "meeting"
+},
+{
+"ch": 2,
+"line": 33,
+"t": 586.208,
+"kind": "x:people",
+"n": "45",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 33,
+"t": 588.728,
+"kind": "c",
+"ref": "tv"
+},
+{
+"ch": 2,
+"line": 33,
+"t": 590.268,
+"kind": "t",
+"ref": "Shelby County Health Department"
+},
+{
+"ch": 2,
+"line": 33,
+"t": 591.688,
+"kind": "c",
+"ref": "stamp"
+},
+{
+"ch": 2,
+"line": 33,
+"t": 591.688,
+"kind": "s",
+"ref": "stamp"
+},
+{
+"ch": 2,
+"line": 33,
+"t": 592.608,
+"kind": "n",
+"ref": "15 turbines permitted"
+},
+{
+"ch": 2,
+"line": 34,
+"t": 594.748,
+"kind": "t",
+"ref": "xAI says:"
+},
+{
+"ch": 2,
+"line": 34,
+"t": 596.508,
+"kind": "t",
+"ref": "pollution controls"
+},
+{
+"ch": 2,
+"line": 34,
+"t": 599.108,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 2,
+"line": 34,
+"t": 600.328,
+"kind": "c",
+"ref": "hard_hat"
+},
+{
+"ch": 2,
+"line": 35,
+"t": 602.438,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 35,
+"t": 604.088,
+"kind": "t",
+"ref": "Both can be true."
+},
+{
+"ch": 2,
+"line": 35,
+"t": 606.848,
+"kind": "t",
+"ref": "That's what makes it *hard*."
+},
+{
+"ch": 2,
+"line": 36,
+"t": 607.978,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 36,
+"t": 609.408,
+"kind": "c",
+"ref": "globe"
+},
+{
+"ch": 2,
+"line": 37,
+"t": 610.268,
+"kind": "l",
+"ref": "google"
+},
+{
+"ch": 2,
+"line": 37,
+"t": 611.628,
+"kind": "t",
+"ref": "net zero by 2030"
+},
+{
+"ch": 2,
+"line": 37,
+"t": 617.548,
+"kind": "x:bars",
+"set": "ghg",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 37,
+"t": 623.748,
+"kind": "p",
+"ref": "dc_roof"
+},
+{
+"ch": 2,
+"line": 38,
+"t": 626.888,
+"kind": "l",
+"ref": "microsoft"
+},
+{
+"ch": 2,
+"line": 38,
+"t": 628.548,
+"kind": "t",
+"ref": "carbon negative by 2030"
+},
+{
+"ch": 2,
+"line": 38,
+"t": 631.648,
+"kind": "x:bars",
+"set": "ghg",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 39,
+"t": 634.868,
+"kind": "k",
+"ref": "SOURCES · GOOGLE 2024 ENVIRONMENTAL REPORT · MICROSOFT 2024 SUSTAINABILITY REPORT"
+},
+{
+"ch": 2,
+"line": 39,
+"t": 637.328,
+"kind": "t",
+"ref": "Their own reports."
+},
+{
+"ch": 2,
+"line": 40,
+"t": 638.938,
+"kind": "clear"
+},
+{
+"ch": 2,
+"line": 40,
+"t": 639.288,
+"kind": "s",
+"ref": "cooling_tower"
+},
+{
+"ch": 2,
+"line": 40,
+"t": 640.648,
+"kind": "p",
+"ref": "steam_tower"
+},
+{
+"ch": 2,
+"line": 41,
+"t": 644.048,
+"kind": "c",
+"ref": "thermometer"
+},
+{
+"ch": 2,
+"line": 42,
+"t": 647.128,
+"kind": "c",
+"ref": "water_drop"
+},
+{
+"ch": 2,
+"line": 43,
+"t": 650.388,
+"kind": "x:map",
+"view": "us",
+"pins": "the_dalles:The Dalles",
+"ref": ""
+},
+{
+"ch": 2,
+"line": 43,
+"t": 652.028,
+"kind": "c",
+"ref": "gavel"
+},
+{
+"ch": 3,
+"line": 0,
+"t": 657.005,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 0,
+"t": 658.735,
+"kind": "c",
+"ref": "sun"
+},
+{
+"ch": 3,
+"line": 1,
+"t": 659.575,
+"kind": "c",
+"ref": "sweat"
+},
+{
+"ch": 3,
+"line": 1,
+"t": 661.215,
+"kind": "c",
+"ref": "steam"
+},
+{
+"ch": 3,
+"line": 1,
+"t": 665.635,
+"kind": "c",
+"ref": "ice_cube"
+},
+{
+"ch": 3,
+"line": 2,
+"t": 667.215,
+"kind": "p",
+"ref": "dc_roof"
+},
+{
+"ch": 3,
+"line": 3,
+"t": 670.0849999999999,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 3,
+"t": 671.435,
+"kind": "x:cool",
+"step": "1",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 3,
+"t": 672.395,
+"kind": "x:cool",
+"step": "2",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 3,
+"t": 674.695,
+"kind": "x:cool",
+"step": "3",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 3,
+"t": 677.675,
+"kind": "x:cool",
+"step": "4",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 4,
+"t": 681.975,
+"kind": "t",
+"ref": "Here's the important part."
+},
+{
+"ch": 3,
+"line": 5,
+"t": 685.635,
+"kind": "p",
+"ref": "columbia"
+},
+{
+"ch": 3,
+"line": 5,
+"t": 687.435,
+"kind": "p",
+"ref": "dalles"
+},
+{
+"ch": 3,
+"line": 5,
+"t": 688.275,
+"kind": "c",
+"ref": "steam"
+},
+{
+"ch": 3,
+"line": 5,
+"t": 693.555,
+"kind": "t",
+"ref": "water *consumption*"
+},
+{
+"ch": 3,
+"line": 5,
+"t": 695.455,
+"kind": "t",
+"ref": "not just water use"
+},
+{
+"ch": 3,
+"line": 6,
+"t": 695.685,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 6,
+"t": 697.395,
+"kind": "t",
+"ref": "A hidden layer."
+},
+{
+"ch": 3,
+"line": 6,
+"t": 698.655,
+"kind": "p",
+"ref": "coal_plant"
+},
+{
+"ch": 3,
+"line": 6,
+"t": 700.535,
+"kind": "p",
+"ref": "dc_campus"
+},
+{
+"ch": 3,
+"line": 6,
+"t": 703.155,
+"kind": "c",
+"ref": "cooling_tower_cut"
+},
+{
+"ch": 3,
+"line": 6,
+"t": 705.375,
+"kind": "t",
+"ref": "AI drinks *twice*"
+},
+{
+"ch": 3,
+"line": 6,
+"t": 708.795,
+"kind": "p",
+"ref": "power_plant"
+},
+{
+"ch": 3,
+"line": 7,
+"t": 709.485,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 7,
+"t": 709.835,
+"kind": "s",
+"ref": "drips"
+},
+{
+"ch": 3,
+"line": 7,
+"t": 710.975,
+"kind": "p",
+"ref": "dalles"
+},
+{
+"ch": 3,
+"line": 8,
+"t": 711.275,
+"kind": "p",
+"ref": "google_dalles"
+},
+{
+"ch": 3,
+"line": 8,
+"t": 714.595,
+"kind": "p",
+"ref": "dalles_dam"
+},
+{
+"ch": 3,
+"line": 8,
+"t": 716.875,
+"kind": "c",
+"ref": "thermometer"
+},
+{
+"ch": 3,
+"line": 8,
+"t": 717.895,
+"kind": "t",
+"ref": "A perfect place."
+},
+{
+"ch": 3,
+"line": 9,
+"t": 719.915,
+"kind": "n",
+"ref": "2021"
+},
+{
+"ch": 3,
+"line": 9,
+"t": 722.835,
+"kind": "c",
+"ref": "water_tap"
+},
+{
+"ch": 3,
+"line": 9,
+"t": 724.435,
+"kind": "p",
+"ref": "oregonian"
+},
+{
+"ch": 3,
+"line": 9,
+"t": 727.175,
+"kind": "c",
+"ref": "faucet"
+},
+{
+"ch": 3,
+"line": 10,
+"t": 729.855,
+"kind": "t",
+"ref": "TRADE SECRET"
+},
+{
+"ch": 3,
+"line": 10,
+"t": 731.075,
+"kind": "c",
+"ref": "stamp"
+},
+{
+"ch": 3,
+"line": 11,
+"t": 732.475,
+"kind": "c",
+"ref": "gavel"
+},
+{
+"ch": 3,
+"line": 11,
+"t": 732.475,
+"kind": "s",
+"ref": "gavel"
+},
+{
+"ch": 3,
+"line": 12,
+"t": 734.975,
+"kind": "c",
+"ref": "calendar"
+},
+{
+"ch": 3,
+"line": 12,
+"t": 737.175,
+"kind": "n",
+"ref": "late 2022"
+},
+{
+"ch": 3,
+"line": 12,
+"t": 738.875,
+"kind": "c",
+"ref": "documents"
+},
+{
+"ch": 3,
+"line": 13,
+"t": 740.025,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 13,
+"t": 740.375,
+"kind": "k",
+"ref": "2021 · GOOGLE USED ~355 MILLION GALLONS IN THE DALLES"
+},
+{
+"ch": 3,
+"line": 13,
+"t": 740.375,
+"kind": "k",
+"ref": "SOURCE · THE OREGONIAN (2022)"
+},
+{
+"ch": 3,
+"line": 13,
+"t": 744.595,
+"kind": "n",
+"ref": "355M gallons"
+},
+{
+"ch": 3,
+"line": 13,
+"t": 748.975,
+"kind": "x:pie",
+"pct": "29",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 13,
+"t": 753.075,
+"kind": "n",
+"ref": "~3× in 5 years"
+},
+{
+"ch": 3,
+"line": 14,
+"t": 755.335,
+"kind": "x:pie",
+"pct": "29",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 14,
+"t": 757.435,
+"kind": "l",
+"ref": "google"
+},
+{
+"ch": 3,
+"line": 14,
+"t": 760.615,
+"kind": "p",
+"ref": "garden_hose"
+},
+{
+"ch": 3,
+"line": 14,
+"t": 762.155,
+"kind": "t",
+"ref": "They weren't allowed to *know*."
+},
+{
+"ch": 3,
+"line": 15,
+"t": 762.525,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 15,
+"t": 764.015,
+"kind": "l",
+"ref": "google"
+},
+{
+"ch": 3,
+"line": 15,
+"t": 766.715,
+"kind": "p",
+"ref": "water_pipes"
+},
+{
+"ch": 3,
+"line": 15,
+"t": 770.275,
+"kind": "p",
+"ref": "columbia"
+},
+{
+"ch": 3,
+"line": 15,
+"t": 771.955,
+"kind": "t",
+"ref": "Not a desert."
+},
+{
+"ch": 3,
+"line": 16,
+"t": 774.855,
+"kind": "p",
+"ref": "desert"
+},
+{
+"ch": 3,
+"line": 17,
+"t": 776.105,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 17,
+"t": 777.735,
+"kind": "x:map",
+"view": "world",
+"pins": "phoenix:Phoenix:l,texas:Texas,spain:Spain,chile:Chile",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 17,
+"t": 786.495,
+"kind": "p",
+"ref": "dry_lake"
+},
+{
+"ch": 3,
+"line": 18,
+"t": 787.045,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 18,
+"t": 787.395,
+"kind": "k",
+"ref": "MONTEVIDEO, URUGUAY · 2023"
+},
+{
+"ch": 3,
+"line": 18,
+"t": 789.235,
+"kind": "x:map",
+"view": "world",
+"pins": "montevideo:Montevideo",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 18,
+"t": 795.335,
+"kind": "c",
+"ref": "tap_water_glass"
+},
+{
+"ch": 3,
+"line": 18,
+"t": 796.475,
+"kind": "p",
+"ref": "paso_severino"
+},
+{
+"ch": 3,
+"line": 18,
+"t": 799.275,
+"kind": "c",
+"ref": "water_bottle"
+},
+{
+"ch": 3,
+"line": 19,
+"t": 800.335,
+"kind": "s",
+"ref": "protest"
+},
+{
+"ch": 3,
+"line": 19,
+"t": 801.395,
+"kind": "l",
+"ref": "google"
+},
+{
+"ch": 3,
+"line": 19,
+"t": 803.495,
+"kind": "x:people",
+"n": "45",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 19,
+"t": 808.715,
+"kind": "c",
+"ref": "water_bottle"
+},
+{
+"ch": 3,
+"line": 19,
+"t": 812.535,
+"kind": "t",
+"ref": "redesigned: *air cooling*"
+},
+{
+"ch": 3,
+"line": 20,
+"t": 817.935,
+"kind": "x:map",
+"pins": "chile:Santiago:l",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 20,
+"t": 817.935,
+"kind": "p",
+"ref": "santiago"
+},
+{
+"ch": 3,
+"line": 20,
+"t": 818.935,
+"kind": "c",
+"ref": "gavel"
+},
+{
+"ch": 3,
+"line": 20,
+"t": 824.535,
+"kind": "c",
+"ref": "fan"
+},
+{
+"ch": 3,
+"line": 21,
+"t": 824.745,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 21,
+"t": 827.015,
+"kind": "t",
+"ref": "Not just one company."
+},
+{
+"ch": 3,
+"line": 22,
+"t": 828.335,
+"kind": "k",
+"ref": "SOURCE · AP NEWS (2023), COMPANY REPORTS"
+},
+{
+"ch": 3,
+"line": 22,
+"t": 828.455,
+"kind": "x:bars",
+"set": "water",
+"show": "0",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 22,
+"t": 832.475,
+"kind": "x:bars",
+"set": "water",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 22,
+"t": 836.555,
+"kind": "x:bars",
+"set": "water",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 23,
+"t": 842.225,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 23,
+"t": 844.255,
+"kind": "t",
+"ref": "How much water per *answer*?"
+},
+{
+"ch": 3,
+"line": 24,
+"t": 846.405,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 24,
+"t": 847.475,
+"kind": "x:split",
+"show": "0",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 25,
+"t": 848.935,
+"kind": "k",
+"ref": "SOURCE · LI, YANG, ISLAM, REN, \"MAKING AI LESS THIRSTY\" (2023)"
+},
+{
+"ch": 3,
+"line": 25,
+"t": 852.375,
+"kind": "p",
+"ref": "ucr"
+},
+{
+"ch": 3,
+"line": 25,
+"t": 854.935,
+"kind": "x:split",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 25,
+"t": 858.675,
+"kind": "x:split",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 26,
+"t": 861.615,
+"kind": "k",
+"ref": "SOURCE · SAM ALTMAN, \"THE GENTLE SINGULARITY\" (2025)"
+},
+{
+"ch": 3,
+"line": 26,
+"t": 865.135,
+"kind": "h",
+"ref": "altman"
+},
+{
+"ch": 3,
+"line": 26,
+"t": 870.355,
+"kind": "x:split",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 27,
+"t": 871.655,
+"kind": "x:split",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 27,
+"t": 873.575,
+"kind": "x:split",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 28,
+"t": 875.455,
+"kind": "x:split",
+"show": "2",
+"q": "1",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 29,
+"t": 876.455,
+"kind": "s",
+"ref": "sting"
+},
+{
+"ch": 3,
+"line": 30,
+"t": 880.655,
+"kind": "t",
+"ref": "We'll settle it."
+},
+{
+"ch": 3,
+"line": 31,
+"t": 884.475,
+"kind": "clear"
+},
+{
+"ch": 3,
+"line": 31,
+"t": 886.615,
+"kind": "p",
+"ref": "power_plant"
+},
+{
+"ch": 3,
+"line": 31,
+"t": 887.595,
+"kind": "p",
+"ref": "coal_plant"
+},
+{
+"ch": 3,
+"line": 31,
+"t": 888.355,
+"kind": "c",
+"ref": "cooling_tower_cut"
+},
+{
+"ch": 3,
+"line": 31,
+"t": 889.375,
+"kind": "c",
+"ref": "chip"
+},
+{
+"ch": 3,
+"line": 32,
+"t": 891.535,
+"kind": "t",
+"ref": "What surprised me most…"
+},
+{
+"ch": 3,
+"line": 33,
+"t": 898.115,
+"kind": "c",
+"ref": "robot_arm"
+},
+{
+"ch": 3,
+"line": 34,
+"t": 899.455,
+"kind": "c",
+"ref": "hands"
+},
+{
+"ch": 3,
+"line": 35,
+"t": 900.235,
+"kind": "x:people",
+"n": "60",
+"ref": ""
+},
+{
+"ch": 3,
+"line": 36,
+"t": 903.275,
+"kind": "c",
+"ref": "ear"
+},
+{
+"ch": 4,
+"line": 0,
+"t": 908.433,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 0,
+"t": 911.703,
+"kind": "t",
+"ref": "One uncomfortable fact."
+},
+{
+"ch": 4,
+"line": 1,
+"t": 915.243,
+"kind": "c",
+"ref": "router"
+},
+{
+"ch": 4,
+"line": 1,
+"t": 916.403,
+"kind": "t",
+"ref": "*ALL* of the internet."
+},
+{
+"ch": 4,
+"line": 2,
+"t": 918.103,
+"kind": "c",
+"ref": "encyclopedia"
+},
+{
+"ch": 4,
+"line": 2,
+"t": 919.303,
+"kind": "c",
+"ref": "poetry_book"
+},
+{
+"ch": 4,
+"line": 2,
+"t": 920.883,
+"kind": "x:blurtext",
+"word": "hate",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 2,
+"t": 921.843,
+"kind": "x:blurtext",
+"word": "violence",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 2,
+"t": 922.943,
+"kind": "x:blurtext",
+"word": "abuse",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 2,
+"t": 924.643,
+"kind": "p",
+"ref": "dark_alley"
+},
+{
+"ch": 4,
+"line": 3,
+"t": 930.443,
+"kind": "x:blurtext",
+"word": "horrifying",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 3,
+"t": 931.603,
+"kind": "x:blurtext",
+"word": "rants",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 3,
+"t": 932.743,
+"kind": "x:blurtext",
+"word": "threats",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 3,
+"t": 938.143,
+"kind": "t",
+"ref": "…from *us*."
+},
+{
+"ch": 4,
+"line": 4,
+"t": 939.893,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 4,
+"t": 941.803,
+"kind": "t",
+"ref": "The problem."
+},
+{
+"ch": 4,
+"line": 4,
+"t": 942.803,
+"kind": "c",
+"ref": "robot_arm"
+},
+{
+"ch": 4,
+"line": 4,
+"t": 944.483,
+"kind": "x:blurtext",
+"word": "worst",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 4,
+"t": 946.323,
+"kind": "t",
+"ref": "*Refuse.*"
+},
+{
+"ch": 4,
+"line": 5,
+"t": 948.463,
+"kind": "c",
+"ref": "index_cards"
+},
+{
+"ch": 4,
+"line": 6,
+"t": 950.403,
+"kind": "x:labels",
+"n": "1",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 6,
+"t": 954.743,
+"kind": "x:labels",
+"n": "2",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 6,
+"t": 956.163,
+"kind": "x:labels",
+"n": "3",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 6,
+"t": 957.043,
+"kind": "x:labels",
+"n": "4",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 7,
+"t": 958.323,
+"kind": "c",
+"ref": "reading_glasses"
+},
+{
+"ch": 4,
+"line": 8,
+"t": 960.673,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 8,
+"t": 961.023,
+"kind": "k",
+"ref": "NAIROBI, KENYA · LATE 2021"
+},
+{
+"ch": 4,
+"line": 8,
+"t": 961.963,
+"kind": "l",
+"ref": "openai"
+},
+{
+"ch": 4,
+"line": 8,
+"t": 964.943,
+"kind": "t",
+"ref": "Sama"
+},
+{
+"ch": 4,
+"line": 8,
+"t": 968.663,
+"kind": "p",
+"ref": "san_francisco"
+},
+{
+"ch": 4,
+"line": 8,
+"t": 970.383,
+"kind": "p",
+"ref": "nairobi_skyline"
+},
+{
+"ch": 4,
+"line": 8,
+"t": 973.083,
+"kind": "t",
+"ref": "\"ethical AI\""
+},
+{
+"ch": 4,
+"line": 8,
+"t": 976.763,
+"kind": "p",
+"ref": "kibera"
+},
+{
+"ch": 4,
+"line": 9,
+"t": 978.163,
+"kind": "n",
+"ref": "2023"
+},
+{
+"ch": 4,
+"line": 9,
+"t": 979.243,
+"kind": "c",
+"ref": "magnifier"
+},
+{
+"ch": 4,
+"line": 9,
+"t": 980.163,
+"kind": "l",
+"ref": "time"
+},
+{
+"ch": 4,
+"line": 10,
+"t": 983.233,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 10,
+"t": 983.883,
+"kind": "p",
+"ref": "empty_office"
+},
+{
+"ch": 4,
+"line": 10,
+"t": 985.803,
+"kind": "c",
+"ref": "mortarboard"
+},
+{
+"ch": 4,
+"line": 10,
+"t": 988.003,
+"kind": "x:blurtext",
+"word": "passage",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 10,
+"t": 991.043,
+"kind": "c",
+"ref": "index_cards"
+},
+{
+"ch": 4,
+"line": 11,
+"t": 992.063,
+"kind": "x:blurtext",
+"word": "unreadable",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 12,
+"t": 998.163,
+"kind": "k",
+"ref": "SOURCE · TIME, BILLY PERRIGO (2023)"
+},
+{
+"ch": 4,
+"line": 12,
+"t": 1001.463,
+"kind": "n",
+"ref": "150–250"
+},
+{
+"ch": 4,
+"line": 12,
+"t": 1003.663,
+"kind": "t",
+"ref": "passages per shift"
+},
+{
+"ch": 4,
+"line": 12,
+"t": 1005.133,
+"kind": "c",
+"ref": "clock"
+},
+{
+"ch": 4,
+"line": 13,
+"t": 1006.953,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 13,
+"t": 1007.303,
+"kind": "s",
+"ref": "room_tone"
+},
+{
+"ch": 4,
+"line": 13,
+"t": 1007.303,
+"kind": "c",
+"ref": "office_chair"
+},
+{
+"ch": 4,
+"line": 14,
+"t": 1009.383,
+"kind": "c",
+"ref": "clock"
+},
+{
+"ch": 4,
+"line": 14,
+"t": 1010.403,
+"kind": "c",
+"ref": "monitor"
+},
+{
+"ch": 4,
+"line": 14,
+"t": 1011.343,
+"kind": "x:blurtext",
+"word": "passage",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 14,
+"t": 1013.683,
+"kind": "t",
+"ref": "No skipping."
+},
+{
+"ch": 4,
+"line": 14,
+"t": 1017.603,
+"kind": "c",
+"ref": "eye"
+},
+{
+"ch": 4,
+"line": 14,
+"t": 1018.363,
+"kind": "c",
+"ref": "eye"
+},
+{
+"ch": 4,
+"line": 14,
+"t": 1021.383,
+"kind": "p",
+"ref": "kitchen_table"
+},
+{
+"ch": 4,
+"line": 14,
+"t": 1023.363,
+"kind": "c",
+"ref": "dinner_plate"
+},
+{
+"ch": 4,
+"line": 15,
+"t": 1028.683,
+"kind": "l",
+"ref": "time"
+},
+{
+"ch": 4,
+"line": 15,
+"t": 1031.923,
+"kind": "x:blurtext",
+"word": "visions",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 15,
+"t": 1035.183,
+"kind": "x:quote",
+"text": "That was torture.",
+"by": "Sama worker, to TIME (2023)",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 17,
+"t": 1037.693,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 17,
+"t": 1039.583,
+"kind": "x:pay",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 18,
+"t": 1045.423,
+"kind": "k",
+"ref": "OPENAI → SAMA ~$12.50/HR · SAMA → WORKERS ~$1.32–$2/HR · SOURCE: TIME (2023)"
+},
+{
+"ch": 4,
+"line": 18,
+"t": 1046.243,
+"kind": "x:pay",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 19,
+"t": 1051.7730000000001,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 19,
+"t": 1053.103,
+"kind": "c",
+"ref": "sofa"
+},
+{
+"ch": 4,
+"line": 19,
+"t": 1054.383,
+"kind": "t",
+"ref": "\"rare and not enough\""
+},
+{
+"ch": 4,
+"line": 19,
+"t": 1056.603,
+"kind": "t",
+"ref": "Sama disputes this."
+},
+{
+"ch": 4,
+"line": 20,
+"t": 1060.523,
+"kind": "n",
+"ref": "Feb 2022"
+},
+{
+"ch": 4,
+"line": 20,
+"t": 1062.763,
+"kind": "c",
+"ref": "contract_torn"
+},
+{
+"ch": 4,
+"line": 20,
+"t": 1065.143,
+"kind": "n",
+"ref": "8 months early"
+},
+{
+"ch": 4,
+"line": 21,
+"t": 1067.603,
+"kind": "c",
+"ref": "documents"
+},
+{
+"ch": 4,
+"line": 22,
+"t": 1068.7730000000001,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 22,
+"t": 1069.343,
+"kind": "n",
+"ref": "2023"
+},
+{
+"ch": 4,
+"line": 22,
+"t": 1072.863,
+"kind": "c",
+"ref": "petition"
+},
+{
+"ch": 4,
+"line": 22,
+"t": 1074.483,
+"kind": "p",
+"ref": "kenya_parliament"
+},
+{
+"ch": 4,
+"line": 22,
+"t": 1077.223,
+"kind": "c",
+"ref": "law_book"
+},
+{
+"ch": 4,
+"line": 22,
+"t": 1082.143,
+"kind": "c",
+"ref": "hazard_sign"
+},
+{
+"ch": 4,
+"line": 22,
+"t": 1084.323,
+"kind": "c",
+"ref": "chemical_barrel"
+},
+{
+"ch": 4,
+"line": 23,
+"t": 1086.763,
+"kind": "c",
+"ref": "monitor"
+},
+{
+"ch": 4,
+"line": 23,
+"t": 1091.483,
+"kind": "p",
+"ref": "nairobi_court"
+},
+{
+"ch": 4,
+"line": 23,
+"t": 1093.923,
+"kind": "t",
+"ref": "PTSD"
+},
+{
+"ch": 4,
+"line": 24,
+"t": 1096.9730000000002,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 24,
+"t": 1100.843,
+"kind": "t",
+"ref": "\"ghost work\""
+},
+{
+"ch": 4,
+"line": 24,
+"t": 1104.743,
+"kind": "c",
+"ref": "robot_arm"
+},
+{
+"ch": 4,
+"line": 24,
+"t": 1107.983,
+"kind": "t",
+"ref": "kept *out of sight*"
+},
+{
+"ch": 4,
+"line": 25,
+"t": 1109.143,
+"kind": "l",
+"ref": "openai"
+},
+{
+"ch": 4,
+"line": 25,
+"t": 1113.103,
+"kind": "c",
+"ref": "padlock"
+},
+{
+"ch": 4,
+"line": 25,
+"t": 1116.203,
+"kind": "t",
+"ref": "\"did not set the targets\""
+},
+{
+"ch": 4,
+"line": 26,
+"t": 1117.433,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 26,
+"t": 1118.483,
+"kind": "x:chat",
+"mode": "mini",
+"text": "Can you help me?",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 27,
+"t": 1120.323,
+"kind": "x:chat",
+"mode": "answer",
+"answer": "Of course! I'd be glad to help. What do you need?",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 27,
+"t": 1125.703,
+"kind": "t",
+"ref": "It's *taught*."
+},
+{
+"ch": 4,
+"line": 28,
+"t": 1126.313,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 28,
+"t": 1128.663,
+"kind": "t",
+"ref": "reinforcement learning from *human* feedback"
+},
+{
+"ch": 4,
+"line": 28,
+"t": 1134.583,
+"kind": "x:rank",
+"show": "0",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 28,
+"t": 1135.823,
+"kind": "x:rank",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 28,
+"t": 1136.943,
+"kind": "x:rank",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 28,
+"t": 1138.003,
+"kind": "x:rank",
+"show": "3",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 28,
+"t": 1139.383,
+"kind": "x:people",
+"n": "60",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 28,
+"t": 1141.903,
+"kind": "c",
+"ref": "thumbs_up"
+},
+{
+"ch": 4,
+"line": 29,
+"t": 1142.933,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 29,
+"t": 1143.503,
+"kind": "t",
+"ref": "\"please\""
+},
+{
+"ch": 4,
+"line": 29,
+"t": 1144.683,
+"kind": "t",
+"ref": "\"I'm sorry, I can't help with that.\""
+},
+{
+"ch": 4,
+"line": 29,
+"t": 1149.123,
+"kind": "c",
+"ref": "hands"
+},
+{
+"ch": 4,
+"line": 30,
+"t": 1152.063,
+"kind": "p",
+"ref": "call_center"
+},
+{
+"ch": 4,
+"line": 31,
+"t": 1154.023,
+"kind": "k",
+"ref": "SOURCE · REUTERS (JUNE 2025)"
+},
+{
+"ch": 4,
+"line": 31,
+"t": 1155.533,
+"kind": "t",
+"ref": "Scale AI"
+},
+{
+"ch": 4,
+"line": 31,
+"t": 1160.183,
+"kind": "l",
+"ref": "meta"
+},
+{
+"ch": 4,
+"line": 31,
+"t": 1161.263,
+"kind": "n",
+"ref": "$14B+"
+},
+{
+"ch": 4,
+"line": 32,
+"t": 1164.073,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 32,
+"t": 1165.943,
+"kind": "x:map",
+"view": "world",
+"pins": "nairobi:Kenya,manila:Philippines,india:India,caracas:Venezuela",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 32,
+"t": 1171.763,
+"kind": "c",
+"ref": "coins"
+},
+{
+"ch": 4,
+"line": 33,
+"t": 1175.023,
+"kind": "l",
+"ref": "wapo"
+},
+{
+"ch": 4,
+"line": 33,
+"t": 1176.883,
+"kind": "p",
+"ref": "manila"
+},
+{
+"ch": 4,
+"line": 33,
+"t": 1183.333,
+"kind": "t",
+"ref": "Remotasks"
+},
+{
+"ch": 4,
+"line": 33,
+"t": 1186.543,
+"kind": "t",
+"ref": "far below *minimum wage*"
+},
+{
+"ch": 4,
+"line": 33,
+"t": 1188.963,
+"kind": "c",
+"ref": "stamp"
+},
+{
+"ch": 4,
+"line": 34,
+"t": 1190.123,
+"kind": "n",
+"ref": "2024"
+},
+{
+"ch": 4,
+"line": 34,
+"t": 1194.163,
+"kind": "c",
+"ref": "letter"
+},
+{
+"ch": 4,
+"line": 34,
+"t": 1194.863,
+"kind": "p",
+"ref": "white_house"
+},
+{
+"ch": 4,
+"line": 34,
+"t": 1199.543,
+"kind": "t",
+"ref": "\"modern-day slavery\""
+},
+{
+"ch": 4,
+"line": 35,
+"t": 1200.4530000000002,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 35,
+"t": 1202.043,
+"kind": "t",
+"ref": "The picture is changing."
+},
+{
+"ch": 4,
+"line": 35,
+"t": 1205.003,
+"kind": "c",
+"ref": "stethoscope"
+},
+{
+"ch": 4,
+"line": 35,
+"t": 1205.803,
+"kind": "c",
+"ref": "law_book"
+},
+{
+"ch": 4,
+"line": 35,
+"t": 1206.243,
+"kind": "c",
+"ref": "microscope"
+},
+{
+"ch": 4,
+"line": 35,
+"t": 1213.503,
+"kind": "t",
+"ref": "lives changed for the better"
+},
+{
+"ch": 4,
+"line": 36,
+"t": 1215.353,
+"kind": "x:tiers",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 36,
+"t": 1216.823,
+"kind": "x:tiers",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 36,
+"t": 1218.483,
+"kind": "x:tiers",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 37,
+"t": 1224.2930000000001,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 37,
+"t": 1227.923,
+"kind": "c",
+"ref": "money_stack"
+},
+{
+"ch": 4,
+"line": 37,
+"t": 1228.743,
+"kind": "n",
+"ref": "$ billions"
+},
+{
+"ch": 4,
+"line": 37,
+"t": 1230.303,
+"kind": "p",
+"ref": "stock_ticker"
+},
+{
+"ch": 4,
+"line": 38,
+"t": 1235.103,
+"kind": "p",
+"ref": "nairobi_night"
+},
+{
+"ch": 4,
+"line": 38,
+"t": 1236.083,
+"kind": "c",
+"ref": "alarm_clock"
+},
+{
+"ch": 4,
+"line": 39,
+"t": 1236.893,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 39,
+"t": 1239.123,
+"kind": "x:chain",
+"links": "power,water,metal,hands",
+"hot": "3",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 40,
+"t": 1241.783,
+"kind": "x:chat",
+"mode": "mini",
+"text": "…",
+"ref": ""
+},
+{
+"ch": 4,
+"line": 40,
+"t": 1243.383,
+"kind": "p",
+"ref": "dc_campus"
+},
+{
+"ch": 4,
+"line": 40,
+"t": 1244.863,
+"kind": "c",
+"ref": "chip"
+},
+{
+"ch": 4,
+"line": 41,
+"t": 1245.573,
+"kind": "clear"
+},
+{
+"ch": 4,
+"line": 41,
+"t": 1245.923,
+"kind": "s",
+"ref": "digging"
+},
+{
+"ch": 4,
+"line": 41,
+"t": 1246.143,
+"kind": "c",
+"ref": "rock"
+},
+{
+"ch": 5,
+"line": 0,
+"t": 1251.65,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 0,
+"t": 1252.0,
+"kind": "s",
+"ref": "sand"
+},
+{
+"ch": 5,
+"line": 0,
+"t": 1253.34,
+"kind": "c",
+"ref": "sand"
+},
+{
+"ch": 5,
+"line": 1,
+"t": 1254.96,
+"kind": "c",
+"ref": "silicon"
+},
+{
+"ch": 5,
+"line": 1,
+"t": 1255.88,
+"kind": "c",
+"ref": "furnace"
+},
+{
+"ch": 5,
+"line": 1,
+"t": 1260.08,
+"kind": "c",
+"ref": "ingot"
+},
+{
+"ch": 5,
+"line": 1,
+"t": 1263.14,
+"kind": "c",
+"ref": "wafer"
+},
+{
+"ch": 5,
+"line": 1,
+"t": 1265.58,
+"kind": "p",
+"ref": "cleanroom"
+},
+{
+"ch": 5,
+"line": 1,
+"t": 1267.1,
+"kind": "c",
+"ref": "die_shot"
+},
+{
+"ch": 5,
+"line": 1,
+"t": 1272.02,
+"kind": "c",
+"ref": "hair"
+},
+{
+"ch": 5,
+"line": 2,
+"t": 1272.67,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 2,
+"t": 1276.04,
+"kind": "p",
+"ref": "fab"
+},
+{
+"ch": 5,
+"line": 2,
+"t": 1277.2,
+"kind": "x:map",
+"view": "asia",
+"pins": "taiwan:Taiwan",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 3,
+"t": 1278.2,
+"kind": "k",
+"ref": "TSMC · TAIWAN"
+},
+{
+"ch": 5,
+"line": 3,
+"t": 1281.012,
+"kind": "l",
+"ref": "tsmc"
+},
+{
+"ch": 5,
+"line": 3,
+"t": 1282.22,
+"kind": "n",
+"ref": "~90% of advanced chips"
+},
+{
+"ch": 5,
+"line": 3,
+"t": 1286.88,
+"kind": "c",
+"ref": "gpu_card"
+},
+{
+"ch": 5,
+"line": 4,
+"t": 1287.8100000000002,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 4,
+"t": 1291.9,
+"kind": "c",
+"ref": "water_drop"
+},
+{
+"ch": 5,
+"line": 4,
+"t": 1292.65,
+"kind": "c",
+"ref": "lab_water"
+},
+{
+"ch": 5,
+"line": 4,
+"t": 1293.62,
+"kind": "c",
+"ref": "wafer"
+},
+{
+"ch": 5,
+"line": 5,
+"t": 1295.91,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 5,
+"t": 1296.26,
+"kind": "k",
+"ref": "TAIWAN · 2021"
+},
+{
+"ch": 5,
+"line": 5,
+"t": 1296.3,
+"kind": "n",
+"ref": "2021"
+},
+{
+"ch": 5,
+"line": 5,
+"t": 1299.38,
+"kind": "p",
+"ref": "taiwan_drought"
+},
+{
+"ch": 5,
+"line": 5,
+"t": 1301.8,
+"kind": "p",
+"ref": "tw_reservoir2"
+},
+{
+"ch": 5,
+"line": 5,
+"t": 1302.98,
+"kind": "p",
+"ref": "rice_paddy"
+},
+{
+"ch": 5,
+"line": 5,
+"t": 1307.1,
+"kind": "p",
+"ref": "fab"
+},
+{
+"ch": 5,
+"line": 5,
+"t": 1308.88,
+"kind": "c",
+"ref": "tanker_truck"
+},
+{
+"ch": 5,
+"line": 6,
+"t": 1316.5,
+"kind": "s",
+"ref": "trucks"
+},
+{
+"ch": 5,
+"line": 6,
+"t": 1318.1,
+"kind": "x:map",
+"view": "asia",
+"pins": "taiwan:Taiwan",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 7,
+"t": 1318.45,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 7,
+"t": 1321.06,
+"kind": "x:strait",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 7,
+"t": 1327.84,
+"kind": "c",
+"ref": "oil_barrel"
+},
+{
+"ch": 5,
+"line": 8,
+"t": 1328.6100000000001,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 8,
+"t": 1329.92,
+"kind": "c",
+"ref": "gallium"
+},
+{
+"ch": 5,
+"line": 9,
+"t": 1331.06,
+"kind": "k",
+"ref": "SOURCE · USGS"
+},
+{
+"ch": 5,
+"line": 9,
+"t": 1331.12,
+"kind": "c",
+"ref": "gallium"
+},
+{
+"ch": 5,
+"line": 9,
+"t": 1331.88,
+"kind": "c",
+"ref": "germanium"
+},
+{
+"ch": 5,
+"line": 9,
+"t": 1335.18,
+"kind": "x:map",
+"view": "asia",
+"pins": "china:China",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 9,
+"t": 1338.42,
+"kind": "n",
+"ref": "~98%"
+},
+{
+"ch": 5,
+"line": 10,
+"t": 1341.12,
+"kind": "k",
+"ref": "NOTE · THE US BAN WAS SUSPENDED FROM NOV 2025 TO NOV 2026"
+},
+{
+"ch": 5,
+"line": 10,
+"t": 1341.24,
+"kind": "n",
+"ref": "2023"
+},
+{
+"ch": 5,
+"line": 10,
+"t": 1342.94,
+"kind": "c",
+"ref": "padlock"
+},
+{
+"ch": 5,
+"line": 10,
+"t": 1345.64,
+"kind": "n",
+"ref": "Dec 2024"
+},
+{
+"ch": 5,
+"line": 10,
+"t": 1347.12,
+"kind": "t",
+"ref": "BANNED → US"
+},
+{
+"ch": 5,
+"line": 10,
+"t": 1353.12,
+"kind": "c",
+"ref": "chess"
+},
+{
+"ch": 5,
+"line": 11,
+"t": 1355.25,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 11,
+"t": 1355.96,
+"kind": "c",
+"ref": "copper_wire"
+},
+{
+"ch": 5,
+"line": 11,
+"t": 1356.96,
+"kind": "p",
+"ref": "copper_spools"
+},
+{
+"ch": 5,
+"line": 11,
+"t": 1359.36,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 5,
+"line": 11,
+"t": 1360.78,
+"kind": "p",
+"ref": "battery_bank"
+},
+{
+"ch": 5,
+"line": 11,
+"t": 1366.44,
+"kind": "c",
+"ref": "cobalt_ore"
+},
+{
+"ch": 5,
+"line": 11,
+"t": 1367.16,
+"kind": "c",
+"ref": "lithium"
+},
+{
+"ch": 5,
+"line": 12,
+"t": 1367.73,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 12,
+"t": 1368.08,
+"kind": "s",
+"ref": "digging"
+},
+{
+"ch": 5,
+"line": 12,
+"t": 1368.2,
+"kind": "n",
+"ref": "~70%"
+},
+{
+"ch": 5,
+"line": 12,
+"t": 1372.5,
+"kind": "x:map",
+"view": "africa",
+"pins": "kinshasa:DR Congo",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 12,
+"t": 1374.62,
+"kind": "l",
+"ref": "amnesty"
+},
+{
+"ch": 5,
+"line": 12,
+"t": 1375.92,
+"kind": "p",
+"ref": "cobalt_mine"
+},
+{
+"ch": 5,
+"line": 12,
+"t": 1377.8,
+"kind": "p",
+"ref": "mine_pit"
+},
+{
+"ch": 5,
+"line": 13,
+"t": 1379.0500000000002,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 13,
+"t": 1380.46,
+"kind": "t",
+"ref": "To be fair:"
+},
+{
+"ch": 5,
+"line": 13,
+"t": 1383.0,
+"kind": "c",
+"ref": "smartphone"
+},
+{
+"ch": 5,
+"line": 13,
+"t": 1384.04,
+"kind": "c",
+"ref": "ev"
+},
+{
+"ch": 5,
+"line": 13,
+"t": 1388.44,
+"kind": "c",
+"ref": "lithium"
+},
+{
+"ch": 5,
+"line": 13,
+"t": 1390.44,
+"kind": "p",
+"ref": "battery_bank"
+},
+{
+"ch": 5,
+"line": 13,
+"t": 1392.88,
+"kind": "x:chain",
+"links": "power,water,metal,hands",
+"hot": "2",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 14,
+"t": 1393.71,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 14,
+"t": 1394.06,
+"kind": "s",
+"ref": "ewaste"
+},
+{
+"ch": 5,
+"line": 14,
+"t": 1394.64,
+"kind": "p",
+"ref": "ewaste"
+},
+{
+"ch": 5,
+"line": 15,
+"t": 1396.98,
+"kind": "c",
+"ref": "chip"
+},
+{
+"ch": 5,
+"line": 15,
+"t": 1399.04,
+"kind": "c",
+"ref": "gpu_card"
+},
+{
+"ch": 5,
+"line": 15,
+"t": 1403.36,
+"kind": "p",
+"ref": "ewaste"
+},
+{
+"ch": 5,
+"line": 16,
+"t": 1404.24,
+"kind": "k",
+"ref": "SOURCE · WANG ET AL., NATURE COMPUTATIONAL SCIENCE (2024)"
+},
+{
+"ch": 5,
+"line": 16,
+"t": 1404.32,
+"kind": "n",
+"ref": "2024"
+},
+{
+"ch": 5,
+"line": 16,
+"t": 1407.0,
+"kind": "t",
+"ref": "Nature Computational Science"
+},
+{
+"ch": 5,
+"line": 16,
+"t": 1411.91,
+"kind": "n",
+"ref": "1.2–5 million tonnes"
+},
+{
+"ch": 5,
+"line": 17,
+"t": 1416.38,
+"kind": "k",
+"ref": "5 MILLION TONNES ≈ ~500 EIFFEL TOWERS"
+},
+{
+"ch": 5,
+"line": 17,
+"t": 1418.26,
+"kind": "x:eiffel",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 17,
+"t": 1420.42,
+"kind": "p",
+"ref": "ewaste"
+},
+{
+"ch": 5,
+"line": 18,
+"t": 1421.27,
+"kind": "clear"
+},
+{
+"ch": 5,
+"line": 18,
+"t": 1424.64,
+"kind": "x:map",
+"view": "world",
+"pins": "the_dalles:Oregon",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 18,
+"t": 1425.54,
+"kind": "x:map",
+"pins": "nairobi:Kenya",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 18,
+"t": 1426.28,
+"kind": "x:map",
+"pins": "taiwan:Taiwan",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 18,
+"t": 1427.22,
+"kind": "x:map",
+"pins": "kinshasa:Congo",
+"ref": ""
+},
+{
+"ch": 5,
+"line": 19,
+"t": 1430.42,
+"kind": "t",
+"ref": "Here it stops being *far away*."
+},
+{
+"ch": 6,
+"line": 0,
+"t": 1435.383,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 0,
+"t": 1437.833,
+"kind": "x:bill",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 0,
+"t": 1439.693,
+"kind": "p",
+"ref": "power_plant"
+},
+{
+"ch": 6,
+"line": 0,
+"t": 1441.113,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 6,
+"line": 0,
+"t": 1441.893,
+"kind": "p",
+"ref": "substation"
+},
+{
+"ch": 6,
+"line": 1,
+"t": 1445.893,
+"kind": "x:people",
+"n": "40",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 2,
+"t": 1449.173,
+"kind": "x:bill",
+"circle": "1",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 2,
+"t": 1449.173,
+"kind": "s",
+"ref": "pen"
+},
+{
+"ch": 6,
+"line": 3,
+"t": 1449.7030000000002,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 3,
+"t": 1450.053,
+"kind": "k",
+"ref": "PJM · THE GRID SERVING ~65 MILLION PEOPLE"
+},
+{
+"ch": 6,
+"line": 3,
+"t": 1453.288,
+"kind": "x:pjm",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 3,
+"t": 1455.913,
+"kind": "n",
+"ref": "65 million people"
+},
+{
+"ch": 6,
+"line": 3,
+"t": 1462.753,
+"kind": "p",
+"ref": "loudoun_dc"
+},
+{
+"ch": 6,
+"line": 4,
+"t": 1465.933,
+"kind": "c",
+"ref": "auction_gavel"
+},
+{
+"ch": 6,
+"line": 4,
+"t": 1469.213,
+"kind": "p",
+"ref": "power_plant"
+},
+{
+"ch": 6,
+"line": 5,
+"t": 1469.9830000000002,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 5,
+"t": 1470.333,
+"kind": "k",
+"ref": "$28.92 → $269.92 PER MEGAWATT-DAY · SOURCE: PJM (2024)"
+},
+{
+"ch": 6,
+"line": 5,
+"t": 1470.473,
+"kind": "x:bars",
+"set": "pjm",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 5,
+"t": 1475.981,
+"kind": "x:bars",
+"set": "pjm",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 6,
+"t": 1477.403,
+"kind": "n",
+"ref": "~9×"
+},
+{
+"ch": 6,
+"line": 7,
+"t": 1481.793,
+"kind": "t",
+"ref": "independent market monitor"
+},
+{
+"ch": 6,
+"line": 7,
+"t": 1483.193,
+"kind": "p",
+"ref": "loudoun_dc"
+},
+{
+"ch": 6,
+"line": 8,
+"t": 1485.633,
+"kind": "n",
+"ref": "2025"
+},
+{
+"ch": 6,
+"line": 8,
+"t": 1488.113,
+"kind": "x:map",
+"view": "us",
+"pins": "ohio:Ohio:l,pa:Pennsylvania:t,maryland:Maryland:b,nj:New Jersey",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 8,
+"t": 1492.053,
+"kind": "x:bill",
+"circle": "1",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 9,
+"t": 1494.603,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 9,
+"t": 1495.773,
+"kind": "p",
+"ref": "ohio_house"
+},
+{
+"ch": 6,
+"line": 9,
+"t": 1497.173,
+"kind": "c",
+"ref": "smartphone"
+},
+{
+"ch": 6,
+"line": 9,
+"t": 1502.533,
+"kind": "p",
+"ref": "crane"
+},
+{
+"ch": 6,
+"line": 9,
+"t": 1503.893,
+"kind": "x:bill",
+"circle": "1",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 10,
+"t": 1504.7830000000001,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 10,
+"t": 1507.333,
+"kind": "p",
+"ref": "md_farm"
+},
+{
+"ch": 6,
+"line": 11,
+"t": 1508.633,
+"kind": "s",
+"ref": "powerline"
+},
+{
+"ch": 6,
+"line": 11,
+"t": 1509.113,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 6,
+"line": 11,
+"t": 1514.833,
+"kind": "p",
+"ref": "loudoun_dc"
+},
+{
+"ch": 6,
+"line": 11,
+"t": 1517.253,
+"kind": "p",
+"ref": "transmission"
+},
+{
+"ch": 6,
+"line": 12,
+"t": 1520.813,
+"kind": "x:map",
+"view": "us",
+"pins": "maryland:Maryland",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 12,
+"t": 1523.753,
+"kind": "n",
+"ref": "~67 miles"
+},
+{
+"ch": 6,
+"line": 12,
+"t": 1526.613,
+"kind": "p",
+"ref": "md_farm"
+},
+{
+"ch": 6,
+"line": 12,
+"t": 1527.493,
+"kind": "p",
+"ref": "forest"
+},
+{
+"ch": 6,
+"line": 12,
+"t": 1530.353,
+"kind": "p",
+"ref": "loudoun_dc"
+},
+{
+"ch": 6,
+"line": 13,
+"t": 1536.693,
+"kind": "p",
+"ref": "old_barn"
+},
+{
+"ch": 6,
+"line": 13,
+"t": 1540.833,
+"kind": "p",
+"ref": "transmission"
+},
+{
+"ch": 6,
+"line": 13,
+"t": 1543.933,
+"kind": "t",
+"ref": "eminent domain"
+},
+{
+"ch": 6,
+"line": 13,
+"t": 1547.213,
+"kind": "c",
+"ref": "fence"
+},
+{
+"ch": 6,
+"line": 13,
+"t": 1549.553,
+"kind": "t",
+"ref": "even if the owner says *no*"
+},
+{
+"ch": 6,
+"line": 14,
+"t": 1550.293,
+"kind": "p",
+"ref": "farmer"
+},
+{
+"ch": 6,
+"line": 14,
+"t": 1554.593,
+"kind": "p",
+"ref": "transmission"
+},
+{
+"ch": 6,
+"line": 15,
+"t": 1556.583,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 15,
+"t": 1559.553,
+"kind": "p",
+"ref": "dc_night"
+},
+{
+"ch": 6,
+"line": 16,
+"t": 1560.753,
+"kind": "s",
+"ref": "hum_night"
+},
+{
+"ch": 6,
+"line": 16,
+"t": 1561.373,
+"kind": "p",
+"ref": "suburb"
+},
+{
+"ch": 6,
+"line": 16,
+"t": 1565.033,
+"kind": "c",
+"ref": "speaker_cone"
+},
+{
+"ch": 6,
+"line": 16,
+"t": 1568.093,
+"kind": "c",
+"ref": "moon"
+},
+{
+"ch": 6,
+"line": 16,
+"t": 1570.413,
+"kind": "t",
+"ref": "a sound you *feel*"
+},
+{
+"ch": 6,
+"line": 16,
+"t": 1574.393,
+"kind": "c",
+"ref": "bed"
+},
+{
+"ch": 6,
+"line": 16,
+"t": 1575.693,
+"kind": "c",
+"ref": "window"
+},
+{
+"ch": 6,
+"line": 17,
+"t": 1577.2230000000002,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 17,
+"t": 1579.133,
+"kind": "c",
+"ref": "envelope_sealed"
+},
+{
+"ch": 6,
+"line": 18,
+"t": 1582.633,
+"kind": "t",
+"ref": "PROJECT ••••••"
+},
+{
+"ch": 6,
+"line": 18,
+"t": 1585.673,
+"kind": "c",
+"ref": "nda"
+},
+{
+"ch": 6,
+"line": 18,
+"t": 1592.373,
+"kind": "c",
+"ref": "stamp"
+},
+{
+"ch": 6,
+"line": 18,
+"t": 1592.373,
+"kind": "s",
+"ref": "stamp"
+},
+{
+"ch": 6,
+"line": 19,
+"t": 1593.2630000000001,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 19,
+"t": 1593.613,
+"kind": "k",
+"ref": "SOURCE · JLARC (2024): $928.6M IN FORGONE SALES TAX, FY2023"
+},
+{
+"ch": 6,
+"line": 19,
+"t": 1597.213,
+"kind": "c",
+"ref": "tax_form"
+},
+{
+"ch": 6,
+"line": 19,
+"t": 1598.713,
+"kind": "x:map",
+"view": "us",
+"pins": "loudoun:Virginia",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 19,
+"t": 1600.193,
+"kind": "t",
+"ref": "JLARC"
+},
+{
+"ch": 6,
+"line": 19,
+"t": 1606.653,
+"kind": "n",
+"ref": "$928.6M"
+},
+{
+"ch": 6,
+"line": 20,
+"t": 1608.343,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 20,
+"t": 1609.433,
+"kind": "t",
+"ref": "What do towns get back?"
+},
+{
+"ch": 6,
+"line": 21,
+"t": 1612.553,
+"kind": "p",
+"ref": "construction_workers"
+},
+{
+"ch": 6,
+"line": 21,
+"t": 1614.573,
+"kind": "c",
+"ref": "hourglass"
+},
+{
+"ch": 6,
+"line": 21,
+"t": 1618.873,
+"kind": "n",
+"ref": "a few dozen jobs"
+},
+{
+"ch": 6,
+"line": 22,
+"t": 1620.2830000000001,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 22,
+"t": 1620.853,
+"kind": "t",
+"ref": "To be fair:"
+},
+{
+"ch": 6,
+"line": 23,
+"t": 1625.393,
+"kind": "c",
+"ref": "tax_form"
+},
+{
+"ch": 6,
+"line": 23,
+"t": 1626.573,
+"kind": "p",
+"ref": "loudoun_sign"
+},
+{
+"ch": 6,
+"line": 23,
+"t": 1633.393,
+"kind": "p",
+"ref": "school"
+},
+{
+"ch": 6,
+"line": 23,
+"t": 1635.533,
+"kind": "c",
+"ref": "arrow_down"
+},
+{
+"ch": 6,
+"line": 24,
+"t": 1637.793,
+"kind": "t",
+"ref": "Some win."
+},
+{
+"ch": 6,
+"line": 24,
+"t": 1639.153,
+"kind": "t",
+"ref": "Some pay."
+},
+{
+"ch": 6,
+"line": 24,
+"t": 1643.273,
+"kind": "t",
+"ref": "…not the people who *decided*."
+},
+{
+"ch": 6,
+"line": 25,
+"t": 1643.7830000000001,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 25,
+"t": 1645.633,
+"kind": "c",
+"ref": "gas_turbine"
+},
+{
+"ch": 6,
+"line": 25,
+"t": 1647.463,
+"kind": "p",
+"ref": "dalles"
+},
+{
+"ch": 6,
+"line": 25,
+"t": 1648.193,
+"kind": "p",
+"ref": "nairobi_skyline"
+},
+{
+"ch": 6,
+"line": 26,
+"t": 1652.273,
+"kind": "c",
+"ref": "globe"
+},
+{
+"ch": 6,
+"line": 26,
+"t": 1654.833,
+"kind": "x:map",
+"view": "world",
+"pins": "memphis:Memphis,the_dalles:The Dalles,nairobi:Nairobi",
+"ref": ""
+},
+{
+"ch": 6,
+"line": 27,
+"t": 1657.2230000000002,
+"kind": "clear"
+},
+{
+"ch": 6,
+"line": 27,
+"t": 1659.933,
+"kind": "t",
+"ref": "The costs."
+},
+{
+"ch": 6,
+"line": 28,
+"t": 1662.553,
+"kind": "t",
+"ref": "The other side."
+},
+{
+"ch": 6,
+"line": 29,
+"t": 1666.613,
+"kind": "t",
+"ref": "Strong answers."
+},
+{
+"ch": 6,
+"line": 29,
+"t": 1668.173,
+"kind": "t",
+"ref": "Some are *true*."
+},
+{
+"ch": 7,
+"line": 0,
+"t": 1673.036,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 0,
+"t": 1673.886,
+"kind": "t",
+"ref": "*1.* One question is tiny."
+},
+{
+"ch": 7,
+"line": 1,
+"t": 1676.626,
+"kind": "k",
+"ref": "SOURCE · SAM ALTMAN (JUNE 2025)"
+},
+{
+"ch": 7,
+"line": 1,
+"t": 1677.766,
+"kind": "h",
+"ref": "altman"
+},
+{
+"ch": 7,
+"line": 1,
+"t": 1681.149,
+"kind": "n",
+"ref": "0.34 Wh"
+},
+{
+"ch": 7,
+"line": 2,
+"t": 1684.486,
+"kind": "k",
+"ref": "1 AI QUESTION ≈ AN OVEN RUNNING FOR ABOUT 1 SECOND"
+},
+{
+"ch": 7,
+"line": 2,
+"t": 1685.186,
+"kind": "c",
+"ref": "oven"
+},
+{
+"ch": 7,
+"line": 2,
+"t": 1686.506,
+"kind": "n",
+"ref": "≈ 1 second"
+},
+{
+"ch": 7,
+"line": 2,
+"t": 1688.311,
+"kind": "c",
+"ref": "led_bulb"
+},
+{
+"ch": 7,
+"line": 2,
+"t": 1690.206,
+"kind": "n",
+"ref": "≈ 2 minutes"
+},
+{
+"ch": 7,
+"line": 3,
+"t": 1690.736,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 3,
+"t": 1691.086,
+"kind": "l",
+"ref": "google"
+},
+{
+"ch": 7,
+"line": 3,
+"t": 1691.086,
+"kind": "k",
+"ref": "SOURCE · GOOGLE (AUGUST 2025)"
+},
+{
+"ch": 7,
+"line": 3,
+"t": 1695.466,
+"kind": "t",
+"ref": "Gemini"
+},
+{
+"ch": 7,
+"line": 3,
+"t": 1697.516,
+"kind": "n",
+"ref": "0.24 Wh"
+},
+{
+"ch": 7,
+"line": 3,
+"t": 1697.516,
+"kind": "n",
+"ref": "0.26 mL"
+},
+{
+"ch": 7,
+"line": 3,
+"t": 1703.306,
+"kind": "x:drops",
+"n": "5",
+"ref": ""
+},
+{
+"ch": 7,
+"line": 3,
+"t": 1707.506,
+"kind": "n",
+"ref": "33× less"
+},
+{
+"ch": 7,
+"line": 4,
+"t": 1709.856,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 4,
+"t": 1710.206,
+"kind": "k",
+"ref": "SOURCE · IEA, G. KAMIYA (2020)"
+},
+{
+"ch": 7,
+"line": 4,
+"t": 1710.846,
+"kind": "x:stack",
+"n": "235",
+"show": "0",
+"ref": ""
+},
+{
+"ch": 7,
+"line": 4,
+"t": 1714.486,
+"kind": "x:stack",
+"show": "1",
+"ref": ""
+},
+{
+"ch": 7,
+"line": 4,
+"t": 1716.886,
+"kind": "x:stack",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 7,
+"line": 5,
+"t": 1718.9160000000002,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 5,
+"t": 1719.546,
+"kind": "t",
+"ref": "*2.* More efficient."
+},
+{
+"ch": 7,
+"line": 6,
+"t": 1724.706,
+"kind": "c",
+"ref": "gpu_card"
+},
+{
+"ch": 7,
+"line": 6,
+"t": 1729.866,
+"kind": "l",
+"ref": "deepseek"
+},
+{
+"ch": 7,
+"line": 6,
+"t": 1735.366,
+"kind": "t",
+"ref": "a fraction of the cost"
+},
+{
+"ch": 7,
+"line": 7,
+"t": 1738.116,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 7,
+"t": 1739.186,
+"kind": "t",
+"ref": "*3.* AI could help fix it."
+},
+{
+"ch": 7,
+"line": 8,
+"t": 1744.006,
+"kind": "k",
+"ref": "SOURCE · DEEPMIND (2016)"
+},
+{
+"ch": 7,
+"line": 8,
+"t": 1746.066,
+"kind": "l",
+"ref": "deepmind"
+},
+{
+"ch": 7,
+"line": 8,
+"t": 1751.786,
+"kind": "n",
+"ref": "up to 40%"
+},
+{
+"ch": 7,
+"line": 8,
+"t": 1755.346,
+"kind": "p",
+"ref": "weather_map"
+},
+{
+"ch": 7,
+"line": 8,
+"t": 1756.786,
+"kind": "c",
+"ref": "lithium"
+},
+{
+"ch": 7,
+"line": 8,
+"t": 1757.886,
+"kind": "c",
+"ref": "crystal"
+},
+{
+"ch": 7,
+"line": 8,
+"t": 1759.606,
+"kind": "p",
+"ref": "control_room"
+},
+{
+"ch": 7,
+"line": 9,
+"t": 1763.646,
+"kind": "p",
+"ref": "solar"
+},
+{
+"ch": 7,
+"line": 9,
+"t": 1764.266,
+"kind": "p",
+"ref": "wind_farm"
+},
+{
+"ch": 7,
+"line": 10,
+"t": 1765.296,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 10,
+"t": 1766.146,
+"kind": "t",
+"ref": "Real points."
+},
+{
+"ch": 7,
+"line": 11,
+"t": 1769.646,
+"kind": "t",
+"ref": "But…"
+},
+{
+"ch": 7,
+"line": 11,
+"t": 1771.026,
+"kind": "t",
+"ref": "It has a *name*."
+},
+{
+"ch": 7,
+"line": 12,
+"t": 1771.736,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 12,
+"t": 1772.086,
+"kind": "k",
+"ref": "1865 · THE JEVONS PARADOX"
+},
+{
+"ch": 7,
+"line": 12,
+"t": 1772.226,
+"kind": "n",
+"ref": "1865"
+},
+{
+"ch": 7,
+"line": 12,
+"t": 1775.386,
+"kind": "h",
+"ref": "jevons"
+},
+{
+"ch": 7,
+"line": 13,
+"t": 1778.726,
+"kind": "p",
+"ref": "steam_engine"
+},
+{
+"ch": 7,
+"line": 13,
+"t": 1778.726,
+"kind": "s",
+"ref": "steam_engine"
+},
+{
+"ch": 7,
+"line": 13,
+"t": 1781.906,
+"kind": "c",
+"ref": "coal"
+},
+{
+"ch": 7,
+"line": 13,
+"t": 1784.446,
+"kind": "p",
+"ref": "uk_industry2"
+},
+{
+"ch": 7,
+"line": 14,
+"t": 1786.926,
+"kind": "t",
+"ref": "Coal use went *up*."
+},
+{
+"ch": 7,
+"line": 15,
+"t": 1789.486,
+"kind": "c",
+"ref": "price_tag"
+},
+{
+"ch": 7,
+"line": 15,
+"t": 1792.446,
+"kind": "x:people",
+"n": "60",
+"ref": ""
+},
+{
+"ch": 7,
+"line": 16,
+"t": 1794.466,
+"kind": "t",
+"ref": "The *Jevons* paradox"
+},
+{
+"ch": 7,
+"line": 17,
+"t": 1795.316,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 17,
+"t": 1796.246,
+"kind": "n",
+"ref": "Jan 2025"
+},
+{
+"ch": 7,
+"line": 17,
+"t": 1798.786,
+"kind": "l",
+"ref": "deepseek"
+},
+{
+"ch": 7,
+"line": 17,
+"t": 1802.366,
+"kind": "h",
+"ref": "nadella"
+},
+{
+"ch": 7,
+"line": 17,
+"t": 1803.126,
+"kind": "x:quote",
+"text": "Jevons paradox strikes again!",
+"by": "Satya Nadella, on X (Jan 2025)",
+"ref": ""
+},
+{
+"ch": 7,
+"line": 17,
+"t": 1809.926,
+"kind": "c",
+"ref": "rocket"
+},
+{
+"ch": 7,
+"line": 18,
+"t": 1810.736,
+"kind": "clear"
+},
+{
+"ch": 7,
+"line": 18,
+"t": 1812.366,
+"kind": "l",
+"ref": "iea"
+},
+{
+"ch": 7,
+"line": 18,
+"t": 1816.186,
+"kind": "x:bars",
+"set": "twh",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 7,
+"line": 18,
+"t": 1819.486,
+"kind": "x:counter",
+"to": "9000000000",
+"label": "questions (illustration)",
+"fast": "1",
+"ref": ""
+},
+{
+"ch": 7,
+"line": 19,
+"t": 1821.366,
+"kind": "c",
+"ref": "price_tag"
+},
+{
+"ch": 7,
+"line": 20,
+"t": 1823.306,
+"kind": "x:counter",
+"to": "90000000000",
+"label": "questions (illustration)",
+"fast": "2",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 0,
+"t": 1828.777,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 0,
+"t": 1830.667,
+"kind": "t",
+"ref": "What does one question cost?"
+},
+{
+"ch": 8,
+"line": 1,
+"t": 1831.927,
+"kind": "x:split",
+"show": "2",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 2,
+"t": 1837.247,
+"kind": "c",
+"ref": "measuring_tape"
+},
+{
+"ch": 8,
+"line": 3,
+"t": 1838.6770000000001,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 3,
+"t": 1840.147,
+"kind": "p",
+"ref": "ucr"
+},
+{
+"ch": 8,
+"line": 3,
+"t": 1842.067,
+"kind": "t",
+"ref": "older model"
+},
+{
+"ch": 8,
+"line": 3,
+"t": 1843.547,
+"kind": "c",
+"ref": "speech_bubbles"
+},
+{
+"ch": 8,
+"line": 3,
+"t": 1846.127,
+"kind": "p",
+"ref": "power_plant"
+},
+{
+"ch": 8,
+"line": 4,
+"t": 1850.9170000000001,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 4,
+"t": 1851.287,
+"kind": "t",
+"ref": "newer models"
+},
+{
+"ch": 8,
+"line": 4,
+"t": 1855.507,
+"kind": "x:chat",
+"mode": "mini",
+"text": "What should I make for dinner?",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 4,
+"t": 1859.787,
+"kind": "c",
+"ref": "photo_frame"
+},
+{
+"ch": 8,
+"line": 4,
+"t": 1860.747,
+"kind": "c",
+"ref": "film_reel"
+},
+{
+"ch": 8,
+"line": 4,
+"t": 1861.947,
+"kind": "c",
+"ref": "hourglass"
+},
+{
+"ch": 8,
+"line": 5,
+"t": 1865.6570000000002,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 5,
+"t": 1866.007,
+"kind": "k",
+"ref": "BOTH NUMBERS ARE REAL. BOTH NUMBERS ARE PARTIAL."
+},
+{
+"ch": 8,
+"line": 5,
+"t": 1867.407,
+"kind": "x:split",
+"show": "2",
+"verdict": "1",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 6,
+"t": 1869.067,
+"kind": "x:split",
+"show": "2",
+"verdict": "2",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 7,
+"t": 1870.1170000000002,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 7,
+"t": 1871.087,
+"kind": "t",
+"ref": "The answer:"
+},
+{
+"ch": 8,
+"line": 8,
+"t": 1876.327,
+"kind": "t",
+"ref": "One question costs almost *nothing*."
+},
+{
+"ch": 8,
+"line": 9,
+"t": 1877.277,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 9,
+"t": 1878.087,
+"kind": "x:chat",
+"mode": "blink",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 10,
+"t": 1880.207,
+"kind": "c",
+"ref": "cloud_soft"
+},
+{
+"ch": 8,
+"line": 10,
+"t": 1881.907,
+"kind": "c",
+"ref": "feather"
+},
+{
+"ch": 8,
+"line": 11,
+"t": 1883.037,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 11,
+"t": 1884.107,
+"kind": "t",
+"ref": "The cost was never in *one* question."
+},
+{
+"ch": 8,
+"line": 12,
+"t": 1885.907,
+"kind": "x:counter",
+"to": "2500000000",
+"label": "ChatGPT prompts a day (OpenAI, July 2025)",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 12,
+"t": 1889.127,
+"kind": "p",
+"ref": "power_plant"
+},
+{
+"ch": 8,
+"line": 12,
+"t": 1892.107,
+"kind": "c",
+"ref": "gas_turbine"
+},
+{
+"ch": 8,
+"line": 12,
+"t": 1894.397,
+"kind": "p",
+"ref": "dalles"
+},
+{
+"ch": 8,
+"line": 12,
+"t": 1895.447,
+"kind": "p",
+"ref": "tmi"
+},
+{
+"ch": 8,
+"line": 13,
+"t": 1896.257,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 13,
+"t": 1899.217,
+"kind": "t",
+"ref": "Some costs don't fit in a *watt-hour*."
+},
+{
+"ch": 8,
+"line": 14,
+"t": 1900.887,
+"kind": "p",
+"ref": "nairobi_night"
+},
+{
+"ch": 8,
+"line": 14,
+"t": 1903.467,
+"kind": "x:bill",
+"circle": "1",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 14,
+"t": 1905.667,
+"kind": "p",
+"ref": "dalles"
+},
+{
+"ch": 8,
+"line": 14,
+"t": 1906.847,
+"kind": "c",
+"ref": "gavel"
+},
+{
+"ch": 8,
+"line": 15,
+"t": 1910.1770000000001,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 15,
+"t": 1912.207,
+"kind": "t",
+"ref": "Not \"stop using AI\"."
+},
+{
+"ch": 8,
+"line": 16,
+"t": 1913.747,
+"kind": "c",
+"ref": "programmer_laptop"
+},
+{
+"ch": 8,
+"line": 16,
+"t": 1917.847,
+"kind": "c",
+"ref": "toolbox"
+},
+{
+"ch": 8,
+"line": 16,
+"t": 1920.747,
+"kind": "c",
+"ref": "puzzle"
+},
+{
+"ch": 8,
+"line": 17,
+"t": 1925.787,
+"kind": "c",
+"ref": "eye"
+},
+{
+"ch": 8,
+"line": 18,
+"t": 1929.047,
+"kind": "c",
+"ref": "curtain"
+},
+{
+"ch": 8,
+"line": 19,
+"t": 1930.4370000000001,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 19,
+"t": 1930.787,
+"kind": "k",
+"ref": "SOURCES · EU ENERGY EFFICIENCY DIRECTIVE · EU AI ACT"
+},
+{
+"ch": 8,
+"line": 19,
+"t": 1932.907,
+"kind": "p",
+"ref": "eu_flag"
+},
+{
+"ch": 8,
+"line": 19,
+"t": 1933.427,
+"kind": "p",
+"ref": "brussels"
+},
+{
+"ch": 8,
+"line": 19,
+"t": 1936.567,
+"kind": "c",
+"ref": "lightning"
+},
+{
+"ch": 8,
+"line": 19,
+"t": 1937.207,
+"kind": "c",
+"ref": "water_drop"
+},
+{
+"ch": 8,
+"line": 19,
+"t": 1940.487,
+"kind": "t",
+"ref": "EU AI Act"
+},
+{
+"ch": 8,
+"line": 19,
+"t": 1944.507,
+"kind": "c",
+"ref": "documents"
+},
+{
+"ch": 8,
+"line": 20,
+"t": 1947.627,
+"kind": "x:map",
+"view": "us",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 20,
+"t": 1954.927,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 8,
+"line": 21,
+"t": 1956.257,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 21,
+"t": 1957.567,
+"kind": "t",
+"ref": "So what can you do?"
+},
+{
+"ch": 8,
+"line": 22,
+"t": 1959.927,
+"kind": "p",
+"ref": "dalles_cityhall"
+},
+{
+"ch": 8,
+"line": 22,
+"t": 1964.627,
+"kind": "c",
+"ref": "faucet"
+},
+{
+"ch": 8,
+"line": 22,
+"t": 1965.267,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 8,
+"line": 22,
+"t": 1968.507,
+"kind": "t",
+"ref": "Who pays for the new grid?"
+},
+{
+"ch": 8,
+"line": 23,
+"t": 1969.847,
+"kind": "c",
+"ref": "newspaper"
+},
+{
+"ch": 8,
+"line": 23,
+"t": 1971.887,
+"kind": "p",
+"ref": "oregonian"
+},
+{
+"ch": 8,
+"line": 23,
+"t": 1973.027,
+"kind": "c",
+"ref": "gavel"
+},
+{
+"ch": 8,
+"line": 24,
+"t": 1976.527,
+"kind": "c",
+"ref": "eye"
+},
+{
+"ch": 8,
+"line": 24,
+"t": 1978.227,
+"kind": "t",
+"ref": "Not guilt."
+},
+{
+"ch": 8,
+"line": 24,
+"t": 1979.107,
+"kind": "t",
+"ref": "*Awareness.*"
+},
+{
+"ch": 8,
+"line": 25,
+"t": 1980.097,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 25,
+"t": 1980.527,
+"kind": "c",
+"ref": "cloud_soft"
+},
+{
+"ch": 8,
+"line": 26,
+"t": 1982.487,
+"kind": "p",
+"ref": "dc_ashburn"
+},
+{
+"ch": 8,
+"line": 26,
+"t": 1983.547,
+"kind": "c",
+"ref": "pylon"
+},
+{
+"ch": 8,
+"line": 26,
+"t": 1984.467,
+"kind": "p",
+"ref": "columbia"
+},
+{
+"ch": 8,
+"line": 26,
+"t": 1985.487,
+"kind": "p",
+"ref": "cobalt_mine"
+},
+{
+"ch": 8,
+"line": 26,
+"t": 1986.547,
+"kind": "c",
+"ref": "hands"
+},
+{
+"ch": 8,
+"line": 27,
+"t": 1994.087,
+"kind": "x:bill",
+"circle": "1",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 28,
+"t": 1995.3570000000002,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 28,
+"t": 1996.677,
+"kind": "p",
+"ref": "dalles_sunset"
+},
+{
+"ch": 8,
+"line": 28,
+"t": 1999.307,
+"kind": "p",
+"ref": "google_dalles"
+},
+{
+"ch": 8,
+"line": 29,
+"t": 2002.727,
+"kind": "x:map",
+"view": "us",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 30,
+"t": 2005.087,
+"kind": "t",
+"ref": "Maybe *yours*."
+},
+{
+"ch": 8,
+"line": 31,
+"t": 2009.557,
+"kind": "clear"
+},
+{
+"ch": 8,
+"line": 31,
+"t": 2009.907,
+"kind": "x:chat",
+"mode": "blink",
+"text": "Would you still ask AI to plan your dinner… if you could see the bill?",
+"ref": ""
+},
+{
+"ch": 8,
+"line": 31,
+"t": 2010.287,
+"kind": "s",
+"ref": "key"
+},
+{
+"ch": 8,
+"line": 33,
+"t": 2017.487,
+"kind": "s",
+"ref": "sting_title"
+}
+]

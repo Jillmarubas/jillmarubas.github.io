@@ -10,6 +10,8 @@ const {renderId, bucketName} = await renderMediaOnLambda({
   composition,
   codec: 'h264',
   crf: 16,
+  // SCALE=0.6667 renders a 1920×1080 composition at 1280×720; SCALE=2 at 3840×2160
+  scale: Number(process.env.SCALE || 1),
   privacy: 'private',
   chromiumOptions: {gl: 'swangle'},
   framesPerLambda: Number(framesPerLambda),

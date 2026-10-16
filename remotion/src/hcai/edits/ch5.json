@@ -1,0 +1,18 @@
+{"edits": [
+  {"ch": 5, "from": 1251.95, "to": 1261.3, "mode": "anim", "ref": "c5sand", "note": "sand, silicon, melt and purify, grow the crystal"},
+  {"ch": 5, "from": 1261.3, "to": 1272.9, "mode": "anim", "ref": "c5wafer", "note": "wafers, clean room, billions of switches, thinner than a hair"},
+  {"ch": 5, "from": 1272.9, "to": 1277.0, "mode": "anim", "ref": "c5island", "note": "almost all advanced chips: one company, one island (Taiwan map follows)"},
+  {"ch": 5, "from": 1282.0, "to": 1287.9, "mode": "anim", "ref": "c5tsmc", "note": "TSMC ~90% of the most advanced chips (VERIFY S20)"},
+  {"ch": 5, "from": 1287.9, "to": 1296.1, "mode": "anim", "ref": "c5water", "note": "ultra-pure water rinses every wafer"},
+  {"ch": 5, "from": 1296.1, "to": 1311.6, "mode": "anim", "ref": "c5drought", "note": "Taiwan 2021 drought, fields vs fabs, TSMC water trucks (VERIFY S21)"},
+  {"ch": 5, "from": 1311.6, "to": 1317.9, "mode": "anim", "ref": "c5trucks", "note": "the world's AI depended on water trucks (Taiwan-China map follows)"},
+  {"ch": 5, "from": 1327.62, "to": 1335.0, "mode": "anim", "ref": "c5metals", "note": "chips like oil; gallium and germanium (China map follows)"},
+  {"ch": 5, "from": 1338.2, "to": 1355.4, "mode": "anim", "ref": "c5gallium", "note": "~98% gallium, 2023 restrictions, late-2024 US ban + suspension footnote (VERIFY S22)"},
+  {"ch": 5, "from": 1355.4, "to": 1368.0, "mode": "anim", "ref": "c5copper", "note": "copper wiring, battery systems, cobalt and lithium"},
+  {"ch": 5, "from": 1368.0, "to": 1372.3, "mode": "anim", "ref": "c5cobalt", "note": "~70% of cobalt from DR Congo (VERIFY S23; DR Congo map follows)"},
+  {"ch": 5, "from": 1380.24, "to": 1394.0, "mode": "anim", "ref": "c5honest", "note": "honest scale: cobalt mostly phones/EVs; AI part of the chain; sober child-labour note (S23)"},
+  {"ch": 5, "from": 1394.0, "to": 1404.1, "mode": "anim", "ref": "c5waste", "note": "chips replaced every few years become waste"},
+  {"ch": 5, "from": 1404.1, "to": 1416.3, "mode": "anim", "ref": "c5study", "note": "Wang et al. 2024: 1.2-5 Mt e-waste by 2030 (VERIFY S24)"},
+  {"ch": 5, "from": 1416.3, "to": 1424.45, "mode": "anim", "ref": "c5eiffel", "note": "5 Mt ~ 500 Eiffel Towers; far away (world map follows)"},
+  {"ch": 5, "from": 1430.2, "to": 1432.3, "mode": "anim", "ref": "c5here", "note": "here it stops being far away"}
+]}

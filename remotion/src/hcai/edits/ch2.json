@@ -1,0 +1,188 @@
+{
+ "edits": [
+  {
+   "ch": 2,
+   "from": 359.2,
+   "to": 369.9,
+   "mode": "anim",
+   "ref": "c2twh",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 369.9,
+   "to": 379.6,
+   "mode": "anim",
+   "ref": "c2share",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 379.6,
+   "to": 396.7,
+   "mode": "anim",
+   "ref": "c2growth",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 396.7,
+   "to": 409.9,
+   "mode": "anim",
+   "ref": "c2us",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 409.9,
+   "to": 423.0,
+   "mode": "anim",
+   "ref": "c2ireland",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 423.0,
+   "to": 430.1,
+   "mode": "anim",
+   "ref": "c2dublin",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 430.1,
+   "to": 443.9,
+   "mode": "anim",
+   "ref": "c2problem",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 443.9,
+   "to": 453.6,
+   "mode": "anim",
+   "ref": "c2gap",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 453.6,
+   "to": 469.0,
+   "mode": "anim",
+   "ref": "c2tmi",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 469.0,
+   "to": 484.6,
+   "mode": "anim",
+   "ref": "c2units",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 484.6,
+   "to": 500.0,
+   "mode": "anim",
+   "ref": "c2crane",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 500.0,
+   "to": 516.8,
+   "mode": "anim",
+   "ref": "c2bigtech",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 516.8,
+   "to": 527.3,
+   "mode": "anim",
+   "ref": "c2slow",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 527.3,
+   "to": 545.5,
+   "mode": "anim",
+   "ref": "c2colossus",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 545.5,
+   "to": 559.9,
+   "mode": "anim",
+   "ref": "c2turbines",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 559.9,
+   "to": 564.0,
+   "mode": "anim",
+   "ref": "c2street",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 571.07,
+   "to": 577.6,
+   "mode": "anim",
+   "ref": "c2pollution",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 577.6,
+   "to": 585.5,
+   "mode": "anim",
+   "ref": "c2nox",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 585.5,
+   "to": 594.6,
+   "mode": "anim",
+   "ref": "c2meetings",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 594.6,
+   "to": 608.3,
+   "mode": "anim",
+   "ref": "c2claims",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 608.3,
+   "to": 626.8,
+   "mode": "anim",
+   "ref": "c2google",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 626.8,
+   "to": 639.2,
+   "mode": "anim",
+   "ref": "c2microsoft",
+   "note": "ch2 in 2D animation"
+  },
+  {
+   "ch": 2,
+   "from": 639.2,
+   "to": 650.2,
+   "mode": "anim",
+   "ref": "c2heat",
+   "note": "ch2 in 2D animation"
+  }
+ ]
+}

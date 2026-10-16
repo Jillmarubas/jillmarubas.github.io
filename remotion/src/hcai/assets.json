@@ -1,0 +1,1277 @@
+[
+ {
+  "id": "eiffel",
+  "type": "c",
+  "q": "Eiffel Tower drawing"
+ },
+ {
+  "id": "tw_reservoir2",
+  "type": "p",
+  "q": "Taiwan reservoir 2021 drought"
+ },
+ {
+  "id": "uk_industry2",
+  "type": "p",
+  "q": "Manchester mills 19th century"
+ },
+ {
+  "id": "lbnl2",
+  "type": "p",
+  "q": "Lawrence Berkeley National Laboratory"
+ },
+ {
+  "id": "pylon",
+  "type": "c",
+  "q": "electricity pylon isolated"
+ },
+ {
+  "id": "water_drop",
+  "type": "c",
+  "q": "water drop splash"
+ },
+ {
+  "id": "copper_ore",
+  "type": "c",
+  "q": "native copper specimen"
+ },
+ {
+  "id": "hands",
+  "type": "c",
+  "q": "hands typing keyboard"
+ },
+ {
+  "id": "feather",
+  "type": "c",
+  "q": "feather white isolated"
+ },
+ {
+  "id": "mute",
+  "type": "c",
+  "q": "loudspeaker icon"
+ },
+ {
+  "id": "cloud_puff",
+  "type": "c",
+  "q": "cumulus cloud isolated blue sky"
+ },
+ {
+  "id": "dc_campus",
+  "type": "p",
+  "q": "Ashburn data centers"
+ },
+ {
+  "id": "dc_roof",
+  "type": "p",
+  "q": "data center roof"
+ },
+ {
+  "id": "newspaper",
+  "type": "c",
+  "q": "newspaper"
+ },
+ {
+  "id": "dalles",
+  "type": "p",
+  "q": "The Dalles Oregon"
+ },
+ {
+  "id": "faucet",
+  "type": "c",
+  "q": "water tap running"
+ },
+ {
+  "id": "google",
+  "type": "l",
+  "q": "Google 2015 logo"
+ },
+ {
+  "id": "dalles_cityhall",
+  "type": "p",
+  "q": "The Dalles city hall Oregon"
+ },
+ {
+  "id": "courthouse",
+  "type": "p",
+  "q": "Wasco County Courthouse"
+ },
+ {
+  "id": "googleplex",
+  "type": "p",
+  "q": "Googleplex Mountain View"
+ },
+ {
+  "id": "water_glass",
+  "type": "c",
+  "q": "glass of water isolated"
+ },
+ {
+  "id": "nairobi_skyline",
+  "type": "p",
+  "q": "Nairobi skyline"
+ },
+ {
+  "id": "laptop_dark",
+  "type": "c",
+  "q": "laptop dark"
+ },
+ {
+  "id": "tmi",
+  "type": "p",
+  "q": "Three Mile Island nuclear power plant"
+ },
+ {
+  "id": "cooling_tower_cut",
+  "type": "c",
+  "q": "cooling tower"
+ },
+ {
+  "id": "boxtown",
+  "type": "p",
+  "q": "Boxtown Memphis"
+ },
+ {
+  "id": "question_mark",
+  "type": "c",
+  "q": "question mark sign"
+ },
+ {
+  "id": "billboard",
+  "type": "c",
+  "q": "blank billboard"
+ },
+ {
+  "id": "cloud_soft",
+  "type": "c",
+  "q": "cumulus cloud"
+ },
+ {
+  "id": "dc_ashburn",
+  "type": "p",
+  "q": "Ashburn data center"
+ },
+ {
+  "id": "concrete",
+  "type": "c",
+  "q": "concrete block"
+ },
+ {
+  "id": "steel_beam",
+  "type": "c",
+  "q": "steel I-beam"
+ },
+ {
+  "id": "copper_wire",
+  "type": "c",
+  "q": "copper wire coil"
+ },
+ {
+  "id": "glass_pane",
+  "type": "c",
+  "q": "glass pane"
+ },
+ {
+  "id": "smartphone",
+  "type": "c",
+  "q": "smartphone"
+ },
+ {
+  "id": "fiber_glow",
+  "type": "c",
+  "q": "fiber optic light strands"
+ },
+ {
+  "id": "street_trench",
+  "type": "p",
+  "q": "fiber optic cable installation street"
+ },
+ {
+  "id": "highway",
+  "type": "p",
+  "q": "interstate highway aerial"
+ },
+ {
+  "id": "sub_cable",
+  "type": "c",
+  "q": "submarine communications cable cross section"
+ },
+ {
+  "id": "server_room",
+  "type": "p",
+  "q": "server room"
+ },
+ {
+  "id": "chip",
+  "type": "c",
+  "q": "CPU"
+ },
+ {
+  "id": "gpu_card",
+  "type": "c",
+  "q": "graphics card"
+ },
+ {
+  "id": "arcade",
+  "type": "p",
+  "q": "video game arcade"
+ },
+ {
+  "id": "explosion",
+  "type": "c",
+  "q": "explosion fireball"
+ },
+ {
+  "id": "water_ripple",
+  "type": "c",
+  "q": "water reflection ripples"
+ },
+ {
+  "id": "lab",
+  "type": "p",
+  "q": "computer science laboratory"
+ },
+ {
+  "id": "abacus",
+  "type": "c",
+  "q": "abacus"
+ },
+ {
+  "id": "math_board",
+  "type": "c",
+  "q": "blackboard equations"
+ },
+ {
+  "id": "nvidia",
+  "type": "l",
+  "q": "Nvidia logo"
+ },
+ {
+  "id": "h100",
+  "type": "c",
+  "q": "Nvidia H100"
+ },
+ {
+  "id": "space_heater",
+  "type": "c",
+  "q": "electric space heater"
+ },
+ {
+  "id": "crane",
+  "type": "p",
+  "q": "construction crane"
+ },
+ {
+  "id": "server_aisle",
+  "type": "p",
+  "q": "server racks"
+ },
+ {
+  "id": "light_bulb",
+  "type": "c",
+  "q": "light bulb"
+ },
+ {
+  "id": "thermometer",
+  "type": "c",
+  "q": "clinical thermometer"
+ },
+ {
+  "id": "hot_aisle",
+  "type": "p",
+  "q": "data center servers"
+ },
+ {
+  "id": "oven",
+  "type": "c",
+  "q": "oven door open"
+ },
+ {
+  "id": "fan",
+  "type": "c",
+  "q": "industrial fan"
+ },
+ {
+  "id": "fan_blades",
+  "type": "c",
+  "q": "server cooling fans"
+ },
+ {
+  "id": "ear_muffs",
+  "type": "c",
+  "q": "ear defenders hearing protection"
+ },
+ {
+  "id": "raised_floor",
+  "type": "p",
+  "q": "data center raised floor tiles"
+ },
+ {
+  "id": "speaker_cone",
+  "type": "c",
+  "q": "loudspeaker"
+ },
+ {
+  "id": "loudoun_dc",
+  "type": "p",
+  "q": "data center Virginia"
+ },
+ {
+  "id": "globe",
+  "type": "c",
+  "q": "The Blue Marble"
+ },
+ {
+  "id": "mall",
+  "type": "p",
+  "q": "shopping mall exterior parking lot"
+ },
+ {
+  "id": "suburb",
+  "type": "p",
+  "q": "Ashburn Virginia"
+ },
+ {
+  "id": "school",
+  "type": "p",
+  "q": "school building Virginia"
+ },
+ {
+  "id": "farmland",
+  "type": "p",
+  "q": "Loudoun County farm"
+ },
+ {
+  "id": "router",
+  "type": "c",
+  "q": "wireless router"
+ },
+ {
+  "id": "books",
+  "type": "c",
+  "q": "stack of books"
+ },
+ {
+  "id": "code_screen",
+  "type": "c",
+  "q": "computer code on screen"
+ },
+ {
+  "id": "speech_bubbles",
+  "type": "c",
+  "q": "speech bubble icon"
+ },
+ {
+  "id": "calendar",
+  "type": "c",
+  "q": "wall calendar"
+ },
+ {
+  "id": "factory",
+  "type": "p",
+  "q": "factory building construction"
+ },
+ {
+  "id": "money_stack",
+  "type": "c",
+  "q": "stack of dollar bills"
+ },
+ {
+  "id": "assembly_line",
+  "type": "p",
+  "q": "factory assembly line"
+ },
+ {
+  "id": "student",
+  "type": "c",
+  "q": "student with backpack"
+ },
+ {
+  "id": "programmer_laptop",
+  "type": "c",
+  "q": "person typing laptop"
+ },
+ {
+  "id": "stethoscope",
+  "type": "c",
+  "q": "stethoscope"
+ },
+ {
+  "id": "dinner_plate",
+  "type": "c",
+  "q": "plate of food dinner"
+ },
+ {
+  "id": "weights",
+  "type": "c",
+  "q": "dumbbell weights"
+ },
+ {
+  "id": "photo_frame",
+  "type": "c",
+  "q": "picture frame"
+ },
+ {
+  "id": "film_reel",
+  "type": "c",
+  "q": "film reel"
+ },
+ {
+  "id": "brain_model",
+  "type": "c",
+  "q": "anatomical brain model"
+ },
+ {
+  "id": "hourglass",
+  "type": "c",
+  "q": "hourglass"
+ },
+ {
+  "id": "openai",
+  "type": "l",
+  "q": "OpenAI logo"
+ },
+ {
+  "id": "softbank",
+  "type": "l",
+  "q": "SoftBank logo"
+ },
+ {
+  "id": "oracle",
+  "type": "l",
+  "q": "Oracle logo"
+ },
+ {
+  "id": "abilene",
+  "type": "p",
+  "q": "Abilene Texas"
+ },
+ {
+  "id": "power_plug",
+  "type": "c",
+  "q": "electric plug"
+ },
+ {
+  "id": "lightning",
+  "type": "c",
+  "q": "lightning bolt"
+ },
+ {
+  "id": "iea",
+  "type": "l",
+  "q": "International Energy Agency logo"
+ },
+ {
+  "id": "tokyo",
+  "type": "p",
+  "q": "Tokyo night skyline"
+ },
+ {
+  "id": "dublin_night",
+  "type": "p",
+  "q": "Dublin at night"
+ },
+ {
+  "id": "dublin_homes",
+  "type": "p",
+  "q": "Dublin terraced houses"
+ },
+ {
+  "id": "dublin_dc",
+  "type": "p",
+  "q": "data centre Ireland"
+ },
+ {
+  "id": "power_plant",
+  "type": "p",
+  "q": "power station"
+ },
+ {
+  "id": "moon",
+  "type": "c",
+  "q": "full moon"
+ },
+ {
+  "id": "alarm_clock",
+  "type": "c",
+  "q": "alarm clock 3 am"
+ },
+ {
+  "id": "leaf",
+  "type": "c",
+  "q": "green leaf isolated"
+ },
+ {
+  "id": "solar",
+  "type": "p",
+  "q": "solar panels"
+ },
+ {
+  "id": "wind_farm",
+  "type": "p",
+  "q": "wind turbines"
+ },
+ {
+  "id": "tmi_1979",
+  "type": "p",
+  "q": "Three Mile Island 1979"
+ },
+ {
+  "id": "tmi_control",
+  "type": "p",
+  "q": "Three Mile Island control room"
+ },
+ {
+  "id": "tmi_carter",
+  "type": "p",
+  "q": "Jimmy Carter Three Mile Island"
+ },
+ {
+  "id": "tmi_quiet",
+  "type": "p",
+  "q": "Three Mile Island cooling towers"
+ },
+ {
+  "id": "microsoft",
+  "type": "l",
+  "q": "Microsoft logo (2012)"
+ },
+ {
+  "id": "power_switch",
+  "type": "c",
+  "q": "light switch"
+ },
+ {
+  "id": "smr",
+  "type": "p",
+  "q": "small modular reactor"
+ },
+ {
+  "id": "amazon",
+  "type": "l",
+  "q": "Amazon logo"
+ },
+ {
+  "id": "reactor_core",
+  "type": "p",
+  "q": "nuclear reactor core"
+ },
+ {
+  "id": "snail",
+  "type": "c",
+  "q": "snail isolated"
+ },
+ {
+  "id": "stopwatch",
+  "type": "c",
+  "q": "stopwatch"
+ },
+ {
+  "id": "musk",
+  "type": "h",
+  "q": "Elon Musk"
+ },
+ {
+  "id": "supercomputer",
+  "type": "p",
+  "q": "supercomputer racks"
+ },
+ {
+  "id": "gas_turbine",
+  "type": "c",
+  "q": "gas turbine generator"
+ },
+ {
+  "id": "generator",
+  "type": "c",
+  "q": "diesel generator trailer"
+ },
+ {
+  "id": "gas_flame",
+  "type": "c",
+  "q": "gas burner blue flame"
+ },
+ {
+  "id": "boxtown2",
+  "type": "p",
+  "q": "Boxtown Memphis park"
+ },
+ {
+  "id": "smokestack",
+  "type": "p",
+  "q": "industrial smokestack"
+ },
+ {
+  "id": "refinery",
+  "type": "p",
+  "q": "oil refinery"
+ },
+ {
+  "id": "steel_mill",
+  "type": "p",
+  "q": "steel mill"
+ },
+ {
+  "id": "semi_truck",
+  "type": "c",
+  "q": "semi-trailer truck"
+ },
+ {
+  "id": "inhaler",
+  "type": "c",
+  "q": "asthma inhaler"
+ },
+ {
+  "id": "lungs",
+  "type": "c",
+  "q": "human lungs model"
+ },
+ {
+  "id": "child_inhaler",
+  "type": "c",
+  "q": "child asthma"
+ },
+ {
+  "id": "tv",
+  "type": "c",
+  "q": "television set isolated"
+ },
+ {
+  "id": "stamp",
+  "type": "c",
+  "q": "rubber stamp"
+ },
+ {
+  "id": "hard_hat",
+  "type": "c",
+  "q": "hard hat"
+ },
+ {
+  "id": "steam_tower",
+  "type": "p",
+  "q": "cooling tower steam"
+ },
+ {
+  "id": "gavel",
+  "type": "c",
+  "q": "gavel"
+ },
+ {
+  "id": "sun",
+  "type": "c",
+  "q": "sun"
+ },
+ {
+  "id": "sweat",
+  "type": "c",
+  "q": "sweat"
+ },
+ {
+  "id": "steam",
+  "type": "c",
+  "q": "steam cloud"
+ },
+ {
+  "id": "ice_cube",
+  "type": "c",
+  "q": "ice cubes"
+ },
+ {
+  "id": "columbia",
+  "type": "p",
+  "q": "Columbia River Gorge"
+ },
+ {
+  "id": "coal_plant",
+  "type": "p",
+  "q": "coal power plant cooling towers"
+ },
+ {
+  "id": "google_dalles",
+  "type": "p",
+  "q": "Google data center The Dalles"
+ },
+ {
+  "id": "dalles_dam",
+  "type": "p",
+  "q": "The Dalles Dam"
+ },
+ {
+  "id": "water_tap",
+  "type": "c",
+  "q": "water tap"
+ },
+ {
+  "id": "oregonian",
+  "type": "p",
+  "q": "The Oregonian newspaper building"
+ },
+ {
+  "id": "documents",
+  "type": "c",
+  "q": "paper documents"
+ },
+ {
+  "id": "garden_hose",
+  "type": "p",
+  "q": "watering garden hose"
+ },
+ {
+  "id": "water_pipes",
+  "type": "p",
+  "q": "water pipes infrastructure"
+ },
+ {
+  "id": "desert",
+  "type": "p",
+  "q": "Arizona desert"
+ },
+ {
+  "id": "dry_lake",
+  "type": "p",
+  "q": "drought cracked earth"
+ },
+ {
+  "id": "paso_severino",
+  "type": "p",
+  "q": "Paso Severino"
+ },
+ {
+  "id": "tap_water_glass",
+  "type": "c",
+  "q": "glass of tap water"
+ },
+ {
+  "id": "water_bottle",
+  "type": "c",
+  "q": "water bottle"
+ },
+ {
+  "id": "santiago",
+  "type": "p",
+  "q": "Santiago Chile skyline"
+ },
+ {
+  "id": "ucr",
+  "type": "p",
+  "q": "University of California Riverside"
+ },
+ {
+  "id": "altman",
+  "type": "h",
+  "q": "Sam Altman"
+ },
+ {
+  "id": "robot_arm",
+  "type": "c",
+  "q": "industrial robot arm"
+ },
+ {
+  "id": "ear",
+  "type": "c",
+  "q": "human ear"
+ },
+ {
+  "id": "encyclopedia",
+  "type": "c",
+  "q": "encyclopedia volumes"
+ },
+ {
+  "id": "poetry_book",
+  "type": "c",
+  "q": "old poetry book"
+ },
+ {
+  "id": "dark_alley",
+  "type": "p",
+  "q": "dark alley"
+ },
+ {
+  "id": "index_cards",
+  "type": "c",
+  "q": "index cards"
+ },
+ {
+  "id": "reading_glasses",
+  "type": "c",
+  "q": "eyeglasses"
+ },
+ {
+  "id": "san_francisco",
+  "type": "p",
+  "q": "San Francisco skyline"
+ },
+ {
+  "id": "kibera",
+  "type": "p",
+  "q": "Kibera Nairobi"
+ },
+ {
+  "id": "time",
+  "type": "l",
+  "q": "Time magazine logo"
+ },
+ {
+  "id": "magnifier",
+  "type": "c",
+  "q": "magnifying glass"
+ },
+ {
+  "id": "empty_office",
+  "type": "p",
+  "q": "empty office"
+ },
+ {
+  "id": "mortarboard",
+  "type": "c",
+  "q": "mortarboard"
+ },
+ {
+  "id": "clock",
+  "type": "c",
+  "q": "wall clock"
+ },
+ {
+  "id": "office_chair",
+  "type": "c",
+  "q": "office chair"
+ },
+ {
+  "id": "monitor",
+  "type": "c",
+  "q": "computer monitor"
+ },
+ {
+  "id": "eye",
+  "type": "c",
+  "q": "human eye close up"
+ },
+ {
+  "id": "kitchen_table",
+  "type": "p",
+  "q": "family dinner table"
+ },
+ {
+  "id": "sofa",
+  "type": "c",
+  "q": "therapist couch"
+ },
+ {
+  "id": "contract_torn",
+  "type": "c",
+  "q": "torn paper document"
+ },
+ {
+  "id": "petition",
+  "type": "c",
+  "q": "petition signatures paper"
+ },
+ {
+  "id": "kenya_parliament",
+  "type": "p",
+  "q": "Parliament of Kenya building"
+ },
+ {
+  "id": "law_book",
+  "type": "c",
+  "q": "law books"
+ },
+ {
+  "id": "hazard_sign",
+  "type": "c",
+  "q": "hazard warning sign"
+ },
+ {
+  "id": "chemical_barrel",
+  "type": "c",
+  "q": "chemical barrel"
+ },
+ {
+  "id": "nairobi_court",
+  "type": "p",
+  "q": "Kenya court"
+ },
+ {
+  "id": "padlock",
+  "type": "c",
+  "q": "padlock isolated"
+ },
+ {
+  "id": "thumbs_up",
+  "type": "c",
+  "q": "thumbs up hand"
+ },
+ {
+  "id": "call_center",
+  "type": "p",
+  "q": "call center office"
+ },
+ {
+  "id": "meta",
+  "type": "l",
+  "q": "Meta Platforms logo"
+ },
+ {
+  "id": "coins",
+  "type": "c",
+  "q": "coins pile"
+ },
+ {
+  "id": "wapo",
+  "type": "l",
+  "q": "The Washington Post logo"
+ },
+ {
+  "id": "manila",
+  "type": "p",
+  "q": "Manila skyline"
+ },
+ {
+  "id": "letter",
+  "type": "c",
+  "q": "handwritten letter envelope"
+ },
+ {
+  "id": "white_house",
+  "type": "p",
+  "q": "White House"
+ },
+ {
+  "id": "microscope",
+  "type": "c",
+  "q": "optical microscope"
+ },
+ {
+  "id": "stock_ticker",
+  "type": "p",
+  "q": "stock ticker"
+ },
+ {
+  "id": "nairobi_night",
+  "type": "p",
+  "q": "Nairobi at night"
+ },
+ {
+  "id": "rock",
+  "type": "c",
+  "q": "granite sample"
+ },
+ {
+  "id": "sand",
+  "type": "c",
+  "q": "pile of sand"
+ },
+ {
+  "id": "silicon",
+  "type": "c",
+  "q": "silicon element"
+ },
+ {
+  "id": "furnace",
+  "type": "c",
+  "q": "molten metal crucible"
+ },
+ {
+  "id": "ingot",
+  "type": "c",
+  "q": "silicon ingot"
+ },
+ {
+  "id": "wafer",
+  "type": "c",
+  "q": "silicon wafer"
+ },
+ {
+  "id": "cleanroom",
+  "type": "p",
+  "q": "semiconductor cleanroom"
+ },
+ {
+  "id": "die_shot",
+  "type": "c",
+  "q": "integrated circuit die"
+ },
+ {
+  "id": "hair",
+  "type": "c",
+  "q": "human hair"
+ },
+ {
+  "id": "fab",
+  "type": "p",
+  "q": "semiconductor fab"
+ },
+ {
+  "id": "tsmc",
+  "type": "l",
+  "q": "TSMC logo"
+ },
+ {
+  "id": "lab_water",
+  "type": "c",
+  "q": "laboratory water bottle"
+ },
+ {
+  "id": "taiwan_drought",
+  "type": "p",
+  "q": "Taiwan drought reservoir 2021"
+ },
+ {
+  "id": "rice_paddy",
+  "type": "p",
+  "q": "Taiwan rice paddy"
+ },
+ {
+  "id": "tanker_truck",
+  "type": "c",
+  "q": "water tanker truck"
+ },
+ {
+  "id": "oil_barrel",
+  "type": "c",
+  "q": "oil drum"
+ },
+ {
+  "id": "gallium",
+  "type": "c",
+  "q": "gallium crystals"
+ },
+ {
+  "id": "germanium",
+  "type": "c",
+  "q": "germanium element"
+ },
+ {
+  "id": "chess",
+  "type": "c",
+  "q": "chess pieces"
+ },
+ {
+  "id": "copper_spools",
+  "type": "p",
+  "q": "copper cable reels"
+ },
+ {
+  "id": "battery_bank",
+  "type": "p",
+  "q": "battery energy storage"
+ },
+ {
+  "id": "cobalt_ore",
+  "type": "c",
+  "q": "cobalt ore"
+ },
+ {
+  "id": "lithium",
+  "type": "c",
+  "q": "lithium battery cells"
+ },
+ {
+  "id": "amnesty",
+  "type": "l",
+  "q": "Amnesty International"
+ },
+ {
+  "id": "cobalt_mine",
+  "type": "p",
+  "q": "cobalt mining Congo"
+ },
+ {
+  "id": "mine_pit",
+  "type": "p",
+  "q": "artisanal mining pit"
+ },
+ {
+  "id": "ev",
+  "type": "c",
+  "q": "electric car charging"
+ },
+ {
+  "id": "ewaste",
+  "type": "p",
+  "q": "electronic waste pile"
+ },
+ {
+  "id": "substation",
+  "type": "p",
+  "q": "electrical substation"
+ },
+ {
+  "id": "auction_gavel",
+  "type": "c",
+  "q": "auction gavel"
+ },
+ {
+  "id": "ohio_house",
+  "type": "p",
+  "q": "house Ohio"
+ },
+ {
+  "id": "md_farm",
+  "type": "p",
+  "q": "Maryland farm field"
+ },
+ {
+  "id": "transmission",
+  "type": "p",
+  "q": "high voltage transmission line"
+ },
+ {
+  "id": "forest",
+  "type": "p",
+  "q": "Maryland forest trees"
+ },
+ {
+  "id": "old_barn",
+  "type": "p",
+  "q": "old barn farm"
+ },
+ {
+  "id": "fence",
+  "type": "c",
+  "q": "wooden fence"
+ },
+ {
+  "id": "farmer",
+  "type": "p",
+  "q": "farmer tractor field"
+ },
+ {
+  "id": "dc_night",
+  "type": "p",
+  "q": "data center at night"
+ },
+ {
+  "id": "bed",
+  "type": "c",
+  "q": "bed bedroom"
+ },
+ {
+  "id": "window",
+  "type": "c",
+  "q": "window closed"
+ },
+ {
+  "id": "envelope_sealed",
+  "type": "c",
+  "q": "sealed envelope wax"
+ },
+ {
+  "id": "nda",
+  "type": "c",
+  "q": "confidential document"
+ },
+ {
+  "id": "tax_form",
+  "type": "c",
+  "q": "tax form"
+ },
+ {
+  "id": "construction_workers",
+  "type": "p",
+  "q": "construction workers"
+ },
+ {
+  "id": "loudoun_sign",
+  "type": "p",
+  "q": "Loudoun County sign"
+ },
+ {
+  "id": "arrow_down",
+  "type": "c",
+  "q": "downward arrow"
+ },
+ {
+  "id": "led_bulb",
+  "type": "c",
+  "q": "LED light bulb"
+ },
+ {
+  "id": "deepseek",
+  "type": "l",
+  "q": "DeepSeek logo"
+ },
+ {
+  "id": "deepmind",
+  "type": "l",
+  "q": "DeepMind logo"
+ },
+ {
+  "id": "weather_map",
+  "type": "p",
+  "q": "weather satellite image hurricane"
+ },
+ {
+  "id": "crystal",
+  "type": "c",
+  "q": "crystal structure model"
+ },
+ {
+  "id": "control_room",
+  "type": "p",
+  "q": "power grid control room"
+ },
+ {
+  "id": "jevons",
+  "type": "h",
+  "q": "William Stanley Jevons"
+ },
+ {
+  "id": "steam_engine",
+  "type": "p",
+  "q": "Watt steam engine engraving"
+ },
+ {
+  "id": "coal",
+  "type": "c",
+  "q": "lump of coal"
+ },
+ {
+  "id": "price_tag",
+  "type": "c",
+  "q": "price tag"
+ },
+ {
+  "id": "nadella",
+  "type": "h",
+  "q": "Satya Nadella"
+ },
+ {
+  "id": "rocket",
+  "type": "c",
+  "q": "rocket launch"
+ },
+ {
+  "id": "measuring_tape",
+  "type": "c",
+  "q": "tape measure"
+ },
+ {
+  "id": "toolbox",
+  "type": "c",
+  "q": "toolbox"
+ },
+ {
+  "id": "puzzle",
+  "type": "c",
+  "q": "jigsaw puzzle piece"
+ },
+ {
+  "id": "curtain",
+  "type": "c",
+  "q": "red curtain"
+ },
+ {
+  "id": "eu_flag",
+  "type": "p",
+  "q": "Flag of Europe"
+ },
+ {
+  "id": "brussels",
+  "type": "p",
+  "q": "European Parliament Brussels"
+ },
+ {
+  "id": "dalles_sunset",
+  "type": "p",
+  "q": "Columbia River sunset The Dalles"
+ }
+]

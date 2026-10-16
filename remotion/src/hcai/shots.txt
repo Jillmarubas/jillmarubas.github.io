@@ -1,0 +1,1128 @@
+# Shot list: one visual per spoken phrase.  Syntax (parsed by shots.py):
+#   = <ch>.<line> [clear]          a script line; "clear" sends everything on stage toward the viewer first
+#   <cue> > <kind> <ref> [; k=v]   a beat landing on spoken word <cue> ("^" = line start, "word#2" = 2nd time in the line)
+# kinds: p photo print · c cut-out object · h person (cut-out + name) · l logo · t key words · n number
+#        k kicker tag (bottom-left, places/sources) · s sound effect · x:<name> special full-stage graphic
+# refs:  id=search query defines an asset (first use); a bare id reuses it.
+
++ eiffel c Eiffel Tower drawing
++ tw_reservoir2 p Taiwan reservoir 2021 drought
++ uk_industry2 p Manchester mills 19th century
++ lbnl2 p Lawrence Berkeley National Laboratory
++ pylon c electricity pylon isolated
++ water_drop c water drop splash
++ copper_ore c native copper specimen
++ hands c hands typing keyboard
+
+######## COLD OPEN
+= 0.0 clear
+^ > x:chat ; mode=type ; text=What should I make for dinner?
+^ > s key
+= 0.1
+= 0.2
+enter > s enter
+= 0.3
+answer > x:chat ; mode=answer
+= 0.4
+nothing > t *Nothing.*
+weight > c feather=feather white isolated
+sound > c mute=loudspeaker icon
+air > c cloud_puff=cumulus cloud isolated blue sky
+= 0.5 clear
+^ > s sting
+^ > p dc_campus=Ashburn data centers
+= 0.6
+somewhere > p dc_roof=data center roof
+= 0.7 clear
+^ > k THE DALLES, OREGON · POP. ~16,000
+2021 > n 2021
+newspaper > c newspaper=newspaper
+town > p dalles=The Dalles Oregon
+= 0.8
+water > c faucet=water tap running
+google > l google=Google 2015 logo
+= 0.9
+city > p dalles_cityhall=The Dalles city hall Oregon
+say > t *No comment.*
+= 0.10
+court > p courthouse=Wasco County Courthouse
+court > s gavel
+= 0.11
+newspaper > c newspaper
+against > t vs.
+companies > p googleplex=Googleplex Mountain View
+= 0.12
+water > c water_glass=glass of water isolated
+= 0.13
+hold > t Hold that thought.
+= 0.14 clear
+^ > x:map ; view=world ; pins=nairobi:on
+oregon > x:map ; pins=the_dalles:Oregon
+= 0.15
+nairobi > x:map ; pins=nairobi:Nairobi
+office > p nairobi_skyline=Nairobi skyline
+two > n <$2/hr
+darkest > c laptop_dark=laptop dark
+= 0.16
+nuclear > x:map ; pins=tmi:Pennsylvania
+reactor > p tmi=Three Mile Island nuclear power plant
+life > c cooling_tower_cut=cooling tower
+= 0.17
+memphis > x:map ; pins=memphis:Memphis
+neighborhood > p boxtown=Boxtown Memphis
+asked > t *Never asked.*
+= 0.18
+closer > x:map ; pins=dublin:Dublin,taiwan:Taiwan,congo:Congo
+= 0.19 clear
+bill > x:bill
+= 0.20 clear
+question > x:chain ; links=power,water,metal,hands ; show=0
+power > x:chain ; show=1
+water > x:chain ; show=2
+metal > x:chain ; show=3
+hands > x:chain ; show=4
+= 0.21
+chain > x:chain ; links=power,water,metal,hands
+= 0.22 clear
+question > c question_mark=question mark sign
+= 0.23
+one > t What does *ONE* question cost?
+cost > s sting_title
+
+######## CHAPTER 1
+= 1.0 clear
+cloud > c cloud_puff
+= 1.1
+marketing > c billboard=blank billboard
+soft > c cloud_soft=cumulus cloud
+weighs > c feather
+= 1.2
+no > t There is *no* cloud.
+= 1.3 clear
+buildings > p dc_ashburn=Ashburn data center
+concrete > c concrete=concrete block
+steel > c steel_beam=steel I-beam
+copper > c copper_wire=copper wire coil
+glass > c glass_pane=glass pane
+thousands > p dc_campus
+= 1.4
+dinner > x:chat ; mode=mini ; text=What should I make for dinner?
+= 1.5 clear
+enter > c smartphone=smartphone
+light > c fiber_glow=fiber optic light strands
+street > p street_trench=fiber optic cable installation street
+highways > p highway=interstate highway aerial
+ocean > c sub_cable=submarine communications cable cross section
+center > p dc_ashburn
+= 1.6
+inside > p server_room=server room
+chip > c chip=CPU
+= 1.7 clear
+gpu > c gpu_card=graphics card
+graphics > t Graphics Processing Unit
+games > p arcade=video game arcade
+explosions > c explosion=explosion fireball
+shadows > t Shadows.
+reflections > c water_ripple=water reflection ripples
+= 1.8
+researchers > p lab=computer science laboratory
+millions > x:grid ; label=1+1 ×1,000,000
+= 1.9
+math > c abacus=abacus
+unbelievable > c math_board=blackboard equations
+once > x:grid ; label=all at once
+= 1.10 clear
+nvidia > l nvidia=Nvidia logo
+h100 > c h100=Nvidia H100
+700 > n 700 W
+= 1.11
+chip > c space_heater=electric space heater
+^ > k 1 chip ≈ a small space heater, running nonstop
+= 1.12
+thousands > x:grid ; label=tens of thousands of chips
+factories > p crane=construction crane
+hundreds > n 100,000s
+= 1.13 clear
+physics > p server_aisle=server racks
+advertisement > c billboard
+= 1.14
+watt > c light_bulb=light bulb
+heat > c thermometer=clinical thermometer
+= 1.15
+aisle > p hot_aisle=data center servers
+^ > s fans
+oven > c oven=oven door open
+oven > s oven
+air > c fan=industrial fan
+roar > c fan_blades=server cooling fans
+protection > c ear_muffs=ear defenders hearing protection
+floor > p raised_floor=data center raised floor tiles
+= 1.16
+sounds > c speaker_cone=loudspeaker
+= 1.17 clear
+virginia > x:map ; view=us ; pins=loudoun:Loudoun County
+^ > k LOUDOUN COUNTY, VIRGINIA · "DATA CENTER ALLEY"
+= 1.18
+loudoun > p loudoun_dc=data center Virginia
+planet > c globe=The Blue Marble
+malls > p mall=shopping mall exterior parking lot
+neighborhoods > p suburb=Ashburn Virginia
+schools > p school=school building Virginia
+farmland > p farmland=Loudoun County farm
+= 1.19 clear
+jobs > t Two jobs.
+= 1.20
+training > t *1.* Training
+= 1.21
+internet > c router=wireless router
+books > c books=stack of books
+articles > c newspaper
+code > c code_screen=computer code on screen
+conversations > c speech_bubbles=speech bubble icon
+weeks > c calendar=wall calendar
+billions > x:grid ; label=billions of settings
+word > t predict the next *word*
+= 1.22 clear
+factory > p factory=factory building construction
+expensive > c money_stack=stack of dollar bills
+= 1.23
+inference > t *2.* Inference
+= 1.24
+question > x:chat ; mode=mini ; text=What should I make for dinner?
+producing > p assembly_line=factory assembly line
+answer > c speech_bubbles
+= 1.25 clear
+everything > t What changed?
+= 1.26
+training > t Training
+today > x:counter ; to=800000000 ; label=weekly ChatGPT users (OpenAI, Oct 2025)
+students > c student=student with backpack
+coders > c programmer_laptop=person typing laptop
+doctors > c stethoscope=stethoscope
+dinner > c dinner_plate=plate of food dinner
+= 1.27 clear
+tiny > c water_drop
+= 1.28
+billions > x:counter ; to=2500000000 ; label=ChatGPT prompts a day (OpenAI, July 2025)
+= 1.29 clear
+heavier > c weights=dumbbell weights
+= 1.30
+text > x:chat ; mode=mini ; text=Write a recipe
+image > c photo_frame=picture frame
+video > c film_reel=film reel
+reasoning > c brain_model=anatomical brain model
+think > c hourglass=hourglass
+math > c math_board
+chips > c chip
+power > c pylon
+= 1.31 clear
+bigger > p crane
+= 1.32
+openai > l openai=OpenAI logo
+softbank > l softbank=SoftBank logo
+oracle > l oracle=Oracle logo
+stargate > t Stargate
+500 > n up to $500B
+^ > k STARGATE · ANNOUNCED JANUARY 2025 · UP TO $500 BILLION
+abilene > p abilene=Abilene Texas
+= 1.33
+billion > n $500,000,000,000
+economy > c globe
+buildings > p dc_campus
+chips > c chip
+power > c pylon
+= 1.34 clear
+chip > c chip
+power > c power_plug=electric plug
+heat > c thermometer
+= 1.35
+two > t Two things.
+= 1.36
+electricity > c lightning=lightning bolt
+heat > c thermometer
+= 1.37
+strange > t This is where it gets *strange*.
+
+######## CHAPTER 2
+= 2.0 clear
+2024 > n 2024
+centers > p dc_campus
+415 > n 415 TWh
+^ > k SOURCE · IEA, ENERGY AND AI (2025)
+= 2.1
+real > t Let's make it real.
+= 2.2 clear
+one > x:globe ; pct=1.5
+countries > x:globe ; light=1
+= 2.3
+fast > t Growing *fast*.
+= 2.4
+agency > l iea=International Energy Agency logo
+2030 > x:bars ; set=twh
+945 > x:bars ; set=twh ; show=2
+= 2.5
+double > x:bars ; set=twh ; show=2
+japan > x:bars ; set=twh ; show=3
+japan > p tokyo=Tokyo night skyline
+^ > k 2030 DATA CENTERS ≈ ALL OF JAPAN'S ELECTRICITY TODAY
+growth > t The driver: *AI*.
+= 2.6 clear
+states > x:map ; view=us
+4.4 > n 4.4%
+government > p lbnl2
+2028 > n up to 12%
+^ > k SOURCE · LAWRENCE BERKELEY NATIONAL LAB (2024)
+= 2.7 clear
+places > p dublin_night=Dublin at night
+= 2.8
+ireland > x:map ; view=europe ; pins=dublin:Ireland
+21 > n 21%
+homes > p dublin_homes=Dublin terraced houses
+^ > k SOURCE · CSO IRELAND (2023)
+= 2.9
+grid > c pylon
+stretched > p dublin_dc=data centre Ireland
+stopped > t *Paused.*
+= 2.10 clear
+problem > t The problem.
+= 2.11
+power > p power_plant=power station
+night > c moon=full moon
+3 > c alarm_clock=alarm clock 3 am
+clean > c leaf=green leaf isolated
+= 2.12
+solar > p solar=solar panels
+night > c moon
+wind > p wind_farm=wind turbines
+^ > s wind_turbine
+= 2.13
+never > t Clean. Always on.
+= 2.14 clear
+^ > s tv_static
+^ > k MARCH 28, 1979 · THREE MILE ISLAND, PENNSYLVANIA
+1979 > n 1979
+three > p tmi_1979=Three Mile Island 1979
+melted > p tmi_control=Three Mile Island control room
+families > p tmi_carter=Jimmy Carter Three Mile Island
+generation > p tmi
+towers > c cooling_tower_cut
+= 2.15
+reactor > t Unit 2: never ran again.
+= 2.16
+second > t Unit 1
+forty > n 40 years
+2019 > n 2019
+dangerous > t Not unsafe.
+money > c money_stack
+= 2.17
+quiet > p tmi_quiet=Three Mile Island cooling towers
+= 2.18
+2024 > n Sept 2024
+microsoft > l microsoft=Microsoft logo (2012)
+twenty > n 20-year deal
+online > c power_switch=light switch
+= 2.19
+restarted > p tmi
+^ > k THREE MILE ISLAND UNIT 1 → RENAMED "CRANE CLEAN ENERGY CENTER"
+power > t to help power *AI*
+= 2.20
+microsoft > l microsoft
+google > l google
+modular > p smr=small modular reactor
+amazon > l amazon=Amazon logo
+startups > p reactor_core=nuclear reactor core
+= 2.21
+richest > c money_stack
+retirement > p tmi_quiet
+hunger > t The size of the *hunger*.
+= 2.22 clear
+weakness > t One weakness.
+= 2.23
+slow > c snail=snail isolated
+years > c calendar
+decade > n 10+ years
+= 2.24
+race > c stopwatch=stopwatch
+= 2.25 clear
+^ > k MEMPHIS, TENNESSEE · 2024
+musk > h musk=Elon Musk
+xai > t xAI
+factory > p factory
+supercomputers > p supercomputer=supercomputer racks
+colossus > t Colossus
+months > n ~4 months
+= 2.26
+grid > c pylon
+= 2.27
+own > t So they brought their *own*.
+= 2.28
+turbines > c gas_turbine=gas turbine generator
+^ > s turbines
+generators > c generator=diesel generator trailer
+methane > c gas_flame=gas burner blue flame
+building > c generator
+= 2.29
+environmental > t Southern Environmental Law Center
+aerial > x:icons ; n=35 ; asset=generator ; label=~35 gas turbines counted from aerial images
+^ > k SOURCE · SOUTHERN ENVIRONMENTAL LAW CENTER (2025)
+= 2.30 clear
+where > p boxtown
+= 2.31
+memphis > x:map ; view=us ; pins=memphis:South Memphis
+boxtown > p boxtown2=Boxtown Memphis park
+pollution > p smokestack=industrial smokestack
+refineries > p refinery=oil refinery
+mill > p steel_mill=steel mill
+truck > c semi_truck=semi-trailer truck
+asthma > c inhaler=asthma inhaler
+= 2.32
+nitrogen > t NOx
+breathing > c lungs=human lungs model
+children > c child_inhaler=child asthma
+= 2.33
+meetings > x:people ; n=45
+^ > s meeting
+news > c tv=television set isolated
+officials > t Shelby County Health Department
+permits > c stamp=rubber stamp
+permits > s stamp
+smaller > n 15 turbines permitted
+= 2.34
+company > t xAI says:
+controls > t pollution controls
+grid > c pylon
+jobs > c hard_hat=hard hat
+= 2.35 clear
+true > t Both can be true.
+hard > t That's what makes it *hard*.
+= 2.36 clear
+picture > c globe
+= 2.37
+google > l google
+zero > t net zero by 2030
+48 > x:bars ; set=ghg ; show=1
+centers > p dc_roof
+= 2.38
+microsoft > l microsoft
+negative > t carbon negative by 2030
+29 > x:bars ; set=ghg ; show=2
+= 2.39
+companies > t Their own reports.
+^ > k SOURCES · GOOGLE 2024 ENVIRONMENTAL REPORT · MICROSOFT 2024 SUSTAINABILITY REPORT
+= 2.40 clear
+half > p steam_tower=cooling tower steam
+^ > s cooling_tower
+= 2.41
+heat > c thermometer
+= 2.42
+water > c water_drop
+= 2.43
+oregon > x:map ; view=us ; pins=the_dalles:The Dalles
+lawsuit > c gavel=gavel
+
+######## CHAPTER 3
+= 3.0 clear
+hot > c sun=sun
+= 3.1
+sweat > c sweat=sweat
+evaporates > c steam=steam cloud
+cool > c ice_cube=ice cubes
+= 3.2
+centers > p dc_roof
+= 3.3 clear
+servers > x:cool ; step=1
+water > x:cool ; step=2
+towers > x:cool ; step=3
+sky > x:cool ; step=4
+= 3.4
+important > t Here's the important part.
+= 3.5
+river > p columbia=Columbia River Gorge
+town > p dalles
+gone > c steam
+consumption > t water *consumption*
+use > t not just water use
+= 3.6 clear
+layer > t A hidden layer.
+plants > p coal_plant=coal power plant cooling towers
+cooling > c cooling_tower_cut
+twice > t AI drinks *twice*
+centers > p dc_campus
+plant > p power_plant
+= 3.7 clear
+dalles > p dalles
+^ > s drips
+= 3.8
+google > p google_dalles=Google data center The Dalles
+hydropower > p dalles_dam=The Dalles Dam
+climate > c thermometer
+perfect > t A perfect place.
+= 3.9
+2021 > n 2021
+rights > c water_tap=water tap
+newspaper > p oregonian=The Oregonian newspaper building
+using > c faucet
+= 3.10
+secret > t TRADE SECRET
+secret#2 > c stamp
+= 3.11
+sued > c gavel
+sued > s gavel
+= 3.12
+year > c calendar
+2022 > n late 2022
+settled > c documents=paper documents
+= 3.13 clear
+^ > k 2021 · GOOGLE USED ~355 MILLION GALLONS IN THE DALLES
+355 > n 355M gallons
+quarter > x:pie ; pct=29
+tripled > n ~3× in 5 years
+^ > k SOURCE · THE OREGONIAN (2022)
+= 3.14
+quarter > x:pie ; pct=29
+company > l google
+lived > p garden_hose=watering garden hose
+know > t They weren't allowed to *know*.
+= 3.15 clear
+google > l google
+infrastructure > p water_pipes=water pipes infrastructure
+river > p columbia
+desert > t Not a desert.
+= 3.16
+places > p desert=Arizona desert
+= 3.17 clear
+southwest > x:map ; view=world ; pins=phoenix:Phoenix:l,texas:Texas,spain:Spain,chile:Chile
+drought > p dry_lake=drought cracked earth
+= 3.18 clear
+^ > k MONTEVIDEO, URUGUAY · 2023
+uruguay > x:map ; view=world ; pins=montevideo:Montevideo
+reservoirs > p paso_severino=Paso Severino
+salty > c tap_water_glass=glass of tap water
+bottled > c water_bottle=water bottle
+= 3.19
+google > l google
+protesters > x:people ; n=45
+^ > s protest
+families > c water_bottle
+redesign > t redesigned: *air cooling*
+= 3.20
+chile > x:map ; pins=chile:Santiago:l
+chile > p santiago=Santiago Chile skyline
+court > c gavel
+air > c fan
+= 3.21 clear
+company > t Not just one company.
+= 3.22
+2022 > x:bars ; set=water ; show=0
+microsoft > x:bars ; set=water ; show=1
+google > x:bars ; set=water ; show=2
+^ > k SOURCE · AP NEWS (2023), COMPANY REPORTS
+= 3.23 clear
+answer > t How much water per *answer*?
+= 3.24 clear
+confusing > x:split ; show=0
+= 3.25
+riverside > p ucr=University of California Riverside
+10 > x:split ; show=1
+500 > x:split ; show=1
+^ > k SOURCE · LI, YANG, ISLAM, REN, "MAKING AI LESS THIRSTY" (2023)
+= 3.26
+altman > h altman=Sam Altman
+teaspoon > x:split ; show=2
+^ > k SOURCE · SAM ALTMAN, "THE GENTLE SINGULARITY" (2025)
+= 3.27
+bottle > x:split ; show=2
+drops > x:split ; show=2
+= 3.28
+right > x:split ; show=2 ; q=1
+= 3.29
+can > s sting
+= 3.30
+promise > t We'll settle it.
+= 3.31 clear
+machines > p power_plant
+plants > p coal_plant
+towers > c cooling_tower_cut
+chips > c chip
+= 3.32
+surprised > t What surprised me most…
+= 3.33
+machines > c robot_arm=industrial robot arm
+= 3.34
+people > c hands
+= 3.35
+millions > x:people ; n=60
+= 3.36
+hear > c ear=human ear
+
+######## CHAPTER 4
+= 4.0 clear
+fact > t One uncomfortable fact.
+= 4.1
+internet > c router
+all > t *ALL* of the internet.
+= 4.2
+encyclopedias > c encyclopedia=encyclopedia volumes
+poems > c poetry_book=old poetry book
+hate > x:blurtext ; word=hate
+violence > x:blurtext ; word=violence
+abuse > x:blurtext ; word=abuse
+corners > p dark_alley=dark alley
+= 4.3
+horrifying > x:blurtext ; word=horrifying
+racist > x:blurtext ; word=rants
+violent > x:blurtext ; word=threats
+learned > t …from *us*.
+= 4.4 clear
+problem > t The problem.
+teach > c robot_arm
+worst > x:blurtext ; word=worst
+refuse > t *Refuse.*
+= 4.5
+examples > c index_cards=index cards
+= 4.6
+thousands > x:labels ; n=1
+violence > x:labels ; n=2
+abuse > x:labels ; n=3
+hate > x:labels ; n=4
+= 4.7
+someone > c reading_glasses=eyeglasses
+= 4.8 clear
+^ > k NAIROBI, KENYA · LATE 2021
+openai > l openai
+sama > t Sama
+francisco > p san_francisco=San Francisco skyline
+nairobi > p nairobi_skyline
+ethical > t "ethical AI"
+poverty > p kibera=Kibera Nairobi
+= 4.9
+2023 > n 2023
+time > l time=Time magazine logo
+investigation > c magnifier=magnifying glass
+= 4.10 clear
+workers > p empty_office=empty office
+graduates > c mortarboard=mortarboard
+passages > x:blurtext ; word=passage
+label > c index_cards
+= 4.11
+descriptions > x:blurtext ; word=unreadable
+= 4.12
+150 > n 150–250
+passages > t passages per shift
+nine > c clock=wall clock
+^ > k SOURCE · TIME, BILLY PERRIGO (2023)
+= 4.13 clear
+^ > s room_tone
+sit > c office_chair=office chair
+= 4.14
+nine > c clock
+screen > c monitor=computer monitor
+passage > x:blurtext ; word=passage
+skip > t No skipping.
+ache > c eye=human eye close up
+home > p kitchen_table=family dinner table
+family > c dinner_plate
+eyes > c eye
+= 4.15
+time > l time
+visions > x:blurtext ; word=visions
+words > x:quote ; text=That was torture. ; by=Sama worker, to TIME (2023)
+= 4.16
+= 4.17 clear
+took > x:pay ; show=1
+= 4.18
+contract > x:pay ; show=2
+^ > k OPENAI → SAMA ~$12.50/HR · SAMA → WORKERS ~$1.32–$2/HR · SOURCE: TIME (2023)
+= 4.19 clear
+counseling > c sofa=therapist couch
+rare > t "rare and not enough"
+disputed > t Sama disputes this.
+= 4.20
+february > n Feb 2022
+ended > c contract_torn=torn paper document
+early > n 8 months early
+= 4.21
+contract > c documents
+= 4.22 clear
+2023 > n 2023
+petition > c petition=petition signatures paper
+parliament > p kenya_parliament=Parliament of Kenya building
+laws > c law_book=law books
+hazard > c hazard_sign=hazard warning sign
+chemicals > c chemical_barrel=chemical barrel
+= 4.23
+moderated > c monitor
+court > p nairobi_court=Kenya court
+diagnosed > t PTSD
+= 4.24 clear
+ghost > t "ghost work"
+automatic > c robot_arm
+sight > t kept *out of sight*
+= 4.25
+openai > l openai
+safe > c padlock=padlock isolated
+targets > t "did not set the targets"
+= 4.26 clear
+connection > x:chat ; mode=mini ; text=Can you help me?
+= 4.27
+polite > x:chat ; mode=answer ; answer=Of course! I'd be glad to help. What do you need?
+taught > t It's *taught*.
+= 4.28 clear
+reinforcement > t reinforcement learning from *human* feedback
+rank > x:rank ; show=0
+better > x:rank ; show=1
+worse > x:rank ; show=2
+harmful > x:rank ; show=3
+millions > x:people ; n=60
+behave > c thumbs_up=thumbs up hand
+= 4.29 clear
+please > t "please"
+sorry > t "I'm sorry, I can't help with that."
+hands > c hands
+= 4.30
+industry > p call_center=call center office
+= 4.31
+scale > t Scale AI
+meta > l meta=Meta Platforms logo
+14 > n $14B+
+^ > k SOURCE · REUTERS (JUNE 2025)
+= 4.32 clear
+networks > x:map ; view=world ; pins=nairobi:Kenya,manila:Philippines,india:India,caracas:Venezuela
+wages > c coins=coins pile
+= 4.33
+post > l wapo=The Washington Post logo
+philippines > p manila=Manila skyline
+remotasks > t Remotasks
+wage > t far below *minimum wage*
+cancelled > c stamp
+= 4.34
+2024 > n 2024
+letter > c letter=handwritten letter envelope
+president > p white_house=White House
+slavery > t "modern-day slavery"
+= 4.35 clear
+changing > t The picture is changing.
+doctors > c stethoscope
+lawyers > c law_book
+scientists > c microscope=optical microscope
+better > t lives changed for the better
+= 4.36
+two > x:tiers ; show=1
+top > x:tiers ; show=1
+underneath > x:tiers ; show=2
+= 4.37 clear
+money > c money_stack
+billions > n $ billions
+trillions > p stock_ticker=stock ticker
+= 4.38
+nairobi > p nairobi_night=Nairobi at night
+sleep > c alarm_clock
+= 4.39 clear
+link > x:chain ; links=power,water,metal,hands ; hot=3
+= 4.40
+chatbot > x:chat ; mode=mini ; text=…
+center > p dc_campus
+chip > c chip
+= 4.41 clear
+rock > c rock=granite sample
+^ > s digging
+
+######## CHAPTER 5
+= 5.0 clear
+sand > c sand=pile of sand
+^ > s sand
+= 5.1
+silicon > c silicon=silicon element
+melted > c furnace=molten metal crucible
+crystal > c ingot=silicon ingot
+wafers > c wafer=silicon wafer
+rooms > p cleanroom=semiconductor cleanroom
+switches > c die_shot=integrated circuit die
+hair > c hair=human hair
+= 5.2 clear
+company > p fab=semiconductor fab
+island > x:map ; view=asia ; pins=taiwan:Taiwan
+= 5.3
+tsmc > l tsmc=TSMC logo
+^ > k TSMC · TAIWAN
+vast > n ~90% of advanced chips
+systems > c gpu_card
+= 5.4 clear
+water > c water_drop
+pure > c lab_water=laboratory water bottle
+rinse > c wafer
+= 5.5 clear
+2021 > n 2021
+drought > p taiwan_drought=Taiwan drought reservoir 2021
+reservoirs > p tw_reservoir2
+farmers > p rice_paddy=Taiwan rice paddy
+factories > p fab
+trucked > c tanker_truck=water tanker truck
+^ > k TAIWAN · 2021
+= 5.6
+trucks > s trucks
+island > x:map ; view=asia ; pins=taiwan:Taiwan
+= 5.7 clear
+china > x:strait
+oil > c oil_barrel=oil drum
+= 5.8 clear
+materials > c gallium=gallium crystals
+= 5.9
+gallium > c gallium
+germanium > c germanium=germanium element
+china > x:map ; view=asia ; pins=china:China
+98 > n ~98%
+^ > k SOURCE · USGS
+= 5.10
+2023 > n 2023
+restricting > c padlock
+2024 > n Dec 2024
+banned > t BANNED → US
+weapon > c chess=chess pieces
+^ > k NOTE · THE US BAN WAS SUSPENDED FROM NOV 2025 TO NOV 2026; LICENCES STILL REQUIRED
+= 5.11 clear
+copper > c copper_wire
+wiring > p copper_spools=copper cable reels
+line > c pylon
+battery > p battery_bank=battery energy storage
+cobalt > c cobalt_ore=cobalt ore
+lithium > c lithium=lithium battery cells
+= 5.12 clear
+70 > n ~70%
+congo > x:map ; view=africa ; pins=kinshasa:DR Congo
+documented > l amnesty=Amnesty International
+children > p cobalt_mine=cobalt mining Congo
+^ > s digging
+dangerous > p mine_pit=artisanal mining pit
+= 5.13 clear
+honest > t To be fair:
+phones > c smartphone
+cars > c ev=electric car charging
+batteries > c lithium
+storage > p battery_bank
+chain > x:chain ; links=power,water,metal,hands ; hot=2
+= 5.14 clear
+end > p ewaste=electronic waste pile
+^ > s ewaste
+= 5.15
+forever > c chip
+replace > c gpu_card
+waste > p ewaste
+= 5.16
+2024 > n 2024
+nature > t Nature Computational Science
+1.2 > n 1.2–5 million tonnes
+^ > k SOURCE · WANG ET AL., NATURE COMPUTATIONAL SCIENCE (2024)
+= 5.17
+500 > x:eiffel
+^ > k 5 MILLION TONNES ≈ ~500 EIFFEL TOWERS
+scrap > p ewaste
+= 5.18 clear
+oregon > x:map ; view=world ; pins=the_dalles:Oregon
+kenya > x:map ; pins=nairobi:Kenya
+taiwan > x:map ; pins=taiwan:Taiwan
+congo > x:map ; pins=kinshasa:Congo
+= 5.19
+away > t Here it stops being *far away*.
+
+######## CHAPTER 6
+= 6.0 clear
+grid > x:bill
+plants > p power_plant
+lines > c pylon
+substations > p substation=electrical substation
+= 6.1
+spread > x:people ; n=40
+= 6.2
+you > x:bill ; circle=1
+you > s pen
+= 6.3 clear
+pjm > x:pjm
+^ > k PJM · THE GRID SERVING ~65 MILLION PEOPLE
+65 > n 65 million people
+alley > p loudoun_dc
+= 6.4
+auction > c auction_gavel=auction gavel
+future > p power_plant
+= 6.5 clear
+2024 > x:bars ; set=pjm ; show=1
+270 > x:bars ; set=pjm ; show=2
+^ > k $28.92 → $269.92 PER MEGAWATT-DAY · SOURCE: PJM (2024)
+= 6.6
+ten > n ~9×
+= 6.7
+monitor > t independent market monitor
+demand > p loudoun_dc
+= 6.8
+2025 > n 2025
+maryland > x:map ; view=us ; pins=ohio:Ohio:l,pa:Pennsylvania:t,maryland:Maryland:b,nj:New Jersey
+bills > x:bill ; circle=1
+= 6.9 clear
+ohio > p ohio_house=house Ohio
+typed > c smartphone
+boom > p crane
+bill > x:bill ; circle=1
+= 6.10 clear
+land > p md_farm=Maryland farm field
+= 6.11
+travel > c pylon
+virginia > p loudoun_dc
+lines > p transmission=high voltage transmission line
+^ > s powerline
+= 6.12
+maryland > x:map ; view=us ; pins=maryland:Maryland
+67 > n ~67 miles
+farms > p md_farm
+forests > p forest=Maryland forest trees
+demand > p loudoun_dc
+= 6.13
+generations > p old_barn=old barn farm
+towers > p transmission
+domain > t eminent domain
+private > c fence=wooden fence
+no > t even if the owner says *no*
+= 6.14
+farmers > p farmer=farmer tractor field
+lines > p transmission
+= 6.15 clear
+door > p dc_night=data center at night
+= 6.16
+virginia > p suburb
+hum > c speaker_cone
+^ > s hum_night
+night > c moon
+chest > t a sound you *feel*
+sleep > c bed=bed bedroom
+windows > c window=window closed
+= 6.17 clear
+secret > c envelope_sealed=sealed envelope wax
+= 6.18
+names > t PROJECT ••••••
+agreements > c nda=confidential document
+approved > c stamp
+approved > s stamp
+= 6.19 clear
+breaks > c tax_form=tax form
+virginia > x:map ; view=us ; pins=loudoun:Virginia
+watchdog > t JLARC
+millions > n $928.6M
+^ > k SOURCE · JLARC (2024): $928.6M IN FORGONE SALES TAX, FY2023
+= 6.20 clear
+back > t What do towns get back?
+= 6.21
+construction > p construction_workers=construction workers
+while > c hourglass
+dozen > n a few dozen jobs
+= 6.22 clear
+fair > t To be fair:
+= 6.23
+tax > c tax_form
+loudoun > p loudoun_sign=Loudoun County sign
+schools > p school
+lower > c arrow_down=downward arrow
+= 6.24
+win > t Some win.
+pay > t Some pay.
+decided > t …not the people who *decided*.
+= 6.25 clear
+memphis > c gas_turbine
+dalles > p dalles
+nairobi > p nairobi_skyline
+= 6.26
+world > c globe
+places > x:map ; view=world ; pins=memphis:Memphis,the_dalles:The Dalles,nairobi:Nairobi
+= 6.27 clear
+costs > t The costs.
+= 6.28
+side > t The other side.
+= 6.29
+answers > t Strong answers.
+true > t Some are *true*.
+
+######## CHAPTER 7
+= 7.0 clear
+one > t *1.* One question is tiny.
+= 7.1
+altman > h altman
+0.34 > n 0.34 Wh
+^ > k SOURCE · SAM ALTMAN (JUNE 2025)
+= 7.2
+oven > c oven
+second > n ≈ 1 second
+led > c led_bulb=LED light bulb
+minutes > n ≈ 2 minutes
+^ > k 1 AI QUESTION ≈ AN OVEN RUNNING FOR ABOUT 1 SECOND
+= 7.3 clear
+google > l google
+gemini > t Gemini
+0.24 > n 0.24 Wh
+0.26 > n 0.26 mL
+five > x:drops ; n=5
+33 > n 33× less
+^ > k SOURCE · GOOGLE (AUGUST 2025)
+= 7.4 clear
+streaming > x:stack ; n=235 ; show=0
+80 > x:stack ; show=1
+hundred > x:stack ; show=2
+^ > k SOURCE · IEA, G. KAMIYA (2020)
+= 7.5 clear
+two > t *2.* More efficient.
+= 7.6
+chips > c gpu_card
+deepseek > l deepseek=DeepSeek logo
+fraction > t a fraction of the cost
+= 7.7 clear
+three > t *3.* AI could help fix it.
+= 7.8
+deepmind > l deepmind=DeepMind logo
+40 > n up to 40%
+^ > k SOURCE · DEEPMIND (2016)
+weather > p weather_map=weather satellite image hurricane
+batteries > c lithium
+materials > c crystal=crystal structure model
+grids > p control_room=power grid control room
+= 7.9
+solar > p solar
+wind > p wind_farm
+= 7.10 clear
+points > t Real points.
+= 7.11
+problem > t But…
+name > t It has a *name*.
+= 7.12 clear
+^ > k 1865 · THE JEVONS PARADOX
+1865 > n 1865
+jevons > h jevons=William Stanley Jevons
+= 7.13
+steam > p steam_engine=Watt steam engine engraving
+^ > s steam_engine
+coal > c coal=lump of coal
+britain > p uk_industry2
+= 7.14
+more > t Coal use went *up*.
+= 7.15
+cheaper > c price_tag=price tag
+more#2 > x:people ; n=60
+= 7.16
+paradox > t The *Jevons* paradox
+= 7.17 clear
+2025 > n Jan 2025
+deepseek > l deepseek
+nadella > h nadella=Satya Nadella
+posted > x:quote ; text=Jevons paradox strikes again! ; by=Satya Nadella, on X (Jan 2025)
+skyrocket > c rocket=rocket launch
+= 7.18 clear
+agency > l iea
+double > x:bars ; set=twh ; show=2
+efficient > x:counter ; to=9000000000 ; label=questions (illustration) ; fast=1
+= 7.19
+cheaper > c price_tag
+= 7.20
+more > x:counter ; to=90000000000 ; label=questions (illustration) ; fast=2
+
+######## ENDING
+= 8.0 clear
+promised > t What does one question cost?
+= 8.1
+bottle > x:split ; show=2
+= 8.2
+measuring > c measuring_tape=tape measure
+= 8.3 clear
+university > p ucr
+older > t older model
+conversation > c speech_bubbles
+hidden > p power_plant
+= 8.4 clear
+newer > t newer models
+single > x:chat ; mode=mini ; text=What should I make for dinner?
+images > c photo_frame
+videos > c film_reel
+reasoning > c hourglass
+= 8.5 clear
+real > x:split ; show=2 ; verdict=1
+^ > k BOTH NUMBERS ARE REAL. BOTH NUMBERS ARE PARTIAL.
+= 8.6
+incomplete > x:split ; show=2 ; verdict=2
+= 8.7 clear
+answer > t The answer:
+= 8.8
+nothing > t One question costs almost *nothing*.
+= 8.9 clear
+trick > x:chat ; mode=blink
+= 8.10
+cloud > c cloud_soft
+weightless > c feather
+= 8.11 clear
+never > t The cost was never in *one* question.
+= 8.12
+billions > x:counter ; to=2500000000 ; label=ChatGPT prompts a day (OpenAI, July 2025)
+plants > p power_plant
+turbines > c gas_turbine
+dalles > p dalles
+pennsylvania > p tmi
+= 8.13 clear
+hour > t Some costs don't fit in a *watt-hour*.
+= 8.14
+nairobi > p nairobi_night
+ohio > x:bill ; circle=1
+town > p dalles
+court > c gavel
+= 8.15 clear
+stop > t Not "stop using AI".
+= 8.16
+use > c programmer_laptop
+tools > c toolbox=toolbox
+problems > c puzzle=jigsaw puzzle piece
+= 8.17
+see > c eye
+= 8.18
+hidden > c curtain=red curtain
+= 8.19 clear
+europe > p eu_flag=Flag of Europe
+rules > p brussels=European Parliament Brussels
+energy > c lightning
+water > c water_drop
+law > t EU AI Act
+document > c documents
+^ > k SOURCES · EU ENERGY EFFICIENCY DIRECTIVE · EU AI ACT
+= 8.20
+states > x:map ; view=us
+grid > c pylon
+= 8.21 clear
+do > t So what can you do?
+= 8.22
+officials > p dalles_cityhall
+water > c faucet
+power > c pylon
+grid > t Who pays for the new grid?
+= 8.23
+journalists > c newspaper
+oregon > p oregonian
+court > c gavel
+= 8.24
+open > c eye
+guilt > t Not guilt.
+awareness > t *Awareness.*
+= 8.25 clear
+cloud > c cloud_soft
+= 8.26
+building > p dc_ashburn
+line > c pylon
+river > p columbia
+mine > p cobalt_mine
+person > c hands
+= 8.27
+bill > x:bill ; circle=1
+= 8.28 clear
+dalles > p dalles_sunset=Columbia River sunset The Dalles
+building > p google_dalles
+= 8.29
+towns > x:map ; view=us
+= 8.30
+yours > t Maybe *yours*.
+= 8.31 clear
+^ > x:chat ; mode=blink ; text=Would you still ask AI to plan your dinner… if you could see the bill?
+comments > s key
+= 8.32
+= 8.33
+next > s sting_title

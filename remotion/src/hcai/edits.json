@@ -1,0 +1,285 @@
+{
+  "_doc": "Scene replacements from review notes, applied by scripts/hcai_strip.py after it picks the scenes. Each edit removes the scenes and chat screens that start in [from, to) of chapter ch and puts one scene at `from` (seconds on the film's timeline); it runs until the next scene. mode anim = a 2D animation, anim3d = a 3D scene, image = a full-frame still (user-supplied, in public/hcai/user).",
+  "edits": [
+    {
+      "ch": 0,
+      "from": 1.5,
+      "to": 18.1,
+      "mode": "anim",
+      "ref": "laptop",
+      "note": "0:01 MacBook with an LLM app; 0:04-0:14 informative 2D animation"
+    },
+    {
+      "ch": 0,
+      "from": 24.13,
+      "to": 28.6,
+      "mode": "anim",
+      "ref": "town",
+      "note": "0:25 2D animation, saturated"
+    },
+    {
+      "ch": 0,
+      "from": 28.63,
+      "to": 32.7,
+      "mode": "image",
+      "ref": "newspaper",
+      "note": "0:28 the user's newspaper image"
+    },
+    {
+      "ch": 0,
+      "from": 32.7,
+      "to": 36.3,
+      "mode": "anim",
+      "ref": "goliath",
+      "note": "0:33 2D animation"
+    },
+    {
+      "ch": 0,
+      "from": 36.36,
+      "to": 40.1,
+      "mode": "anim3d",
+      "ref": "glass",
+      "note": "0:36 in 3D"
+    },
+    {
+      "ch": 0,
+      "from": 46.23,
+      "to": 56.1,
+      "mode": "anim",
+      "ref": "coins",
+      "note": "0:46 coins with the typography"
+    },
+    {
+      "ch": 0,
+      "from": 72.44,
+      "to": 83.4,
+      "mode": "anim",
+      "ref": "chain",
+      "note": "1:21 2D animation"
+    },
+    {
+      "ch": 0,
+      "from": 83.45,
+      "to": 97.0,
+      "mode": "anim3d",
+      "ref": "thinker",
+      "note": "1:23 and 1:28 3D person with question marks above the head"
+    },
+    {
+      "ch": 1,
+      "from": 137.37,
+      "to": 146.6,
+      "mode": "image",
+      "ref": "gpu",
+      "note": "ch1 0:40 the user's GPU image (was a desktop CPU photo)"
+    },
+    {
+      "ch": 1,
+      "from": 100.6,
+      "to": 110.7,
+      "mode": "anim",
+      "ref": "c1cloud",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 110.7,
+      "to": 116.0,
+      "mode": "anim",
+      "ref": "c1buildings",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 116.0,
+      "to": 133.6,
+      "mode": "anim",
+      "ref": "c1journey",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 133.6,
+      "to": 137.3,
+      "mode": "anim",
+      "ref": "c1divein",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 146.63,
+      "to": 149.4,
+      "mode": "anim",
+      "ref": "c1games",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 149.4,
+      "to": 167.3,
+      "mode": "anim",
+      "ref": "c1parallel",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 167.3,
+      "to": 176.5,
+      "mode": "anim",
+      "ref": "c1watts",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 176.5,
+      "to": 185.9,
+      "mode": "anim",
+      "ref": "c1scale",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 185.9,
+      "to": 194.1,
+      "mode": "anim",
+      "ref": "c1heat",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 194.1,
+      "to": 208.2,
+      "mode": "anim",
+      "ref": "c1hotaisle",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 208.2,
+      "to": 213.9,
+      "mode": "anim",
+      "ref": "c1sound",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 219.9,
+      "to": 226.5,
+      "mode": "anim",
+      "ref": "c1neighbours",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 226.5,
+      "to": 245.5,
+      "mode": "anim",
+      "ref": "c1training",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 245.5,
+      "to": 251.7,
+      "mode": "anim",
+      "ref": "c1factory",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 251.7,
+      "to": 261.7,
+      "mode": "anim",
+      "ref": "c1inference",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 261.7,
+      "to": 276.9,
+      "mode": "anim",
+      "ref": "c1users",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 276.9,
+      "to": 282.7,
+      "mode": "anim",
+      "ref": "c1tiny",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 282.7,
+      "to": 306.9,
+      "mode": "anim",
+      "ref": "c1heavier",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 306.9,
+      "to": 309.6,
+      "mode": "anim",
+      "ref": "c1bigger",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 309.6,
+      "to": 326.9,
+      "mode": "anim",
+      "ref": "c1stargate",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 326.9,
+      "to": 336.0,
+      "mode": "anim",
+      "ref": "c1halftrillion",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 336.0,
+      "to": 345.0,
+      "mode": "anim",
+      "ref": "c1loop",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 345.0,
+      "to": 350.6,
+      "mode": "anim",
+      "ref": "c1twothings",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 1,
+      "from": 350.6,
+      "to": 355.8,
+      "mode": "anim",
+      "ref": "c1strange",
+      "note": "whole film in 2D (review)"
+    },
+    {
+      "ch": 0,
+      "from": 18.23,
+      "to": 24.1,
+      "mode": "anim",
+      "ref": "cocampus",
+      "note": "whole film in 2D"
+    },
+    {
+      "ch": 0,
+      "from": 62.23,
+      "to": 67.1,
+      "mode": "anim",
+      "ref": "coboxtown",
+      "note": "whole film in 2D"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{"edits": [
+{"ch": 8, "from": 1829.03, "to": 1838.95, "mode": "anim", "ref": "c8split", "note": "the question again; bottle per conversation vs drops per question; different things"},
+{"ch": 8, "from": 1838.95, "to": 1850.9, "mode": "anim", "ref": "c8older", "note": "2023 university estimate: older model, whole conversation, power-plant water"},
+{"ch": 8, "from": 1850.9, "to": 1857.5, "mode": "anim", "ref": "c8newer", "note": "newer company numbers: efficient models, one typical text question"},
+{"ch": 8, "from": 1857.5, "to": 1865.85, "mode": "anim", "ref": "c8notcounted", "note": "mostly not included: images, videos, reasoning models"},
+{"ch": 8, "from": 1865.85, "to": 1870.3, "mode": "anim", "ref": "c8both", "note": "both real, both incomplete: two pieces of a bigger puzzle"},
+{"ch": 8, "from": 1870.3, "to": 1877.7, "mode": "anim", "ref": "c8answer", "note": "the answer: receipt for one question, almost nothing; dives into the screen before the film's night chat (1877.9-1883)"},
+{"ch": 8, "from": 1883.0, "to": 1888.4, "mode": "anim", "ref": "c8billions", "note": "never in one question; billions every day"},
+{"ch": 8, "from": 1888.4, "to": 1896.3, "mode": "anim", "ref": "c8places", "note": "new power plants; Memphis turbines, The Dalles water, Pennsylvania reactor"},
+{"ch": 8, "from": 1896.3, "to": 1910.3, "mode": "anim", "ref": "c8watthour", "note": "costs that don't fit in a watt-hour: Nairobi, Ohio, The Dalles"},
+{"ch": 8, "from": 1910.3, "to": 1916.6, "mode": "anim", "ref": "c8notstop", "note": "not stop using AI; I use it"},
+{"ch": 8, "from": 1916.6, "to": 1922.75, "mode": "anim", "ref": "c8tools", "note": "one of the most powerful tools; problems we can't solve alone"},
+{"ch": 8, "from": 1922.75, "to": 1930.5, "mode": "anim", "ref": "c8hidden", "note": "can't decide what we can't see; the bill is hidden"},
+{"ch": 8, "from": 1930.5, "to": 1938.9, "mode": "anim", "ref": "c8eurules", "note": "EU: large data centres report energy and water"},
+{"ch": 8, "from": 1938.9, "to": 1947.45, "mode": "anim", "ref": "c8aiact", "note": "EU AI Act: biggest models document energy; board map follows at 1947.48"},
+{"ch": 8, "from": 1954.707, "to": 1958.5, "mode": "anim", "ref": "c8grid", "note": "the grid they depend on; Ohio tariff; what can you do?"},
+{"ch": 8, "from": 1958.5, "to": 1969.1, "mode": "anim", "ref": "c8ask", "note": "1: ask local officials about water, power and the grid"},
+{"ch": 8, "from": 1969.1, "to": 1974.5, "mode": "anim", "ref": "c8press", "note": "2: support journalists (The Oregonian)"},
+{"ch": 8, "from": 1974.5, "to": 1980.3, "mode": "anim", "ref": "c8eyes", "note": "3: eyes open, not guilt, awareness"},
+{"ch": 8, "from": 1980.3, "to": 1987.6, "mode": "anim", "ref": "c8chain", "note": "the cloud was never a cloud: the cold open's chain returns"},
+{"ch": 8, "from": 1987.6, "to": 1995.3, "mode": "anim", "ref": "c8fullbill", "note": "the more who know, the full bill"},
+{"ch": 8, "from": 1995.3, "to": 2002.5, "mode": "anim", "ref": "c8dalles", "note": "back in The Dalles at sunset; Google kept building; board map follows at 2002.58 to the end"}
+]}

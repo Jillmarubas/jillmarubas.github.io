@@ -1,0 +1,2669 @@
+{
+"frames": [
+{
+"ch": 0,
+"at": 1.5,
+"kind": "anim",
+"ref": "laptop",
+"mode": "anim",
+"hold": 16.73,
+"n": 1,
+"captions": []
+},
+{
+"ch": 0,
+"at": 18.23,
+"kind": "anim",
+"ref": "cocampus",
+"mode": "anim",
+"hold": 5.9,
+"n": 2,
+"captions": []
+},
+{
+"ch": 0,
+"at": 24.13,
+"kind": "anim",
+"ref": "town",
+"mode": "anim",
+"hold": 4.5,
+"n": 3,
+"captions": [
+{
+"at": 24.13,
+"text": "THE DALLES, OREGON · POP. ~16,000"
+},
+{
+"at": 24.13,
+"text": "2021"
+}
+]
+},
+{
+"ch": 0,
+"at": 28.63,
+"kind": "image",
+"ref": "newspaper",
+"mode": "image",
+"hold": 4.07,
+"n": 4,
+"captions": []
+},
+{
+"ch": 0,
+"at": 32.7,
+"kind": "anim",
+"ref": "goliath",
+"mode": "anim",
+"hold": 3.66,
+"n": 5,
+"captions": []
+},
+{
+"ch": 0,
+"at": 36.36,
+"kind": "anim3d",
+"ref": "glass",
+"mode": "anim3d",
+"hold": 3.84,
+"n": 6,
+"captions": []
+},
+{
+"ch": 0,
+"at": 40.2,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "world",
+"pins": "nairobi:on"
+}
+},
+{
+"at": 38,
+"o": {
+"pins": "the_dalles:Oregon"
+}
+},
+{
+"at": 82,
+"o": {
+"pins": "nairobi:Nairobi"
+}
+}
+],
+"dur": 145
+},
+"mode": "board",
+"hold": 6.03,
+"n": 7,
+"captions": []
+},
+{
+"ch": 0,
+"at": 46.23,
+"kind": "anim",
+"ref": "coins",
+"mode": "anim",
+"hold": 9.97,
+"n": 8,
+"captions": []
+},
+{
+"ch": 0,
+"at": 56.2,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": -200,
+"o": {
+"view": "world",
+"pins": "nairobi:on"
+}
+},
+{
+"at": -200,
+"o": {
+"pins": "the_dalles:Oregon"
+}
+},
+{
+"at": -200,
+"o": {
+"pins": "nairobi:Nairobi"
+}
+},
+{
+"at": 4,
+"o": {
+"pins": "tmi:Pennsylvania"
+}
+},
+{
+"at": 167,
+"o": {
+"pins": "memphis:Memphis"
+}
+}
+],
+"dur": 145
+},
+"mode": "board",
+"hold": 6.03,
+"n": 9,
+"captions": []
+},
+{
+"ch": 0,
+"at": 62.23,
+"kind": "anim",
+"ref": "coboxtown",
+"mode": "anim",
+"hold": 4.93,
+"n": 10,
+"captions": []
+},
+{
+"ch": 0,
+"at": 67.16,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": -200,
+"o": {
+"view": "world",
+"pins": "nairobi:on"
+}
+},
+{
+"at": -200,
+"o": {
+"pins": "the_dalles:Oregon"
+}
+},
+{
+"at": -200,
+"o": {
+"pins": "nairobi:Nairobi"
+}
+},
+{
+"at": -200,
+"o": {
+"pins": "tmi:Pennsylvania"
+}
+},
+{
+"at": -200,
+"o": {
+"pins": "memphis:Memphis"
+}
+},
+{
+"at": 4,
+"o": {
+"pins": "dublin:Dublin,taiwan:Taiwan,congo:Congo"
+}
+}
+],
+"dur": 127
+},
+"mode": "board",
+"hold": 5.28,
+"n": 11,
+"captions": []
+},
+{
+"ch": 0,
+"at": 72.44,
+"kind": "anim",
+"ref": "chain",
+"mode": "anim",
+"hold": 11.01,
+"n": 12,
+"captions": []
+},
+{
+"ch": 0,
+"at": 83.45,
+"kind": "anim3d",
+"ref": "thinker",
+"mode": "anim3d",
+"hold": 13.586,
+"n": 13,
+"captions": []
+},
+{
+"ch": 1,
+"at": 100.6,
+"kind": "anim",
+"ref": "c1cloud",
+"mode": "anim",
+"hold": 10.1,
+"n": 14,
+"captions": []
+},
+{
+"ch": 1,
+"at": 110.7,
+"kind": "anim",
+"ref": "c1buildings",
+"mode": "anim",
+"hold": 5.3,
+"n": 15,
+"captions": []
+},
+{
+"ch": 1,
+"at": 116.0,
+"kind": "anim",
+"ref": "c1journey",
+"mode": "anim",
+"hold": 17.6,
+"n": 16,
+"captions": []
+},
+{
+"ch": 1,
+"at": 133.6,
+"kind": "anim",
+"ref": "c1divein",
+"mode": "anim",
+"hold": 3.77,
+"n": 17,
+"captions": []
+},
+{
+"ch": 1,
+"at": 137.37,
+"kind": "image",
+"ref": "gpu",
+"mode": "image",
+"hold": 9.26,
+"n": 18,
+"captions": []
+},
+{
+"ch": 1,
+"at": 146.63,
+"kind": "anim",
+"ref": "c1games",
+"mode": "anim",
+"hold": 2.77,
+"n": 19,
+"captions": []
+},
+{
+"ch": 1,
+"at": 149.4,
+"kind": "anim",
+"ref": "c1parallel",
+"mode": "anim",
+"hold": 17.9,
+"n": 20,
+"captions": []
+},
+{
+"ch": 1,
+"at": 167.3,
+"kind": "anim",
+"ref": "c1watts",
+"mode": "anim",
+"hold": 9.2,
+"n": 21,
+"captions": []
+},
+{
+"ch": 1,
+"at": 176.5,
+"kind": "anim",
+"ref": "c1scale",
+"mode": "anim",
+"hold": 9.4,
+"n": 22,
+"captions": [
+{
+"at": 176.5,
+"text": "1 chip ≈ a small space heater, running nonstop"
+}
+]
+},
+{
+"ch": 1,
+"at": 185.9,
+"kind": "anim",
+"ref": "c1heat",
+"mode": "anim",
+"hold": 8.2,
+"n": 23,
+"captions": []
+},
+{
+"ch": 1,
+"at": 194.1,
+"kind": "anim",
+"ref": "c1hotaisle",
+"mode": "anim",
+"hold": 14.1,
+"n": 24,
+"captions": []
+},
+{
+"ch": 1,
+"at": 208.2,
+"kind": "anim",
+"ref": "c1sound",
+"mode": "anim",
+"hold": 5.756,
+"n": 25,
+"captions": []
+},
+{
+"ch": 1,
+"at": 213.956,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "us",
+"pins": "loudoun:Loudoun County"
+}
+}
+],
+"dur": 143
+},
+"mode": "board",
+"hold": 5.944,
+"n": 26,
+"captions": [
+{
+"at": 213.956,
+"text": "LOUDOUN COUNTY, VIRGINIA · \"DATA CENTER ALLEY\""
+}
+]
+},
+{
+"ch": 1,
+"at": 219.9,
+"kind": "anim",
+"ref": "c1neighbours",
+"mode": "anim",
+"hold": 6.6,
+"n": 27,
+"captions": []
+},
+{
+"ch": 1,
+"at": 226.5,
+"kind": "anim",
+"ref": "c1training",
+"mode": "anim",
+"hold": 19.0,
+"n": 28,
+"captions": []
+},
+{
+"ch": 1,
+"at": 245.5,
+"kind": "anim",
+"ref": "c1factory",
+"mode": "anim",
+"hold": 6.2,
+"n": 29,
+"captions": []
+},
+{
+"ch": 1,
+"at": 251.7,
+"kind": "anim",
+"ref": "c1inference",
+"mode": "anim",
+"hold": 10.0,
+"n": 30,
+"captions": []
+},
+{
+"ch": 1,
+"at": 261.7,
+"kind": "anim",
+"ref": "c1users",
+"mode": "anim",
+"hold": 15.2,
+"n": 31,
+"captions": []
+},
+{
+"ch": 1,
+"at": 276.9,
+"kind": "anim",
+"ref": "c1tiny",
+"mode": "anim",
+"hold": 5.8,
+"n": 32,
+"captions": []
+},
+{
+"ch": 1,
+"at": 282.7,
+"kind": "anim",
+"ref": "c1heavier",
+"mode": "anim",
+"hold": 24.2,
+"n": 33,
+"captions": []
+},
+{
+"ch": 1,
+"at": 306.9,
+"kind": "anim",
+"ref": "c1bigger",
+"mode": "anim",
+"hold": 2.7,
+"n": 34,
+"captions": []
+},
+{
+"ch": 1,
+"at": 309.6,
+"kind": "anim",
+"ref": "c1stargate",
+"mode": "anim",
+"hold": 17.3,
+"n": 35,
+"captions": [
+{
+"at": 309.726,
+"text": "STARGATE · ANNOUNCED JANUARY 2025 · UP TO $500 BILLION"
+}
+]
+},
+{
+"ch": 1,
+"at": 326.9,
+"kind": "anim",
+"ref": "c1halftrillion",
+"mode": "anim",
+"hold": 9.1,
+"n": 36,
+"captions": []
+},
+{
+"ch": 1,
+"at": 336.0,
+"kind": "anim",
+"ref": "c1loop",
+"mode": "anim",
+"hold": 9.0,
+"n": 37,
+"captions": []
+},
+{
+"ch": 1,
+"at": 345.0,
+"kind": "anim",
+"ref": "c1twothings",
+"mode": "anim",
+"hold": 5.6,
+"n": 38,
+"captions": []
+},
+{
+"ch": 1,
+"at": 350.6,
+"kind": "anim",
+"ref": "c1strange",
+"mode": "anim",
+"hold": 5.218,
+"n": 39,
+"captions": []
+},
+{
+"ch": 2,
+"at": 359.2,
+"kind": "anim",
+"ref": "c2twh",
+"mode": "anim",
+"hold": 10.7,
+"n": 40,
+"captions": [
+{
+"at": 359.268,
+"text": "SOURCE · IEA, ENERGY AND AI (2025)"
+},
+{
+"at": 359.388,
+"text": "2024"
+}
+]
+},
+{
+"ch": 2,
+"at": 369.9,
+"kind": "anim",
+"ref": "c2share",
+"mode": "anim",
+"hold": 9.7,
+"n": 41,
+"captions": []
+},
+{
+"ch": 2,
+"at": 379.6,
+"kind": "anim",
+"ref": "c2growth",
+"mode": "anim",
+"hold": 17.1,
+"n": 42,
+"captions": [
+{
+"at": 388.128,
+"text": "2030 DATA CENTERS ≈ ALL OF JAPAN'S ELECTRICITY TODAY"
+}
+]
+},
+{
+"ch": 2,
+"at": 396.7,
+"kind": "anim",
+"ref": "c2us",
+"mode": "anim",
+"hold": 13.2,
+"n": 43,
+"captions": [
+{
+"at": 396.868,
+"text": "SOURCE · LAWRENCE BERKELEY NATIONAL LAB (2024)"
+}
+]
+},
+{
+"ch": 2,
+"at": 409.9,
+"kind": "anim",
+"ref": "c2ireland",
+"mode": "anim",
+"hold": 13.1,
+"n": 44,
+"captions": [
+{
+"at": 412.488,
+"text": "SOURCE · CSO IRELAND (2023)"
+}
+]
+},
+{
+"ch": 2,
+"at": 423.0,
+"kind": "anim",
+"ref": "c2dublin",
+"mode": "anim",
+"hold": 7.1,
+"n": 45,
+"captions": []
+},
+{
+"ch": 2,
+"at": 430.1,
+"kind": "anim",
+"ref": "c2problem",
+"mode": "anim",
+"hold": 13.8,
+"n": 46,
+"captions": []
+},
+{
+"ch": 2,
+"at": 443.9,
+"kind": "anim",
+"ref": "c2gap",
+"mode": "anim",
+"hold": 9.7,
+"n": 47,
+"captions": []
+},
+{
+"ch": 2,
+"at": 453.6,
+"kind": "anim",
+"ref": "c2tmi",
+"mode": "anim",
+"hold": 15.4,
+"n": 48,
+"captions": [
+{
+"at": 453.788,
+"text": "MARCH 28, 1979 · THREE MILE ISLAND, PENNSYLVANIA"
+},
+{
+"at": 455.388,
+"text": "1979"
+}
+]
+},
+{
+"ch": 2,
+"at": 469.0,
+"kind": "anim",
+"ref": "c2units",
+"mode": "anim",
+"hold": 15.6,
+"n": 49,
+"captions": [
+{
+"at": 476.208,
+"text": "2019"
+}
+]
+},
+{
+"ch": 2,
+"at": 484.6,
+"kind": "anim",
+"ref": "c2crane",
+"mode": "anim",
+"hold": 15.4,
+"n": 50,
+"captions": [
+{
+"at": 492.608,
+"text": "THREE MILE ISLAND UNIT 1 → RENAMED \"CRANE CLEAN ENERGY CENTER\""
+}
+]
+},
+{
+"ch": 2,
+"at": 500.0,
+"kind": "anim",
+"ref": "c2bigtech",
+"mode": "anim",
+"hold": 16.8,
+"n": 51,
+"captions": []
+},
+{
+"ch": 2,
+"at": 516.8,
+"kind": "anim",
+"ref": "c2slow",
+"mode": "anim",
+"hold": 10.5,
+"n": 52,
+"captions": []
+},
+{
+"ch": 2,
+"at": 527.3,
+"kind": "anim",
+"ref": "c2colossus",
+"mode": "anim",
+"hold": 18.2,
+"n": 53,
+"captions": [
+{
+"at": 527.408,
+"text": "MEMPHIS, TENNESSEE · 2024"
+}
+]
+},
+{
+"ch": 2,
+"at": 545.5,
+"kind": "anim",
+"ref": "c2turbines",
+"mode": "anim",
+"hold": 14.4,
+"n": 54,
+"captions": [
+{
+"at": 554.068,
+"text": "SOURCE · SOUTHERN ENVIRONMENTAL LAW CENTER (2025)"
+}
+]
+},
+{
+"ch": 2,
+"at": 559.9,
+"kind": "anim",
+"ref": "c2street",
+"mode": "anim",
+"hold": 4.118,
+"n": 55,
+"captions": []
+},
+{
+"ch": 2,
+"at": 564.018,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "us",
+"pins": "memphis:South Memphis"
+}
+}
+],
+"dur": 169
+},
+"mode": "board",
+"hold": 7.052,
+"n": 56,
+"captions": []
+},
+{
+"ch": 2,
+"at": 571.07,
+"kind": "anim",
+"ref": "c2pollution",
+"mode": "anim",
+"hold": 6.53,
+"n": 57,
+"captions": []
+},
+{
+"ch": 2,
+"at": 577.6,
+"kind": "anim",
+"ref": "c2nox",
+"mode": "anim",
+"hold": 7.9,
+"n": 58,
+"captions": []
+},
+{
+"ch": 2,
+"at": 585.5,
+"kind": "anim",
+"ref": "c2meetings",
+"mode": "anim",
+"hold": 9.1,
+"n": 59,
+"captions": []
+},
+{
+"ch": 2,
+"at": 594.6,
+"kind": "anim",
+"ref": "c2claims",
+"mode": "anim",
+"hold": 13.7,
+"n": 60,
+"captions": []
+},
+{
+"ch": 2,
+"at": 608.3,
+"kind": "anim",
+"ref": "c2google",
+"mode": "anim",
+"hold": 18.5,
+"n": 61,
+"captions": []
+},
+{
+"ch": 2,
+"at": 626.8,
+"kind": "anim",
+"ref": "c2microsoft",
+"mode": "anim",
+"hold": 12.4,
+"n": 62,
+"captions": [
+{
+"at": 634.868,
+"text": "SOURCES · GOOGLE 2024 ENVIRONMENTAL REPORT · MICROSOFT 2024 SUSTAINABILITY REPORT"
+}
+]
+},
+{
+"ch": 2,
+"at": 639.2,
+"kind": "anim",
+"ref": "c2heat",
+"mode": "anim",
+"hold": 11.038,
+"n": 63,
+"captions": []
+},
+{
+"ch": 2,
+"at": 650.238,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "us",
+"pins": "the_dalles:The Dalles"
+}
+}
+],
+"dur": 88
+},
+"mode": "board",
+"hold": 3.667,
+"n": 64,
+"captions": []
+},
+{
+"ch": 3,
+"at": 657.3,
+"kind": "anim",
+"ref": "c3sweat",
+"mode": "anim",
+"hold": 9.3,
+"n": 65,
+"captions": []
+},
+{
+"ch": 3,
+"at": 666.6,
+"kind": "anim",
+"ref": "c3loop",
+"mode": "anim",
+"hold": 14.4,
+"n": 66,
+"captions": []
+},
+{
+"ch": 3,
+"at": 681.0,
+"kind": "anim",
+"ref": "c3gone",
+"mode": "anim",
+"hold": 14.9,
+"n": 67,
+"captions": []
+},
+{
+"ch": 3,
+"at": 695.9,
+"kind": "anim",
+"ref": "c3twice",
+"mode": "anim",
+"hold": 13.7,
+"n": 68,
+"captions": []
+},
+{
+"ch": 3,
+"at": 709.6,
+"kind": "anim",
+"ref": "c3dalles",
+"mode": "anim",
+"hold": 10.0,
+"n": 69,
+"captions": []
+},
+{
+"ch": 3,
+"at": 719.6,
+"kind": "anim",
+"ref": "c3secret",
+"mode": "anim",
+"hold": 14.2,
+"n": 70,
+"captions": [
+{
+"at": 719.915,
+"text": "2021"
+}
+]
+},
+{
+"ch": 3,
+"at": 733.8,
+"kind": "anim",
+"ref": "c3court",
+"mode": "anim",
+"hold": 6.5,
+"n": 71,
+"captions": []
+},
+{
+"ch": 3,
+"at": 740.3,
+"kind": "anim",
+"ref": "c3gallons",
+"mode": "anim",
+"hold": 7.75,
+"n": 72,
+"captions": [
+{
+"at": 740.375,
+"text": "2021 · GOOGLE USED ~355 MILLION GALLONS IN THE DALLES"
+},
+{
+"at": 740.375,
+"text": "SOURCE · THE OREGONIAN (2022)"
+}
+]
+},
+{
+"ch": 3,
+"at": 748.05,
+"kind": "anim",
+"ref": "c3quarter",
+"mode": "anim",
+"hold": 7.05,
+"n": 73,
+"captions": []
+},
+{
+"ch": 3,
+"at": 755.1,
+"kind": "anim",
+"ref": "c3know",
+"mode": "anim",
+"hold": 7.6,
+"n": 74,
+"captions": []
+},
+{
+"ch": 3,
+"at": 762.7,
+"kind": "anim",
+"ref": "c3fair",
+"mode": "anim",
+"hold": 9.8,
+"n": 75,
+"captions": []
+},
+{
+"ch": 3,
+"at": 772.5,
+"kind": "anim",
+"ref": "c3deserts",
+"mode": "anim",
+"hold": 5.085,
+"n": 76,
+"captions": []
+},
+{
+"ch": 3,
+"at": 777.585,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "world",
+"pins": "phoenix:Phoenix:l,texas:Texas,spain:Spain,chile:Chile"
+}
+}
+],
+"dur": 208
+},
+"mode": "board",
+"hold": 8.685,
+"n": 77,
+"captions": []
+},
+{
+"ch": 3,
+"at": 786.27,
+"kind": "anim",
+"ref": "c3uruguay",
+"mode": "anim",
+"hold": 13.93,
+"n": 78,
+"captions": [
+{
+"at": 787.395,
+"text": "MONTEVIDEO, URUGUAY · 2023"
+}
+]
+},
+{
+"ch": 3,
+"at": 800.2,
+"kind": "anim",
+"ref": "c3protest",
+"mode": "anim",
+"hold": 17.585,
+"n": 79,
+"captions": []
+},
+{
+"ch": 3,
+"at": 817.785,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": -200,
+"o": {
+"view": "world",
+"pins": "montevideo:Montevideo"
+}
+},
+{
+"at": 4,
+"o": {
+"pins": "chile:Santiago:l"
+}
+}
+],
+"dur": 157
+},
+"mode": "board",
+"hold": 6.525,
+"n": 80,
+"captions": []
+},
+{
+"ch": 3,
+"at": 824.31,
+"kind": "anim",
+"ref": "c3growth",
+"mode": "anim",
+"hold": 18.19,
+"n": 81,
+"captions": [
+{
+"at": 828.335,
+"text": "SOURCE · AP NEWS (2023), COMPANY REPORTS"
+}
+]
+},
+{
+"ch": 3,
+"at": 842.5,
+"kind": "anim",
+"ref": "c3oneanswer",
+"mode": "anim",
+"hold": 6.3,
+"n": 82,
+"captions": []
+},
+{
+"ch": 3,
+"at": 848.8,
+"kind": "anim",
+"ref": "c3bottle",
+"mode": "anim",
+"hold": 12.7,
+"n": 83,
+"captions": [
+{
+"at": 848.935,
+"text": "SOURCE · LI, YANG, ISLAM, REN, \"MAKING AI LESS THIRSTY\" (2023)"
+}
+]
+},
+{
+"ch": 3,
+"at": 861.5,
+"kind": "anim",
+"ref": "c3teaspoon",
+"mode": "anim",
+"hold": 9.9,
+"n": 84,
+"captions": [
+{
+"at": 861.615,
+"text": "SOURCE · SAM ALTMAN, \"THE GENTLE SINGULARITY\" (2025)"
+}
+]
+},
+{
+"ch": 3,
+"at": 871.4,
+"kind": "anim",
+"ref": "c3compare",
+"mode": "anim",
+"hold": 13.2,
+"n": 85,
+"captions": []
+},
+{
+"ch": 3,
+"at": 884.6,
+"kind": "anim",
+"ref": "c3machines",
+"mode": "anim",
+"hold": 10.3,
+"n": 86,
+"captions": []
+},
+{
+"ch": 3,
+"at": 894.9,
+"kind": "anim",
+"ref": "c3people",
+"mode": "anim",
+"hold": 10.433,
+"n": 87,
+"captions": []
+},
+{
+"ch": 4,
+"at": 908.7,
+"kind": "anim",
+"ref": "c4fact",
+"mode": "anim",
+"hold": 9.3,
+"n": 88,
+"captions": []
+},
+{
+"ch": 4,
+"at": 918.0,
+"kind": "anim",
+"ref": "c4iceberg",
+"mode": "anim",
+"hold": 10.4,
+"n": 89,
+"captions": []
+},
+{
+"ch": 4,
+"at": 928.4,
+"kind": "anim",
+"ref": "c4early",
+"mode": "anim",
+"hold": 11.6,
+"n": 90,
+"captions": []
+},
+{
+"ch": 4,
+"at": 940.0,
+"kind": "anim",
+"ref": "c4teach",
+"mode": "anim",
+"hold": 21.0,
+"n": 91,
+"captions": []
+},
+{
+"ch": 4,
+"at": 961.0,
+"kind": "anim",
+"ref": "c4sama",
+"mode": "anim",
+"hold": 17.0,
+"n": 92,
+"captions": [
+{
+"at": 961.023,
+"text": "NAIROBI, KENYA · LATE 2021"
+}
+]
+},
+{
+"ch": 4,
+"at": 978.0,
+"kind": "anim",
+"ref": "c4office",
+"mode": "anim",
+"hold": 20.0,
+"n": 93,
+"captions": [
+{
+"at": 978.163,
+"text": "2023"
+}
+]
+},
+{
+"ch": 4,
+"at": 998.0,
+"kind": "anim",
+"ref": "c4quota",
+"mode": "anim",
+"hold": 11.2,
+"n": 94,
+"captions": [
+{
+"at": 998.163,
+"text": "SOURCE · TIME, BILLY PERRIGO (2023)"
+}
+]
+},
+{
+"ch": 4,
+"at": 1009.2,
+"kind": "anim",
+"ref": "c4shift",
+"mode": "anim",
+"hold": 18.2,
+"n": 95,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1027.4,
+"kind": "anim",
+"ref": "c4visions",
+"mode": "anim",
+"hold": 8.9,
+"n": 96,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1036.3,
+"kind": "anim",
+"ref": "c4pay",
+"mode": "anim",
+"hold": 15.7,
+"n": 97,
+"captions": [
+{
+"at": 1045.423,
+"text": "OPENAI → SAMA ~$12.50/HR · SAMA → WORKERS ~$1.32–$2/HR · SOURCE: TIME (2023)"
+}
+]
+},
+{
+"ch": 4,
+"at": 1052.0,
+"kind": "anim",
+"ref": "c4counsel",
+"mode": "anim",
+"hold": 8.2,
+"n": 98,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1060.2,
+"kind": "anim",
+"ref": "c4ended",
+"mode": "anim",
+"hold": 8.8,
+"n": 99,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1069.0,
+"kind": "anim",
+"ref": "c4petition",
+"mode": "anim",
+"hold": 16.6,
+"n": 100,
+"captions": [
+{
+"at": 1069.343,
+"text": "2023"
+}
+]
+},
+{
+"ch": 4,
+"at": 1085.6,
+"kind": "anim",
+"ref": "c4court",
+"mode": "anim",
+"hold": 11.4,
+"n": 101,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1097.0,
+"kind": "anim",
+"ref": "c4ghost",
+"mode": "anim",
+"hold": 12.0,
+"n": 102,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1109.0,
+"kind": "anim",
+"ref": "c4targets",
+"mode": "anim",
+"hold": 17.3,
+"n": 103,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1126.3,
+"kind": "anim",
+"ref": "c4rlhf",
+"mode": "anim",
+"hold": 16.7,
+"n": 104,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1143.0,
+"kind": "anim",
+"ref": "c4please",
+"mode": "anim",
+"hold": 7.0,
+"n": 105,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1150.0,
+"kind": "anim",
+"ref": "c4industry",
+"mode": "anim",
+"hold": 15.793,
+"n": 106,
+"captions": [
+{
+"at": 1154.023,
+"text": "SOURCE · REUTERS (JUNE 2025)"
+}
+]
+},
+{
+"ch": 4,
+"at": 1165.793,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "world",
+"pins": "nairobi:Kenya,manila:Philippines,india:India,caracas:Venezuela"
+}
+}
+],
+"dur": 261
+},
+"mode": "board",
+"hold": 10.867,
+"n": 107,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1176.66,
+"kind": "anim",
+"ref": "c4remotasks",
+"mode": "anim",
+"hold": 13.24,
+"n": 108,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1189.9,
+"kind": "anim",
+"ref": "c4letter",
+"mode": "anim",
+"hold": 10.8,
+"n": 109,
+"captions": [
+{
+"at": 1190.123,
+"text": "2024"
+}
+]
+},
+{
+"ch": 4,
+"at": 1200.7,
+"kind": "anim",
+"ref": "c4experts",
+"mode": "anim",
+"hold": 13.4,
+"n": 110,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1214.1,
+"kind": "anim",
+"ref": "c4twotier",
+"mode": "anim",
+"hold": 10.4,
+"n": 111,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1224.5,
+"kind": "anim",
+"ref": "c4money",
+"mode": "anim",
+"hold": 12.6,
+"n": 112,
+"captions": []
+},
+{
+"ch": 4,
+"at": 1237.1,
+"kind": "anim",
+"ref": "c4chain",
+"mode": "anim",
+"hold": 11.45,
+"n": 113,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1251.95,
+"kind": "anim",
+"ref": "c5sand",
+"mode": "anim",
+"hold": 9.35,
+"n": 114,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1261.3,
+"kind": "anim",
+"ref": "c5wafer",
+"mode": "anim",
+"hold": 11.6,
+"n": 115,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1272.9,
+"kind": "anim",
+"ref": "c5island",
+"mode": "anim",
+"hold": 4.15,
+"n": 116,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1277.05,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "asia",
+"pins": "taiwan:Taiwan"
+}
+}
+],
+"dur": 119
+},
+"mode": "board",
+"hold": 4.95,
+"n": 117,
+"captions": [
+{
+"at": 1278.2,
+"text": "TSMC · TAIWAN"
+}
+]
+},
+{
+"ch": 5,
+"at": 1282.0,
+"kind": "anim",
+"ref": "c5tsmc",
+"mode": "anim",
+"hold": 5.9,
+"n": 118,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1287.9,
+"kind": "anim",
+"ref": "c5water",
+"mode": "anim",
+"hold": 8.2,
+"n": 119,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1296.1,
+"kind": "anim",
+"ref": "c5drought",
+"mode": "anim",
+"hold": 15.5,
+"n": 120,
+"captions": [
+{
+"at": 1296.26,
+"text": "TAIWAN · 2021"
+},
+{
+"at": 1296.3,
+"text": "2021"
+}
+]
+},
+{
+"ch": 5,
+"at": 1311.6,
+"kind": "anim",
+"ref": "c5trucks",
+"mode": "anim",
+"hold": 6.35,
+"n": 121,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1317.9499999999998,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "asia",
+"pins": "taiwan:Taiwan"
+}
+}
+],
+"dur": 232
+},
+"mode": "board",
+"hold": 9.67,
+"n": 122,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1327.62,
+"kind": "anim",
+"ref": "c5metals",
+"mode": "anim",
+"hold": 7.41,
+"n": 123,
+"captions": [
+{
+"at": 1331.06,
+"text": "SOURCE · USGS"
+}
+]
+},
+{
+"ch": 5,
+"at": 1335.03,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "asia",
+"pins": "china:China"
+}
+}
+],
+"dur": 76
+},
+"mode": "board",
+"hold": 3.17,
+"n": 124,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1338.2,
+"kind": "anim",
+"ref": "c5gallium",
+"mode": "anim",
+"hold": 17.2,
+"n": 125,
+"captions": [
+{
+"at": 1341.12,
+"text": "NOTE · THE US BAN WAS SUSPENDED FROM NOV 2025 TO NOV 2026"
+},
+{
+"at": 1341.24,
+"text": "2023"
+}
+]
+},
+{
+"ch": 5,
+"at": 1355.4,
+"kind": "anim",
+"ref": "c5copper",
+"mode": "anim",
+"hold": 12.6,
+"n": 126,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1368.0,
+"kind": "anim",
+"ref": "c5cobalt",
+"mode": "anim",
+"hold": 4.35,
+"n": 127,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1372.35,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "africa",
+"pins": "kinshasa:DR Congo"
+}
+}
+],
+"dur": 189
+},
+"mode": "board",
+"hold": 7.89,
+"n": 128,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1380.24,
+"kind": "anim",
+"ref": "c5honest",
+"mode": "anim",
+"hold": 13.76,
+"n": 129,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1394.0,
+"kind": "anim",
+"ref": "c5waste",
+"mode": "anim",
+"hold": 10.1,
+"n": 130,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1404.1,
+"kind": "anim",
+"ref": "c5study",
+"mode": "anim",
+"hold": 12.2,
+"n": 131,
+"captions": [
+{
+"at": 1404.24,
+"text": "SOURCE · WANG ET AL., NATURE COMPUTATIONAL SCIENCE (2024)"
+},
+{
+"at": 1404.32,
+"text": "2024"
+}
+]
+},
+{
+"ch": 5,
+"at": 1416.3,
+"kind": "anim",
+"ref": "c5eiffel",
+"mode": "anim",
+"hold": 8.19,
+"n": 132,
+"captions": [
+{
+"at": 1416.38,
+"text": "5 MILLION TONNES ≈ ~500 EIFFEL TOWERS"
+}
+]
+},
+{
+"ch": 5,
+"at": 1424.49,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "world",
+"pins": "the_dalles:Oregon"
+}
+},
+{
+"at": 25,
+"o": {
+"pins": "nairobi:Kenya"
+}
+},
+{
+"at": 43,
+"o": {
+"pins": "taiwan:Taiwan"
+}
+},
+{
+"at": 66,
+"o": {
+"pins": "kinshasa:Congo"
+}
+}
+],
+"dur": 137
+},
+"mode": "board",
+"hold": 5.71,
+"n": 133,
+"captions": []
+},
+{
+"ch": 5,
+"at": 1430.2,
+"kind": "anim",
+"ref": "c5here",
+"mode": "anim",
+"hold": 2.083,
+"n": 134,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1435.633,
+"kind": "anim",
+"ref": "c6grid",
+"mode": "anim",
+"hold": 6.817,
+"n": 135,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1442.45,
+"kind": "anim",
+"ref": "c6spread",
+"mode": "anim",
+"hold": 7.5,
+"n": 136,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1449.95,
+"kind": "anim",
+"ref": "c6pjm",
+"mode": "anim",
+"hold": 13.9,
+"n": 137,
+"captions": [
+{
+"at": 1450.053,
+"text": "PJM · THE GRID SERVING ~65 MILLION PEOPLE"
+}
+]
+},
+{
+"ch": 6,
+"at": 1463.85,
+"kind": "anim",
+"ref": "c6auction",
+"mode": "anim",
+"hold": 6.35,
+"n": 138,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1470.2,
+"kind": "anim",
+"ref": "c6price",
+"mode": "anim",
+"hold": 9.65,
+"n": 139,
+"captions": [
+{
+"at": 1470.333,
+"text": "$28.92 → $269.92 PER MEGAWATT-DAY · SOURCE: PJM (2024)"
+}
+]
+},
+{
+"ch": 6,
+"at": 1479.85,
+"kind": "anim",
+"ref": "c6monitor",
+"mode": "anim",
+"hold": 8.113,
+"n": 140,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1487.963,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "us",
+"pins": "ohio:Ohio:l,pa:Pennsylvania:t,maryland:Maryland:b,nj:New Jersey"
+}
+}
+],
+"dur": 95
+},
+"mode": "board",
+"hold": 3.94,
+"n": 141,
+"captions": [
+{
+"at": 1487.963,
+"text": "2025"
+}
+]
+},
+{
+"ch": 6,
+"at": 1491.903,
+"kind": "anim",
+"ref": "c6family",
+"mode": "anim",
+"hold": 13.097,
+"n": 142,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1505.0,
+"kind": "anim",
+"ref": "c6land",
+"mode": "anim",
+"hold": 15.663,
+"n": 143,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1520.663,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "us",
+"pins": "maryland:Maryland"
+}
+}
+],
+"dur": 159
+},
+"mode": "board",
+"hold": 6.61,
+"n": 144,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1527.273,
+"kind": "anim",
+"ref": "c6route",
+"mode": "anim",
+"hold": 10.677,
+"n": 145,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1537.95,
+"kind": "anim",
+"ref": "c6eminent",
+"mode": "anim",
+"hold": 12.35,
+"n": 146,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1550.3,
+"kind": "anim",
+"ref": "c6farmers",
+"mode": "anim",
+"hold": 6.5,
+"n": 147,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1556.8,
+"kind": "anim",
+"ref": "c6nextdoor",
+"mode": "anim",
+"hold": 11.8,
+"n": 148,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1568.6,
+"kind": "anim",
+"ref": "c6sleep",
+"mode": "anim",
+"hold": 8.85,
+"n": 149,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1577.45,
+"kind": "anim",
+"ref": "c6secret",
+"mode": "anim",
+"hold": 16.0,
+"n": 150,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1593.45,
+"kind": "anim",
+"ref": "c6taxrace",
+"mode": "anim",
+"hold": 5.113,
+"n": 151,
+"captions": [
+{
+"at": 1593.613,
+"text": "SOURCE · JLARC (2024): $928.6M IN FORGONE SALES TAX, FY2023"
+}
+]
+},
+{
+"ch": 6,
+"at": 1598.5629999999999,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "us",
+"pins": "loudoun:Virginia"
+}
+}
+],
+"dur": 189
+},
+"mode": "board",
+"hold": 7.87,
+"n": 152,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1606.433,
+"kind": "anim",
+"ref": "c6jlarc",
+"mode": "anim",
+"hold": 3.967,
+"n": 153,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1610.4,
+"kind": "anim",
+"ref": "c6jobs",
+"mode": "anim",
+"hold": 10.1,
+"n": 154,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1620.5,
+"kind": "anim",
+"ref": "c6loudoun",
+"mode": "anim",
+"hold": 16.35,
+"n": 155,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1636.85,
+"kind": "anim",
+"ref": "c6winpay",
+"mode": "anim",
+"hold": 7.1,
+"n": 156,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1643.95,
+"kind": "anim",
+"ref": "c6pattern",
+"mode": "anim",
+"hold": 10.733,
+"n": 157,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1654.683,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "world",
+"pins": "memphis:Memphis,the_dalles:The Dalles,nairobi:Nairobi"
+}
+}
+],
+"dur": 121
+},
+"mode": "board",
+"hold": 5.03,
+"n": 158,
+"captions": []
+},
+{
+"ch": 6,
+"at": 1659.713,
+"kind": "anim",
+"ref": "c6otherside",
+"mode": "anim",
+"hold": 10.223,
+"n": 159,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1673.29,
+"kind": "anim",
+"ref": "c7tiny",
+"mode": "anim",
+"hold": 11.01,
+"n": 160,
+"captions": [
+{
+"at": 1676.626,
+"text": "SOURCE · SAM ALTMAN (JUNE 2025)"
+}
+]
+},
+{
+"ch": 7,
+"at": 1684.3,
+"kind": "anim",
+"ref": "c7oven",
+"mode": "anim",
+"hold": 6.6,
+"n": 161,
+"captions": [
+{
+"at": 1684.486,
+"text": "1 AI QUESTION ≈ AN OVEN RUNNING FOR ABOUT 1 SECOND"
+}
+]
+},
+{
+"ch": 7,
+"at": 1690.9,
+"kind": "anim",
+"ref": "c7gemini",
+"mode": "anim",
+"hold": 8.6,
+"n": 162,
+"captions": [
+{
+"at": 1691.086,
+"text": "SOURCE · GOOGLE (AUGUST 2025)"
+}
+]
+},
+{
+"ch": 7,
+"at": 1699.5,
+"kind": "anim",
+"ref": "c7drops",
+"mode": "anim",
+"hold": 5.4,
+"n": 163,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1704.9,
+"kind": "anim",
+"ref": "c7fall33",
+"mode": "anim",
+"hold": 5.2,
+"n": 164,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1710.1,
+"kind": "anim",
+"ref": "c7stream",
+"mode": "anim",
+"hold": 9.0,
+"n": 165,
+"captions": [
+{
+"at": 1710.206,
+"text": "SOURCE · IEA, G. KAMIYA (2020)"
+}
+]
+},
+{
+"ch": 7,
+"at": 1719.1,
+"kind": "anim",
+"ref": "c7arg2",
+"mode": "anim",
+"hold": 7.9,
+"n": 166,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1727.0,
+"kind": "anim",
+"ref": "c7deepseek",
+"mode": "anim",
+"hold": 11.3,
+"n": 167,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1738.3,
+"kind": "anim",
+"ref": "c7arg3",
+"mode": "anim",
+"hold": 5.6,
+"n": 168,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1743.9,
+"kind": "anim",
+"ref": "c7cooling",
+"mode": "anim",
+"hold": 9.3,
+"n": 169,
+"captions": [
+{
+"at": 1744.006,
+"text": "SOURCE · DEEPMIND (2016)"
+}
+]
+},
+{
+"ch": 7,
+"at": 1753.2,
+"kind": "anim",
+"ref": "c7uses",
+"mode": "anim",
+"hold": 7.5,
+"n": 170,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1760.7,
+"kind": "anim",
+"ref": "c7buyers",
+"mode": "anim",
+"hold": 4.8,
+"n": 171,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1765.5,
+"kind": "anim",
+"ref": "c7real",
+"mode": "anim",
+"hold": 3.4,
+"n": 172,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1768.9,
+"kind": "anim",
+"ref": "c7name",
+"mode": "anim",
+"hold": 9.7,
+"n": 173,
+"captions": [
+{
+"at": 1772.086,
+"text": "1865 · THE JEVONS PARADOX"
+}
+]
+},
+{
+"ch": 7,
+"at": 1778.6,
+"kind": "anim",
+"ref": "c7steam",
+"mode": "anim",
+"hold": 7.8,
+"n": 174,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1786.4,
+"kind": "anim",
+"ref": "c7more",
+"mode": "anim",
+"hold": 9.1,
+"n": 175,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1795.5,
+"kind": "anim",
+"ref": "c7post",
+"mode": "anim",
+"hold": 10.2,
+"n": 176,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1805.7,
+"kind": "anim",
+"ref": "c7demand",
+"mode": "anim",
+"hold": 5.2,
+"n": 177,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1810.9,
+"kind": "anim",
+"ref": "c7double",
+"mode": "anim",
+"hold": 9.4,
+"n": 178,
+"captions": []
+},
+{
+"ch": 7,
+"at": 1820.3,
+"kind": "anim",
+"ref": "c7loop",
+"mode": "anim",
+"hold": 5.377,
+"n": 179,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1829.03,
+"kind": "anim",
+"ref": "c8split",
+"mode": "anim",
+"hold": 9.92,
+"n": 180,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1838.95,
+"kind": "anim",
+"ref": "c8older",
+"mode": "anim",
+"hold": 11.95,
+"n": 181,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1850.9,
+"kind": "anim",
+"ref": "c8newer",
+"mode": "anim",
+"hold": 6.6,
+"n": 182,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1857.5,
+"kind": "anim",
+"ref": "c8notcounted",
+"mode": "anim",
+"hold": 8.35,
+"n": 183,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1865.85,
+"kind": "anim",
+"ref": "c8both",
+"mode": "anim",
+"hold": 4.45,
+"n": 184,
+"captions": [
+{
+"at": 1866.007,
+"text": "BOTH NUMBERS ARE REAL. BOTH NUMBERS ARE PARTIAL."
+}
+]
+},
+{
+"ch": 8,
+"at": 1870.3,
+"kind": "anim",
+"ref": "c8answer",
+"mode": "anim",
+"hold": 12.7,
+"n": 185,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1883.0,
+"kind": "anim",
+"ref": "c8billions",
+"mode": "anim",
+"hold": 5.4,
+"n": 186,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1888.4,
+"kind": "anim",
+"ref": "c8places",
+"mode": "anim",
+"hold": 7.9,
+"n": 187,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1896.3,
+"kind": "anim",
+"ref": "c8watthour",
+"mode": "anim",
+"hold": 14.0,
+"n": 188,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1910.3,
+"kind": "anim",
+"ref": "c8notstop",
+"mode": "anim",
+"hold": 6.3,
+"n": 189,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1916.6,
+"kind": "anim",
+"ref": "c8tools",
+"mode": "anim",
+"hold": 6.15,
+"n": 190,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1922.75,
+"kind": "anim",
+"ref": "c8hidden",
+"mode": "anim",
+"hold": 7.75,
+"n": 191,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1930.5,
+"kind": "anim",
+"ref": "c8eurules",
+"mode": "anim",
+"hold": 8.4,
+"n": 192,
+"captions": [
+{
+"at": 1930.787,
+"text": "SOURCES · EU ENERGY EFFICIENCY DIRECTIVE · EU AI ACT"
+}
+]
+},
+{
+"ch": 8,
+"at": 1938.9,
+"kind": "anim",
+"ref": "c8aiact",
+"mode": "anim",
+"hold": 8.577,
+"n": 193,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1947.4769999999999,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "us"
+}
+}
+],
+"dur": 174
+},
+"mode": "board",
+"hold": 7.23,
+"n": 194,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1954.707,
+"kind": "anim",
+"ref": "c8grid",
+"mode": "anim",
+"hold": 3.793,
+"n": 195,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1958.5,
+"kind": "anim",
+"ref": "c8ask",
+"mode": "anim",
+"hold": 10.6,
+"n": 196,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1969.1,
+"kind": "anim",
+"ref": "c8press",
+"mode": "anim",
+"hold": 5.4,
+"n": 197,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1974.5,
+"kind": "anim",
+"ref": "c8eyes",
+"mode": "anim",
+"hold": 5.8,
+"n": 198,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1980.3,
+"kind": "anim",
+"ref": "c8chain",
+"mode": "anim",
+"hold": 7.3,
+"n": 199,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1987.6,
+"kind": "anim",
+"ref": "c8fullbill",
+"mode": "anim",
+"hold": 7.7,
+"n": 200,
+"captions": []
+},
+{
+"ch": 8,
+"at": 1995.3,
+"kind": "anim",
+"ref": "c8dalles",
+"mode": "anim",
+"hold": 7.277,
+"n": 201,
+"captions": []
+},
+{
+"ch": 8,
+"at": 2002.577,
+"kind": "board",
+"ref": "map",
+"board": {
+"name": "map",
+"ups": [
+{
+"at": 4,
+"o": {
+"view": "us"
+}
+}
+],
+"dur": 524
+},
+"mode": "board",
+"hold": 21.815,
+"n": 202,
+"captions": []
+}
+],
+"nights": [
+{
+"ch": 4,
+"start": 1120.173,
+"end": 1126.313,
+"ups": [
+{
+"at": 4,
+"o": {
+"mode": "answer",
+"answer": "Of course! I'd be glad to help. What do you need?",
+"text": "Can you help me?"
+}
+}
+]
+},
+{
+"ch": 8,
+"start": 1877.937,
+"end": 1883.037,
+"ups": [
+{
+"at": 4,
+"o": {
+"mode": "blink"
+}
+}
+]
+},
+{
+"ch": 8,
+"start": 2009.7569999999998,
+"end": 2024.392,
+"ups": [
+{
+"at": 4,
+"o": {
+"mode": "blink",
+"text": "Would you still ask AI to plan your dinner… if you could see the bill?"
+}
+}
+]
+}
+]
+}
