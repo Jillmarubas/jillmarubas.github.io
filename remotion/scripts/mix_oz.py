@@ -44,6 +44,7 @@ def lowpass(a, hz):
 N = int(DUR * SR) + SR
 voice = np.zeros((N, 2), np.float32)
 fx = np.zeros((N, 2), np.float32)
+mus = np.zeros((N, 2), np.float32)
 report = []
 
 
@@ -176,6 +177,34 @@ place('23b-footsteps', S(39) + 0.5, S(40) + 3.5 - S(39) - 0.5, -32, fi=2.0, fo=0
 place('24-bells-stop', S(40) + 3.4, 1.5, -18, peak=True, loop=False, label='the bells stop')
 place('25-shimmer', S(43) + 4.4, 3.0, -12, peak=True, loop=False, fo=1.2, label='silver shoes: the sting')
 
+# ---------- music: original score (ElevenLabs Music), one cue per movement of the story ----------
+def music(name, at, end, level=-27, fi=1.5, fo=2.5):
+    path = f'oz/music/{name}.mp3'
+    if not os.path.exists(os.path.join(ROOT, 'public', path)):
+        report.append(f'  (missing music {name})'); return
+    a = load(path)
+    n = min(len(a), int((end - at) * SR))
+    seg = a[:n].copy()
+    seg *= 10 ** ((level - db(body_rms(seg))) / 20)
+    f1, f2 = int(fi * SR), int(fo * SR)
+    seg[:f1] *= np.linspace(0, 1, f1)[:, None]
+    seg[-f2:] *= np.linspace(1, 0, f2)[:, None]
+    p0 = int(at * SR)
+    e = min(N, p0 + n)
+    mus[p0:e] += seg[: e - p0]
+    report.append(f'{at:7.2f}s  MUSIC {name:<28} {n / SR:5.1f}s  body {level}')
+
+music('m01-storm-open', 0.0, E(2) + 0.2, -26, fi=1.0, fo=0.25)
+music('m02-kansas', S(3) - 0.5, S(10) + 0.5, -30, fi=3.0, fo=1.5)
+music('m03-toto', S(10) - 0.3, S(11) + 0.6, -28, fi=0.8, fo=1.2)
+music('m04-storm-build', S(11), S(22) - 0.2, -27, fi=3.0, fo=0.4)
+music('m05-liftoff', S(22) - 0.2, S(25) + 2.0, -27, fi=1.0, fo=2.0)
+music('m06-lullaby', S(25), S(33) - 0.25, -31, fi=3.0, fo=0.05)  # cut dead by the thump
+music('m07-sunshine', S(35) + 5.0, S(36) + 3.8, -29, fi=2.5, fo=0.6)
+music('m08-oz-wonder', S(36) + 3.5, S(39) + 1.5, -26, fi=0.3, fo=2.0)
+music('m09-munchkins', S(39), S(42) - 0.2, -28, fi=1.5, fo=0.5)
+music('m10-cliffhanger', S(42) - 0.3, DUR, -26, fi=0.2, fo=3.0)
+
 # ---------- duck the effects under the voice so the narrator is never masked ----------
 env = np.abs(voice).max(axis=1)
 w = int(0.25 * SR)
@@ -184,7 +213,8 @@ idx = np.arange(len(env))
 lo, hi = np.clip(idx - w // 2, 0, len(env)), np.clip(idx + w // 2, 0, len(env))
 env = ((c[hi] - c[lo]) / np.maximum(1, hi - lo)).astype(np.float32)
 duck = 1 - 0.65 * np.clip(env / (10 ** (-30 / 20)), 0, 1)  # up to ~-9 dB under speech
-mix = voice + fx * duck[:, None]
+mduck = 1 - 0.5 * np.clip(env / (10 ** (-30 / 20)), 0, 1)  # music dips ~6 dB under speech
+mix = voice + fx * duck[:, None] + mus * mduck[:, None]
 mix = mix[: int(DUR * SR)]
 # silence after the thump stays silent
 a, b = int((S(34) - 0.6) * SR), int((S(35) + 2.0) * SR)
