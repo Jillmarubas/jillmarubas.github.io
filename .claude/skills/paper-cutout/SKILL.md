@@ -14,7 +14,21 @@ Follow the steps in order. Each one ends with a check.
 **Read first, every time:**
 - `anthropic-skills:video-production-psychology`: picture, edit, sound and colour decisions, and the review loop.
 - `anthropic-skills:script-writing`: the story layer.
-- The `motion-video` skill's non-negotiables still apply: original content only, CC0 or self-made assets, final render on Lambda.
+
+## Precedence: the psychology skill wins (the user's rule, 17 Oct 2026)
+This SOP is deliberately different from the `motion-video` SOP. Where they disagree, **follow the video-production-psychology skill**:
+
+| Topic | motion-video house rule | paper-cutout (psychology skill) |
+|---|---|---|
+| Camera | locked flat on the paper, objects move | physical camera moves through paper planes (dolly, truck, crane), never a zoom |
+| Transitions | whip pans, paper wipes, every scene exits toward the viewer | hard cuts on event boundaries (a head turn, a grab, a flash); Kuleshov ordering; fast inserts alternate with long takes |
+| Frame rate | 30 fps default | 23.976 fps |
+| Length and rhythm | 14–24 s, a new beat every 1.5–3.5 s | about 60 s; the pacing follows the tension curve |
+| Grade | one fixed look | brightness and saturation follow the tension curve (darkest at the crisis, brightest at the release) |
+| Sound | effects on cuts and landings | off-screen sound, audio leading mood changes, Shepard tone for tension released at the payoff |
+| Previews | Lambda renders | local renders and the review room; Lambda only for the approved 4K master |
+
+What still applies from `motion-video`: original content only, CC0 or self-made assets, no music unless asked, and the final master rendered on Lambda.
 
 ## House defaults (the user's choices)
 | Setting | Value |
@@ -24,7 +38,7 @@ Follow the steps in order. Each one ends with a check.
 | Length | about 60 s, 10–15 shots |
 | Look | cream and white paper, muted greys and sage, **one accent colour** carried by the story object (the kite's red, the lantern's amber) |
 | Motion | drawings held **on twos** (`useStep()` / `useTw()`); camera moves on ones |
-| Camera | multiplane: dolly, truck and crane through stacked paper planes; **never zoom**. This replaces the motion-video "locked camera" rule for paper films (video-production-psychology skill). |
+| Camera | multiplane: dolly, truck and crane through stacked paper planes; **never zoom** (see Precedence). |
 | Text | title and end card only, on paper strips. Wordless story. |
 | Sound | CC0 recordings (BigSoundBank). No music unless asked. A Shepard tone counts as sound design for tension. |
 | Previews | rendered locally (free). **Lambda only for the approved master.** |
