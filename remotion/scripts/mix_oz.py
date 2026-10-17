@@ -179,7 +179,10 @@ place('25-shimmer', S(43) + 4.4, 3.0, -12, peak=True, loop=False, fo=1.2, label=
 # ---------- duck the effects under the voice so the narrator is never masked ----------
 env = np.abs(voice).max(axis=1)
 w = int(0.25 * SR)
-env = np.convolve(env, np.ones(w) / w, mode='same')
+c = np.concatenate([[0], np.cumsum(env, dtype=np.float64)])
+idx = np.arange(len(env))
+lo, hi = np.clip(idx - w // 2, 0, len(env)), np.clip(idx + w // 2, 0, len(env))
+env = ((c[hi] - c[lo]) / np.maximum(1, hi - lo)).astype(np.float32)
 duck = 1 - 0.65 * np.clip(env / (10 ** (-30 / 20)), 0, 1)  # up to ~-9 dB under speech
 mix = voice + fx * duck[:, None]
 mix = mix[: int(DUR * SR)]
