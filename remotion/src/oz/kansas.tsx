@@ -361,10 +361,10 @@ export const Cow: React.FC<{x: number; y: number; ft: number; flip?: boolean; t:
       {[-3, -2.2, 2.4, 3.1].map((lx, i) => (
         <rect key={i} x={lx - 0.25} y={-2.6} width={0.5} height={2.6} fill={i % 2 ? col : mix(col, '#000', 0.25)} />
       ))}
-      <Cut d={cutC([[-4, -5], [-1, -5.3], [2.6, -5], [3.6, -4.2], [3.4, -2.6], [-3.6, -2.5], [-4.2, -3.6]], 'cowb', 0.08, 1)} fill={col} lift={1} edge={0.15} />
+      <Cut d={cutC([[-4, -5], [-1, -5.3], [2.6, -5], [3.6, -4.2], [3.4, -2.6], [-3.6, -2.5], [-4.2, -3.6]], 'cowb', 0.08, 1)} fill={col} lift={0} edge={0} />
       <Cut d={cutC(ellipsePts(-1, -4, 1.1, 0.7, 10), 'cowspot', 0.05, 1)} fill="#EDE6D8" lift={0} edge={0} />
       <g transform={`translate(3.4 -4.6) rotate(${head + 20})`}>
-        <Cut d={cutC([[0, -0.6], [1.6, -0.3], [2.2, 0.8], [1.6, 1.3], [0.2, 0.6]], 'cowh', 0.06, 1)} fill={col} lift={1} edge={0.15} />
+        <Cut d={cutC([[0, -0.6], [1.6, -0.3], [2.2, 0.8], [1.6, 1.3], [0.2, 0.6]], 'cowh', 0.06, 1)} fill={col} lift={0} edge={0} />
         <path d="M0.4 -0.5 L0.1 -1.1 M0.9 -0.5 L1.1 -1.1" stroke="#E6DCC8" strokeWidth={0.15} />
       </g>
       <path d={`M-4 -4.6 Q-4.6 -3 -4.3 -1.6`} stroke={col} strokeWidth={0.18} fill="none" />
@@ -372,21 +372,43 @@ export const Cow: React.FC<{x: number; y: number; ft: number; flip?: boolean; t:
   );
 };
 
-// A horse in profile (about 5 ft at the withers).
-export const Horse: React.FC<{x: number; y: number; ft: number; flip?: boolean; t: number; rear?: number; col?: string}> = ({x, y, ft, flip, t, rear = 0, col = '#5B4030'}) => {
-  const s = ft;
+// A draft horse in profile, facing +x: about 5.3 ft at the withers, 8 ft nose to tail. Units are feet.
+export const Horse: React.FC<{x: number; y: number; ft: number; flip?: boolean; t: number; rear?: number; walk?: number; col?: string}> = ({x, y, ft, flip, t, rear = 0, walk = 0, col = '#5B4030'}) => {
+  const dark = mix(col, '#000', 0.3);
+  const mane = '#2A1E16';
   const toss = Math.sin(t * 6) * 10 * rear;
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s}) rotate(${-rear * 18} -3 0)`}>
-      {[-2.8, -2.1, 2.2, 2.9].map((lx, i) => (
-        <path key={i} d={`M${lx} -3 L${lx + (i > 1 ? rear * 1.2 : 0)} 0`} stroke={i % 2 ? col : mix(col, '#000', 0.3)} strokeWidth={0.5} strokeLinecap="round" />
-      ))}
-      <Cut d={cutC([[-3.6, -5], [-0.5, -5.3], [2.5, -5.1], [3.4, -4.3], [3.2, -3], [-3.3, -2.9], [-3.8, -4]], 'horseb', 0.06, 1)} fill={col} lift={1} edge={0.15} />
-      <g transform={`translate(2.8 -4.8) rotate(${-30 + toss})`}>
-        <Cut d={cutC([[0, 0.5], [0.4, -2.4], [1, -3], [2.6, -2.2], [2.6, -1.6], [1.2, -1.4], [1, 0.6]], 'horseh', 0.06, 1)} fill={col} lift={1} edge={0.15} />
-        <path d="M0.2 -2.2 L-0.4 0.2" stroke="#2A1E16" strokeWidth={0.4} />
+  const ph = t * Math.PI * 2 * 0.7;
+  // leg: hip/shoulder point, upper and lower angle (deg), drawn as two tapered segments plus a hoof
+  const leg = (px: number, py: number, a: number, b: number, key: string, fill: string, hind: boolean) => (
+    <g key={key} transform={`translate(${px} ${py}) rotate(${a})`}>
+      <path d={hind ? 'M-0.42 0 L0.42 0 L0.22 1.5 L-0.2 1.5 Z' : 'M-0.36 0 L0.36 0 L0.2 1.35 L-0.2 1.35 Z'} fill={fill} />
+      <g transform={`translate(0 ${hind ? 1.5 : 1.35}) rotate(${b})`}>
+        <circle r={0.2} fill={fill} />
+        <path d="M-0.18 0 L0.18 0 L0.14 1.25 L-0.14 1.25 Z" fill={fill} />
+        <path d="M-0.22 1.25 L0.26 1.25 L0.3 1.55 L-0.24 1.55 Z" fill="#1C1814" />
       </g>
-      <path d={`M-3.7 -4.8 Q${-4.6 + Math.sin(t * 5) * 0.4} -3.6 -4.2 -2.2`} stroke="#2A1E16" strokeWidth={0.35} fill="none" />
+    </g>
+  );
+  const sw = (k: number) => Math.sin(ph + k) * 22 * walk;
+  return (
+    <g transform={`translate(${x} ${y}) scale(${flip ? -ft : ft} ${ft}) rotate(${-rear * 22} -3 -0.1)`}>
+      <ellipse cx={0} cy={0} rx={4.2} ry={0.35} fill="rgba(30,20,10,0.2)" />
+      {leg(-2.7, -3.4, sw(0) - rear * 10, Math.max(0, -sw(0)) * 0.8 + 6, 'hb', dark, true)}
+      {leg(2.2, -3.6, sw(Math.PI) + rear * 50, 10 + rear * 70, 'fb', dark, false)}
+      {/* barrel, chest and quarters */}
+      <Cut d={cutC([[-3.5, -5.1], [-2.6, -5.5], [-0.6, -5.2], [1.6, -5.3], [2.5, -5.0], [3.1, -4.2], [3.0, -3.2], [2.4, -2.9], [0.4, -2.7], [-1.6, -2.8], [-2.9, -3.2], [-3.7, -4.0]], 'horseb', 0.05, 0.6)} fill={col} lift={0} edge={0} />
+      {/* neck and head */}
+      <g transform={`translate(2.4 -4.9) rotate(${toss})`}>
+        <Cut d={cutC([[-0.6, 0.2], [0.2, -1.6], [0.8, -2.6], [1.3, -2.8], [2.6, -1.8], [2.8, -1.3], [2.4, -1.1], [1.4, -1.6], [1.0, -0.6], [0.8, 0.6]], 'horsen', 0.05, 0.6)} fill={col} lift={0} edge={0} />
+        <path d="M0.2 -1.6 L0.8 -2.6 L1.0 -2.9" stroke={mane} strokeWidth={0.32} fill="none" strokeLinecap="round" />
+        <path d="M-0.4 0.1 Q0 -1.0 0.5 -2.2" stroke={mane} strokeWidth={0.28} fill="none" />
+        <circle cx={1.55} cy={-2.25} r={0.1} fill="#000" />
+        <path d="M1.0 -2.9 L1.15 -3.3 L1.3 -2.85" fill={col} />
+      </g>
+      {/* tail */}
+      <path d={`M-3.6 -4.8 Q${-4.5 + Math.sin(t * 2) * 0.3} -3.8 ${-4.1 + Math.sin(t * 2.4) * 0.2} -2.2`} stroke={mane} strokeWidth={0.42} fill="none" strokeLinecap="round" />
+      {leg(-2.2, -3.4, -sw(0), Math.max(0, sw(0)) * 0.8 + 6, 'hf', col, true)}
+      {leg(2.6, -3.6, -sw(Math.PI) + rear * 60, 10 + rear * 80, 'ff', col, false)}
     </g>
   );
 };

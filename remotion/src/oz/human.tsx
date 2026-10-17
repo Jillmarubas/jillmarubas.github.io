@@ -326,19 +326,21 @@ export const Person: React.FC<Pose & {t?: number}> = (p) => {
   return (
     <g transform={`translate(${p.x} ${p.y}) scale(${(p.flip ? -1 : 1) * s} ${s})`}>
       {(p.shadow ?? 1) > 0 && <ellipse cx={0} cy={4} rx={190} ry={26} fill="rgba(30,20,10,0.22)" opacity={p.shadow ?? 1} />}
-      <g transform={`translate(0 ${-(p.bob ?? 0)}) rotate(${p.lean ?? 0} 0 ${yHip})`}>
-        {/* back arm and leg (a little darker: they're in the body's shadow) */}
+      <g transform={`translate(0 ${-(p.bob ?? 0)})`}>
+        {/* legs stay planted; only the upper body leans (back leg a little darker: it's in the body's shadow) */}
         <g filter="url(#shade)">
-          <g transform={`translate(${-shW * 0.1} ${yShoulder + u * 0.12})`}>
-            <Limb2 a={p.shB ?? -4} b={p.elB ?? 10} spec={armSpec} seed="aB" end={hand('hB')} />
-          </g>
           <g transform={`translate(${-hipW * 0.12} ${yHip})`}>
             <Limb2 a={p.hipB ?? 0} b={p.knB ?? 2} spec={legSpec} seed="lB" end={boot('bB')} leg />
           </g>
         </g>
-        {/* front leg */}
         <g transform={`translate(${hipW * 0.12} ${yHip})`}>
           <Limb2 a={p.hipF ?? 0} b={p.knF ?? 2} spec={legSpec} seed="lF" end={boot('bF')} leg />
+        </g>
+        <g transform={`rotate(${p.lean ?? 0} 0 ${yHip})`}>
+        <g filter="url(#shade)">
+          <g transform={`translate(${-shW * 0.1} ${yShoulder + u * 0.12})`}>
+            <Limb2 a={p.shB ?? -4} b={p.elB ?? 10} spec={armSpec} seed="aB" end={hand('hB')} />
+          </g>
         </g>
         {/* trousers: hips */}
         {!c.skirt && <Cut d={cutC([[-hipW * 0.5, yWaist], [hipW * 0.5, yWaist], [hipW * 0.52, yHip + 20], [-hipW * 0.52, yHip + 20]], 'hips', 1, 14)} fill={c.trousers ?? '#4A4038'} lift={1} />}
@@ -372,6 +374,7 @@ export const Person: React.FC<Pose & {t?: number}> = (p) => {
           <Hat u={u} c={c} wind={wind} bellT={t} />
         </g>
         {!raised && frontArm}
+        </g>
       </g>
     </g>
   );
