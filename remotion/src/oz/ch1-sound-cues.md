@@ -35,3 +35,6 @@ Cues follow the script lines (search for the quoted words). The picture will be 
 | 25 | "two feet were sticking out, shod in silver shoes." | **A single sting** (a low note or soft shimmer), then cut | The cliffhanger |
 
 **Deliver to me:** one stereo WAV of the final mix (narration plus sound design), plus the voice-only track. I sync the paper-cutout picture to the voice, so the cuts land on the words.
+
+## Sound files
+All cues live in `remotion/public/oz/sfx/`, named by cue number (for example `11a-gust.mp3`). Cues 01a–08a were made by hand in ElevenLabs. Cues 08b–25 were generated through the ElevenLabs connector (Sound Effects v2, with a set length). Cue 16 reuses `03b-trapdoor.mp3`, and cue 20 is silence.
