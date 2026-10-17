@@ -26,6 +26,7 @@ import {KEEPER_DURATION, Keeper} from './keeper/Film';
 import {OzCastTest, OzSetTest} from './oz/CastTest';
 import {OzCyclone, OZ_FRAMES} from './oz/Film';
 import {ScissorAvatar} from './scissor/Avatar';
+import {ScissorBanner} from './scissor/Banner';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -106,6 +107,7 @@ export const Root: React.FC = () => (
     <Composition id="N1Test" component={N1Test} durationInFrames={120} fps={24} width={1920} height={1080} defaultProps={{logos: ['anthropic', 'kimi', 'oura'], place: 'whitehouse' as 'whitehouse' | 'ftc' | 'none'}} />
     <Composition id="PaperKite" component={PaperKite} durationInFrames={PK_DURATION} fps={23} width={1080} height={1920} defaultProps={{sound: true}} />
     <Composition id="Keeper" component={Keeper} durationInFrames={KEEPER_DURATION} fps={24000 / 1001} width={1080} height={1920} defaultProps={{sound: false}} />
+    <Composition id="ScissorBanner" component={ScissorBanner} durationInFrames={1} fps={30} width={2560} height={1440} />
     <Composition id="ScissorAvatar" component={ScissorAvatar} durationInFrames={1} fps={30} width={800} height={800} />
     <Composition id="OzCyclone" component={OzCyclone} durationInFrames={OZ_FRAMES} fps={24000 / 1001} width={1920} height={1080} defaultProps={{sound: false, voiceOnly: false}} />
     <Composition id="OzSetTest" component={OzSetTest} durationInFrames={72} fps={24000 / 1001} width={1920} height={1080} />
