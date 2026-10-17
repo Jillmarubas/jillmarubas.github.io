@@ -19,6 +19,9 @@ FUNCTION=remotion-render-4-0-529-mem3008mb-disk10240mb-900sec
 SITE=${SITE:-jillmar-motion}
 # Account concurrency is 10: 1 orchestrator + 8 renderers, leaving one slot spare.
 FRAMES_PER_LAMBDA=${FRAMES_PER_LAMBDA:-50}
+# SCALE=2 for a 4K master of a 1080-wide composition; PROPS overrides input props (JSON).
+SCALE=${SCALE:-1}
+PROPS=${PROPS:-'{}'}
 
 # The AWS SDK ignores HTTPS_PROXY; route it through the session proxy, which signs requests.
 export GLOBAL_AGENT_HTTP_PROXY=$HTTPS_PROXY
@@ -28,7 +31,7 @@ export NODE_OPTIONS="${NODE_OPTIONS:-} -r global-agent/bootstrap"
 SERVE_URL=$(npx remotion lambda sites create src/index.ts --site-name="$SITE" --region="$REGION" --log=error -q | tail -1)
 [ -n "$SERVE_URL" ] || SERVE_URL="https://remotionlambda-useast1-c5w9ygbemk.s3.us-east-1.amazonaws.com/sites/$SITE/index.html"
 
-read -r RENDER_ID BUCKET < <(node start-lambda-render.mjs "$COMP" "$REGION" "$FUNCTION" "$SERVE_URL" "$FRAMES_PER_LAMBDA" |
+read -r RENDER_ID BUCKET < <(node start-lambda-render.mjs "$COMP" "$REGION" "$FUNCTION" "$SERVE_URL" "$FRAMES_PER_LAMBDA" "$SCALE" "$PROPS" |
   python3 -c 'import json,sys; d=json.loads(sys.stdin.read().strip().splitlines()[-1]); print(d["renderId"], d["bucketName"])')
 BASE="https://$BUCKET.s3.$REGION.amazonaws.com/renders/$RENDER_ID"
 echo "render $RENDER_ID started"

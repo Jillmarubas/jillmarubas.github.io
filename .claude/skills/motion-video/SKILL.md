@@ -75,5 +75,6 @@ reflections + lens effects (DOF, grain, vignette, subtle chromatic aberration).*
 - `../../../design-system/`: house design systems usable as a look. **Autopilot Blue** is wired for Remotion (`remotion/src/autopilot/`); its rules are in `SOP.md` → "Design systems".
 - `reference/realism.md`: lighting, shadow, reflection, material and lens recipes, with numbers.
 - **Daily news videos:** always use the approved living-gradient background (`<LivingGradient>` in `remotion/src/gradient/GradientLoop.tsx`) in the chosen design system's colours. See the SOP section "Daily news videos".
+- **Paper-cutout films:** use the `paper-cutout` skill (`.claude/skills/paper-cutout/SKILL.md`): 23.976 fps, multiplane camera, review room, 4K Lambda master.
 - `reference/vector-story-film.md`: **default for story videos.** 2D vector films where every script line is its own scene with a main character, emotions and cinematic shots. Read it before planning any story or explainer film.
 - `remotion/`: the working project. Compositions `BrandStory` (2D + SVG), `MoonDistance` (3D procedural) and `RealMoon` (NASA data, photoreal). Scripts: `render-lambda.sh`, `scripts/analyze-reference.sh`, `scripts/prepare-nasa-textures.py`, and the `make_*_sfx.py` sound generators.
