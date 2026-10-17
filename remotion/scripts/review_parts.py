@@ -20,7 +20,7 @@ os.makedirs(outdir, exist_ok=True)
 def probe(path):
     out = subprocess.run(['npx', 'remotion', 'ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', path],
                          capture_output=True, text=True, cwd=ROOT).stdout.strip().splitlines()[-1]
-    w, h = map(int, out.split(','))
+    w, h = map(int, out.strip(',').split(',')[:2])
     return w, h
 
 w, h = probe(film)
@@ -34,9 +34,11 @@ for ci, ch in enumerate(spec['chapters']):
         e = min(b, a + max_frames)
         name = f"{spec['slug']}-c{spec['cut']}-ch{ci + 1}{'' if k == 0 and e == b else chr(97 + k)}.mp4"
         out = os.path.join(outdir, name)
-        vf = f"trim=start_frame={a}:end_frame={e},setpts=PTS-STARTPTS,scale={size}:flags=lanczos,format=yuv420p"
-        af = f"atrim=start={a / fps:.6f}:end={e / fps:.6f},asetpts=PTS-STARTPTS"
-        cmd = ['npx', 'remotion', 'ffmpeg', '-y', '-v', 'error', '-i', film, '-vf', vf, '-af', af,
+        # Seek on the input (exact when re-encoding) and take exactly e - a frames.
+        # Remotion's bundled ffmpeg has no trim/setpts filters, so no filter graph is used for cutting.
+        scale = [] if (w, h) == tuple(map(int, size.split(':'))) else ['-vf', f'scale={size}:flags=lanczos']
+        cmd = ['npx', 'remotion', 'ffmpeg', '-y', '-v', 'error', '-ss', f'{a / fps:.6f}', '-i', film, *scale,
+               '-frames:v', str(e - a), '-t', f'{(e - a) / fps:.6f}', '-pix_fmt', 'yuv420p',
                '-r', f"{spec['fpsNum']}/{spec['fpsDen']}", '-c:v', 'libx264', '-preset', 'slow', '-b:v', '850k', '-maxrate', '1100k', '-bufsize', '1700k',
                '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', out]
         subprocess.run(cmd, check=True, cwd=ROOT)
