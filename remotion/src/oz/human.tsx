@@ -24,6 +24,7 @@ export type Pose = {
   expr?: Expr;
   blink?: boolean;
   talk?: number; // 0..1 mouth opening
+  gaze?: number; // -1..1 pupils toward the viewer (-) or forward (+)
   wind?: number; // 0..1 hair/skirt blown back
   look: Costume;
   shadow?: number;
@@ -123,11 +124,12 @@ const HEAD_PTS: Pt[] = [
   [0.43, 0.1], [0.37, 0.15], [0.36, 0.24], [0.34, 0.31], [0.3, 0.42], [0.18, 0.5], [0.02, 0.47], [-0.14, 0.34], [-0.22, 0.2], [-0.3, 0.12],
 ];
 
-const Face: React.FC<{u: number; c: Costume; expr: Expr; blink?: boolean; talk: number}> = ({u, c, expr, blink, talk}) => {
+const Face: React.FC<{u: number; c: Costume; expr: Expr; blink?: boolean; talk: number; gaze?: number}> = ({u, c, expr, blink, talk, gaze = 0}) => {
   const P = (x: number, y: number) => `${(x * u).toFixed(1)} ${(y * u).toFixed(1)}`;
   const eyeR = expr === 'amazed' || expr === 'scared' ? 0.055 : 0.045;
   const closed = blink || expr === 'asleep';
-  const brow: Record<Expr, [number, number]> = {calm: [0, -0.13], smile: [0, -0.14], worried: [10, -0.14], scared: [12, -0.17], amazed: [-4, -0.19], stern: [-12, -0.12], sad: [12, -0.13], asleep: [0, -0.12]};
+  // + raises the inner end (fear, worry, sadness); - lowers it (sternness)
+  const brow: Record<Expr, [number, number]> = {calm: [0, -0.13], smile: [0, -0.14], worried: [-12, -0.15], scared: [-16, -0.18], amazed: [-4, -0.19], stern: [10, -0.12], sad: [-14, -0.13], asleep: [0, -0.12]};
   const [bRot, bY] = brow[expr];
   const ink = '#2B211B';
   const mouthOpen = Math.max(talk, expr === 'amazed' ? 0.7 : expr === 'scared' ? 0.55 : 0);
@@ -147,8 +149,8 @@ const Face: React.FC<{u: number; c: Costume; expr: Expr; blink?: boolean; talk: 
         ) : (
           <g key={i}>
             <ellipse cx={ex * u} cy={-0.03 * u} rx={0.06 * k * u} ry={eyeR * u} fill="#F7F1E8" />
-            <ellipse cx={(ex + 0.012) * u} cy={-0.03 * u} rx={0.032 * k * u} ry={0.038 * u} fill="#3C2A1E" />
-            <circle cx={(ex + 0.02) * u} cy={-0.045 * u} r={0.009 * u} fill="#fff" />
+            <ellipse cx={(ex + 0.012 + gaze * 0.025 * k) * u} cy={-0.03 * u} rx={0.032 * k * u} ry={0.038 * u} fill="#3C2A1E" />
+            <circle cx={(ex + 0.02 + gaze * 0.025 * k) * u} cy={-0.045 * u} r={0.009 * u} fill="#fff" />
           </g>
         ),
       )}
@@ -367,7 +369,7 @@ export const Person: React.FC<Pose & {t?: number}> = (p) => {
         <g transform={`translate(${u * 0.02} ${yHead}) rotate(${p.head ?? 0} 0 ${u * 0.45})`}>
           <HairBack u={u} c={c} wind={wind} t={t} />
           <Cut d={cutC(HEAD_PTS.map(([x, y]) => [x * u, y * u] as Pt), 'head' + c.kind + (female ? 'f' : 'm'), 0.9, 10)} fill={c.skin} lift={2} />
-          <Face u={u} c={c} expr={p.expr ?? 'calm'} blink={p.blink} talk={p.talk ?? 0} />
+          <Face u={u} c={c} expr={p.expr ?? 'calm'} blink={p.blink} talk={p.talk ?? 0} gaze={p.gaze} />
           {c.beard && <Cut d={cutC([[0.02 * u, 0.12 * u], [0.28 * u, 0.2 * u], [0.4 * u, 0.32 * u], [0.36 * u, 0.7 * u], [0.22 * u, 1.05 * u], [0.06 * u, 0.9 * u], [-0.14 * u, 0.42 * u], [-0.2 * u, 0.16 * u]], 'beard', 1, 10)} fill={c.beard} lift={1} edge={0.2} />}
           {c.beard && <path d={`M${0.26 * u} ${0.26 * u} L${0.36 * u} ${0.26 * u}`} stroke="#4A2A22" strokeWidth={0.02 * u} strokeLinecap="round" />}
           <HairFront u={u} c={c} />
