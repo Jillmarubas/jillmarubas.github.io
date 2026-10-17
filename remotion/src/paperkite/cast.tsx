@@ -19,6 +19,19 @@ export type KidPose = {
   blink?: boolean;
   hairBlow?: number; // 0..1
   bob?: number;
+  look?: Look;
+};
+
+// Optional costume for other characters; the defaults are the kite film's kid.
+export type Look = {
+  coat?: string;
+  coatBack?: string;
+  pants?: string;
+  hair?: string;
+  style?: 'tuft' | 'bob';
+  hat?: string; // sou'wester colour
+  beard?: string;
+  stripe?: string | null;
 };
 
 const SHOULDER: Pt = [0, -268];
@@ -89,10 +102,14 @@ export const Kid: React.FC<KidPose & {holding?: React.ReactNode}> = (p) => {
   const expr = p.expr ?? 'happy';
   const [browRot, browY] = BROW[expr];
   const blow = p.hairBlow ?? 0;
+  const L = p.look ?? {};
+  const coat = L.coat ?? C.shirt;
+  const hairC = L.hair ?? C.hair;
+  const stripe = L.stripe === undefined ? '#E3DCCD' : L.stripe;
   const shoe = (seed: string) => <Cut d={cut(ellipsePts(10, ARM_LEN + 18, 26, 13), seed, 0.8)} fill={C.ink} lift={1} edge={0.15} />;
   const armUp = (p.armFront ?? 0) < -95;
   const frontArm = (
-    <Limb x={SHOULDER[0] + 4} y={SHOULDER[1] + 8} angle={p.armFront ?? 0} len={ARM_LEN} w={30} fill={C.shirt} seed="armF" end={<Cut d={cut(ellipsePts(0, ARM_LEN, 15, 15, 12), 'handF', 0.6)} fill={C.skin} lift={1} edge={0.2} />} />
+    <Limb x={SHOULDER[0] + 4} y={SHOULDER[1] + 8} angle={p.armFront ?? 0} len={ARM_LEN} w={30} fill={coat} seed="armF" end={<Cut d={cut(ellipsePts(0, ARM_LEN, 15, 15, 12), 'handF', 0.6)} fill={C.skin} lift={1} edge={0.2} />} />
   );
   const hand = (seed: string) => <Cut d={cut(ellipsePts(0, ARM_LEN, 15, 15, 12), seed, 0.6)} fill={C.skin} lift={1} edge={0.2} />;
   return (
@@ -101,28 +118,44 @@ export const Kid: React.FC<KidPose & {holding?: React.ReactNode}> = (p) => {
       <ellipse cx={0} cy={4} rx={70} ry={12} fill="rgba(43,29,16,0.16)" />
       <g transform={`translate(0 ${-(p.bob ?? 0)}) rotate(${p.lean ?? 0} 0 ${HIP_Y})`}>
         {/* back arm + leg */}
-        <Limb x={SHOULDER[0] - 6} y={SHOULDER[1] + 6} angle={p.armBack ?? 0} len={ARM_LEN} w={30} fill="#5E6A72" seed="armB" end={hand('handB')} />
+        <Limb x={SHOULDER[0] - 6} y={SHOULDER[1] + 6} angle={p.armBack ?? 0} len={ARM_LEN} w={30} fill={L.coatBack ?? '#5E6A72'} seed="armB" end={hand('handB')} />
         <Limb x={-8} y={HIP_Y} angle={p.legBack ?? 0} len={ARM_LEN} w={34} fill="#45403A" seed="legB" end={shoe('shoeB')} />
         {/* body */}
-        <Cut d={cut([[-44, -128], [46, -128], [40, -170], [-40, -170]], 'shorts', 1.2, 14)} fill={C.pants} lift={1} />
-        <Cut d={cut([[-48, -158], [50, -158], [42, -284], [-40, -284]], 'shirt', 1.4, 14)} fill={C.shirt} lift={2} />
-        <Cut d={cut(rectPts(-46, -214, 96, 16), 'stripe', 1, 14)} fill="#E3DCCD" lift={1} edge={0} />
+        <Cut d={cut([[-44, -128], [46, -128], [40, -170], [-40, -170]], 'shorts', 1.2, 14)} fill={L.pants ?? C.pants} lift={1} />
+        <Cut d={cut([[-48, -158], [50, -158], [42, -284], [-40, -284]], 'shirt', 1.4, 14)} fill={coat} lift={2} />
+        {stripe && <Cut d={cut(rectPts(-46, -214, 96, 16), 'stripe', 1, 14)} fill={stripe} lift={1} edge={0} />}
         {/* front leg */}
-        <Limb x={8} y={HIP_Y} angle={p.legFront ?? 0} len={ARM_LEN} w={34} fill={C.pants} seed="legF" end={shoe('shoeF')} />
+        <Limb x={8} y={HIP_Y} angle={p.legFront ?? 0} len={ARM_LEN} w={34} fill={L.pants ?? C.pants} seed="legF" end={shoe('shoeF')} />
         {armUp && frontArm}
         {/* head */}
         <g transform={`rotate(${p.headTilt ?? 0} 0 -290)`}>
+          {L.style === 'bob' && (
+            <Cut d={cut([[-66, -360], [-74, -300], [-60, -268], [-20, -272], [-4, -300], [30, -300], [30, -380]], 'bobBack', 1.2, 12)} fill={hairC} lift={1} />
+          )}
           <Cut d={cut(ellipsePts(8, -338, 66, 70), 'head', 1.2)} fill={C.skin} lift={2} />
           <Cut d={cut(ellipsePts(-20, -334, 13, 17, 12), 'ear', 0.8)} fill="#DCC3AD" lift={1} edge={0.2} />
           {/* hair: cap + a tuft that blows in the wind */}
           <Cut
             d={cut([[-58, -330], [-62, -372], [-40, -404], [0, -414], [44, -404], [70, -378], [62, -360], [20, -376], [-18, -366], [-36, -346]], 'hair', 1.4, 12)}
-            fill={C.hair}
+            fill={hairC}
             lift={1}
           />
-          <g transform={`rotate(${-12 - blow * 26} 10 -408)`}>
-            <Cut d={cut([[0, -404], [-18, -440], [12, -428], [24, -452], [30, -410]], 'tuft', 1, 10)} fill={C.hair} lift={1} edge={0.1} />
-          </g>
+          {L.style !== 'bob' && !L.hat && (
+            <g transform={`rotate(${-12 - blow * 26} 10 -408)`}>
+              <Cut d={cut([[0, -404], [-18, -440], [12, -428], [24, -452], [30, -410]], 'tuft', 1, 10)} fill={hairC} lift={1} edge={0.1} />
+            </g>
+          )}
+          {L.style === 'bob' && (
+            <g transform={`rotate(${-blow * 14} -40 -380)`}>
+              <Cut d={cut([[-40, -400], [-84, -372], [-70, -352], [-30, -380]], 'bobFlick', 1, 10)} fill={hairC} lift={1} edge={0.1} />
+            </g>
+          )}
+          {L.hat && (
+            <g transform={`rotate(${-6 - blow * 6} 0 -400)`}>
+              <Cut d={cut([[-90, -376], [-60, -398], [0, -404], [70, -394], [96, -372], [40, -384], [-40, -384]], 'brim', 1.2, 12)} fill={L.hat} lift={2} />
+              <Cut d={cut([[-56, -386], [-50, -430], [-10, -452], [36, -444], [54, -392]], 'crown', 1.2, 12)} fill={L.hat} lift={2} />
+            </g>
+          )}
           {/* eye, brow, cheek, mouth */}
           {p.blink ? (
             <path d="M30 -344 Q38 -338 46 -344" stroke={C.ink} strokeWidth={4} fill="none" strokeLinecap="round" />
@@ -131,6 +164,7 @@ export const Kid: React.FC<KidPose & {holding?: React.ReactNode}> = (p) => {
           )}
           <path d={`M26 ${browY} L50 ${browY}`} stroke={C.ink} strokeWidth={5} strokeLinecap="round" transform={`rotate(${browRot} 38 ${browY})`} />
           <ellipse cx={30} cy={-318} rx={13} ry={9} fill={C.cheek} opacity={0.55} />
+          {L.beard && <Cut d={cut([[-14, -322], [20, -300], [66, -312], [70, -290], [50, -262], [10, -256], [-14, -280]], 'beard', 1.2, 10)} fill={L.beard} lift={1} edge={0.3} />}
           <Mouth expr={expr} />
         </g>
         {/* front arm: in front of the body, but tucked behind the head when raised so it never covers the face */}

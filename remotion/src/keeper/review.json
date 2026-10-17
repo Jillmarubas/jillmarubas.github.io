@@ -1,0 +1,32 @@
+{
+  "title": "The Keeper",
+  "slug": "keeper",
+  "fpsNum": 24000,
+  "fpsDen": 1001,
+  "frames": 1439,
+  "cut": 1,
+  "chapters": [
+    {"name": "Storm", "start": 0, "end": 14},
+    {"name": "Climb", "start": 14, "end": 26},
+    {"name": "Lamp", "start": 26, "end": 35},
+    {"name": "Bell", "start": 35, "end": 45.5},
+    {"name": "Home", "start": 45.5, "end": 60}
+  ],
+  "shots": [
+    {"start": 0, "label": "A lantern in the storm"},
+    {"start": 4.5, "label": "The rocks the boat cannot see"},
+    {"start": 9, "label": "The lighthouse: lamp dark, one window lit"},
+    {"start": 14, "label": "She watches the boat from the window"},
+    {"start": 19, "label": "She climbs the spiral stair"},
+    {"start": 26, "label": "She lights the big lamp"},
+    {"start": 28.5, "label": "Insert: the boat nears the rocks"},
+    {"start": 29.6, "label": "A pane bursts; the flames go out"},
+    {"start": 31.4, "label": "Insert: rocks dead ahead"},
+    {"start": 32.4, "label": "In the dark she finds the bell rope"},
+    {"start": 35, "label": "She rings the bell"},
+    {"start": 39.5, "label": "The village answers with lanterns"},
+    {"start": 45.5, "label": "The boat turns and follows the lanterns"},
+    {"start": 51.5, "label": "Dawn: grandpa is home"},
+    {"start": 57, "label": "The lamp glows once, by itself"}
+  ]
+}

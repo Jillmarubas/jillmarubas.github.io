@@ -1,0 +1,272 @@
+{
+ "title": "The Cyclone \u00b7 Scissor Tales",
+ "slug": "oz",
+ "fpsNum": 24000,
+ "fpsDen": 1001,
+ "frames": 13067,
+ "cut": 1,
+ "chapters": [
+  {
+   "name": "Cold open",
+   "start": 0.0,
+   "end": 23.265
+  },
+  {
+   "name": "Gray Kansas (1)",
+   "start": 23.265,
+   "end": 99.072
+  },
+  {
+   "name": "Gray Kansas (2)",
+   "start": 99.072,
+   "end": 174.878
+  },
+  {
+   "name": "The cyclone comes",
+   "start": 174.878,
+   "end": 257.342
+  },
+  {
+   "name": "In the storm (1)",
+   "start": 257.342,
+   "end": 326.826
+  },
+  {
+   "name": "In the storm (2)",
+   "start": 326.826,
+   "end": 396.309
+  },
+  {
+   "name": "The landing",
+   "start": 396.309,
+   "end": 444.237
+  },
+  {
+   "name": "Munchkin country",
+   "start": 444.237,
+   "end": 544.964
+  }
+ ],
+ "shots": [
+  {
+   "start": 0,
+   "label": "The house is flying"
+  },
+  {
+   "start": 12.616,
+   "label": "Dorothy holds Toto"
+  },
+  {
+   "start": 21.265,
+   "label": "Title"
+  },
+  {
+   "start": 23.265,
+   "label": "Nothing in Kansas moved"
+  },
+  {
+   "start": 29.706,
+   "label": "The farm"
+  },
+  {
+   "start": 44.706,
+   "label": "One room, the trapdoor"
+  },
+  {
+   "start": 58.5,
+   "label": "Dorothy in the doorway"
+  },
+  {
+   "start": 66.0,
+   "label": "Gray prairie on every side"
+  },
+  {
+   "start": 76.0,
+   "label": "Sun-baked cracks"
+  },
+  {
+   "start": 85.701,
+   "label": "Blistered paint"
+  },
+  {
+   "start": 98.587,
+   "label": "Aunt Em"
+  },
+  {
+   "start": 116.587,
+   "label": "Startled by laughter"
+  },
+  {
+   "start": 126.881,
+   "label": "\"Child, how can you laugh\""
+  },
+  {
+   "start": 133.279,
+   "label": "Uncle Henry plows"
+  },
+  {
+   "start": 150.988,
+   "label": "Toto"
+  },
+  {
+   "start": 170.474,
+   "label": "Not playing today"
+  },
+  {
+   "start": 174.878,
+   "label": "Henry watches the sky"
+  },
+  {
+   "start": 183.878,
+   "label": "Wind from the north"
+  },
+  {
+   "start": 190.878,
+   "label": "Whistling from the south"
+  },
+  {
+   "start": 199.219,
+   "label": "\"There's a cyclone coming\""
+  },
+  {
+   "start": 206.053,
+   "label": "Henry runs to the stock"
+  },
+  {
+   "start": 210.653,
+   "label": "Em sees the danger"
+  },
+  {
+   "start": 217.115,
+   "label": "\"Run for the cellar!\""
+  },
+  {
+   "start": 220.641,
+   "label": "Toto hides"
+  },
+  {
+   "start": 225.203,
+   "label": "\"Toto, come here!\""
+  },
+  {
+   "start": 228.254,
+   "label": "Em goes down the trapdoor"
+  },
+  {
+   "start": 239.73,
+   "label": "A great shriek"
+  },
+  {
+   "start": 244.776,
+   "label": "The house shakes"
+  },
+  {
+   "start": 252.189,
+   "label": "A strange thing happened"
+  },
+  {
+   "start": 257.342,
+   "label": "The house rises"
+  },
+  {
+   "start": 267.511,
+   "label": "The center of the cyclone"
+  },
+  {
+   "start": 282.511,
+   "label": "Carried like a feather"
+  },
+  {
+   "start": 296.313,
+   "label": "Rocked like a cradle"
+  },
+  {
+   "start": 312.804,
+   "label": "Toto falls in"
+  },
+  {
+   "start": 324.846,
+   "label": "\"Toto!\""
+  },
+  {
+   "start": 326.745,
+   "label": "An ear in the hole"
+  },
+  {
+   "start": 338.745,
+   "label": "The rescue"
+  },
+  {
+   "start": 351.743,
+   "label": "Hour after hour"
+  },
+  {
+   "start": 366.514,
+   "label": "\"Will we be dashed to pieces?\""
+  },
+  {
+   "start": 374.896,
+   "label": "Fast asleep"
+  },
+  {
+   "start": 396.309,
+   "label": "The shock"
+  },
+  {
+   "start": 405.898,
+   "label": "Silence"
+  },
+  {
+   "start": 411.589,
+   "label": "Sunshine"
+  },
+  {
+   "start": 427.775,
+   "label": "She opens the door"
+  },
+  {
+   "start": 434.526,
+   "label": "Amazement"
+  },
+  {
+   "start": 444.237,
+   "label": "Munchkin country"
+  },
+  {
+   "start": 453.237,
+   "label": "Fruit trees"
+  },
+  {
+   "start": 462.237,
+   "label": "Banks of flowers"
+  },
+  {
+   "start": 470.237,
+   "label": "Brilliant birds"
+  },
+  {
+   "start": 477.237,
+   "label": "The brook"
+  },
+  {
+   "start": 486.188,
+   "label": "The queerest people"
+  },
+  {
+   "start": 511.617,
+   "label": "The bow"
+  },
+  {
+   "start": 517.285,
+   "label": "\"You are welcome\""
+  },
+  {
+   "start": 529.526,
+   "label": "Dorothy looks behind her"
+  },
+  {
+   "start": 532.885,
+   "label": "Silver shoes"
+  }
+ ]
+}
