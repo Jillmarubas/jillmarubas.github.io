@@ -102,9 +102,24 @@ Researched and tested in October 2026.
   - Keep a list of where every asset came from, with its license.
   - Use news and movie clips only briefly, with edits on top. That channel nearly lost
     everything to copyright strikes.
-- **EffectCraft** (free After Effects alternative, github.com/storytold/effectcraft) runs
-  headless in the cloud container:
-  - Download the Linux tarball from its GitHub releases.
+- **The ArtCraft family of apps** (free, open-source, github.com/storytold) runs headless
+  in the cloud container. Cloud sessions start empty, so install them first:
+  - Run `bash scripts/install-craft-apps.sh` (about 1 minute). Name apps to install
+    only some, for example `bash scripts/install-craft-apps.sh effectcraft filmcraft`.
+  - It installs the latest Linux release of EffectCraft (After Effects), FilmCraft
+    (Premiere), PhotoCraft (Photoshop), LightCraft (Lightroom), VectorCraft
+    (Illustrator), DesignCraft (InDesign), FigCraft (Figma) and PDFCraft (Acrobat), and
+    puts each `<app>-cli` command on the PATH.
+  - Pin a version if a new release breaks something, for example
+    `EFFECTCRAFT_VERSION=0.11.1`.
+  - ArtCraft itself (AI image and video generation) ships for Windows and macOS only,
+    so it runs on the user's computer, not here.
+  - Last checked versions (October 2026): EffectCraft 0.11.1, FilmCraft 0.8.0,
+    PhotoCraft 0.9.0, LightCraft 0.8.0, VectorCraft 0.12.0, DesignCraft 0.8.0,
+    FigCraft 0.6.0, PDFCraft 0.8.0.
+  - Not yet checked: whether PhotoCraft can remove backgrounds automatically for
+    cut-outs. If it can't, use a separate free cut-out tool.
+- **EffectCraft** is the main motion-graphics tool:
   - Use `effectcraft-cli script file.jsx` for After Effects-style scripting.
   - Use `render-frame` to check stills and `render` to export.
   - Property paths need the group, for example
