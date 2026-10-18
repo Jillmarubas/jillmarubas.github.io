@@ -14,6 +14,7 @@ The live site is published from `site/` by GitHub Actions on every push to `main
 | `backups/` | Earlier versions kept for reference: the original orange design, the pre-glass version, and the black/white Settle rebuild. Not published. |
 | `.github/workflows/pages.yml` | The deploy workflow. |
 | `remotion/` | Motion-graphics video project (Remotion + three.js), rendered on AWS Lambda. Not published. |
+| `scripts/install-craft-apps.sh` | Installs the free ArtCraft family apps (EffectCraft, FilmCraft, PhotoCraft and more) in a cloud session. |
 | `.claude/skills/motion-video/` | Skill and SOP for making realistic 3D motion videos: reference breakdowns, realism recipes, step-by-step procedure. |
 
 ## The site, briefly
