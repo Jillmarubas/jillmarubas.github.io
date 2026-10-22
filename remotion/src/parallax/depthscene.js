@@ -1,12 +1,13 @@
-// Depth-map parallax test: one archive photo, three ways to move a camera through it.
+// Archive-photo parallax: move a real 3D camera through one photo.
 // Plain ES module with no imports (the host passes THREE), like demo3d/city3d.js.
+// Used by <ArchiveParallax>; prepare the images with prep_depth.py.
 //
 //  'depth'  A. Depth-map displacement: the whole photo is a mesh pushed back by the AI depth map.
 //  'hybrid' B. Cut-outs (shack, family, posts) as flat cards in front of the filled-in background,
 //              which is itself bent by the object-free depth map.
 //  'holes'  C. Same as B but the background was NOT filled: the cut-out holes show.
 
-export const FPS = 30;
+export const FPS = 30; // demo default; the component follows the composition's fps
 export const DURATION_S = 6;
 export const W = 1920;
 export const H = 1080;
@@ -70,8 +71,16 @@ function card(THREE, map, disp, order) {
   return m;
 }
 
-/** tex: {photo, depth, clean, holes, depth_bg, obj_mid, obj_near}; info: layers.json */
-export function createDepthScene(THREE, tex, info, method) {
+// Default move: track right, rise a little, push in, and widen the lens slightly while pushing
+// (the research's "keyframed FOV" lens warp). Units: world px at the 1200 px plate distance.
+// Keep z within about -350 (push in) to +150 (pull out); bigger moves reveal plate edges and
+// the rough fill. fov in degrees (48.46 = the plate fills the frame exactly).
+export const DEFAULT_MOVE = {x: [-70, 70], y: [-10, 18], z: [0, -280], fov: [48.46, 52]};
+
+/** tex: {photo, depth, clean, holes, depth_bg, obj_mid, obj_near}; info: layers.json;
+ *  move: {x, y, z, fov} pairs [start, end]; duration: seconds the move takes. */
+export function createDepthScene(THREE, tex, info, method, move = DEFAULT_MOVE, duration = DURATION_S) {
+  const mv = {...DEFAULT_MOVE, ...move};
   for (const k of ['photo', 'clean', 'holes', 'obj_mid', 'obj_near']) {
     tex[k].colorSpace = THREE.SRGBColorSpace;
     tex[k].anisotropy = 8;
@@ -92,12 +101,11 @@ export function createDepthScene(THREE, tex, info, method) {
 
   const camera = new THREE.PerspectiveCamera((2 * Math.atan(H / 2 / D) * 180) / Math.PI, W / H, 1, 20000);
 
-  // Same move for all three: track right, rise a little, push in, and widen the lens slightly
-  // while pushing (the research's "keyframed FOV" lens warp).
+  // Cubic ease in-out over the whole clip (ends 0.2 s early so the last frames settle).
   function renderAt(t) {
-    const p = easeInOutCubic(clamp01(t / (DURATION_S - 0.2)));
-    camera.position.set(lerp(-70, 70, p), lerp(-10, 18, p), lerp(0, -280, p));
-    camera.fov = lerp(48.46, 52, p);
+    const p = easeInOutCubic(clamp01(t / Math.max(0.1, duration - 0.2)));
+    camera.position.set(lerp(mv.x[0], mv.x[1], p), lerp(mv.y[0], mv.y[1], p), lerp(mv.z[0], mv.z[1], p));
+    camera.fov = lerp(mv.fov[0], mv.fov[1], p);
     camera.updateProjectionMatrix();
     camera.lookAt(camera.position.x, camera.position.y, camera.position.z - 1);
     camera.updateMatrixWorld();

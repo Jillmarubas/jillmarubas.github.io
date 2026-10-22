@@ -1,7 +1,20 @@
-"""Prepare the depth-map parallax test from one archive photo.
+"""Prepare one photo for <ArchiveParallax> (method B: cut-outs over a filled, depth-bent background).
 
-Usage: python prep_depth.py <photo.jpg> <out_dir>
+Usage:
+  python prep_depth.py <photo.jpg> <out_dir> [--crop X0,X1] [--cy 0.5] [--delta 0.05] [--near 0.42] [--sky 0.15]
+
+  --crop X0,X1  horizontal crop as fractions of the width (trim scan borders); default 0,1.
+                The height follows for 16:9.
+  --cy          vertical centre of the 16:9 crop, as a fraction of the height; default 0.5.
+  --delta       how much nearer than the ground (0-1 depth) a pixel must be to count as an
+                object; lower it if people or objects are missed, raise it if ground is cut.
+  --near        objects with median depth above this go on the near layer (front posts,
+                people close to the lens); the rest go on the mid layer.
+  --sky         top fraction of the frame where nothing is cut out (sky).
+
 Needs: torch (CPU), transformers, opencv-python-headless, pillow, numpy.
+Model: Depth Anything V2 Small (Apache-2.0). Base and Large are CC-BY-NC: not for commercial work.
+Example (the 1936 dust-storm test): --crop 0.038,0.960 --cy 0.585
 
 Writes into out_dir (all 2400x1350, i.e. 1.25x the 1920x1080 frame so the camera can move):
 - photo.png        the cropped photo
@@ -9,32 +22,46 @@ Writes into out_dir (all 2400x1350, i.e. 1.25x the 1920x1080 frame so the camera
 - clean.png        background with the standing objects removed and the hole filled in (inpainted)
 - holes.png        same background with the holes left transparent (to show why filling matters)
 - depth_bg.png     depth of the background with the objects removed (ground depth in the hole)
-- obj_mid.png      cut-out: shack, farmer, sons, far posts (RGBA)
-- obj_near.png     cut-out: the nearest posts and stumps (RGBA)
-- layers.json      each layer's mean depth (0-1, 1 = nearest)
+- obj_mid.png      cut-out: standing objects at mid depth (RGBA)
+- obj_near.png     cut-out: the nearest objects (RGBA)
+- layers.json      each layer's median depth (0-1, 1 = nearest)
+- check.jpg        contact sheet to QA: photo, depth, filled background, cut-outs on red
 """
+import argparse
 import json
 import os
-import sys
 
 import cv2
 import numpy as np
 from PIL import Image
 from transformers import pipeline
 
-SRC, OUT = sys.argv[1], sys.argv[2]
+ap = argparse.ArgumentParser()
+ap.add_argument('photo')
+ap.add_argument('out_dir')
+ap.add_argument('--crop', default='0,1')
+ap.add_argument('--cy', type=float, default=0.5)
+ap.add_argument('--delta', type=float, default=0.05)
+ap.add_argument('--near', type=float, default=0.42)
+ap.add_argument('--sky', type=float, default=0.15)
+args = ap.parse_args()
+SRC, OUT = args.photo, args.out_dir
 os.makedirs(OUT, exist_ok=True)
 PW, PH = 2400, 1350
 
-# 1. Crop the print (drop the mount border) to a 16:9 band around the shack and the family.
+# 1. Crop to 16:9 (trim scan borders with --crop, place the band with --cy).
 im = Image.open(SRC).convert('RGB')
 W0, H0 = im.size
-x0, x1 = int(W0 * 0.038), int(W0 * 0.960)
+fx0, fx1 = (float(v) for v in args.crop.split(','))
+x0, x1 = int(W0 * fx0), int(W0 * fx1)
 cw = x1 - x0
 ch = int(cw * 9 / 16)
-cy = int(H0 * 0.585)
-y0 = max(int(H0 * 0.034), cy - ch // 2)
-crop = im.crop((x0, y0, x1, y0 + ch)).resize((PW, PH), Image.LANCZOS)
+if ch > H0:  # photo wider than 16:9 after the crop: use full height, narrow the width
+    ch = H0
+    cw = int(ch * 16 / 9)
+    x0 = (x0 + x1 - cw) // 2
+y0 = min(max(0, int(H0 * args.cy) - ch // 2), H0 - ch)
+crop = im.crop((x0, y0, x0 + cw, y0 + ch)).resize((PW, PH), Image.LANCZOS)
 crop.save(os.path.join(OUT, 'photo.png'))
 rgb = np.asarray(crop)
 
@@ -54,8 +81,8 @@ Image.fromarray((disp * 255).astype(np.uint8)).save(os.path.join(OUT, 'depth.png
 # Ground/sky behind = the farther pixels of each row (15th percentile), since objects are nearer.
 row_ground = np.percentile(disp, 15, axis=1, keepdims=True).astype(np.float32)
 row_ground = cv2.GaussianBlur(row_ground, (1, 61), 0)
-stand = (disp - row_ground) > 0.05
-stand[: int(PH * 0.15)] = False  # nothing stands in the upper sky
+stand = (disp - row_ground) > args.delta
+stand[: int(PH * args.sky)] = False  # nothing stands in the upper sky
 stand = cv2.morphologyEx(stand.astype(np.uint8), cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
 stand = cv2.morphologyEx(stand, cv2.MORPH_CLOSE, np.ones((15, 15), np.uint8))
 n, lab, stats, _ = cv2.connectedComponentsWithStats(stand, 8)
@@ -68,7 +95,7 @@ for i in range(1, n):
     m = lab == i
     d = float(np.median(disp[m]))
     # Clearly nearer objects (the front posts and stumps) get their own layer; the rest is mid.
-    if d > 0.42:
+    if d > args.near:
         near[m] = 255
         near_d.append(d)
     else:
@@ -124,4 +151,18 @@ json.dump({
     'near': round(float(np.median(near_d)) if near_d else bg_d, 4),
     'objects': {'mid': len(mid_d), 'near': len(near_d)},
 }, open(os.path.join(OUT, 'layers.json'), 'w'), indent=2)
+# 5. Contact sheet for QA: check every new photo's cut-outs before rendering.
+tiles = [crop, Image.fromarray((disp * 255).astype(np.uint8)).convert('RGB'),
+         Image.fromarray(cv2.cvtColor(clean, cv2.COLOR_BGR2RGB))]
+red = Image.new('RGBA', (PW, PH), (200, 40, 40, 255))
+red.alpha_composite(rgba(mid_a))
+blue = Image.new('RGBA', (PW, PH), (0, 0, 0, 0))
+blue.alpha_composite(rgba(near_a))
+red.alpha_composite(Image.blend(Image.new('RGBA', (PW, PH), (40, 90, 220, 0)), blue, 0.85))
+tiles.append(red.convert('RGB'))
+sheet = Image.new('RGB', (1600, 900))
+for k, t in enumerate(tiles):
+    sheet.paste(t.resize((800, 450)), ((k % 2) * 800, (k // 2) * 450))
+sheet.save(os.path.join(OUT, 'check.jpg'), quality=85)
+
 print('done', json.load(open(os.path.join(OUT, 'layers.json'))))

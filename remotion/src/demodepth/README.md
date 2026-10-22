@@ -1,6 +1,8 @@
 # Depth-map parallax test
 
-One archive photo, three ways to move a camera through it. Same 6 s move in all three (track
+One archive photo, three ways to move a camera through it. The reusable code (component,
+scene, prep script) lives in `../parallax/`; method B is the house default (motion-video SOP,
+"Archive-photo parallax: method B"). Same 6 s move in all three (track
 right, slight rise, push in, lens widening 48.5° → 52°).
 
 | Composition | Method |
@@ -30,8 +32,8 @@ venv/bin/pip install transformers==4.46.3 pillow numpy opencv-python-headless==4
 # 2. Photo: the 3840 px rendering of the Commons file above (send a User-Agent header)
 curl -A "Mozilla/5.0 (jillmarubas.github.io)" -o dust.jpg "<thumburl from the Commons API, iiurlwidth=3840>"
 # 3. Crop, depth, cut-outs, filled background -> public/demodepth/ (git-ignored)
-venv/bin/python src/demodepth/prep_depth.py dust.jpg public/demodepth
-# 4. Render (each about 1-3 min on a 4-core box)
+venv/bin/python src/parallax/prep_depth.py dust.jpg public/demodepth --crop 0.038,0.960 --cy 0.585
+# 4. Render (each about 3-4 min on a 4-core box without a GPU)
 npx remotion render src/demodepth/index.ts DepthB out.mp4 --gl=swangle
 ```
 
@@ -41,4 +43,4 @@ npx remotion render src/demodepth/index.ts DepthB out.mp4 --gl=swangle
 - OpenCV inpainting smears large holes. It's fine when the cut-out covers most of the hole, but for
   big reveals use a better fill (e.g. a LaMa-style inpainting model or a hand clean plate).
 - `ThreeCanvas` only draws on frame changes and on creation, so mount it after textures load
-  (see `DemoDepth.tsx`), or frames come out black.
+  (see `../parallax/ArchiveParallax.tsx`), or frames come out black.
