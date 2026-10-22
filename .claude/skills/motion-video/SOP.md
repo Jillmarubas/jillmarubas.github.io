@@ -353,7 +353,13 @@ Reusable pieces in `remotion/src/docfx/` (see its README): `DecodeTitle`, `Matte
 `DocFxDemo`. Use them for documentary and MagnatesMedia-style films, alongside
 `<ArchiveParallax>` (method B) for real photos.
 
-**When to use what:**
+**They're tools, not a template (the user's rule, 22 Oct 2026).** Reference 7 explains why
+these effects work; it is never imitated. Pick effects only where the script needs them, design
+looks (fonts, colours, glow, metaphors) from the film's own design system and story, and never
+rebuild the reference's sequence (portrait → vault → silhouette, face-off, landmark in a void) as
+a set. The defaults are deliberately neutral; style every use.
+
+**When each tool can help (options, not a recipe):**
 - **Name title:** `DecodeTitle` starting on the frame the narrator says the name. One title
   per name; it leaves with the next transition.
 - **Between shots:**

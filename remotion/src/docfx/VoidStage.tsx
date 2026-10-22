@@ -20,7 +20,7 @@ export const VoidStage: React.FC<{
   orbit?: [number, number]; // camera angle (degrees) start → end, for a slow drift around
   dust?: number;
   glow?: string;
-}> = ({children, recede = [9, 14], recedeDur = 3, height = 1.4, target = 1.0, orbit = [0, 0], dust = 260, glow = '#ffcf8a'}) => {
+}> = ({children, recede = [9, 14], recedeDur = 3, height = 1.4, target = 1.0, orbit = [0, 0], dust = 260, glow = '#e6e6e6'}) => {
   const {fps, width, height: H} = useVideoConfig();
   const t = useCurrentFrame() / fps;
   return (

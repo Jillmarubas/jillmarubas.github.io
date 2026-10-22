@@ -3,8 +3,8 @@ import {useCurrentFrame, useVideoConfig} from 'remotion';
 import {E, clamp, hash01} from './util';
 
 /**
- * Name title that "decodes": random glyphs settle into the real letters left to right, with a
- * strong glow (reference 7: "John D. Rzn" → "John D. Rockefeller", about 1.1 s).
+ * Name title that "decodes": random glyphs settle into the real letters left to right, with an
+ * optional glow (principle from reference 7: the name lands on the word that says it).
  * Start it on the frame the narrator says the name. It leaves left to right (fade + blur).
  * Times are in seconds, local to the enclosing Sequence.
  */
@@ -28,10 +28,11 @@ export const DecodeTitle: React.FC<{
   exitAt,
   exitDur = 0.5,
   size = 110,
-  color = '#F6C59A',
-  glow = '#FF6A1A',
-  font = 'Fraunces, Georgia, serif',
-  weight = 900,
+  // Neutral defaults on purpose: style every use from the film's own design system.
+  color = '#FFFFFF',
+  glow = '',
+  font = 'Inter, sans-serif',
+  weight = 800,
   seed = 7,
   style,
 }) => {

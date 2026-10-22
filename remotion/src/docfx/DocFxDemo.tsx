@@ -21,7 +21,7 @@ const ShotA: React.FC = () => (
     <ArchiveParallax dir="demodepth" move={{x: [-30, 30], y: [10, -6], z: [-60, 120], fov: [50, 48.5]}} />
     <Tint color="#ff4a12" from={0.55} to={0.55} />
     <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 170}}>
-      <DecodeTitle text="THE DUST BOWL" at={1.0} dur={1.1} exitAt={3.3} size={120} />
+      <DecodeTitle text="THE DUST BOWL" at={1.0} dur={1.1} exitAt={3.3} size={120} color="#F6C59A" glow="#FF6A1A" font="Fraunces, Georgia, serif" weight={900} />
     </AbsoluteFill>
     <DocFinish grainSrc={GRAIN} />
   </AbsoluteFill>
@@ -30,7 +30,7 @@ const ShotA: React.FC = () => (
 // Shot B: a place as a 3D model in a void; then the eyeline over-the-shoulder.
 const ShotB: React.FC = () => (
   <AbsoluteFill>
-    <VoidStage recede={[9, 15]} recedeDur={3.2} orbit={[-8, 6]}>
+    <VoidStage recede={[9, 15]} recedeDur={3.2} orbit={[-8, 6]} glow="#ffcf8a">
       <ClassicalBuilding />
     </VoidStage>
     <Tint color="#2f5f8f" from={0.5} to={0.5} />

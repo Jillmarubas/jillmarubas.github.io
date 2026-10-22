@@ -112,7 +112,8 @@ Researched and tested in October 2026.
     everything to copyright strikes.
   - AI animation of real people's photos depends on the topic: ask the user at the brief
     for each video (never in Vox-style videos).
-- **Effects:** use the docfx kit (`remotion/src/docfx/`) and method B (`<ArchiveParallax>`).
+- **Effects:** the docfx kit (`remotion/src/docfx/`) and method B (`<ArchiveParallax>`) are
+  available tools. References (such as reference 7) guide the principles; never imitate them.
 - **EffectCraft** (free After Effects alternative, github.com/storytold/effectcraft) runs
   headless in the cloud container:
   - Download the Linux tarball from its GitHub releases.

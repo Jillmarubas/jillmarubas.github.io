@@ -101,6 +101,10 @@ spike in mean difference is a hard cut. A run of frames above the median differe
 ---
 
 ## 7 · Business documentary cold open, 16:9 (studied 22 Oct 2026)
+> **Reference only, never imitate (the user's rule).** Use this to understand *why* the effects
+> work (timing, depth, turns, sound). Each film designs its own shots, metaphors, titles and
+> colours from its own story and design system; don't rebuild these scenes.
+
 Two screen recordings (10.6 s + 9.7 s, back to back) from YouTube of a MagnatesMedia-style documentary about John D.
 Rockefeller (channel not named by the user). It's an HDR recording, so frames were tone-mapped
 before study. The "Includes paid promotion" badge and the captions are the YouTube player, not
@@ -162,7 +166,7 @@ the documentary range.
   (whoosh and paper-flutter effects; some may be sibilants).
 - Voice pauses (6.7, 8.2, 8.9–9.0 s) leave the drone alone for a beat.
 
-**Techniques to take (in our tools):**
+**Principles this shows, and the tools we have for them (guidance only, never recreate these shots):**
 1. 2.5D pull-back with the portrait drifting and foreground silhouettes revealed:
    `<ArchiveParallax>` (method B) with `z` positive, or code-built layers.
 2. Defocused foreground props sliding fast across the frame (gold bars): a near card with
@@ -209,7 +213,7 @@ the documentary range.
   tension ring or an artefact of the screen recording; confirm by ear on the original before
   copying it.
 
-**More techniques to take (clip 2):**
+**More principles (clip 2), same rule:**
 9. Face-off composition: two cut-out profiles facing each other at the frame edges, the
    conflict scene between them (`<ArchiveParallax>` cards or code layers).
 10. A symbolic 3D miniature of a place in a dark void with dust particles, slow recede to a hold
