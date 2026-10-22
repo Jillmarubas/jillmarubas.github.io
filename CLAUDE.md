@@ -6,7 +6,7 @@ don't have to repeat themselves.
 ## Making any video
 
 Before planning, scripting, building scenes, editing, sound or color for **any** video,
-load and follow both skills:
+load and follow all three skills:
 
 1. **`video-production-psychology`** (Anthropic skill): the visual, audio and edit rules.
    The checklist below is a summary; read the skill itself for the full version.
@@ -14,6 +14,11 @@ load and follow both skills:
    rendering. **Where the two disagree, `motion-video` wins.** Its styles were approved
    by the user, for example the locked camera with whip pans in the paper style, the
    MacBook style's zooms, the frame rates, and rendering on Lambda.
+3. **`video-research`** (`.claude/skills/video-research/`): the user's own research on
+   explainer comprehension (cognitive load, Mayer's principles, 130–150 wpm for explainers),
+   motion and compositing (blend modes, alpha, banding, parallax), sound design (Murch's
+   rule of five, sidechain ducking, synchresis) and flash safety. `motion-video` still wins
+   on look; the user's per-format rules (such as no music in news videos) win over the research.
 
 For the script itself, use the `script-writing` skill.
 
@@ -78,6 +83,9 @@ For the script itself, use the `script-writing` skill.
 - Screen overloaded anywhere?
 - Sound and color following the script's tension curve?
 - Cut approved, with every note marked Fixed, before the final render?
+- Flash-safe? Run `python3 .claude/skills/video-research/scripts/flash_check.py <video>`
+  (at most 3 flashes in any second, WCAG 2.3.1).
+- Every visual landing on its spoken word, and no more than ~5 kinds of sound at once?
 
 ## Documentary videos in the MagnatesMedia style
 
