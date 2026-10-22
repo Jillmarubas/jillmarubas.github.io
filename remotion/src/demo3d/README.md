@@ -8,7 +8,11 @@ takes `THREE` as an argument, so both hosts run identical scene code:
 - HyperFrames: `hyperframes/index.html` draws it in an `hf-seek` listener.
 
 Test frames from the two matched to under 0.5/255 average pixel difference.
-Render times: see the PR / results below once measured.
+
+| Version | Local render of 8 s, 4-core cloud box (software WebGL), 4 workers |
+|---|---|
+| Remotion (`@remotion/three`) | 4 min 43 s |
+| HyperFrames (three.js on `hf-seek`) | 3 min 56 s |
 
 ## Re-run
 - Remotion: `npx remotion render src/demo3d/index.ts Demo3D out.mp4 --gl=swangle`
