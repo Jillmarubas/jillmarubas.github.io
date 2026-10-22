@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      /* Same shot spec as the Remotion version (remotion/src/demo25d/shot.ts). */
+      @font-face {
+        font-family: "Inter";
+        font-weight: 800;
+        src: url("assets/inter-latin-800-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Fraunces";
+        font-style: italic;
+        font-weight: 400;
+        src: url("assets/fraunces-latin-400-italic.woff2") format("woff2");
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      .full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+
+      /* Lens: perspective 1200px = same as the Three.js camera's field of view. */
+      #stage { perspective: 1200px; perspective-origin: 50% 50%; overflow: hidden; }
+      #world { position: absolute; inset: 0; transform-style: preserve-3d; }
+      /* Each plate is 2400x1350, pushed back to its depth and scaled up so it
+         looks 2400x1350 at frame 0: translateZ(1200 - d) scale(d / 1200). */
+      .plate { position: absolute; left: -240px; top: -135px; width: 2400px; height: 1350px; }
+      #p-sky        { transform: translate3d(0, 0, -5800px) scale(5.8333); }
+      #p-mountains  { transform: translate3d(0, 0, -3000px) scale(3.5); }
+      #p-haze       { transform: translate3d(0, 0, -2100px) scale(2.75); }
+      #p-city       { transform: translate3d(0, 0, -1400px) scale(2.1667); }
+      #p-hill       { transform: translate3d(0, -130px, -600px) scale(1.5); }
+      #p-foreground { transform: translate3d(0, -100px, 250px) scale(0.7917); }
+
+      #text {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-shadow: 0 4px 30px rgba(0, 0, 0, 0.55);
+      }
+      #lead { font-family: "Fraunces"; font-style: italic; font-size: 46px; color: #efe6d8; }
+      #year {
+        font-family: "Inter"; font-weight: 800; font-size: 190px; line-height: 1; color: #fff;
+        letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+      }
+      #kw {
+        font-family: "Inter"; font-weight: 800; font-size: 64px; color: #f2b45a;
+        margin-top: 18px; white-space: nowrap; letter-spacing: 0.08em;
+      }
+      #kw span { display: inline-block; }
+      #grain { background-image: url("assets/grain.png"); mix-blend-mode: overlay; opacity: 0.22; }
+      #vignette { background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+      .black { background: #000; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="8" data-width="1920" data-height="1080">
+      <div id="stage" class="clip full" data-start="0" data-duration="8">
+        <div id="world">
+          <img id="p-sky" class="plate" src="assets/sky.png" alt="" />
+          <img id="p-mountains" class="plate" src="assets/mountains.png" alt="" />
+          <img id="p-haze" class="plate" src="assets/haze.png" alt="" />
+          <img id="p-city" class="plate" src="assets/city.png" alt="" />
+          <img id="p-hill" class="plate" src="assets/hill.png" alt="" />
+          <img id="p-foreground" class="plate" src="assets/foreground.png" alt="" />
+        </div>
+      </div>
+      <div id="text" class="clip full" data-start="0" data-duration="8">
+        <div id="lead">The year is</div>
+        <div id="year">1950</div>
+        <div id="kw"></div>
+      </div>
+      <div id="grain" class="clip full" data-start="0" data-duration="8"></div>
+      <div id="vignette" class="clip full" data-start="0" data-duration="8"></div>
+      <div id="black-in" class="clip full black" data-start="0" data-duration="8"></div>
+      <div id="black-out" class="clip full black" data-start="0" data-duration="8"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Camera: moving the world the opposite way = moving the camera.
+      // cam x -90 -> 110, y 20 -> -20, push-in z 0 -> 520, cubic ease in-out.
+      tl.fromTo("#world", { x: 90, y: -20, z: 0 }, { x: -110, y: 20, z: 520, duration: 7.6, ease: "power2.inOut" }, 0);
+
+      tl.fromTo("#black-in", { opacity: 1 }, { opacity: 0, duration: 0.8, ease: "power1.out" }, 0);
+      tl.fromTo("#lead", { opacity: 0, y: 20, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 1.2);
+      tl.fromTo("#year", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 1.6);
+      const counter = { v: 1950 };
+      const yearEl = document.getElementById("year");
+      tl.fromTo(counter, { v: 1950 }, {
+        v: 1987, duration: 1.8, ease: "power2.out",
+        onUpdate: () => { yearEl.textContent = String(Math.round(counter.v)); },
+      }, 1.6);
+      // Keyword "tracks in": each letter starts spread out (1.12em extra per gap) and slides home.
+      const KW = "THE EMPIRE BEGINS";
+      const kwEl = document.getElementById("kw");
+      for (const ch of KW) {
+        const sp = document.createElement("span");
+        sp.className = "kwc";
+        sp.textContent = ch === " " ? "\u00a0" : ch;
+        kwEl.appendChild(sp);
+      }
+      const spread = 1.12 * 64;
+      const mid = (KW.length - 1) / 2;
+      tl.fromTo("#kw", { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power3.out" }, 4.0);
+      tl.fromTo(".kwc", { x: (i) => (i - mid) * spread }, { x: 0, duration: 0.7, ease: "power3.out" }, 4.0);
+      tl.fromTo("#text", { opacity: 1, y: 0 }, { opacity: 0, y: -20, duration: 0.8, ease: "power2.in" }, 6.6);
+      tl.fromTo("#black-out", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, 7.5);
+
+      // Film grain jumps to a new spot every 2 frames.
+      for (let k = 0; k < 120; k++) {
+        tl.set("#grain", { backgroundPosition: `${(k * 137) % 512}px ${(k * 271) % 512}px` }, (k * 2) / 30);
+      }
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

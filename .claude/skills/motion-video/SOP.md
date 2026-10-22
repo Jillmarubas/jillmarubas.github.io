@@ -292,6 +292,59 @@ Start a new video by copying that folder; don't rebuild the pieces.
 - Follow "Thumbnails: the approved style" above.
 - ElevenLabs stays voiceover-only (the user's rule, confirmed 3 Oct 2026).
 
+## Archive-photo parallax: method B (approved test, 22 Oct 2026)
+The default way to turn a **real photo** (archive, public-domain or licensed) into a 2.5D camera
+move. Use it for documentary, MagnatesMedia-style and Vox-style shots that move through a
+photo. Tested on Rothstein's 1936 dust-storm photo against the alternatives
+(`remotion/src/demodepth/`, PR #24).
+
+**Method B = cut-outs over a filled, depth-bent background:**
+- An AI depth map (Depth Anything V2 Small) finds what stands out of the ground: people,
+  buildings, posts.
+- Those are cut out as flat cards at their own depth (a mid and a near layer).
+- The hole they leave is filled in, and the filled background is bent by a depth map with the
+  objects removed, so the ground still recedes.
+- Result: crisp edges and real ground depth. The other methods tested worse:
+  - Method A (depth map only) smears edges where near meets far (hats, heads, posts).
+  - Skipping the fill opens black holes behind every cut-out.
+
+**Steps**
+1. **Pick the photo and log it.** Public domain or licensed only. Record the source, author and
+   license in the film's `ASSETS.md`. Credit on screen in small type if the format does. Use
+   the largest file available (≥ 2400 px wide after the crop). Photos with clear ground and
+   separated subjects work best.
+2. **Prepare** (CPU is fine; the model takes seconds). Use a venv with `torch` (CPU wheel),
+   `transformers`, `opencv-python-headless`, `pillow` and `numpy`:
+   `python src/parallax/prep_depth.py photo.jpg public/<film>/<shot> --crop X0,X1 --cy 0.5`
+   - `--crop` trims scan or mount borders (fractions of the width). `--cy` places the 16:9 band.
+   - **Only use the Small model** (Apache-2.0). Base and Large are CC-BY-NC, not for commercial work.
+3. **Check `check.jpg`** for every photo, before rendering:
+   - Mid cut-outs show on red; near cut-outs are tinted blue.
+   - People and objects missed → lower `--delta` (default 0.05). Ground being cut → raise it.
+   - Objects on the wrong layer → move `--near` (default 0.42).
+   - The fill only has to look right at the edges the move reveals.
+4. **Use the component.** `<ArchiveParallax dir="<film>/<shot>" />` from
+   `remotion/src/parallax/ArchiveParallax.tsx`, inside a `Sequence`. The move runs over the
+   Sequence length with a cubic ease in-out. The default move tracks right, rises slightly,
+   pushes in and widens the lens a little. Override with
+   `move={{x: [a, b], y: [a, b], z: [a, b], fov: [a, b]}}`. Units are world px at a 1200 px
+   distance; z negative = push in.
+5. **Keep moves modest:** |x| ≤ ~100, z between −350 and +150. Bigger moves reveal plate edges
+   and the rough fill. One continuous move per shot; cut on the next idea, not mid-move.
+6. **QA:**
+   - Preview stills at the start and the end of the move (largest parallax), with
+     `npx remotion still ... --gl=swangle`.
+   - Then run the flash check and the usual final QC.
+
+**When to use method A instead:** `method="depth"` needs no cutting and suits gentle,
+short drifts (z ≥ −150), photos with no clear ground (crowds, interiors), or quick drafts.
+Check the end frame for stretching.
+
+**Limits:** OpenCV inpainting smears large holes. That's fine while the cut-outs cover most of
+the hole; for big reveals use a stronger fill (a LaMa-style model or a hand-made clean plate).
+Video clips need a temporally stable depth model (Video Depth Anything), not this per-photo
+pipeline.
+
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a
 shot list with **one scene per script line** (shot type, place, time of day, character pose and
@@ -334,6 +387,7 @@ design system they choose**.
 | Liquid invisible inside a glass or bottle | A transmissive object isn't visible through another transmissive one | Make the liquid opaque (clearcoat, sheen) and keep only the glass transmissive |
 | Glass looks milky or tinted on the white stage | Transmission can't see an HTML backdrop | Put the paper wall in 3D so the glass refracts it |
 | Scene renders empty or black although assets loaded | The canvas never redrew after the assets arrived | `ReleaseWhenDrawn` in `cola/assets.tsx`: advance the canvas, then `continueRender` |
+| `<ThreeCanvas>` frames all black when textures load async | `ThreeCanvas` draws only on frame changes and on creation | Mount the canvas after the assets load (see `parallax/ArchiveParallax.tsx`) |
 | Metal looks black | No environment map | PMREM `RoomEnvironment` or an HDRI |
 | Seam on a planet | Texture wrap, or decals not wrapped | Sample noise on the sphere, draw decals at x ± width, rotate the seam to the back |
 | `ffmpeg` can't read TIFF | Remotion's ffmpeg is a minimal build | `pip install pillow numpy` and convert with Python |

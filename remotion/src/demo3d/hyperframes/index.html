@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      /* Same scene file (assets/city3d.js) and same overlay timings as remotion/src/demo3d. */
+      @font-face { font-family: "Inter"; font-weight: 800; src: url("assets/inter-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Fraunces"; font-style: italic; font-weight: 400; src: url("assets/fraunces-latin-400-italic.woff2") format("woff2"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      .full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #gl { display: block; width: 1920px; height: 1080px; }
+      #text { display: flex; flex-direction: column; align-items: center; justify-content: center; text-shadow: 0 4px 30px rgba(0,0,0,0.55); }
+      #lead { font-family: "Fraunces"; font-style: italic; font-size: 46px; color: #efe6d8; }
+      #year { font-family: "Inter"; font-weight: 800; font-size: 190px; line-height: 1; color: #fff; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+      #kw { font-family: "Inter"; font-weight: 800; font-size: 64px; color: #f2b45a; margin-top: 18px; white-space: nowrap; letter-spacing: 0.08em; }
+      #kw span { display: inline-block; }
+      #grain { background-image: url("assets/grain.png"); mix-blend-mode: overlay; opacity: 0.22; }
+      #vignette { background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+      .black { background: #000; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="8" data-width="1920" data-height="1080">
+      <canvas id="gl" class="clip full" width="1920" height="1080" data-start="0" data-duration="8"></canvas>
+      <div id="text" class="clip full" data-start="0" data-duration="8">
+        <div id="lead">The year is</div>
+        <div id="year">1950</div>
+        <div id="kw"></div>
+      </div>
+      <div id="grain" class="clip full" data-start="0" data-duration="8"></div>
+      <div id="vignette" class="clip full" data-start="0" data-duration="8"></div>
+      <div id="black-in" class="clip full black" data-start="0" data-duration="8"></div>
+      <div id="black-out" class="clip full black" data-start="0" data-duration="8"></div>
+    </div>
+
+    <script>
+      // The 3D scene loads as a module; tell HyperFrames to wait for it.
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+      window.__hf.buildReady.city = new Promise((resolve) => { window.__cityReady = resolve; });
+
+      // Text overlay on a GSAP timeline (same timings as the Remotion version).
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#black-in", { opacity: 1 }, { opacity: 0, duration: 0.8, ease: "power1.out" }, 0);
+      tl.fromTo("#lead", { opacity: 0, y: 20, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 1.0);
+      tl.fromTo("#year", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 1.4);
+      const counter = { v: 1950 };
+      const yearEl = document.getElementById("year");
+      tl.fromTo(counter, { v: 1950 }, { v: 1987, duration: 1.8, ease: "power2.out", onUpdate: () => { yearEl.textContent = String(Math.round(counter.v)); } }, 1.4);
+      const KW = "THE EMPIRE BEGINS";
+      const kwEl = document.getElementById("kw");
+      for (const ch of KW) { const sp = document.createElement("span"); sp.className = "kwc"; sp.textContent = ch === " " ? " " : ch; kwEl.appendChild(sp); }
+      const mid = (KW.length - 1) / 2;
+      tl.fromTo("#kw", { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power3.out" }, 3.2);
+      tl.fromTo(".kwc", { x: (i) => (i - mid) * 1.12 * 64 }, { x: 0, duration: 0.7, ease: "power3.out" }, 3.2);
+      tl.fromTo("#text", { opacity: 1, y: 0 }, { opacity: 0, y: -20, duration: 0.7, ease: "power2.in" }, 4.8);
+      tl.fromTo("#black-out", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, 7.5);
+      for (let k = 0; k < 120; k++) {
+        tl.set("#grain", { backgroundPosition: `${(k * 137) % 512}px ${(k * 271) % 512}px` }, (k * 2) / 30);
+      }
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+
+    <script type="module">
+      import * as THREE from "./assets/three.module.js";
+      import { createWorld, RENDER } from "./assets/city3d.js";
+
+      // Same renderer settings react-three-fiber uses in the Remotion version.
+      const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("gl"), antialias: true, preserveDrawingBuffer: true });
+      renderer.setPixelRatio(1);
+      renderer.setSize(1920, 1080, false);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = RENDER.exposure;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+      const world = createWorld(THREE);
+      const renderAt = (t) => { world.renderAt(t); renderer.render(world.scene, world.camera); };
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      renderAt(0);
+      window.__cityReady();
+    </script>
+  </body>
+</html>
