@@ -1,11 +1,11 @@
 """Sound for the compressor cutaway demo (src/cutaway). Writes public/cutaway/compressor_sfx.wav.
 
 Layers (Murch's rule of five, one of each kind):
-  1. room tone      - very low noise bed
-  2. motor hum      - 100/150/200/300 Hz partials, starts a beat before the motor turns
-  3. gas            - breathy suction, a rising "squeeze" band during compression, hiss on discharge
-  4. ticks          - relay click, reed-valve ticks, part landings, label ticks (synchresis)
-  5. whooshes       - CC0 recordings already in public/sfx for the slice, explode, reassemble, pull-back
+  1. motor hum      - 100/150/200/300 Hz partials, starts a beat before the motor turns
+  2. pressure tone  - a soft rising tone during compression, slow turn only
+  3. ticks          - relay click, reed-valve ticks, part landings, label ticks (synchresis)
+  4. whooshes       - two short CC0 whooshes from public/sfx: the slice and the explode
+No noise beds: filtered noise swelling and falling reads as a stream of whooshes.
 The crank angle is the same function as compressor.ts (phiAt), so valve ticks land on the frames
 where the reeds open.
 """
@@ -133,8 +133,7 @@ def thump(freq=70, dur=0.35):
 mix = np.zeros(N)
 
 # 1. Room tone.
-room = onepole_lp(noise(N), 500) * 0.6
-mix += room * db(-46) * (1 - smooth((t - 26.0) / 1.0))
+# (No room tone: a noise bed under the whole film reads as constant hiss.)
 
 # 2. Motor hum: leads the picture by ~0.2 s, rises a little in pitch and level as it speeds up.
 fast = smooth((t - T['fast']) / (T['fastFull'] - T['fast']))
@@ -142,7 +141,6 @@ hum_env = smooth((t - (T['motorOn'] - 0.2)) / 0.6) * (1 - smooth((t - 25.8) / 1.
 pitch = 1 + 0.06 * fast
 ph = 2 * math.pi * np.cumsum(np.full(N, 50.0) * pitch) / SR
 hum = 0.9 * np.sin(2 * ph) + 0.55 * np.sin(3 * ph) + 0.45 * np.sin(4 * ph) + 0.2 * np.sin(6 * ph) + 0.08 * np.sin(8 * ph)
-hum += onepole_lp(noise(N), 900) * 0.25
 mix += hum * hum_env * db(-27) * (0.75 + 0.35 * fast)
 
 # 3. Gas: shown only from the cut on.
@@ -151,12 +149,13 @@ suc = bump(p, *P_SUC)
 dis = bump(p, *P_DIS)
 comp = ((p >= P_SUC[1]) & (p < P_DIS[0])).astype(float)
 comp_k = np.clip((p - P_SUC[1]) / (P_DIS[0] - P_SUC[1]), 0, 1) * comp
-breath = onepole_lp(noise(N), 1200)
-mix += breath * suc * show * (1 - 0.6 * fast) * db(-20)
-squeeze = bandpass(noise(N), 350 + 1500 * comp_k ** 1.5, q=4.0)
-mix += squeeze * comp * show * (0.3 + 0.7 * comp_k) * (1 - 0.7 * fast) * db(-18)
-hiss = bandpass(noise(N), 4200, q=0.9)
-mix += hiss * np.maximum(dis, 0.35 * fast) * show * db(-22)
+# No noise beds here: filtered-noise swells read as whooshes (the user heard "swoosh the whole
+# video" in the first cut). Gas is told by the picture; sound stays mechanical and tonal.
+# A soft pressure tone rises during compression, only in the slow first turn.
+slow = 1 - fast
+press_f = 150 + 210 * comp_k ** 1.3
+press = np.sin(2 * math.pi * np.cumsum(press_f) / SR) + 0.3 * np.sin(4 * math.pi * np.cumsum(press_f) / SR)
+mix += press * comp * smooth(comp_k * 4) * show * slow * db(-30)
 
 # 4. Ticks.
 ticks = np.zeros(N)
@@ -181,13 +180,12 @@ place(ticks, tick(2600, 0.04, 120, 0.4), T['outLabel'] + 0.05, db(-15))
 mix += ticks
 
 # 5. Whooshes (CC0 recordings).
+# Only two short whooshes, on the two big moves (slice and explode).
 w7 = load_mp3('whoosh7.mp3')
-w8 = load_mp3('whoosh8.mp3')
-w1 = load_mp3('whoosh1.mp3')
-place(mix, w1, T['sliceA'] - 0.15, db(-10))
-place(mix, w7, T['explode'] - 0.1, db(-9))
-place(mix, w7[::-1].copy(), T['reassemble'] - 0.05, db(-12))
-place(mix, w8, T['pullBack'] - 0.1, db(-13))
+w1 = load_mp3('whoosh1.mp3')[: int(1.1 * SR)].copy()
+w1[-int(0.3 * SR):] *= np.linspace(1, 0, int(0.3 * SR))
+place(mix, w1, T['sliceA'] - 0.15, db(-12))
+place(mix, w7, T['explode'] - 0.1, db(-12))
 
 # Master: gentle limit, then loudnorm to the house -14 LUFS / -1 dBTP.
 peak = np.max(np.abs(mix))
@@ -199,6 +197,13 @@ with wave.open(tmp, 'w') as w:
     w.setsampwidth(2)
     w.setframerate(SR)
     w.writeframes((mix * 32767).astype('<i2').tobytes())
-subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', tmp, '-af', 'loudnorm=I=-14:TP=-1:LRA=11', '-ar', str(SR), '-ac', '2', OUT], check=True)
+# Two-pass loudnorm in linear mode: one fixed gain for the whole track. (Single-pass loudnorm
+# works like an automatic gain control and pumped quiet parts up by ~30 dB.)
+import json
+r = subprocess.run(['ffmpeg', '-hide_banner', '-i', tmp, '-af', 'loudnorm=I=-14:TP=-1:LRA=11:print_format=json', '-f', 'null', '-'], capture_output=True, text=True)
+m = json.loads(r.stderr[r.stderr.rindex('{'):r.stderr.rindex('}') + 1])
+af = ('loudnorm=I=-14:TP=-1:LRA=11:linear=true:measured_I={input_i}:measured_TP={input_tp}:measured_LRA={input_lra}'
+      ':measured_thresh={input_thresh}:offset={target_offset}').format(**m)
+subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', tmp, '-af', af, '-ar', str(SR), '-ac', '2', OUT], check=True)
 os.remove(tmp)
 print('wrote', OUT)

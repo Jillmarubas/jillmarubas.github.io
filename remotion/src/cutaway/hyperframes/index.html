@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      /* Same scene code (assets/cutaway.js, bundled from remotion/src/cutaway) and timings as the Remotion version. */
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 700; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 800; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Fraunces"; font-style: italic; font-weight: 400; src: url("assets/fonts/fraunces-latin-400-italic.woff2") format("woff2"); }
+      :root { --ink: #16181c; --muted: #555b63; --accent: #ff6a1a; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #eceef1; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: radial-gradient(ellipse 75% 70% at 50% 45%, #fbfbfc 0%, #eceef1 60%, #dcdfe3 100%); }
+      .full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #gl { display: block; width: 1920px; height: 1080px; }
+      .label { pointer-events: none; opacity: 0; }
+      .label svg { position: absolute; left: 0; top: 0; }
+      .card { position: absolute; white-space: nowrap; background: rgba(255,255,255,0.92); padding: 10px 18px 12px; border-radius: 14px; box-shadow: 0 6px 24px rgba(20,24,30,0.12); }
+      .card .title { font-family: "Inter"; font-weight: 800; font-size: 40px; color: var(--ink); letter-spacing: -0.01em; line-height: 1.1; }
+      .card .sub { font-family: "Inter"; font-weight: 500; font-size: 25px; color: var(--muted); margin-top: 4px; }
+      #lab-suction .card, #lab-compression .card, #lab-discharge .card, #lab-speed .card { text-align: center; }
+      #title { position: absolute; left: 110px; top: 390px; }
+      #lead { font-family: "Fraunces"; font-style: italic; font-size: 54px; color: #3b4048; }
+      #big { font-family: "Inter"; font-weight: 800; font-size: 104px; color: var(--ink); letter-spacing: -0.03em; line-height: 1; }
+      #bar { height: 8px; width: 150px; background: var(--accent); margin-top: 22px; border-radius: 4px; transform-origin: left center; }
+      .pill { position: absolute; font-family: "Inter"; font-weight: 700; font-size: 24px; color: var(--muted); background: rgba(255,255,255,0.9); border-radius: 30px; display: flex; align-items: center; letter-spacing: 0.1em; }
+      #slowmo { left: 70px; top: 64px; padding: 10px 20px; gap: 12px; }
+      #slowmo i { width: 12px; height: 12px; border-radius: 6px; background: var(--accent); display: block; }
+      #legend { left: 730px; bottom: 70px; width: 460px; padding: 12px 22px; gap: 16px; }
+      #legend b { flex: 1; height: 10px; border-radius: 5px; background: linear-gradient(90deg, #1f6fff, #a04bd0 50%, #ff3b12); }
+      #grain { background-image: url("assets/grain.png"); mix-blend-mode: overlay; opacity: 0.12; }
+      #vignette { background: radial-gradient(ellipse at center, rgba(0,0,0,0) 62%, rgba(40,44,52,0.16) 100%); }
+      #endfade { background: #eceef1; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="27" data-width="1920" data-height="1080">
+      <canvas id="gl" class="clip full" width="1920" height="1080" data-start="0" data-duration="27" data-track-index="0"></canvas>
+      <div id="titlewrap" class="clip full" data-start="0" data-duration="3.6" data-track-index="1">
+        <div id="title"><div id="lead">What’s inside a fridge</div><div id="big">COMPRESSOR</div><div id="bar"></div></div>
+      </div>
+      <div id="closeup" class="clip full" data-start="13.8" data-duration="9.6" data-track-index="2">
+        <div id="slowmo" class="pill"><i></i>SLOW MOTION</div>
+        <div id="legend" class="pill">COLD<b></b>HOT</div>
+      </div>
+      <div id="lab-shell" class="clip full label" data-start="0" data-duration="27" data-track-index="3" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#16181c" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">Sealed steel shell</div></div>
+      </div>
+      <div id="lab-crank" class="clip full label" data-start="0" data-duration="27" data-track-index="4" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#16181c" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">Crankshaft</div></div>
+      </div>
+      <div id="lab-motor" class="clip full label" data-start="0" data-duration="27" data-track-index="5" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#16181c" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">Electric motor</div></div>
+      </div>
+      <div id="lab-springs" class="clip full label" data-start="0" data-duration="27" data-track-index="6" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#16181c" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">Springs</div><div class="sub">soak up vibration</div></div>
+      </div>
+      <div id="lab-piston" class="clip full label" data-start="0" data-duration="27" data-track-index="7" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#16181c" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">Piston</div></div>
+      </div>
+      <div id="lab-valves" class="clip full label" data-start="0" data-duration="27" data-track-index="8" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#16181c" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">Valves</div></div>
+      </div>
+      <div id="lab-suction" class="clip full label" data-start="0" data-duration="27" data-track-index="9" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#ff6a1a" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">1&nbsp;&nbsp;Suction</div><div class="sub">cool, low-pressure gas pulled in</div></div>
+      </div>
+      <div id="lab-compression" class="clip full label" data-start="0" data-duration="27" data-track-index="10" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#ff6a1a" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">2&nbsp;&nbsp;Compression</div><div class="sub">squeezed into less space, it heats up</div></div>
+      </div>
+      <div id="lab-discharge" class="clip full label" data-start="0" data-duration="27" data-track-index="11" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#ff6a1a" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">3&nbsp;&nbsp;Discharge</div><div class="sub">hot, high-pressure gas pushed out</div></div>
+      </div>
+      <div id="lab-speed" class="clip full label" data-start="0" data-duration="27" data-track-index="12" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#16181c" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">Real speed: ~50 strokes a second</div><div class="sub">fixed-speed motor on 50 Hz power</div></div>
+      </div>
+      <div id="lab-outlet" class="clip full label" data-start="0" data-duration="27" data-track-index="13" data-layout-allow-overlap>
+        <svg width="1920" height="1080"><line stroke="#16181c" stroke-width="2.2" /><circle fill="#ff6a1a" stroke="#fff" stroke-width="2.5" /></svg>
+        <div class="card"><div class="title">To the condenser</div><div class="sub">hot, high-pressure gas</div></div>
+      </div>
+      <div id="grain" class="clip full" data-start="0" data-duration="27" data-track-index="20"></div>
+      <div id="vignette" class="clip full" data-start="0" data-duration="27" data-track-index="21"></div>
+      <div id="endfade" class="clip full" data-start="0" data-duration="27" data-track-index="22"></div>
+      <audio id="sfx" src="assets/compressor_sfx.wav" data-start="0" data-duration="27" data-track-index="30"></audio>
+    </div>
+
+    <script>
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+      window.__hf.buildReady.cutaway = new Promise((resolve) => { window.__cutawayReady = resolve; });
+
+      // HTML furniture on the GSAP timeline (same timings as the Remotion version).
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.3);
+      tl.fromTo("#bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 0.8);
+      tl.to("#title", { opacity: 0, scale: 1.15, filter: "blur(10px)", duration: 0.5, ease: "power2.inOut" }, 3.0);
+      tl.fromTo(["#slowmo", "#legend"], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 14.1);
+      tl.to(["#slowmo", "#legend"], { opacity: 0, duration: 0.4, ease: "power1.in" }, 22.9);
+      tl.to("#endfade", { opacity: 1, duration: 0.5, ease: "none" }, 26.45);
+      for (let k = 0; k < 405; k++) {
+        tl.set("#grain", { backgroundPosition: `${(k * 137) % 512}px ${(k * 271) % 512}px` }, (k * 2) / 30);
+      }
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+
+    <script type="module">
+      import { createHost } from "./assets/cutaway.js";
+      const host = createHost(document.getElementById("gl"));
+      window.addEventListener("hf-seek", (e) => host.renderAt(e.detail.time));
+      host.renderAt(0);
+      window.__cutawayReady();
+    </script>
+  </body>
+</html>

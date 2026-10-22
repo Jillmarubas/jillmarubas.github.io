@@ -31,7 +31,22 @@ python3 scripts/make_compressor_sfx.py   # rebuilds public/cutaway/compressor_sf
   piston, so they crowd together as it compresses; colour goes from cold blue to hot red with compression.
   Suction and discharge streams follow curves and only flow while their reed valve is open.
 - **Sound:** `scripts/make_compressor_sfx.py` uses the same crank-angle maths, so every reed tick lands on
-  the frame its valve opens.
+  the frame its valve opens. Lessons from the first cut (the user heard "swoosh the entire video"):
+  - No noise beds. Filtered noise that swells once per stroke reads as a stream of whooshes; keep the
+    machine's sound tonal (hum, ticks, a soft rising tone) and let the picture show the gas.
+  - Never single-pass `loudnorm`: it acts like auto-gain and pumped a -46 dB room tone up to full level.
+    Use two-pass `loudnorm` with `linear=true` (one fixed gain).
+  - Trim long whoosh files (`whoosh1.mp3` is 10.9 s) and keep whooshes to the big moves only.
+
+## HyperFrames version
+`hyperframes/` holds the same demo for HyperFrames: `host.ts` runs the same scene code and labels on
+every `hf-seek`, and `index.html` holds the canvas, the labels, the GSAP timeline for the title and
+pills, and the sound. Build and render:
+```
+npx hyperframes@0.8.185 init cutaway-hf --example blank
+bash src/cutaway/hyperframes/build.sh cutaway-hf   # esbuild bundle + assets
+cd cutaway-hf && npx hyperframes check && npx hyperframes render . -w 4
+```
 
 ## Facts on screen
 - "Real speed: ~50 strokes a second (fixed-speed motor on 50 Hz power)": a 2-pole induction motor runs
