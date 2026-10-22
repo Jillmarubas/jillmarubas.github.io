@@ -13,6 +13,7 @@ Follow the steps in order. Each step ends with a check; don't move on until it p
 
 ## 1. Brief (5 min)
 Write these down before touching code:
+- For documentaries about real people, ask whether AI animation of real people's photos is allowed for this topic (see "Documentary effects kit").
 - **Topic and one-line message.** The hook question is asked in the first 2 s and answered by the end.
 - **Beats:** 4–6 scenes of 1.5–3.5 s each, plus a call-to-action scene. Total 14–24 s.
 - **Look:** use the look of the user's references (white paper for this user), **or** a house design system from `design-system/` when the user names one (see "Design systems" below — e.g. **Autopilot Blue**). Only pick another from `reference/breakdowns.md` (white studio, dark cinematic, cream paper with window light, black listicle, archival grey, editorial poster). Choose **one accent colour** (a design system fixes it for you).
@@ -344,6 +345,49 @@ Check the end frame for stretching.
 the hole; for big reveals use a stronger fill (a LaMa-style model or a hand-made clean plate).
 Video clips need a temporally stable depth model (Video Depth Anything), not this per-photo
 pipeline.
+
+## Documentary effects kit: docfx (built from reference 7, 22 Oct 2026)
+Reusable pieces in `remotion/src/docfx/` (see its README): `DecodeTitle`, `MatteTransition`
+(ink wipe and melt dissolve), `ParticleRain`, `SideEntrance`, `FaceOff`, `VoidStage` (+
+`ClassicalBuilding`), `OverShoulder`, `ForegroundSweep`, `Tint` and `DocFinish`. Demo:
+`DocFxDemo`. Use them for documentary and MagnatesMedia-style films, alongside
+`<ArchiveParallax>` (method B) for real photos.
+
+**They're tools, not a template (the user's rule, 22 Oct 2026).** Reference 7 explains why
+these effects work; it is never imitated. Pick effects only where the script needs them, design
+looks (fonts, colours, glow, metaphors) from the film's own design system and story, and never
+rebuild the reference's sequence (portrait → vault → silhouette, face-off, landmark in a void) as
+a set. The defaults are deliberately neutral; style every use.
+
+**When each tool can help (options, not a recipe):**
+- **Name title:** `DecodeTitle` starting on the frame the narrator says the name. One title
+  per name; it leaves with the next transition.
+- **Between shots:**
+  - Ink wipe on a hard turn of place or time.
+  - A particle wipe (`ParticleRain` density → 1 plus a 0.1–0.2 s dip) on money or excess beats.
+  - Melt dissolve for transformations (statue → man, then → now).
+  - Plain cuts everywhere else, landing on the word.
+- **Rivalries:** `FaceOff` with the two cut-outs facing in and the conflict scene between them.
+- **Many people at once:** `SideEntrance`, landing on the line that names them.
+- **A place as a symbol:** `VoidStage` with a 3D replica of the real building (built from
+  reference photos, never traced). That's the same rule as Vox rule 6.
+- **Depth on any shot:** `ForegroundSweep` (near prop, out of focus, fast) or `OverShoulder`
+  (eyeline: subject and target in one frame).
+
+**Story turns ("But…") are one package:**
+1. About 0.2–0.4 s of silence just before the turn. In the mix script, on the music bed:
+   `volume=enable='between(t,T-0.4,T)':volume=0.03`.
+2. Cut exactly on the word ("But").
+3. A bass drop-out for about 0.7 s on the turn, music bed only:
+   `highpass=f=180:enable='between(t,T,T+0.7)'`. The voice stays untouched.
+4. A colour-temperature flip with `Tint` (cold void → warm skin and wood, or the reverse).
+
+**AI likenesses of real people (the user's rule, 22 Oct 2026): it depends on the topic.**
+- Decide it per video at the brief, and ask the user before animating any real person's
+  photo or generating a real person's face (gestures, statue → face morphs).
+- Vox-style videos: never (Vox rule 3).
+- When it's allowed, start from a licensed or public-domain photo. Keep it plausible (no words
+  put in their mouth, no actions they didn't do) and log it in `ASSETS.md`.
 
 ## Story films in 2D vector (the user's default for story videos)
 Follow `reference/vector-story-film.md`. In short: before building, write a beat sheet and a

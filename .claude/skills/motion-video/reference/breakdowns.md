@@ -1,6 +1,6 @@
 # Reference breakdowns
 
-Six vertical short-form motion-graphics videos, studied frame by frame (contact sheets at
+Six vertical short-form motion-graphics videos (1–6) and one 16:9 documentary clip (7), studied frame by frame (contact sheets at
 4 fps, plus native-frame-rate measurements). This file records **techniques and numbers
 only**. We never reuse the references' footage, photos, logos, characters or scripts.
 
@@ -18,6 +18,7 @@ spike in mean difference is a hard cut. A run of frames above the median differe
 | 4 | Listicle on black, chrome type | 30 | 21.3 s | 3 | 5.33 s | 17 (near black) | 11 | 383 ms, ease-in-out |
 | 5 | Archival documentary, grey | 24 | 17.5 s | 10 | 1.59 s | 117 | 1 (pure grey) | 375 ms, ease-in-out |
 | 6 | Editorial poster, B/W + one accent | 30 | 20.0 s | 6 | 2.86 s | 144 | 8 | 433 ms, ease-in-out |
+| 7 | Business documentary cold open (Rockefeller), 16:9 | ~60 (screen rec.) | 20.3 s (2 clips) | 5 transitions | ~3–5 s | dark (39–49), crushed blacks | one hue per shot | slow 2.5D drift, then long eased pull-backs |
 
 **Patterns shared by all six**
 - **Near-monochrome.** Saturation stays between 1 and 35 out of 255. Colour is a single accent (gold, red or orange) used on one word or object at a time.
@@ -96,6 +97,140 @@ spike in mean difference is a hard cut. A run of frames above the median differe
 - **Light-sweep product reveal:** the product starts in darkness, then a light sweeps across it over about 1 s, with the large word behind it.
 - **Black iris wipe:** a circle grows from a point until it fills the frame (about 8 frames).
 - **Ending:** a 3D booklet mockup with the call to action, then a defocus fade.
+
+---
+
+## 7 · Business documentary cold open, 16:9 (studied 22 Oct 2026)
+> **Reference only, never imitate (the user's rule).** Use this to understand *why* the effects
+> work (timing, depth, turns, sound). Each film designs its own shots, metaphors, titles and
+> colours from its own story and design system; don't rebuild these scenes.
+
+Two screen recordings (10.6 s + 9.7 s, back to back) from YouTube of a MagnatesMedia-style documentary about John D.
+Rockefeller (channel not named by the user). It's an HDR recording, so frames were tone-mapped
+before study. The "Includes paid promotion" badge and the captions are the YouTube player, not
+the video. **Clip 1:** three shots, one per narration sentence:
+
+| Time | Narration (from captions) | Picture |
+|---|---|---|
+| 0.0–5.1 s | "There was a time when anyone would tremble upon hearing the name John D. Rockefeller." | Portrait of Rockefeller graded bronze-dark, in front of a burning industrial skyline (chimneys glowing red, cooling tower, smoke, red storm sky), tree silhouettes at the edges |
+| 5.1–9.7 s | "Not only was he the world's first billionaire, he's one of the richest people in history." | Colourised, **AI-animated** Rockefeller (his hands open in a gesture) in a gold vault: stacks of gold bars in the soft foreground, coin piles behind. Four modern and historic billionaires slide in beside him; money rains |
+| 9.7–10.6 s+ | "His empire - Standard Oil - became the most dominant monopoly in the world by brutally…" | A lone silhouette in a ruined oil field at a red sunset, pumpjacks and derricks, **octopus tentacles rising from his back**: the old "Standard Oil octopus" cartoon metaphor, made into a scene |
+
+**Story:** a textbook cold open: fear hook → superlative → the dark turn ("brutally…"), one idea
+per shot. Narration runs about 165 wpm in sentence 1 and about 215 wpm in sentence 2, the top of
+the documentary range.
+
+**Camera and layers (optical flow measured):**
+- **Shot 1, a slow 2.5D pull-back:** the whole frame scales down about 1–2 % per second. The
+  portrait floats up (about 35 px/s at 1080p) for 2 s, then down. Tree silhouettes are revealed
+  at the frame edges as the camera pulls back.
+  - Layers, back to front: storm sky, smoke, burning skyline, portrait cut-out, foreground trees.
+  - Nothing is ever still.
+- **Shot 2, a push-in with foreground parallax:** defocused gold bars in the left foreground
+  slide left fast (about 160 px/s at 1080p) while the subject barely moves. This is the strongest
+  depth cue in the clip.
+  - At 6.9–7.3 s the side figures **slide in from both edges toward the centre** (left layer
+    moving right, right layer moving left), landing on "richest people in history".
+  - From 8.6 s, **money rain**: bills fall and fly toward the lens, the near ones big,
+    motion-blurred and out of focus.
+- **Shot 3:** a low-angle, slow rise over the silhouette; dark ground fills the lower half.
+
+**Type:** one title only, the name, in a bold serif with a strong orange glow, centred low.
+- It appears with a **character-scramble (decode) effect**: random letters resolve left to
+  right, "John D. Rzn" → "John D. Rockeff w" → "John D. Rockefeller", over about 1.1 s
+  (3.5–4.6 s).
+- It is **timed to the spoken name.**
+- It leaves with the transition wipe.
+
+**Transitions (frame by frame):**
+- **5.0 → 5.3 s, an ink/smoke matte wipe:** an organic black shape sweeps left to right and the
+  next shot is revealed behind it, starting from the left edge. About 0.3 s (a luma-matte
+  transition).
+- **9.6 → 10.05 s, a particle-wipe dip:** the money rain thickens, with bills flying past the
+  lens. Then a 0.1 s dip to black, and the next shot fades up from black in about 0.15 s.
+
+**Colour:**
+- Each shot has one warm hue: red-orange (danger, industry), gold-amber (wealth), red sunset
+  (menace).
+- Dark overall, with crushed blacks.
+- Glow and bloom on the fire, the light sources and the title.
+- Heavy vignette.
+- The low exposure keeps it ominous; the gold shot is the brightest, at the "richest" line.
+
+**Sound (spectrogram and band levels):**
+- A deep male narrator over a constant low drone in the sub band.
+- A **sustained high tone around 1.1 kHz** runs under the whole clip, a tension ring.
+- **Silence → hit:** all sound drops for about 0.3 s (4.3–4.5 s) just before the title locks;
+  then a broadband impact at 4.6 s.
+- Short high-frequency bursts while the voice is low around the transitions and the money rain
+  (whoosh and paper-flutter effects; some may be sibilants).
+- Voice pauses (6.7, 8.2, 8.9–9.0 s) leave the drone alone for a beat.
+
+**Principles this shows, and the tools we have for them (guidance only, never recreate these shots):**
+1. 2.5D pull-back with the portrait drifting and foreground silhouettes revealed:
+   `<ArchiveParallax>` (method B) with `z` positive, or code-built layers.
+2. Defocused foreground props sliding fast across the frame (gold bars): a near card with
+   DOF blur.
+3. Lineup entrance: supporting photos slide in from both edges on the line that names them.
+4. Money/particle rain toward the lens with motion blur and DOF (three.js instanced planes);
+   thicken it into a particle wipe.
+5. Name title with a character-scramble decode plus glow, synced to the spoken name (seeded
+   random glyphs, never `Math.random`).
+6. Ink/smoke luma-matte wipe between shots (procedural noise mask or a CC0 ink clip).
+7. Visual metaphor from history (the Standard Oil octopus) staged as a scene, not as an
+   explanation.
+8. Sound: a sustained drone plus a high tension ring, silence → impact on the title, a whoosh on
+   every transition.
+
+**Clip 2 (the next 9.7 s, picks up right after clip 1):**
+
+| Time | Narration (from captions) | Picture |
+|---|---|---|
+| 0.0–0.3 s | "His career is filled with bitter rivalries like with Andrew Carnegie," | **Face-off:** two giant profile close-ups (Rockefeller left, Carnegie right) facing each other at the frame edges, with the octopus-silhouette scene still visible in the gap between them |
+| 0.5–3.4 s | "…and even ferocious battles against US Presidents." | A **3D miniature of the White House** floating in a dark void with dust motes and stars, lit from above with a soft glow pool underneath. It slowly recedes and settles to a hold. Big defocused shapes drift into the foreground at the end |
+| 3.45–7.5 s | "But, before he was the titan of the oil industry, Rockefeller was at the very bottom of society." | **Cut exactly on "But".** An over-the-shoulder view of a **3D bust of Rockefeller (smooth statue material)** looking at the White House. The bust turns its head toward the camera |
+| 7.3–9.7 s | "…bottom of society. His story is one of only a handful of cases where someone manages to rise from the depths" | The statue **morph-dissolves (about 0.3 s) into a photoreal portrait** in a dark log cabin. Then a **fast eased pull-back** reveals him sitting in a poor wooden room |
+
+- **The "but" turn is carried by everything at once:** the cut lands on the word.
+  - The bass drops out for about 0.7 s (3.5–4.2 s); the voice stays.
+  - The colour moves from cold void to warm skin and wood.
+  - The subject changes from power (White House) to origin (the cabin).
+- **A silence before each turn:** about 0.4 s of near-silence before "But" (2.7–3.1 s) and about
+  0.2 s before "His story…" (8.6–8.7 s). Clip 1 does the same before the title hit.
+- **Camera (optical flow):**
+  - The White House recedes at under 1 %/s, slowing to a hold.
+  - Small push and pull moves while the head turns (±3–7 %/s).
+  - Then the reveal pull-back accelerates to about 19 %/s at 8.5 s and eases out: one long
+    ease-in-out with peak speed mid-move.
+- **Eyeline in one frame:** the subject and what he's fighting (the White House) share the
+  over-the-shoulder shot, so no cutaway is needed.
+- **Legend → man:** the statue becoming flesh says "before the myth, a poor man" without any text.
+- **Places as 3D replicas:** the White House is a model in a void, not a photo. That's the same
+  idea as the house Vox rule 6.
+- **Transition:** face-off → White House is a 0.2 s dip to black with a 0.1 s sound gap.
+- **Narration:** about 210 wpm in the "But" sentence.
+- **The constant ~1.1 kHz line** shows in both recordings' spectrograms. It's either a designed
+  tension ring or an artefact of the screen recording; confirm by ear on the original before
+  copying it.
+
+**More principles (clip 2), same rule:**
+9. Face-off composition: two cut-out profiles facing each other at the frame edges, the
+   conflict scene between them (`<ArchiveParallax>` cards or code layers).
+10. A symbolic 3D miniature of a place in a dark void with dust particles, slow recede to a hold
+    (three.js, like `demo3d`).
+11. Over-the-shoulder eyeline shot: the subject's back in the soft foreground, the target sharp
+    behind.
+12. Statue → photo morph-dissolve (0.3 s) for "the man behind the legend"; then a long eased
+    pull-back reveal.
+13. Turns: a silence beat (0.2–0.4 s) before, a cut on the word, a bass drop-out on the turn,
+    and a colour-temperature flip.
+
+**Watch-outs:**
+- The animated Rockefeller, the sliding billionaires and the statue → photo morph use
+  **AI-animated or AI-generated likenesses of real people**. The Vox-style rules forbid AI faces of real people. For documentaries, ask the user
+  before animating any real person's photo, and use licensed or public-domain photos only.
+- Never reuse the reference's footage, script or exact scenes. Take the techniques.
+- The money rain and particle wipe must pass the flash check (`flash_check.py`).
 
 ---
 

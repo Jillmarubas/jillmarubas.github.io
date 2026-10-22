@@ -110,9 +110,33 @@ Researched and tested in October 2026.
   - Keep a list of where every asset came from, with its license.
   - Use news and movie clips only briefly, with edits on top. That channel nearly lost
     everything to copyright strikes.
+  - AI animation of real people's photos depends on the topic: ask the user at the brief
+    for each video (never in Vox-style videos).
+- **Effects:** the docfx kit (`remotion/src/docfx/`) and method B (`<ArchiveParallax>`) are
+  available tools. References (such as reference 7) guide the principles; never imitate them.
 - **EffectCraft** (free After Effects alternative, github.com/storytold/effectcraft) runs
   headless in the cloud container:
-  - Download the Linux tarball from its GitHub releases.
+  - Download the Linux tarball from its GitHub releases. The release pages return 403 through
+    the proxy, but direct downloads work:
+    `https://github.com/storytold/effectcraft/releases/latest/download/SHA256SUMS.txt`, then
+    `.../download/effectcraft-<ver>-linux-x86_64.tar.gz`; check it with `sha256sum -c`.
+  - Verified 22 Oct 2026 with v0.14.0, no GPU: CC Particle World, Glow and a moving 3D camera
+    render on the CPU (about 0.5 s per 1080p frame; a 4 s 1080p H.264 clip in 20 s).
+  - It is alpha ("about 45% of the way to production"): check every effect's frames before
+    relying on it. It renders ProRes 4444 with alpha and PNG sequences, so its effect passes
+    (particles, glows, light, puppet) can be layered into Remotion films.
+  - `effectcraft-cli mcp` is an MCP server for agents; `effectcraft-cli commands` lists every
+    command.
+  - A full 16 s demo was built in EffectCraft alone (`effectcraft/docfx-demo/`): 104 layers,
+    rendered at 1080p in 6 min. Lessons from that build:
+    - Run `effectcraft-cli script` with an absolute path, or `#include` can't find files.
+    - Shape layer contents are in layer space. Set the layer's Position to `[0, 0]` (keep z)
+      when drawing in comp coordinates, or everything shifts by half the comp.
+    - Popup values are 1-based in scripts; for example Glow "Glow Colors" 2 = A & B Colors.
+    - CC Particle World has no texture layer, so it can't do bills or coins. Use
+      expression-driven 3D layers (`seedRandom(k, true)`) with motion blur instead.
+    - CC Vignette darkens its own layer: put it on an adjustment layer, not a solid.
+    - It reads system fonts only. Convert a repo woff2 to TTF with fontTools into `~/.fonts`.
   - Use `effectcraft-cli script file.jsx` for After Effects-style scripting.
   - Use `render-frame` to check stills and `render` to export.
   - Property paths need the group, for example
