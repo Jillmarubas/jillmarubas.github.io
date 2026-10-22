@@ -40,7 +40,10 @@ export const DecodeTitle: React.FC<{
   if (t < at) return null;
   const chars = [...text];
   const n = Math.max(1, chars.length - 1);
-  const GLYPHS = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghkmnopqrstuvwxyz0123456789';
+  // Scrambled glyphs match the letter's case so an all-caps title stays all caps.
+  const UPPER = 'ABCDEFGHJKLMNOPQRSTUVWXYZ';
+  const LOWER = 'abcdefghkmnopqrstuvwxyz';
+  const DIGITS = '0123456789';
   const bucket = Math.floor(t * 15); // scrambled glyphs change 15 times a second
   return (
     <div
@@ -64,8 +67,8 @@ export const DecodeTitle: React.FC<{
         const start = at + (i / n) * dur * 0.35;
         const resolve = at + (0.25 + 0.75 * (i / n)) * dur + (hash01(i, seed) - 0.5) * 0.08;
         if (t < start) return <span key={i} style={{opacity: 0}}>{ch}</span>;
-        const shown =
-          t >= resolve ? ch : GLYPHS[Math.floor(hash01(i, bucket, seed) * GLYPHS.length)];
+        const pool = /[0-9]/.test(ch) ? DIGITS : ch === ch.toLowerCase() && ch !== ch.toUpperCase() ? LOWER : UPPER;
+        const shown = t >= resolve ? ch : pool[Math.floor(hash01(i, bucket, seed) * pool.length)];
         const appear = E.out(clamp((t - start) / 0.12));
         let o = (t >= resolve ? 1 : 0.75) * appear;
         let blur = 0;
