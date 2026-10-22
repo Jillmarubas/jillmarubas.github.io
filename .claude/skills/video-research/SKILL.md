@@ -118,6 +118,10 @@ The goal of an explainer is understanding with the least mental effort. Cut ever
   and always ship dark gradients with grain or dither (the house grain layer does this). Use low CRF
   on dark, smooth scenes.
 - **2.5D parallax:**
+  - **On a real photo, use method B** (tested 22 Oct 2026): AI depth map → cut-outs on cards in
+    front of a filled background that is itself bent by the depth map. It's `<ArchiveParallax>`
+    in `remotion/src/parallax/`; steps are in the `motion-video` SOP, "Archive-photo parallax:
+    method B". Depth-only displacement (method A) stretches edges; skipping the fill opens holes.
   - Separate foreground, mid and back layers, and **fill the hole behind the cut-out** so camera
     moves don't reveal gaps.
   - Spread the layers in Z and move a real camera (see `remotion/src/demo25d/` and the `motion-video`
