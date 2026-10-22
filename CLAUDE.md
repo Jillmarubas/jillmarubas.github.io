@@ -127,6 +127,16 @@ Researched and tested in October 2026.
     (particles, glows, light, puppet) can be layered into Remotion films.
   - `effectcraft-cli mcp` is an MCP server for agents; `effectcraft-cli commands` lists every
     command.
+  - A full 16 s demo was built in EffectCraft alone (`effectcraft/docfx-demo/`): 104 layers,
+    rendered at 1080p in 6 min. Lessons from that build:
+    - Run `effectcraft-cli script` with an absolute path, or `#include` can't find files.
+    - Shape layer contents are in layer space. Set the layer's Position to `[0, 0]` (keep z)
+      when drawing in comp coordinates, or everything shifts by half the comp.
+    - Popup values are 1-based in scripts; for example Glow "Glow Colors" 2 = A & B Colors.
+    - CC Particle World has no texture layer, so it can't do bills or coins. Use
+      expression-driven 3D layers (`seedRandom(k, true)`) with motion blur instead.
+    - CC Vignette darkens its own layer: put it on an adjustment layer, not a solid.
+    - It reads system fonts only. Convert a repo woff2 to TTF with fontTools into `~/.fonts`.
   - Use `effectcraft-cli script file.jsx` for After Effects-style scripting.
   - Use `render-frame` to check stills and `render` to export.
   - Property paths need the group, for example
