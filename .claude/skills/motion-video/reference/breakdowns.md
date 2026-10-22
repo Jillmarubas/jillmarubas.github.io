@@ -18,7 +18,7 @@ spike in mean difference is a hard cut. A run of frames above the median differe
 | 4 | Listicle on black, chrome type | 30 | 21.3 s | 3 | 5.33 s | 17 (near black) | 11 | 383 ms, ease-in-out |
 | 5 | Archival documentary, grey | 24 | 17.5 s | 10 | 1.59 s | 117 | 1 (pure grey) | 375 ms, ease-in-out |
 | 6 | Editorial poster, B/W + one accent | 30 | 20.0 s | 6 | 2.86 s | 144 | 8 | 433 ms, ease-in-out |
-| 7 | Business documentary cold open (Rockefeller), 16:9 | ~60 (screen rec.) | 10.6 s (clip) | 2 transitions | ~4.8 s | dark, crushed blacks | one warm hue per shot | slow 2.5D drift + fast foreground parallax |
+| 7 | Business documentary cold open (Rockefeller), 16:9 | ~60 (screen rec.) | 20.3 s (2 clips) | 5 transitions | ~3–5 s | dark (39–49), crushed blacks | one hue per shot | slow 2.5D drift, then long eased pull-backs |
 
 **Patterns shared by all six**
 - **Near-monochrome.** Saturation stays between 1 and 35 out of 255. Colour is a single accent (gold, red or orange) used on one word or object at a time.
@@ -101,10 +101,10 @@ spike in mean difference is a hard cut. A run of frames above the median differe
 ---
 
 ## 7 · Business documentary cold open, 16:9 (studied 22 Oct 2026)
-A 10.6 s screen recording from YouTube of a MagnatesMedia-style documentary about John D.
+Two screen recordings (10.6 s + 9.7 s, back to back) from YouTube of a MagnatesMedia-style documentary about John D.
 Rockefeller (channel not named by the user). It's an HDR recording, so frames were tone-mapped
 before study. The "Includes paid promotion" badge and the captions are the YouTube player, not
-the video. Three shots, one per narration sentence:
+the video. **Clip 1:** three shots, one per narration sentence:
 
 | Time | Narration (from captions) | Picture |
 |---|---|---|
@@ -178,9 +178,52 @@ the documentary range.
 8. Sound: a sustained drone plus a high tension ring, silence → impact on the title, a whoosh on
    every transition.
 
+**Clip 2 (the next 9.7 s, picks up right after clip 1):**
+
+| Time | Narration (from captions) | Picture |
+|---|---|---|
+| 0.0–0.3 s | "His career is filled with bitter rivalries like with Andrew Carnegie," | **Face-off:** two giant profile close-ups (Rockefeller left, Carnegie right) facing each other at the frame edges, with the octopus-silhouette scene still visible in the gap between them |
+| 0.5–3.4 s | "…and even ferocious battles against US Presidents." | A **3D miniature of the White House** floating in a dark void with dust motes and stars, lit from above with a soft glow pool underneath. It slowly recedes and settles to a hold. Big defocused shapes drift into the foreground at the end |
+| 3.45–7.5 s | "But, before he was the titan of the oil industry, Rockefeller was at the very bottom of society." | **Cut exactly on "But".** An over-the-shoulder view of a **3D bust of Rockefeller (smooth statue material)** looking at the White House. The bust turns its head toward the camera |
+| 7.3–9.7 s | "…bottom of society. His story is one of only a handful of cases where someone manages to rise from the depths" | The statue **morph-dissolves (about 0.3 s) into a photoreal portrait** in a dark log cabin. Then a **fast eased pull-back** reveals him sitting in a poor wooden room |
+
+- **The "but" turn is carried by everything at once:** the cut lands on the word.
+  - The bass drops out for about 0.7 s (3.5–4.2 s); the voice stays.
+  - The colour moves from cold void to warm skin and wood.
+  - The subject changes from power (White House) to origin (the cabin).
+- **A silence before each turn:** about 0.4 s of near-silence before "But" (2.7–3.1 s) and about
+  0.2 s before "His story…" (8.6–8.7 s). Clip 1 does the same before the title hit.
+- **Camera (optical flow):**
+  - The White House recedes at under 1 %/s, slowing to a hold.
+  - Small push and pull moves while the head turns (±3–7 %/s).
+  - Then the reveal pull-back accelerates to about 19 %/s at 8.5 s and eases out: one long
+    ease-in-out with peak speed mid-move.
+- **Eyeline in one frame:** the subject and what he's fighting (the White House) share the
+  over-the-shoulder shot, so no cutaway is needed.
+- **Legend → man:** the statue becoming flesh says "before the myth, a poor man" without any text.
+- **Places as 3D replicas:** the White House is a model in a void, not a photo. That's the same
+  idea as the house Vox rule 6.
+- **Transition:** face-off → White House is a 0.2 s dip to black with a 0.1 s sound gap.
+- **Narration:** about 210 wpm in the "But" sentence.
+- **The constant ~1.1 kHz line** shows in both recordings' spectrograms. It's either a designed
+  tension ring or an artefact of the screen recording; confirm by ear on the original before
+  copying it.
+
+**More techniques to take (clip 2):**
+9. Face-off composition: two cut-out profiles facing each other at the frame edges, the
+   conflict scene between them (`<ArchiveParallax>` cards or code layers).
+10. A symbolic 3D miniature of a place in a dark void with dust particles, slow recede to a hold
+    (three.js, like `demo3d`).
+11. Over-the-shoulder eyeline shot: the subject's back in the soft foreground, the target sharp
+    behind.
+12. Statue → photo morph-dissolve (0.3 s) for "the man behind the legend"; then a long eased
+    pull-back reveal.
+13. Turns: a silence beat (0.2–0.4 s) before, a cut on the word, a bass drop-out on the turn,
+    and a colour-temperature flip.
+
 **Watch-outs:**
-- The animated Rockefeller and the sliding billionaires are **AI-animated photos of real
-  people**. The Vox-style rules forbid AI faces of real people. For documentaries, ask the user
+- The animated Rockefeller, the sliding billionaires and the statue → photo morph use
+  **AI-animated or AI-generated likenesses of real people**. The Vox-style rules forbid AI faces of real people. For documentaries, ask the user
   before animating any real person's photo, and use licensed or public-domain photos only.
 - Never reuse the reference's footage, script or exact scenes. Take the techniques.
 - The money rain and particle wipe must pass the flash check (`flash_check.py`).
