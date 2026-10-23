@@ -49,15 +49,19 @@ Scene.prototype.hinge = function (name, pos, root) {
   h.property("Transform").property("Position").setValue(root ? this.local(pos[0], pos[1], pos[2]) : this.p(pos[0], pos[1], pos[2]));
   return h;
 };
-Scene.prototype.fins = function (k, root, prefix) {
+// `only` (optional): indices to build, e.g. the back two in a cutaway so nothing blocks the cut.
+// modelName (optional) swaps the model, e.g. "hl_grid_fin" for highlight copies that move with the fins.
+Scene.prototype.fins = function (k, root, prefix, only, t0, t1, modelName) {
   var out = [];
   for (var i = 0; i < RIG.fins.length; i++) {
+    if (only && only.indexOf(i) < 0) continue;
     var f = RIG.fins[i];
     var h = this.hinge((prefix || "") + "fin hinge " + (i + 1), f.pos, root);
-    var fin = this.model("grid_fin", [0, 0, 0], (prefix || "") + "grid fin " + (i + 1));
+    var fin = this.model(modelName || "grid_fin", [0, 0, 0], (prefix || "") + (modelName ? "HL " : "") + "grid fin " + (i + 1));
     attach(fin, h);
     fin.property("Transform").property("Orientation").setValue([0, degY(f.yaw), 0]);
-    fin.property("Transform").property("Z Rotation").setValue(degZ((Math.PI / 2) * (1 - k)));
+    if (typeof k === "function") bakeFn(fin.property("Transform").property("Z Rotation"), t0 || 0, t1, function (t) { return degZ((Math.PI / 2) * (1 - k(t))); });
+    else fin.property("Transform").property("Z Rotation").setValue(degZ((Math.PI / 2) * (1 - k)));
     out.push(fin);
   }
   return out;
@@ -71,43 +75,65 @@ function pusherPose(deg) {
   for (var j = 0; j < P.stages; j++) out.push({ x: P.bodyX + (dx / dist) * step * j, y: P.bodyY + (dy / dist) * step * j, phi: phi });
   return out;
 }
-Scene.prototype.legs = function (k, root, prefix) {
-  var out = [], L = RIG.leg;
-  var deg = L.stowedDeg + (L.deployedDeg - L.stowedDeg) * k;
+// k: 0 stowed .. 1 deployed, or a function of time (seconds) to animate; t0..t1 is the baked range.
+Scene.prototype.legs = function (k, root, prefix, only, t0, t1, modelName) {
+  var out = [], L = RIG.leg, anim = typeof k === "function";
+  var degAt = function (t) { return L.stowedDeg + (L.deployedDeg - L.stowedDeg) * (anim ? k(t) : k); };
+  var bakeLeg = function (prop, fn) { bakeFn(prop, t0 || 0, t1, fn); };
+  var deg = degAt(0);
   var pose = pusherPose(deg);
   for (var i = 0; i < RIG.legs.length; i++) {
+    if (only && only.indexOf(i) < 0) continue;
     var g = RIG.legs[i], c = Math.cos(g.yaw), sn = Math.sin(g.yaw);
     var h = this.hinge((prefix || "") + "leg hinge " + (i + 1), g.pos, root);
-    var leg = this.model("leg", [0, 0, 0], (prefix || "") + "leg " + (i + 1));
+    var leg = this.model(modelName || "leg", [0, 0, 0], (prefix || "") + (modelName ? "HL " : "") + "leg " + (i + 1));
     attach(leg, h);
     leg.property("Transform").property("Orientation").setValue([0, degY(g.yaw), 0]);
-    leg.property("Transform").property("Z Rotation").setValue(degZ((-deg * Math.PI) / 180));
-    for (var j = 0; j < pose.length; j++) {
-      var t = this.model("leg_pusher_" + (j + 1), [0, 0, 0], (prefix || "") + "leg " + (i + 1) + " pusher " + (j + 1));
+    if (anim) bakeLeg(leg.property("Transform").property("Z Rotation"), function (t) { return degZ((-degAt(t) * Math.PI) / 180); });
+    else leg.property("Transform").property("Z Rotation").setValue(degZ((-deg * Math.PI) / 180));
+    for (var j = 0; j < (modelName ? 0 : pose.length); j++) (function (j, sc) {
+      var t = sc.model("leg_pusher_" + (j + 1), [0, 0, 0], (prefix || "") + "leg " + (i + 1) + " pusher " + (j + 1));
       t.parent = h;
-      // Leg-plane point (x radial, y up) turned by the leg's yaw (three.js rotation.y), then to px.
-      t.property("Transform").property("Position").setValue(this.local(pose[j].x * c, pose[j].y, -pose[j].x * sn));
       t.property("Transform").property("Orientation").setValue([0, degY(g.yaw), 0]);
-      t.property("Transform").property("Z Rotation").setValue(degZ(-pose[j].phi));
-    }
+      // Leg-plane point (x radial, y up) turned by the leg's yaw (three.js rotation.y), then to px.
+      var posAt = function (q) { return sc.local(q.x * c, q.y, -q.x * sn); };
+      if (anim) {
+        bakeLeg(t.property("Transform").property("Position"), function (tt) { return posAt(pusherPose(degAt(tt))[j]); });
+        bakeLeg(t.property("Transform").property("Z Rotation"), function (tt) { return degZ(-pusherPose(degAt(tt))[j].phi); });
+      } else {
+        t.property("Transform").property("Position").setValue(posAt(pose[j]));
+        t.property("Transform").property("Z Rotation").setValue(degZ(-pose[j].phi));
+      }
+    })(j, this);
     out.push(leg);
   }
   return out;
 };
+// The booster: shell, tanks, engines, thrusters, plus propellant when o.fill is given (0..1, both tanks).
+// Layers are kept in this.parts (lox, rp1 = draining columns; loxCrown, rp1Crown = full-tank tops).
 Scene.prototype.booster = function (o) {
   o = o || {};
   var cut = o.cut ? "_cut" : "";
-  var off = o.at || [0, 0, 0];
-  var root = this.nul("booster root", off);
-  var parts = ["booster_shell" + cut, "booster_tanks" + cut, "engines", "thrusters"];
-  for (var i = 0; i < parts.length; i++) attach(this.model(parts[i]), root);
+  var root = this.nul("booster root", o.at || [0, 0, 0]);
+  var P = this.parts = { root: root };
+  var names = ["booster_shell", "booster_tanks", "engines", "thrusters"];
+  for (var i = 0; i < names.length; i++) { P[names[i]] = this.model(names[i] + (names[i] == "engines" || names[i] == "thrusters" ? "" : cut)); attach(P[names[i]], root); }
   if (o.fill !== undefined) {
-    var lx = this.model("lox" + cut); lx.parent = root; lx.property("Transform").property("Position").setValue(this.local(RIG.lox[0], RIG.lox[1], RIG.lox[2]));
-    var rp = this.model("rp1" + cut); rp.parent = root; rp.property("Transform").property("Position").setValue(this.local(RIG.rp1[0], RIG.rp1[1], RIG.rp1[2]));
-    lx.property("Transform").property("Scale").setValue([100, 100 * o.fill, 100]);
-    rp.property("Transform").property("Scale").setValue([100, 100 * o.fill, 100]);
+    P.lox = this.model("lox" + cut); P.lox.parent = root; P.lox.property("Transform").property("Position").setValue(this.local(RIG.lox[0], RIG.lox[1], RIG.lox[2]));
+    P.rp1 = this.model("rp1" + cut); P.rp1.parent = root; P.rp1.property("Transform").property("Position").setValue(this.local(RIG.rp1[0], RIG.rp1[1], RIG.rp1[2]));
+    var extra = ["lox_base", "lox_crown", "rp1_base", "rp1_crown"];
+    for (var j = 0; j < extra.length; j++) { P[extra[j]] = this.model(extra[j] + cut); attach(P[extra[j]], root); }
+    this.setFill(o.fill, o.fill);
   }
   return root;
+};
+// Static propellant levels (use fillKeys for animation).
+Scene.prototype.setFill = function (lox, rp1) {
+  var P = this.parts;
+  P.lox.property("Transform").property("Scale").setValue([100, Math.max(0.1, 100 * lox), 100]);
+  P.rp1.property("Transform").property("Scale").setValue([100, Math.max(0.1, 100 * rp1), 100]);
+  P.lox_crown.property("Transform").property("Opacity").setValue(lox >= 0.999 ? 100 : 0);
+  P.rp1_crown.property("Transform").property("Opacity").setValue(rp1 >= 0.999 ? 100 : 0);
 };
 Scene.prototype.lights = function () {
   var key = this.comp.layers.__new(this.cmd("layer.newLight", { name: "Key light", kind: "Parallel", intensity: 115, castsShadows: true, shadowDarkness: 55, shadowDiffusion: 40 }));
@@ -150,4 +176,35 @@ function newComp(name, dur) {
   c.renderer = "ADBE Advanced 3d";
   studio(c);
   return c;
+}
+
+// ---------- highlights ----------
+// A highlight is a glowing copy of a part (assets/hl_*.glb), parented like the part and faded in on the spoken word.
+Scene.prototype.hl = function (name, root, layerName) {
+  var l = this.model("hl_" + name, [0, 0, 0], layerName || "HL " + name);
+  if (root) attach(l, root);
+  l.property("Transform").property("Opacity").setValue(0);
+  this.cmd("material.set", { layers: [l.__id], castsShadows: "off", acceptsShadows: "off" });
+  return l;
+};
+// Copies a layer's transform onto another (for highlights of fins and legs, whose parents can't pass rotation).
+function copyPose(src, dst) {
+  var T = ["Position", "Orientation", "X Rotation", "Y Rotation", "Z Rotation", "Scale"];
+  dst.parent = src.parent;
+  for (var i = 0; i < T.length; i++) dst.property("Transform").property(T[i]).setValue(src.property("Transform").property(T[i]).value);
+}
+// Smooth opacity pulse: fades in over `fade` s from tOn, holds to tOff, fades out. Several pulses can be added.
+function smoothKeys(t0, t1, v0, v1, n) {
+  var ts = [], vs = [];
+  for (var i = 0; i <= n; i++) {
+    var u = i / n, e = u * u * (3 - 2 * u);
+    ts.push(t0 + (t1 - t0) * u); vs.push(v0 + (v1 - v0) * e);
+  }
+  return [ts, vs];
+}
+function pulse(layer, tOn, tOff, peak, fade) {
+  peak = peak === undefined ? 100 : peak; fade = fade || 0.3;
+  var op = layer.property("Transform").property("Opacity");
+  var a = smoothKeys(Math.max(0, tOn - 0.04), tOn + fade, 0, peak, 6), b = smoothKeys(tOff, tOff + fade * 1.5, peak, 0, 6);
+  op.setValuesAtTimes(a[0].concat(b[0]), a[1].concat(b[1]));
 }

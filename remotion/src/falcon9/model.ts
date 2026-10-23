@@ -23,6 +23,16 @@ export const TANK_TOP = 40.6; // top of the LOX tank, just below the interstage 
 const RP1_SHARE = 152 / (152 + 252);
 export const COMMON_DOME = ENGINE_BAY_TOP + (TANK_TOP - ENGINE_BAY_TOP) * RP1_SHARE;
 export const DOME_H = 0.95; // ellipsoidal tank heads (illustrative)
+export const SEAM_YS = (() => {
+  const ys = [ENGINE_BAY_TOP + 0.2, COMMON_DOME, TANK_TOP - 0.2];
+  for (let y = ENGINE_BAY_TOP + 3.2; y < TANK_TOP - 1; y += 3.0) if (ys.every((v) => Math.abs(v - y) > 1)) ys.push(y);
+  return ys.sort((a, b) => a - b);
+})();
+
+// ---------- colours ----------
+// Each fluid has one colour for the whole film; dry hardware is highlighted in the channel's orange.
+export const FLUID = {lox: '#2f86ff', rp1: '#f2b400', helium: '#9a6cff', nitrogen: '#3fd0c0'};
+export const HIGHLIGHT = '#ff5a14';
 
 // ---------- materials ----------
 export const MAT = {
@@ -35,8 +45,10 @@ export const MAT = {
   copper: () => new THREE.MeshStandardMaterial({color: '#b8703f', metalness: 1, roughness: 0.35, name: 'copper chamber'}),
   heatShield: () => new THREE.MeshStandardMaterial({color: '#55585e', metalness: 0.2, roughness: 0.8, name: 'heat shield'}),
   copv: () => new THREE.MeshStandardMaterial({color: '#2a2c30', metalness: 0.3, roughness: 0.5, name: 'COPV carbon overwrap'}),
-  lox: () => new THREE.MeshStandardMaterial({color: '#5aa7ff', metalness: 0, roughness: 0.1, transparent: true, opacity: 0.55, name: 'liquid oxygen'}),
-  rp1: () => new THREE.MeshStandardMaterial({color: '#e0a64a', metalness: 0, roughness: 0.12, transparent: true, opacity: 0.6, name: 'RP-1 kerosene'}),
+  // Fluid colours, used for the fills and for highlighting anything that carries that fluid.
+  // Opaque so the colours stay strong against the white studio; the cutaway shows them through the cut.
+  lox: () => new THREE.MeshStandardMaterial({color: FLUID.lox, emissive: FLUID.lox, emissiveIntensity: 0.2, metalness: 0, roughness: 0.35, side: THREE.DoubleSide, name: 'liquid oxygen'}),
+  rp1: () => new THREE.MeshStandardMaterial({color: FLUID.rp1, emissive: FLUID.rp1, emissiveIntensity: 0.2, metalness: 0, roughness: 0.35, side: THREE.DoubleSide, name: 'RP-1 kerosene'}),
   orange: () => new THREE.MeshStandardMaterial({color: '#ff6a1a', metalness: 0.05, roughness: 0.35, name: 'helmet orange'}),
   workwear: () => new THREE.MeshStandardMaterial({color: '#2a2d33', metalness: 0, roughness: 0.8, name: 'workwear'}),
   skin: () => new THREE.MeshStandardMaterial({color: '#c98f6b', metalness: 0, roughness: 0.6, name: 'skin'}),
@@ -79,6 +91,27 @@ const headProfile = (r: number, y0: number, h: number, n = 16): [number, number]
   }
   return pts;
 };
+
+// Fill geometry (see buildBooster): radius, hole for the transfer tube, column bases and heights.
+export const FILL = (() => {
+  const rf = R - 0.02 - 0.03;
+  const rp1Y0 = ENGINE_BAY_TOP + DOME_H * 0.2; // aft dome rim
+  const loxTop = TANK_TOP - 0.2; // forward dome rim
+  const rp1Top = COMMON_DOME - DOME_H - 0.03; // just under the common dome's lowest point
+  return {rf, hole: 0.27, rp1Y0, rp1H: rp1Top - rp1Y0, rp1Top, loxH: loxTop - COMMON_DOME, loxTop};
+})();
+/** Closed lathe profile between a flat plane and a dome surface. The dome is the tank's own ellipse
+ * (radius R − 0.02, height |h| from y0), moved by `off` metres so the fill stays clear of the metal.
+ * 'below' = between the dome and a plane above it; 'above' = between a plane below and the dome. */
+function fillProfile(kind: 'below' | 'above', plane: number, y0: number, h: number, off: number, hole: number, n = 24): [number, number][] {
+  const re = R - 0.02, rf = FILL.rf;
+  const curve = [...Array(n + 1)].map((_, i) => {
+    const r = hole + ((rf - hole) * i) / n;
+    return [r, y0 + h * Math.sqrt(Math.max(0, 1 - (r / re) ** 2)) + off] as [number, number];
+  });
+  if (kind === 'below') return [[hole, plane], ...curve, [rf, plane], [hole, plane]];
+  return [[hole, plane], [rf, plane], ...curve.slice().reverse(), [hole, plane]];
+}
 
 // ---------- Merlin engine (sea level) ----------
 // Proportions are illustrative, sized so 9 bells fit the 3.66 m base (8 around 1).
@@ -274,6 +307,7 @@ export type BoosterParts = {
   fins: THREE.Group[]; // rotate about local Y-axis hinge to deploy
   legs: THREE.Group[]; // rotate about local Z to deploy; userData.pusher = the four pusher stages
   thrusters: THREE.Group;
+  fills: THREE.Group; // the fixed bowl and crown pieces of both fills
 };
 
 export function buildBooster(): BoosterParts {
@@ -284,6 +318,9 @@ export function buildBooster(): BoosterParts {
   shell.add(mesh(ringWall(R - 0.025, R, 4.0, TANK_TOP), MAT.paint(), 'tank skin'));
   shell.add(mesh(ringWall(R - 0.025, R, TANK_TOP, INTERSTAGE_TOP), MAT.carbon(), 'interstage'));
   shell.add(mesh(ringWall(R - 0.025, R + 0.02, 1.4, 4.0), MAT.carbon(), 'engine section'));
+  // Friction-stir welded seams: where the domes meet the barrel, plus barrel section joints (spacing illustrative).
+  const seamMat = new THREE.MeshStandardMaterial({color: '#dfe2e6', metalness: 0.3, roughness: 0.5, name: 'weld seam'});
+  for (const y of SEAM_YS) shell.add(mesh(new THREE.TorusGeometry(R + 0.004, 0.012, 6, 128).rotateX(Math.PI / 2).translate(0, y, 0), seamMat, 'weld seam'));
   // Raceway: the black cable and pressure-line tray up the side (Block 5 thermal coating: Wikipedia).
   const rwA = -Math.PI / 8; // between a leg and a grid fin
   const raceway = mesh(new THREE.BoxGeometry(0.16, TANK_TOP - 4.0, 0.42).translate(R + 0.06, (TANK_TOP + 4.0) / 2, 0), MAT.carbon(), 'raceway');
@@ -334,31 +371,44 @@ export function buildBooster(): BoosterParts {
     const a = (i / 4) * Math.PI * 2 + Math.PI / 4;
     sep.add(mesh(cyl(0.07, INTERSTAGE_TOP - 1.6, INTERSTAGE_TOP - 0.9, 16).translate(Math.cos(a) * (R - 0.25), 0, Math.sin(a) * (R - 0.25)), MAT.steel(), 'pneumatic pusher'));
   }
+  // Three separation latches on the interstage ring (helium-released: User's Guide p. 8).
+  for (let i = 0; i < 3; i++) {
+    const a = (i / 3) * Math.PI * 2 + Math.PI / 6;
+    const latch = mesh(new THREE.BoxGeometry(0.22, 0.3, 0.3).translate(R - 0.2, INTERSTAGE_TOP - 0.3, 0), MAT.steel(), 'separation latch');
+    latch.rotation.y = -a;
+    sep.add(latch);
+  }
   tanks.add(sep);
   root.add(tanks);
-  // Propellant fills (base at the bottom of each tank, scale.y = fill fraction).
-  const rpH = COMMON_DOME - DOME_H - ENGINE_BAY_TOP;
-  const rp1 = mesh(cyl(rIn - 0.03, 0, rpH, 96), MAT.rp1(), 'RP-1 fill');
-  rp1.position.y = ENGINE_BAY_TOP;
-  const loxH = TANK_TOP - 0.2 - COMMON_DOME;
-  const lox = mesh(cyl(rIn - 0.03, 0, loxH, 96), MAT.lox(), 'LOX fill');
+  // Propellant fills, 3 cm inside every wall and dome so no two surfaces share a plane. Each tank's fill is a
+  // fixed bowl (in the lower dome), a column that drains (scale.y = level, base at the bowl's rim) and a crown
+  // (in the upper dome) that is shown only when the tank is full. RP-1 is a ring around the transfer tube.
+  const g = FILL;
+  const rp1Base = mesh(lathe(fillProfile('below', g.rp1Y0, g.rp1Y0, -DOME_H, 0.03, g.hole)), MAT.rp1(), 'RP-1 fill base');
+  const rp1 = mesh(lathe([[g.hole, 0], [g.rf, 0], [g.rf, g.rp1H], [g.hole, g.rp1H], [g.hole, 0]]), MAT.rp1(), 'RP-1 fill');
+  rp1.position.y = g.rp1Y0;
+  const rp1Crown = mesh(lathe(fillProfile('above', g.rp1Top, COMMON_DOME, -DOME_H, -0.03, g.hole)), MAT.rp1(), 'RP-1 fill crown');
+  const loxBase = mesh(lathe(fillProfile('below', COMMON_DOME, COMMON_DOME, -DOME_H, 0.03, 0)), MAT.lox(), 'LOX fill base');
+  const lox = mesh(cyl(g.rf, 0, g.loxH, 96), MAT.lox(), 'LOX fill');
   lox.position.y = COMMON_DOME;
-  rp1.castShadow = lox.castShadow = false;
-  root.add(rp1, lox);
+  const loxCrown = mesh(lathe(fillProfile('above', g.loxTop, g.loxTop, DOME_H * 0.8, -0.03, 0)), MAT.lox(), 'LOX fill crown');
+  for (const m of [rp1Base, rp1, rp1Crown, loxBase, lox, loxCrown]) m.castShadow = false;
+  const fills = group('propellant', rp1Base, rp1Crown, loxBase, loxCrown);
+  root.add(rp1, lox, fills);
 
   // --- engines: octaweb, heat shield, 9 Merlins (8 around 1) ---
   const engines = group('engines');
   engines.add(mesh(cyl(R, 1.35, 1.55, 96), MAT.heatShield(), 'heat shield'));
   engines.add(mesh(cyl(R - 0.1, 1.55, 1.75, 8), MAT.steel(), 'octaweb lower plate'));
-  engines.add(mesh(cyl(R - 0.1, 3.7, 3.9, 8), MAT.steel(), 'octaweb upper plate'));
+  engines.add(mesh(cyl(R - 0.1, 2.95, 3.1, 8), MAT.steel(), 'octaweb upper plate')); // below the aft dome (3.24 m)
   // Octaweb: an eight-sided thrust structure, bolted together (Wikipedia, Block 5); radial beams between engines.
   for (let i = 0; i < 8; i++) {
     const a = ((i + 0.5) / 8) * Math.PI * 2;
-    const beam = mesh(new THREE.BoxGeometry(R - 0.2, 2.0, 0.08).translate((R - 0.2) / 2, 2.72, 0), MAT.alLi(), 'octaweb beam');
+    const beam = mesh(new THREE.BoxGeometry(R - 0.2, 1.2, 0.08).translate((R - 0.2) / 2, 2.35, 0), MAT.alLi(), 'octaweb beam');
     beam.rotation.y = -a;
     engines.add(beam);
   }
-  engines.add(mesh(cyl(0.55, 1.75, 3.7, 8, true), MAT.alLi(), 'octaweb centre ring'));
+  engines.add(mesh(cyl(0.55, 1.75, 2.95, 8, true), MAT.alLi(), 'octaweb centre ring'));
   const ring = 1.27; // ring radius for the 8 outer engines
   for (let i = 0; i < 9; i++) {
     const m = buildMerlin();
@@ -422,7 +472,7 @@ export function buildBooster(): BoosterParts {
     thrusters.add(pod);
   }
   root.add(thrusters);
-  const parts = {root, shell, tanks, lox, rp1, engines, fins, legs, thrusters};
+  const parts = {root, shell, tanks, lox, rp1, engines, fins, legs, thrusters, fills};
   setLegs(parts, 0);
   return parts;
 }
@@ -445,6 +495,8 @@ export function setLegs(b: BoosterParts, k: number) {
 export function setPropellant(b: BoosterParts, lox: number, rp1: number) {
   b.lox.scale.y = Math.max(0.001, lox);
   b.rp1.scale.y = Math.max(0.001, rp1);
+  b.fills.getObjectByName('LOX fill crown')!.visible = lox >= 0.999;
+  b.fills.getObjectByName('RP-1 fill crown')!.visible = rp1 >= 0.999;
 }
 
 // ---------- second stage + fairing ----------

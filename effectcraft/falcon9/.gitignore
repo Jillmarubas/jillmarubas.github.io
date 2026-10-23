@@ -5,3 +5,4 @@ assets/rig.json
 assets/studio_env.png
 *.ecproj
 *.mp4
+out/
