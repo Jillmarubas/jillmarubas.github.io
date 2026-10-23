@@ -26,7 +26,7 @@ const stripes = () => {
 };
 
 // Motor parts along +x (the motor axis), then the whole group is tilted into a diagonal.
-function buildMotor() {
+export function buildMotor() {
   const root = new THREE.Group();
   const motor = new THREE.Group();
   root.add(motor);
