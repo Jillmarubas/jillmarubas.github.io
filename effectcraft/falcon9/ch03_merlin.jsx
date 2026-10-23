@@ -32,7 +32,7 @@ shot(main, "Merlin", 0, END, 260, function (s, dur) {
   var at = function (base, part, e) { var o = PARTS[part]; return [base[0] + o[0] * e, base[1] + o[1] * e, base[2] + o[2] * e]; };
 
   // ---------- camera ----------
-  var ASM = [[3.6, 1.9, 6.6], [0.25, 1.25, 0], 34], EXP = [[6.4, 2.6, 11.0], [0.55, 1.75, 0], 34];
+  var ASM = [[3.6, 1.9, 6.6], [0.25, 1.25, 0], 34], EXP = [[5.25, 2.9, 8.85], [0.6, 2.35, 0], 34];
   var tInj = w("meet") - 1.0, tNoz = w("hot"), tThr = w("throttle");
   s.cameraPath([
     [0, [4.2, 2.1, 7.4], [0.25, 1.25, 0], 34],
