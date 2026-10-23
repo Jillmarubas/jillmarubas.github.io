@@ -1,14 +1,15 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, staticFile, useCurrentFrame} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
-import {useThree} from '@react-three/fiber';
+import {useFrame, useThree} from '@react-three/fiber';
 import * as THREE from 'three';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/inter/800.css';
 import '@fontsource/fraunces/400-italic.css';
-import {ACCENT, FOV, FPS, H, P_DIS, P_SUC, T, W, anchors, buildCompressor, camAt, crankPhi, inOut, outQ, prog} from './compressor';
+import {ACCENT, FOV, FPS, H, P_DIS, P_SUC, T, W, anchors, blurSamples, buildCompressor, camAt, crankPhi, inOut, outQ, prog} from './compressor';
+import {createMotionBlur} from './motionblur';
 
 const INK = '#16181c';
 
@@ -27,15 +28,21 @@ const World: React.FC<{sec: number}> = ({sec}) => {
   gl.shadowMap.type = THREE.PCFSoftShadowMap;
   scene.environment = env;
   scene.environmentIntensity = 0.75;
-  model.update(sec);
-  const c = camAt(sec);
-  cam.fov = FOV;
-  cam.near = 0.05;
-  cam.far = 100;
-  cam.position.copy(c.pos);
-  cam.lookAt(c.target);
-  cam.updateProjectionMatrix();
-  cam.updateMatrixWorld();
+  const blur = useMemo(() => createMotionBlur(gl, W, H), [gl]);
+  const pose = (ts: number) => {
+    model.update(ts);
+    const c = camAt(ts);
+    cam.fov = FOV;
+    cam.near = 0.05;
+    cam.far = 100;
+    cam.position.copy(c.pos);
+    cam.lookAt(c.target);
+    cam.updateProjectionMatrix();
+    cam.updateMatrixWorld();
+  };
+  pose(sec);
+  // Priority 1 takes over drawing from react-three-fiber: the frame is drawn with motion blur.
+  useFrame(() => blur.render(scene, cam, sec, FPS, blurSamples(sec), pose), 1);
   return (
     <>
       <directionalLight

@@ -234,6 +234,27 @@ export const camAt = (s: number) => {
   return {pos, target};
 };
 
+// ---------- motion blur ----------
+// How many shutter samples frame t needs: more when the camera or the parts move fast on screen.
+// Never across the hard cut (that would blend two shots).
+export const blurSamples = (s: number) => {
+  const dt = 1 / FPS;
+  if (s - 0.5 * dt < T.cut && s >= T.cut) return 1;
+  const a = camAt(s);
+  const b = camAt(s - dt);
+  const r = a.pos.distanceTo(a.target);
+  let v = (a.pos.distanceTo(b.pos) + 2 * a.target.distanceTo(b.target)) / r;
+  for (const k of Object.keys(EXPLODE)) {
+    const d = Math.abs(explodeK(s, k) - explodeK(s - dt, k));
+    const len = Math.hypot(...EXPLODE[k].v) * MM;
+    v = Math.max(v, (d * len) / r);
+  }
+  v = Math.max(v, (Math.abs(sliceAt(s) - sliceAt(s - dt)) * MM) / r);
+  let n = Math.round(1 + v * 420);
+  if (s >= T.cut && s < T.pullBack + 1.5) n = Math.max(n, Math.round(1 + 5 * speedUp(s)));
+  return Math.min(8, Math.max(1, n));
+};
+
 // ---------- materials ----------
 const std = (color: string, metalness: number, roughness: number, extra: Partial<THREE.MeshPhysicalMaterialParameters> = {}) =>
   new THREE.MeshPhysicalMaterial({color, metalness, roughness, ...extra});

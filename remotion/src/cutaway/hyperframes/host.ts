@@ -3,7 +3,8 @@
 // and moves the HTML labels from the same camera maths, on every hf-seek.
 import * as THREE from 'three';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
-import {FOV, H, P_DIS, P_SUC, T, W, anchors, buildCompressor, camAt, crankPhi, outQ, prog} from '../compressor';
+import {FOV, FPS, H, P_DIS, P_SUC, T, W, anchors, blurSamples, buildCompressor, camAt, crankPhi, outQ, prog} from '../compressor';
+import {createMotionBlur} from '../motionblur';
 
 type P = {x: number; y: number};
 type Align = 'left' | 'right' | 'center';
@@ -125,10 +126,12 @@ export function createHost(canvas: HTMLCanvasElement) {
     label('lab-outlet', P.outlet, {x: P.outlet.x - 120, y: P.outlet.y - 150}, win(s, T.outLabel, T.end - 0.4), 'left');
   };
 
+  const blur = createMotionBlur(renderer, W, H);
   const renderAt = (s: number) => {
-    model.update(s);
-    placeCam(s);
-    renderer.render(scene, cam);
+    blur.render(scene, cam, s, FPS, blurSamples(s), (ts) => {
+      model.update(ts);
+      placeCam(ts);
+    });
     updateLabels(s);
   };
   return {renderAt};
