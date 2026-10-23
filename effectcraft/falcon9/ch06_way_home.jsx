@@ -153,6 +153,7 @@ shot(main, "F ours", tF, END, 10, function (s, dur) {
   for (var i = 0; i < fins.length; i++) { bakeFn(tr(fins[i], "X Rotation"), 0, dur, trim); bakeFn(tr(hf[i], "X Rotation"), 0, dur, trim); }
   var hEng = s.hl("engine_centre", b);
   hlOn(hEng, "an engine", w("engine"), dur, 90);
+  s.label({ id: "one engine", at: [0, 0.3, 0], root: b, title: "One engine", sub: "lowest setting still too strong", align: "right", to: ["A[0] + 220", "A[1] + 60"], tOn: w("engine"), tOff: dur });
   s.lights();
   // Looking down past the booster at the ship far below; the target ring is tiny.
   // The camera rides alongside, a little above, looking down past the booster to the ship far below.
