@@ -55,7 +55,7 @@ s.cameraPath([
 
 // ---------- the cut opens, the tanks fill ----------
 s.openCut(0.15, 1.5); // fully open before "fuel tank" (2.3 s), so its highlight shows
-var hSkin = s.hl("tank_skin_cut", b);
+var hSkin = s.hl("tank_skin", b); // the whole shell: the cut one hides behind the inner tank wall
 hlOn(hSkin, "fuel tank", w("fuel"), w("two") + 0.6, 85);
 // Levels: LOX fills on "liquid oxygen", RP-1 on "RP-1"; both drain as the tanks empty; refill on "Remember";
 // almost all gone on "gone".
