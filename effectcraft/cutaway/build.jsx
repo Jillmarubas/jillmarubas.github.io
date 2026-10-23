@@ -205,8 +205,8 @@ for (var i = 0; i < LABELS.length; i++) {
   dst.property("Stroke Width").setValue(2.5);
   var df = gd.property("Contents").addProperty("ADBE Vector Graphic - Fill");
   df.property("Color").setValue(d[7] ? ACC : INK);
-  // Card below its words.
-  sh.moveAfter(S1 || T1);
+  // Card below its words (the title was added first, so it is the lower of the two).
+  sh.moveAfter(T1);
 }
 
 // ---------- 2D: title and close-up furniture ----------
