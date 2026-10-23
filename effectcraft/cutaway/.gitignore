@@ -1,0 +1,9 @@
+# Generated: npm-side exporter and baker write these (see README.md)
+assets/*.glb
+assets/pivots.json
+assets/compressor_sfx.wav
+assets/grain.png
+anim.jsx
+*.ecproj
+*.mp4
+test*.jsx
