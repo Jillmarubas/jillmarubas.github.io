@@ -142,6 +142,25 @@ Researched and tested in October 2026.
   - Property paths need the group, for example
     `layer.property("Transform").property("Position")` and
     `layer.property("Text").property("Source Text")`.
+- **VectorCraft** (free Illustrator alternative, github.com/storytold/vectorcraft) draws the
+  cartoon art for the time-traveler channel (`remotion/src/timetraveler/README.md`):
+  - Install in the cloud container (verified 23 Oct 2026, v0.16.0): `git clone --depth 50
+    https://github.com/storytold/vectorcraft` (a clone works through the proxy; the GitHub
+    web pages return 403), `cargo build --release -p vectorcraft-cli` (11 min on 4 cores), then
+    copy `target/release/vectorcraft-cli` to `~/.cargo/bin/`.
+  - Register it: `claude mcp add -s user vectorcraft -- ~/.cargo/bin/vectorcraft-cli mcp --headless`.
+    The tools appear after Claude Code restarts. In the same session, drive the server with
+    `remotion/scripts/vectorcraft/vc.py`, which sends the same MCP calls.
+  - `remotion/scripts/vectorcraft/art.py` redraws every Ice Age piece in about 3 s.
+  - Hand-drawn look: `distort.roughen` (smooth, about 1.4 pt) on outlined shapes,
+    `stylize.scribble` on shade shapes, and `stroke.set {profile: "lens"}` on detail strokes.
+    SVG export writes these as plain paths. Roughen needs a high `detail` (about 30) on small
+    circles, or they turn into diamonds.
+  - PNG export crops to the art; SVG export keeps the artboard as the viewBox.
+- **Local preview renders:** the browser is now
+  `/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell`
+  (the older 1194 path in the SOP is gone). `scripts/stills.mjs` reads it from `REMOTION_BROWSER`.
+  Preload `global-agent` (as `render-lambda.sh` does), or the Remotion CLI fails on `remotion.media`.
 - **Render speed** (measured on the 4-core cloud server, 5 s parallax shot with
   effects):
   - 1080p: about 44 s.
