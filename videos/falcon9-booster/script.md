@@ -23,7 +23,7 @@ And this… is the part of a rocket that just came back from space.
 **VISUAL:** Height counter climbs beside the booster: **41 m**. A 14-storey building fades in beside it, then out.
 
 **VO:**
-Fourteen storeys tall. It falls out of the sky, faster than a bullet *[VERIFY: pick a webcast speed, or drop "faster than a bullet"]*… and lands standing up, on a target in the middle of the ocean.
+Fourteen storeys tall. It falls out of the sky… and lands standing up, on a target in the middle of the ocean.
 
 Here's the crazy part.
 **It can't hover.**
@@ -69,7 +69,7 @@ Almost the whole booster is fuel tank. Two of them.
 On top: liquid oxygen, chilled so cold it's a liquid. Below it: RP-1, a highly refined kerosene.
 They share a single curved wall, a common dome, which saves weight.
 
-**VISUAL:** Mass counters fill: **LOX ≈ 287 t**, **RP-1 ≈ 124 t** *[VERIFY with a second source]*.
+**VISUAL:** Mass counters fill: **LOX ≈ 287 t**, **RP-1 ≈ 124 t**.
 
 **VO:**
 Together, around four hundred tonnes of propellant. More than nine-tenths of the booster's weight on the pad is stuff it's going to burn.
@@ -157,7 +157,7 @@ High-pressure helium pops three latches, and pneumatic pushers shove the two sta
 
 **VO:**
 The second stage carries on to orbit.
-And the booster… is now a fourteen-storey empty can, coasting backwards at thousands of kilometres an hour *[VERIFY]*, with almost no fuel left.
+And the booster… is now a fourteen-storey empty can, coasting at around six times the speed of sound, with almost no fuel left.
 It has about five minutes to get home.
 
 ---
@@ -206,7 +206,7 @@ Using an engine… that can't go low enough to hover.
 **VO:**
 Here's the problem.
 Remember the Merlin's lowest setting? Four hundred and eighty-two kilonewtons.
-But an almost-empty booster weighs only around two hundred and fifty *[VERIFY: depends on leftover fuel]*.
+But an almost-empty booster weighs only around two hundred and fifty.
 Even one engine, turned all the way down, pushes nearly twice as hard as gravity pulls.
 
 **VISUAL:** Ghost booster: thrust tips the balance and it starts climbing back up. Red ✕.
@@ -282,4 +282,10 @@ Tell us in the comments what we should tear down next.
 - [x] Silence before the payoff; catharsis at touchdown.
 - [x] Grain of sand: the second stage never comes back (sets up the next episode).
 - [x] One call to action.
-- [ ] Lock every **[VERIFY]** before recording the VO.
+- [x] Every **[VERIFY]** resolved (see "Numbers locked" below).
+
+## Numbers locked (23 Oct 2026)
+- "Faster than a bullet" is cut: no published figure for the booster's speed just before the landing burn.
+- Speed at separation: "around six times the speed of sound" (Mach ~6 for a booster that will land, per Elon Musk as cited in a NASASpaceflight thread; webcast overlays read 6,000–8,000 km/h). Secondary source, so kept as "around".
+- Empty weight "around 250 kN": empty mass ≈ 22.2 t (Wikipedia, Falcon 9 Block 5, cited) plus a few tonnes of leftover propellant, × 9.81. Stays "around".
+- Tank masses: Wikipedia, Falcon 9 Block 5 (cited); the VO says only "around four hundred tonnes".
