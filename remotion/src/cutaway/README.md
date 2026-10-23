@@ -38,6 +38,19 @@ python3 scripts/make_compressor_sfx.py   # rebuilds public/cutaway/compressor_sf
     Use two-pass `loudnorm` with `linear=true` (one fixed gain).
   - Trim long whoosh files (`whoosh1.mp3` is 10.9 s) and keep whooshes to the big moves only.
 
+- **Sound style:** the second mix sounded comic to the user (pitched "boop" ticks, a slide-whistle
+  rise, a pitch-drop "bonk"). Keep machine sounds unpitched or inharmonic, short and low: hum,
+  noise-transient clicks, one inharmonic clank. No UI ticks on labels.
+
+## Flicker fixes (23 Oct 2026)
+Found with `.claude/skills/video-research/scripts/flicker_check.py`; all in the shared scene, so both hosts had them:
+- The cut floor exposed the base plate's shadow speckle → base plate doesn't receive shadows.
+- Coplanar faces (reed valves on the valve plate, cylinder-head walls on each other and on the plate)
+  z-fought → parts offset or inset by 0.2–0.3 mm.
+- Rotor stripes strobed at full speed → a plain sleeve fades in with the speed (stands in for motion blur).
+- The "Real speed" label was pinned to the moving piston → pinned to the still cylinder.
+- Gas dots popped on and off → their size follows the fractional gas mass, and stream dots grow in and shrink out.
+
 ## HyperFrames version
 `hyperframes/` holds the same demo for HyperFrames: `host.ts` runs the same scene code and labels on
 every `hf-seek`, and `index.html` holds the canvas, the labels, the GSAP timeline for the title and

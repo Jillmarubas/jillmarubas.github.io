@@ -352,7 +352,7 @@ export function buildCompressor() {
   const bg = new THREE.ExtrudeGeometry(basePlate, {depth: 4, bevelEnabled: true, bevelSize: 2, bevelThickness: 1, bevelSegments: 2});
   bg.rotateX(-Math.PI / 2);
   bg.translate(0, 5, 0);
-  mesh(bg, M.base, root);
+  mesh(bg, M.base, root).receiveShadow = false; // seen through the cut floor; shadow speckle there flickered
   for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
     mesh(cylY(11, 0, 7, 32).translate(sx * 122, 0, sz * 46), M.rubber, root);
     mesh(cylY(11, 10, 15, 32).translate(sx * 122, 0, sz * 46), M.rubber, root);
@@ -380,7 +380,7 @@ export function buildCompressor() {
       const t = i / 120;
       pts.push(new THREE.Vector3(sx * 46 + 7 * Math.cos(t * TAU * 5.5), 14 + 32 * t, sz * 38 + 7 * Math.sin(t * TAU * 5.5)));
     }
-    mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 240, 1.6, 10, false), M.steel, root);
+    mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 240, 2.0, 10, false), M.steel, root);
   }
 
   // --- stator: laminated stack + copper end turns ---
@@ -420,6 +420,11 @@ export function buildCompressor() {
   rotorOff.add(crank);
   const rotorMat = std('#ffffff', 0.85, 0.42, {map: stripeTexture('#5d636b', '#9aa0a8', 28, 14)});
   mesh(new THREE.CylinderGeometry(25.5, 25.5, 32, 64, 1, true).translate(0, 68, 0), rotorMat, crank);
+  // Plain sleeve that fades in as the rotor speeds up: stands in for motion blur so the
+  // stripes don't strobe (wagon-wheel effect) at full speed.
+  const rotorBlurMat = new THREE.MeshPhysicalMaterial({color: '#80868e', metalness: 0.85, roughness: 0.45, transparent: true, opacity: 0});
+  const rotorBlur = mesh(new THREE.CylinderGeometry(25.7, 25.7, 32, 64, 1, true).translate(0, 68, 0), rotorBlurMat, crank);
+  rotorBlur.castShadow = false;
   mesh(cylY(25.5, 48, 52, 64), M.alu, crank);
   mesh(cylY(25.5, 84, 88, 64), M.alu, crank);
   mesh(cylY(9, 24, 122), M.steel, crank);
@@ -468,15 +473,15 @@ export function buildCompressor() {
   root.add(plate);
   solid(box(-65, -62, 110, 156, -23, 23), M.steelC, CAP.steel, plate);
   const sucPivot = new THREE.Group();
-  sucPivot.position.set(-61.5, 153, 0);
+  sucPivot.position.set(-61.2, 153, 0);
   plate.add(sucPivot);
   mesh(box(-0.5, 0.5, -15, 0, -6, 6), M.reed, sucPivot);
   const disPivot = new THREE.Group();
-  disPivot.position.set(-65.5, 116, 0);
+  disPivot.position.set(-65.8, 116, 0);
   plate.add(disPivot);
   mesh(box(-0.5, 0.5, 0, 15, -6, 6), M.reed, disPivot);
   // Port holes drawn as dark discs on the plate faces.
-  for (const [x, y] of [[-61.9, 145], [-65.1, 124]]) {
+  for (const [x, y] of [[-61.6, 145], [-65.4, 124]]) {
     const g = new THREE.CircleGeometry(4.2, 32);
     g.rotateY(x > -63 ? Math.PI / 2 : -Math.PI / 2);
     g.translate(x, y, 0);
@@ -487,12 +492,13 @@ export function buildCompressor() {
   const head = new THREE.Group();
   root.add(head);
   for (const g of [
-    box(-80, -77, 110, 156, -23, 23),
-    box(-80, -65, 153, 156, -23, 23),
-    box(-80, -65, 110, 113, -23, 23),
-    box(-80, -65, 110, 156, -23, -20),
-    box(-80, -65, 110, 156, 20, 23),
-    box(-80, -65, 132, 135, -23, 23),
+    // Walls are inset a little where they meet, so no two faces share a plane (z-fighting flicker).
+    box(-80, -77.2, 110.2, 155.8, -22.8, 22.8),
+    box(-80, -65.3, 153, 156, -23, 23),
+    box(-80, -65.3, 110, 113, -23, 23),
+    box(-79.8, -65.3, 113.2, 152.8, -23, -20),
+    box(-79.8, -65.3, 113.2, 152.8, 20, 23),
+    box(-77.4, -65.3, 132, 135, -19.8, 19.8),
   ])
     solid(g, M.iron, CAP.iron, head);
 
@@ -625,6 +631,8 @@ export function buildCompressor() {
     const phi = crankPhi(s);
     const th = phi + Math.PI;
     crank.rotation.y = -th;
+    rotorBlurMat.opacity = Math.min(1, speedUp(s) * 1.4);
+    rotorBlur.visible = rotorBlurMat.opacity > 0.001;
     const xp = pinX(phi);
     piston.position.set(xp - 1, Y_AX, 0);
     const px = R_CRANK * Math.cos(th);
@@ -648,7 +656,7 @@ export function buildCompressor() {
     const gapLen = Math.max(1, gas.gap - 1.6);
     const off = pump.position;
     for (let i = 0; i < N_CYL; i++) {
-      const on = show && i < gas.mass * N_CYL ? 1 : 0;
+      const on = show * Math.min(1, Math.max(0, gas.mass * N_CYL - i)); // fractional: fades, no popping
       const u = rnd(i, 1);
       const rr = Math.sqrt(rnd(i, 2)) * (BORE - 2);
       const an = rnd(i, 3) * TAU;
@@ -661,14 +669,15 @@ export function buildCompressor() {
       const u = (i / N_SUC + s * lerp(0.35, 0.9, fastK)) % 1;
       const p = sucCurve.getPointAt(u).add(off);
       tmpC.copy(COLD).lerp(HOT, 0.04);
-      put(gasSuc, i, p, sucK * Math.min(1, u * 6) * 0.9, tmpC);
+      put(gasSuc, i, p, sucK * Math.min(1, Math.min(u, 1 - u) * 8) * 0.9, tmpC);
     }
     const disK = show * Math.max(gas.dis, fastK * 0.9, prog(s, T.pullBack, 0.3));
     for (let i = 0; i < N_DIS; i++) {
       const u = (i / N_DIS + s * lerp(0.16, 0.42, fastK)) % 1;
       const p = disPath.getPointAt(u).add(off);
       tmpC.copy(HOT).lerp(new THREE.Color('#ff7a2e'), u * 0.5);
-      put(gasDis, i, p, disK * lerp(1.1, 2.4, prog(s, T.pullBack, 1.6)), tmpC);
+      const ends = Math.min(1, Math.min(u, 1 - u) * 12); // grow in / shrink out at the ends of the path
+      put(gasDis, i, p, disK * ends * lerp(1.1, 2.4, prog(s, T.pullBack, 1.6)), tmpC);
     }
     for (const g of [gasCyl, gasSuc, gasDis]) {
       g.instanceMatrix.needsUpdate = true;

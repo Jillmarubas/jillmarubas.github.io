@@ -203,6 +203,10 @@ The goal of an explainer is understanding with the least mental effort. Cut ever
 - [ ] Hits, whooshes and impacts sit on the exact frames of their actions.
 - [ ] No dark halos on alpha overlays; no banding in dark gradients.
 - [ ] `python3 .claude/skills/video-research/scripts/flash_check.py <video.mp4>` passes.
+- [ ] `python3 .claude/skills/video-research/scripts/flicker_check.py <video.mp4> --map map.png` shows no
+  flicker (the user spotted it in the first compressor cutaway). Usual causes in 3D: two faces in the
+  same plane (z-fighting), shadow speckle on surfaces seen through a cut, fine stripes spinning fast
+  (wagon-wheel strobing), particles or labels popping on and off, labels pinned to a moving part.
 - [ ] Master measures -14 LUFS / -1 dBTP.
 
 ## References

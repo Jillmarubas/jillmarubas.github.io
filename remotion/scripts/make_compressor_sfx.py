@@ -1,11 +1,13 @@
 """Sound for the compressor cutaway demo (src/cutaway). Writes public/cutaway/compressor_sfx.wav.
 
-Layers (Murch's rule of five, one of each kind):
-  1. motor hum      - 100/150/200/300 Hz partials, starts a beat before the motor turns
-  2. pressure tone  - a soft rising tone during compression, slow turn only
-  3. ticks          - relay click, reed-valve ticks, part landings, label ticks (synchresis)
+Layers (Murch's rule of five, one of each kind). The user found the first two mixes comic
+(pitched "boop" ticks, a slide-whistle rise, a pitch-drop "bonk"), so everything here is
+unpitched or inharmonic, short and low in the mix, like a documentary about real machines:
+  1. motor hum      - 100/150/200/300 Hz partials with slow beating, starts a beat before the motor turns
+  2. mechanics      - valve clicks and the relay as band-passed noise transients (no sine bodies)
+  3. metal          - one inharmonic clank when the parts seat back together
   4. whooshes       - two short CC0 whooshes from public/sfx: the slice and the explode
-No noise beds: filtered noise swelling and falling reads as a stream of whooshes.
+No noise beds, no label ticks, no rising tones.
 The crank angle is the same function as compressor.ts (phiAt), so valve ticks land on the frames
 where the reeds open.
 """
@@ -115,19 +117,24 @@ def place(buf, clip, at, gain):
         buf[i:j] += clip[: j - i] * gain
 
 
-def tick(freq=3200, dur=0.025, decay=180.0, click=0.6):
+def click(fc=3000, dur=0.018, decay=320.0, q=1.5):
+    """A short unpitched mechanical click: a band-passed noise transient."""
     n = int(dur * SR)
     tt = np.arange(n) / SR
-    body = np.sin(2 * math.pi * freq * tt) * np.exp(-tt * decay)
-    hit = noise(n) * np.exp(-tt * decay * 3) * click
-    return body + hit
+    x = noise(n) * np.exp(-tt * decay)
+    return bandpass(x, fc, q=q) * 2.5
 
 
-def thump(freq=70, dur=0.35):
+def clank(dur=0.6):
+    """One metal-on-metal seat: inharmonic partials (a struck steel part) plus a dull low body."""
     n = int(dur * SR)
     tt = np.arange(n) / SR
-    f = freq * (1 + 0.8 * np.exp(-tt * 30))
-    return np.sin(2 * math.pi * np.cumsum(f) / SR) * np.exp(-tt * 11) + 0.25 * noise(n) * np.exp(-tt * 60)
+    out = np.zeros(n)
+    for f, a, d in [(412, 1.0, 9), (1093, 0.55, 14), (1877, 0.35, 20), (2741, 0.22, 28), (3960, 0.12, 40)]:
+        out += a * np.sin(2 * math.pi * f * tt + f) * np.exp(-tt * d)
+    out += 0.8 * bandpass(noise(n), 180, q=0.8) * np.exp(-tt * 18)
+    out += click(2500, dur, 250, 1.0)[:n] * 0.6
+    return out * np.minimum(1, tt / 0.0015)
 
 
 mix = np.zeros(N)
@@ -141,7 +148,8 @@ hum_env = smooth((t - (T['motorOn'] - 0.2)) / 0.6) * (1 - smooth((t - 25.8) / 1.
 pitch = 1 + 0.06 * fast
 ph = 2 * math.pi * np.cumsum(np.full(N, 50.0) * pitch) / SR
 hum = 0.9 * np.sin(2 * ph) + 0.55 * np.sin(3 * ph) + 0.45 * np.sin(4 * ph) + 0.2 * np.sin(6 * ph) + 0.08 * np.sin(8 * ph)
-mix += hum * hum_env * db(-27) * (0.75 + 0.35 * fast)
+beat = 1 + 0.12 * np.sin(2 * math.pi * 0.7 * t)
+mix += hum * hum_env * beat * db(-30) * (0.75 + 0.35 * fast)
 
 # 3. Gas: shown only from the cut on.
 show = (t >= T['cut']).astype(float) * (1 - smooth((t - 25.6) / 1.2))
@@ -151,32 +159,19 @@ comp = ((p >= P_SUC[1]) & (p < P_DIS[0])).astype(float)
 comp_k = np.clip((p - P_SUC[1]) / (P_DIS[0] - P_SUC[1]), 0, 1) * comp
 # No noise beds here: filtered-noise swells read as whooshes (the user heard "swoosh the whole
 # video" in the first cut). Gas is told by the picture; sound stays mechanical and tonal.
-# A soft pressure tone rises during compression, only in the slow first turn.
-slow = 1 - fast
-press_f = 150 + 210 * comp_k ** 1.3
-press = np.sin(2 * math.pi * np.cumsum(press_f) / SR) + 0.3 * np.sin(4 * math.pi * np.cumsum(press_f) / SR)
-mix += press * comp * smooth(comp_k * 4) * show * slow * db(-30)
 
-# 4. Ticks.
+# 4. Mechanics and metal.
 ticks = np.zeros(N)
-place(ticks, tick(2600, 0.04, 120, 0.4), T['sliceB'] - 0.2, db(-14))  # shell label
-for k, d in enumerate([0, 0.07, 0.14, 0.22, 0.28, 0.32]):  # parts landing after the explode
-    place(ticks, tick(1800 + 300 * k, 0.05, 90, 0.8), T['explode'] + d + 1.0, db(-17))
-for a in T['labels']:
-    place(ticks, tick(3000, 0.03, 160, 0.3), a + 0.05, db(-18))
-for d in [0.32, 0.28, 0.22, 0.14, 0.07, 0.0]:  # parts going back in
-    place(ticks, tick(1500, 0.05, 80, 0.9), T['reassemble'] + (0.32 - d) * 0.8 + 0.75, db(-15))
-place(ticks, thump(65, 0.5), T['reassemble'] + 0.32 * 0.8 + 0.75, db(-6))  # final clunk
-place(ticks, tick(5200, 0.012, 600, 1.0) + np.pad(tick(4100, 0.012, 600, 1.0), (240, 0))[: int(0.012 * SR)], T['motorOn'] - 0.25, db(-8))  # relay
-# Reed valves: a tick each time a valve starts to open.
-for a, gain in [(P_SUC[0], -20), (P_DIS[0], -14)]:
+place(ticks, clank(), T['reassemble'] + 0.32 * 0.8 + 0.75, db(-16))  # parts seat back together
+relay = click(2200, 0.03, 260, 1.2)
+relay[int(0.008 * SR):int(0.028 * SR)] += click(3400, 0.02, 400, 1.2) * 0.7
+place(ticks, relay, T['motorOn'] - 0.25, db(-14))  # start relay
+# Reed valves: a soft click each time a valve opens; quieter as the motor speeds up (they blend into the hum).
+for a, fc, gain in [(P_SUC[0], 2600, -26), (P_DIS[0], 3600, -22)]:
     cyc = np.floor((phi - a) / (2 * math.pi))
     edges = np.where((np.diff(cyc) > 0) & (t[1:] > T['cut']))[0]
     for e in edges:
-        s = e / SR
-        g = gain - 6 * float(fast[e])
-        place(ticks, tick(2400 if a < 3 else 3400, 0.03, 140, 0.7), s, db(g))
-place(ticks, tick(2600, 0.04, 120, 0.4), T['outLabel'] + 0.05, db(-15))
+        place(ticks, click(fc, 0.014, 420, 2.0), e / SR, db(gain - 8 * float(fast[e])))
 mix += ticks
 
 # 5. Whooshes (CC0 recordings).
@@ -184,8 +179,8 @@ mix += ticks
 w7 = load_mp3('whoosh7.mp3')
 w1 = load_mp3('whoosh1.mp3')[: int(1.1 * SR)].copy()
 w1[-int(0.3 * SR):] *= np.linspace(1, 0, int(0.3 * SR))
-place(mix, w1, T['sliceA'] - 0.15, db(-12))
-place(mix, w7, T['explode'] - 0.1, db(-12))
+place(mix, w1, T['sliceA'] - 0.15, db(-17))
+place(mix, w7, T['explode'] - 0.1, db(-17))
 
 # Master: gentle limit, then loudnorm to the house -14 LUFS / -1 dBTP.
 peak = np.max(np.abs(mix))

@@ -121,7 +121,7 @@ export function createHost(canvas: HTMLCanvasElement) {
     label('lab-suction', P.cylinder, cylTop, pk(P_SUC[0], P_SUC[1] + 0.1), 'center');
     label('lab-compression', P.cylinder, cylTop, pk(P_SUC[1] + 0.1, P_DIS[0] + 0.05), 'center');
     label('lab-discharge', P.cylinder, cylTop, disK, 'center');
-    label('lab-speed', P.piston, {x: P.piston.x, y: P.piston.y - 230}, win(s, T.fastFull - 0.6, T.pullBack + 0.1), 'center');
+    label('lab-speed', P.cylinder, {x: P.cylinder.x, y: P.cylinder.y - 230}, win(s, T.fastFull - 0.6, T.pullBack + 0.1), 'center');
     label('lab-outlet', P.outlet, {x: P.outlet.x - 120, y: P.outlet.y - 150}, win(s, T.outLabel, T.end - 0.4), 'left');
   };
 

@@ -174,7 +174,7 @@ export const CompressorCutaway: React.FC<{sound?: boolean}> = ({sound = true}) =
       <Label at={P.cylinder} to={cylTop} k={sucK} title="1  Suction" sub="cool, low-pressure gas pulled in" align="center" accent />
       <Label at={P.cylinder} to={cylTop} k={comK} title="2  Compression" sub="squeezed into less space, it heats up" align="center" accent />
       <Label at={P.cylinder} to={cylTop} k={disK} title="3  Discharge" sub="hot, high-pressure gas pushed out" align="center" accent />
-      <Label at={P.piston} to={{x: P.piston.x, y: P.piston.y - 230}} k={win(s, T.fastFull - 0.6, T.pullBack + 0.1)} title="Real speed: ~50 strokes a second" sub="fixed-speed motor on 50 Hz power" align="center" />
+      <Label at={P.cylinder} to={{x: P.cylinder.x, y: P.cylinder.y - 230}} k={win(s, T.fastFull - 0.6, T.pullBack + 0.1)} title="Real speed: ~50 strokes a second" sub="fixed-speed motor on 50 Hz power" align="center" />
 
       {/* Close-up furniture */}
       {(() => {
