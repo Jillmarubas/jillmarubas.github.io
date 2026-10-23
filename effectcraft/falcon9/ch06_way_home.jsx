@@ -160,7 +160,7 @@ shot(main, "F ours", tF, END, 10, function (s, dur) {
   var cam = s.camera([30, 450, 90], [0, 446, 0], 40);
   bakeFn(tr(cam, "Position"), 0, dur, function (t) { return s.p(30, yb(t) + 30, 90); });
   // First on the booster (its fins in frame), then tilting down to the tiny ship on "toward".
-  bakeFn(tr(cam, "Point of Interest"), 0, dur, function (t) { var u = ease((t - w("toward", 2) + 0.3) / 1.6); return s.p(0, lerp(yb(t) + 26, yb(t) * 0.3, u), 0); });
+  bakeFn(tr(cam, "Point of Interest"), 0, dur, function (t) { var u = ease((t - w("toward", 2) + 0.3) / 1.6); var u2 = ease((t - w("stop") + 0.4) / 1.4); return s.p(0, lerp(lerp(yb(t) + 26, yb(t) * 0.3, u), yb(t) + 4, u2), 0); }); // and back up to its engines on "stop"
   caption(s.comp, "hundreds of m/s", { id: "hundreds", pos: [1420, 470], size: 54, color: INK, tOn: w("hundreds"), tOff: w("toward", 2) + 0.3 });
   s.label({ id: "target", at: [0, 0.2, 0], title: "Landing target", sub: "a few dozen metres wide", align: "right", to: ["A[0] + 230", "A[1] - 160"], tOn: w("target"), tOff: w("stop") - 0.6 });
   caption(s.comp, "now it has to stop", { id: "stop", pos: [960, 960], size: 50, color: INK, tOn: w("stop"), tOff: dur - 0.2 });
