@@ -151,13 +151,16 @@ shot(main, "F ours", tF, END, 10, function (s, dur) {
   var hf = s.hlFins(1, b, null, 0, dur, "steering with its fins", w("steering"), w("falling", 2) + 0.3);
   var trim = function (t) { return 4 * Math.sin(t * 1.7) + 2 * Math.sin(t * 3.1); };
   for (var i = 0; i < fins.length; i++) { bakeFn(tr(fins[i], "X Rotation"), 0, dur, trim); bakeFn(tr(hf[i], "X Rotation"), 0, dur, trim); }
+  var hEng = s.hl("engine_centre", b);
+  hlOn(hEng, "an engine", w("engine"), dur, 90);
   s.lights();
   // Looking down past the booster at the ship far below; the target ring is tiny.
   // The camera rides alongside, a little above, looking down past the booster to the ship far below.
   var yb = function (t) { return 420 - 180 * t / dur; };
-  var cam = s.camera([30, 438, 70], [0, 190, 0], 40);
-  bakeFn(tr(cam, "Position"), 0, dur, function (t) { return s.p(30, yb(t) + 18, 70); });
-  bakeFn(tr(cam, "Point of Interest"), 0, dur, function (t) { var u = ease((t - w("toward", 2) + 0.3) / 1.6); return s.p(0, yb(t) * (0.55 - 0.45 * u), 0); });
+  var cam = s.camera([30, 450, 90], [0, 446, 0], 40);
+  bakeFn(tr(cam, "Position"), 0, dur, function (t) { return s.p(30, yb(t) + 30, 90); });
+  // First on the booster (its fins in frame), then tilting down to the tiny ship on "toward".
+  bakeFn(tr(cam, "Point of Interest"), 0, dur, function (t) { var u = ease((t - w("toward", 2) + 0.3) / 1.6); return s.p(0, lerp(yb(t) + 26, yb(t) * 0.3, u), 0); });
   caption(s.comp, "hundreds of m/s", { id: "hundreds", pos: [1420, 470], size: 54, color: INK, tOn: w("hundreds"), tOff: w("toward", 2) + 0.3 });
   s.label({ id: "target", at: [0, 0.2, 0], title: "Landing target", sub: "a few dozen metres wide", align: "right", to: ["A[0] + 230", "A[1] - 160"], tOn: w("target"), tOff: w("stop") - 0.6 });
   caption(s.comp, "now it has to stop", { id: "stop", pos: [960, 960], size: 50, color: INK, tOn: w("stop"), tOff: dur - 0.2 });
