@@ -25,7 +25,7 @@ args = ap.parse_args()
 
 W, H = 480, 270
 from fractions import Fraction
-fps = args.fps or float(Fraction(subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=r_frame_rate', '-of', 'csv=p=0', args.video], capture_output=True, text=True).stdout.strip()))
+fps = args.fps or float(Fraction(subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=r_frame_rate', '-of', 'csv=p=0', args.video], capture_output=True, text=True).stdout.strip().split(',')[0]))
 raw = subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', args.video, '-vf', f'scale={W}:{H},format=gray', '-f', 'rawvideo', '-'], capture_output=True).stdout
 v = np.frombuffer(raw, np.uint8).reshape(-1, H, W).astype(np.float32)
 d = np.diff(v, axis=0)

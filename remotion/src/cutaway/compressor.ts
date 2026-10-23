@@ -351,7 +351,7 @@ export function buildCompressor() {
   basePlate.closePath();
   const bg = new THREE.ExtrudeGeometry(basePlate, {depth: 4, bevelEnabled: true, bevelSize: 2, bevelThickness: 1, bevelSegments: 2});
   bg.rotateX(-Math.PI / 2);
-  bg.translate(0, 5, 0);
+  bg.translate(0, 4, 0); // top at y = 9, 1 mm under the shell floor (y = 10): same height z-fought through the cut
   mesh(bg, M.base, root).receiveShadow = false; // seen through the cut floor; shadow speckle there flickered
   for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
     mesh(cylY(11, 0, 7, 32).translate(sx * 122, 0, sz * 46), M.rubber, root);
@@ -402,9 +402,10 @@ export function buildCompressor() {
   const hole = new THREE.Path();
   hole.absarc(0, 0, 27, 0, TAU, true);
   sq.holes.push(hole);
-  const slice = new THREE.ExtrudeGeometry(sq, {depth: 3.4, bevelEnabled: false, curveSegments: 24});
+  // 6 thick laminations with 1.6 mm gaps: thin 0.6 mm gaps were ~1 px in wide shots and shimmered.
+  const slice = new THREE.ExtrudeGeometry(sq, {depth: 5, bevelEnabled: false, curveSegments: 24});
   slice.rotateX(-Math.PI / 2);
-  for (let i = 0; i < 10; i++) solid(slice.clone().translate(0, 48 + i * 4, 0), M.lam, CAP.lam, stator);
+  for (let i = 0; i < 6; i++) solid(slice.clone().translate(0, 48 + i * 6.6, 0), M.lam, CAP.lam, stator);
   for (const y of [42, 94]) {
     const g = new THREE.TorusGeometry(35, 8.5, 20, 64);
     g.rotateX(Math.PI / 2);
