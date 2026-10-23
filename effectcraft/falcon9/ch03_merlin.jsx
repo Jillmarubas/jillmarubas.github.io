@@ -57,7 +57,11 @@ shot(main, "Merlin", 0, END, 260, function (s, dur) {
 
   // ---------- turbopump: oxygen and kerosene in, rammed into the engine ----------
   var pump = at([0.42, CT - 0.25, 0], "turbopump", 1);
-  hlOn(HL.turbopump, "turbopump", tApart, w("What") - 0.2);
+  hlOn(HL.turbopump, "turbopump", tApart, w("small") - 0.15); // stays lit through "what spins the pump?"
+  // "...just to power the pump": a second copy, so the pump lights again without clashing keyframes.
+  var hlPump2 = s.hl("merlin_turbopump", null, "HL pump again");
+  bakeFn(tr(hlPump2, "Position"), 0, dur, function (t) { var e = ex(t), o = PARTS.turbopump; return s.p(o[0] * e, o[1] * e, o[2] * e); });
+  hlOn(hlPump2, "power the pump", w("pump", 3) - 0.1, w("exhaust") - 0.1, 70);
   s.label({ id: "pump", at: [pump[0] + 0.15, pump[1] + 0.35, 0.1], title: "Turbopump", align: "right", to: ["A[0] + 170", "A[1] - 130"], tOn: tApart + 0.2, tOff: w("What") - 0.2 });
   s.flow({ id: "oxygen in", a: [pump[0] - 0.12, pump[1] + 1.4, 0.12], b: [pump[0] - 0.12, pump[1] + 0.25, 0.12], color: LOXC, n: 7, r: 0.04, speed: 0.6, tOn: w("oxygen"), tOff: w("What") - 0.2 });
   s.flow({ id: "kerosene in", a: [pump[0] + 0.12, pump[1] + 1.4, -0.12], b: [pump[0] + 0.12, pump[1] + 0.5, -0.12], color: RP1C, n: 7, r: 0.04, speed: 0.6, tOn: w("kerosene"), tOff: w("What") - 0.2 });
