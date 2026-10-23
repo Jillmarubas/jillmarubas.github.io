@@ -21,7 +21,8 @@ shot(main, "A thrust vs weight", 0, tB, 12, function (s, dur) {
   hlOn(hc, "one engine", w("one"), dur, 85);
   s.flame({ id: "minimum", at: [0, 0.35, 0], root: b, len: 7, r: 0.5, keys: [[0, 0.56], [dur, 0.56]], tEnd: dur });
   s.lights();
-  s.cameraPath([[0, [26, 30, 112], [16, 26, 0], 34], [dur, [26, 30, 108], [16, 26, 0], 34]], dur); // booster left, numbers right
+  s.cameraPath([[0, [26, 30, 124], [16, 26, 0], 34], [dur, [26, 30, 120], [16, 26, 0], 34]], dur);
+  s.label({ id: "one engine label", at: [0, 0.3, 0], root: b, title: "One engine", sub: "turned all the way down", align: "left", to: ["A[0] - 200", "A[1] + 40"], tOn: w("one"), tOff: dur - 0.2 }); // booster left, numbers right
   // Arrows to scale: 482 kN up, 250 kN down (1 kN = 0.6 px).
   s.arrow({ id: "thrust 482 kN", at: [5, 14, 0], root: b, color: AC, dir: [0, -482 * 0.6], width: 16, head: 40, tOn: w("482"), tOff: dur - 0.2 });
   caption(s.comp, "THRUST  482 kN", { pos: [1420, 300], size: 52, color: AC, tOn: w("482"), tOff: dur - 0.2 });
@@ -35,17 +36,17 @@ shot(main, "A thrust vs weight", 0, tB, 12, function (s, dur) {
 // ---------- B: it would go back up; zero speed at zero height; hoverslam ----------
 shot(main, "B can't hold still", tB, tC, 10, function (s, dur) {
   s.model("droneship", [0, 0, 0]);
-  var b = s.booster({ at: [0, SY + 60, 0], assembly: "landed" });
+  var b = s.booster({ at: [0, SY + 50, 0], assembly: "landed" });
   // Slows to a stop at 60 m... and climbs back up (thrust > weight).
   var tStop = w("stop") + 0.2, tUp = w("up") + 0.6;
   bakeFn(tr(b, "Position"), 0, dur, function (t) {
-    var h = t < tStop ? 60 + 30 * Math.pow(1 - t / tStop, 2) : 60 + 26 * ease((t - tStop) / (tUp + 1.2 - tStop));
+    var h = t < tStop ? 22 + 28 * Math.pow(1 - t / tStop, 2) : 22 + 18 * ease((t - tStop) / (tUp + 1.2 - tStop)); // the ship stays in frame for scale
     return s.p(0, SY + h, 0);
   });
   s.flame({ id: "too strong", at: [0, 0.35, 0], root: b, len: 7, r: 0.5, keys: [[0, 0.7], [dur, 0.7]], tEnd: dur });
   mention(tStop, "stops in mid-air, goes back up", "motion");
   s.lights();
-  s.cameraPath([[0, [34, 80, 200], [8, 78, 0], 34], [dur, [34, 78, 196], [8, 74, 0], 34]], dur);
+  s.cameraPath([[0, [40, 46, 250], [8, 44, 0], 34], [dur, [40, 46, 244], [8, 44, 0], 34]], dur);
   s.arrow({ id: "back up", at: [5, 40, 0], root: b, color: RED, dir: [0, -150], tOn: w("back"), tOff: w("can't") + 0.6 });
   caption(s.comp, "can't hold still", { id: "can't hold still", pos: [1420, 520], size: 60, color: RED, tOn: w("can't"), tOff: w("has") - 0.1 });
   caption(s.comp, "zero speed", { id: "zero speed", pos: [1420, 470], size: 60, color: INK, tOn: w("zero"), tOff: dur - 0.3 });
@@ -82,8 +83,11 @@ function prof(t) { var u = Math.max(0, Math.min(1, (t - tIgn) / (tLand - tIgn)))
 shot(main, "D example", tD, tE, 10, function (s, dur) {
   var b = s.booster({ at: [-24, 22, 0], assembly: "landed" });
   var ti = tIgn - OFFSET;
-  s.flame({ id: "lights", at: [0, 0.35, 0], root: b, len: 8, r: 0.5, keys: [[0, 0], [ti - 0.05, 0], [ti + 0.4, 1], [dur, 1]], tEnd: dur });
+  s.flame({ id: "lights", at: [0, 0.35, 0], root: b, len: 14, r: 0.8, keys: [[0, 0], [ti - 0.05, 0], [ti + 0.4, 1], [dur, 1]], tEnd: dur });
   mention(ti, "lights the engine", "flame");
+  var hcD = s.hl("engine_centre", b);
+  hlOn(hcD, "the engine (lights)", ti - 0.1, dur, 90);
+  s.label({ id: "lights label", at: [0, 0.3, 0], root: b, title: "Engine lights", sub: "≈ 1.6 km up", align: "right", to: ["A[0] + 140", "A[1] + 110"], tOn: ti, tOff: dur - 0.2 });
   s.lights();
   s.cameraPath([[0, [-8, 42, 168], [-6, 40, 0], 34], [dur, [-8, 42, 164], [-6, 40, 0], 34]], dur);
   caption(s.comp, "EXAMPLE", { pos: [1300, 250], size: 34, font: "Inter-SemiBold", color: MUTED, tOn: w("Say"), tOff: dur - 0.2 });
