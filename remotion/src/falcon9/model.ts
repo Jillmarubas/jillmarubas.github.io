@@ -1,7 +1,8 @@
 // Falcon 9 booster episode: every 3D part, modelled in code, in metres (+Y up, +Z toward the camera).
-// Real dimensions come from research/falcon9-booster/facts.md. Where SpaceX publishes nothing (engine and
-// leg proportions, the helium bottles' exact layout), the shapes are illustrative and sized to fit the
-// real outer dimensions. No logos or markings: plain white, black and metal.
+// Built as close to the real vehicle as public sources allow; research/falcon9-booster/facts.md lists the
+// source for each feature ("3D model" table). Where SpaceX publishes nothing (exact engine and leg
+// proportions, how many helium bottles and where), shapes are sized from photos and marked illustrative.
+// No logos or markings: plain white, black and metal.
 import * as THREE from 'three';
 
 // ---------- real dimensions (facts.md) ----------
@@ -96,9 +97,6 @@ export function buildMerlin(opts: {exploded?: number} = {}) {
   const nozzleDS = MAT.nozzle();
   nozzleDS.side = THREE.DoubleSide;
   const bell = mesh(lathe(bellPts, 64), nozzleDS, 'nozzle bell');
-  // Regenerative cooling tubes: thin stripes up the bell.
-  const tubes = new THREE.Group();
-  tubes.name = 'cooling tubes';
   // Combustion chamber + throat (copper-coloured liner).
   const chamber = mesh(
     lathe([[0.13, m.throatY - 0.15], [0.11, m.throatY], [0.2, m.throatY + 0.18], [0.2, m.chamberTop], [0.01, m.chamberTop]], 48),
@@ -142,8 +140,22 @@ export function buildMerlin(opts: {exploded?: number} = {}) {
     mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.15, -0.1, 0), new THREE.Vector3(-0.32, -0.2, 0)]), 16, 0.05, 10), MAT.alLi(), 'LOX line'),
     mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.1, 0.05, 0.12), new THREE.Vector3(-0.3, 0.02, 0.2)]), 16, 0.04, 10), MAT.steel(), 'fuel line'),
   );
+  // Two hydraulic gimbal actuators that steer the engine (the nozzle is gimbaled: User's Guide).
+  const act = (x: number, z: number) => {
+    const a = new THREE.Vector3(x * 0.55, 0.75, z * 0.55);
+    const b = new THREE.Vector3(x * 0.2, 0, z * 0.2);
+    const len = a.distanceTo(b);
+    const g = new THREE.Group();
+    const body = mesh(cyl(0.045, 0, len * 0.6, 16), MAT.steel(), 'actuator body');
+    const rod = mesh(cyl(0.022, len * 0.55, len, 12), MAT.alLi(), 'actuator rod');
+    g.add(body, rod);
+    g.position.copy(b);
+    g.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), a.clone().sub(b).normalize());
+    return g;
+  };
+  const gimbal = group('gimbal actuators', act(-1, 0.35), act(-0.35, -1));
   // Assemble, with an exploded offset per part.
-  const root = group('merlin', bell, tubes, chamber, injector, pump, gg, lines);
+  const root = group('merlin', bell, chamber, injector, pump, gg, lines, gimbal);
   const place = (o: THREE.Object3D, base: [number, number, number], out: [number, number, number]) =>
     o.position.set(base[0] + out[0] * e, base[1] + out[1] * e, base[2] + out[2] * e);
   place(bell, [0, 0, 0], [0, -0.6, 0]);
@@ -152,12 +164,34 @@ export function buildMerlin(opts: {exploded?: number} = {}) {
   place(pump, [0.42, m.chamberTop - 0.25, 0], [1.1, 0.9, 0]);
   place(gg, [0.32, m.chamberTop - 0.1, 0.18], [0.7, 0.3, 0.8]);
   place(lines, [0.36, m.chamberTop + 0.05, 0], [0.6, 0.55, 0.2]);
+  place(gimbal, [0, m.chamberTop - 0.1, 0], [-0.9, 0.5, -0.4]);
   return root;
 }
 
 // ---------- booster (first stage) ----------
-export const FIN_Y = 39.4; // grid fin hinge height (illustrative, "near the top")
-export const LEG = {hingeY: 1.6, length: 9.3, stowedDeg: 4, deployedDeg: 120};
+export const FIN_Y = 41.6; // grid fin hinge on the black interstage, fins folded up against it (photos)
+// Legs: hinge at the base, stowed pointing up, swing down and out (Spaceflight Now / SpaceX). 128° gives
+// a deployed span of about 18 m. A four-stage telescoping pusher runs from the engine section to the leg.
+export const LEG = {hingeY: 1.6, length: 9.3, stowedDeg: 4, deployedDeg: 128};
+export const PUSHER = {bodyY: 3.2, bodyX: -0.12, legS: 5.1, stages: 4, stageLen: 1.95, r0: 0.11, dr: 0.02};
+/** Pusher tube poses in the leg holder's plane (x radial, y up from the hinge) for a leg at `deg`. */
+export function pusherPose(deg: number) {
+  const th = (deg * Math.PI) / 180;
+  const ax = PUSHER.bodyX, ay = PUSHER.bodyY;
+  const px = PUSHER.legS * Math.sin(th), py = PUSHER.legS * Math.cos(th);
+  const dx = px - ax, dy = py - ay;
+  const dist = Math.hypot(dx, dy);
+  const phi = Math.atan2(dx, dy); // from +Y toward +X
+  const n = PUSHER.stages;
+  const step = Math.max(0, (dist - PUSHER.stageLen) / (n - 1));
+  const out: {x: number; y: number; phi: number}[] = [];
+  for (let i = 0; i < n; i++) out.push({x: ax + (dx / dist) * step * i, y: ay + (dy / dist) * step * i, phi});
+  return out;
+}
+/** One pusher stage: a tube along +Y from the origin (stage 0 is the widest). */
+export function buildPusherStage(i: number) {
+  return mesh(cyl(PUSHER.r0 - PUSHER.dr * i, 0, PUSHER.stageLen, 24), i === 0 ? MAT.carbon() : MAT.steel(), `pusher stage ${i + 1}`);
+}
 
 /** One grid fin: a titanium frame with a waffle lattice. Hinge at the local origin; the fin extends along
  * +X (radially), its chord along Z, and air flows through the lattice along Y. Deployed = this pose. */
@@ -198,12 +232,14 @@ export function buildGridFin() {
       if (pts.length >= 2) bar(pts[0][0], pts[0][1], pts[1][0], pts[1][1], 0.025);
     }
   }
-  // Hinge actuator at the root.
-  g.add(mesh(new THREE.BoxGeometry(0.3, 0.35, 0.4), MAT.heatShield(), 'fin actuator'));
+  // Root spar and hinge fitting (hydraulically driven: a 2018 pump stall is in facts.md).
+  g.add(mesh(new THREE.BoxGeometry(0.3, 0.3, c * 0.9), MAT.titanium(), 'root spar'));
+  g.add(mesh(cyl(0.09, -0.25, 0.25, 20).rotateX(Math.PI / 2), MAT.steel(), 'hinge pin'));
   return g;
 }
 
-/** One landing leg: carbon-fibre beam with a foot and a telescoping strut; hinge at local origin, leg along +Y when stowed. */
+/** One landing leg: carbon-fibre / aluminium-honeycomb beam with black thermal coating and a foot pad;
+ * hinge at the local origin, leg along +Y when stowed. The pad is level with the ground when deployed. */
 export function buildLeg() {
   const g = group('landing leg');
   const L = LEG.length;
@@ -216,8 +252,15 @@ export function buildLeg() {
   const beamGeo = new THREE.ExtrudeGeometry(beam, {depth: 0.28, bevelEnabled: true, bevelSize: 0.03, bevelThickness: 0.03, bevelSegments: 2});
   beamGeo.translate(0, 0, -0.14);
   g.add(mesh(beamGeo, MAT.carbon(), 'leg beam'));
-  const foot = mesh(cyl(0.42, L - 0.05, L + 0.12, 32), MAT.heatShield(), 'foot');
-  g.add(foot);
+  // Spine rib down the outside face (photos show a raised centre section).
+  g.add(mesh(new THREE.BoxGeometry(0.22, L * 0.92, 0.12).translate(0, L * 0.48, 0.18), MAT.carbon(), 'leg spine'));
+  g.add(mesh(cyl(0.12, -0.3, 0.3, 20).rotateX(Math.PI / 2), MAT.steel(), 'hinge pin'));
+  // Foot pad: a disc tilted so it sits flat on the deck at the deployed angle.
+  g.add(mesh(cyl(0.16, L - 0.3, L + 0.12, 16), MAT.steel(), 'foot post'));
+  const pad = mesh(cyl(0.5, -0.06, 0.06, 32), MAT.heatShield(), 'foot pad');
+  pad.position.set(0, L + 0.12, 0);
+  pad.rotation.z = (LEG.deployedDeg * Math.PI) / 180; // undoes the leg's tilt: flat on the deck when deployed
+  g.add(pad);
   return g;
 }
 
@@ -229,7 +272,7 @@ export type BoosterParts = {
   rp1: THREE.Mesh;
   engines: THREE.Group; // 9 Merlins + octaweb + heat shield
   fins: THREE.Group[]; // rotate about local Y-axis hinge to deploy
-  legs: THREE.Group[]; // rotate about local Z to deploy
+  legs: THREE.Group[]; // rotate about local Z to deploy; userData.pusher = the four pusher stages
   thrusters: THREE.Group;
 };
 
@@ -241,25 +284,57 @@ export function buildBooster(): BoosterParts {
   shell.add(mesh(ringWall(R - 0.025, R, 4.0, TANK_TOP), MAT.paint(), 'tank skin'));
   shell.add(mesh(ringWall(R - 0.025, R, TANK_TOP, INTERSTAGE_TOP), MAT.carbon(), 'interstage'));
   shell.add(mesh(ringWall(R - 0.025, R + 0.02, 1.4, 4.0), MAT.carbon(), 'engine section'));
+  // Raceway: the black cable and pressure-line tray up the side (Block 5 thermal coating: Wikipedia).
+  const rwA = -Math.PI / 8; // between a leg and a grid fin
+  const raceway = mesh(new THREE.BoxGeometry(0.16, TANK_TOP - 4.0, 0.42).translate(R + 0.06, (TANK_TOP + 4.0) / 2, 0), MAT.carbon(), 'raceway');
+  raceway.rotation.y = -rwA;
+  shell.add(raceway);
   root.add(shell);
 
   // --- tanks: domes, common dome, transfer tube, helium COPVs ---
   const tanks = group('tanks');
   const alLi = MAT.alLi();
   const rIn = R - 0.02;
+  // Bare aluminium-lithium inside face of the tank wall (paint is on the outside only).
+  tanks.add(mesh(cyl(R - 0.026, ENGINE_BAY_TOP + 0.05, TANK_TOP - 0.05, 128, true), MAT.alLi(), 'tank wall, inside'));
   tanks.add(mesh(lathe(headProfile(rIn, ENGINE_BAY_TOP + DOME_H * 0.2, -DOME_H)), alLi, 'RP-1 aft dome'));
   tanks.add(mesh(lathe(headProfile(rIn, COMMON_DOME, -DOME_H)), alLi, 'common dome'));
   tanks.add(mesh(lathe(headProfile(rIn, TANK_TOP - 0.2, DOME_H * 0.8)), alLi, 'LOX forward dome'));
-  tanks.add(mesh(cyl(0.22, ENGINE_BAY_TOP - 0.6, COMMON_DOME - DOME_H + 0.1, 40), alLi, 'LOX transfer tube (double wall)'));
-  // Helium COPVs (illustrative count and placement) in the LOX tank.
+  // Double-wall LOX transfer tube through the middle of the RP-1 tank (User's Guide).
+  const ttY0 = ENGINE_BAY_TOP - 0.6, ttY1 = COMMON_DOME - DOME_H + 0.1;
+  tanks.add(mesh(cyl(0.24, ttY0, ttY1, 40, true), alLi, 'transfer tube outer wall'));
+  tanks.add(mesh(cyl(0.18, ttY0 - 0.05, ttY1 + 0.05, 40), MAT.steel(), 'transfer tube inner wall'));
+  // RP-1 tank is skin-and-stringer (the LOX tank is monocoque): stringers inside the wall (Wikipedia).
+  const stringerMat = MAT.alLi();
+  for (let i = 0; i < 48; i++) {
+    const a = (i / 48) * Math.PI * 2;
+    const st = mesh(new THREE.BoxGeometry(0.05, COMMON_DOME - ENGINE_BAY_TOP - 0.3, 0.035).translate(rIn - 0.03, (COMMON_DOME + ENGINE_BAY_TOP) / 2, 0), stringerMat, 'stringer');
+    st.rotation.y = -a;
+    tanks.add(st);
+  }
+  // Helium COPVs inside the LOX tank, held by struts (both stages carry them in LOX: Spaceflight101).
+  // How many and where on the first stage is not published: three here, illustrative.
   const copvs = group('helium COPVs');
   for (let i = 0; i < 3; i++) {
     const a = (i / 3) * Math.PI * 2 + 0.4;
-    const c = mesh(new THREE.CapsuleGeometry(0.32, 0.6, 8, 24), MAT.copv(), 'COPV');
-    c.position.set(Math.cos(a) * 1.05, TANK_TOP - 2.4, Math.sin(a) * 1.05);
-    copvs.add(c);
+    const cx = Math.cos(a) * 1.05, cz = Math.sin(a) * 1.05, cy = TANK_TOP - 2.4;
+    copvs.add(mesh(new THREE.CapsuleGeometry(0.32, 0.6, 8, 24).translate(cx, cy, cz), MAT.copv(), 'COPV'));
+    for (const dy of [-0.35, 0.35]) {
+      const st = mesh(cyl(0.025, 0, rIn - 1.05 - 0.28, 8).rotateZ(-Math.PI / 2).translate(0.28, dy, 0), MAT.steel(), 'COPV strut');
+      st.position.set(cx, cy, cz);
+      st.rotation.y = -a;
+      copvs.add(st);
+    }
   }
   tanks.add(copvs);
+  // Stage separation: a centre pusher on the forward dome plus four pneumatic pushers on the interstage ring (User's Guide).
+  const sep = group('stage separation pushers');
+  sep.add(mesh(cyl(0.16, TANK_TOP + DOME_H * 0.8 - 0.25, TANK_TOP + 3.2, 24), MAT.steel(), 'centre pusher'));
+  for (let i = 0; i < 4; i++) {
+    const a = (i / 4) * Math.PI * 2 + Math.PI / 4;
+    sep.add(mesh(cyl(0.07, INTERSTAGE_TOP - 1.6, INTERSTAGE_TOP - 0.9, 16).translate(Math.cos(a) * (R - 0.25), 0, Math.sin(a) * (R - 0.25)), MAT.steel(), 'pneumatic pusher'));
+  }
+  tanks.add(sep);
   root.add(tanks);
   // Propellant fills (base at the bottom of each tank, scale.y = fill fraction).
   const rpH = COMMON_DOME - DOME_H - ENGINE_BAY_TOP;
@@ -274,7 +349,16 @@ export function buildBooster(): BoosterParts {
   // --- engines: octaweb, heat shield, 9 Merlins (8 around 1) ---
   const engines = group('engines');
   engines.add(mesh(cyl(R, 1.35, 1.55, 96), MAT.heatShield(), 'heat shield'));
-  engines.add(mesh(cyl(R - 0.1, 1.55, 3.9, 8), MAT.steel(), 'octaweb (thrust structure)'));
+  engines.add(mesh(cyl(R - 0.1, 1.55, 1.75, 8), MAT.steel(), 'octaweb lower plate'));
+  engines.add(mesh(cyl(R - 0.1, 3.7, 3.9, 8), MAT.steel(), 'octaweb upper plate'));
+  // Octaweb: an eight-sided thrust structure, bolted together (Wikipedia, Block 5); radial beams between engines.
+  for (let i = 0; i < 8; i++) {
+    const a = ((i + 0.5) / 8) * Math.PI * 2;
+    const beam = mesh(new THREE.BoxGeometry(R - 0.2, 2.0, 0.08).translate((R - 0.2) / 2, 2.72, 0), MAT.alLi(), 'octaweb beam');
+    beam.rotation.y = -a;
+    engines.add(beam);
+  }
+  engines.add(mesh(cyl(0.55, 1.75, 3.7, 8, true), MAT.alLi(), 'octaweb centre ring'));
   const ring = 1.27; // ring radius for the 8 outer engines
   for (let i = 0; i < 9; i++) {
     const m = buildMerlin();
@@ -313,6 +397,9 @@ export function buildBooster(): BoosterParts {
     leg.rotation.z = (-LEG.stowedDeg * Math.PI) / 180; // stowed: pointing up
     holder.add(leg);
     holder.userData.leg = leg;
+    const pusher = [...Array(PUSHER.stages)].map((_, j) => buildPusherStage(j));
+    holder.add(...pusher);
+    holder.userData.pusher = pusher;
     root.add(holder);
     legs.push(holder);
   }
@@ -320,11 +407,24 @@ export function buildBooster(): BoosterParts {
   // --- cold-gas (nitrogen) thruster pods near the top ---
   const thrusters = group('nitrogen thrusters');
   for (const s of [1, -1]) {
-    const pod = mesh(new THREE.BoxGeometry(0.35, 0.5, 0.3).translate(s * (R + 0.12), TANK_TOP + 0.6, 0), MAT.heatShield(), 'thruster pod');
+    // Pod between two grid fins on the interstage, with nozzles facing sideways and fore/aft.
+    const pod = group('thruster pod');
+    pod.add(mesh(new THREE.BoxGeometry(0.3, 0.7, 0.55).translate(R + 0.12, 0, 0), MAT.carbon(), 'pod housing'));
+    for (const [dy, dz, rx] of [[0.2, 0.3, Math.PI / 2], [0.2, -0.3, -Math.PI / 2], [-0.2, 0, 0]] as const) {
+      const nz = mesh(lathe([[0.03, 0], [0.06, 0.1]], 16), MAT.steel(), 'thruster nozzle');
+      if (rx) nz.rotation.x = rx;
+      else nz.rotation.z = -Math.PI / 2;
+      nz.position.set(R + 0.27, dy, dz);
+      pod.add(nz);
+    }
+    pod.position.y = 44.2;
+    pod.rotation.y = s > 0 ? 0 : Math.PI;
     thrusters.add(pod);
   }
   root.add(thrusters);
-  return {root, shell, tanks, lox, rp1, engines, fins, legs, thrusters};
+  const parts = {root, shell, tanks, lox, rp1, engines, fins, legs, thrusters};
+  setLegs(parts, 0);
+  return parts;
 }
 
 /** Pose helpers. fin: 0 stowed → 1 deployed; leg: 0 stowed → 1 deployed. */
@@ -333,7 +433,14 @@ export function setFins(b: BoosterParts, k: number) {
 }
 export function setLegs(b: BoosterParts, k: number) {
   const deg = LEG.stowedDeg + (LEG.deployedDeg - LEG.stowedDeg) * k;
-  for (const l of b.legs) (l.userData.leg as THREE.Object3D).rotation.z = (-deg * Math.PI) / 180;
+  const pose = pusherPose(deg);
+  for (const l of b.legs) {
+    (l.userData.leg as THREE.Object3D).rotation.z = (-deg * Math.PI) / 180;
+    (l.userData.pusher as THREE.Object3D[]).forEach((p, j) => {
+      p.position.set(pose[j].x, pose[j].y, 0);
+      p.rotation.z = -pose[j].phi;
+    });
+  }
 }
 export function setPropellant(b: BoosterParts, lox: number, rp1: number) {
   b.lox.scale.y = Math.max(0.001, lox);

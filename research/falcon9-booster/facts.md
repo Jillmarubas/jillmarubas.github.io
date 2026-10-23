@@ -58,6 +58,33 @@ specialist infographics). Tier C = estimate or derived; on screen only with "abo
 - A better source than Wikipedia for the empty mass (≈ 22 t).
 - Landing legs: material and stroke (the User's Guide only says "four deployable legs").
 
+## 3D model: what each feature is based on (model.ts)
+Tier A/B features are modelled as documented. "Photos" means shape and placement taken from public
+launch and landing photos, with proportions estimated. "Illustrative" means not published; say so on screen.
+| Feature | Basis | Tier |
+|---|---|---|
+| 3.66 m diameter, 41.2 m stage, 47.7 m with interstage, 70 m total, 5.2 m × 13.2 m fairing | User's Guide; spec sheets | A/B |
+| LOX tank on top, RP-1 below, common dome between them | User's Guide p. 7 | A |
+| Tank split by volume (LOX ≈ 252 m³, RP-1 ≈ 152 m³) | Derived from the propellant masses above | C |
+| Double-wall LOX transfer tube through the centre of the RP-1 tank | User's Guide p. 7 | A |
+| RP-1 tank skin-and-stringer, LOX tank monocoque (48 stringers drawn) | Wikipedia, Falcon 9 Block 5 (stringer count illustrative) | B |
+| Helium COPVs inside the LOX tank, held on struts | Spaceflight101 (both stages); CRS-7 strut finding (2nd stage). Count and position on stage 1 illustrative | B |
+| 9 Merlin 1D, 8 around a centre engine, on an eight-sided bolted octaweb | User's Guide p. 7; Wikipedia, Block 5 | A/B |
+| Merlin parts: pintle injector, gas generator, turbopump, turbine exhaust duct, gimbal actuators | Wikipedia, SpaceX Merlin; photos (proportions illustrative) | B |
+| Heat shield at the base | Wikipedia, Block 5 | B |
+| Black interstage (carbon fibre over aluminium honeycomb) | User's Guide p. 7 | A |
+| Black raceway up the side; black legs and interstage (thermal coating) | Wikipedia, Block 5; photos (position illustrative) | B |
+| 4 titanium grid fins on the interstage, folded up when stowed, hydraulic | User's Guide p. 7; Wikipedia, Block 5 | A/B |
+| 2 nitrogen thruster pods on the interstage | User's Guide p. 8 (thrusters); photos (pods) | A/photos |
+| Stage separation: centre pusher plus 4 pneumatic pushers | User's Guide p. 8 | A |
+| 4 legs, carbon fibre with aluminium honeycomb, hinged at the base, stowed pointing up, swing down and out | Spaceflight Now (SpaceX website), 2014 | B |
+| Leg span ≈ 18 m, length 9.3 m, telescoping pusher strut (4 stages) | Photos; span is widely quoted but unsourced | C |
+| Droneship deck ≈ 91 m × 52 m | Tier B spec | B |
+| No logos or names on any part | Channel rule | — |
+
+Extra sources: Spaceflight101 on COPVs in LOX (https://spaceflight101.com/?p=23029); Spaceflight Now on the
+legs (https://www.spaceflightnow.com/falcon9/009/140223legs/).
+
 ## Sources
 - SpaceX Falcon User's Guide (Sept 2021): https://web.mit.edu/2.70/Reading%20Materials/SpaceX%20Falcon-users-guide-2021-09.pdf
 - NASA Space Launch Report, Falcon 9 v1.2 data sheet: https://sma.nasa.gov/LaunchVehicle/assets/spacex-falcon-9-v1.2-data-sheet.pdf

@@ -40,8 +40,7 @@ function degZ(rad) { return (-rad * 180) / Math.PI; }
 
 // EffectCraft 0.14: a parent null's Y Rotation did not reach its children (its Z Rotation does), and a layer's own
 // rotations apply Y before Z. So each fin and leg carries its yaw in Orientation (applied last) and its fold in Z Rotation.
-// Grid fins: k = 0 stowed, 1 deployed. Legs: k = 0 stowed, 1 deployed (LEG constants from model.ts).
-var LEG = { stowedDeg: 4, deployedDeg: 120 };
+// Grid fins: k = 0 stowed, 1 deployed. Legs: k = 0 stowed, 1 deployed (RIG.leg and RIG.pusher come from model.ts).
 // Local offset (px) of a point given in booster metres, for layers parented to the booster root.
 Scene.prototype.local = function (x, y, z) { return [this.S * x, -this.S * y, -this.S * z]; };
 Scene.prototype.hinge = function (name, pos, root) {
@@ -63,16 +62,34 @@ Scene.prototype.fins = function (k, root, prefix) {
   }
   return out;
 };
+// Same maths as pusherPose() in model.ts: tube j of the telescoping pusher, in the leg's plane.
+function pusherPose(deg) {
+  var P = RIG.pusher, th = (deg * Math.PI) / 180;
+  var px = P.legS * Math.sin(th), py = P.legS * Math.cos(th);
+  var dx = px - P.bodyX, dy = py - P.bodyY, dist = Math.sqrt(dx * dx + dy * dy);
+  var phi = Math.atan2(dx, dy), step = Math.max(0, (dist - P.stageLen) / (P.stages - 1)), out = [];
+  for (var j = 0; j < P.stages; j++) out.push({ x: P.bodyX + (dx / dist) * step * j, y: P.bodyY + (dy / dist) * step * j, phi: phi });
+  return out;
+}
 Scene.prototype.legs = function (k, root, prefix) {
-  var out = [];
+  var out = [], L = RIG.leg;
+  var deg = L.stowedDeg + (L.deployedDeg - L.stowedDeg) * k;
+  var pose = pusherPose(deg);
   for (var i = 0; i < RIG.legs.length; i++) {
-    var g = RIG.legs[i];
+    var g = RIG.legs[i], c = Math.cos(g.yaw), sn = Math.sin(g.yaw);
     var h = this.hinge((prefix || "") + "leg hinge " + (i + 1), g.pos, root);
     var leg = this.model("leg", [0, 0, 0], (prefix || "") + "leg " + (i + 1));
     attach(leg, h);
     leg.property("Transform").property("Orientation").setValue([0, degY(g.yaw), 0]);
-    var deg = LEG.stowedDeg + (LEG.deployedDeg - LEG.stowedDeg) * k;
     leg.property("Transform").property("Z Rotation").setValue(degZ((-deg * Math.PI) / 180));
+    for (var j = 0; j < pose.length; j++) {
+      var t = this.model("leg_pusher_" + (j + 1), [0, 0, 0], (prefix || "") + "leg " + (i + 1) + " pusher " + (j + 1));
+      t.parent = h;
+      // Leg-plane point (x radial, y up) turned by the leg's yaw (three.js rotation.y), then to px.
+      t.property("Transform").property("Position").setValue(this.local(pose[j].x * c, pose[j].y, -pose[j].x * sn));
+      t.property("Transform").property("Orientation").setValue([0, degY(g.yaw), 0]);
+      t.property("Transform").property("Z Rotation").setValue(degZ(-pose[j].phi));
+    }
     out.push(leg);
   }
   return out;

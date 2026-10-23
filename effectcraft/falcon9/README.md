@@ -18,8 +18,9 @@ effectcraft-cli script $PWD/preview.jsx --empty --save-as $PWD/preview.ecproj
 effectcraft-cli render-frame preview.ecproj --comp "A Scale" --frame 0 --max-side 960 --out A.png
 ```
 
-`preview.jsx` builds six check comps: scale lineup, cutaway, engine bay with legs, exploded Merlin,
-the technician on top, and the droneship landing.
+`preview.jsx` builds nine check comps: scale lineup, cutaway, engine bay with legs, exploded Merlin,
+the technician on top, the droneship landing, the interstage (fins and thrusters), the helium bottles
+in the LOX tank, and the base of the fuel tank.
 
 ## EffectCraft 0.14 lessons
 
@@ -32,6 +33,7 @@ the technician on top, and the droneship landing.
 
 ## Accuracy
 
-Dimensions follow `research/falcon9-booster/facts.md` (3.66 m diameter, 41.2 m first stage, 70 m total,
-9 Merlins, 4 grid fins, 4 legs). Internal layout (COPVs, lines, Merlin parts) is illustrative and is
-labelled as such in the script. No logos or markings.
+Built as close to the real booster as public sources allow. The "3D model" table in
+`research/falcon9-booster/facts.md` gives the source and tier of every feature; anything SpaceX has not
+published (COPV count and position, exact Merlin and leg proportions) is marked illustrative. No logos or
+markings.

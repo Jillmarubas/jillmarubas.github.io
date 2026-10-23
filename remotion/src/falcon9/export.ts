@@ -4,7 +4,7 @@
 import * as THREE from 'three';
 import {GLTFExporter} from 'three/examples/jsm/exporters/GLTFExporter.js';
 import {clipAndCap} from '../three-tools/clip';
-import {buildBooster, buildBus, buildBuilding, buildDroneship, buildGridFin, buildLeg, buildMerlin, buildTechnician, buildUpperStack} from './model';
+import {LEG, PUSHER, buildBooster, buildBus, buildBuilding, buildDroneship, buildGridFin, buildLeg, buildMerlin, buildPusherStage, buildTechnician, buildUpperStack, setLegs} from './model';
 
 const CUT_TOL = 0.0005; // metres
 
@@ -66,6 +66,15 @@ export async function exportParts() {
 
   parts.grid_fin = bake(buildGridFin(), null);
   parts.leg = bake(buildLeg(), null);
+  for (let j = 0; j < PUSHER.stages; j++) parts[`leg_pusher_${j + 1}`] = bake(buildPusherStage(j), null);
+  rig.leg = LEG;
+  rig.pusher = PUSHER;
+  // Height of the booster origin above the ground when it stands on deployed legs.
+  setLegs(b, 1);
+  b.root.updateMatrixWorld(true);
+  let minY = Infinity;
+  for (const l of b.legs) minY = Math.min(minY, new THREE.Box3().setFromObject(l).min.y);
+  rig.standY = -minY;
 
   const up = buildUpperStack();
   parts.upper_stack = bake(up, null);
