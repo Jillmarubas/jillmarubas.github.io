@@ -36,7 +36,7 @@ shot(main, "A person on top", 0, tA1, 12, function (s, dur) {
   s.lights();
   s.cameraPath([
     [0, [1.3, TOP + 1.3, 5.4], [0, TOP + 1.05, 1.75], 34],
-    [w("And") - 0.1, [1.3, TOP + 1.3, 5.4], [0, TOP + 1.05, 1.75], 34],
+    [w("person") + 0.45, [1.3, TOP + 1.3, 5.4], [0, TOP + 1.05, 1.75], 34], // the pull-back starts right after "person"
     [w("14") + 0.8, [24, 27, 92], [-4, 24, 0], 34, true], // geometric dolly out
     [dur, [25, 26.5, 95], [-4, 24, 0], 34],
   ], dur);
@@ -120,10 +120,9 @@ shot(main, "C too late", tC3, tD, 10, function (s, dur) {
   var H = 80, v0 = 70, tb = w("late") + 0.05, a = 8;
   var tHit = tb + (v0 - Math.sqrt(v0 * v0 - 4 * a / 2 * (H - v0 * tb))) / a;
   var hAt = function (t) { if (t < tb) return H - v0 * t; var x = t - tb; return Math.max(0, H - v0 * tb - v0 * x + 0.5 * a * x * x); };
-  var b = s.booster({ at: [0, SY + H, 0] });
+  var b = s.booster({ at: [0, SY + H, 0], assembly: "landed" });
   bakeFn(tr(b, "Position"), 0, dur, function (t) { return s.p(0, SY + hAt(t), 0); });
   bakeFn(tr(b, "Z Rotation"), 0, dur, function (t) { return -24 * ease((t - tHit) / 1.1) * ease((t - tHit) / 0.6); });
-  s.legs(1, b); s.fins(1, b);
   s.flame({ id: "too late", at: [0, 0.35, 0], root: b, len: 8, keys: [[0, 0.2], [tb, 0.2], [tb + 0.25, 1], [tHit, 1], [tHit + 0.15, 0], [dur, 0]], tEnd: dur });
   caption(s.comp, "TOO LATE", { id: "too late", pos: [1380, 520], size: 96, color: RED, tOn: w("late"), tOff: dur - 0.3 });
   mention(tHit, "crash", "motion");

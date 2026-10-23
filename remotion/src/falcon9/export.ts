@@ -4,7 +4,7 @@
 import * as THREE from 'three';
 import {GLTFExporter} from 'three/examples/jsm/exporters/GLTFExporter.js';
 import {clipAndCap} from '../three-tools/clip';
-import {FILL, FLUID, HIGHLIGHT, LEG, PUSHER, R, SEAM_YS, buildBooster, buildBus, buildBuilding, buildDroneship, buildGridFin, buildLeg, buildMerlin, buildPusherStage, buildTechnician, buildUpperStack, setLegs} from './model';
+import {FILL, FLUID, HIGHLIGHT, LEG, PUSHER, R, SEAM_YS, buildBooster, buildBus, buildBuilding, buildDroneship, buildGridFin, buildLeg, buildMerlin, buildPusherStage, buildTechnician, buildUpperStack, setFins, setLegs} from './model';
 
 const CUT_TOL = 0.0005; // metres
 
@@ -162,12 +162,34 @@ export async function exportParts() {
     parts[`hl_${name}`] = bakeHighlight(src, null, re, col, pad, 'none');
     parts[`hl_${name}_cut`] = bakeHighlight(src, null, re, col, pad, 'back');
   }
+  // Fill highlights that drain with the fuel: the column in its own space (scale it like the fill) plus the bowl.
+  for (const [k, col, n] of [['lox', FLUID.lox, 'LOX fill'], ['rp1', FLUID.rp1, 'RP-1 fill']] as const) {
+    const column = k === 'lox' ? b.lox : b.rp1;
+    parts[`hl_${k}_column`] = bakeHighlight(column, column, null, col, 0.02, 'none');
+    parts[`hl_${k}_column_cut`] = bakeHighlight(column, column, null, col, 0.02, 'back');
+    const base = b.fills.getObjectByName(`${n} base`)!;
+    parts[`hl_${k}_base`] = bakeHighlight(base, null, null, col, 0.02, 'none');
+    parts[`hl_${k}_base_cut`] = bakeHighlight(base, null, null, col, 0.02, 'back');
+  }
   // Weld seams get their own fatter rings (growing a thin ring would only move it outward).
   const seams = new THREE.Group();
   for (const y of SEAM_YS) seams.add(new THREE.Mesh(new THREE.TorusGeometry(R + 0.006, 0.04, 8, 128).rotateX(Math.PI / 2).translate(0, y, 0), hlMat(O)));
   parts.hl_weld_seams = seams;
   parts.hl_weld_seams_cut = bakeHighlight(seams, null, null, O, 0.01, 'back');
 
+  // Whole boosters as one rigid model (no fills), for shots that turn the booster: EffectCraft 0.14 does not
+  // compose 3D rotations through parents, so fins and legs (which carry their own angles) must be baked in.
+  for (const [k, fin, leg] of [['stowed', 0, 0], ['finsout', 1, 0], ['landed', 1, 1]] as const) {
+    const a = buildBooster();
+    setFins(a, fin);
+    setLegs(a, leg);
+    a.root.remove(a.lox, a.rp1, a.fills);
+    a.root.updateMatrixWorld(true);
+    parts[`assembly_${k}`] = bake(a.root, null);
+    parts[`assembly_${k}_cut`] = bake(a.root, null, 'back');
+    if (k === 'landed') parts.hl_leg1_landed_red = bakeHighlight(a.root, null, /^leg 1$/, '#dc2a1e', 0.03, 'none'); // the 2024 failed leg
+    if (k === 'finsout') parts.hl_fins_out = bakeHighlight(a.root, null, /^grid fin \d$/, O, 0.03, 'none'); // all four, rigid
+  }
   parts.grid_fin = bake(buildGridFin(), null);
   parts.hl_grid_fin = bakeHighlight(buildGridFin(), null, null, O, 0.025, 'none');
   parts.hl_leg = bakeHighlight(buildLeg(), null, null, O, 0.03, 'none');

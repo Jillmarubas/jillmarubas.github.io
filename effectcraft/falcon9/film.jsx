@@ -144,7 +144,8 @@ Scene.prototype.label = function (o) {
     'var A = thisComp.layer("A_' + id + '").toComp([0, 0, 0]);' +
     'var k = thisComp.layer("K_' + id + '").effect("Slider Control")("Slider");' +
     "var ln = 1 - Math.pow(1 - Math.min(1, k * 1.8), 4);" +
-    "var tx = 1 - Math.pow(1 - Math.max(0, Math.min(1, k * 1.8 - 0.55)), 4);" +
+    // Words and card fade on a smoothstep of k, so they come and go over ~10 frames, never in a jump.
+    "var tq = Math.max(0, Math.min(1, (k - 0.4) / 0.5)); var tx = tq * tq * (3 - 2 * tq);" +
     "var to = [" + o.to[0] + ", " + o.to[1] + "];" +
     // Keep every card inside the title-safe area (5% in from each edge), whatever the camera does.
     "to = [Math.max(" + (align === "left" ? 520 : 110) + ", Math.min(" + (align === "right" ? 1400 : 1810) + ", to[0])), Math.max(" + (align === "center" ? (hasSub ? 160 : 126) : 92) + ", Math.min(960, to[1]))];" +
@@ -354,6 +355,7 @@ Scene.prototype.flame = function (o) {
 Scene.prototype.hlFins = function (k, root, only, t0, t1, id, tOn, tOff) {
   var ls = this.fins(k, root, "", only, t0, t1, "hl_grid_fin");
   for (var i = 0; i < ls.length; i++) { tr(ls[i], "Opacity").setValue(0); this.cmd("material.set", { layers: [ls[i].__id], castsShadows: "off", acceptsShadows: "off" }); hlOn(ls[i], i ? id + " " + i : id, tOn, tOff); }
+  return ls;
 };
 Scene.prototype.hlLegs = function (k, root, only, t0, t1, id, tOn, tOff) {
   var ls = this.legs(k, root, "", only, t0, t1, "hl_leg");
@@ -367,4 +369,101 @@ function dollyPos(p0, t0, p1, t1, u) {
   var L = l0 * Math.pow(l1 / l0, u), dir = lerp([d0[0] / l0, d0[1] / l0, d0[2] / l0], [d1[0] / l1, d1[1] / l1, d1[2] / l1], u);
   var n = Math.sqrt(dir[0] * dir[0] + dir[1] * dir[1] + dir[2] * dir[2]), tg = lerp(t0, t1, u);
   return [tg[0] + dir[0] / n * L, tg[1] + dir[1] / n * L, tg[2] + dir[2] / n * L];
+}
+
+// ---------- nine engines that move on their own ----------
+// Each Merlin hangs from a gimbal null at its gimbal point (2.2 m above the nozzle exit at 0.9 scale), so a
+// Z rotation of the null swivels the engine. Returns [{name, gimbal, model, hl, hlRed, x, z}] in RIG order.
+var GIMBAL_UP = 2.2;
+Scene.prototype.engines9 = function (root, o) {
+  o = o || {}; var out = [];
+  for (var i = 0; i < RIG.engines.length; i++) {
+    var e = RIG.engines[i], p = e.pos;
+    var g = this.nul("gimbal " + e.name, [0, 0, 0]); g.parent = root;
+    tr(g, "Position").setValue(this.local(p[0], p[1] + GIMBAL_UP, p[2]));
+    var mk = function (sc, name, label) {
+      var m = sc.model(name, [0, 0, 0], label); m.parent = g;
+      tr(m, "Position").setValue(sc.local(0, -GIMBAL_UP, 0)); tr(m, "Scale").setValue([100 * e.scale, 100 * e.scale, 100 * e.scale]);
+      return m;
+    };
+    var rec = { name: e.name, gimbal: g, model: mk(this, "merlin", e.name), x: p[0], z: p[2] };
+    // A glowing disc across the nozzle exit makes the highlight read from below, where only the rim shows.
+    var disc = function (sc, col, label) {
+      var d = sc.comp.layers.__new(sc.cmd("layer.new3dPrimitive", { kind: "cylinder", name: label, radius: 0.43 * e.scale * sc.S, height: 0.02 * sc.S, segments: 48, baseColor: col, emissive: col, castsShadows: "off", acceptsShadows: "off" }));
+      d.parent = g; tr(d, "Position").setValue(sc.local(0, -GIMBAL_UP - 0.03, 0)); tr(d, "Opacity").setValue(0);
+      return d;
+    };
+    if (o.hl) { rec.hl = mk(this, "hl_merlin", "HL " + e.name); tr(rec.hl, "Opacity").setValue(0); rec.disc = disc(this, ORANGE, "HL disc " + e.name); }
+    if (o.hlRed) { rec.hlRed = mk(this, "hl_merlin_red", "HL red " + e.name); tr(rec.hlRed, "Opacity").setValue(0); rec.discRed = disc(this, RED, "HL red disc " + e.name); }
+    out.push(rec);
+  }
+  return out;
+};
+
+// Thousands separator inside an expression body: fmtThousands("v") -> expression string for "7,686".
+function fmtThousands(v) { return 'var n = Math.round(' + v + '); (n >= 1000 ? Math.floor(n / 1000) + "," + ("00" + (n % 1000)).slice(-3) : "" + n)'; }
+
+// A highlight of the fuel actually in a tank at a fixed level (0..1): the bowl plus the column scaled to the
+// level, so a nearly empty tank glows as nearly empty. tank: "lox" | "rp1".
+Scene.prototype.hlFill = function (tank, level, cut, id, tOn, tOff, peak) {
+  var c = cut ? "_cut" : "", base = RIG[tank];
+  var col = this.model("hl_" + tank + "_column" + c, [0, 0, 0], "HL " + id); col.parent = this.parts.root;
+  tr(col, "Position").setValue(this.local(base[0], base[1], base[2]));
+  tr(col, "Scale").setValue([100, Math.max(0.1, 100 * level), 100]);
+  var bowl = this.hl(tank + "_base" + c, this.parts.root, "HL " + id + " bowl");
+  this.cmd("material.set", { layers: [col.__id], castsShadows: "off", acceptsShadows: "off" });
+  pulse(col, tOn, tOff, peak || 85, 0.28); pulse(bowl, tOn, tOff, peak || 85, 0.28);
+  tr(col, "Opacity").setValueAtTime(0, 0);
+  mention(tOn, id, "highlight");
+};
+
+// A full-frame colour behind the 3D scene (sky, space), just above the studio background; keys fade it.
+function backdrop(comp, rgb, keys, name) {
+  var l = comp.layers.addSolid(rgb, name || "Backdrop", W, H, 1);
+  l.moveBefore(comp.layer(comp.numLayers));
+  animate(tr(l, "Opacity"), keys);
+  return l;
+}
+
+// A flame placed in world space (no parent), for a booster turned by a pivot: EffectCraft does not pass a
+// parent's rotation down to a primitive through several levels, so the flame is turned and placed directly.
+// at: nozzle exit in booster space; pivot: [x, y, z] of the pivot (world); ang: the pivot's EffectCraft Z rotation (deg).
+Scene.prototype.flameFree = function (o) {
+  var s = this, len = o.len || 9, r = o.r || 0.42;
+  var l = s.comp.layers.__new(s.cmd("layer.new3dPrimitive", { kind: "cone", name: "flame " + o.id, radius: r * s.S, height: len * s.S, segments: 32, baseColor: [1, 0.72, 0.38], emissive: [1, 0.62, 0.25], castsShadows: "off", acceptsShadows: "off", acceptsLights: false }));
+  tr(l, "X Rotation").setValue(180);
+  var phi = function (t) { return -(typeof o.ang === "function" ? o.ang(t) : o.ang) * Math.PI / 180; }; // three.js angle
+  var rot = function (p, a) { return [p[0] * Math.cos(a) - p[1] * Math.sin(a), p[0] * Math.sin(a) + p[1] * Math.cos(a)]; };
+  bakeFn(tr(l, "Z Rotation"), 0, o.tEnd, function (t) { return typeof o.ang === "function" ? o.ang(t) : o.ang; });
+  bakeFn(tr(l, "Scale"), 0, o.tEnd, function (t) { var k = keyed(o.keys, t); return [100 * (0.75 + 0.25 * k), 100 * Math.max(0.01, k), 100 * (0.75 + 0.25 * k)]; });
+  bakeFn(tr(l, "Position"), 0, o.tEnd, function (t) {
+    var k = keyed(o.keys, t), a = phi(t);
+    // Flame centre in booster space: below the nozzle by half its length; then turned about the pivot.
+    var q = rot([o.at[0] - o.pivot[0], o.at[1] - len * k / 2 - o.pivot[1]], a);
+    var pv = typeof o.pivotAt === "function" ? o.pivotAt(t) : o.pivot;
+    return s.p(pv[0] + q[0], pv[1] + q[1], o.at[2]);
+  });
+  bakeFn(tr(l, "Opacity"), 0, o.tEnd, function (t) { return 92 * Math.min(1, keyed(o.keys, t) * 3); });
+  return l;
+};
+
+// ---------- 2D bars ----------
+// A horizontal bar: track plus fill whose length follows fn(t) in 0..1 (baked per frame). Listed first draws on top.
+function hbar(comp, id, o) {
+  var n = comp.layers.addNull(); n.name = "K_" + id;
+  bakeFn(n.property("Effects").addProperty("Slider Control").property("Slider"), 0, o.tEnd, o.fn);
+  var sh = comp.layers.addShape(); sh.name = "Bar_" + id;
+  tr(sh, "Position").setValue([0, 0]); tr(sh, "Anchor Point").setValue([0, 0]);
+  var head = 'var v = Math.max(0, Math.min(1, thisComp.layer("K_' + id + '").effect("Slider Control")("Slider")));';
+  var g2 = sh.property("Contents").addProperty("ADBE Vector Group");
+  var r2 = g2.property("Contents").addProperty("ADBE Vector Shape - Rect"); r2.property("Roundness").setValue(o.h / 2);
+  r2.property("Size").expression = head + "[Math.max(" + o.h + ", " + o.w + " * v), " + o.h + "];";
+  r2.property("Position").expression = head + "[" + o.x + " + Math.max(" + o.h + ", " + o.w + " * v) / 2, " + o.y + "];";
+  g2.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue(o.color || ORANGE);
+  var g1 = sh.property("Contents").addProperty("ADBE Vector Group");
+  var r1 = g1.property("Contents").addProperty("ADBE Vector Shape - Rect"); r1.property("Size").setValue([o.w, o.h]); r1.property("Position").setValue([o.x + o.w / 2, o.y]); r1.property("Roundness").setValue(o.h / 2);
+  g1.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue(o.track || [0.85, 0.86, 0.88]);
+  animate(tr(sh, "Opacity"), [[o.tOn - 0.05, 0], [o.tOn + 0.35, 100], [o.tOff, 100], [o.tOff + 0.35, 0]]);
+  mention(o.tOn, id, "graphic");
+  return sh;
 }

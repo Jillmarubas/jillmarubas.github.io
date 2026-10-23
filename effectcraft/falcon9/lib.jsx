@@ -117,7 +117,12 @@ Scene.prototype.booster = function (o) {
   var root = this.nul("booster root", o.at || [0, 0, 0]);
   var P = this.parts = { root: root };
   var names = ["booster_shell", "booster_tanks", "engines", "thrusters"];
-  for (var i = 0; i < names.length; i++) { P[names[i]] = this.model(names[i] + (names[i] == "engines" || names[i] == "thrusters" ? "" : cut)); attach(P[names[i]], root); }
+  // o.ownEngines: the thrust structure only; the nine Merlins come from Scene.engines9 so each can move.
+  if (o.ownEngines) names[2] = "engines_frame";
+  // o.assembly ("stowed" | "finsout" | "landed"): the whole booster with its fins and legs as one rigid model,
+  // for shots that turn it (EffectCraft 0.14 does not compose 3D rotations through parents). Don't add fins/legs.
+  if (o.assembly) { P.assembly = this.model("assembly_" + o.assembly + cut); attach(P.assembly, root); }
+  else for (var i = 0; i < names.length; i++) { P[names[i]] = this.model(names[i] + (/^engines|thrusters/.test(names[i]) ? "" : cut)); attach(P[names[i]], root); }
   if (o.fill !== undefined) {
     P.lox = this.model("lox" + cut); P.lox.parent = root; P.lox.property("Transform").property("Position").setValue(this.local(RIG.lox[0], RIG.lox[1], RIG.lox[2]));
     P.rp1 = this.model("rp1" + cut); P.rp1.parent = root; P.rp1.property("Transform").property("Position").setValue(this.local(RIG.rp1[0], RIG.rp1[1], RIG.rp1[2]));

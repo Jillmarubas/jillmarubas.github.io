@@ -40,10 +40,9 @@ var tC = w("Grid");
 shot(main, "B the booster", tB, tC, 12, function (s, dur) {
   // A pivot at mid-height so the booster can turn around in the air.
   var pv = s.nul("pivot", [0, 24, 0]);
-  var b = s.booster({});
+  var b = s.booster({ assembly: "stowed" });
   b.parent = pv; tr(b, "Position").setValue(s.local(0, -24, 0));
   var up = s.model("upper_stack", [0, 0, 0]);
-  s.fins(0, b); s.legs(0, b);
   s.lights();
   var tLift = w("opening") + 0.1;
   animate(tr(up, "Position"), [[tLift, s.p(0, 0, 0)], [tLift + 2.4, s.p(0, 62, -4)]]);
