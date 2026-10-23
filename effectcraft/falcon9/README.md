@@ -30,6 +30,19 @@ in the LOX tank, and the base of the fuel tank.
   apply Y before Z. So fins and legs carry their yaw in Orientation and their fold in Z Rotation.
 - Axis mapping: three.js metres `(x, y, z)` → comp px `(960 + S·x, 540 − S·y, −S·z)`; Y and Z rotations
   flip sign.
+- Rotations don't compose through deeper parents: a booster turned by a pivot leaves its fins, legs and
+  engines behind. For any shot that turns the booster, use a rigid `assembly_*` model (fins and legs
+  baked in), `flameFree()` for its flames, and highlights baked in the same space (`hl_fins_out`,
+  `hl_leg1_landed_red`).
+- Fading a model layer from 100 to below 100 opacity makes it pop (the render mode switches). Slide
+  models in and out of frame at full opacity instead (the building, the upper stack, `openCut`).
+- Model layers can't take effects or animated materials, so a highlight is a separate glowing copy
+  grown by a small pad (so it never shares a surface and z-fights). It must match what's on screen:
+  a nearly empty tank gets `hlFill()` at that level, not the full-tank highlight, and a cutaway shell
+  highlight hides behind the opaque fuel, so use the whole-shell highlight there.
+- Comp motion blur has no effect on nested comps; fast camera moves strobe. Use cuts and geometric
+  dollies (`cameraPath` keys with `true`) instead.
+- Shot comps are 2 frames longer than their slot, or a frame can fall between two shots and go black.
 
 ## Accuracy
 

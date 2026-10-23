@@ -35,6 +35,8 @@ for p in args.parts.split(','):
     words = json.load(open(timing))['words'] if timing.exists() else []
     # Shot cuts inside the chapter, from the EffectCraft build log ("CUTS [...]", chapter seconds).
     cuts, log = [], EC / f'ch{p}.log'
+    if not log.exists():
+        log = EC / f"ch{p.replace('07a_', '07_')}.log"  # chapter 7a is built as ch07_math
     if log.exists():
         for ln in log.read_text().splitlines():
             if ln.startswith('CUTS '):
@@ -86,14 +88,14 @@ def measure(f):
     return json.loads(r.stderr[r.stderr.rindex('{'):])
 gain = -14 - float(measure(pre)['input_i'])
 fin = tmp.with_name(tmp.name + '_fin.wav')
-for _ in range(3):
+for _ in range(6):
     subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', str(pre), '-af', f'volume={gain:.2f}dB,aresample=192000,alimiter=limit=0.84:attack=1:release=60:level=0,aresample=48000',
                     '-c:a', 'pcm_s24le', str(fin)], check=True)
     m = measure(fin)
     print(f"loudness {float(m['input_i']):.1f} LUFS, true peak {float(m['input_tp']):.1f} dBTP")
     if abs(float(m['input_i']) + 14) < 0.3:
         break
-    gain += -14 - float(m['input_i'])
+    gain += 1.3 * (-14 - float(m["input_i"]))  # the limiter eats part of each step
 subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', str(pic), '-i', str(fin), '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest', str(out)], check=True)
 fin.unlink()
 json.dump({'duration': round(total, 3), 'fps': 30, 'parts': parts}, open(str(out) + '.timeline.json', 'w'), indent=0)
