@@ -30,6 +30,7 @@ import {TREE_SWAY_DURATION, TreeBackdrop, TreeSway} from './timetraveler/TreeSwa
 import {JURASSIC_DURATION, JurassicLandscape} from './timetraveler/JurassicLandscape';
 import {CLOSEUP_DURATION, CloseUpOTS} from './timetraveler/CloseUpOTS';
 import {BASEMENT_DURATION, BasementTV} from './timetraveler/BasementTV';
+import {BASEMENT_FRONT_DURATION, BasementFront} from './timetraveler/BasementFront';
 
 export const Root: React.FC = () => (
   <>
@@ -108,6 +109,7 @@ export const Root: React.FC = () => (
     <Composition id="N1ThumbF" component={N1ThumbF} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="N1Test" component={N1Test} durationInFrames={120} fps={24} width={1920} height={1080} defaultProps={{logos: ['anthropic', 'kimi', 'oura'], place: 'whitehouse' as 'whitehouse' | 'ftc' | 'none'}} />
     <Composition id="BasementTV" component={BasementTV} durationInFrames={BASEMENT_DURATION} fps={30} width={1920} height={1080} />
+    <Composition id="BasementFront" component={BasementFront} durationInFrames={BASEMENT_FRONT_DURATION} fps={30} width={1920} height={1080} />
     <Composition id="CloseUpOTS" component={CloseUpOTS} durationInFrames={CLOSEUP_DURATION} fps={30} width={1920} height={1080} />
     <Composition id="JurassicLandscape" component={JurassicLandscape} durationInFrames={JURASSIC_DURATION} fps={30} width={1920} height={1080} defaultProps={{squad: true}} />
     <Composition id="JurassicLandscapeEmpty" component={JurassicLandscape} durationInFrames={JURASSIC_DURATION} fps={30} width={1920} height={1080} defaultProps={{squad: false}} />

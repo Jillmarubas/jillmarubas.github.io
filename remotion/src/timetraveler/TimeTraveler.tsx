@@ -7,7 +7,7 @@ import {random, useCurrentFrame} from 'remotion';
 
 export type Expression = 'neutral' | 'happy' | 'surprised' | 'worried' | 'scared' | 'determined' | 'cold';
 export type Costume = 'none' | 'iceAge' | 'rome' | 'egypt' | 'jurassic';
-export type Pose = 'idle' | 'wave' | 'point' | 'panic' | 'shiver' | 'checkWatch';
+export type Pose = 'idle' | 'wave' | 'point' | 'panic' | 'shiver' | 'checkWatch' | 'eat' | 'reach' | 'holdBowl' | 'toss' | 'snack';
 
 export type TimeTravelerProps = {
   expression?: Expression;
@@ -25,6 +25,13 @@ export type TimeTravelerProps = {
   /** Seeds the blink timing so two characters on screen don't blink together. */
   seed?: string;
   style?: React.CSSProperties;
+  /** Something held in a hand (viewer's left = A, right = B), drawn at the wrist in the 300 x 520 box. */
+  handA?: React.ReactNode;
+  handB?: React.ReactNode;
+  /** Draw arm B in front of the face (for hand-to-mouth poses like 'eat'). */
+  armBFront?: boolean;
+  /** Extra drawing on top of everything, in the 300 x 520 box (for example popcorn in flight). */
+  children?: React.ReactNode;
 };
 
 // Locked design values. The Ice Age art matches these line weights.
@@ -67,6 +74,12 @@ const POSES: Record<Pose, PoseDef> = {
   panic: {a: {upper: 150, elbow: 30}, b: {upper: 150, elbow: 30}, headTilt: 0, lookX: 0, lookY: -1},
   shiver: {a: {upper: -8, elbow: -105}, b: {upper: -8, elbow: -105}, headTilt: 0, lookX: 0, lookY: 1},
   checkWatch: {a: {upper: 38, elbow: -118}, b: {upper: 12, elbow: -10}, headTilt: -9, lookX: -3, lookY: 4},
+  // seated poses (solved so the hand lands on the mouth, the lap or a bowl)
+  eat: {a: {upper: 18.7, elbow: -65.2}, b: {upper: -67.3, elbow: -131.4}, headTilt: 0, lookX: 0, lookY: 0},
+  reach: {a: {upper: 107.7, elbow: -98.3}, b: {upper: 20.2, elbow: -65.9}, headTilt: -4, lookX: -2, lookY: 1},
+  snack: {a: {upper: 107.7, elbow: -98.3}, b: {upper: -67.3, elbow: -131.4}, headTilt: -2, lookX: 0, lookY: 0},
+  holdBowl: {a: {upper: 27.8, elbow: -61.5}, b: {upper: 27.8, elbow: -61.5}, headTilt: 0, lookX: 0, lookY: 0},
+  toss: {a: {upper: 18.7, elbow: -65.2}, b: {upper: 159.9, elbow: 10.5}, headTilt: 3, lookX: 0, lookY: -4},
 };
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -354,6 +367,10 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
   size = 400,
   seed = 'tt',
   style,
+  handA,
+  handB,
+  armBFront = false,
+  children,
 }) => {
   const frame = useCurrentFrame();
   const p = fromPose ? mixPose(POSES[fromPose], POSES[pose], Math.min(1, Math.max(0, poseProgress))) : POSES[pose];
@@ -381,6 +398,14 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
   const glitch = watchGlitch ? 1 : 0;
   const sleeve = TT.hoodie;
   const width = (size * TT.viewW) / TT.viewH;
+  const wristA = armPoints(-1, armA, 150 - 52, 224);
+  const wristB = armPoints(1, armB, 150 + 52, 224);
+  const armBNode = (
+    <>
+      <Arm side={1} pose={armB} sleeve={sleeve} glitch={0} frame={frame} />
+      {handB && <g transform={`translate(${wristB.wx} ${wristB.wy})`}>{handB}</g>}
+    </>
+  );
 
   return (
     <svg
@@ -440,7 +465,8 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
 
           {/* arms in front */}
           <Arm side={-1} pose={armA} sleeve={sleeve} watch glitch={glitch} frame={frame} />
-          <Arm side={1} pose={armB} sleeve={sleeve} glitch={0} frame={frame} />
+          {handA && <g transform={`translate(${wristA.wx} ${wristA.wy})`}>{handA}</g>}
+          {!armBFront && armBNode}
 
           {/* head */}
           <g transform={`rotate(${sway} 150 196)`}>
@@ -474,6 +500,8 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
             {/* mouth */}
             <g transform={`translate(${150 + p.lookX * 0.6} ${178 + p.lookY * 0.5})`}>{mouthPath(face.mouth, flap, frame)}</g>
           </g>
+          {armBFront && armBNode}
+          {children}
         </g>
       </g>
     </svg>

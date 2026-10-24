@@ -31,3 +31,12 @@ Switch a scene between the two art sets with the `art` prop (`'vector'` or `'cod
 ## Asset sources
 Everything here is original: the character, the code-drawn art and the VectorCraft art were all
 drawn for this project. No third-party images. The film grain is the repo's existing `public/grain-1024.png`.
+
+## Basement, front view (`BasementFront`)
+
+The reverse of `BasementTV`: the camera sits at the TV and looks back at the couch. Same room and 3D
+camera (`scripts/vectorcraft/basement_front.py` imports `P()`/`box3d()` from `basement.py`), so the
+two shots cut together; left and right swap (Ria, Tank, the Traveler, Pip; the lamp is on the right).
+The rigs sit by being clipped at the hips, with seated legs drawn in front. New seated poses on both
+rigs: `eat`, `reach`, `snack`, `holdBowl`, `toss`, plus `handA`/`handB` (something held in a hand),
+`armBFront` (hand in front of the face) and `children` (extra drawing in the rig's own coordinates).

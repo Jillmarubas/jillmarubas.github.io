@@ -23,6 +23,13 @@ export type ExplorerProps = {
   /** Height of a standard-height character in px; each explorer scales from it. */
   size?: number;
   style?: React.CSSProperties;
+  /** Something held in a hand (viewer's left = A, right = B), drawn at the wrist in the 300 x 520 box. */
+  handA?: React.ReactNode;
+  handB?: React.ReactNode;
+  /** Draw arm B in front of the face (for hand-to-mouth poses like 'eat'). */
+  armBFront?: boolean;
+  /** Extra drawing on top of everything, in the 300 x 520 box. */
+  children?: React.ReactNode;
 };
 
 const {ink, line: LW} = TT;
@@ -71,7 +78,8 @@ export const SQUAD: Record<ExplorerId, Spec & {name: string; role: string}> = {
 // ---- arms (same pose language as the time traveler) ----
 type ArmPose = {upper: number; elbow: number};
 type PoseDef = {a: ArmPose; b: ArmPose; headTilt: number; lookX: number; lookY: number};
-const POSES: Record<Pose, PoseDef> = {
+type BasePose = 'idle' | 'wave' | 'point' | 'panic' | 'shiver' | 'checkWatch';
+const BASE: Record<BasePose, PoseDef> = {
   idle: {a: {upper: 12, elbow: -10}, b: {upper: 12, elbow: -10}, headTilt: 0, lookX: 0, lookY: 0},
   wave: {a: {upper: 12, elbow: -10}, b: {upper: 145, elbow: 35}, headTilt: -4, lookX: 0, lookY: 0},
   point: {a: {upper: 10, elbow: -8}, b: {upper: 92, elbow: 0}, headTilt: -3, lookX: 3, lookY: 0},
@@ -79,6 +87,32 @@ const POSES: Record<Pose, PoseDef> = {
   shiver: {a: {upper: -8, elbow: -105}, b: {upper: -8, elbow: -105}, headTilt: 0, lookX: 0, lookY: 1},
   checkWatch: {a: {upper: 38, elbow: -118}, b: {upper: 12, elbow: -10}, headTilt: -9, lookX: -3, lookY: 4},
 };
+// seated poses, solved per body so the hand lands on the mouth, the lap or a bowl
+const arm = (upper: number, elbow: number) => ({upper, elbow});
+const SEATED: Record<ExplorerId, Record<'eat' | 'reach' | 'holdBowl' | 'toss' | 'snack', PoseDef>> = {
+  tank: {
+    eat: {a: arm(-8.5, -10), b: arm(-50.4, -117.8), headTilt: 0, lookX: 0, lookY: 0},
+    reach: {a: arm(19.1, -10), b: arm(-8.5, -10), headTilt: -4, lookX: -2, lookY: 1},
+    holdBowl: {a: arm(-4, -10.2), b: arm(-4, -10.2), headTilt: 0, lookX: 0, lookY: 0},
+    toss: {a: arm(-8.5, -10), b: arm(142.1, 60.7), headTilt: 4, lookX: -2, lookY: -5},
+    snack: {a: arm(19.1, -10), b: arm(-50.4, -117.8), headTilt: -2, lookX: 0, lookY: 0},
+  },
+  pip: {
+    eat: {a: arm(32.1, -85.2), b: arm(-100.8, -112), headTilt: 0, lookX: 0, lookY: 0},
+    reach: {a: arm(50.2, -48.4), b: arm(32.1, -85.2), headTilt: -4, lookX: -2, lookY: 1},
+    holdBowl: {a: arm(53, -87.5), b: arm(53, -87.5), headTilt: 0, lookX: 0, lookY: 0},
+    toss: {a: arm(32.1, -85.2), b: arm(163.4, 10.8), headTilt: 3, lookX: 0, lookY: -4},
+    snack: {a: arm(50.2, -48.4), b: arm(-100.8, -112), headTilt: -2, lookX: 0, lookY: 0},
+  },
+  ria: {
+    eat: {a: arm(25.5, -73), b: arm(-85.8, -120), headTilt: 0, lookX: 0, lookY: 0},
+    reach: {a: arm(50.3, -43.7), b: arm(25.5, -73), headTilt: -4, lookX: -2, lookY: 1},
+    holdBowl: {a: arm(36, -71.7), b: arm(36, -71.7), headTilt: 0, lookX: 0, lookY: 0},
+    toss: {a: arm(25.5, -73), b: arm(161.1, 10.3), headTilt: 3, lookX: 0, lookY: -4},
+    snack: {a: arm(50.3, -43.7), b: arm(-85.8, -120), headTilt: -2, lookX: 0, lookY: 0},
+  },
+};
+const poseOf = (who: ExplorerId, pose: Pose): PoseDef => (pose in BASE ? BASE[pose as BasePose] : SEATED[who][pose as keyof (typeof SEATED)['tank']]);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const mix = (p: PoseDef, q: PoseDef, t: number): PoseDef => ({
   a: {upper: lerp(p.a.upper, q.a.upper, t), elbow: lerp(p.a.elbow, q.a.elbow, t)},
@@ -279,10 +313,10 @@ const RiaStaff: React.FC<{g: ReturnType<typeof armGeom>}> = ({g}) => {
 };
 
 // ---- the explorer ----
-export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', pose = 'idle', fromPose, poseProgress = 1, talking = false, flip = false, size = 400, style}) => {
+export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', pose = 'idle', fromPose, poseProgress = 1, talking = false, flip = false, size = 400, style, handA, handB, armBFront = false, children}) => {
   const frame = useCurrentFrame();
   const s = SQUAD[who];
-  const p = fromPose ? mix(POSES[fromPose], POSES[pose], Math.min(1, Math.max(0, poseProgress))) : POSES[pose];
+  const p = fromPose ? mix(poseOf(who, fromPose), poseOf(who, pose), Math.min(1, Math.max(0, poseProgress))) : poseOf(who, pose);
   const face = FACES[expression];
   const breath = Math.sin((frame / 90) * Math.PI * 2 + s.height * 7);
   const sway = Math.sin((frame / 130) * Math.PI * 2 + s.height * 3) * 2 + p.headTilt;
@@ -302,6 +336,12 @@ export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', 
   const k = s.headR / 80;
   const h = size * s.height;
   const legX = (side: -1 | 1) => 150 + side * (s.legGap / 2 + s.legW / 2);
+  const armBNode = (
+    <>
+      <Arm g={gb} s={s} bare={who === 'tank'} />
+      {handB && <g transform={`translate(${gb.wx} ${gb.wy})`}>{handB}</g>}
+    </>
+  );
 
   return (
     <svg width={(h * TT.viewW) / TT.viewH} height={h} viewBox={`0 0 ${TT.viewW} ${TT.viewH}`} style={{overflow: 'visible', transform: flip ? 'scaleX(-1)' : undefined, ...style}}>
@@ -349,7 +389,8 @@ export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', 
 
           {who === 'ria' && <RiaStaff g={gb} />}
           <Arm g={ga} s={s} bare={who === 'tank'} />
-          <Arm g={gb} s={s} bare={who === 'tank'} />
+          {handA && <g transform={`translate(${ga.wx} ${ga.wy})`}>{handA}</g>}
+          {!armBFront && armBNode}
 
           {/* head */}
           <g transform={`rotate(${sway} 150 ${s.headY + s.headR})`}>
@@ -385,6 +426,8 @@ export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', 
               <Mouth m={face.mouth} open={flap} k={k} />
             </g>
           </g>
+          {armBFront && armBNode}
+          {children}
         </g>
       </g>
     </svg>
