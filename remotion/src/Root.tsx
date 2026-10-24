@@ -21,6 +21,7 @@ import {CITY_CHAPTERS, CITY_DURATION, CITY_QA, CityFilm, CityPart, CityQA} from 
 import {DEMO_DURATION, TutorialDemo} from './tutorial/Demo';
 import {CC_DURATION, CC_PARTS, CCFilm, CCPart} from './cc1003/Film';
 import {CCThumbA, CCThumbB, CCThumbC, CCThumbD} from './cc1003/Thumbnail';
+import {PK_DURATION, PaperKite} from './paperkite/Film';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -99,5 +100,6 @@ export const Root: React.FC = () => (
     <Composition id="N1ThumbE" component={N1ThumbE} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="N1ThumbF" component={N1ThumbF} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="N1Test" component={N1Test} durationInFrames={120} fps={24} width={1920} height={1080} defaultProps={{logos: ['anthropic', 'kimi', 'oura'], place: 'whitehouse' as 'whitehouse' | 'ftc' | 'none'}} />
+    <Composition id="PaperKite" component={PaperKite} durationInFrames={PK_DURATION} fps={23} width={1080} height={1920} defaultProps={{sound: true}} />
     </>
 );
