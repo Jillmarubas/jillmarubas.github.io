@@ -31,7 +31,35 @@ python3 scripts/make_compressor_sfx.py   # rebuilds public/cutaway/compressor_sf
   piston, so they crowd together as it compresses; colour goes from cold blue to hot red with compression.
   Suction and discharge streams follow curves and only flow while their reed valve is open.
 - **Sound:** `scripts/make_compressor_sfx.py` uses the same crank-angle maths, so every reed tick lands on
-  the frame its valve opens.
+  the frame its valve opens. Lessons from the first cut (the user heard "swoosh the entire video"):
+  - No noise beds. Filtered noise that swells once per stroke reads as a stream of whooshes; keep the
+    machine's sound tonal (hum, ticks, a soft rising tone) and let the picture show the gas.
+  - Never single-pass `loudnorm`: it acts like auto-gain and pumped a -46 dB room tone up to full level.
+    Use two-pass `loudnorm` with `linear=true` (one fixed gain).
+  - Trim long whoosh files (`whoosh1.mp3` is 10.9 s) and keep whooshes to the big moves only.
+
+- **Sound style:** the second mix sounded comic to the user (pitched "boop" ticks, a slide-whistle
+  rise, a pitch-drop "bonk"). Keep machine sounds unpitched or inharmonic, short and low: hum,
+  noise-transient clicks, one inharmonic clank. No UI ticks on labels.
+
+## Flicker fixes (23 Oct 2026)
+Found with `.claude/skills/video-research/scripts/flicker_check.py`; all in the shared scene, so both hosts had them:
+- The cut floor exposed the base plate's shadow speckle → base plate doesn't receive shadows.
+- Coplanar faces (reed valves on the valve plate, cylinder-head walls on each other and on the plate)
+  z-fought → parts offset or inset by 0.2–0.3 mm.
+- Rotor stripes strobed at full speed → a plain sleeve fades in with the speed (stands in for motion blur).
+- The "Real speed" label was pinned to the moving piston → pinned to the still cylinder.
+- Gas dots popped on and off → their size follows the fractional gas mass, and stream dots grow in and shrink out.
+
+## HyperFrames version
+`hyperframes/` holds the same demo for HyperFrames: `host.ts` runs the same scene code and labels on
+every `hf-seek`, and `index.html` holds the canvas, the labels, the GSAP timeline for the title and
+pills, and the sound. Build and render:
+```
+npx hyperframes@0.8.185 init cutaway-hf --example blank
+bash src/cutaway/hyperframes/build.sh cutaway-hf   # esbuild bundle + assets
+cd cutaway-hf && npx hyperframes check && npx hyperframes render . -w 4
+```
 
 ## Facts on screen
 - "Real speed: ~50 strokes a second (fixed-speed motor on 50 Hz power)": a 2-pole induction motor runs
