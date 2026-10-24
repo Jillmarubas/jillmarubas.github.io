@@ -22,6 +22,15 @@ import {DEMO_DURATION, TutorialDemo} from './tutorial/Demo';
 import {CC_DURATION, CC_PARTS, CCFilm, CCPart} from './cc1003/Film';
 import {CCThumbA, CCThumbB, CCThumbC, CCThumbD} from './cc1003/Thumbnail';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
+import {TT_DEMO_DURATION, TimeTravelerDemo} from './timetraveler/TimeTravelerDemo';
+import {ICE_AGE_DURATION, IceAgeScene} from './timetraveler/IceAgeScene';
+import {SQUAD_DEMO_DURATION, SquadDemo} from './timetraveler/SquadDemo';
+import {DINO_DEMO_DURATION, DinoDemo} from './timetraveler/DinoDemo';
+import {TREE_SWAY_DURATION, TreeBackdrop, TreeSway} from './timetraveler/TreeSway';
+import {JURASSIC_DURATION, JurassicLandscape} from './timetraveler/JurassicLandscape';
+import {CLOSEUP_DURATION, CloseUpOTS} from './timetraveler/CloseUpOTS';
+import {BASEMENT_DURATION, BasementTV} from './timetraveler/BasementTV';
+import {BASEMENT_FRONT_DURATION, BasementFront} from './timetraveler/BasementFront';
 
 export const Root: React.FC = () => (
   <>
@@ -99,5 +108,18 @@ export const Root: React.FC = () => (
     <Composition id="N1ThumbE" component={N1ThumbE} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="N1ThumbF" component={N1ThumbF} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="N1Test" component={N1Test} durationInFrames={120} fps={24} width={1920} height={1080} defaultProps={{logos: ['anthropic', 'kimi', 'oura'], place: 'whitehouse' as 'whitehouse' | 'ftc' | 'none'}} />
+    <Composition id="BasementTV" component={BasementTV} durationInFrames={BASEMENT_DURATION} fps={30} width={1920} height={1080} />
+    <Composition id="BasementFront" component={BasementFront} durationInFrames={BASEMENT_FRONT_DURATION} fps={30} width={1920} height={1080} />
+    <Composition id="CloseUpOTS" component={CloseUpOTS} durationInFrames={CLOSEUP_DURATION} fps={30} width={1920} height={1080} />
+    <Composition id="JurassicLandscape" component={JurassicLandscape} durationInFrames={JURASSIC_DURATION} fps={30} width={1920} height={1080} defaultProps={{squad: true}} />
+    <Composition id="JurassicLandscapeEmpty" component={JurassicLandscape} durationInFrames={JURASSIC_DURATION} fps={30} width={1920} height={1080} defaultProps={{squad: false}} />
+    <Composition id="TreeSway" component={TreeSway} durationInFrames={TREE_SWAY_DURATION} fps={30} width={720} height={1080} />
+    <Composition id="TreeBackdrop" component={TreeBackdrop} durationInFrames={1} fps={30} width={720} height={1080} />
+    <Composition id="DinoDemo" component={DinoDemo} durationInFrames={DINO_DEMO_DURATION} fps={30} width={1920} height={1080} />
+    <Composition id="SquadDemo" component={SquadDemo} durationInFrames={SQUAD_DEMO_DURATION} fps={30} width={1920} height={1080} />
+    <Composition id="TimeTravelerDemo" component={TimeTravelerDemo} durationInFrames={TT_DEMO_DURATION} fps={30} width={1920} height={1080} />
+    {/* IceAgeScene uses the VectorCraft art; IceAgeSceneCode is the same scene with the code-drawn fallback */}
+    <Composition id="IceAgeScene" component={IceAgeScene} durationInFrames={ICE_AGE_DURATION} fps={30} width={1920} height={1080} defaultProps={{art: 'vector' as 'vector' | 'code'}} />
+    <Composition id="IceAgeSceneCode" component={IceAgeScene} durationInFrames={ICE_AGE_DURATION} fps={30} width={1920} height={1080} defaultProps={{art: 'code' as 'vector' | 'code'}} />
     </>
 );

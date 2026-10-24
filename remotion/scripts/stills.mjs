@@ -9,7 +9,7 @@ import {execSync} from 'node:child_process';
 const [comp, outdir, scale, ...secs] = process.argv.slice(2);
 fs.mkdirSync(outdir, {recursive: true});
 const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts'), onProgress: () => {}});
-const browser = await openBrowser('chrome', {browserExecutable: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', chromiumOptions: {gl: 'swangle'}});
+const browser = await openBrowser('chrome', {browserExecutable: process.env.REMOTION_BROWSER ?? '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', chromiumOptions: {gl: 'swangle'}});
 const composition = await selectComposition({serveUrl, id: comp, puppeteerInstance: browser});
 const files = [];
 const queue = [...secs];

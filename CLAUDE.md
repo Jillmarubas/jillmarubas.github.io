@@ -87,6 +87,91 @@ For the script itself, use the `script-writing` skill.
   (at most 3 flashes in any second, WCAG 2.3.1).
 - Every visual landing on its spoken word, and no more than ~5 kinds of sound at once?
 
+## Time-traveler cartoon channel ("history survival" stories)
+
+Set by the user, 24 Oct 2026. Code: `remotion/src/timetraveler/` (see its README).
+
+**Everything must be detailed.** Simple, flat "lazy" art is not acceptable for any asset:
+backgrounds, props, plants, creatures or scenes. The approved benchmark is the Jurassic
+monkey-puzzle tree (`remotion/scripts/vectorcraft/tree_detailed.py`,
+`remotion/public/timetraveler/trees/jurassicTree.svg`). Every new asset needs at least that level:
+- **Real structure:** draw how the thing is actually built, for example whorled branches, branchlets,
+  scale-leaves, cones; for creatures, real anatomy and skin pattern.
+- **Depth:** parts behind are darker and less saturated, parts in front lighter, with lit edges.
+- **Light:** one light direction per scene (upper left by default), a shadow side with crayon
+  hatching (`stylize.scribble`), and highlights.
+- **Surface texture:** bark rings and scale marks, scale or fur patterns, cracks, moss, grain.
+  Never a plain flat fill on a large area.
+- **Variation:** no repeated, evenly spaced elements. Use random spacing, sizes, angles and
+  directions, so nothing reads as a pattern or a ladder.
+- **Surroundings:** ground cover, rocks, plants and props that fit the period (for example no
+  grass in the Jurassic), and a soft contact shadow.
+- **Hand-drawn finish:** thick ink outlines with Roughen, tapered detail strokes, and the same ink
+  colour `#2a1b12` as the characters.
+- **Check before showing:** render a full view and a close-up crop, and fix anything that reads as
+  simple, repetitive or blob-like before sending it to the user.
+- **Zoomed detail review (every scene, before showing):** cut the still into a 3x2 grid of tiles,
+  enlarge each one, and inspect every tile for small flaws. Fix them, re-render, and check the tiles again. Things to catch:
+  - things passing through each other (pipes through stairs, a rail into the ceiling);
+  - objects painted flat on a wall instead of standing in 3D;
+  - a prop hiding something important (a poster behind the TV);
+  - plain boxes with no detail, stray lines that read as wires, sawtooth edges;
+  - missing body parts (ears, neck) and shading that reads as a mask.
+  Taught by the user, 24 Oct 2026, on the basement scene.
+- **Upgrading:** older, simpler assets (the Ice Age pieces, `trees.py`, the first creature
+  pass) are below this standard. Redo them at this level before using them in a video.
+
+**Landscapes** follow the user's references (24 Oct 2026: misty jungle with sauropods, a river valley,
+a sunlit forest path), taken as principles and never copied:
+- **Atmospheric perspective:** every depth band further back is paler, bluer, hazier and less contrasty.
+  Fade each band as one group, so trees in a band don't show through each other.
+- **Mist and light:** mist between the bands, warm light shafts and dust from one side, and a bright,
+  misty middle that holds the focal point (for example a sauropod herd as soft silhouettes).
+- **Framing:** a dark, dense foreground frame (fronds, a big trunk, hanging growth), and small
+  figures for scale.
+- **Ground:** fully covered with period plants (fern carpet, horsetails, cycads, moss, rocks).
+  Never a flat lawn, and no palms or grass in the Jurassic.
+- **Example:** `remotion/src/timetraveler/JurassicLandscape.tsx`, built from the detailed assets in
+  `public/timetraveler/jurassic/` (`landscape.py`, plus `tree_detailed.py --bare --seed N`).
+
+**Close-ups** (training notes from the user, 24 Oct 2026; example `remotion/src/timetraveler/CloseUpOTS.tsx`):
+- **Creatures are one continuous silhouette.** The neck flows into the skull and the throat runs into the
+  jaw. Never stick a head onto a separate neck shape: that leaves a seam, a collar edge or a step.
+- **In a forest, frame the shot with leaves near the camera.** Big, dark, out-of-focus fronds go
+  around the edges, kept clear of the subject's eye and face.
+- **Forest light is dim.** Darken the scene overall and let light break through only in shafts.
+  Don't use a bright, even, open-air look.
+- **Scale size matches the distance.** Up close, use fine scales with soft outlines. Large, even,
+  high-contrast cells read as a snake or chainmail.
+
+**Interiors** (training note, 24 Oct 2026; example `remotion/src/timetraveler/BasementTV.tsx`):
+- **Objects in a room are 3D, never flat drawings on a wall plane.** Stairs, furniture and anything that
+  sticks out into the room need real perspective. Project them from 3D (see `P()` and `box_faces()`
+  in `scripts/vectorcraft/basement.py`), with the faces you would really see: tops below eye level,
+  undersides above it, the end facing the camera. Add thickness, and cast shadows on the wall and floor.
+
+**Always use logic** (user, 24 Oct 2026): every scene must make sense for where the characters are
+and what they are doing. Before showing anything, ask "would a real person have or do this here?"
+- Clothes and gear fit the place: expedition gear (backpacks, Tank's rope, Ria's staff, Pip's camera)
+  only on adventures, never at home. The rigs take `gear={false}` for home scenes.
+- Props fit the action and the era, sizes match the real thing, and nothing is held, worn or
+  placed in a way that makes no sense (a bag on the back while sitting on a couch, a cup in a bowl).
+- The same thing stays the same between shots of one scene (left and right swap in a reverse shot).
+
+Other decisions for this channel:
+- **Research first:** research textures, colours, anatomy, movement and surroundings before any
+  art, and write it down with sources (`research/<era>.md`). Real anatomy goes in the cartoon
+  style. Unknown colours are plausible guesses (countershaded), labelled "scientists think" on screen.
+- **Original characters only:** no copyrighted characters or real actors' likenesses, even when
+  the user shares one as a reference (for example the Jumanji cast). Make an original character
+  with the same role. The squad is the Traveler, Tank, Pip and Ria.
+- **Tools:**
+  - Draw assets in VectorCraft.
+  - Animate in Remotion with joint rigs; scene trees sway in Remotion because vectors stay sharp
+    when the camera pushes in.
+  - Use EffectCraft puppet pins for single flat pictures and for atmosphere passes.
+- **Previews:** send stills unless the user asks for a video.
+
 ## Documentary videos in the MagnatesMedia style
 
 Researched and tested in October 2026.
@@ -137,11 +222,35 @@ Researched and tested in October 2026.
       expression-driven 3D layers (`seedRandom(k, true)`) with motion blur instead.
     - CC Vignette darkens its own layer: put it on an adjustment layer, not a solid.
     - It reads system fonts only. Convert a repo woff2 to TTF with fontTools into `~/.fonts`.
+  - v0.16.0 (24 Oct 2026, x86_64 tarball, same download route) has puppet pins with
+    keyframes (`puppet.addPin`, `puppet.movePin {pin, position, time}`, `puppet.follow`).
+    `effectcraft-cli exec` does **not** save its change: chain the commands and a
+    `file.save {path}` in one `effectcraft-cli run ... project.ecproj`. Tree-sway test:
+    `effectcraft/tree-sway/` (11 pins, 671 keyframes, 6 s 720x1080 render in 8 s).
   - Use `effectcraft-cli script file.jsx` for After Effects-style scripting.
   - Use `render-frame` to check stills and `render` to export.
   - Property paths need the group, for example
     `layer.property("Transform").property("Position")` and
     `layer.property("Text").property("Source Text")`.
+- **VectorCraft** (free Illustrator alternative, github.com/storytold/vectorcraft) draws the
+  cartoon art for the time-traveler channel (`remotion/src/timetraveler/README.md`):
+  - Install in the cloud container (verified 23 Oct 2026, v0.16.0): `git clone --depth 50
+    https://github.com/storytold/vectorcraft` (a clone works through the proxy; the GitHub
+    web pages return 403), `cargo build --release -p vectorcraft-cli` (11 min on 4 cores), then
+    copy `target/release/vectorcraft-cli` to `~/.cargo/bin/`.
+  - Register it: `claude mcp add -s user vectorcraft -- ~/.cargo/bin/vectorcraft-cli mcp --headless`.
+    The tools appear after Claude Code restarts. In the same session, drive the server with
+    `remotion/scripts/vectorcraft/vc.py`, which sends the same MCP calls.
+  - `remotion/scripts/vectorcraft/art.py` redraws every Ice Age piece in about 3 s.
+  - Hand-drawn look: `distort.roughen` (smooth, about 1.4 pt) on outlined shapes,
+    `stylize.scribble` on shade shapes, and `stroke.set {profile: "lens"}` on detail strokes.
+    SVG export writes these as plain paths. Roughen needs a high `detail` (about 30) on small
+    circles, or they turn into diamonds.
+  - PNG export crops to the art; SVG export keeps the artboard as the viewBox.
+- **Local preview renders:** the browser is now
+  `/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell`
+  (the older 1194 path in the SOP is gone). `scripts/stills.mjs` reads it from `REMOTION_BROWSER`.
+  Preload `global-agent` (as `render-lambda.sh` does), or the Remotion CLI fails on `remotion.media`.
 - **Render speed** (measured on the 4-core cloud server, 5 s parallax shot with
   effects):
   - 1080p: about 44 s.
