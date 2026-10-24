@@ -6,7 +6,7 @@ import {random, useCurrentFrame} from 'remotion';
 // comes from the current frame, so a render always looks the same.
 
 export type Expression = 'neutral' | 'happy' | 'surprised' | 'worried' | 'scared' | 'determined' | 'cold';
-export type Costume = 'none' | 'iceAge' | 'rome' | 'egypt';
+export type Costume = 'none' | 'iceAge' | 'rome' | 'egypt' | 'jurassic';
 export type Pose = 'idle' | 'wave' | 'point' | 'panic' | 'shiver' | 'checkWatch';
 
 export type TimeTravelerProps = {
@@ -314,6 +314,33 @@ const EgyptBand: React.FC = () => (
   </g>
 );
 
+// Jurassic explorer: khaki field vest over the hoodie, teal neckerchief, goggles on the hair.
+const ExplorerVest: React.FC = () => (
+  <g>
+    <path d="M86 216 Q100 208 118 210 L126 344 Q100 346 78 340 L80 250 Q80 228 86 216 Z" fill="#c9a86a" stroke={ink} strokeWidth={LW} strokeLinejoin="round" />
+    <path d="M214 216 Q200 208 182 210 L174 344 Q200 346 222 340 L220 250 Q220 228 214 216 Z" fill="#c9a86a" stroke={ink} strokeWidth={LW} strokeLinejoin="round" />
+    <rect x={88} y={262} width={26} height={24} rx={4} fill="#b08f52" stroke={ink} strokeWidth={LW * 0.6} />
+    <rect x={186} y={262} width={26} height={24} rx={4} fill="#b08f52" stroke={ink} strokeWidth={LW * 0.6} />
+    <rect x={88} y={300} width={26} height={22} rx={4} fill="#b08f52" stroke={ink} strokeWidth={LW * 0.6} />
+    <rect x={186} y={300} width={26} height={22} rx={4} fill="#b08f52" stroke={ink} strokeWidth={LW * 0.6} />
+    <path d="M118 206 Q150 236 182 206 L170 230 Q150 246 130 230 Z" fill="#2fa39a" stroke={ink} strokeWidth={LW * 0.8} strokeLinejoin="round" />
+    <path d="M146 236 L140 262 L154 258 Z" fill="#2fa39a" stroke={ink} strokeWidth={LW * 0.6} strokeLinejoin="round" />
+  </g>
+);
+
+const Goggles: React.FC = () => (
+  <g>
+    <path d="M72 96 Q150 70 228 96" fill="none" stroke={ink} strokeWidth={14} strokeLinecap="round" />
+    <path d="M72 96 Q150 70 228 96" fill="none" stroke="#6b4428" strokeWidth={6} strokeLinecap="round" />
+    {[124, 176].map((x) => (
+      <g key={x}>
+        <circle cx={x} cy={80} r={17} fill="#8fdcff" stroke={ink} strokeWidth={LW * 0.8} />
+        <path d={`M${x - 8} ${74} q6 -6 12 -2`} stroke="#fff" strokeWidth={4} strokeLinecap="round" fill="none" />
+      </g>
+    ))}
+  </g>
+);
+
 // ---------- the character ----------
 export const TimeTraveler: React.FC<TimeTravelerProps> = ({
   expression = 'neutral',
@@ -376,8 +403,8 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
             </>
           ) : (
             <>
-              <path d="M96 494 Q96 466 126 466 Q150 466 152 494 Z" fill={costume === 'rome' || costume === 'egypt' ? '#a87443' : TT.shoe} stroke={ink} strokeWidth={LW} strokeLinejoin="round" />
-              <path d="M148 494 Q150 466 174 466 Q204 466 204 494 Z" fill={costume === 'rome' || costume === 'egypt' ? '#a87443' : TT.shoe} stroke={ink} strokeWidth={LW} strokeLinejoin="round" />
+              <path d="M96 494 Q96 466 126 466 Q150 466 152 494 Z" fill={costume === 'rome' || costume === 'egypt' || costume === 'jurassic' ? '#7a4a2a' : TT.shoe} stroke={ink} strokeWidth={LW} strokeLinejoin="round" />
+              <path d="M148 494 Q150 466 174 466 Q204 466 204 494 Z" fill={costume === 'rome' || costume === 'egypt' || costume === 'jurassic' ? '#7a4a2a' : TT.shoe} stroke={ink} strokeWidth={LW} strokeLinejoin="round" />
               <rect x={94} y={490} width={60} height={10} rx={5} fill={TT.sole} stroke={ink} strokeWidth={LW * 0.7} />
               <rect x={146} y={490} width={60} height={10} rx={5} fill={TT.sole} stroke={ink} strokeWidth={LW * 0.7} />
             </>
@@ -409,6 +436,7 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
 
           {costume === 'iceAge' && <FurCape />}
           {costume === 'egypt' && <EgyptCollar />}
+          {costume === 'jurassic' && <ExplorerVest />}
 
           {/* arms in front */}
           <Arm side={-1} pose={armA} sleeve={sleeve} watch glitch={glitch} frame={frame} />
@@ -422,6 +450,7 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
             <path d="M112 72 Q128 62 146 66 M170 64 Q186 62 198 74" fill="none" stroke={TT.hairLight} strokeWidth={5} strokeLinecap="round" />
             {costume === 'rome' && <Laurel />}
             {costume === 'egypt' && <EgyptBand />}
+            {costume === 'jurassic' && <Goggles />}
 
             {/* brows */}
             <g transform={`translate(0 ${face.browY})`}>
