@@ -150,6 +150,14 @@ a sunlit forest path), taken as principles and never copied:
   in `scripts/vectorcraft/basement.py`), with the faces you would really see: tops below eye level,
   undersides above it, the end facing the camera. Add thickness, and cast shadows on the wall and floor.
 
+**Always use logic** (user, 24 Oct 2026): every scene must make sense for where the characters are
+and what they are doing. Before showing anything, ask "would a real person have or do this here?"
+- Clothes and gear fit the place: expedition gear (backpacks, Tank's rope, Ria's staff, Pip's camera)
+  only on adventures, never at home. The rigs take `gear={false}` for home scenes.
+- Props fit the action and the era, sizes match the real thing, and nothing is held, worn or
+  placed in a way that makes no sense (a bag on the back while sitting on a couch, a cup in a bowl).
+- The same thing stays the same between shots of one scene (left and right swap in a reverse shot).
+
 Other decisions for this channel:
 - **Research first:** research textures, colours, anatomy, movement and surroundings before any
   art, and write it down with sources (`research/<era>.md`). Real anatomy goes in the cartoon

@@ -32,6 +32,8 @@ export type TimeTravelerProps = {
   armBFront?: boolean;
   /** Extra drawing on top of everything, in the 300 x 520 box (for example popcorn in flight). */
   children?: React.ReactNode;
+  /** The backpack and its straps. Turn off for scenes at home. */
+  gear?: boolean;
 };
 
 // Locked design values. The Ice Age art matches these line weights.
@@ -371,6 +373,7 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
   handB,
   armBFront = false,
   children,
+  gear = true,
 }) => {
   const frame = useCurrentFrame();
   const p = fromPose ? mixPose(POSES[fromPose], POSES[pose], Math.min(1, Math.max(0, poseProgress))) : POSES[pose];
@@ -439,19 +442,23 @@ export const TimeTraveler: React.FC<TimeTravelerProps> = ({
         {/* upper body breathes */}
         <g transform={`translate(0 ${breath * 1.6}) `}>
           {/* backpack behind the body */}
+          {gear && <>
           <rect x={68} y={214} width={164} height={130} rx={34} fill={TT.pack} stroke={ink} strokeWidth={LW} />
           <rect x={60} y={270} width={22} height={56} rx={9} fill={TT.packDark} stroke={ink} strokeWidth={LW * 0.8} />
           <rect x={218} y={270} width={22} height={56} rx={9} fill={TT.packDark} stroke={ink} strokeWidth={LW * 0.8} />
+          </>}
 
           {/* hoodie */}
           <path d="M96 214 Q150 192 204 214 Q222 222 224 250 L226 344 Q150 364 74 344 L76 250 Q78 222 96 214 Z" fill={TT.hoodie} stroke={ink} strokeWidth={LW} strokeLinejoin="round" />
           <path d="M80 330 Q150 348 220 330" fill="none" stroke={TT.hoodieShade} strokeWidth={6} strokeLinecap="round" />
           <path d="M114 290 Q150 282 186 290 L192 330 Q150 338 108 330 Z" fill={TT.hoodieShade} stroke={ink} strokeWidth={LW * 0.7} strokeLinejoin="round" />
           {/* backpack straps */}
+          {gear && <>
           <path d="M104 214 Q98 260 106 312" fill="none" stroke={ink} strokeWidth={22} strokeLinecap="round" />
           <path d="M104 214 Q98 260 106 312" fill="none" stroke={TT.pack} strokeWidth={22 - LW * 1.5} strokeLinecap="round" />
           <path d="M196 214 Q202 260 194 312" fill="none" stroke={ink} strokeWidth={22} strokeLinecap="round" />
           <path d="M196 214 Q202 260 194 312" fill="none" stroke={TT.pack} strokeWidth={22 - LW * 1.5} strokeLinecap="round" />
+          </>}
           {/* hood bunched round the neck */}
           <path d="M98 212 Q150 236 202 212 Q206 196 186 192 L114 192 Q94 196 98 212 Z" fill={TT.hoodie} stroke={ink} strokeWidth={LW} strokeLinejoin="round" />
           {/* drawstrings */}

@@ -30,6 +30,8 @@ export type ExplorerProps = {
   armBFront?: boolean;
   /** Extra drawing on top of everything, in the 300 x 520 box. */
   children?: React.ReactNode;
+  /** Expedition gear (Pip's backpack and camera, Tank's rope, Ria's staff). Turn off for scenes at home. */
+  gear?: boolean;
 };
 
 const {ink, line: LW} = TT;
@@ -251,12 +253,14 @@ const PipBackpack: React.FC<{s: Spec}> = ({s}) => (
     <rect x={150 - s.shoulder - 62} y={s.torsoTop - 170} width={28} height={38} rx={6} fill="#f2c14e" stroke={ink} strokeWidth={LW * 0.8} />
   </g>
 );
-const PipGear: React.FC<{s: Spec}> = ({s}) => (
+const PipGear: React.FC<{s: Spec; camera: boolean}> = ({s, camera}) => (
   // camera on a neck strap: he films everything
   <g>
+    {camera && <>
     <path d={`M${150 - 26} ${s.torsoTop + 2} L150 ${s.torsoTop + 50} L${150 + 26} ${s.torsoTop + 2}`} fill="none" stroke={ink} strokeWidth={4} />
     <rect x={150 - 22} y={s.torsoTop + 44} width={44} height={30} rx={6} fill="#2e2e36" stroke={ink} strokeWidth={LW * 0.8} />
     <circle cx={150} cy={s.torsoTop + 59} r={9} fill="#7fd3ff" stroke={ink} strokeWidth={3} />
+    </>}
     {/* tall striped socks */}
     {[-1, 1].map((side) => (
       <g key={side}>
@@ -313,7 +317,7 @@ const RiaStaff: React.FC<{g: ReturnType<typeof armGeom>}> = ({g}) => {
 };
 
 // ---- the explorer ----
-export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', pose = 'idle', fromPose, poseProgress = 1, talking = false, flip = false, size = 400, style, handA, handB, armBFront = false, children}) => {
+export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', pose = 'idle', fromPose, poseProgress = 1, talking = false, flip = false, size = 400, style, handA, handB, armBFront = false, children, gear = true}) => {
   const frame = useCurrentFrame();
   const s = SQUAD[who];
   const p = fromPose ? mix(poseOf(who, fromPose), poseOf(who, pose), Math.min(1, Math.max(0, poseProgress))) : poseOf(who, pose);
@@ -346,7 +350,7 @@ export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', 
   return (
     <svg width={(h * TT.viewW) / TT.viewH} height={h} viewBox={`0 0 ${TT.viewW} ${TT.viewH}`} style={{overflow: 'visible', transform: flip ? 'scaleX(-1)' : undefined, ...style}}>
       <g transform={`translate(${shiver} 0)`}>
-        {who === 'pip' && <g transform={`translate(0 ${breath * 1.6})`}><PipBackpack s={s} /></g>}
+        {who === 'pip' && gear && <g transform={`translate(0 ${breath * 1.6})`}><PipBackpack s={s} /></g>}
         {who === 'ria' && <g transform={`translate(0 ${breath * 1.6}) rotate(${sway} 150 ${s.headY + s.headR})`}><RiaPonytail s={s} frame={frame} /></g>}
         {/* legs and boots */}
         {([-1, 1] as const).map((side) => (
@@ -356,7 +360,7 @@ export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', 
             <rect x={legX(side) - s.legW / 2 - 14} y={492} width={s.legW + 30} height={9} rx={4} fill="#e9e1d0" stroke={ink} strokeWidth={LW * 0.6} />
           </g>
         ))}
-        {who === 'pip' && <PipGear s={s} />}
+        {who === 'pip' && <PipGear s={s} camera={gear} />}
 
         <g transform={`translate(0 ${breath * 1.6})`}>
           {/* torso */}
@@ -367,7 +371,7 @@ export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', 
             strokeWidth={LW}
             strokeLinejoin="round"
           />
-          {who === 'tank' && <TankGear s={s} />}
+          {who === 'tank' && gear && <TankGear s={s} />}
           {who === 'ria' && (
             <>
               <RiaGear s={s} />
@@ -379,15 +383,17 @@ export const Explorer: React.FC<ExplorerProps> = ({who, expression = 'neutral', 
             <>
               <path d={`M${150 - s.shoulder + 6} ${s.torsoTop + 50} H${150 + s.shoulder - 6} M${150 - s.shoulder + 4} ${s.torsoTop + 80} H${150 + s.shoulder - 4}`} stroke={s.shirtShade} strokeWidth={8} />
               {/* backpack straps */}
+              {gear && <>
               <path d={`M${150 - 34} ${s.torsoTop} L${150 - 30} ${s.torsoTop + 90} M${150 + 34} ${s.torsoTop} L${150 + 30} ${s.torsoTop + 90}`} stroke={ink} strokeWidth={14} strokeLinecap="round" />
               <path d={`M${150 - 34} ${s.torsoTop} L${150 - 30} ${s.torsoTop + 90} M${150 + 34} ${s.torsoTop} L${150 + 30} ${s.torsoTop + 90}`} stroke="#45627c" strokeWidth={7} strokeLinecap="round" />
+              </>}
             </>
           )}
 
           {/* neck */}
           <rect x={150 - 16 * k} y={s.headY + s.headR - 14} width={32 * k} height={s.torsoTop - s.headY - s.headR + 22} fill={TT.skin} stroke={ink} strokeWidth={LW} />
 
-          {who === 'ria' && <RiaStaff g={gb} />}
+          {who === 'ria' && gear && <RiaStaff g={gb} />}
           <Arm g={ga} s={s} bare={who === 'tank'} />
           {handA && <g transform={`translate(${ga.wx} ${ga.wy})`}>{handA}</g>}
           {!armBFront && armBNode}

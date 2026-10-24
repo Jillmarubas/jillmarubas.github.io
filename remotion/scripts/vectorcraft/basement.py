@@ -680,9 +680,9 @@ def back_figure(name, out):
         hy, r = 230, 150
         a.shape(smooth_d([(20, 610), (40, 470), (120, 400), (440, 400), (520, 470), (540, 610)], tension=0.35), '#f6c443')
         a.shape(smooth_d([(20, 610), (40, 470), (120, 400), (200, 405), (120, 480), (110, 610)], tension=0.35), '#dfa52a', stroke=False, rough=1.5)
-        for s in (-1, 1):
-            a.stroke(f'M{hx + s * 90} 400 q{s * 6} 60 {s * 22} 200', color=INK, lw=30, profile=None, rough=False)
-            a.stroke(f'M{hx + s * 90} 400 q{s * 6} 60 {s * 22} 200', color='#6b4325', lw=20, profile=None, rough=False)
+        # no backpack at home: just the hoodie, with its centre seam and a fold across the back
+        a.stroke('M280 440 L284 610', color='#dfa52a', lw=4)
+        a.stroke('M150 520 Q280 540 410 515', color='#dfa52a', lw=4)
         a.shape(smooth_d([(150, 420), (170, 380), (240, 362), (320, 362), (390, 380), (410, 420), (350, 440), (210, 440)], tension=0.4), '#f6c443')
         a.stroke('M190 410 Q280 384 370 410', color='#c98f1f', lw=5)
         for sd in (-1, 1):

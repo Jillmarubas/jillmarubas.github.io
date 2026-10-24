@@ -134,27 +134,27 @@ export const BasementFront: React.FC = () => {
       {/* the four friends, from left to right */}
       <Seated who="ria" x={SEATS[0].x}>
         {(size) => (
-          <Explorer who="ria" size={size} expression="happy" pose="eat" fromPose="holdBowl" poseProgress={riaProgress} armBFront
+          <Explorer who="ria" gear={false} size={size} expression="happy" pose="eat" fromPose="holdBowl" poseProgress={riaProgress} armBFront
             handA={<image href={staticFile('timetraveler/basement/bBag.svg')} x={-34} y={-70} width={68} height={83} />}
             handB={riaProgress > 0.5 ? <Pop n={2} s={22} rot={20} /> : undefined} />
         )}
       </Seated>
       <Seated who="tank" x={SEATS[1].x}>
         {(size) => (
-          <Explorer who="tank" size={size} expression="surprised" pose="toss" armBFront handB={!flying ? <Pop n={3} s={24} /> : undefined}>
+          <Explorer who="tank" gear={false} size={size} expression="surprised" pose="toss" armBFront handB={!flying ? <Pop n={3} s={24} /> : undefined}>
             {flying && <image href={pop(3)} x={px - 12} y={py - 12} width={24} height={24} transform={`rotate(${tossT * 540} ${px} ${py})`} />}
           </Explorer>
         )}
       </Seated>
       <Seated who="traveler" x={SEATS[2].x}>
         {(size) => (
-          <TimeTraveler size={size} costume="none" expression="happy" seed="ttf" pose="snack" fromPose="reach" poseProgress={travelerProgress} armBFront
+          <TimeTraveler gear={false} size={size} costume="none" expression="happy" seed="ttf" pose="snack" fromPose="reach" poseProgress={travelerProgress} armBFront
             handB={travelerProgress > 0.5 ? <Pop n={1} s={24} rot={-15} /> : undefined} />
         )}
       </Seated>
       <Seated who="pip" x={SEATS[3].x} jitter={pipJitter}>
         {(size) => (
-          <Explorer who="pip" size={size} expression="scared" pose="holdBowl">
+          <Explorer who="pip" gear={false} size={size} expression="scared" pose="holdBowl">
             {/* the TV reflected in his glasses */}
             {[-1, 1].map((s) => (
               <rect key={s} x={150 + s * 33.75 - 12} y={150} width={18} height={11} rx={2} fill="#bfe8c8" opacity={0.45 * flicker} transform={`rotate(-8 ${150 + s * 33.75} 156)`} />
