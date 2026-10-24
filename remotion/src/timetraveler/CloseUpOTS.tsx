@@ -19,9 +19,9 @@ export const CloseUpOTS: React.FC = () => {
   return (
     <AbsoluteFill style={{background: '#cfdcd8', overflow: 'hidden'}}>
       {/* far background: soft and out of focus */}
-      <AbsoluteFill style={{filter: 'blur(9px)'}}>
+      <AbsoluteFill style={{filter: 'blur(14px) brightness(0.78) saturate(0.9)'}}>
         <AbsoluteFill style={{background: 'radial-gradient(ellipse at 78% 10%, #fff4d6 0%, #eef0e0 22%, #c9d8d5 55%, #a9bcbe 100%)'}} />
-        {img('timetraveler/jurassic/jFar.svg', {left: -400, top: 120, width: 2400, height: 1080})}
+        {img('timetraveler/jurassic/jFar.svg', {left: -400, top: 200, width: 2400, height: 1080})}
         {[[-80, 0.5], [260, 0.42], [1460, 0.55], [1760, 0.45], [980, 0.36]].map(([x, s], i) => (
           <Img key={i} src={staticFile(`timetraveler/jurassic/araucaria${[11, 23, 37][i % 3]}.svg`)} style={{position: 'absolute', left: x - 600 * s, top: 1180 - 1560 * s, width: 1200 * s, height: 1600 * s, opacity: 0.75, filter: 'saturate(0.6) brightness(1.1)'}} />
         ))}
@@ -38,7 +38,7 @@ export const CloseUpOTS: React.FC = () => {
       </AbsoluteFill>
       {/* the Diplodocus: sharp, the focal point */}
       <div style={{position: 'absolute', left: 430, top: -150 + lower * 40, width: 1400 * 1.15, height: 1000 * 1.15, transformOrigin: '100% 0%', transform: `rotate(${-2 + lower * 2}deg)`}}>
-        {img('timetraveler/closeup/cuDiploHead.svg', {left: 0, top: 0, width: 1400 * 1.15, height: 1000 * 1.15})}
+        {img('timetraveler/closeup/cuDiploHead.svg', {left: 0, top: 0, width: 1400 * 1.15, height: 1000 * 1.15, filter: 'brightness(0.9)'})}
       </div>
       {/* dust in the light */}
       <svg width={W} height={H} style={{position: 'absolute', inset: 0, mixBlendMode: 'screen'}}>
@@ -50,11 +50,16 @@ export const CloseUpOTS: React.FC = () => {
         })}
       </svg>
       {/* the Traveler from behind: big, slightly soft, a little darker (his back is in shade) */}
-      <div style={{position: 'absolute', left: -70, top: 420 + breathe, width: 900 * 0.86, height: 1000 * 0.86, filter: 'blur(1.6px) brightness(0.9)'}}>
+      <div style={{position: 'absolute', left: -70, top: 420 + breathe, width: 900 * 0.86, height: 1000 * 0.86, filter: 'blur(1.6px) brightness(0.78)'}}>
         {img('timetraveler/closeup/cuTravelerBack.svg', {left: 0, top: 0, width: 900 * 0.86, height: 1000 * 0.86})}
       </div>
-      {/* finish */}
-      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 60% 42%, rgba(0,0,0,0) 48%, rgba(6,16,12,0.55) 100%)'}} />
+      {/* leaves right in front of the lens: dark and out of focus, framing the shot */}
+      <AbsoluteFill style={{filter: 'blur(4px) brightness(0.85)', transform: `translate(${Math.sin(f / 45) * 6}px, ${Math.sin(f / 60) * 4}px)`}}>
+        {img('timetraveler/closeup/cuLeaves.svg', {left: 0, top: 0, width: W, height: H})}
+      </AbsoluteFill>
+      {/* finish: the forest is dim, light only breaks through in shafts */}
+      <AbsoluteFill style={{background: 'rgba(10,22,16,0.14)'}} />
+      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 60% 40%, rgba(0,0,0,0) 40%, rgba(6,16,12,0.7) 100%)'}} />
       <AbsoluteFill style={{backgroundImage: `url(${staticFile('grain-1024.png')})`, backgroundSize: '1024px 1024px', mixBlendMode: 'overlay', opacity: 0.08}} />
     </AbsoluteFill>
   );

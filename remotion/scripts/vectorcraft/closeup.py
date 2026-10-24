@@ -65,80 +65,60 @@ DI = dict(dorsal='#76705e', side='#958f7a', belly='#d6ccb3', speckL='#c9bfa4', s
 
 def diplo_head(out):
     v = VC(); a = Artist(v, 1400, 1000, 6, seed=88)
-    # neck: centreline from the upper right down to the back of the skull, widths growing toward the body
-    centre = [(1460, 40), (1300, 110), (1150, 210), (1010, 330), (910, 440), (830, 520)]
-    widths = [300, 285, 262, 240, 220, 205]
-    def edge(sign):
-        out_pts = []
-        for i, ((x, y), w) in enumerate(zip(centre, widths)):
-            (x0, y0) = centre[max(0, i - 1)]; (x1, y1) = centre[min(len(centre) - 1, i + 1)]
-            ux, uy = x1 - x0, y1 - y0
-            n = math.hypot(ux, uy) or 1
-            nx, ny = uy / n, -ux / n  # left normal (toward the top of the neck)
-            out_pts.append((x + nx * w / 2 * sign, y + ny * w / 2 * sign))
-        return out_pts
-    top = edge(1); bot = edge(-1)
-    neck = top + bot[::-1]
-    # spines along the top of the neck (behind the outline)
+    # One continuous silhouette: the neck flows into the skull (no seam), the throat runs into the jaw.
+    # U = top of the neck, Lo = underside, both from the head toward the body (upper right).
+    U = [(880, 395), (950, 322), (1060, 214), (1200, 104), (1350, 14), (1500, -60)]
+    Lo = [(892, 590), (990, 528), (1100, 438), (1240, 336), (1400, 244), (1500, 196)]
+    HEAD_TOP = [(880, 395), (812, 400), (730, 394), (655, 408), (590, 444), (500, 486), (400, 520), (318, 546), (282, 580)]
+    HEAD_BOT = [(284, 622), (330, 652), (440, 668), (580, 664), (710, 646), (800, 622), (860, 606), (892, 590)]
+    outline = U[::-1] + HEAD_TOP[1:] + HEAD_BOT + Lo[1:] + [(1520, 196), (1520, -60)]
+    # spines along the top of the neck, behind the outline, shrinking toward the head
     sp = []
-    for i in range(len(top) - 1):
-        for t in (0.15, 0.5, 0.85):
-            p = lerp(top[i], top[i + 1], t); q = lerp(top[i], top[i + 1], t + 0.18)
-            hgt = 52 * (1 - (i + t) / len(top)) + 16
-            sp.append(f'M{p[0]:.1f} {p[1]:.1f} L{(p[0] + q[0]) / 2 - 6:.1f} {(p[1] + q[1]) / 2 - hgt:.1f} L{q[0]:.1f} {q[1]:.1f} Z')
+    for i in range(len(U) - 1):
+        for t in (0.1, 0.45, 0.8):
+            p = lerp(U[i], U[i + 1], t); q = lerp(U[i], U[i + 1], t + 0.2)
+            hgt = 14 + 12 * i + 14 * t
+            sp.append(f'M{p[0]:.1f} {p[1]:.1f} L{(p[0] + q[0]) / 2 - 4:.1f} {(p[1] + q[1]) / 2 - hgt:.1f} L{q[0]:.1f} {q[1]:.1f} Z')
     v.tool('draw_path', d=' '.join(sp), fill=DI['spine'], stroke=INK, strokeWidth=4, effects=[a._rough(0.8, 8)])
-    a.shape(smooth_d(neck, tension=0.35), DI['side'], lw=7)
-    # countershading: pale belly band along the underside, dark band along the back
-    a.shape(smooth_d(bot + [lerp(b, t, 0.3) for b, t in zip(bot, top)][::-1], tension=0.35), DI['belly'], stroke=False, rough=2)
-    a.shape(smooth_d(top + [lerp(t, b, 0.28) for t, b in zip(top, bot)][::-1], tension=0.35), DI['dorsal'], stroke=False, rough=2)
+    a.shape(smooth_d(outline, tension=0.32), DI['side'], lw=7)
+    # countershading bands that run from the neck onto the head without a break
+    up_band = U[::-1] + HEAD_TOP[1:6] + [(p[0] + 6, p[1] + 34) for p in HEAD_TOP[1:6]][::-1] + [lerp(u, l, 0.28) for u, l in zip(U, Lo)]
+    a.shape(smooth_d(up_band, tension=0.32), DI['dorsal'], stroke=False, rough=2)
+    low_band = HEAD_BOT[1:] + Lo[1:] + [lerp(l, u, 0.3) for l, u in zip(Lo[::-1], U[::-1])][:-1] + [(p[0], p[1] - 22) for p in HEAD_BOT[1:]][::-1]
+    a.shape(smooth_d(low_band, tension=0.32), DI['belly'], stroke=False, rough=2)
 
-    def neck_shade(x, y):
-        # which band is this point in? project onto the nearest centreline segment
-        best = None
-        for i in range(len(centre) - 1):
-            (x0, y0), (x1, y1) = centre[i], centre[i + 1]
-            ux, uy = x1 - x0, y1 - y0
-            L2 = ux * ux + uy * uy
-            t = max(0, min(1, ((x - x0) * ux + (y - y0) * uy) / L2))
-            px, py = x0 + ux * t, y0 + uy * t
-            d = math.hypot(x - px, y - py)
-            if best is None or d < best[0]:
-                n = math.hypot(ux, uy); nx, ny = uy / n, -ux / n
-                side = (x - px) * nx + (y - py) * ny
-                w = widths[i] + (widths[i + 1] - widths[i]) * t
-                best = (d, side / (w / 2))
-        s = best[1]
+    def shade(x, y):
         r = rng.random()
         if r < 0.07:
             return DI['speckL']
         if r < 0.12:
             return DI['speckD']
-        return DI['dorsal'] if s > 0.45 else DI['belly'] if s < -0.4 else DI['side']
-    scale_cells(a, neck, 10, neck_shade)
-    # skin folds across the neck, tapering strokes
-    for i in range(1, 16):
-        t = i / 16
-        k = int(t * (len(centre) - 1)); f = t * (len(centre) - 1) - k
-        p_top = lerp(top[k], top[k + 1], f); p_bot = lerp(bot[k], bot[k + 1], f)
-        mid = lerp(p_top, p_bot, 0.5)
-        a.stroke(smooth_d([lerp(p_top, p_bot, 0.15), (mid[0] - 14, mid[1] + 6), lerp(p_top, p_bot, 0.85)], closed=False), color='#3e3a30', lw=4, opacity=60)
-    # rim light along the top (sun from the upper right), crayon shadow underneath
-    a.stroke(smooth_d([lerp(t, b, 0.05) for t in top for b in [bot[top.index(t)]]], closed=False), color=DI['rim'], lw=8, opacity=85)
-    a.hatch(smooth_d(bot + [lerp(b, t, 0.22) for b, t in zip(bot, top)][::-1], tension=0.35), '#3e3a30', angle=70, spacing=7, width=2.2, opacity=55)
+        # position between top and bottom edge, measured against the nearest neck/head cross-section
+        if x > 870:
+            k = min(range(len(U)), key=lambda i: abs(U[i][0] - x) + abs(Lo[i][0] - x))
+            top_y, bot_y = U[k][1] + (x - U[k][0]) * -0.75, Lo[k][1] + (x - Lo[k][0]) * -0.7
+        else:
+            top_y = min(p[1] for p in HEAD_TOP if abs(p[0] - x) < 70) if any(abs(p[0] - x) < 70 for p in HEAD_TOP) else 500
+            bot_y = max(p[1] for p in HEAD_BOT if abs(p[0] - x) < 90) if any(abs(p[0] - x) < 90 for p in HEAD_BOT) else 640
+        f = (y - top_y) / max(40, bot_y - top_y)
+        return DI['dorsal'] if f < 0.28 else DI['belly'] if f > 0.74 else DI['side']
+    neck_region = U + [(1520, -60), (1520, 196)] + Lo[::-1]
+    head_region = HEAD_TOP + HEAD_BOT  # top from the neck to the snout, then the underside back
+    scale_cells(a, neck_region, 10, shade)
+    scale_cells(a, head_region, 6.5, shade)
+    # skin folds across the neck and a soft throat crease where neck meets jaw
+    for i in range(1, 15):
+        t = i / 15
+        k = min(len(U) - 2, int(t * (len(U) - 1))); f = t * (len(U) - 1) - k
+        pu = lerp(U[k], U[k + 1], f); pl = lerp(Lo[k], Lo[k + 1], f)
+        mid = lerp(pu, pl, 0.5)
+        a.stroke(smooth_d([lerp(pu, pl, 0.12), (mid[0] - 14, mid[1] + 8), lerp(pu, pl, 0.88)], closed=False), color='#3e3a30', lw=4, opacity=55)
+    a.stroke('M846 606 q30 -40 40 -110', color='#3e3a30', lw=4, opacity=55)
+    a.stroke('M800 622 q50 -10 80 -40', color='#3e3a30', lw=3, opacity=50)
+    # rim light along the whole top edge (sun from the upper right), crayon shade underneath
+    a.stroke(smooth_d([(p[0] - 4, p[1] + 9) for p in (U[::-1] + HEAD_TOP[1:7])], closed=False), color=DI['rim'], lw=8, opacity=80)
+    a.hatch(smooth_d(HEAD_BOT[1:] + Lo[1:] + [(p[0] - 10, p[1] - 40) for p in Lo[1:]][::-1] + [(p[0], p[1] - 24) for p in HEAD_BOT[1:]][::-1], tension=0.3), '#3e3a30', angle=72, spacing=7, width=2.2, opacity=55)
 
-    # head: long, low skull with a broad square snout, pointing down-left
-    head = [(860, 448), (800, 404), (720, 396), (650, 410), (590, 446), (500, 488), (400, 522), (318, 548), (282, 580), (284, 622), (330, 652), (440, 668), (580, 664), (710, 644), (812, 604), (868, 540)]
-    a.shape(smooth_d(head, tension=0.35), DI['side'], lw=7)
-    a.shape(smooth_d([(290, 628), (330, 652), (440, 668), (580, 664), (710, 644), (812, 604), (760, 620), (600, 646), (450, 652), (340, 640)], tension=0.35), DI['belly'], stroke=False, rough=1.5)
-    a.shape(smooth_d([(860, 448), (800, 404), (720, 396), (650, 410), (590, 446), (500, 488), (400, 522), (440, 534), (580, 476), (690, 432), (800, 432)], tension=0.35), DI['dorsal'], stroke=False, rough=1.5)
-    def head_shade(x, y):
-        r = rng.random()
-        if r < 0.1:
-            return DI['speckL']
-        if r < 0.16:
-            return DI['speckD']
-        return DI['dorsal'] if y < 500 - (x - 300) * 0.16 else DI['side'] if y < 630 else DI['belly']
-    scale_cells(a, head, 6.5, head_shade)
     # mouth line, lip edge and the comb of peg teeth at the front of both jaws
     a.stroke(smooth_d([(286, 604), (360, 606), (450, 604), (540, 596), (600, 588)], closed=False), lw=5, profile=None)
     teeth = []
@@ -164,7 +144,6 @@ def diplo_head(out):
         a.stroke(f'M{ex + math.cos(ang) * 50:.1f} {ey + math.sin(ang) * 36:.1f} l{math.cos(ang) * 16:.1f} {math.sin(ang) * 12:.1f}', color='#3e3a30', lw=3)
     a.stroke(f'M{ex - 52} {ey - 22} Q{ex} {ey - 54} {ex + 56} {ey - 18}', lw=6)  # brow ridge
     # rim light on the head top, crayon shadow under the jaw
-    a.stroke(smooth_d([(840, 432), (720, 404), (620, 428), (500, 494), (380, 536)], closed=False), color=DI['rim'], lw=7, opacity=85)
     a.hatch(smooth_d([(320, 640), (470, 664), (700, 630), (790, 594), (700, 612), (470, 648), (330, 632)], tension=0.35), '#3e3a30', angle=80, spacing=6, width=2, opacity=60)
     # a monkey-puzzle branchlet hanging from the mouth, a few scale-leaves falling
     td.rng = random.Random(5)
@@ -283,8 +262,56 @@ def traveler_back(out):
     v.close()
 
 
+def cu_leaves(out):
+    """Near-camera framing (1920 x 1080): big dark fern and cycad fronds around the edges,
+    with leaflets and a faint lit edge. Blurred in Remotion as the nearest depth."""
+    v = VC(); a = Artist(v, 1920, 1080, 4, seed=77)
+    lr = random.Random(77)
+    def frond(base, ang, length, leaf, droop, col, lit):
+        rad = math.radians(ang)
+        tip = (base[0] + math.cos(rad) * length, base[1] + math.sin(rad) * length + droop)
+        mid = (base[0] + math.cos(rad) * length * 0.5, base[1] + math.sin(rad) * length * 0.5 + droop * 0.25)
+        leaves, edges = [], []
+        n = 26
+        for i in range(1, n):
+            t = i / n
+            p = lerp(base, mid, t * 2) if t < 0.5 else lerp(mid, tip, (t - 0.5) * 2)
+            q = lerp(base, mid, (t + 0.02) * 2) if t < 0.5 else lerp(mid, tip, min(1, (t + 0.02 - 0.5) * 2))
+            ux, uy = q[0] - p[0], q[1] - p[1]
+            nn = math.hypot(ux, uy) or 1
+            ux, uy = ux / nn, uy / nn
+            nx, ny = -uy, ux
+            ll = leaf * (1 - t * 0.7) * lr.uniform(0.85, 1.1)
+            for sgn in (-1, 1):
+                ex, ey = p[0] + nx * sgn * ll + ux * ll * 0.7, p[1] + ny * sgn * ll + uy * ll * 0.7 + ll * 0.25
+                leaves.append(f'M{p[0]:.1f} {p[1]:.1f} Q{(p[0] + ex) / 2 + ux * ll * 0.35:.1f} {(p[1] + ey) / 2 + uy * ll * 0.35:.1f} {ex:.1f} {ey:.1f} Q{(p[0] + ex) / 2 - ux * ll * 0.15:.1f} {(p[1] + ey) / 2 - uy * ll * 0.15:.1f} {p[0]:.1f} {p[1]:.1f} Z')
+                edges.append(f'M{p[0] + ux * 3:.1f} {p[1] + uy * 3:.1f} Q{(p[0] + ex) / 2 + ux * ll * 0.35:.1f} {(p[1] + ey) / 2 + uy * ll * 0.35 - 2:.1f} {ex:.1f} {ey:.1f}')
+        v.tool('draw_path', d=smooth_d([base, mid, tip], closed=False), fill='none', stroke=col, strokeWidth=leaf * 0.22, cap='round')
+        v.tool('draw_path', d=' '.join(leaves), fill=col, stroke='#08120c', strokeWidth=2)
+        v.tool('draw_path', d=' '.join(edges), fill='none', stroke=lit, strokeWidth=2.2, opacity=70)
+    dark, mid_c = '#13251b', '#1b3324'
+    # top left, hanging into the frame above the Traveler
+    for (b, ang, l, lf, dr, c) in (((-80, -60), 30, 800, 78, 220, dark), ((-60, 160), 8, 640, 72, 180, mid_c), ((220, -80), 70, 560, 70, 60, dark),
+                                   ((-100, 40), 18, 720, 80, 260, mid_c), ((80, -100), 50, 700, 74, 140, dark), ((-120, 380), -5, 520, 66, 160, dark),
+                                   ((420, -120), 85, 420, 60, 40, mid_c)):
+        frond(b, ang, l, lf, dr, c, '#3c6a4a')
+    # top right corner, over the far end of the neck
+    for (b, ang, l, lf, dr, c) in (((2000, -80), 150, 520, 70, 120, dark), ((1960, -120), 120, 420, 62, 60, mid_c)):
+        frond(b, ang, l, lf, dr, c, '#3c6a4a')
+    # right edge and bottom right, under the neck
+    for (b, ang, l, lf, dr, c) in (((2000, 1150), -150, 820, 82, -60, dark), ((2000, 860), 178, 560, 70, 120, mid_c), ((1500, 1180), -100, 560, 74, -20, dark), ((1760, 1200), -125, 700, 80, -40, mid_c),
+                                   ((2020, 1000), -170, 700, 80, 40, dark), ((1300, 1200), -80, 460, 66, -10, mid_c), ((1900, 1220), -110, 600, 78, -30, dark)):
+        frond(b, ang, l, lf, dr, c, '#3c6a4a')
+    # bottom centre: low ferns between the Traveler and the stream of light
+    for (b, ang, l, lf, dr, c) in (((900, 1180), -80, 340, 54, -10, dark), ((1080, 1200), -105, 380, 56, -10, mid_c), ((700, 1200), -60, 320, 52, -10, mid_c)):
+        frond(b, ang, l, lf, dr, c, '#3c6a4a')
+    v.tool('export', path=os.path.join(out, 'cuLeaves.svg'))
+    v.close()
+
+
 if __name__ == '__main__':
     out = sys.argv[1]
     os.makedirs(out, exist_ok=True)
     diplo_head(out); print('diplo head ok')
     traveler_back(out); print('traveler back ok')
+    cu_leaves(out); print('leaves ok')

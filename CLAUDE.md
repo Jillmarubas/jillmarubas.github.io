@@ -126,6 +126,16 @@ a sunlit forest path), taken as principles and never copied:
 - **Example:** `remotion/src/timetraveler/JurassicLandscape.tsx`, built from the detailed assets in
   `public/timetraveler/jurassic/` (`landscape.py`, plus `tree_detailed.py --bare --seed N`).
 
+**Close-ups** (training notes from the user, 24 Oct 2026; example `remotion/src/timetraveler/CloseUpOTS.tsx`):
+- **Creatures are one continuous silhouette.** The neck flows into the skull and the throat runs into the
+  jaw. Never stick a head onto a separate neck shape: that leaves a seam, a collar edge or a step.
+- **In a forest, frame the shot with leaves near the camera.** Big, dark, out-of-focus fronds go
+  around the edges, kept clear of the subject's eye and face.
+- **Forest light is dim.** Darken the scene overall and let light break through only in shafts.
+  Don't use a bright, even, open-air look.
+- **Scale size matches the distance.** Up close, use fine scales with soft outlines. Large, even,
+  high-contrast cells read as a snake or chainmail.
+
 Other decisions for this channel:
 - **Research first:** research textures, colours, anatomy, movement and surroundings before any
   art, and write it down with sources (`research/<era>.md`). Real anatomy goes in the cartoon
