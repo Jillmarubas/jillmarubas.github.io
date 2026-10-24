@@ -72,7 +72,7 @@ const Group: React.FC<{cam: number; depth: number; haze: string; opacity: number
   <AbsoluteFill style={{transform: `translateX(${-cam / depth}px)`, filter: haze, opacity}}>{children}</AbsoluteFill>
 );
 
-export const JurassicLandscape: React.FC = () => {
+export const JurassicLandscape: React.FC<{squad?: boolean}> = ({squad = true}) => {
   const f = useCurrentFrame();
   const cam = Math.sin(f / 120) * 50;
   return (
@@ -122,12 +122,12 @@ export const JurassicLandscape: React.FC = () => {
       </Group>
       <Mist top={680} height={180} opacity={0.8} />
       {/* the squad on the near bank, looking at the herd */}
-      <div style={{position: 'absolute', left: 330 - cam / 1.1, top: 735, display: 'flex', gap: 16, alignItems: 'flex-end'}}>
+      {squad && <div style={{position: 'absolute', left: 330 - cam / 1.1, top: 735, display: 'flex', gap: 16, alignItems: 'flex-end'}}>
         <TimeTraveler costume="jurassic" size={170} pose="point" expression="surprised" flip />
         <Explorer who="tank" size={170} expression="surprised" flip />
         <Explorer who="pip" size={170} expression="scared" pose="panic" flip />
         <Explorer who="ria" size={170} expression="determined" flip />
-      </div>
+      </div>}
       {/* near plants and a big monkey-puzzle trunk framing the left */}
       <Group cam={cam} depth={1} haze="none" opacity={1}>
         <Prop id="araucaria11" x={110} y={1190} s={1.05} />
