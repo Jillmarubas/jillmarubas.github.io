@@ -78,3 +78,10 @@ display parts (crests, plates, feathers).
 
 Still to check before the script locks: the primary papers for the Diplodocus colour study,
 the Allosaurus wound specimens, and Archaeopteryx's later colour studies.
+
+## Decisions (user, 24 Oct 2026)
+- **Story:** "Jumanji mixed with Jurassic". It's an adventure-game premise: the traveler is pulled into the
+  Jurassic and has to survive challenges to get home. Use the idea only: no Jumanji names,
+  board design, characters or music.
+- **Accuracy:** real anatomy, scale patterns, feathers, movement and plants, drawn in the flat
+  cartoon style. Unknown colours are plausible and countershaded, and labelled as a guess on screen.
