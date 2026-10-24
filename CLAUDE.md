@@ -87,6 +87,46 @@ For the script itself, use the `script-writing` skill.
   (at most 3 flashes in any second, WCAG 2.3.1).
 - Every visual landing on its spoken word, and no more than ~5 kinds of sound at once?
 
+## Time-traveler cartoon channel ("history survival" stories)
+
+Set by the user, 24 Oct 2026. Code: `remotion/src/timetraveler/` (see its README).
+
+**Everything must be detailed.** Simple, flat "lazy" art is not acceptable for any asset:
+backgrounds, props, plants, creatures or scenes. The approved benchmark is the Jurassic
+monkey-puzzle tree (`remotion/scripts/vectorcraft/tree_detailed.py`,
+`remotion/public/timetraveler/trees/jurassicTree.svg`). Every new asset needs at least that level:
+- **Real structure:** draw how the thing is actually built, for example whorled branches, branchlets,
+  scale-leaves, cones; for creatures, real anatomy and skin pattern.
+- **Depth:** parts behind are darker and less saturated, parts in front lighter, with lit edges.
+- **Light:** one light direction per scene (upper left by default), a shadow side with crayon
+  hatching (`stylize.scribble`), and highlights.
+- **Surface texture:** bark rings and scale marks, scale or fur patterns, cracks, moss, grain.
+  Never a plain flat fill on a large area.
+- **Variation:** no repeated, evenly spaced elements. Use random spacing, sizes, angles and
+  directions, so nothing reads as a pattern or a ladder.
+- **Surroundings:** ground cover, rocks, plants and props that fit the period (for example no
+  grass in the Jurassic), and a soft contact shadow.
+- **Hand-drawn finish:** thick ink outlines with Roughen, tapered detail strokes, and the same ink
+  colour `#2a1b12` as the characters.
+- **Check before showing:** render a full view and a close-up crop, and fix anything that reads as
+  simple, repetitive or blob-like before sending it to the user.
+- **Upgrading:** older, simpler assets (the Ice Age pieces, `trees.py`, the first creature
+  pass) are below this standard. Redo them at this level before using them in a video.
+
+Other decisions for this channel:
+- **Research first:** research textures, colours, anatomy, movement and surroundings before any
+  art, and write it down with sources (`research/<era>.md`). Real anatomy goes in the cartoon
+  style. Unknown colours are plausible guesses (countershaded), labelled "scientists think" on screen.
+- **Original characters only:** no copyrighted characters or real actors' likenesses, even when
+  the user shares one as a reference (for example the Jumanji cast). Make an original character
+  with the same role. The squad is the Traveler, Tank, Pip and Ria.
+- **Tools:**
+  - Draw assets in VectorCraft.
+  - Animate in Remotion with joint rigs; scene trees sway in Remotion because vectors stay sharp
+    when the camera pushes in.
+  - Use EffectCraft puppet pins for single flat pictures and for atmosphere passes.
+- **Previews:** send stills unless the user asks for a video.
+
 ## Documentary videos in the MagnatesMedia style
 
 Researched and tested in October 2026.
