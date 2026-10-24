@@ -55,15 +55,8 @@ export const BasementTV: React.FC = () => {
       <Back who="Ria" x={1360} y={898} s={0.56} tilt={-2} />
       {/* the couch, in shadow, with the TV rim along its top */}
       <Img src={staticFile('timetraveler/basement/bCouch.svg')} style={{position: 'absolute', left: 0, top: 70, width: W, height: H, filter: 'brightness(0.5) drop-shadow(0 -2px 3px rgba(140,190,255,0.6))'}} />
-      {/* a table lamp on the left side table, the warm light source */}
-      <svg width={W} height={H} style={{position: 'absolute', inset: 0}}>
-        <path d="M150 1080 L150 800 L330 800 L330 1080 Z" fill="#3a2a1c" stroke="#2a1b12" strokeWidth={5} />
-        <path d="M230 800 L230 720" stroke="#2a1b12" strokeWidth={10} />
-        <path d="M180 720 L280 720 L260 640 L200 640 Z" fill="#e8b46a" stroke="#2a1b12" strokeWidth={5} />
-        <path d="M190 715 L270 715 L256 650 L204 650 Z" fill="#ffd89a" opacity={0.7} />
-        <rect x={262} y={760} width={28} height={40} rx={4} fill="#b0303a" stroke="#2a1b12" strokeWidth={4} />
-        <rect x={296} y={768} width={24} height={32} rx={4} fill="#3a7ab0" stroke="#2a1b12" strokeWidth={4} />
-      </svg>
+      {/* the side table with the table lamp (the warm light source), a mug, a soda can, the remote */}
+      <Img src={staticFile('timetraveler/basement/bLamp.svg')} style={{position: 'absolute', inset: 0, width: W, height: H}} />
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.5) 100%)'}} />
       <AbsoluteFill style={{backgroundImage: `url(${staticFile('grain-1024.png')})`, backgroundSize: '1024px 1024px', mixBlendMode: 'overlay', opacity: 0.1}} />
     </AbsoluteFill>

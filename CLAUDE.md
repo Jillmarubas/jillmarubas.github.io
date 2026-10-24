@@ -110,6 +110,14 @@ monkey-puzzle tree (`remotion/scripts/vectorcraft/tree_detailed.py`,
   colour `#2a1b12` as the characters.
 - **Check before showing:** render a full view and a close-up crop, and fix anything that reads as
   simple, repetitive or blob-like before sending it to the user.
+- **Zoomed detail review (every scene, before showing):** cut the still into a 3x2 grid of tiles,
+  enlarge each one, and inspect every tile for small flaws. Fix them, re-render, and check the tiles again. Things to catch:
+  - things passing through each other (pipes through stairs, a rail into the ceiling);
+  - objects painted flat on a wall instead of standing in 3D;
+  - a prop hiding something important (a poster behind the TV);
+  - plain boxes with no detail, stray lines that read as wires, sawtooth edges;
+  - missing body parts (ears, neck) and shading that reads as a mask.
+  Taught by the user, 24 Oct 2026, on the basement scene.
 - **Upgrading:** older, simpler assets (the Ice Age pieces, `trees.py`, the first creature
   pass) are below this standard. Redo them at this level before using them in a video.
 
