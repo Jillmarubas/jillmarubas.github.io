@@ -21,6 +21,13 @@ import {CITY_CHAPTERS, CITY_DURATION, CITY_QA, CityFilm, CityPart, CityQA} from 
 import {DEMO_DURATION, TutorialDemo} from './tutorial/Demo';
 import {CC_DURATION, CC_PARTS, CCFilm, CCPart} from './cc1003/Film';
 import {CCThumbA, CCThumbB, CCThumbC, CCThumbD} from './cc1003/Thumbnail';
+import {GPT_DURATION, GPT_PARTS, GPTFilm, GPTPart} from './gpt1010/Film';
+import {GPTThumbA, GPTThumbB, GPTThumbC} from './gpt1010/Thumbnail';
+import {VS_DURATION, VS_PARTS, VSFilm, VSPart} from './vs1010/Film';
+import {VSThumbA, VSThumbB, VSThumbC} from './vs1010/Thumbnail';
+import {AsherThumb1, AsherThumb2, AsherThumb3, AsherThumb4, AsherThumb5} from './vs1010/AsherThumbs';
+import {IconRow, IconTile} from './vs1010/Icons';
+import {LUMO_DUR, LUMO_FPS, LumoAd} from './lumo/Ad';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
 
 export const Root: React.FC = () => (
@@ -77,6 +84,28 @@ export const Root: React.FC = () => (
     {CC_PARTS.map((p, i) => (
       <Composition key={`cc${i}`} id={`ClaudeCodeMods-part${i}`} component={CCPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
     ))}
+    <Composition id="ChatGPTClick" component={GPTFilm} durationInFrames={GPT_DURATION} fps={60} width={1920} height={1080} />
+    {GPT_PARTS.map((p, i) => (
+      <Composition key={`gpt${i}`} id={`ChatGPTClick-part${i}`} component={GPTPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
+    ))}
+    <Composition id="AIVersus" component={VSFilm} durationInFrames={VS_DURATION} fps={60} width={1920} height={1080} />
+    {VS_PARTS.map((p, i) => (
+      <Composition key={`vs${i}`} id={`AIVersus-part${i}`} component={VSPart} durationInFrames={p.to - p.from} fps={60} width={1920} height={1080} defaultProps={{part: i}} />
+    ))}
+    <Composition id="LumoAd" component={LumoAd} durationInFrames={LUMO_DUR * LUMO_FPS} fps={LUMO_FPS} width={1920} height={1080} />
+    <Composition id="IconTile" component={IconTile} durationInFrames={1} fps={30} width={1080} height={1080} defaultProps={{b: 'gpt' as const}} />
+    <Composition id="IconRow" component={IconRow} durationInFrames={1} fps={30} width={2400} height={1000} />
+    <Composition id="VSThumbA" component={VSThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="VSThumbB" component={VSThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="VSThumbC" component={VSThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb1" component={AsherThumb1} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb2" component={AsherThumb2} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb3" component={AsherThumb3} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb4" component={AsherThumb4} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="AsherThumb5" component={AsherThumb5} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="GPTThumbA" component={GPTThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="GPTThumbB" component={GPTThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
+    <Composition id="GPTThumbC" component={GPTThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CCThumbA" component={CCThumbA} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CCThumbB" component={CCThumbB} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CCThumbC" component={CCThumbC} durationInFrames={1} fps={30} width={1920} height={1080} />
