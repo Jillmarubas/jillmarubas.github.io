@@ -258,7 +258,13 @@ def cycad(a, x, y):
 
 
 if __name__ == '__main__':
-    out = sys.argv[1]
+    # optional: --seed N (a different tree), --bare (no plants at the foot, for forests), --name NAME
+    args = sys.argv[1:]
+    out = args[0]
+    seed = int(args[args.index('--seed') + 1]) if '--seed' in args else 7
+    bare = '--bare' in args
+    name = args[args.index('--name') + 1] if '--name' in args else 'jurassicTree'
+    rng = random.Random(seed)
     os.makedirs(out, exist_ok=True)
     v = VC()
     a = Artist(v, W, H, 5, seed=1234)
@@ -270,12 +276,14 @@ if __name__ == '__main__':
     a.v.tool('draw_path', d=chevrons(leader, 18, 8), fill='none', stroke=FRONT['scale'], strokeWidth=2.2)
     for (x, y) in cones[:4]:
         cone(a, x, y - 26)
-    ground(a)
-    fern(a, 330, 1560, 150)
-    fern(a, 900, 1566, 130, flip=-1)
-    cycad(a, 220, 1580)
-    fern(a, 760, 1580, 100)
-    v.tool('export', path=os.path.join(out, 'jurassicTree.svg'))
-    v.tool('export', path=os.path.join(out, 'jurassicTree.png'), options={"background": "transparent", "rect": [0, 0, W, H], "ppi": 72})
+    if not bare:
+        ground(a)
+        fern(a, 330, 1560, 150)
+        fern(a, 900, 1566, 130, flip=-1)
+        cycad(a, 220, 1580)
+        fern(a, 760, 1580, 100)
+    v.tool('export', path=os.path.join(out, f'{name}.svg'))
+    if not bare:
+        v.tool('export', path=os.path.join(out, f'{name}.png'), options={"background": "transparent", "rect": [0, 0, W, H], "ppi": 72})
     v.close()
-    print('ok', os.path.getsize(os.path.join(out, 'jurassicTree.svg')))
+    print('ok', name, os.path.getsize(os.path.join(out, f'{name}.svg')))

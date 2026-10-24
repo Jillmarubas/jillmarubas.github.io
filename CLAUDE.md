@@ -113,6 +113,19 @@ monkey-puzzle tree (`remotion/scripts/vectorcraft/tree_detailed.py`,
 - **Upgrading:** older, simpler assets (the Ice Age pieces, `trees.py`, the first creature
   pass) are below this standard. Redo them at this level before using them in a video.
 
+**Landscapes** follow the user's references (24 Oct 2026: misty jungle with sauropods, a river valley,
+a sunlit forest path), taken as principles and never copied:
+- **Atmospheric perspective:** every depth band further back is paler, bluer, hazier and less contrasty.
+  Fade each band as one group, so trees in a band don't show through each other.
+- **Mist and light:** mist between the bands, warm light shafts and dust from one side, and a bright,
+  misty middle that holds the focal point (for example a sauropod herd as soft silhouettes).
+- **Framing:** a dark, dense foreground frame (fronds, a big trunk, hanging growth), and small
+  figures for scale.
+- **Ground:** fully covered with period plants (fern carpet, horsetails, cycads, moss, rocks).
+  Never a flat lawn, and no palms or grass in the Jurassic.
+- **Example:** `remotion/src/timetraveler/JurassicLandscape.tsx`, built from the detailed assets in
+  `public/timetraveler/jurassic/` (`landscape.py`, plus `tree_detailed.py --bare --seed N`).
+
 Other decisions for this channel:
 - **Research first:** research textures, colours, anatomy, movement and surroundings before any
   art, and write it down with sources (`research/<era>.md`). Real anatomy goes in the cartoon
