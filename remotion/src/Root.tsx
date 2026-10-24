@@ -26,6 +26,7 @@ import {TT_DEMO_DURATION, TimeTravelerDemo} from './timetraveler/TimeTravelerDem
 import {ICE_AGE_DURATION, IceAgeScene} from './timetraveler/IceAgeScene';
 import {SQUAD_DEMO_DURATION, SquadDemo} from './timetraveler/SquadDemo';
 import {DINO_DEMO_DURATION, DinoDemo} from './timetraveler/DinoDemo';
+import {TREE_SWAY_DURATION, TreeBackdrop, TreeSway} from './timetraveler/TreeSway';
 
 export const Root: React.FC = () => (
   <>
@@ -103,6 +104,8 @@ export const Root: React.FC = () => (
     <Composition id="N1ThumbE" component={N1ThumbE} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="N1ThumbF" component={N1ThumbF} durationInFrames={1} fps={24} width={1920} height={1080} />
     <Composition id="N1Test" component={N1Test} durationInFrames={120} fps={24} width={1920} height={1080} defaultProps={{logos: ['anthropic', 'kimi', 'oura'], place: 'whitehouse' as 'whitehouse' | 'ftc' | 'none'}} />
+    <Composition id="TreeSway" component={TreeSway} durationInFrames={TREE_SWAY_DURATION} fps={30} width={720} height={1080} />
+    <Composition id="TreeBackdrop" component={TreeBackdrop} durationInFrames={1} fps={30} width={720} height={1080} />
     <Composition id="DinoDemo" component={DinoDemo} durationInFrames={DINO_DEMO_DURATION} fps={30} width={1920} height={1080} />
     <Composition id="SquadDemo" component={SquadDemo} durationInFrames={SQUAD_DEMO_DURATION} fps={30} width={1920} height={1080} />
     <Composition id="TimeTravelerDemo" component={TimeTravelerDemo} durationInFrames={TT_DEMO_DURATION} fps={30} width={1920} height={1080} />

@@ -137,6 +137,11 @@ Researched and tested in October 2026.
       expression-driven 3D layers (`seedRandom(k, true)`) with motion blur instead.
     - CC Vignette darkens its own layer: put it on an adjustment layer, not a solid.
     - It reads system fonts only. Convert a repo woff2 to TTF with fontTools into `~/.fonts`.
+  - v0.16.0 (24 Oct 2026, x86_64 tarball, same download route) has puppet pins with
+    keyframes (`puppet.addPin`, `puppet.movePin {pin, position, time}`, `puppet.follow`).
+    `effectcraft-cli exec` does **not** save its change: chain the commands and a
+    `file.save {path}` in one `effectcraft-cli run ... project.ecproj`. Tree-sway test:
+    `effectcraft/tree-sway/` (11 pins, 671 keyframes, 6 s 720x1080 render in 8 s).
   - Use `effectcraft-cli script file.jsx` for After Effects-style scripting.
   - Use `render-frame` to check stills and `render` to export.
   - Property paths need the group, for example
