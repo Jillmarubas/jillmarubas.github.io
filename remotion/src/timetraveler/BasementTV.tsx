@@ -39,7 +39,7 @@ export const BasementTV: React.FC = () => {
       <AbsoluteFill style={{mixBlendMode: 'screen', opacity: 0.55 * flicker, background: 'radial-gradient(ellipse 34% 40% at 50% 41%, rgba(140,190,255,0.75) 0%, rgba(90,140,220,0.25) 45%, rgba(0,0,0,0) 75%)'}} />
       {/* warm lamp glow at the left, and the door light at the top of the stairs */}
       <AbsoluteFill style={{mixBlendMode: 'screen', opacity: 0.5, background: 'radial-gradient(circle at 12% 70%, rgba(255,190,110,0.6) 0%, rgba(255,160,80,0.18) 18%, rgba(0,0,0,0) 34%)'}} />
-      <AbsoluteFill style={{mixBlendMode: 'screen', opacity: 0.35, background: 'radial-gradient(circle at 96% 8%, rgba(255,210,140,0.7) 0%, rgba(0,0,0,0) 20%)'}} />
+      <AbsoluteFill style={{mixBlendMode: 'screen', opacity: 0.35, background: 'radial-gradient(ellipse 14% 22% at 77% 14%, rgba(255,210,140,0.75) 0%, rgba(0,0,0,0) 100%)'}} />
       {/* dust drifting in the TV light */}
       <svg width={W} height={H} style={{position: 'absolute', inset: 0, mixBlendMode: 'screen'}}>
         {Array.from({length: 40}).map((_, i) => {

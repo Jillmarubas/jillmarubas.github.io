@@ -159,27 +159,89 @@ def room(out):
     a.shape(pts_d([RIGHT(0, 0), RIGHT(1, 0), RIGHT(1, 1), RIGHT(0, 1)]), '#64666d', lw=0, rough=0)
     rows = ' '.join(pts_d([RIGHT(0, t), RIGHT(1, t)], closed=False) for t in [i / 18 for i in range(1, 18)])
     v.tool('draw_path', d=rows, fill='none', stroke='#55575d', strokeWidth=1.6)
-    steps = []
-    for i in range(9):
-        u0 = 0.25 + i * 0.075
-        t = 0.2 + i * 0.075
-        steps.append(pts_d([RIGHT(u0, t), RIGHT(u0 + 0.075, t), RIGHT(u0 + 0.075, t + 0.03), RIGHT(u0, t + 0.03)]))
-    v.tool('draw_path', d=' '.join(steps), fill='#9a7448', stroke=INK, strokeWidth=3)
-    stringer = [RIGHT(0.25, 0.23), RIGHT(0.25 + 9 * 0.075, 0.23 + 9 * 0.075), RIGHT(0.25 + 9 * 0.075, 0.23 + 9 * 0.075 + 0.06), RIGHT(0.25, 0.29)]
-    a.shape(pts_d(stringer), '#6e5232', lw=3)
-    a.stroke(pts_d([RIGHT(0.25, 0.05), RIGHT(0.25 + 9 * 0.075, 0.05 + 9 * 0.075)], closed=False), color='#5a4028', lw=8, profile=None, rough=False)
-    posts = ' '.join(pts_d([RIGHT(u_, 0.05 + (u_ - 0.25)), RIGHT(u_, 0.2 + (u_ - 0.25))], closed=False) for u_ in [0.3 + i * 0.1 for i in range(6)])
-    v.tool('draw_path', d=posts, fill='none', stroke='#5a4028', strokeWidth=5)
-    # light spilling from the door at the top of the stairs (warm, faint)
-    a.shape(pts_d([RIGHT(0.18, 0.02), RIGHT(0.26, 0.02), RIGHT(0.26, 0.22), RIGHT(0.18, 0.22)]), '#e8c27a', lw=3, opacity=70)
     # water heater in the back-right corner, pipes up to the ceiling
     hx, hy0, hy1, hw = 1440, 520, 770, 44
     a.shape(smooth_d([(hx - hw, hy1), (hx - hw, hy0 + 14), (hx - hw * 0.6, hy0), (hx + hw * 0.6, hy0), (hx + hw, hy0 + 14), (hx + hw, hy1)], tension=0.25), '#c9ccd0', lw=3.5)
     a.shape(smooth_d([(hx + hw * 0.3, hy1), (hx + hw * 0.3, hy0 + 10), (hx + hw, hy0 + 14), (hx + hw, hy1)], tension=0.25), '#9fa3a8', stroke=False, rough=1)
     a.stroke(f'M{hx - 14} {hy0} V160 M{hx + 14} {hy0} V160', color='#b06a3a', lw=7, profile=None, rough=False)
     a.shape(f'M{hx - 14} {hy0 + 90} h28 v20 h-28 Z', '#e6dfc8', lw=2.5, rough=0)
+    stairs(a, v)
     v.tool('export', path=os.path.join(out, 'bRoom.svg'))
     v.close()
+
+
+# ---- real 3D for the stairs: camera at the origin looking down +z, back wall at z = 10
+F = 1000.0
+def P(x, y, z):
+    return (960 + F * x / z, 470 - F * y / z)
+
+
+def box_faces(x0, x1, y0, y1, z0, z1):
+    """Visible faces of an axis-aligned box seen from the origin (camera left of and level with it)."""
+    faces = []
+    faces.append(('front', [P(x0, y1, z0), P(x1, y1, z0), P(x1, y0, z0), P(x0, y0, z0)]))     # faces the camera
+    faces.append(('side', [P(x0, y1, z0), P(x0, y1, z1), P(x0, y0, z1), P(x0, y0, z0)]))      # left end, seen because camera x < x0
+    if y1 < 0:
+        faces.append(('top', [P(x0, y1, z0), P(x1, y1, z0), P(x1, y1, z1), P(x0, y1, z1)]))   # below eye level: see the top
+    elif y0 > 0:
+        faces.append(('under', [P(x0, y0, z0), P(x1, y0, z0), P(x1, y0, z1), P(x0, y0, z1)]))  # above eye level: see underneath
+    return faces
+
+
+def stairs(a, v):
+    """Open-riser wooden stairs against the right wall, climbing from the front toward the back
+    up to an opening in the ceiling. Faces are drawn back to front so nearer steps cover farther ones."""
+    XL, XR = 4.25, 5.4          # open side and wall side
+    YF, YC = -3.0, 3.1          # floor and ceiling
+    N, RUN, Z0 = 12, 0.3, 6.0
+    RISE = (YC - YF) / N
+    # dark floor shadow under the stairs
+    a.shape(pts_d([P(XL, YF, Z0), P(XR, YF, Z0), P(XR, YF, Z0 + N * RUN), P(XL, YF, Z0 + N * RUN)]), '#2e3034', stroke=False, rough=2, opacity=60)
+    # warm light from the opening in the ceiling at the top, and the shadow the stairs cast on the wall
+    a.shape(pts_d([P(XL, YC, 9.0), P(XR, YC, 9.0), P(XR, YC, 9.75), P(XL, YC, 9.75)]), '#f0c878', lw=3)
+    shadow = [P(XR, YF + 0.0, Z0 + 0.4), P(XR, YC - 0.4, Z0 + N * RUN), P(XR, YC - 0.4 - 1.6, Z0 + N * RUN), P(XR, YF, Z0 + 2.6)]
+    a.shape(pts_d(shadow), '#3a3c42', stroke=False, rough=2, opacity=70)
+    # wall-side stringer: a dark board fixed to the wall along the line of the steps
+    wall_str = [P(XR - 0.01, YF + RISE, Z0), P(XR - 0.01, YC, Z0 + N * RUN), P(XR - 0.01, YC - 0.45, Z0 + N * RUN), P(XR - 0.01, YF + RISE - 0.45, Z0)]
+    a.shape(pts_d(wall_str), '#5a4028', lw=3)
+    cols = {'front': '#8a6640', 'side': '#7a5836', 'top': '#a98252', 'under': '#5e4429'}
+    for i in range(N, 0, -1):  # back (top) step first
+        z0 = Z0 + (i - 1) * RUN
+        y1 = YF + i * RISE
+        for kind, quad in box_faces(XL, XR - 0.04, y1 - 0.09, y1, z0, z0 + RUN + 0.04):
+            a.shape(pts_d(quad), cols[kind], lw=2.6, rough=0.4)
+        if y1 < 0:  # wear on the treads you can see the top of
+            c0, c1 = P(XL + 0.3, y1, z0 + 0.12), P(XR - 0.3, y1, z0 + 0.12)
+            a.stroke(f'M{c0[0]:.1f} {c0[1]:.1f} L{c1[0]:.1f} {c1[1]:.1f}', color='#c49a62', lw=2.5, profile=None, rough=False)
+    # open-side stringer: a thick diagonal board with a face toward the camera
+    top_line = [(Z0 - 0.05, YF + RISE * 0.6), (Z0 + N * RUN, YC - 0.05)]
+    def on_line(t, drop):
+        z = top_line[0][0] + (top_line[1][0] - top_line[0][0]) * t
+        y = top_line[0][1] + (top_line[1][1] - top_line[0][1]) * t - drop
+        return z, y
+    pts_top = [P(XL - 0.06, on_line(t, 0)[1], on_line(t, 0)[0]) for t in (0, 1)]
+    pts_bot = [P(XL - 0.06, on_line(t, 0.55)[1], on_line(t, 0.55)[0]) for t in (1, 0)]
+    a.shape(pts_d(pts_top + pts_bot), '#7a5836', lw=3.5)
+    a.hatch(pts_d(pts_top + pts_bot), '#4a3420', angle=30, spacing=6, width=1.8, opacity=50)
+    grain = [P(XL - 0.06, on_line(t, d)[1], on_line(t, d)[0]) for t, d in ((0.05, 0.2), (0.6, 0.2))]
+    a.stroke(f'M{grain[0][0]:.1f} {grain[0][1]:.1f} L{grain[1][0]:.1f} {grain[1][1]:.1f}', color='#5a4028', lw=2.4, profile=None, rough=False)
+    # the bottom of the stringer resting on the floor
+    foot = [P(XL - 0.06, YF, Z0 - 0.3), P(XL - 0.06, YF + RISE * 0.6, Z0 - 0.05), P(XL - 0.06, YF + RISE * 0.6 - 0.55, Z0 - 0.05)]
+    a.shape(pts_d(foot), '#6e5232', lw=3)
+    # handrail on the open side: posts standing up from the stringer, a rail along their tops
+    posts = []
+    rail = []
+    for t in [k / 6 for k in range(7)]:
+        z, y = on_line(t, 0)
+        b = P(XL - 0.03, y, z); top = P(XL - 0.03, y + 1.15, z)
+        posts.append((b, top))
+        rail.append(top)
+    for b, top in posts:
+        a.stroke(f'M{b[0]:.1f} {b[1]:.1f} L{top[0]:.1f} {top[1]:.1f}', color=INK, lw=9, profile=None, rough=False)
+        a.stroke(f'M{b[0]:.1f} {b[1]:.1f} L{top[0]:.1f} {top[1]:.1f}', color='#7a5836', lw=5, profile=None, rough=False)
+    a.stroke(pts_d(rail, closed=False), color=INK, lw=13, profile=None, rough=False)
+    a.stroke(pts_d(rail, closed=False), color='#8a6640', lw=8, profile=None, rough=False)
+    a.stroke(pts_d([(x, y - 2) for x, y in rail], closed=False), color='#c49a62', lw=2.5, profile=None, rough=False)
 
 
 def tv(out):

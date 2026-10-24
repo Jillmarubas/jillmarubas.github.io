@@ -136,6 +136,12 @@ a sunlit forest path), taken as principles and never copied:
 - **Scale size matches the distance.** Up close, use fine scales with soft outlines. Large, even,
   high-contrast cells read as a snake or chainmail.
 
+**Interiors** (training note, 24 Oct 2026; example `remotion/src/timetraveler/BasementTV.tsx`):
+- **Objects in a room are 3D, never flat drawings on a wall plane.** Stairs, furniture and anything that
+  sticks out into the room need real perspective. Project them from 3D (see `P()` and `box_faces()`
+  in `scripts/vectorcraft/basement.py`), with the faces you would really see: tops below eye level,
+  undersides above it, the end facing the camera. Add thickness, and cast shadows on the wall and floor.
+
 Other decisions for this channel:
 - **Research first:** research textures, colours, anatomy, movement and surroundings before any
   art, and write it down with sources (`research/<era>.md`). Real anatomy goes in the cartoon
