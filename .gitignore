@@ -34,3 +34,7 @@ container-transform-demo.html
 /*.pdf
 /*.docx
 /*.mp4
+
+# Python bytecode caches
+__pycache__/
+*.pyc
