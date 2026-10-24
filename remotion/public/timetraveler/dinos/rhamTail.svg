@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="560" height="320" viewBox="0 0 560 320">
+  <title>Untitled-2</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <path d="M250 170 C183.333 180.667 120 192 60 204" fill="none" stroke="#2a1b12" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M250 170 C183.333 180.667 120 192 60 204" fill="none" stroke="#6a4f38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M61.468 203.947 C62.318 201.484 56.987 201.986 53.176 199.849 C49.366 197.712 42.37 193.47 38.604 191.126 C34.838 188.782 33.931 185.063 30.583 185.785 C27.235 186.507 22.584 192.085 18.515 195.46 C14.445 198.834 5.98 202.575 6.166 206.031 C6.352 209.486 15.013 212.794 19.629 216.193 C24.246 219.593 29.125 226.689 33.866 226.428 C38.607 226.166 43.476 218.373 48.076 214.626 C52.676 210.879 60.617 206.41 61.468 203.947 Z" fill="#c0502f" stroke="#2a1b12" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
