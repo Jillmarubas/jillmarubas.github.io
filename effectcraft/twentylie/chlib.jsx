@@ -190,6 +190,7 @@ function win(c, x, y, w, h, fill, titleRgb, z) {
   bar.threeDLayer = true;
   bar.property("Transform").property("Position").setValue([x, y, (z || 0) - 1]);
   bar.parent = l;
+  bar.property("Transform").property("Opacity").expression = 'thisLayer.parent.transform.opacity';
   return l;
 }
 

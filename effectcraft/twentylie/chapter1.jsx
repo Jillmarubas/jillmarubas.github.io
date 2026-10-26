@@ -17,6 +17,7 @@ function chunks(c, words, y, size, t0, step) {
     b.property("Transform").property("Position").setValue([cx, y, 1]);
     var t = txt(c, words[j], "Fraunces-SemiBold", size, INK, cx, y, null, true);
     t.parent = b; t.property("Transform").property("Position").setValue([0, 0, -1]);
+    t.property("Transform").property("Opacity").expression = 'thisLayer.parent.transform.opacity';
     fade(b, t0 + j * step, t0 + j * step + 0.2, 0, 100);
     keys(b.property("Transform").property("Scale"), [[t0 + j * step, [80, 80, 100]], [t0 + j * step + 0.3, [100, 100, 100]]], 70);
     out.push(b);
