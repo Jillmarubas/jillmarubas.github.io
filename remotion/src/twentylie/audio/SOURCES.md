@@ -12,8 +12,8 @@ Every file was downloaded by the user from ElevenLabs' free library (26 Oct 2026
 | `sfx/paper_thin.mp3` | 1.0 s | Receipts sliding in, cards flipping, the magnifying glass. |
 | `sfx/whoosh_soft_cinematic.mp3` | 2.0 s | Whip transitions between scenes. |
 | `sfx/whoosh_short_soft.mp3` | 2.0 s | Small object entrances (price tags, quote cards). |
+| `sfx/receipt_printer.mp3` | 2.0 s | The film's motif: every receipt that prints, the cold-open printer that won't stop, the second bill in ch 3. |
 | `sfx/cash_register_error.mp3` | 1.0 s | Counter running into the red (cold open), "then get charged extra" (ch 3). |
 
 **Still missing**
-- **Receipt printer** (the film's sound motif): needs a download.
 - **Shepard tone** for the ch 3 climax: made in code (no credits), because it's a mathematical illusion and not a recording.
