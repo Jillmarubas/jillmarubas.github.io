@@ -1,0 +1,4 @@
+# Higgsfield gpt_image_2_5, high quality, 2k, 16:9, reference people/ref_builder.jpg (2.75 credits each)
+T1 3572955c-1583-40a8-ad2d-894eac57d756 https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_085136_3572955c-1583-40a8-ad2d-894eac57d756.png
+T2 04d2e136-2f80-417a-a0f3-87c3ce555ea2 https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_085136_04d2e136-2f80-417a-a0f3-87c3ce555ea2.png
+T3 9ec29760-c127-4d51-9ca8-ec694e863292 https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_085137_9ec29760-c127-4d51-9ca8-ec694e863292.png
