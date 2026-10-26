@@ -109,7 +109,7 @@ function shot6() {
   var bet = txt(c, "BET", "Fraunces-Black", 120, INK, W / 2, 700, null, true);
   var aBet = T(31.6) - 27.9; // "...there's a quiet bet."
   fade(bet, aBet - 0.2, aBet, 0, 100);
-  circleStroke(c, W / 2, 660, 170, 95, RED, 7, aBet + 0.1, aBet + 0.6);
+  markerLoop(c, W / 2 - 4, 668, 196, 110, aBet + 0.1, aBet + 0.75, 1.7);
   camera(c, [[0, [W / 2, H / 2 - 40, -1200]], [7.0, [W / 2, H / 2 + 40, -1050]]], 30);
   return c;
 }

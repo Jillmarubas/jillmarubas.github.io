@@ -171,3 +171,39 @@ function circleStroke(comp, cx, cy, rx, ry, rgb, w, t0, t1) {
   l.property("Transform").property("Position").setValue([0, 0]);
   return l;
 }
+
+// Hand-drawn red marker loop: a slightly uneven ellipse that overshoots its start, drawn on
+// with Trim Paths, round caps, multiplied onto the paper and roughened like felt-tip ink.
+function markerLoop(comp, cx, cy, rx, ry, t0, t1, seed) {
+  var n = 40, turns = 1.13, a0 = -2.5, pts = [];
+  seed = seed || 1;
+  for (var i = 0; i <= n; i++) {
+    var u = i / n, a = a0 + u * turns * 2 * Math.PI;
+    var wob = 1 + 0.05 * Math.sin(3 * a + seed) + 0.03 * Math.sin(5 * a + 2 * seed);
+    var grow = 1 + 0.09 * u;                       // the loop drifts outward, so the ends cross
+    pts.push([cx + Math.cos(a) * rx * wob * grow + 6 * u, cy + Math.sin(a) * ry * wob * grow - 4 * u]);
+  }
+  var ins = [], outs = [];
+  for (var j = 0; j <= n; j++) {
+    var p0 = pts[Math.max(0, j - 1)], p2 = pts[Math.min(n, j + 1)];
+    var tx = (p2[0] - p0[0]) / 6, ty = (p2[1] - p0[1]) / 6;
+    ins.push([-tx, -ty]); outs.push([tx, ty]);
+  }
+  var s = new Shape(); s.vertices = pts; s.inTangents = ins; s.outTangents = outs; s.closed = false;
+  var l = comp.layers.addShape();
+  l.name = "Red marker";
+  var g = l.property("Contents").addProperty("ADBE Vector Group").property("Contents");
+  g.addProperty("ADBE Vector Shape - Group").property("Path").setValue(s);
+  var st = g.addProperty("ADBE Vector Graphic - Stroke");
+  st.property("Color").setValue([0.86, 0.09, 0.11]);
+  st.property("Stroke Width").setValue(17);
+  st.property("Line Cap").setValue(2);
+  st.property("Line Join").setValue(2);
+  var tr = g.addProperty("ADBE Vector Filter - Trim");
+  keys(tr.property("End"), [[t0, 0], [t1, 100]], 35);
+  l.property("Transform").property("Position").setValue([0, 0]);
+  l.property("Transform").property("Opacity").setValue(92);
+  l.blendingMode = BlendingMode.MULTIPLY;
+  fx(l, "Turbulent Displace", {"Amount": 6, "Size": 7});
+  return l;
+}

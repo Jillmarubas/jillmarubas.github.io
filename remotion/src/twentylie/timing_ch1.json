@@ -1,0 +1,85 @@
+{
+ "duration": 81.552,
+ "lines": [
+  {
+   "line": "February 1st, 2023. ChatGPT is barely two months old, and millions of people are already using it.",
+   "start": 0.0,
+   "end": 6.561
+  },
+  {
+   "line": "OpenAI announces a paid version. ChatGPT Plus. Twenty dollars a month.",
+   "start": 6.694,
+   "end": 10.002
+  },
+  {
+   "line": "It's a familiar price. About what people already paid for music or a streaming service.",
+   "start": 10.222,
+   "end": 17.901
+  },
+  {
+   "line": "But AI isn't like streaming.",
+   "start": 18.123,
+   "end": 18.85
+  },
+  {
+   "line": "When one more person watches a film, the film doesn't get more expensive. It's already made.",
+   "start": 18.997,
+   "end": 23.856
+  },
+  {
+   "line": "AI is different. Every answer is made fresh, on chips in a data centre, the moment you ask.",
+   "start": 24.101,
+   "end": 29.765
+  },
+  {
+   "line": "The industry measures that work in tokens. Small pieces of words.",
+   "start": 30.008,
+   "end": 33.614
+  },
+  {
+   "line": "More tokens, more computing. More computing, more cost.",
+   "start": 33.845,
+   "end": 37.179
+  },
+  {
+   "line": "So a flat price is a gamble, a bit like a gym membership. Most people come in a few times. Their money pays for the few who come every day.",
+   "start": 37.399,
+   "end": 47.331
+  },
+  {
+   "line": "However, the AI companies had a second reason to feel safe.",
+   "start": 47.554,
+   "end": 51.102
+  },
+  {
+   "line": "Tokens were getting cheaper. Fast.",
+   "start": 51.322,
+   "end": 52.803
+  },
+  {
+   "line": "The investment firm Andreessen Horowitz measured it. For the same level of ability, the price of AI was falling about ten times every year.",
+   "start": 53.023,
+   "end": 61.222
+  },
+  {
+   "line": "Performance like GPT-3's cost sixty dollars per million tokens in 2021. Three years later, about six cents.",
+   "start": 61.361,
+   "end": 68.393
+  },
+  {
+   "line": "So the plan made sense. Even the heaviest users would get cheaper to serve every year. Time was on their side.",
+   "start": 68.615,
+   "end": 74.867
+  },
+  {
+   "line": "They were right about the price of a word.",
+   "start": 75.087,
+   "end": 78.451
+  },
+  {
+   "line": "They were wrong about how many words we'd want.",
+   "start": 78.676,
+   "end": 81.385
+  }
+ ]
+}
