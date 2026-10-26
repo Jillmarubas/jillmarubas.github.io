@@ -57,9 +57,11 @@ function head(c, s, x, y, size, rgb, z) {
   return t;
 }
 function source(c, s, t) { var l = label(c, s, W / 2, 1010, 22, GREY); if (t !== undefined) fade(l, t, t + 0.4, 0, 100); return l; }
+// Fade in with a small scale settle, relative to the layer's own scale (k = start size in %).
 function pop(l, t, k) {
   fade(l, t, t + 0.2, 0, 100);
-  keys(l.property("Transform").property("Scale"), [[t, [k || 115, k || 115, 100]], [t + 0.45, [100, 100, 100]]], 80);
+  var sp = l.property("Transform").property("Scale"), s0 = sp.valueAtTime(t, false), f = (k || 115) / 100;
+  keys(sp, [[t, [s0[0] * f, s0[1] * f, s0.length > 2 ? s0[2] : 100]], [t + 0.45, s0]], 80);
   return l;
 }
 function enter(l, t, dx, dy, d) {
@@ -74,11 +76,13 @@ function exitTo(l, t, dx, dy, d) {
 }
 
 // Date stamp: red rubber-stamp text that thumps onto the paper.
-function stamp(c, s, x, y, t, size) {
+// onDark: normal blend (multiply would vanish on a dark background).
+function stamp(c, s, x, y, t, size, onDark) {
   size = size || 96;
+  var mode = onDark ? BlendingMode.NORMAL : BlendingMode.MULTIPLY;
   var l = txt(c, s, "Fraunces-Black", size, RED, x, y, null, true);
   l.property("Transform").property("Z Rotation").setValue(-4);
-  l.blendingMode = BlendingMode.MULTIPLY;
+  l.blendingMode = mode;
   l.property("Transform").property("Opacity").setValue(0);
   keys(l.property("Transform").property("Opacity"), [[t, 0], [t + 0.04, 90]], 0);
   keys(l.property("Transform").property("Scale"), [[t, [135, 135, 100]], [t + 0.12, [100, 100, 100]]], 60);
@@ -88,7 +92,7 @@ function stamp(c, s, x, y, t, size) {
   box.threeDLayer = true;
   box.property("Transform").property("Position").setValue([x, y, -1]);
   box.property("Transform").property("Z Rotation").setValue(-4);
-  box.blendingMode = BlendingMode.MULTIPLY;
+  box.blendingMode = mode;
   keys(box.property("Transform").property("Opacity"), [[t, 0], [t + 0.04, 85]], 0);
   keys(box.property("Transform").property("Scale"), [[t, [135, 135, 100]], [t + 0.12, [100, 100, 100]]], 60);
   fx(box, "Turbulent Displace", {"Amount": 5, "Size": 4});
@@ -198,14 +202,15 @@ function chapterCard(c, num, title, d) {
   smoke(c, 10);
   var strip = solid(c, CREAM, "Card strip");
   strip.threeDLayer = true;
-  strip.property("Transform").property("Scale").setValue([62, 66, 100]);
+  strip.property("Transform").property("Scale").setValue([title.length > 22 ? 84 : 62, 66, 100]);
   strip.property("Transform").property("Position").setValue([W / 2, 520, 40]);
   slide(strip, 0.0, 0.9, [W / 2, -520, 40], [W / 2, 520, 40], 75);
   var k = label(c, "CHAPTER " + num, W / 2, 380, 34, GREY);
   fade(k, 0.9, 1.3, 0, 100);
-  var t = head(c, title, W / 2, 560, title.length > 16 ? 100 : 128, INK);
+  var sz = title.length > 22 ? 80 : (title.length > 16 ? 100 : 128);
+  var t = head(c, title, W / 2, 560, sz, INK);
   pop(t, 1.3, 108);
-  var w = Math.min(1100, title.length * (title.length > 16 ? 58 : 74));
+  var w = Math.min(1300, title.length * sz * 0.58);
   markerLine(c, W / 2 - w / 2, 610, W / 2 + w / 2, 604, 2.0, 2.7);
   camera(c, [[0, [W / 2, H / 2 + 20, -1200]], [d, [W / 2, H / 2 - 10, -980]]], 20);
   var out = solid(c, [0, 0, 0], "Out");
