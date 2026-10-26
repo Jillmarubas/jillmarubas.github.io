@@ -93,6 +93,7 @@ w_total = d.textlength("$20", font=f_price) + 8 + d.textlength("*", font=f_star)
 x0 = 1480 - w_total / 2
 d.text((x0, 590), "$20", font=f_price, fill=(28, 26, 24), anchor="ls")
 d.text((x0 + d.textlength("$20", font=f_price) + 8, 420), "*", font=f_star, fill=RED, anchor="ls")
+base3 = im.copy()  # $20* without the small print, for variant 3b
 fine = ("*Plan limits apply. Usage beyond the allowance is billed in credits. Allowances may change. "
         "Heavy users may pay more. Prices shown are monthly. See terms for details.")
 fm = font(MONO, 17)
@@ -107,6 +108,16 @@ for i, ln in enumerate(lines):
     d.text((1180, 660 + i * 24), ln, font=fm, fill=(110, 100, 90))
 marker_loop(im, 1478, 700, 360, 78, width=9, seed=9, tilt=-2)
 save(im, 3)
+
+# 3b. Same, but the small print is one readable line: "*Terms & conditions apply"
+im = base3
+d = ImageDraw.Draw(im)
+tc = "*Terms & conditions apply"
+ftc = fit(MONO, tc, 640, 60)
+d.text((1478, 712), tc, font=ftc, fill=(58, 52, 46), anchor="mm")
+tw = d.textlength(tc, font=ftc)
+marker_loop(im, 1478, 712, tw / 2 + 50, 62, width=9, seed=9, tilt=-2)
+save(im, "3b")
 
 # Squint test: all three at 120 px and 320 px wide.
 sheet = Image.new("RGB", (3 * 330 + 20, 200 + 90), (40, 40, 40))
