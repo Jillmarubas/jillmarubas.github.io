@@ -69,13 +69,8 @@ def save(img, n):
     return out
 
 
-# 1. Receipt shock: "$20" on the receipt, circled in red marker. Hook: WHO PAYS?
-im = plate(1).convert("RGBA")
-rec = Image.new("RGBA", (300, 150), (0, 0, 0, 0))
-ImageDraw.Draw(rec).text((150, 75), "$20", font=font(MONO, 96), fill=(38, 34, 30, 240), anchor="mm")
-rec = rec.rotate(-8, resample=Image.BICUBIC, expand=True)
-im.alpha_composite(rec, (int(598 - rec.width / 2), int(925 - rec.height / 2)))
-marker_loop(im, 598, 925, 118, 62, width=10, seed=5, tilt=-8)
+# 1. Bill shock: he stares at an A4 bill (no numbers on it). Hook: WHO PAYS?
+im = Image.open(os.path.join(HERE, "raw", "T1b.png")).convert("RGB").resize((W, H), Image.LANCZOS).convert("RGBA")  # A4 bill version
 f_big = fit(FRAUNCES, "PAYS?", 760, 300)
 shadow_text(im, (1490, 330), "WHO", f_big, (255, 255, 255), anchor="ms")
 shadow_text(im, (1490, 610), "PAYS?", f_big, (255, 214, 64), anchor="ms")
