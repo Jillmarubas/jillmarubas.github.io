@@ -162,3 +162,6 @@ Researched and tested in October 2026.
 - **Sound effects and music:** use only free downloads from ElevenLabs' library. **Never generate
   them with the user's ElevenLabs credits.** The cloud container can't reach elevenlabs.io, so the
   user downloads the files and uploads them to the chat.
+- **Voice-over pacing:** no long pauses; they make viewers wait. After every TTS take, run
+  `python3 remotion/scripts/tighten_vo.py <take> <out.wav>`, which cuts every pause down to 0.22 s
+  without changing the speed of the voice.

@@ -118,7 +118,7 @@ A documentary in the MagnatesMedia style for **Small Print**: narration only, no
 | 6:36 | In 2025, OpenAI brought in about thirteen billion dollars. According to reports from its investors, it also burned through about eight billion in cash. | Two counters: "$13.1B in" and "$8B burned". Source: CNBC, Feb 2026. |
 | 6:46 | And the spending ahead is far bigger. | The counters shrink as the frame widens. |
 | 6:49 | In late 2025, Sam Altman said OpenAI had committed to about one-point-four trillion dollars of data centres and computing over eight years. | A counter rolls to "$1.4 TRILLION". A map fills with data-centre pins. |
-| 6:57 | By February, it had told investors a smaller target. Around six hundred billion by 2030. Still one of the largest spending plans in history. | The counter rolls back to "~$600B by 2030", still dwarfing the $13.1B. Source: CNBC. |
+| 6:57 | By February 2026, it had told investors a smaller target. Around six hundred billion by 2030. Still one of the largest spending plans in history. | The counter rolls back to "~$600B by 2030", still dwarfing the $13.1B. Source: CNBC. |
 | 7:06 | So here is the paradox. | Split screen. |
 | 7:09 | Every token keeps getting cheaper. | Left: the price line falls. |
 | 7:11 | But every task uses more of them. Reasoning models think longer. Agents loop, re-read and retry. | Right: the token count climbs faster than the price falls. |
