@@ -70,9 +70,10 @@ For the script itself, use the `script-writing` skill.
   pin notes to exact frames. Fix each note, mark it Fixed, and republish only the
   chapters that changed. If that page can't be published, send each chapter as a local
   clip instead.
-- The skill names helper scripts `scripts/review_parts.py` and `scripts/review_page.py`.
-  They are **not** in this repo yet (`remotion/scripts/` has none), so build them the
-  first time a review room is needed.
+- The helper scripts are `remotion/scripts/review_parts.py` (960x540 parts, <=120 s, <15 MB)
+  and `remotion/scripts/review_page.py` (the page; notes live in the artifact's `db`, collection
+  `notes`, fields `chapter`, `t`, `tc`, `text`, `status` open|fixed, `reply`). Built 26 Oct 2026
+  for The $20 Lie; `effectcraft/twentylie/assemble.sh` shows the whole flow.
 - Render the final master once, in the cloud, only after the user approves the cut.
 
 **Final QC**
@@ -137,6 +138,15 @@ Researched and tested in October 2026.
       expression-driven 3D layers (`seedRandom(k, true)`) with motion blur instead.
     - CC Vignette darkens its own layer: put it on an adjustment layer, not a solid.
     - It reads system fonts only. Convert a repo woff2 to TTF with fontTools into `~/.fonts`.
+  - Lessons from The $20 Lie (26 Oct 2026, v0.17.0):
+    - Render long comps in short frame-aligned chunks (`effectcraft/twentylie/render_chunks.sh`);
+      the cloud container restarts now and then and kills background renders. Re-run to resume.
+    - `--end` is exclusive, so chunk edges at whole frames join with no gaps or duplicates.
+    - A child layer does NOT inherit its parent's opacity: link it with the expression
+      `thisLayer.parent.transform.opacity`.
+    - Keyframing Scale on an image card resets it to 100%; key relative to its current scale.
+    - Multiply-blended red ink vanishes on dark backgrounds; use normal blend there.
+    - A round-capped stroke shows a dot at Trim End 0: keep it hidden until it starts drawing.
   - Use `effectcraft-cli script file.jsx` for After Effects-style scripting.
   - Use `render-frame` to check stills and `render` to export.
   - Property paths need the group, for example
