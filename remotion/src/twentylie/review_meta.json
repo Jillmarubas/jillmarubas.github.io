@@ -1,0 +1,508 @@
+{
+ "title": "The $20 Lie",
+ "page_title": "$20 Lie Review Room",
+ "fps": [
+  24000,
+  1001
+ ],
+ "chapters": [
+  {
+   "id": "coldopen",
+   "label": "Cold open",
+   "lines": [
+    {
+     "t0": 0.5,
+     "t1": 7.33,
+     "scene": "0.1",
+     "text": "In January 2025, the head of the most famous AI company in the world posted something strange."
+    },
+    {
+     "t0": 7.553,
+     "t1": 14.01,
+     "scene": "0.2",
+     "text": "\"Insane thing,\" Sam Altman wrote. \"We are currently losing money on OpenAI Pro subscriptions.\""
+    },
+    {
+     "t0": 14.24,
+     "t1": 21.291,
+     "scene": "0.3",
+     "text": "The plan cost two hundred dollars a month. And some people used so much that they cost OpenAI more than they paid."
+    },
+    {
+     "t0": 21.512,
+     "t1": 24.177,
+     "scene": "0.4",
+     "text": "The strangest part? He'd picked the price himself."
+    },
+    {
+     "t0": 24.403,
+     "t1": 27.681,
+     "scene": "0.5",
+     "text": "But this isn't a story about one plan, or one company."
+    },
+    {
+     "t0": 27.901,
+     "t1": 34.71,
+     "scene": "0.6",
+     "text": "Behind almost every AI subscription you pay for, there's a quiet bet. A bet that you won't use too much."
+    },
+    {
+     "t0": 34.931,
+     "t1": 39.731,
+     "scene": "0.7",
+     "text": "Then AI agents arrived. And \"too much\" stopped meaning what it used to."
+    },
+    {
+     "t0": 39.952,
+     "t1": 42.518,
+     "scene": "0.8",
+     "text": "This October, the small print changed again."
+    }
+   ]
+  },
+  {
+   "id": "ch1",
+   "label": "1 · The $20 Bet",
+   "lines": [
+    {
+     "t0": 12.3,
+     "t1": 18.861,
+     "scene": "1.1",
+     "text": "February 1st, 2023. ChatGPT is barely two months old, and millions of people are already using it."
+    },
+    {
+     "t0": 18.994,
+     "t1": 22.302,
+     "scene": "1.2",
+     "text": "OpenAI announces a paid version. ChatGPT Plus. Twenty dollars a month."
+    },
+    {
+     "t0": 22.522,
+     "t1": 30.201,
+     "scene": "1.3",
+     "text": "It's a familiar price. About what people already paid for music or a streaming service."
+    },
+    {
+     "t0": 30.423,
+     "t1": 31.15,
+     "scene": "1.4",
+     "text": "But AI isn't like streaming."
+    },
+    {
+     "t0": 31.297,
+     "t1": 36.156,
+     "scene": "1.5",
+     "text": "When one more person watches a film, the film doesn't get more expensive. It's already made."
+    },
+    {
+     "t0": 36.401,
+     "t1": 42.065,
+     "scene": "1.6",
+     "text": "AI is different. Every answer is made fresh, on chips in a data centre, the moment you ask."
+    },
+    {
+     "t0": 42.308,
+     "t1": 45.914,
+     "scene": "1.7",
+     "text": "The industry measures that work in tokens. Small pieces of words."
+    },
+    {
+     "t0": 46.145,
+     "t1": 49.479,
+     "scene": "1.8",
+     "text": "More tokens, more computing. More computing, more cost."
+    },
+    {
+     "t0": 49.699,
+     "t1": 59.631,
+     "scene": "1.9",
+     "text": "So a flat price is a gamble, a bit like a gym membership. Most people come in a few times. Their money pays for the few who come every day."
+    },
+    {
+     "t0": 59.854,
+     "t1": 63.402,
+     "scene": "1.10",
+     "text": "However, the AI companies had a second reason to feel safe."
+    },
+    {
+     "t0": 63.622,
+     "t1": 65.103,
+     "scene": "1.11",
+     "text": "Tokens were getting cheaper. Fast."
+    },
+    {
+     "t0": 65.323,
+     "t1": 73.522,
+     "scene": "1.12",
+     "text": "The investment firm Andreessen Horowitz measured it. For the same level of ability, the price of AI was falling about ten times every year."
+    },
+    {
+     "t0": 73.661,
+     "t1": 80.693,
+     "scene": "1.13",
+     "text": "Performance like GPT-3's cost sixty dollars per million tokens in 2021. Three years later, about six cents."
+    },
+    {
+     "t0": 80.915,
+     "t1": 87.167,
+     "scene": "1.14",
+     "text": "So the plan made sense. Even the heaviest users would get cheaper to serve every year. Time was on their side."
+    },
+    {
+     "t0": 87.387,
+     "t1": 90.751,
+     "scene": "1.15",
+     "text": "They were right about the price of a word."
+    },
+    {
+     "t0": 90.976,
+     "t1": 93.685,
+     "scene": "1.16",
+     "text": "They were wrong about how many words we'd want."
+    }
+   ]
+  },
+  {
+   "id": "ch2",
+   "label": "2 · The Heavy Users",
+   "lines": [
+    {
+     "t0": 12.3,
+     "t1": 18.082,
+     "scene": "2.1",
+     "text": "December 2024. OpenAI launches ChatGPT Pro. Two hundred dollars a month, ten times the price of Plus."
+    },
+    {
+     "t0": 18.42,
+     "t1": 24.155,
+     "scene": "2.2",
+     "text": "The selling point was a new kind of model, one that reasons. It thinks through a problem before it answers."
+    },
+    {
+     "t0": 24.381,
+     "t1": 30.583,
+     "scene": "2.3",
+     "text": "But that thinking is made of tokens too. You never see most of it. Someone still pays for it."
+    },
+    {
+     "t0": 30.809,
+     "t1": 36.607,
+     "scene": "2.4",
+     "text": "A few weeks later came the post. \"People use it much more than we expected.\""
+    },
+    {
+     "t0": 36.832,
+     "t1": 40.458,
+     "scene": "2.5",
+     "text": "Then the next shift arrived. Not a smarter chatbot, but an agent."
+    },
+    {
+     "t0": 40.584,
+     "t1": 48.829,
+     "scene": "2.6",
+     "text": "A chatbot answers one question. An agent takes a whole task, opens files, writes code, tests it, fails, and tries again. On its own."
+    },
+    {
+     "t0": 49.05,
+     "t1": 55.828,
+     "scene": "2.7",
+     "text": "And at every step it re-reads everything it has done so far. Each lap of the loop costs more than the last."
+    },
+    {
+     "t0": 56.055,
+     "t1": 65.134,
+     "scene": "2.8",
+     "text": "In April 2025, Anthropic launched its own two-hundred-dollar plan, called Max. Programmers pointed its coding agent, Claude Code, at their projects."
+    },
+    {
+     "t0": 65.338,
+     "t1": 67.081,
+     "scene": "2.9",
+     "text": "Some of them never turned it off."
+    },
+    {
+     "t0": 67.314,
+     "t1": 75.296,
+     "scene": "2.10",
+     "text": "In July 2025, Anthropic announced weekly limits. It said some people were running Claude Code \"continuously in the background, 24/7.\""
+    },
+    {
+     "t0": 75.517,
+     "t1": 82.46,
+     "scene": "2.11",
+     "text": "One user on a two-hundred-dollar plan had used, in Anthropic's words, \"tens of thousands\" of dollars of model usage."
+    },
+    {
+     "t0": 82.689,
+     "t1": 89.916,
+     "scene": "2.12",
+     "text": "Anthropic said the new limits would affect fewer than five percent of subscribers."
+    },
+    {
+     "t0": 90.136,
+     "t1": 98.895,
+     "scene": "2.13",
+     "text": "But from the other side of the counter, it looked different. People had paid for a plan sold as twenty times more usage. Nobody had shown them where the ceiling was."
+    },
+    {
+     "t0": 99.123,
+     "t1": 103.773,
+     "scene": "2.14",
+     "text": "The companies had a problem. Their best customers were their most expensive ones."
+    },
+    {
+     "t0": 103.998,
+     "t1": 106.145,
+     "scene": "2.15",
+     "text": "One company tried to fix that quietly."
+    },
+    {
+     "t0": 106.403,
+     "t1": 107.779,
+     "scene": "2.16",
+     "text": "It did not go quietly."
+    }
+   ]
+  },
+  {
+   "id": "ch3",
+   "label": "3 · The Bill Comes Due",
+   "lines": [
+    {
+     "t0": 12.3,
+     "t1": 16.985,
+     "scene": "3.1",
+     "text": "June 2025. Cursor, one of the most popular AI coding apps, changes its twenty-dollar plan."
+    },
+    {
+     "t0": 17.113,
+     "t1": 26.1,
+     "scene": "3.2",
+     "text": "Before, you got a set number of requests. Now you get twenty dollars of credit, used up at the price of whichever model you pick."
+    },
+    {
+     "t0": 26.329,
+     "t1": 31.695,
+     "scene": "3.3",
+     "text": "Heavy users pick the best models. Some burn through the credit in days, then get charged extra."
+    },
+    {
+     "t0": 31.915,
+     "t1": 33.526,
+     "scene": "3.4",
+     "text": "Developers are furious."
+    },
+    {
+     "t0": 33.749,
+     "t1": 43.422,
+     "scene": "3.5",
+     "text": "Within weeks the CEO apologises. The changes, he writes, were \"not communicated clearly. That's our mistake, and we're sorry.\" Cursor offers refunds."
+    },
+    {
+     "t0": 43.911,
+     "t1": 51.529,
+     "scene": "3.6",
+     "text": "However, the lesson the industry took away wasn't to stop charging for heavy use. It was to explain it better. And to move slowly."
+    },
+    {
+     "t0": 51.772,
+     "t1": 60.171,
+     "scene": "3.7",
+     "text": "April 4th, 2026. Anthropic stops letting subscriptions cover outside agent tools, such as OpenClaw. Those now need separate, pay-as-you-go usage."
+    },
+    {
+     "t0": 60.354,
+     "t1": 66.164,
+     "scene": "3.8",
+     "text": "Late April. GitHub announces that Copilot is moving to usage-based billing, starting June 1st."
+    },
+    {
+     "t0": 66.402,
+     "t1": 72.801,
+     "scene": "3.9",
+     "text": "The monthly prices stay the same. But heavy use beyond the allowance is now billed in credits, worth one cent each."
+    },
+    {
+     "t0": 73.003,
+     "t1": 77.606,
+     "scene": "3.10",
+     "text": "Then, in September, the company that started it all."
+    },
+    {
+     "t0": 77.834,
+     "t1": 81.006,
+     "scene": "3.11",
+     "text": "OpenAI reopens its two-hundred-dollar Pro plan, and adds a new one at five hundred."
+    },
+    {
+     "t0": 81.25,
+     "t1": 91.4,
+     "scene": "3.12",
+     "text": "For people already on Pro, the old allowance runs until October 29th. After that, the price stays two hundred dollars. What you get for it goes down."
+    },
+    {
+     "t0": 91.624,
+     "t1": 96.415,
+     "scene": "3.13",
+     "text": "And the reason OpenAI gives is printed right there on its help page."
+    },
+    {
+     "t0": 96.644,
+     "t1": 100.863,
+     "scene": "3.14",
+     "text": "The lower allowance is \"to reflect our increasingly efficient models.\""
+    },
+    {
+     "t0": 101.095,
+     "t1": 101.67,
+     "scene": "3.15",
+     "text": "Read that again."
+    },
+    {
+     "t0": 102.129,
+     "t1": 104.507,
+     "scene": "3.16",
+     "text": "The models get more efficient, and you get less."
+    },
+    {
+     "t0": 104.639,
+     "t1": 109.917,
+     "scene": "3.17",
+     "text": "To understand how both can be true, you have to look at the receipt from the other side."
+    }
+   ]
+  },
+  {
+   "id": "ch4",
+   "label": "4 · The Other Side of the Receipt",
+   "lines": [
+    {
+     "t0": 12.3,
+     "t1": 22.184,
+     "scene": "4.1",
+     "text": "In 2025, OpenAI brought in about thirteen billion dollars. According to reports from its investors, it also burned through about eight billion in cash."
+    },
+    {
+     "t0": 22.417,
+     "t1": 24.551,
+     "scene": "4.2",
+     "text": "And the spending ahead is far bigger."
+    },
+    {
+     "t0": 24.791,
+     "t1": 34.05,
+     "scene": "4.3",
+     "text": "In late 2025, Sam Altman said OpenAI had committed to about one-point-four trillion dollars of data centres and computing over eight years."
+    },
+    {
+     "t0": 34.276,
+     "t1": 44.041,
+     "scene": "4.4",
+     "text": "By February 2026, it had told investors a smaller target. Around six hundred billion by 2030. Still one of the largest spending plans in history."
+    },
+    {
+     "t0": 44.261,
+     "t1": 45.88,
+     "scene": "4.5",
+     "text": "So here is the paradox."
+    },
+    {
+     "t0": 46.1,
+     "t1": 48.025,
+     "scene": "4.6",
+     "text": "Every token keeps getting cheaper."
+    },
+    {
+     "t0": 48.247,
+     "t1": 53.182,
+     "scene": "4.7",
+     "text": "But every task uses more of them. Reasoning models think longer. Agents loop, re-read and retry."
+    },
+    {
+     "t0": 53.423,
+     "t1": 59.716,
+     "scene": "4.8",
+     "text": "The research firm Gartner has called this the inference paradox: cheaper words, bigger bills."
+    },
+    {
+     "t0": 59.936,
+     "t1": 66.661,
+     "scene": "4.9",
+     "text": "Which leaves every AI company with three choices. Raise the price. Cut what's inside. Or charge for every use."
+    },
+    {
+     "t0": 66.796,
+     "t1": 70.17,
+     "scene": "4.10",
+     "text": "Raising prices is loud. People notice a number going up."
+    },
+    {
+     "t0": 70.411,
+     "t1": 74.003,
+     "scene": "4.11",
+     "text": "Charging per use is scary. Nobody likes a meter running."
+    },
+    {
+     "t0": 74.289,
+     "t1": 78.242,
+     "scene": "4.12",
+     "text": "So most chose the quietest option. Keep the price. Shrink the box."
+    },
+    {
+     "t0": 78.484,
+     "t1": 85.656,
+     "scene": "4.13",
+     "text": "However, for most people, almost nothing changes. If you ask a few questions a day, you'll probably never hit a limit."
+    },
+    {
+     "t0": 85.879,
+     "t1": 92.384,
+     "scene": "4.14",
+     "text": "The squeeze falls on the heaviest users. The ones who let agents work through the night."
+    },
+    {
+     "t0": 92.616,
+     "t1": 94.752,
+     "scene": "4.15",
+     "text": "And that group is growing every month."
+    },
+    {
+     "t0": 94.985,
+     "t1": 97.124,
+     "scene": "4.16",
+     "text": "So, was twenty dollars a lie?"
+    },
+    {
+     "t0": 97.348,
+     "t1": 100.481,
+     "scene": "4.17",
+     "text": "Not exactly. The price on the page was always true."
+    },
+    {
+     "t0": 100.724,
+     "t1": 102.869,
+     "scene": "4.18",
+     "text": "The lie was a word nobody printed, but we all heard anyway."
+    },
+    {
+     "t0": 103.091,
+     "t1": 104.483,
+     "scene": "4.19",
+     "text": "Unlimited."
+    },
+    {
+     "t0": 104.703,
+     "t1": 112.688,
+     "scene": "4.20",
+     "text": "Today, an agent working for you can cost more than you pay for it. Soon, agents may hire other agents, all night, on your account."
+    },
+    {
+     "t0": 112.927,
+     "t1": 116.792,
+     "scene": "4.21",
+     "text": "When that bill arrives, who's going to read the small print?"
+    }
+   ]
+  }
+ ]
+}
