@@ -1,6 +1,6 @@
 // Helpers for the EffectCraft build of the docfx demo (After Effects-style scripting).
 var ROOT = File($.fileName).parent.fsName;
-var W = 1920, H = 1080, FPS = 24;
+var W = 1920, H = 1080, FPS = 23.976;
 
 function img(name) {
   return app.project.importFile(new ImportOptions(new File(ROOT + "/assets/" + name)));
