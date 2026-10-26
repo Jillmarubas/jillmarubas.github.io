@@ -150,3 +150,15 @@ Researched and tested in October 2026.
     as that server.
   - So render in the cloud, work in 1080p, and upscale the final video to 4K. Use true
     4K only for a few hero shots.
+
+## Asset pipeline for documentaries (set by the user, 26 Oct 2026)
+
+- **Images:** generate them in Higgsfield one piece at a time (background plate, each subject and
+  prop as a separate cut-out), so they can be layered. Quote the credit cost before each batch.
+- **Assembly:** build the shots in EffectCraft: parallax, overlays, depth of field, glows and camera
+  moves. Make atmospheric overlays (grain, smoke, dust, light leaks) procedurally there; don't spend
+  generation credits on them.
+- **Voice-over:** ElevenLabs text-to-speech with the voice ID the user provides.
+- **Sound effects and music:** use only free downloads from ElevenLabs' library. **Never generate
+  them with the user's ElevenLabs credits.** The cloud container can't reach elevenlabs.io, so the
+  user downloads the files and uploads them to the chat.
