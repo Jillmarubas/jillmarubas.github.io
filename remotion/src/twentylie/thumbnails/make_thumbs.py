@@ -85,7 +85,7 @@ shadow_text(im, (80, 650), "BILL", f_bill, RED, stroke=4, stroke_fill=(255, 255,
 save(im, 2)
 
 # 3. Magnifier, gaze toward the price. Hook: $20* (the asterisk is the curiosity gap)
-im = plate(3).convert("RGBA")
+im = Image.open(os.path.join(HERE, "raw", "T3b.png")).convert("RGB").resize((W, H), Image.LANCZOS).convert("RGBA")  # glasses visible through the magnifier
 f_price = font(FRAUNCES, 290)
 f_star = font(FRAUNCES, 220)
 d = ImageDraw.Draw(im)
