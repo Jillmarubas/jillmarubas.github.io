@@ -1,0 +1,45 @@
+{
+ "duration": 42.312,
+ "lines": [
+  {
+   "line": "In January 2025, the head of the most famous AI company in the world posted something strange.",
+   "start": 0.0,
+   "end": 6.83
+  },
+  {
+   "line": "\"Insane thing,\" Sam Altman wrote. \"We are currently losing money on OpenAI Pro subscriptions.\"",
+   "start": 7.053,
+   "end": 13.51
+  },
+  {
+   "line": "The plan cost two hundred dollars a month. And some people used so much that they cost OpenAI more than they paid.",
+   "start": 13.74,
+   "end": 20.791
+  },
+  {
+   "line": "The strangest part? He'd picked the price himself.",
+   "start": 21.012,
+   "end": 23.677
+  },
+  {
+   "line": "But this isn't a story about one plan, or one company.",
+   "start": 23.903,
+   "end": 27.181
+  },
+  {
+   "line": "Behind almost every AI subscription you pay for, there's a quiet bet. A bet that you won't use too much.",
+   "start": 27.401,
+   "end": 34.21
+  },
+  {
+   "line": "Then AI agents arrived. And \"too much\" stopped meaning what it used to.",
+   "start": 34.431,
+   "end": 39.231
+  },
+  {
+   "line": "This October, the small print changed again.",
+   "start": 39.452,
+   "end": 42.018
+  }
+ ]
+}
