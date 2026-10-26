@@ -202,7 +202,8 @@ function markerLoop(comp, cx, cy, rx, ry, t0, t1, seed) {
   var tr = g.addProperty("ADBE Vector Filter - Trim");
   keys(tr.property("End"), [[t0, 0], [t1, 100]], 35);
   l.property("Transform").property("Position").setValue([0, 0]);
-  l.property("Transform").property("Opacity").setValue(92);
+  // Hidden until the pen touches the paper (a round cap would otherwise show a dot at End = 0).
+  keys(l.property("Transform").property("Opacity"), [[t0, 0], [t0 + 0.03, 92]], 0);
   l.blendingMode = BlendingMode.MULTIPLY;
   fx(l, "Turbulent Displace", {"Amount": 6, "Size": 7});
   return l;

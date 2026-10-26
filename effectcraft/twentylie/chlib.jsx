@@ -117,10 +117,11 @@ function tag(c, price, x, y, z, s, rot, size) {
 }
 
 // Quote card on paper: big serif quote, source line under it.
-function quote(c, q, src, t, size, italic) {
-  var l = txt(c, q, italic ? "Fraunces-SemiBoldItalic" : "Fraunces-SemiBold", size || 76, INK, W / 2, 520, null, true);
+function quote(c, q, src, t, size, italic, y) {
+  y = y || 520;
+  var l = txt(c, q, italic ? "Fraunces-SemiBoldItalic" : "Fraunces-SemiBold", size || 76, INK, W / 2, y, null, true);
   fade(l, t, t + 0.35, 0, 100);
-  if (src) { var s = label(c, src, W / 2, 520 + (size || 76) * 1.6, 24, GREY); fade(s, t + 0.4, t + 0.8, 0, 100); }
+  if (src) { var s = label(c, src, W / 2, y + (size || 76) * 1.3, 24, GREY); fade(s, t + 0.4, t + 0.8, 0, 100); }
   return l;
 }
 
@@ -170,7 +171,7 @@ function markerLine(c, x0, y0, x1, y1, t0, t1) {
   var tr = g.addProperty("ADBE Vector Filter - Trim");
   keys(tr.property("End"), [[t0, 0], [t1, 100]], 35);
   l.property("Transform").property("Position").setValue([0, 0]);
-  l.property("Transform").property("Opacity").setValue(92);
+  keys(l.property("Transform").property("Opacity"), [[t0, 0], [t0 + 0.03, 92]], 0);
   l.blendingMode = BlendingMode.MULTIPLY;
   fx(l, "Turbulent Displace", {"Amount": 6, "Size": 7});
   return l;
