@@ -1,0 +1,6 @@
+# Higgsfield gpt_image_2_5, high quality, 2k, 16:9, reference people/ref_builder.jpg (2.75 credits each)
+T1 3572955c-1583-40a8-ad2d-894eac57d756 https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_085136_3572955c-1583-40a8-ad2d-894eac57d756.png
+T2 04d2e136-2f80-417a-a0f3-87c3ce555ea2 https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_085136_04d2e136-2f80-417a-a0f3-87c3ce555ea2.png
+T3 9ec29760-c127-4d51-9ca8-ec694e863292 https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_085137_9ec29760-c127-4d51-9ca8-ec694e863292.png
+T1b b665ac1b-b496-4cda-a03c-b4ac5d776995 https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_161606_b665ac1b-b496-4cda-a03c-b4ac5d776995.png  (A4 bill edit of T1, used for thumb_1)
+T3b 6a65122d-eb2a-4421-926b-931398d5d9b8 https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_162345_6a65122d-eb2a-4421-926b-931398d5d9b8.png  (T3 edit: glasses visible through the magnifier, used for thumb_3)

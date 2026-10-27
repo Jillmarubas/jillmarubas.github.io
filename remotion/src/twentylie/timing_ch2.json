@@ -1,0 +1,85 @@
+{
+ "duration": 95.76,
+ "lines": [
+  {
+   "line": "December 2024. OpenAI launches ChatGPT Pro. Two hundred dollars a month, ten times the price of Plus.",
+   "start": 0.0,
+   "end": 5.782
+  },
+  {
+   "line": "The selling point was a new kind of model, one that reasons. It thinks through a problem before it answers.",
+   "start": 6.12,
+   "end": 11.855
+  },
+  {
+   "line": "But that thinking is made of tokens too. You never see most of it. Someone still pays for it.",
+   "start": 12.081,
+   "end": 18.283
+  },
+  {
+   "line": "A few weeks later came the post. \"People use it much more than we expected.\"",
+   "start": 18.509,
+   "end": 24.307
+  },
+  {
+   "line": "Then the next shift arrived. Not a smarter chatbot, but an agent.",
+   "start": 24.532,
+   "end": 28.158
+  },
+  {
+   "line": "A chatbot answers one question. An agent takes a whole task, opens files, writes code, tests it, fails, and tries again. On its own.",
+   "start": 28.284,
+   "end": 36.529
+  },
+  {
+   "line": "And at every step it re-reads everything it has done so far. Each lap of the loop costs more than the last.",
+   "start": 36.75,
+   "end": 43.528
+  },
+  {
+   "line": "In April 2025, Anthropic launched its own two-hundred-dollar plan, called Max. Programmers pointed its coding agent, Claude Code, at their projects.",
+   "start": 43.755,
+   "end": 52.834
+  },
+  {
+   "line": "Some of them never turned it off.",
+   "start": 53.038,
+   "end": 54.781
+  },
+  {
+   "line": "In July 2025, Anthropic announced weekly limits. It said some people were running Claude Code \"continuously in the background, 24/7.\"",
+   "start": 55.014,
+   "end": 62.996
+  },
+  {
+   "line": "One user on a two-hundred-dollar plan had used, in Anthropic's words, \"tens of thousands\" of dollars of model usage.",
+   "start": 63.217,
+   "end": 70.16
+  },
+  {
+   "line": "Anthropic said the new limits would affect fewer than five percent of subscribers.",
+   "start": 70.389,
+   "end": 77.616
+  },
+  {
+   "line": "But from the other side of the counter, it looked different. People had paid for a plan sold as twenty times more usage. Nobody had shown them where the ceiling was.",
+   "start": 77.836,
+   "end": 86.595
+  },
+  {
+   "line": "The companies had a problem. Their best customers were their most expensive ones.",
+   "start": 86.823,
+   "end": 91.473
+  },
+  {
+   "line": "One company tried to fix that quietly.",
+   "start": 91.698,
+   "end": 93.845
+  },
+  {
+   "line": "It did not go quietly.",
+   "start": 94.103,
+   "end": 95.479
+  }
+ ]
+}
