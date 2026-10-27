@@ -33,10 +33,10 @@ var shots = [
   // 1: "The selling point was a new kind of model, one that reasons. It thinks through a problem before it answers."
   S(1, function (c, d, at) {
     dark(c, [0.06, 0.06, 0.07]); smoke(c, 14);
-    var rows = ""; for (var i = 0; i < 12; i++) rows += ["consider the user's goal...", "list the possible approaches", "check step 2 against the data", "that fails; try another path", "compare both answers", "re-check the arithmetic"][i % 6] + "\r";
-    var th = txt(c, rows, "IBMPlexMono-Regular", 24, [0.75, 0.73, 0.7], W / 2, 0, null, true);
-    th.property("Transform").property("Position").expression = '[960, 200 - (time - ' + L(1, 0.5, at) + ') * 22, 30]';
-    th.property("Transform").property("Opacity").expression = 'time < ' + L(1, 0.5, at) + ' ? 0 : linear(time, ' + L(1, 0.5, at) + ', ' + L(1, 0.6, at) + ', 0, 45)';
+    // Revision 1: the model's hidden reasoning runs as a code overlay across the whole frame.
+    codeOverlay(c, L(1, 0.45, at), 42, [0.55, 0.85, 0.65], ["think(step=1): consider the user's goal", "think(step=2): list the possible approaches",
+      "think(step=3): check step 2 against the data", "    -> mismatch at row 14; try another path", "think(step=4): compare both answers",
+      "think(step=5): re-check the arithmetic", "tokens_hidden += 1_284", "tokens_shown  += 96", ""], 28, 160);
     var chip = card(c, "O10_ai_chip.png", W / 2, 760, -60, 24);
     var k = label(c, "A MODEL THAT REASONS", W / 2, 960, 30, CREAM); fade(k, L(1, 0.2, at), L(1, 0.3, at), 0, 100);
     still(c, d, 120);
@@ -44,46 +44,43 @@ var shots = [
   // 2: "But that thinking is made of tokens too. You never see most of it. Someone still pays for it."
   S(2, function (c, d, at) {
     dark(c, [0.06, 0.06, 0.07]);
-    var m = card(c, "O09_taxi_meter.png", W / 2, 600, 0, 28);
+    // Revision 1: real US banknotes stacking up (the meter's top no longer runs off the frame).
+    var base = shadow(card(c, "O29_dollar_bills.png", W / 2, 520, 0, 34));
     for (var i = 0; i < 9; i++) {
-      var coin = card(c, "O08_coins.png", 560 + (i % 5) * 200, 120, -20, 7);
-      var t0 = L(2, 0.05 + i * 0.07, at);
-      slide(coin, t0, t0 + 0.45, [560 + (i % 5) * 200, -100, -20], [W / 2, 520, -20], 30);
-      keys(coin.property("Transform").property("Opacity"), [[t0 + 0.4, 100], [t0 + 0.5, 0]], 0);
+      var y = 520 - (i + 1) * 24, t0 = L(2, 0.05 + i * 0.09, at), b = shadow(card(c, "O29_dollar_bills.png", W / 2 + ((i * 37) % 5 - 2) * 6, y, 0, 34, ((i * 53) % 7 - 3) * 0.8));
+      keys(b.property("Transform").property("Position"), [[t0, [W / 2, -500, 0]], [t0 + 0.32, [W / 2 + ((i * 37) % 5 - 2) * 6, y, 0]]], 0);
+      b.property("Transform").property("Position").setTemporalEaseAtKey(1, [new KeyframeEase(0, 70)], [new KeyframeEase(0, 70)]);
+      keys(b.property("Transform").property("Opacity"), [[t0 - 0.01, 0], [t0, 100]], 0);
     }
-    var curtain = solid(c, [0.03, 0.03, 0.035], "Curtain"); curtain.threeDLayer = true;
-    curtain.property("Transform").property("Scale").setValue([100, 40, 100]);
-    curtain.property("Transform").property("Position").setValue([W / 2, 200, -30]);
     var k = label(c, "HIDDEN REASONING TOKENS", W / 2, 840, 28, CREAM); fade(k, L(2, 0.35, at), L(2, 0.45, at), 0, 100);
     counter(c, W / 2, 950, 90, RED, 0, 4.8, L(2, 0.05, at), L(2, 1.0, at), "$", "", 2);
     still(c, d, 80);
   }),
   // 3: "A few weeks later came the post. 'People use it much more than we expected.'"
   S(3, function (c, d, at) {
+    // Revision 1: his photo with the quote beside him, black ink creeping in at the edges.
     paper2(c);
-    var bg = solid(c, CREAM, "Post"); bg.threeDLayer = true;
-    bg.property("Transform").property("Scale").setValue([56, 34, 100]);
-    bg.property("Transform").property("Position").setValue([W / 2, 520, 10]);
-    label(c, "Sam Altman", W / 2 - 440, 400, 28, INK).property("Source Text").setValue("Sam Altman");
-    var t = txt(c, "Insane thing: we are currently losing money on\rOpenAI Pro subscriptions! People use it much\rmore than we expected.", "IBMPlexMono-Medium", 30, INK, W / 2 - 440, 470, ParagraphJustification.LEFT_JUSTIFY, true);
-    markerLine(c, W / 2 - 160, 558, W / 2 + 420, 552, L(3, 0.55, at), L(3, 0.8, at));
-    markerLine(c, W / 2 - 440, 600, W / 2 + 30, 596, L(3, 0.8, at), L(3, 0.95, at));
-    source(c, "Sam Altman on X, Jan 2025", 0.3);
+    altman(c, 540, 640, 46, 0.0);
+    var nm = label(c, "SAM ALTMAN", 1390, 300, 30, INK); fade(nm, 0.1, 0.4, 0, 100);
+    var q = txt(c, "“People use it\rmuch more than\rwe expected.”", "Fraunces-SemiBold", 78, INK, 1390, 420, null, true);
+    fade(q, 0.15, 0.5, 0, 100);
+    markerLine(c, 1125, 538, 1655, 532, L(3, 0.62, at), L(3, 0.85, at));
+    source(c, "Sam Altman on X, Jan 2025", 0.3).property("Transform").property("Position").setValue([1390, 760, 0]);
+    inkEdges(c, 30);
     still(c, d, 90);
   }),
   // 4: "Then the next shift arrived. Not a smarter chatbot, but an agent."
   S(4, function (c, d, at) {
     paper2(c);
-    var chat = win(c, W / 2, 540, 760, 460, CREAM, [0.8, 0.77, 0.72], 0);
-    var ct = label(c, "CHATBOT", W / 2, 360, 30, INK); ct.parent = chat; ct.property("Transform").property("Position").setValue([0, -170, -2]);
-    var b1 = txt(c, "What's a token?", "IBMPlexMono-Medium", 30, INK, W / 2, 500, null, true); b1.parent = chat; b1.property("Transform").property("Position").setValue([0, -40, -2]);
-    var b2 = txt(c, "A small piece of a word.", "IBMPlexMono-Medium", 30, GREY, W / 2, 560, null, true); b2.parent = chat; b2.property("Transform").property("Position").setValue([0, 40, -2]);
+    // Revision 1: one terminal. First a chatbot answers one question; then an agent takes the task.
     var g = L(4, 0.6, at);
-    exitTo(chat, g, -1500, 0, 0.5);
-    var term = win(c, W / 2 + 1500, 540, 860, 500, [0.07, 0.07, 0.08], [0.22, 0.22, 0.24], -10);
-    slide(term, g, g + 0.55, [W / 2 + 1500, 540, -10], [W / 2, 540, -10]);
-    var tt = txt(c, "AGENT\r\r> task: fix the failing tests\r> reading 14 files...\r> writing patch...\r> running tests...", "IBMPlexMono-Medium", 30, CREAM, W / 2, 400, ParagraphJustification.LEFT_JUSTIFY, true);
-    tt.parent = term; tt.property("Transform").property("Position").setValue([-380, -180, -2]);
+    var term = terminal(c, W / 2, 560, 1180, 600, 0);
+    var h1 = head(c, "CHATBOT", W / 2, 200, 56, INK); fade(h1, 0.1, 0.3, 0, 100); fade(h1, g - 0.2, g, 100, 0);
+    var h2 = head(c, "AGENT", W / 2, 200, 56, RED); fade(h2, g, g + 0.2, 0, 100);
+    var c1 = termText(c, term, "$ chat \"What's a token?\"\r\rA small piece of a word.", -540, -200, 0.2, 1.4);
+    fade(c1, g - 0.25, g, 100, 0);
+    var a2 = "$ agent run \"fix the failing tests\"\r> reading 14 files...\r> writing patch...\r> running tests... 3 failed\r> trying again...";
+    termText(c, term, a2, -540, -200, g + 0.05, d - 0.2);
     still(c, d, 80);
   }),
   // 5: "A chatbot answers one question. An agent takes a whole task, opens files, writes code, tests it, fails, and tries again. On its own."

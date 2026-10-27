@@ -10,9 +10,9 @@ for p in coldopen chapter1 chapter2 chapter3 chapter4; do
   ffmpeg -loglevel error -y -i renders/${p}_video.mp4 -i renders/${p}_mix.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest renders/${p}_final.mp4
 done
 printf "file '%s'\n" coldopen_final.mp4 chapter1_final.mp4 chapter2_final.mp4 chapter3_final.mp4 chapter4_final.mp4 > renders/film_list.txt
-ffmpeg -loglevel error -y -f concat -safe 0 -i renders/film_list.txt -c:v copy -c:a aac -b:a 192k renders/the20lie_cut1_1080p.mp4
-python3 ../../.claude/skills/video-research/scripts/flash_check.py renders/the20lie_cut1_1080p.mp4 | tail -3
-ffmpeg -hide_banner -i renders/the20lie_cut1_1080p.mp4 -af ebur128=peak=true -f null - 2>&1 | grep -E "^\s+(I|Peak):"
+ffmpeg -loglevel error -y -f concat -safe 0 -i renders/film_list.txt -c:v copy -c:a aac -b:a 192k renders/the20lie_${CUT:-cut2}_1080p.mp4
+python3 ../../.claude/skills/video-research/scripts/flash_check.py renders/the20lie_${CUT:-cut2}_1080p.mp4 | tail -3
+ffmpeg -hide_banner -i renders/the20lie_${CUT:-cut2}_1080p.mp4 -af ebur128=peak=true -f null - 2>&1 | grep -E "^\s+(I|Peak):"
 python3 $M/review_parts.py renders/review coldopen=renders/coldopen_final.mp4 ch1=renders/chapter1_final.mp4 \
   ch2=renders/chapter2_final.mp4 ch3=renders/chapter3_final.mp4 ch4=renders/chapter4_final.mp4
 python3 $M/review_page.py renders/review ../../remotion/src/twentylie/review_meta.json

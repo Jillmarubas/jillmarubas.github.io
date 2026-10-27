@@ -27,7 +27,7 @@ PRINT, REG, TICK = "sfx/receipt_printer.mp3", "sfx/cash_register_error.mp3", "sf
 UNEASE, RESOLVE = "music/unease_beneath_the_surface.mp3", "music/dual_motif_resolve.mp3"
 
 # Chapter card (same on every chapter): strip slides in, title pops, marker underline, out.
-card = [(PAPER, 0.05, -9), (PRINT, 0.15, -16), (WSOFT, 1.25, -13), (PAPER, 2.0, -15), (WHIP, VO0 - 0.45, -12)]
+card = [(PAPER, 0.05, -9), (WSOFT, 1.25, -13), (PAPER, 2.0, -15), (WHIP, VO0 - 0.45, -12)]
 stampfx = lambda t: [(HIT, t, -17), (PAPER, t, -11)]
 
 # music: (file, source start s, film start, film end, fade in, fade out, card level dB, bed level dB)
@@ -35,7 +35,7 @@ if N == 1:
     music = [(RESOLVE, 0, 0, DUR - 0.9, 1.0, 0.05, -9, -18)]
     sfx = card + stampfx(VO0 + 0.15) + [
         (WSOFT, L(0, 0.27), -16), (WSOFT, L(1, 0.62), -12), (PAPER, L(2, 0.45), -14), (PAPER, L(2, 0.72), -14),
-        (WSOFT, L(3, 0.05), -14), (PAPER, S(4), -13), (WHIP, S(5), -11), (PAPER, L(6, 0.45), -15), (PAPER, L(7, 0.1), -16),
+        (WSOFT, L(3, 0.05), -14), (WSOFT, S(4) + 0.6, -16), (WHIP, S(5), -11), (PAPER, L(6, 0.45), -15), (PAPER, L(7, 0.1), -16),
         (WSOFT, S(8), -15), (PAPER, L(9, 0.15), -10), (WSOFT, L(11, 0.62), -14), (HIT, L(12, 0.88), -16),
         (RISE, DUR - 0.9 - 0.45, -12), (HIT, DUR - 0.9, -5)]
 elif N == 2:

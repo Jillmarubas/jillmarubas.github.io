@@ -34,12 +34,17 @@ var shots = [
   // 2: "In late 2025, Sam Altman said OpenAI had committed to about one-point-four trillion dollars of data centres and computing over eight years."
   S(2, function (c, d, at) {
     paper4(c, 10);
+    // Revision 1: his photo while he is named, then it drops away for the data centres.
+    var ph = altman(c, W / 2, 680, 40, 0, L(2, 0.27, at));
+    var nm = label(c, "SAM ALTMAN, LATE 2025", W / 2, 200, 30, INK); fade(nm, 0.1, 0.4, 0, 100);
+    exitTo(ph, L(2, 0.27, at), 0, 1300, 0.4); fade(nm, L(2, 0.27, at), L(2, 0.32, at), 100, 0);
     var spots = [[300, 760, 300], [620, 820, 120], [980, 780, 420], [1320, 840, 200], [1640, 770, 380], [460, 900, -60], [1140, 930, -90], [1520, 960, 40], [800, 980, -150], [180, 960, 150]];
     for (var i = 0; i < spots.length; i++) {
       var s = spots[i], m = card(c, "O18_datacentre_model.png", s[0], s[1], s[2], 16, 0);
       pop(m, L(2, 0.3 + i * 0.05, at), 60);
     }
     var n = counter(c, W / 2, 360, 170, INK, 0, 1.4, L(2, 0.35, at), L(2, 0.62, at), "$", " TRILLION", 1);
+    fade(n, L(2, 0.29, at), L(2, 0.35, at), 0, 100);
     var k = label(c, "COMMITTED TO DATA CENTRES AND COMPUTING, OVER ~8 YEARS", W / 2, 460, 26, INK); fade(k, L(2, 0.65, at), L(2, 0.72, at), 0, 100);
     source(c, "Source: Sam Altman, Nov 2025", 0.6);
     camera(c, [[0, [W / 2, H / 2 - 40, -1350]], [d, [W / 2, H / 2 + 20, -1150]]], 25);
@@ -102,7 +107,7 @@ var shots = [
     paper4(c);
     var t = tag(c, "$20/mo", W / 2 + 40, 560, -40, 32, 4, 70);
     var up = head(c, "↑", W / 2 + 330, 470, 160, RED); pop(up, L(9, 0.55, at), 140);
-    keys(t.property("Transform").property("Position"), [[L(9, 0.5, at), [W / 2 + 40, 560, -40]], [L(9, 0.58, at), [W / 2 + 40, 520, -40]], [L(9, 0.7, at), [W / 2 + 40, 560, -40]]], 60);
+    keys(t.property("Transform").property("Position"), [[L(9, 0.5, at), [W / 2 + 40, 560, 0]], [L(9, 0.58, at), [W / 2 + 40, 520, 0]], [L(9, 0.7, at), [W / 2 + 40, 560, 0]]], 60);
     var k = head(c, "LOUD", W / 2, 920, 90, RED); pop(k, L(9, 0.2, at), 110);
     still(c, d, 60);
   }),
@@ -153,7 +158,7 @@ var shots = [
   S(15, function (c, d, at) {
     paper4(c);
     var r = tag(c, "$20/mo", W / 2 + 40, 430, 60, 34, 4, 70);
-    var u = head(c, "UNLIMITED", W / 2, 800, 120, INK, 40);
+    var u = head(c, "UNLIMITED", W / 2, 800, 120, INK);
     fade(u, L(18, 0.0, at), L(18, 0.25, at), 0, 100);
     markerLine(c, W / 2 - 360, 768, W / 2 + 360, 756, L(18, 0.45, at), L(18, 0.85, at));
     // One long push toward the receipt (the slow take before the release).

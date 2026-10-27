@@ -49,3 +49,21 @@ People come from Google Flow (`PEOPLE_PROMPTS.md`). Text, numbers, charts, count
 - 7 plates × 1 credit = 7 credits
 - 19 props × 2 variants each (to pick the best) × 0.25 credits = 9.5 credits
 - **Total: about 17 credits** of your 140. Redos for bad hands or warped objects are about 0.25 credits each.
+
+## Revision 1 (27 Oct 2026, from the review-room notes)
+
+New Higgsfield images (gpt_image_2_5, high quality; links in `images/higgsfield_jobs.txt`):
+two newspaper front pages with a made-up masthead (THE DAILY LEDGER; real logos blurred afterwards),
+a blank A4 sheet, a commuter crowd on their phones (4K), a US dollar coin, a monitor, a stack of US
+banknotes, and the Builder holding an A4 bill (P6b, cut out with Higgsfield's background remover).
+About 27 credits in total.
+
+Made in code from those (no credits): `effectcraft/twentylie/tools/bake_tags.py` (price printed onto
+the tag) and `tools/make_paper_assets.py` (A4 bills, the fair-use page, the October 2026 calendar,
+the laptop with the post on screen).
+
+**Sam Altman** is shown with a real, licensed photo, not an AI likeness:
+"Sam Altman TechCrunch SF 2019 Day 2 Oct 3 (cropped).jpg", Wikimedia Commons, by TechCrunch,
+CC BY 2.0 (credit shown on screen: "Photo: TechCrunch, CC BY 2.0"; also credit it in the video
+description). Brought in through Higgsfield's URL import and cut out with its background remover,
+because this server can't reach Wikimedia. **Check** the license line on the Commons file page.

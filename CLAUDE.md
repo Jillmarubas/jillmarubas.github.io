@@ -147,6 +147,23 @@ Researched and tested in October 2026.
     - Keyframing Scale on an image card resets it to 100%; key relative to its current scale.
     - Multiply-blended red ink vanishes on dark backgrounds; use normal blend there.
     - A round-capped stroke shows a dot at Trim End 0: keep it hidden until it starts drawing.
+    - A Source Text expression that returns "" falls back to the full static text: return " " before a
+      type-on starts (`typeOn` in `lib.jsx` does).
+    - 2D shape layers ignore the 3D camera, so lines and underlines drift off 3D text when the camera
+      pushes. Move them into 3D with `to3D()` (`lib.jsx`).
+    - Drop Shadow, masks (feather, inverted) and Fractal Noise in Multiply mode (ink blots, ink
+      dissolves: `inkWipe` / `inkEdges` in `chlib.jsx`) all work.
+  - What the user asked for after watching cut 1 of The $20 Lie (apply to future documentaries):
+    - Nothing should hover. Props lie on the paper plane (`prop()`: z 0 plus a contact shadow) and the
+      camera pushes over one surface; no parallax between paper and props, no drifting cameras on
+      locked scenes. Text that belongs to an object is baked into that image (price on the tag).
+    - Real-world objects, not stand-ins: A4 bills instead of receipts, real US dollar coins and bills,
+      charts on a monitor screen, a laptop with a realistic app layout, a newspaper front page for news
+      beats, a terminal for agents, code overlays on tech shots, ink dissolves and black ink for drama.
+    - Fill the frame: no blank paper or empty corners; frame tight on the part that matters.
+    - A real person who is named on screen is shown with a real, licensed photo each time (never an AI
+      replica): Wikimedia Commons is blocked here, so import the file through Higgsfield's URL import
+      (`Special:FilePath/<file>` works) and cut it out with its background remover; credit it on screen.
   - Use `effectcraft-cli script file.jsx` for After Effects-style scripting.
   - Use `render-frame` to check stills and `render` to export.
   - Property paths need the group, for example

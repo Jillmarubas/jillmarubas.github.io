@@ -7,7 +7,7 @@ A documentary in the MagnatesMedia style for **Small Print**: narration only, no
 - **Facts:** every number and quote is listed in `RESEARCH.md` with its source. Sources also appear on screen in small type. Items marked **check** there must be confirmed at the primary source before the voice-over is recorded.
 - **Look (proposal):** cream thermal-receipt paper with red ink as the one accent colour. That ties into the channel name and the "receipt" idea that runs through the film. Grain, smoke and vignette on top; maps, documents and counters for the data.
 - **Frame rate:** 23.976 fps (the user's choice, 26 Oct 2026).
-- **People:** Sam Altman is quoted, not shown. If we show him, we use a licensed photo with parallax and no AI animation.
+- **People:** Sam Altman is shown with a licensed photo (TechCrunch, CC BY 2.0) whenever he is named, never an AI likeness and no AI animation.
 
 ## Story map
 

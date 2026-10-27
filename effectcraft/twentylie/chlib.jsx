@@ -109,15 +109,12 @@ function counter(c, x, y, size, rgb, a, b, t0, t1, pre, suf, dec, font) {
   return l;
 }
 
-// Price tag cut-out with handwritten-style price on it.
+// Price tag: one image with the price printed on it (tools/bake_tags.py), lying on the paper.
+// (Revision 1: the price used to be a separate text layer that drifted off the tag.)
 function tag(c, price, x, y, z, s, rot, size) {
-  var t = card(c, "O03_price_tag.png", x, y, z, s || 46, rot || 8);
-  var k = (s || 46) / 46;
-  var p = txt(c, price, "Fraunces-Black", (size || 64) * k, INK, x + 70 * k, y + 32 * k, null, true);
-  p.property("Transform").property("Position").setValue([x + 70 * k, y + 32 * k, z - 1]);
-  p.property("Transform").property("Z Rotation").setValue(rot || 8);
-  p.parent = t;
-  return t;
+  var key = price.replace("$", "").replace("/", "");
+  var t = card(c, "O03_tag_" + key + ".png", x, y, 0, s || 46, rot || 8);
+  return shadow(t);
 }
 
 // Quote card on paper: big serif quote, source line under it.
@@ -138,10 +135,10 @@ function grid(c, cols, rows, gap, cy, lit, t, litRgb) {
     (lit && lit.indexOf(k) >= 0 ? litShapes : shapes).push(e);
   }
   var g = pathLayer(c, "Grid", shapes.concat(litShapes), [0.62, 0.59, 0.55]);
-  g.property("Transform").property("Position").setValue([0, 0]);
+  g.property("Transform").property("Position").setValue([0, 0]); to3D(g);
   if (litShapes.length) {
     var h = pathLayer(c, "Lit", litShapes, litRgb || RED);
-    h.property("Transform").property("Position").setValue([0, 0]);
+    h.property("Transform").property("Position").setValue([0, 0]); to3D(h, -1);
     fade(h, t, t + 0.3, 0, 100);
     return h;
   }
@@ -156,7 +153,7 @@ function line(c, pts, rgb, w, t0, t1) {
   var tr = g.addProperty("ADBE Vector Filter - Trim");
   keys(tr.property("End"), [[t0, 0], [t1, 100]], 40);
   l.property("Transform").property("Position").setValue([0, 0]);
-  return l;
+  return to3D(l);
 }
 
 // Red marker strike-through (same felt-tip look as the BET loop).
@@ -178,7 +175,7 @@ function markerLine(c, x0, y0, x1, y1, t0, t1) {
   keys(l.property("Transform").property("Opacity"), [[t0, 0], [t0 + 0.03, 92]], 0);
   l.blendingMode = BlendingMode.MULTIPLY;
   fx(l, "Turbulent Displace", {"Amount": 6, "Size": 7});
-  return l;
+  return to3D(l);
 }
 
 // Rounded window (chat or terminal).
@@ -201,20 +198,108 @@ function plate(c, name, z, extra) { return card(c, name, W / 2, H / 2, z, 94 * (
 function chapterCard(c, num, title, d) {
   paper(c, 700);
   smoke(c, 10);
+  // Revision 1: the title is sized to fit inside the strip, and the strip, title and underline sit on
+  // one plane (z 0), so the camera push moves them as one card.
+  var sz = Math.min(128, Math.floor(1380 / (title.length * 0.8)));
+  var tw = title.length * sz * 0.8;
   var strip = solid(c, CREAM, "Card strip");
   strip.threeDLayer = true;
-  strip.property("Transform").property("Scale").setValue([title.length > 22 ? 84 : 62, 66, 100]);
-  strip.property("Transform").property("Position").setValue([W / 2, 520, 40]);
-  slide(strip, 0.0, 0.9, [W / 2, -520, 40], [W / 2, 520, 40], 75);
+  strip.property("Transform").property("Scale").setValue([Math.min(96, (tw + 300) / W * 100), 66, 100]);
+  strip.property("Transform").property("Position").setValue([W / 2, 520, 1]);
+  slide(strip, 0.0, 0.9, [W / 2, -520, 1], [W / 2, 520, 1], 75);
   var k = label(c, "CHAPTER " + num, W / 2, 380, 34, GREY);
   fade(k, 0.9, 1.3, 0, 100);
-  var sz = title.length > 22 ? 80 : (title.length > 16 ? 100 : 128);
   var t = head(c, title, W / 2, 560, sz, INK);
   pop(t, 1.3, 108);
-  var w = Math.min(1300, title.length * sz * 0.58);
+  var w = Math.min(1300, tw * 0.92);
   markerLine(c, W / 2 - w / 2, 610, W / 2 + w / 2, 604, 2.0, 2.7);
   camera(c, [[0, [W / 2, H / 2 + 20, -1200]], [d, [W / 2, H / 2 - 10, -980]]], 20);
   var out = solid(c, [0, 0, 0], "Out");
   out.property("Transform").property("Opacity").setValue(0);
   keys(out.property("Transform").property("Opacity"), [[d - 0.35, 0], [d, 100]], 0);
+}
+
+// ---------- revision 1 pieces ----------
+// Ink dissolve: black ink blooms over the frame ("out") or clears from it ("in") between t0 and t1.
+function inkWipe(c, t0, t1, mode) {
+  var l = solid(c, [0.5, 0.5, 0.5], "Ink wipe");
+  var e = fx(l, "Fractal Noise", {"Contrast": 420, "Complexity": 5});
+  var a = mode == "in" ? -260 : 260, b = mode == "in" ? 260 : -260;
+  keys(e.property("Brightness"), [[t0, a], [t1, b]], 30);
+  e.property("Evolution").expression = 'time * 90';
+  fx(l, "Turbulent Displace", {"Amount": 40, "Size": 60});
+  l.blendingMode = BlendingMode.MULTIPLY;
+  return l;
+}
+// Black ink creeping in from the frame edges (a living, blotchy vignette).
+function inkEdges(c, amount) {
+  var l = solid(c, [0.5, 0.5, 0.5], "Ink edges");
+  var e = fx(l, "Fractal Noise", {"Contrast": 700, "Brightness": amount || -10, "Complexity": 6});
+  e.property("Evolution").expression = 'time * 40';
+  fx(l, "Turbulent Displace", {"Amount": 70, "Size": 26});
+  var m = l.property("Masks").addProperty("Mask");
+  m.property("Mask Path").setValue(rect(120, 90, W - 240, H - 180));
+  m.property("Mask Feather").setValue([120, 120]);
+  try { m.inverted = true; } catch (err) { m.property("Inverted").setValue(true); }
+  l.blendingMode = BlendingMode.MULTIPLY;
+  return l;
+}
+// Code running: a column of monospaced lines scrolling up, screened over the shot.
+var CODE = ["tokens = tokenizer.encode(prompt)", "kv = cache.load(session_id)", "for step in range(max_new_tokens):",
+  "    logits = model.forward(tokens, kv)", "    next_id = sample(logits, temperature=0.7)", "    tokens.append(next_id)",
+  "    gpu_ms += kernel_time(len(tokens))", "    if next_id == EOS: break", "reply = tokenizer.decode(tokens[n:])",
+  "cost_usd = gpu_ms / 3.6e6 * GPU_PRICE_PER_HOUR", "log.write(user_id, len(tokens), cost_usd)", "stream(reply)", ""];
+function codeOverlay(c, t0, op, rgb, lines, size, x) {
+  lines = lines || CODE;
+  var s = ""; for (var i = 0; i < 60; i++) s += lines[i % lines.length] + "\r";
+  var l = txt(c, s, "IBMPlexMono-Regular", size || 26, rgb || [0.55, 0.85, 0.65], x || 140, 0, ParagraphJustification.LEFT_JUSTIFY, false);
+  l.property("Transform").property("Position").expression = '[' + (x || 140) + ', 120 - Math.max(0, time - ' + t0 + ') * 70]';
+  l.property("Transform").property("Opacity").expression = 'time < ' + t0 + ' ? 0 : linear(time, ' + t0 + ', ' + (t0 + 0.3) + ', 0, ' + (op || 40) + ')';
+  l.blendingMode = BlendingMode.SCREEN;
+  return l;
+}
+// Terminal window with a title bar, three lights and typed lines.
+function terminal(c, x, y, w, h, z) {
+  var t = win(c, x, y, w, h, [0.07, 0.07, 0.08], [0.2, 0.2, 0.22], z || 0);
+  var cols = [[0.93, 0.36, 0.33], [0.96, 0.75, 0.3], [0.38, 0.78, 0.4]];
+  for (var i = 0; i < 3; i++) {
+    var d = pathLayer(c, "Light", [ellipseShape(0, 0, 9, 9)], cols[i]); d.threeDLayer = true; d.parent = t;
+    d.property("Transform").property("Position").setValue([-w / 2 + 30 + i * 30, -h / 2 + 22, -2]);
+    d.property("Transform").property("Opacity").expression = 'thisLayer.parent.transform.opacity';
+  }
+  var tl = label(c, "terminal", 0, 0, 22, [0.6, 0.6, 0.62]); tl.parent = t;
+  tl.property("Transform").property("Position").setValue([0, -h / 2 + 30, -2]);
+  tl.property("Transform").property("Opacity").expression = 'thisLayer.parent.transform.opacity';
+  return t;
+}
+function termText(c, t, s, x, y, a, b, rgb) {
+  var l = txt(c, s, "IBMPlexMono-Medium", 30, rgb || [0.86, 0.9, 0.86], 0, 0, ParagraphJustification.LEFT_JUSTIFY, true);
+  l.parent = t; l.property("Transform").property("Position").setValue([x, y, -2]);
+  if (a !== undefined) typeOn(l, s, a, b);
+  return l;
+}
+// The licensed photo of Sam Altman (TechCrunch, CC BY 2.0, via Wikimedia Commons), cut out, with credit.
+function altman(c, x, y, s, t, tOut) {
+  var p = card(c, "O27_altman.png", x, y, 0, s || 46);
+  shadow(p, 10, 50, 35);
+  if (t !== undefined) fade(p, t, t + 0.3, 0, 100);
+  var cr = label(c, "Photo: TechCrunch, CC BY 2.0", 1730, 1052, 17, GREY);
+  if (tOut !== undefined) fade(cr, tOut, tOut + 0.3, 100, 0);
+  return p;
+}
+// Real dollar coins raining down, tumbling, between t0 and t1 (comp seconds).
+function coinRain(c, t0, t1, n, s, x0, x1, yEnd, seed) {
+  var out = [];
+  for (var i = 0; i < n; i++) {
+    var r = Math.sin((i + 1) * 12.9898 + (seed || 0)) * 43758.5453; r -= Math.floor(r);
+    var r2 = Math.sin((i + 1) * 78.233 + (seed || 0)) * 12345.678; r2 -= Math.floor(r2);
+    var x = x0 + (x1 - x0) * r, z = -150 + 300 * r2, a = t0 + (t1 - t0) * (i / n), d = 0.9 + 0.5 * r2;
+    var k = card(c, "O21_dollar_coin.png", x, -200, z, s * (0.8 + 0.4 * r));
+    keys(k.property("Transform").property("Position"), [[a, [x, -200, z]], [a + d, [x + (r - 0.5) * 200, yEnd || 1300, z]]], 0);
+    k.property("Transform").property("Position").setTemporalEaseAtKey(1, [new KeyframeEase(0, 60)], [new KeyframeEase(0, 60)]);
+    keys(k.property("Transform").property("Y Rotation"), [[a, 0], [a + d, 360 + 540 * r]], 0);
+    keys(k.property("Transform").property("X Rotation"), [[a, 30 * r], [a + d, -40 + 80 * r2]], 0);
+    out.push(k);
+  }
+  return out;
 }

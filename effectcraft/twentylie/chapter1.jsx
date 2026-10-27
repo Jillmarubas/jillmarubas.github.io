@@ -3,6 +3,15 @@
 #include "chlib.jsx"
 #include "timing_ch1.jsx"
 
+// Monitor on a dark desk; its screen spans x 236-1684, y 100-902 in comp space (O28 at 80 %).
+function monitor(c) {
+  dark(c, [0.07, 0.07, 0.075]); smoke(c, 8);
+  var m = card(c, "O28_monitor.png", W / 2, 600, 0, 80);
+  var gl = [];
+  for (var i = 0; i < 5; i++) gl.push(rect(300, 250 + i * 130, 1320, 2));
+  var g = pathLayer(c, "Gridlines", gl, [0.9, 0.9, 0.92]); g.property("Transform").property("Position").setValue([0, 0]); to3D(g, -1);
+  return m;
+}
 var PASTEL = [[0.98, 0.83, 0.56], [0.72, 0.85, 0.95], [0.80, 0.91, 0.72], [0.95, 0.76, 0.78], [0.86, 0.81, 0.95]];
 
 // Token chunks: words on coloured blocks, laid out centred on y.
@@ -30,15 +39,14 @@ var shots = [
   // 0: "February 1st, 2023."
   {at: 0, fn: function (c, d, at) {
     paper(c, 600); stamp(c, "1 FEB 2023", W / 2, 560, 0.15); still(c, d, 70);
+    inkWipe(c, d - 0.45, d, "out");
   }},
   // 0b: "ChatGPT is barely two months old, and millions of people are already using it."
   {at: L(0, 0.27, 0), fn: function (c, d, at) {
-    plate(c, "B4_living_room_day.png", 900);
-    var p = card(c, "P2.png", W / 2 + 120, H / 2 + 60, 0, 78);
-    var m = head(c, "MILLIONS", 520, 520, 120, CREAM, -150);
-    pop(m, L(0, 0.72, at), 112);
-    var s = label(c, "OF PEOPLE, IN TWO MONTHS", 520, 600, 30, CREAM, -150); fade(s, L(0, 0.8, at), L(0, 0.9, at), 0, 100);
-    drift(c, d, 40, 160);
+    // Revision 1: the news of ChatGPT's growth, revealed through an ink dissolve.
+    card(c, "N2_news_chatgpt.png", W / 2, 560, 0, 74);
+    camera(c, [[0, [W / 2, H / 2 + 20, -1200]], [d, [W / 2 + 60, H / 2 - 40, -1000]]], 25);
+    inkWipe(c, 0.0, 0.7, "in");
   }},
   // 1: "OpenAI announces a paid version. ChatGPT Plus. Twenty dollars a month."
   S(1, function (c, d, at) {
@@ -60,18 +68,20 @@ var shots = [
     enter(b, L(2, 0.72, at), 900, 0); enter(lb, L(2, 0.72, at), 900, 0);
     var g = L(3, 0.05, at);
     exitTo(a, g, 0, 900, 0.5); exitTo(la, g, 0, 900, 0.5); exitTo(b, g + 0.08, 0, 900, 0.5); exitTo(lb, g + 0.08, 0, 900, 0.5);
-    keys(t.property("Transform").property("Position"), [[g, [620, 540, -40]], [g + 0.6, [W / 2 + 30, 540, -40]]], 70);
+    keys(t.property("Transform").property("Position"), [[g, [620, 540, 0]], [g + 0.6, [W / 2 + 30, 540, 0]]], 70);
     still(c, d, 60);
   }),
   // 4: "When one more person watches a film, the film doesn't get more expensive. It's already made."
   S(4, function (c, d, at) {
-    paper(c, 600);
-    var r = card(c, "O07_film_reel.png", W / 2, 420, 0, 30);
-    keys(r.property("Transform").property("Z Rotation"), [[0, 0], [d, 140]], 0);
-    var k = label(c, "COST OF ONE MORE VIEWER", W / 2, 860, 28);
-    var n = head(c, "$0", W / 2, 985, 110, INK);
-    fade(k, L(4, 0.35, at), L(4, 0.45, at), 0, 100); pop(n, L(4, 0.55, at));
-    drift(c, d, 30, 80);
+    // Revision 1: one person watching her phone, then the camera pulls back to a crowd doing the same.
+    card(c, "B8_crowd_phones.png", W / 2, H / 2, 0, 50);
+    var sh = solid(c, [0, 0, 0], "Shade"); sh.property("Transform").property("Opacity").setValue(0);
+    keys(sh.property("Transform").property("Opacity"), [[L(4, 0.45, at), 0], [L(4, 0.6, at), 45]], 40);
+    var k = label(c, "COST OF ONE MORE VIEWER", W / 2, 840, 38, CREAM);
+    k.threeDLayer = false; k.property("Transform").property("Position").setValue([W / 2, 860]);
+    var n = txt(c, "$0", "Fraunces-Black", 170, CREAM, W / 2, 1000, null, false);
+    fade(k, L(4, 0.5, at), L(4, 0.6, at), 0, 100); pop(n, L(4, 0.65, at));
+    camera(c, [[0, [945, 455, -430]], [L(4, 0.15, at), [945, 455, -430]], [d, [W / 2, H / 2, -1190]]], 55);
   }),
   // 5: "AI is different. Every answer is made fresh, on chips in a data centre, the moment you ask."
   S(5, function (c, d, at) {
@@ -80,6 +90,7 @@ var shots = [
     var chip = card(c, "O10_ai_chip.png", W / 2 + 40, H / 2 + 20, -200, 22);
     fade(chip, L(5, 0.55, at), L(5, 0.65, at), 0, 100);
     keys(chip.property("Transform").property("Y Rotation"), [[L(5, 0.55, at), -60], [d, 15]], 50);
+    codeOverlay(c, 0.1, 38);
     // A real dolly down the aisle: the near rack slides past faster than the far plate.
     camera(c, [[0, [W / 2, H / 2, -1200]], [d, [W / 2 + 60, H / 2, -760]]], 30);
   }),
@@ -94,13 +105,9 @@ var shots = [
   S(7, function (c, d, at) {
     paper(c, 600);
     var b = chunks(c, ["Every", "answer", "is", "made", "fresh"], 300, 60, -1, 0);
-    var m = card(c, "O09_taxi_meter.png", W / 2, 600, 0, 28);
-    for (var i = 0; i < 5; i++) {
-      var coin = card(c, "O08_coins.png", 700 + i * 130, 330, -20, 8);
-      var t0 = L(7, 0.1 + i * 0.12, at);
-      slide(coin, t0, t0 + 0.4, [700 + i * 130, 330, -20], [W / 2, 520, -20], 30);
-      keys(coin.property("Transform").property("Opacity"), [[t0 + 0.35, 100], [t0 + 0.45, 0]], 0);
-    }
+    // Revision 1: real dollar coins rain down behind the meter.
+    coinRain(c, L(7, 0.05, at), d, 56, 11, 100, 1820, 1300, 3);
+    var m = shadow(card(c, "O09_taxi_meter.png", W / 2, 600, -40, 28));
     var k = label(c, "COST", W / 2, 820, 26);
     var n = counter(c, W / 2, 930, 96, INK, 0, 0.12, L(7, 0.1, at), L(7, 0.95, at), "$", "", 2);
     still(c, d, 80);
@@ -113,7 +120,7 @@ var shots = [
     var g = grid(c, 12, 3, 90, 470, [17], L(8, 0.62, at));
     var k1 = label(c, "MOST MEMBERS: A FEW VISITS A MONTH", W / 2, 300, 30, CREAM); fade(k1, L(8, 0.4, at), L(8, 0.5, at), 0, 100);
     var k2 = head(c, "THE FEW WHO COME EVERY DAY", W / 2, 740, 60, RED); fade(k2, L(8, 0.75, at), L(8, 0.82, at), 0, 100);
-    drift(c, d, 50, 120);
+    camera(c, [[0, [W / 2, H / 2, -1200]]]); // revision 1: locked off, nothing drifts
   }),
   // 9: "However, the AI companies had a second reason to feel safe."
   S(9, function (c, d, at) {
@@ -126,19 +133,20 @@ var shots = [
   }),
   // 10: "Tokens were getting cheaper. Fast."
   S(10, function (c, d, at) {
-    paper(c, 600);
-    label(c, "PRICE PER TOKEN", W / 2, 260, 30);
-    line(c, [[420, 330], [700, 420], [980, 560], [1240, 700], [1500, 800]], RED, 10, 0.05, d * 0.9);
+    // Revision 1: the chart lives on a monitor screen (screen: x 236-1684, y 100-902).
+    monitor(c);
+    label(c, "PRICE PER TOKEN", W / 2, 190, 30, INK);
+    line(c, [[360, 280], [640, 380], [920, 520], [1180, 650], [1560, 760]], RED, 10, 0.05, d * 0.9);
     still(c, d, 60);
   }),
   // 11: Andreessen Horowitz: about ten times cheaper every year.
   S(11, function (c, d, at) {
-    paper(c, 600);
-    label(c, "PRICE FOR THE SAME ABILITY (LOG SCALE)", W / 2, 250, 28);
-    line(c, [[460, 320], [660, 320], [660, 420], [860, 420], [860, 520], [1060, 520], [1060, 620], [1260, 620], [1260, 720], [1460, 720]], INK, 9, L(11, 0.15, at), L(11, 0.75, at));
-    label(c, "2021", 460, 800, 26); label(c, "2024", 1460, 800, 26);
-    var k = head(c, "~10× CHEAPER EVERY YEAR", W / 2, 920, 66, RED); pop(k, L(11, 0.62, at), 108);
-    source(c, "Source: a16z, “Welcome to LLMflation”, Nov 2024", L(11, 0.3, at));
+    monitor(c);
+    label(c, "PRICE FOR THE SAME ABILITY (LOG SCALE)", W / 2, 190, 28, INK);
+    line(c, [[460, 260], [660, 260], [660, 360], [860, 360], [860, 460], [1060, 460], [1060, 560], [1260, 560], [1260, 660], [1460, 660]], INK, 9, L(11, 0.15, at), L(11, 0.75, at));
+    label(c, "2021", 460, 730, 26, INK); label(c, "2024", 1460, 730, 26, INK);
+    var k = head(c, "~10× CHEAPER EVERY YEAR", W / 2, 840, 60, RED); pop(k, L(11, 0.62, at), 108);
+    source(c, "Source: a16z, “Welcome to LLMflation”, Nov 2024", L(11, 0.3, at)).property("Transform").property("Position").setValue([W / 2, 1030, 0]);
     still(c, d, 70);
   }),
   // 12: GPT-3-level: $60 per million tokens in 2021, about 6 cents three years later.

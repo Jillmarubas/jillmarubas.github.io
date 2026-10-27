@@ -145,10 +145,14 @@ function txt(comp, s, font, size, rgb, x, y, just, threeD) {
 }
 // Typewriter: reveal characters linearly between a and b (seconds, comp time).
 function typeOn(t, s, a, b) {
-  t.property("Source Text").expression = 'var s = ' + JSON.stringify(s) + '; s.substr(0, Math.round(linear(time, ' + a + ', ' + b + ', 0, s.length)));';
+  // An empty string makes the renderer fall back to the full static text, so return a space instead.
+  t.property("Source Text").expression = 'var s = ' + JSON.stringify(s) + '; var n = Math.round(linear(time, ' + a + ', ' + b + ', 0, s.length)); n < 1 ? " " : s.substr(0, n);';
 }
 // Paper backdrop far behind, so the camera's moves give parallax against it.
 function paper(comp, z) {
+  // Revision 1: the paper sits just behind the props (it used to be 600 px back), so a camera push
+  // reads as one surface moving together, not cut-outs hovering over a far wall.
+  z = Math.min(z, 150);
   var l = solid(comp, PAPER, "Paper");
   l.threeDLayer = true;
   var k = 140 * (1200 + z) / 1200;
@@ -206,5 +210,23 @@ function markerLoop(comp, cx, cy, rx, ry, t0, t1, seed) {
   keys(l.property("Transform").property("Opacity"), [[t0, 0], [t0 + 0.03, 92]], 0);
   l.blendingMode = BlendingMode.MULTIPLY;
   fx(l, "Turbulent Displace", {"Amount": 6, "Size": 7});
+  to3D(l);
   return l;
 }
+
+// A shape layer drawn in comp coordinates, moved into 3D at z (default 0), so the camera moves it
+// together with the 3D paper and cards instead of leaving it pinned to the screen.
+function to3D(l, z) {
+  var tr = l.property("Transform"), p = tr.property("Position").value, a = tr.property("Anchor Point").value;
+  l.threeDLayer = true;
+  tr.property("Anchor Point").setValue([a[0], a[1], 0]);
+  tr.property("Position").setValue([p[0], p[1], z || 0]);
+  return l;
+}
+// Soft contact shadow, so a prop lies on the paper instead of floating above it.
+function shadow(l, dist, soft, op) {
+  fx(l, "Drop Shadow", {"Distance": dist || 14, "Softness": soft || 36, "Opacity": op || 42});
+  return l;
+}
+// A prop placed on the paper: a card with a contact shadow.
+function prop(comp, name, x, y, s, rot) { return shadow(card(comp, name, x, y, 0, s, rot)); }

@@ -24,3 +24,12 @@ O16_chocolate https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqz
 O17_banknotes https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_041333_cd1486d0-f89a-4784-a70d-a35d46671674.png
 O18_datacentre_model https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_041400_2652ec7f-cf99-414a-a5e6-68273bed0142.png
 O19_frosted_glass https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261026_041359_8b1347ad-cc81-4cf6-9faa-154cccb2db90.png
+N1_news_altman_raw https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_021519_b45886c7-2d4f-4349-9e07-0194d423d142.png
+N2_news_chatgpt_raw https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_021638_a919dc50-f512-4236-89f3-7d4a350a9c91.png
+O20_a4_sheet https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_021519_8d6703eb-8214-4a3d-8822-8396d7765a0e.png
+B8_crowd_phones https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_021518_f47cd9ec-2169-443b-8f8e-65b2a96a1aeb.png
+O21_dollar_coin https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_021518_b57b678e-ad16-4c6a-a89d-8890ae24a0f2.png
+O28_monitor https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_021639_32c3f611-50b5-4f3d-9873-23f1a5c6e3f6.png
+O29_dollar_bills https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_021639_4438cb00-2b44-491c-bec8-eb69c83edb6d.png
+P6b_cut https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_022224_5f1912a8-978e-4f59-ba0b-517224dc7d00.png
+altman_cutout https://d8j0ntlcm91z4.cloudfront.net/user_3IrEfLaypdcB72Nad5P1rYqzhz2/hf_20261027_021242_b69847d1-2de1-47e3-805d-d43e32226e39.png

@@ -60,7 +60,7 @@ var shots = [
   // 2b: "...then get charged extra."
   {at: L(2, 0.7, 0), fn: function (c, d, at) {
     dark(c, [0.1, 0.09, 0.08]);
-    card(c, "P6.png", W / 2 + 120, 600, 0, 70);
+    card(c, "P6b_cut.png", W / 2 + 120, 600, 0, 70); // revision 1: an A4 bill, not a receipt
     stamp(c, "+ OVERAGE", 470, 260, 0.35, 72, true);
     still(c, d, 80);
   }},
@@ -94,10 +94,11 @@ var shots = [
   S(6, function (c, d, at) {
     paper3(c);
     stamp(c, "4 APR 2026", W / 2, 230, 0.15, 64);
-    var plug = card(c, "O13_plug.png", W / 2, 600, 0, 34);
-    var a = label(c, "SUBSCRIPTION", 520, 600, 34, INK); fade(a, L(6, 0.2, at), L(6, 0.3, at), 0, 100);
-    var b = head(c, "PAY AS YOU GO", 1420, 600, 56, RED); fade(b, L(6, 0.75, at), L(6, 0.82, at), 0, 100);
-    keys(plug.property("Transform").property("Position"), [[L(6, 0.45, at), [W / 2, 600, 0]], [L(6, 0.6, at), [W / 2 + 180, 600, 0]]], 60);
+    // Revision 1: the words sit clear of the plug and socket.
+    var plug = card(c, "O13_plug.png", W / 2 - 60, 600, 0, 32);
+    var a = label(c, "SUBSCRIPTION", 330, 600, 34, INK); fade(a, L(6, 0.2, at), L(6, 0.3, at), 0, 100);
+    var b = head(c, "PAY AS YOU GO", 1640, 600, 56, RED); fade(b, L(6, 0.75, at), L(6, 0.82, at), 0, 100);
+    keys(plug.property("Transform").property("Position"), [[L(6, 0.45, at), [W / 2 - 60, 600, 0]], [L(6, 0.6, at), [W / 2 + 40, 600, 0]]], 60);
     var k = label(c, "FOR OUTSIDE AGENT TOOLS, SUCH AS OPENCLAW", W / 2, 930, 26, INK); fade(k, L(6, 0.5, at), L(6, 0.6, at), 0, 100);
     source(c, "Reported 4 Apr 2026", 0.5);
     still(c, d, 70);
@@ -117,7 +118,7 @@ var shots = [
     var s = label(c, "MONTHLY PRICE: UNCHANGED", 560, 560, 26, INK); fade(s, 0.3, 0.5, 0, 100);
     var k = label(c, "EXTRA USE, IN 1-CENT CREDITS", 1360, 300, 26, INK); fade(k, L(8, 0.5, at), L(8, 0.6, at), 0, 100);
     for (var i = 0; i < 10; i++) {
-      var coin = card(c, "O08_coins.png", 1360 + ((i * 37) % 5 - 2) * 60, -150, -20, 6);
+      var coin = card(c, "O21_dollar_coin.png", 1360 + ((i * 37) % 5 - 2) * 60, -150, -20, 6); // revision 1: real dollar coins
       var t0 = L(8, 0.55 + i * 0.04, at);
       slide(coin, t0, t0 + 0.5, [1360 + ((i * 37) % 5 - 2) * 60, -150, -20], [1360 + ((i * 37) % 5 - 2) * 30, 640 - i * 12, -20], 30);
     }
@@ -143,14 +144,17 @@ var shots = [
   // 11: "For people already on Pro, the old allowance runs until October 29th. After that, the price stays two hundred dollars. What you get for it goes down."
   S(11, function (c, d, at) {
     paper3(c);
-    var cal = card(c, "O14_calendar.png", 560, 520, 0, 34);
-    var day = head(c, "29 OCT", 560, 560, 80, RED); fade(day, L(11, 0.3, at), L(11, 0.36, at), 0, 100);
-    var t = tag(c, "$200/mo", 1300, 380, -40, 24, 6, 70); fade(t, L(11, 0.55, at), L(11, 0.62, at), 0, 100);
+    // Revision 1: a real October 2026 calendar fills the frame; the 29th gets the red marker.
+    // O25 (2480 x 1700) at 56 %, centred (760, 560): the 29th's cell centre lands at (755, 896).
+    prop(c, "O25_calendar.png", 760, 560, 56, -1);
+    markerLoop(c, 760, 893, 110, 78, L(11, 0.3, at), L(11, 0.42, at), 2.3);
+    var t = tag(c, "$200/mo", 1650, 330, 0, 22, 8); fade(t, L(11, 0.55, at), L(11, 0.62, at), 0, 100);
     var stack = blocks(c, 6, 5, 34, 6, 760, PASTEL3);
-    stack.property("Transform").property("Position").setValue([1300, 760]);
+    stack.property("Transform").property("Position").setValue([1650, 860]);
     stack.property("Transform").property("Anchor Point").setValue([W / 2, 860]);
     keys(stack.property("Transform").property("Scale"), [[L(11, 0.8, at), [100, 100]], [L(11, 0.98, at), [100, 50]]], 60);
-    var k = label(c, "WHAT YOU GET", 1300, 900, 24, INK); fade(k, L(11, 0.8, at), L(11, 0.86, at), 0, 100);
+    to3D(stack);
+    var k = label(c, "WHAT YOU GET", 1650, 920, 24, INK); fade(k, L(11, 0.8, at), L(11, 0.86, at), 0, 100);
     source(c, "Source: OpenAI Help Center", 0.4);
     still(c, d, 70);
   }),
@@ -190,7 +194,7 @@ var shots = [
   // 16: "To understand how both can be true, you have to look at the receipt from the other side."
   S(16, function (c, d, at) {
     paper3(c, 30);
-    var r = card(c, "O01_receipt.png", W / 2, 560, 0, 46, -3);
+    var r = prop(c, "O22_bill_plus.png", W / 2, 560, 40, -3); // revision 1: the A4 bill, not a receipt
     keys(r.property("Transform").property("Y Rotation"), [[L(16, 0.7, at), 0], [L(16, 0.98, at), 180]], 60);
     var blk = solid(c, [0, 0, 0], "Cut"); blk.property("Transform").property("Opacity").setValue(0);
     keys(blk.property("Transform").property("Opacity"), [[d - 0.6, 0], [d - 0.58, 100]], 0);

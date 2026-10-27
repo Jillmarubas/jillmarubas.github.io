@@ -14,19 +14,19 @@ DUR, VO_AT, STOP, TITLE = 47.5, 0.5, 39.95, 42.8
 
 # (file, film time, gain dB)
 sfx = [
-    ("sfx/paper_thin.mp3", 7.55, -10),            # cut to the quote on paper
-    ("sfx/whoosh_short_soft.mp3", 11.35, -14),    # LOSING MONEY locks in
-    ("sfx/paper_thin.mp3", 14.2, -8),             # receipt drops in
+    ("sfx/paper_thin.mp3", 7.55, -10),            # cut to the newspaper
+    ("sfx/whoosh_short_soft.mp3", 11.45, -14),    # LOSING MONEY underlined in red
+    ("sfx/paper_thin.mp3", 14.2, -8),             # the bill drops onto the desk
     ("sfx/whoosh_short_soft.mp3", 14.65, -12),    # price tag slides in
     ("sfx/cash_register_error.mp3", 19.4, -9),    # cost passes $200
     ("sfx/whoosh_soft_cinematic.mp3", 24.15, -9), # whip pan into the receipts
     ("sfx/paper_thin.mp3", 24.75, -12),
     ("sfx/paper_thin.mp3", 25.1, -13),
-    ("sfx/receipt_printer.mp3", 28.05, -12),      # the receipt prints
-    ("sfx/whoosh_short_soft.mp3", 32.15, -15),    # red ink circle
-    ("sfx/receipt_printer.mp3", 35.05, -11),      # the printer won't stop...
-    ("sfx/receipt_printer.mp3", 36.9, -9),
-    ("sfx/receipt_printer.mp3", 38.3, -7),
+    ("sfx/paper_thin.mp3", 27.95, -14),           # the bill fills the frame
+    ("sfx/deep_cinematic_doc.mp3", 32.1, -15),    # the red BET stamp lands
+    ("sfx/paper_thin.mp3", 32.1, -10),
+    ("sfx/paper_thin.mp3", 34.95, -13),           # the fair-use page
+    ("sfx/whoosh_short_soft.mp3", 35.95, -15),    # highlighter on "too much"
     ("sfx/riser_cinematic.mp3", 39.55, -12),      # peaks on the hard stop
     ("sfx/paper_thin.mp3", 39.95, -14),           # magnifier slides in, in silence
     ("sfx/riser_cinematic.mp3", 42.4, -10),
