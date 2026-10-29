@@ -24,6 +24,12 @@
    "gain": -8
   },
   {
+   "f": "out/invisible-cassette/audio/sfx/F8a.mp3",
+   "at": 0.6,
+   "bus": "sfx",
+   "gain": -9
+  },
+  {
    "f": "out/invisible-cassette/audio/sfx/E4a.mp3",
    "at": 8.96,
    "bus": "amb",
@@ -109,6 +115,12 @@
  ],
  "rumble": [
   [
+   0,
+   183.33,
+   -28,
+   0.05
+  ],
+  [
    67.6,
    90.6,
    -19
@@ -121,19 +133,10 @@
  ],
  "silence": [
   [
-   40.440000000000005,
-   40.74
-  ],
-  [
    90.6,
    91.8
   ]
  ],
- "bassout": [
-  [
-   40.74,
-   0.7
-  ]
- ],
+ "bassout": [],
  "shepard": []
 }

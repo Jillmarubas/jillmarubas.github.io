@@ -6,7 +6,7 @@ Usage: python3 -I scripts/mix_ic.py <cues.json> <out.wav>
 cues.json: {"duration": s, "cues": [
   {"f": "path", "at": film_s, "bus": "vo|music|amb|sfx", "gain": dB, "trim": [from_s, to_s],
    "fade_in": s, "fade_out": s, "lowpass": Hz, "loop_to": film_s}, ...],
- "rumble": [[from_s, to_s, dB], ...],      # X1: 45 Hz + 90 Hz (phones can't play 45 Hz)
+ "rumble": [[from_s, to_s, dB(, fade_s)], ...],  # X1: 45 Hz + 90 Hz (phones can't play 45 Hz)
  "silence": [[from_s, to_s], ...],          # story-turn dips on the music bed only
  "bassout": [[at_s, dur_s], ...],           # story-turn bass drop-out on the music bed (highpass 180 Hz)
  "shepard": [[from_s, to_s, dB], ...]}      # X2: endlessly rising Shepard tone + ticking clock, cut dead at to_s
@@ -64,10 +64,12 @@ for i, c in enumerate(cfg["cues"]):
     buses[b].append(f)
 
 # X1 sub-rumble: 45 Hz body + 90 Hz so phone speakers still feel it, faded in and out per window
-for k, (a, b, db) in enumerate(cfg.get("rumble", [])):
+# a 4th value sets the fade length (the constant bed uses 0.05 s so scene joins stay seamless)
+for k, r in enumerate(cfg.get("rumble", [])):
+    a, b, db = r[:3]; fd = r[3] if len(r) > 3 else 2
     f = os.path.join(tmp, f"r{k}.wav")
     run(["ffmpeg", "-y", "-f", "lavfi", "-i", f"aevalsrc=0.6*sin(2*PI*45*t)+0.35*sin(2*PI*90*t)*(0.75+0.25*sin(2*PI*0.5*t)):s={SR}:d={b - a}",
-         "-af", f"afade=t=in:d=2,afade=t=out:st={max(0, b - a - 2)}:d=2,volume={db}dB,adelay={int(a * 1000)}|{int(a * 1000)},apad=whole_dur={dur}", "-ac", "2", "-t", str(dur), f])
+         "-af", f"afade=t=in:d={fd},afade=t=out:st={max(0, b - a - fd)}:d={fd},volume={db}dB,adelay={int(a * 1000)}|{int(a * 1000)},apad=whole_dur={dur}", "-ac", "2", "-t", str(dur), f])
     buses["amb"].append(f)
 
 # X2 Shepard tone: eight octave-spaced partials whose pitch rises forever (Gaussian loudness over the

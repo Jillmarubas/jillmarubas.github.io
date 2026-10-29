@@ -12,7 +12,7 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IC = os.path.join(HERE, "../../remotion/src/invisible-cassette")
 # (render name, label, scene id whose narration it carries, voice offset inside the part)
 ORDER = [
-    ("s1-mm", "Act I · 1 The crash no human could see", 1, 4.0),
+    ("s1", "Act I · 1 The crash no human could see", 1, 4.0),
     ("s2", "Act I · 2 The autopsy of a phantom", 2, 1.0),
     ("act2", "Act II card · The velocity crisis", None, 0),
     ("s3", "Act II · 3 The physics of the grid", 3, 1.0),
@@ -42,7 +42,7 @@ for name, lab, sid, off in ORDER:
     d = dur(f)
     files.append(f)
     shots.append({"name": lab, "start": round(t, 2), "end": round(t + d, 2)})
-    if "card" in lab or name == "s1-mm":
+    if "card" in lab or name == "s1":
         chapters.append(round(t, 2))
     if sid:
         for ln in timing[sid]["lines"]:
@@ -54,6 +54,6 @@ open(lst, "w").write("".join(f"file '{f}'\n" for f in files))
 out = os.path.join(HERE, "render", "film-half.mp4")
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", lst, "-vf", "scale=960:540,fps=24", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
                 "-c:a", "aac", "-b:a", "192k", "-ar", "48000", out], check=True)
-tl = {"title": "Invisible Cassette Review", "version": "Full film v1 · MagnatesMedia look · trading terminal", "shots": shots, "lines": lines, "chapters": chapters}
+tl = {"title": "Invisible Cassette Review", "version": "Full film v2 · production-file directives · trading terminal", "shots": shots, "lines": lines, "chapters": chapters}
 json.dump(tl, open(os.path.join(IC, "timeline_full.json"), "w"), indent=1)
 print(f"film {t:.1f} s ({t / 60:.1f} min) -> {out}; chapters at {chapters}")

@@ -196,7 +196,7 @@ var tRun = at("running"), tPhys = at("physical");
   var fl = solid(o.c, [0.02, 0.03, 0.05], "floor", 1400, 3600); fl.threeDLayer = true;
   T(fl).property("Position").setValue([W / 2, H / 2 + 550, 1400]); T(fl).property("X Rotation").setValue(90);
   var wall = solid(o.c, [0.06, 0.11, 0.22], "end wall", 1400, 1200); wall.threeDLayer = true; T(wall).property("Position").setValue([W / 2, H / 2 + 60, 2900]);
-  label(o, "BEYOND HUMAN LATENCY", at("beyond"), {y: H / 2 - 20, color: [0.7, 0.82, 1.0], size: 34, track: 160});
+  label(o, "LATENCY", at("beyond"), {y: H / 2 - 20, color: [0.7, 0.82, 1.0], size: 34, track: 160});
   flag(o, "Illustration");
   cam(o, {push: 1.05, d0: 0.5, d1: -0.6});
 })();

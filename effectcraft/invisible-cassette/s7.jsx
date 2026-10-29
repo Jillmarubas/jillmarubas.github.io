@@ -14,9 +14,10 @@ function pipeIcon(o, x, y, s, c) { var l = shapeAt(o.c, "pipeline", [x, y, 0]); 
 // A · directive 21:00: a dark topographic globe revolving (Natural Earth countries, tools/make_world.py)
 (function () {
   var o = Shot("S7A Globe", 0, vo(6.7));
-  var g = o.c.layers.add(img("world.png")); g.threeDLayer = true;
-  T(g).property("Position").setValue([W / 2, H / 2 + 60, 0]); T(g).property("Scale").setValue([50, 50, 100]);
-  var e = fx(g, "CC Sphere", {"Radius": 1000, "Rotation X": -18, "Ambient": 35, "Light Intensity": 110, "Light Height": 40, "Light Direction": -40, "Specular": 10});
+  // CC Sphere renders off-centre on a 3D layer under the camera, so the globe is 2D with its own slow push
+  var g = o.c.layers.add(img("world.png"));
+  T(g).property("Position").setValue([W / 2, H / 2 + 60]); keys(T(g).property("Scale"), [[0, [48, 48]], [o.d, [51, 51]]], 0);
+  var e = fx(g, "CC Sphere", {"Radius": 1000, "Offset": [2048, 1024], "Rotation X": -18, "Ambient": 35, "Light Intensity": 110, "Light Height": 40, "Light Direction": -40, "Specular": 10});
   e.property("Rotation Y").expression = "-60 + time * 12";
   vis(g, 0, o.d, 0.8, 0.3, o.d);
   word(o, "BEYOND THE GRID", at("not confined"), {size: 110, y: 150, mode: "rise", glow: true});
@@ -34,7 +35,7 @@ var tToday = at("today");
   word(o, "1993", at("1993"), {font: TF.mono, size: 120, x: 1560, y: 420, color: TERM.amber, glow: true});
   label(o, "FIRST AUTOMATED TERMINAL", at("world's first"), {x: 1560, y: 500, size: 28, color: TERM.white});
   flag(o, "Map: Natural Earth · Source: ECT, Rotterdam");
-  cam(o, {y0: -320, y1: 0, push: 1.05, d0: 0.5, d1: -0.6});
+  cam(o, {y0: -200, y1: 0, push: 1.05, d0: 0.5, d1: -0.6});
 })();
 // B2 · the yard: driverless vehicles through fog, directed by terminal software (drawn)
 (function () {
@@ -49,8 +50,8 @@ var tToday = at("today");
   // fog drifting through the yard (near and far banks)
   for (var f = 0; f < 2; f++) {
     var fg = solid(o.c, [0.5, 0.5, 0.5], "fog " + f); fg.threeDLayer = true; T(fg).property("Position").setValue([W / 2, H / 2 + 80, f ? -120 : 160]);
-    fx(fg, "Fractal Noise", {"Contrast": 70, "Brightness": -18, "Transform/Scale": 900, "Transform/Scale Width": 1600});
-    fg.blendingMode = BlendingMode.SCREEN; T(fg).property("Opacity").setValue(f ? 22 : 30);
+    fx(fg, "Fractal Noise", {"Contrast": 140, "Brightness": -30, "Transform/Scale": 900, "Transform/Scale Width": 1600});
+    fg.blendingMode = BlendingMode.SCREEN; T(fg).property("Opacity").setValue(f ? 10 : 14);
     fg.property("Effects").property(1).property("Evolution").expression = "time * " + (f ? 14 : 9);
   }
   label(o, "DRIVERLESS", at("driverless"), {y: 880, size: 32, color: TERM.green});
@@ -134,9 +135,9 @@ var tBut2 = at("but spectators");
 (function () {
   var o = Shot("S7F Monitors", vo(72.1), tBut2);
   var tR = at("relegated");
-  var c1 = word(o, "HUMAN SUPERVISOR: MONITORING", tR, {font: TF.mono, size: 30, x: 70, y: 120, just: LEFTJ, track: 20, mode: "type", cps: 36, color: TERM.green});
-  var c2 = word(o, "REACTION WINDOW: < 1 SECOND", tR + 0.9, {font: TF.mono, size: 30, x: 70, y: 170, just: LEFTJ, track: 20, mode: "type", cps: 36, color: TERM.red});
-  slideIn(o, c1, tR, [70, 120, -40], [-500, 0]); slideIn(o, c2, tR + 0.9, [70, 170, -40], [-500, 0]);
+  var c1 = word(o, "HUMAN SUPERVISOR: MONITORING", tR, {font: TF.mono, size: 30, x: 230, y: 190, just: LEFTJ, track: 20, mode: "type", cps: 36, color: TERM.green});
+  var c2 = word(o, "REACTION WINDOW: < 1 SECOND", tR + 0.9, {font: TF.mono, size: 30, x: 230, y: 240, just: LEFTJ, track: 20, mode: "type", cps: 36, color: TERM.red});
+  slideIn(o, c1, tR, [230, 190, -40], [-600, 0]); slideIn(o, c2, tR + 0.9, [230, 240, -40], [-600, 0]);
   var b = box(o, 1500, 520, W / 2 + 80, 640, 40, TERM.green); showAt(o, b, at("control rooms"));
   for (var i = 0; i < 60; i++) {
     var d = dot(o.c, 410 + (i % 15) * 90, 520 + Math.floor(i / 15) * 90, 14, TERM.green, "status " + i, 10);

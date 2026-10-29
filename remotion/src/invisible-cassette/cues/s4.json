@@ -24,6 +24,12 @@
    "gain": -8
   },
   {
+   "f": "out/invisible-cassette/audio/sfx/T5a.mp3",
+   "at": 0.4,
+   "bus": "sfx",
+   "gain": -8
+  },
+  {
    "f": "out/invisible-cassette/audio/sfx/K7a.mp3",
    "at": 15.5,
    "bus": "sfx",
@@ -76,12 +82,6 @@
    "gain": -9
   },
   {
-   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
-   "at": 84.64,
-   "bus": "sfx",
-   "gain": -7
-  },
-  {
    "f": "out/invisible-cassette/audio/sfx/K4b.mp3",
    "at": 86.86,
    "bus": "sfx",
@@ -92,9 +92,69 @@
    "at": 110.84,
    "bus": "sfx",
    "gain": -5
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F4a.mp3",
+   "at": 0.7,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F3a.mp3",
+   "at": 2.0,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F4a.mp3",
+   "at": 3.3,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
+   "at": 4.6,
+   "bus": "sfx",
+   "gain": -12
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F1a.mp3",
+   "at": 8.48,
+   "bus": "sfx",
+   "gain": -1
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
+   "at": 47.22,
+   "bus": "sfx",
+   "gain": -12
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
+   "at": 66.52,
+   "bus": "sfx",
+   "gain": -12
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F3a.mp3",
+   "at": 74.74,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F2a.mp3",
+   "at": 84.64,
+   "bus": "sfx",
+   "gain": -3
   }
  ],
  "rumble": [
+  [
+   0,
+   114.98,
+   -28,
+   0.05
+  ],
   [
    102.9,
    114.98,
@@ -103,21 +163,21 @@
  ],
  "silence": [
   [
-   20.8,
-   21.1
+   20.78,
+   21.08
   ],
   [
-   102.60000000000001,
-   102.9
+   102.62,
+   102.92
   ]
  ],
  "bassout": [
   [
-   21.1,
+   21.08,
    0.7
   ],
   [
-   102.9,
+   102.92,
    0.7
   ]
  ],

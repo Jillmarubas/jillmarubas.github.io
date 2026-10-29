@@ -1,57 +1,41 @@
 {
- "duration": 22.0,
+ "duration": 75.0,
  "cues": [
-  {
-   "f": "out/invisible-cassette/audio/music/M12.mp3",
-   "at": 0,
-   "bus": "music",
-   "trim": [
-    22.0,
-    40.0
-   ],
-   "fade_in": 0.5,
-   "fade_out": 3.0,
-   "gain": 2
-  },
   {
    "f": "out/invisible-cassette/audio/sfx/A1a.mp3",
    "at": 0,
    "bus": "amb",
-   "gain": -6,
-   "loop_to": 19.0,
+   "gain": -4,
+   "loop_to": 30.0,
    "fade_in": 1.0,
-   "fade_out": 0.3
+   "fade_out": 1.5
   },
   {
-   "f": "public/cc1003/sfx/typing-laptop.wav",
-   "at": 1.4,
+   "f": "out/invisible-cassette/audio/sfx/F5a.mp3",
+   "at": 5.0,
    "bus": "sfx",
-   "trim": [
-    0,
-    2.6
-   ],
-   "gain": -14,
-   "fade_out": 0.2
-  },
-  {
-   "f": "public/cc1003/sfx/typing-laptop.wav",
-   "at": 6.4,
-   "bus": "sfx",
-   "trim": [
-    3,
-    5.5
-   ],
-   "gain": -14,
-   "fade_out": 0.2
+   "gain": -4
   },
   {
    "f": "out/invisible-cassette/audio/sfx/K8a.mp3",
-   "at": 18.4,
+   "at": 25.0,
    "bus": "sfx",
-   "gain": -5
+   "gain": -3
   }
  ],
- "rumble": [],
+ "rumble": [
+  [
+   0,
+   45.0,
+   -28,
+   0.05
+  ],
+  [
+   0,
+   30.0,
+   -24
+  ]
+ ],
  "silence": [],
  "bassout": [],
  "shepard": []

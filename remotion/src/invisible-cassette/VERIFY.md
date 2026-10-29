@@ -129,3 +129,12 @@ Primary sites (sec.gov, cftc.gov, wikipedia.org) were blocked in this session's 
 | Status | Narration | Note | Sources |
 |---|---|---|---|
 | 🖼 | On screen: No change (it's the film's own line, so no attribution) | was: End quote: "We didn't lose control to machines that woke up. We handed it over because we were too slow." — Fine as the narrator's conclusion. |  |
+
+## On-screen additions in the rebuild (29 Oct 2026)
+The rebuilt picture (production-file directives, keyword-only text) adds only checkable on-screen material:
+- Data shots carry a source credit in the corner (CFTC–SEC report, DOJ 2016, AEMO, T&D World, the 2003 task force,
+  National Grid ESO via Ofgem, RTE L2RPN, DeepMind 2020, ECT, FAA, Medical News Today, the PMC reaction-time study).
+- Maps are Natural Earth outlines; positions of lines and wind farms on the South Australia map are marked schematic.
+- Removed as unverified or outside the narration: the Dow levels, Hornsea / Little Barford, the exact dates
+  28 Sept 2016 and 14 Aug 2003 (now "September 2016" and "2003"), FAA SAFO 13002, E-mini, the block's "bottom face".
+- Scene 4's three title pages show the papers' real titles, authors and venues (checked).

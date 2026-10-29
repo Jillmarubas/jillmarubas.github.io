@@ -11,7 +11,7 @@ vignette, keywords and numbers only on screen, story-turn package on every "But"
 | Scene | Directive (as corrected) | Where it lands | Build |
 |---|---|---|---|
 | 1 | 00:00 black, muted keyboard clatter, sub-bass swell | 0–4 s | black; typing + T1 swell (existing mix) |
-| 1 | 00:05 top-down 3D camera pan over the desk; archival Dow ticker tape scrolling fast | "On May 6th…" | tape (DJIA level, prior close → falling) scrolling across a dark surface, top-down camera pan |
+| 1 | 00:05 top-down 3D camera pan over the desk; archival Dow ticker tape scrolling fast | "On May 6th…" | ticker tape (symbols with ▼ arrows; no index levels, the Dow figures could not be verified) scrolling across a dark surface, top-down camera pan |
 | 1 | 00:20 tape numbers plunge off the edge into shadow | "evaporated" | the tape slides off the surface edge into black; K2 tape whip |
 | 1 | 00:40 NYSE parallax (FG brokers, MG boards plunging into crimson, BG arena) | "On the trading floor…" | Highsmith NYSE floor, 3 layers; amber → red grade. No PD photo of 6 May 2010 or of brokers exists to us: caption "Archive photo" |
 | 1 | 01:25 freeze-frame into a distressed Polaroid; shutter snap; typed "MAY 6, 2010 // 14:42:00 EDT" | "When investigators…" | freeze of the floor frame into a Polaroid print; K3 shutter; typewriter caption |

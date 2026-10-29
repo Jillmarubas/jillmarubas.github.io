@@ -465,4 +465,4 @@ function dropIn(o, l, when, pos, rz) {
 }
 // events the mix reads (paper slides get friction, stamps a thump): printed at build time
 var EVENTS = [];
-function logEvents(scene) { var s = []; for (var i = 0; i < EVENTS.length; i++) s.push('["' + EVENTS[i][0] + '",' + Math.round(EVENTS[i][1] * 100) / 100 + ']'); writeLn("EVENTS " + scene + " [" + s.join(",") + "]"); }
+function logEvents(scene) { var s = []; for (var i = 0; i < EVENTS.length; i++) s.push('["' + EVENTS[i][0] + '",' + Math.round(EVENTS[i][1] * 100) / 100 + (EVENTS[i][2] ? ',"' + EVENTS[i][2] + '"' : '') + ']'); writeLn("EVENTS " + scene + " [" + s.join(",") + "]"); }
