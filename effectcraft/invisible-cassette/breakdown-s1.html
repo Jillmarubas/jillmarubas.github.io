@@ -1,0 +1,139 @@
+<title>Scene 1 Breakdown</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Courier+Prime:wght@400;700&family=IBM+Plex+Sans+Condensed:wght@400;600&display=swap">
+<style>
+/* Layout: a production sheet — one column of shot cards, each split into the brief's three parts. */
+:root{--bg:#0E1117;--panel:#161B24;--line:#2B3342;--fg:#ECE4D4;--muted:#9AA2B0;--gold:#E5A93C;--crimson:#E2584A;--manila:#E5D9C5;
+--fd:"Playfair Display",Georgia,serif;--fm:"Courier Prime","Courier New",monospace;--fu:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--fu);font-size:16px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 56px}
+.wrap{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.eyebrow{font-family:var(--fm);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--fd);font-weight:900;font-size:clamp(26px,6vw,40px);margin:4px 0 0;text-transform:uppercase;letter-spacing:.05em;text-wrap:balance}
+h2{font-family:var(--fd);font-size:21px;margin:0;text-transform:uppercase;letter-spacing:.05em;text-wrap:balance}
+h3{font-family:var(--fm);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0}
+p{margin:0}
+.muted{color:var(--muted)}
+.rig{background:var(--panel);border:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.rig ul,.shot ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.shot{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);padding:14px 16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.shot.turn{border-left-color:var(--crimson)}
+.head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.tc{font-family:var(--fm);font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
+.line{font-size:15px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px;font-style:italic}
+.part{display:flex;flex-direction:column;gap:5px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:420px}
+td,th{border-bottom:1px solid var(--line);padding:5px 8px 5px 0;text-align:left;vertical-align:top}
+th{font-family:var(--fm);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:400}
+td.n{font-family:var(--fm);white-space:nowrap;font-variant-numeric:tabular-nums}
+code{font-family:var(--fm);font-size:.95em;color:var(--manila)}
+.flag{color:var(--crimson);font-weight:600}
+</style>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Small Print · The Invisible Cassette · Act I</div>
+  <h1>Scene 1: The crash no human could see</h1>
+  <p class="muted">Film 00:00–02:04.5 (cold open + title card) · 24 fps · built in EffectCraft 0.18.0, assets prepared in PhotoCraft 0.17.0 · sound mixed to −14 LUFS</p>
+</header>
+
+<section class="rig">
+  <h2>Global rig (every shot)</h2>
+  <ul>
+    <li><b>Camera:</b> 35 mm virtual camera (zoom 1866.67 px), depth of field on, focus locked to Z 0 by expression while it dollies.</li>
+    <li><b>Motion:</b> continuous push-in of 0.6 % a second (100 → 106 % over 10 s), Dutch drift between ±0.3° and ±1.0°. No static frames.</li>
+    <li><b>Depth:</b> background plate Z +350 · subject Z 0 (sharp) · foreground occluder Z −250 (out of focus, about 15–20 px).</li>
+    <li><b>Light:</b> one overhead tungsten spot (warm 1.0/0.80/0.56, cone 78°, feather 100) + ambient 28. Every document: Drop Shadow, distance 18, softness 25, opacity 40 %.</li>
+    <li><b>Texture:</b> Fractal Noise grain in Overlay at 12 %, CC Vignette 18, CC Particle World dust motes in the lamp light.</li>
+    <li><b>Physics:</b> documents slide in with an ease-out cubic (fast start, long settle); stamps slam with a 2-frame overshoot 115 % → 100 % plus a 3-frame camera shake.</li>
+    <li><b>Brightness curve:</b> an exposure layer follows the tension: black open, darker into the plunge, lift on the recovery, colder into the loop, snap to black before the title.</li>
+  </ul>
+</section>
+
+<section class="rig">
+  <h2>PhotoCraft asset prep</h2>
+  <ul>
+    <li><code>desk_oak.png</code> 3840×2160: Add Noise 200 (mono, gaussian) → Motion Blur 1.5°/420 px → Auto Contrast → Wave (3 generators, 400–900 px) → Gradient Map from #04060A through #0E1117 to #3B2B1D. Dark oiled oak.</li>
+    <li><code>manila.png</code> 2400×1600: Clouds → Gradient Map #D5C5A6 / #E0D3BA / #EBE2D0 → Add Noise 9 (mono). Card stock for every document.</li>
+    <li class="flag">Pending: the trading-floor photo. Its 3-layer cut (background plate cleaned with Content-Aware Fill, brokers via Select Subject + Refine Edge with 0.5–1 px feather, out-of-focus foreground) waits on commons.wikimedia.org being allowed. Until then the shot is a drawn board wall labelled "Illustration".</li>
+  </ul>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">00:00–00:04</span><h2>Cold open, black</h2></div>
+  <div class="part"><h3>EffectCraft</h3><p>Pure black (exposure layer 100 %), fading up over 0.6 s at 00:04.</p></div>
+  <div class="part"><h3>Sound</h3><p>Your typing recording, muffled (low-pass 2.2 kHz), fading out by 00:04.6 · T1 sub-bass swell at 00:00.2 · M1 "The Plunge" starts under it (offset so its hard stop lands on the shutter at 01:19.5).</p></div>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">00:04–00:27</span><h2>A · Desk and ticker tape</h2></div>
+  <p class="line">"On May 6th, 2010… nearly one trillion dollars in market value evaporated into thin air."</p>
+  <div class="part"><h3>EffectCraft</h3>
+  <div class="tbl"><table><tr><th>Layer</th><th>Z</th><th>Animation</th></tr>
+  <tr><td>Desk (oak)</td><td class="n">+350</td><td>Lit by the tungsten spot</td></tr>
+  <tr><td>Ticker tape (precomp, manila + JetBrains Mono symbols ▼)</td><td class="n">0</td><td>Rotated −7°, scroll accelerating (ease-in). At "evaporated" (00:23.48) it slides off the desk edge: +980 px down, −7° → +14°, fades by 00:24.8</td></tr>
+  <tr><td>"MAY 6, 2010" Courier Prime Bold 92, gold</td><td class="n">0</td><td>Typed on "May" (00:04.18), 16 characters a second</td></tr>
+  <tr><td>"14:42 EDT" Courier Prime 48</td><td class="n">0</td><td>Typed on "forty-two" (00:06.48)</td></tr>
+  <tr><td>"36 MINUTES" Playfair Display Black 150</td><td class="n">0</td><td>Letters rise left to right on "thirty-six" (00:18.68)</td></tr>
+  <tr><td>"~$1 TRILLION" Playfair Display Black 120, gold</td><td class="n">0</td><td>Rise on "trillion" (00:20.84)</td></tr>
+  <tr><td>Fountain pen (shape)</td><td class="n">−250</td><td>Out-of-focus foreground, bottom right</td></tr></table></div>
+  <p class="muted">Camera: push 100 → 114 % over 23 s, Dutch −0.5° → +0.8°.</p></div>
+  <div class="part"><h3>Sound</h3><p>A1 room tone from 00:04 · K1 ticker loop 00:04–00:24.8 (−15 dB) · K2 tape whip + low boom at 00:23.3 · X1 rumble 00:17.4–00:27.</p></div>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">00:27–00:41</span><h2>B · Price cards</h2></div>
+  <p class="line">"Shares of Accenture… traded for a single cent. Shares of Sotheby's briefly changed hands at one hundred thousand dollars."</p>
+  <div class="part"><h3>EffectCraft</h3><p>Two 660×420 manila cards (precomps). ACCENTURE slides in from the left on "Accenture" (00:27.40), −14° → −5°, ease-out cubic, 0.93 s; price "$0.01" in crimson appears on "single" (00:33.06). SOTHEBY'S slides in from the right on "Sotheby's" (00:35.52); "$100,000" in gold at 00:37.0. Note "Both trades were later cancelled." typed at 00:38.6. Camera tracks −40 → +40 px.</p></div>
+  <div class="part"><h3>Sound</h3><p>F3 paper slide at 00:27.3 and 00:35.4.</p></div>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">00:41–00:56</span><h2>C · Trading floor (drawn, for now)</h2></div>
+  <p class="line">"On the trading floor… brokers stood and watched… inside computers, in fractions of a second."</p>
+  <div class="part"><h3>EffectCraft</h3><p>Board wall precomp (60 panels, bars and arrows only: no invented figures) at Z +350, focus pulled to it; each panel turns from amber to crimson at a seeded moment. On "computers" (00:52.7) the boards fade and 70 light streaks (gold, 1 in 5 crimson, Add mode) fly past at three depths. "FRACTIONS OF A SECOND" rises at 00:54.16. Foreground railing at Z −250. "Illustration" label at bottom right.</p></div>
+  <div class="part"><h3>Sound</h3><p>A2 trading-floor murmur (low-pass 3 kHz) 00:41.2–00:52.9 · T5 whoosh at 00:52.3 · X1 rumble 00:41.2–00:56.</p></div>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">00:56–01:10</span><h2>D · Newswire</h2></div>
+  <p class="line">"No war had been declared. No bank had collapsed. Markets were already nervous… about Greece's debt crisis…"</p>
+  <div class="part"><h3>EffectCraft</h3><p>Three teletype strips (Special Elite 60) slide in and type on their words: NO WAR DECLARED (00:56.42), NO BANK COLLAPSE (00:58.70), GREECE: DEBT FEARS in amber ink (01:03.46). On "could explain" they dim to 45 %.</p></div>
+  <div class="part"><h3>Sound</h3><p>Typewriter strikes on each strip (−9 dB).</p></div>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">01:10–01:19</span><h2>E · Recovery (release)</h2></div>
+  <p class="line">"And thirty-six minutes after it began, the market had recovered most of what it lost…"</p>
+  <div class="part"><h3>EffectCraft</h3><p>The brightest beat: lamp intensity 150, exposure lifted. The tape rises back onto the desk with ▲ arrows in olive, slowing as it steadies. "RECOVERED" rises at 01:14.12.</p></div>
+  <div class="part"><h3>Sound</h3><p>Ticker loop again, quieter (−17 dB). No rumble: the release.</p></div>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">01:19.5–01:32</span><h2>F · Polaroid and the report</h2></div>
+  <p class="line">"When investigators from… the SEC and the CFTC went through the trading records…"</p>
+  <div class="part"><h3>EffectCraft</h3><p>Freeze-frame: the board wall frozen into a Polaroid (white frame, desaturated −45), dropping onto the desk from Z −60, −7° → −4°. A single soft 3-frame shutter flash (flash-safe). Caption "MAY 6, 2010 // 14:42:00 EDT" typed in Courier Prime Bold. On "SEC" (01:24.38) the report folder slides in from the right, carrying the real report title, "Findings Regarding the Market Events of May 6, 2010", and the camera pans 300 px to it.</p></div>
+  <div class="part"><h3>Sound</h3><p>M1 hard-stops on the shutter · K3 35 mm shutter at 01:19.5 · key strikes under the caption · F4 report slide at 01:24.38 · M2 "Aftermath" from 01:19.5.</p></div>
+</section>
+
+<section class="shot turn">
+  <div class="head"><span class="tc">01:32–01:35</span><h2>G · The stamp (story turn)</h2></div>
+  <p class="line">"Nobody had decided to crash the market."</p>
+  <div class="part"><h3>EffectCraft</h3><p>Close on the folder. The stamp "~$1 TRILLION ERASED / 36 MINUTES" (crimson, Multiply, Roughen Edges ink) slams on "crash" (01:33.62): scale 145 → 115 → 100 % over 4 frames, then a 3-frame camera shake.</p></div>
+  <div class="part"><h3>Sound</h3><p>Story-turn package: music dips almost silent 01:31.7–01:32.08, then a 0.7 s bass drop-out on "Nobody" · F1 stamp + T3 low boom on the hit · X1 rumble from 01:32.1.</p></div>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">01:35–01:48</span><h2>H · Feedback loop</h2></div>
+  <p class="line">"It began with one automated sell order… a feedback loop that ran faster than any human could step in."</p>
+  <div class="part"><h3>EffectCraft</h3><p>Void with a faint gold glow pool at Z +350. One SELL ticket appears on "automated" (01:36.18). On "amplified" (01:38.88) it becomes a ring of 12 tickets on a gold ellipse that spins, accelerating after "feedback" (01:43.94), with motion blur. Snaps to black at 01:48.3.</p></div>
+  <div class="part"><h3>Sound</h3><p>K4 relay clicks at 01:36.2 and 01:38.9 · K5 machine-speed orders from 01:43.9, cut dead at 01:48.3.</p></div>
+</section>
+
+<section class="shot">
+  <div class="head"><span class="tc">01:49–02:04.5</span><h2>I · Title card</h2></div>
+  <div class="part"><h3>EffectCraft</h3><p>A 1400×820 case-file sheet on the desk, "SMALL PRINT · CASE FILE 01". The stamp "THE GHOST IN THE SYSTEM" slams at 01:50.1 (Playfair Display Black 110, crimson). "AN INVESTIGATION" typed at 01:52.2. Fades out over the last 0.8 s.</p></div>
+  <div class="part"><h3>Sound</h3><p>M3 "The Ghost in the System", music only (15.5 s, fade 2.5 s) · T2 low metallic chime at 01:49.3 · F1 stamp at 01:50.1 · typewriter at 01:52.2.</p></div>
+</section>
+</div>

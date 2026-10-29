@@ -7,7 +7,8 @@ cues.json: {"duration": s, "cues": [
   {"f": "path", "at": film_s, "bus": "vo|music|amb|sfx", "gain": dB, "trim": [from_s, to_s],
    "fade_in": s, "fade_out": s, "lowpass": Hz, "loop_to": film_s}, ...],
  "rumble": [[from_s, to_s, dB], ...],      # X1: 45 Hz + 90 Hz (phones can't play 45 Hz)
- "silence": [[from_s, to_s], ...]}           # story-turn dips on the music bed only
+ "silence": [[from_s, to_s], ...],          # story-turn dips on the music bed only
+ "bassout": [[at_s, dur_s], ...]}            # story-turn bass drop-out on the music bed (highpass 180 Hz)
 Rules (video-research + SOP): sources are loudness-matched first; music is ducked under the voice
 with sidechain compression; every hit peaks well above the bed; master -14 LUFS / -1 dBTP, 48 kHz.
 """
@@ -82,6 +83,7 @@ def sum_bus(files, name):
 vo, mu, am, fx = (sum_bus(buses[k], k) for k in ("vo", "music", "amb", "sfx"))
 # story-turn silences on the music bed only
 dips = "".join(f",volume=enable='between(t,{a},{b})':volume=0.03" for a, b in cfg.get("silence", []))
+dips += "".join(f",highpass=f=180:enable='between(t,{a},{a + d})'" for a, d in cfg.get("bassout", []))
 mixf = (f"[1:a]asplit=2[vok][vom];[0:a]equalizer=f=2500:t=q:w=1.2:g=-3{dips}[mus];"
         f"[mus][vok]sidechaincompress=threshold=0.05:ratio=8:attack=20:release=300[duck];"
         f"[vom]highpass=f=90[vo];[duck][vo][2:a][3:a]amix=inputs=4:normalize=0[m]")
