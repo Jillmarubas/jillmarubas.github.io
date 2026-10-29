@@ -1,68 +1,108 @@
 // Scene 3, "The physics of the grid" (Act II opens). Scene comp starts 1.0 s before the voice.
+// Built to the production file's Scene 3 directives (DIRECTIVES.md): blueprint drafting table, gold traces
+// to the generators, the TVA generator hall, protection settings tripping on a South Australia map, the
+// Mohave shaft, the 2003 states going dark. On-screen text: keywords and numbers only.
 #include "kit2.jsx"
 SC = 3;
 var END = vo(180.53) + 1.8;
 var NODES = [[220, 760], [480, 640], [760, 720], [1040, 600], [1320, 690], [1640, 580], [600, 880], [1180, 860], [900, 480], [1480, 840], [340, 500], [1760, 760]];
 var EDGES = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [1, 6], [6, 2], [3, 7], [7, 4], [2, 8], [8, 3], [4, 9], [9, 7], [10, 1], [10, 8], [5, 11], [9, 11]];
-function grid(o, when, color, until) {
-  for (var k = 0; k < EDGES.length; k++) { var p = pathShape(o.c, [NODES[EDGES[k][0]], NODES[EDGES[k][1]]], color || TERM.amber, 3, "line"); showAt(o, p.l, when, until); }
-  for (var n = 0; n < NODES.length; n++) showAt(o, dot(o.c, NODES[n][0], NODES[n][1], 11, color || TERM.amber, "bus"), when, until);
+var GEN = [[10, "THERMAL"], [5, "HYDRO"], [6, "THERMAL"]]; // generator nodes on the drawing
+var GOLD = [1, 0.78, 0.3], BLUE_PAPER = [0.05, 0.17, 0.33], CHALK = [0.86, 0.92, 1.0];
+
+// a dot that runs one way from p0 to p1 and repeats (gold current on the drawing)
+function pulse(c, p0, p1, color, startLocal, period, phase) {
+  var d = dot(c, p0[0], p0[1], 8, color, "current");
+  T(d).property("Position").expression = "var t = time - " + startLocal + "; if (t < 0) t = 0; var u = ((t / " + period + ") + " + phase + ") % 1; [" +
+    p0[0] + " + (" + (p1[0] - p0[0]) + ") * u, " + p0[1] + " + (" + (p1[1] - p0[1]) + ") * u, 0];";
+  T(d).property("Opacity").expression = "time < " + startLocal + " ? 0 : 100";
+  glow(d);
+  return d;
 }
 
-// A · the grid
+// A · directive 06:00 + 06:45: a blueprint of the network on a drafting table; the network draws itself
+// (F8 pencil), then gold current flows along the copper lines to the turbine generators
 (function () {
-  var o = Shot("S3A Grid", 0, vo(8.36));
-  backdropPhoto(o, "hoover_switchyard_highsmith.jpg", 0, {caption: "Hoover Dam switchyard · Carol M. Highsmith, Library of Congress"});
-  grid(o, 0.2);
-  word(o, "THE ELECTRICAL GRID", at("electrical grid"), {size: 120, y: 300, mode: "rise", glow: true});
-  label(o, "UNFORGIVING PHYSICS", at("unforgiving"), {y: 390, color: TERM.white, size: 34});
-  cam(o, {y0: 40, y1: 0, d0: -0.3, d1: 0.4});
+  var o = Shot("S3A Blueprint", 0, vo(16.5));
+  var bp = comp("Blueprint sheet", o.d, 1920, 1080);
+  var po = {c: bp, a: o.a, b: o.b, d: o.d, t: o.t};
+  solid(bp, BLUE_PAPER, "blueprint paper");
+  for (var gx = 0; gx <= 1920; gx += 80) { var l = solid(bp, CHALK, "grid v", 1, 1080); T(l).property("Position").setValue([gx, 540]); T(l).property("Opacity").setValue(10); }
+  for (var gy = 0; gy <= 1080; gy += 80) { var l2 = solid(bp, CHALK, "grid h", 1920, 1); T(l2).property("Position").setValue([960, gy]); T(l2).property("Opacity").setValue(10); }
+  var n = solid(bp, [0.5, 0.5, 0.5], "paper grain"); fx(n, "Fractal Noise", {"Contrast": 120, "Transform/Scale": 4}); n.blendingMode = BlendingMode.OVERLAY; T(n).property("Opacity").setValue(18);
+  for (var k = 0; k < EDGES.length; k++) { var p = pathShape(bp, [NODES[EDGES[k][0]], NODES[EDGES[k][1]]], CHALK, 3, "line"); drawOn(po, p, 0.6 + k * 0.22, 0.6); }
+  for (var m = 0; m < NODES.length; m++) { var d = dot(bp, NODES[m][0], NODES[m][1], 10, CHALK, "bus"); vis(d, 0.6 + m * 0.2, o.d, 0.3, 0.3, o.d); }
+  var tTh = o.t(at("thermal"));
+  for (var g = 0; g < GEN.length; g++) {
+    var P = NODES[GEN[g][0]], s = shapeAt(bp, "generator", [P[0], P[1] - 90, 0]);
+    addEllipse(s, 80, [0, 0], GOLD, 4, BLUE_PAPER);
+    vis(s, tTh + g * 0.3, o.d, 0.3, 0.3, o.d);
+    var gt = txt(bp, "G", TF.head, 44, GOLD, [P[0], P[1] - 75], CENTER, 0); vis(gt, tTh + g * 0.3, o.d, 0.3, 0.3, o.d);
+    var gl = txt(bp, GEN[g][1], TF.monoReg, 22, GOLD, [P[0], P[1] - 150], CENTER, 120); vis(gl, tTh + g * 0.3 + 0.2, o.d, 0.4, 0.3, o.d);
+    var lead = pathShape(bp, [[P[0], P[1] - 50], [P[0], P[1]]], GOLD, 3, "lead"); vis(lead.l, tTh + g * 0.3, o.d, 0.3, 0.3, o.d);
+  }
+  // gold current along every line, from the generators outward (a few dots per line, staggered)
+  for (var e = 0; e < EDGES.length; e++) for (var q = 0; q < 2; q++)
+    pulse(bp, NODES[EDGES[e][0]], NODES[EDGES[e][1]], GOLD, tTh + 0.4 + e * 0.08, 1.6 + rnd(e, q) * 0.8, q * 0.5 + rnd(e, 9) * 0.3);
+  // the sheet lies on a drafting table, tilted away from the camera
+  var sheet = c3(o.c, bp, [W / 2, H / 2 + 40, 60]); T(sheet).property("X Rotation").setValue(-32); T(sheet).property("Scale").setValue([96, 96, 100]);
+  shadow(sheet);
+  word(o, "THE GRID", at("electrical grid"), {size: 120, y: 190, mode: "rise", glow: true, until: at("for a century")});
+  label(o, "PHYSICS", at("unforgiving"), {y: 280, color: TERM.white, size: 34, until: at("for a century")});
+  flag(o, "Illustration");
+  cam(o, {y0: 60, y1: -10, d0: -0.4, d1: 0.5});
 })();
 
-// B · spinning steel: mechanical inertia
+// B · spinning steel: mechanical inertia (TVA generator hall, 1942, three layers)
 (function () {
-  var o = Shot("S3B Inertia", vo(8.36), vo(24.2));
-  printPhoto(o, "tva_generators_1942.jpg", o.a + 0.1, {x: 540, y: H / 2 - 10, w: 780, caption: "TVA hydroelectric generator room, 1942 · Alfred T. Palmer, Library of Congress"});
-  showAt(o, rotor(o, 860, H / 2 + 280, 90, TERM.amber, "time * 220"), at("spinning steel"));
-  label(o, "THERMAL AND HYDRO TURBINES", at("thermal"), {x: 540, y: H / 2 + 380, size: 28});
-  word(o, "SPINNING STEEL", at("spinning steel"), {size: 100, x: 1390, y: 430});
-  word(o, "MECHANICAL INERTIA", at("mechanical"), {size: 80, x: 1390, y: 560, color: TERM.amber, glow: true});
-  label(o, "IT RESISTS RAPID FREQUENCY DROPS", at("resisting"), {x: 1390, y: 650, size: 26, color: TERM.white});
-  cam(o, {x0: -60, x1: 40, d0: -0.4, d1: 0.4});
+  var o = Shot("S3B Inertia", vo(16.5), vo(24.2), {bg: false});
+  photoShot(o, "tva", {caption: "TVA hydroelectric generator room, 1942 · Alfred T. Palmer, Library of Congress"});
+  bar(o, 880, at("spinning steel") - 0.2);
+  word(o, "SPINNING STEEL", at("spinning steel"), {size: 72, y: 895, until: at("mechanical") - 0.1});
+  word(o, "MECHANICAL INERTIA", at("mechanical"), {size: 72, y: 895, color: TERM.amber, glow: true});
+  cam(o, {x0: -80, x1: 60, y0: 20, y1: -10, d0: -0.6, d1: 0.6, aperture: PHOTO_APERTURE});
 })();
 
-// C · time to respond: seconds for machines, minutes for people
+// C1 · something fails: the spinning mass slows the fall (dial)
+var tAuto = at("automatic");
 (function () {
-  var o = Shot("S3C Time budget", vo(24.2), vo(39.74));
+  var o = Shot("S3C Fall slowed", vo(24.2), tAuto);
   var tf = o.t(at("failed"));
-  gauge(o, 1400, 860, 230, "LOW", "60 Hz", "HIGH", "-22 * ease(time, " + tf + ", " + (tf + 4) + ", 0, 1)");
-  label(o, "SOMETHING FAILS: THE SPINNING MASS SLOWS THE FALL", at("failed"), {x: 1400, y: 520, size: 24, color: TERM.white});
-  printPhoto(o, "control_room_haer.jpg", at("human operators"), {x: 560, y: 690, w: 760, caption: "Power plant control room, Los Angeles Aqueduct · HAER, Library of Congress"});
-  word(o, "AUTOMATIC CONTROLS: SECONDS", at("automatic"), {size: 64, y: 200, color: TERM.amber});
-  word(o, "HUMAN OPERATORS: MINUTES", at("human operators"), {size: 64, y: 300});
-  label(o, "READ THE DIALS · PICK UP THE PHONE · CALL IN RESERVE POWER", at("read the dials"), {y: 380, size: 26, color: TERM.amber});
-  cam(o, {d0: 0.3, d1: -0.3});
+  gauge(o, W / 2, 820, 300, "LOW", "60 Hz", "HIGH", "-22 * ease(time, " + tf + ", " + (tf + 4) + ", 0, 1)");
+  word(o, "FREQUENCY", at("failed") - 0.2, {size: 90, y: 300, mode: "rise"});
+  label(o, "INERTIA: A SLOW FALL", at("slowed"), {y: 390, color: TERM.amber, size: 32});
+  flag(o, "Illustration");
+  cam(o, {d0: 0.6, d1: -0.6});
+})();
+// C2 · seconds for machines, minutes for people (control room, three layers; K6 phone ring on "phone")
+(function () {
+  var o = Shot("S3C Control room", tAuto, vo(39.74), {bg: false});
+  photoShot(o, "control", {caption: "Power plant control room, Los Angeles Aqueduct · HAER, Library of Congress"});
+  bar(o, 880, tAuto);
+  word(o, "AUTOMATIC: SECONDS", tAuto, {size: 66, y: 895, color: TERM.amber, until: at("human operators") - 0.1});
+  word(o, "OPERATORS: MINUTES", at("human operators"), {size: 66, y: 895});
+  cam(o, {x0: 70, x1: -70, y0: -10, y1: 10, d0: 0.6, d1: -0.6, aperture: PHOTO_APERTURE});
 })();
 
-// D · the turn: inertia is shrinking
+// D · today: inertia shrinking (the rotor spins down)
 (function () {
   var o = Shot("S3D Shrinking", vo(39.74), vo(43.3), {red: true});
   showAt(o, rotor(o, W / 2, H / 2 + 60, 200, TERM.amberDim, "var t = Math.min(time, 3.2); 220 * t - 34 * t * t"), o.a);
-  word(o, "INERTIA IS SHRINKING", at("shrinking") - 0.6, {size: 120, color: TERM.red, y: H / 2 - 260, glow: true});
-  cam(o, {push: 1.05, d0: 0, d1: 0.6});
+  word(o, "INERTIA ▼", at("shrinking") - 0.6, {size: 130, color: TERM.red, y: H / 2 - 260, glow: true});
+  cam(o, {push: 1.03, d0: -0.5, d1: 0.6});
 })();
 
 // E · inverter-based resources: power electronics, not rotating iron
 (function () {
   var o = Shot("S3E Inverters", vo(43.3), vo(60.78));
-  label(o, "INVERTER-BASED RESOURCES", at("inverter"), {y: 220, size: 40, color: TERM.white});
+  label(o, "INVERTER-BASED", at("inverter"), {y: 220, size: 40, color: TERM.white});
   showAt(o, solarIcon(o, 540, 500, 120, TERM.amber), at("solar"));
   showAt(o, batteryIcon(o, 960, 520, 140, TERM.amber), at("battery"));
   var w = windIcon(o, 1380, 440, 130, TERM.amber, "time * 60"); showAt(o, w.tower, at("wind farms")); showAt(o, w.blades, at("wind farms"));
   label(o, "SOLAR", at("solar"), {x: 540, y: 690, size: 26}); label(o, "BATTERIES", at("battery"), {x: 960, y: 690, size: 26}); label(o, "WIND", at("wind farms"), {x: 1380, y: 690, size: 26});
   word(o, "POWER ELECTRONICS", at("power electronics"), {size: 92, y: 820, color: TERM.amber, glow: true});
-  word(o, "HEAVY ROTATING IRON", at("not heavy"), {size: 50, y: 920, color: TERM.grey, mode: "fade"});
-  strike(o, W / 2, 905, 560, at("rotating iron") + 0.2);
+  word(o, "ROTATING IRON", at("not heavy"), {size: 50, y: 920, color: TERM.grey, mode: "fade"});
+  strike(o, W / 2, 905, 420, at("rotating iron") + 0.2);
   cam(o, {x0: -40, x1: 40, d0: -0.3, d1: 0.3});
 })();
 
@@ -74,49 +114,74 @@ function grid(o, when, color, until) {
   label(o, "LOW INERTIA", o.a + 0.2, {x: 1360, y: 360, size: 32, color: TERM.white});
   gauge(o, 560, 760, 240, "", "", "", "-20 * ease(time, " + t0 + ", " + (t0 + 4) + ", 0, 1)");
   gauge(o, 1360, 760, 240, "", "", "", "-70 * ease(time, " + t0 + ", " + (t0 + 0.8) + ", 0, 1)", TERM.red);
-  word(o, "LESS INERTIA = FASTER FALL", at("less inertia"), {size: 80, y: 220});
+  word(o, "LESS INERTIA → FASTER FALL", at("less inertia"), {size: 80, y: 220});
+  flag(o, "Illustration");
   cam(o, {d0: 0.2, d1: -0.3});
 })();
 
-// G1 · South Australia, 28 Sept 2016: storm, towers down, wind farms' protection settings cut output
+// G1 · directive 07:30: South Australia, September 2016, on a real map. The storm brings lines down
+// north of Adelaide; then the wind farms' protection settings trip (icons stop and turn red), not
+// "unstable renewables"
 var tState = at("the state was");
+var SA = function (n) { return mapPoint(null, "sa", n); };
 (function () {
   var o = Shot("S3G South Australia storm", vo(66.6), tState, {red: true});
-  word(o, "SOUTH AUSTRALIA · 28 SEPTEMBER 2016", at("september"), {font: TF.mono, size: 46, color: TERM.amber, y: 170, mode: "type", cps: 26, track: 60});
-  var tS = at("storm");
-  var line = pathShape(o.c, [[160, 560], [1760, 560]], TERM.amber, 4, "transmission line");
-  keys(line.st.property("Color"), [[0, TERM.amber], [o.t(tS) + 0.8, TERM.amber], [o.t(tS) + 1.2, TERM.red]], 0);
-  for (var i = 0; i < 5; i++) { var tw = tower(o, 300 + i * 330, 720, 80, TERM.amber); showAt(o, tw, o.a + 0.2);
-    keys(T(tw).property("Z Rotation"), [[0, 0], [o.t(tS) + 0.6 + i * 0.15, 0], [o.t(tS) + 1.3 + i * 0.15, i % 2 ? 70 : -70]], 0); }
-  label(o, "A STORM TEARS DOWN TRANSMISSION LINES", tS, {y: 270, size: 30, color: TERM.white});
-  var tW = at("wind farms");
-  for (var k = 0; k < 3; k++) { var w = windIcon(o, 560 + k * 400, 860, 70, TERM.amber, "time < " + (o.t(at("cut their")) + 0.4) + " ? time * 120 : " + (o.t(at("cut their")) + 0.4) + " * 120"); showAt(o, w.tower, tW); showAt(o, w.blades, tW); }
-  word(o, "WIND FARMS’ PROTECTION SETTINGS CUT OUTPUT", at("protection"), {size: 52, y: 380, color: TERM.red});
+  var mp = mapDraw(o, "sa", {when: o.a, dim: ["Victoria"], width: 3});
+  label(o, "SOUTH AUSTRALIA", o.a + 0.4, {x: 740, y: 520, size: 28, color: TERM.amber});
+  label(o, "VICTORIA", o.a + 0.4, {x: 1250, y: 800, size: 26, color: TERM.grey});
+  word(o, "SEPTEMBER 2016", at("september"), {font: TF.mono, size: 52, color: TERM.amber, x: 1560, y: 230, mode: "type", cps: 18, track: 60});
+  var tS = at("storm"), tW = at("wind farms"), tCut = at("cut their");
+  // lines north of Adelaide: drawn amber, then broken red where the storm hits
+  var ln = pathShape(o.c, [SA("Davenport"), SA("Mid North"), SA("Adelaide")], TERM.amber, 5, "transmission lines");
+  showAt(o, ln.l, o.a + 0.6, tS + 1.1);
+  var br = pathShape(o.c, [SA("Davenport"), SA("Mid North")], TERM.red, 5, "lines down");
+  showAt(o, br.l, tS + 1.0);
+  for (var i = 0; i < 3; i++) {
+    var a = SA("Davenport"), b = SA("Mid North"), u = 0.25 + i * 0.25;
+    var tw = tower(o, a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u + 4, 10, TERM.amber); showAt(o, tw, o.a + 0.6);
+    keys(T(tw).property("Z Rotation"), [[0, 0], [o.t(tS) + 0.5 + i * 0.15, 0], [o.t(tS) + 1.1 + i * 0.15, i % 2 ? 80 : -80]], 0);
+  }
+  word(o, "STORM", tS, {size: 90, color: TERM.white, x: 1560, y: 360, mode: "rise"});
+  for (var k = 1; k <= 4; k++) {
+    var P = SA("Wind " + k);
+    var w = windIcon(o, P[0] + (k === 4 ? 0 : (k - 2) * 95), P[1] - 60, 40, TERM.amber, "time < " + (o.t(tCut) + 0.2) + " ? time * 160 : " + (o.t(tCut) + 0.2) + " * 160");
+    showAt(o, w.tower, tW, tCut + 0.25); showAt(o, w.blades, tW, tCut + 0.25);
+    var wr = windIcon(o, P[0] + (k === 4 ? 0 : (k - 2) * 95), P[1] - 60, 40, TERM.red, String(((o.t(tCut) + 0.2) * 160).toFixed(1)));
+    showAt(o, wr.tower, tCut + 0.2); showAt(o, wr.blades, tCut + 0.2);
+  }
+  word(o, "PROTECTION TRIPS", at("protection"), {size: 60, color: TERM.red, x: 1520, y: 520, mode: "rise"});
+  label(o, "WIND OUTPUT CUT", tCut, {x: 1520, y: 600, size: 28, color: TERM.white});
+  flag(o, "Map: Natural Earth · Source: AEMO final report · positions schematic");
   cam(o, {d0: -0.5, d1: 0.6});
 })();
-// G2 · cut off from its neighbours; frequency collapses in under a second
+// G2 · cut off from Victoria (the interconnector opens); frequency collapses in under a second
 var tBlack = at("went black");
 (function () {
   var o = Shot("S3G Collapse", tState, tBlack, {red: true});
-  tag(o, "SOUTH AUSTRALIA", o.a + 0.1, {x: 520, y: 320, color: TERM.amber, size: 46});
-  tag(o, "VICTORIA", o.a + 0.1, {x: 1440, y: 320, color: TERM.grey, size: 46});
-  var ic = pathShape(o.c, [[760, 320], [1290, 320]], TERM.amber, 5, "interconnector"); showAt(o, ic.l, o.a, at("cut off") + 0.2);
-  word(o, "CUT OFF FROM ITS NEIGHBORS", at("cut off"), {x: 1020, y: 250, size: 40, color: TERM.red});
+  var mp = mapDraw(o, "sa", {when: o.a, dim: ["Victoria"], width: 3});
+  var ic = pathShape(o.c, [SA("South East"), SA("Heywood")], TERM.amber, 7, "interconnector"); showAt(o, ic.l, o.a, at("cut off") + 0.15);
+  var ix = pathShape(o.c, [SA("South East"), SA("Heywood")], TERM.red, 3, "interconnector open"); showAt(o, ix.l, at("cut off") + 0.15);
+  T(ix.l).property("Opacity").expression = "value * 0.5";
+  word(o, "ISOLATED", at("cut off"), {size: 90, color: TERM.red, x: 1560, y: 300});
   var tc = o.t(at("collapsed"));
-  gauge(o, W / 2, 900, 260, "", "50 Hz", "", "-80 * ease(time, " + (tc - 0.2) + ", " + (tc + 0.6) + ", 0, 1)", TERM.red);
-  word(o, "FREQUENCY COLLAPSED IN UNDER A SECOND", at("collapsed"), {size: 64, y: 520, color: TERM.red, glow: true});
-  cam(o, {push: 1.06, d0: 0.4, d1: -0.6});
+  gauge(o, 1680, 960, 140, "", "50 Hz", "", "-80 * ease(time, " + (tc - 0.2) + ", " + (tc + 0.6) + ", 0, 1)", TERM.red);
+  word(o, "< 1 SECOND", at("under a second"), {font: TF.mono, size: 72, x: 1560, y: 520, color: TERM.red, glow: true});
+  flag(o, "Map: Natural Earth · Source: AEMO final report");
+  cam(o, {push: 1.04, d0: 0.4, d1: -0.6});
 })();
-// H · the whole state went black
+// H · the whole state went black (the map goes out, then the line about wrecked machines)
 (function () {
   var o = Shot("S3H Black", tBlack, vo(95.7), {bg: false});
   solid(o.c, [0, 0, 0], "black");
-  word(o, "SPINNING MACHINES CAN BE WRECKED", at("spinning machines"), {size: 72, y: H / 2 - 30, mode: "rise"});
-  label(o, "BY THE ELECTRICITY THEY MAKE", at("electricity"), {y: H / 2 + 50, size: 34, color: TERM.amber});
+  var mp = mapDraw(o, "sa", {when: o.a, only: ["South Australia"], color: TERM.red, width: 2});
+  T(mp["South Australia"].l).property("Opacity").expression = "value * Math.max(0, 1 - time / 0.9)";
+  word(o, "BLACKOUT", o.a + 0.05, {size: 120, y: H / 2 - 20, color: TERM.red, until: at("spinning machines") - 0.1});
+  word(o, "WRECKED", at("wrecked"), {size: 110, y: H / 2 - 30, mode: "rise"});
+  label(o, "BY THEIR OWN ELECTRICITY", at("electricity"), {y: H / 2 + 50, size: 34, color: TERM.amber});
   cam(o, {push: 1.03});
 })();
 
-// I · Mohave, 1970 and 1971: oscillations twist a generator shaft
+// I · ~08:00: Mohave, 1970 and 1971: oscillations twist a generator shaft (drawn shaft under strain, E5)
 (function () {
   var o = Shot("S3I Mohave shaft", vo(95.7), vo(113.64));
   word(o, "1970", at("1970"), {font: TF.mono, size: 120, x: 760, y: 250, color: TERM.amber});
@@ -131,9 +196,10 @@ var tBlack = at("went black");
   var wv = []; for (var x = -600; x <= 600; x += 20) wv.push([W / 2 + x, 760 + Math.sin(x / 40) * 40]);
   var wave = pathShape(o.c, wv, TERM.red, 4, "oscillation"); showAt(o, wave.l, at("oscillations"));
   T(wave.l).property("Position").expression = "[ (time * 160) % 251 - 125, 0, 0 ]";
-  word(o, "ELECTRICAL OSCILLATIONS TWISTED THE SHAFT", at("oscillations"), {size: 56, y: 400, color: TERM.red});
+  word(o, "OSCILLATIONS", at("oscillations"), {size: 80, y: 400, color: TERM.red});
   label(o, "MOHAVE GENERATING STATION, NEVADA", at("mojave"), {y: 870, size: 32, color: TERM.white});
-  word(o, "EACH REPAIR TOOK MONTHS", at("each repair"), {size: 72, y: 960, color: TERM.amber});
+  word(o, "REPAIRS: MONTHS", at("each repair"), {size: 72, y: 960, color: TERM.amber});
+  flag(o, "Illustration · Source: T&D World");
   cam(o, {x0: -50, x1: 50, d0: -0.3, d1: 0.3});
 })();
 
@@ -141,61 +207,67 @@ var tBlack = at("went black");
 (function () {
   var o = Shot("S3J Human speed", vo(113.64), vo(126.32));
   var tW = at("that's why");
-  word(o, "SECONDS TO NOTICE AN ALARM", at("seconds", vo(113)), {size: 80, y: 420, until: tW - 0.1});
-  label(o, "FAR LONGER TO UNDERSTAND IT", at("far longer"), {y: 520, size: 34, color: TERM.white, until: tW - 0.1});
-  word(o, "THE FASTEST PROTECTION", at("fastest"), {size: 80, y: 430, mode: "rise"});
-  word(o, "AUTOMATIC FOR DECADES", at("automatic", tW), {size: 96, y: 560, color: TERM.amber, glow: true});
+  word(o, "ALARM → SECONDS", at("seconds", vo(113)), {size: 80, y: 420, until: tW - 0.1});
+  label(o, "UNDERSTANDING → LONGER", at("far longer"), {y: 520, size: 34, color: TERM.white, until: tW - 0.1});
+  word(o, "AUTOMATIC PROTECTION", at("fastest"), {size: 90, y: 430, mode: "rise"});
+  word(o, "DECADES", at("decades"), {size: 110, y: 570, color: TERM.amber, glow: true});
   cam(o, {d0: 0.2, d1: -0.3});
 })();
 
-// K · 2003: silenced alarms, a blackout across the northeast
+// K · directive 08:30: 2003. A label card (no fake highlight) and the affected states going dark on a
+// real map; about 50 million people (U.S.–Canada task force)
 (function () {
   var o = Shot("S3K 2003 blackout", vo(126.32), vo(146.0), {red: true});
-  word(o, "14 AUGUST 2003", at("2003"), {font: TF.mono, size: 60, y: 160, color: TERM.amber, mode: "type", cps: 18, track: 80});
-  word(o, "OHIO CONTROL ROOM: A SOFTWARE BUG SILENCES THE ALARMS", at("software bug"), {size: 46, y: 250});
-  var t0 = at("lines failing"), t1 = at("50");
-  for (var i = 0; i < 40; i++) {
-    var x = 260 + rnd(i, 1) * 1400, y = 360 + rnd(i, 2) * 420;
-    var d = dot(o.c, x, y, 9, TERM.amber, "city " + i);
-    var td = o.t(t0 + (t1 - t0) * rnd(i, 3));
-    keys(T(d).property("Opacity"), [[0, 100], [td, 100], [td + 0.3, 12]], 0);
+  var mp = mapDraw(o, "ne2003", {when: o.a, width: 2});
+  var out = MAPS.ne2003.out, t0 = at("lines failing"), t1 = at("ontario") + 0.4;
+  for (var i = 0; i < out.length; i++) {
+    var td = o.t(t0 + (t1 - t0) * i / (out.length - 1)), r = mp[out[i]];
+    keys(r.fill.property("Color"), [[0, TERM.panel], [td, TERM.panel], [td + 0.5, [0.01, 0.01, 0.012]]], 0);
+    keys(r.stroke.property("Color"), [[0, TERM.amber], [td, TERM.amber], [td + 0.5, TERM.red]], 0);
   }
-  num(o, 0, 50, at("50"), at("50") + 0.9, {pre: "≈ ", suf: " MILLION PEOPLE", size: 96, y: 900, glow: true});
-  label(o, "U.S.–CANADA POWER SYSTEM OUTAGE TASK FORCE", at("50") + 0.6, {y: 980, size: 24});
+  pin(o, mapPoint(o, "ne2003", "Ohio control room"), "OHIO", at("ohio"), {ly: -44});
+  // the label card: year, cause
+  box(o, 520, 230, 300, 190, 10);
+  word(o, "2003", at("2003"), {font: TF.mono, size: 90, x: 300, y: 200, color: TERM.amber, mode: "type", cps: 10});
+  label(o, "SOFTWARE BUG · ALARMS SILENT", at("software bug"), {x: 300, y: 270, size: 22, color: TERM.white, track: 60});
+  num(o, 0, 50, at("50"), at("50") + 0.9, {pre: "≈ ", suf: " MILLION", size: 96, x: 1500, y: 960, glow: true});
+  label(o, "PEOPLE", at("50") + 0.5, {x: 1500, y: 1020, size: 26});
+  flag(o, "Map: Natural Earth · Source: U.S.–Canada Power System Outage Task Force");
   cam(o, {d0: -0.4, d1: 0.5});
 })();
 
-// L · Britain, 9 Aug 2019: two stations lost, automatic systems cut 1.1 million customers
+// L · Britain, August 2019: two stations lost; automatic systems cut about 1.1 million customers
 (function () {
   var o = Shot("S3L Britain 2019", vo(146.0), vo(163.68));
-  word(o, "GREAT BRITAIN · 9 AUGUST 2019", at("august"), {font: TF.mono, size: 50, y: 160, color: TERM.amber, mode: "type", cps: 24, track: 60});
-  label(o, "AFTER A LIGHTNING STRIKE", at("lightning"), {y: 240, size: 30, color: TERM.white});
+  mapDraw(o, "gb", {when: o.a, color: TERM.amberDim, width: 2});
+  word(o, "AUGUST 2019", at("august"), {font: TF.mono, size: 56, x: 360, y: 300, color: TERM.amber, mode: "type", cps: 16, track: 60});
+  label(o, "LIGHTNING", at("lightning"), {x: 360, y: 370, size: 30, color: TERM.white});
   var tN = at("no human");
-  tag(o, "HORNSEA", at("two power"), {x: 700, y: 400, color: TERM.red, size: 50, until: tN - 0.1});
-  tag(o, "LITTLE BARFORD", at("stations") + 0.4, {x: 1220, y: 400, color: TERM.red, size: 50, until: tN - 0.1});
-  label(o, "TWO POWER STATIONS LOST WITHIN SECONDS", at("within seconds"), {y: 500, size: 30, until: tN - 0.1});
-  word(o, "NO HUMAN DECIDED", tN, {size: 110, y: 430, glow: true});
-  num(o, 0, 1.1, at("million", tN), at("million", tN) + 0.8, {dec: 1, pre: "≈ ", suf: " MILLION CUSTOMERS", size: 80, y: 620, color: TERM.amber});
-  label(o, "CUT OFF AUTOMATICALLY TO SAVE THE REST OF THE GRID", at("save"), {y: 710, size: 28, color: TERM.white});
+  word(o, "2 STATIONS LOST", at("two power"), {size: 64, x: 360, y: 520, color: TERM.red, mode: "rise"});
+  word(o, "AUTOMATIC", tN, {size: 96, x: 1520, y: 420, glow: true});
+  num(o, 0, 1.1, at("million", tN), at("million", tN) + 0.8, {dec: 1, pre: "≈ ", suf: " MILLION", size: 80, x: 1520, y: 580, color: TERM.amber});
+  label(o, "CUSTOMERS CUT OFF", at("customers"), {x: 1520, y: 650, size: 28, color: TERM.white});
+  flag(o, "Map: Natural Earth · Source: National Grid ESO report via Ofgem");
   cam(o, {d0: 0.4, d1: -0.4});
 })();
 
 // M · a few seconds: flicker or blackout
 (function () {
   var o = Shot("S3M Flicker or blackout", vo(163.68), vo(171.86));
-  label(o, "IN A LOW-INERTIA GRID, A FEW SECONDS", at("low inertia"), {y: 300, size: 34, color: TERM.white});
+  label(o, "LOW INERTIA · SECONDS", at("low inertia"), {y: 300, size: 34, color: TERM.white});
   word(o, "FLICKER", at("flicker"), {size: 130, x: 560, y: 560, color: TERM.amber});
   word(o, "BLACKOUT", at("blackout"), {size: 130, x: 1360, y: 560, color: TERM.red, glow: true});
   label(o, "OR", at("flicker") + 0.4, {y: 545, size: 40});
   cam(o, {push: 1.04});
 })();
 
-// N · biologically too slow (end of scene: hand-off to Scene 4)
+// N · too slow (end of scene: hand-off to Scene 4)
 (function () {
   var o = Shot("S3N Too slow", vo(171.86), END);
-  word(o, "BIOLOGICALLY TOO SLOW", at("biologically"), {size: 130, y: H / 2 - 20, glow: true});
-  label(o, "TO BALANCE THE PHYSICS OF THE MODERN GRID ALONE", at("balance"), {y: H / 2 + 90, size: 32, color: TERM.amber});
-  cam(o, {push: 1.05, d0: -0.2, d1: 0.3});
+  label(o, "HUMAN OPERATORS", o.a + 0.1, {y: H / 2 - 175, size: 34, color: TERM.white});
+  word(o, "TOO SLOW", at("biologically"), {size: 150, y: H / 2 - 20, glow: true});
+  cam(o, {push: 1.04, d0: -0.2, d1: 0.3});
 })();
 
 assemble("Scene3", END, [[0, 100], [0.8, 0], [vo(66.6), 0], [vo(67), 15], [tBlack - 0.05, 15], [tBlack, 0], [vo(95.7), 0], [vo(126.32), 0], [vo(126.6), 12], [vo(146), 12], [vo(146.3), 0], [END - 1.0, 0], [END, 100]]);
+logEvents(3);

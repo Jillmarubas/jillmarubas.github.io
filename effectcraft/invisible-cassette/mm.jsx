@@ -17,12 +17,8 @@ function counter(t, a, b, t0, t1, dec, pre, suf) {
     'var s = v.toFixed(' + (dec || 0) + '); var p = s.split("."); p[0] = p[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ",");' +
     '"' + (pre || "") + '" + (neg ? "−" : "") + p.join(".") + "' + (suf || "") + '";';
 }
-// kinetic slam-in for a keyword: scale 130 -> 100 with a fast settle, opacity on
-function slamIn(l, at) {
-  keys(T(l).property("Scale"), [[at, [128, 128, 100]], [at + 0.22, [100, 100, 100]]], 0);
-  setEase(T(l).property("Scale"), 70, 0.1);
-  keys(T(l).property("Opacity"), [[0, 0], [at - 0.001, 0], [at, 100]], 0);
-}
+// kinetic slam-in for a keyword: the same 2-frame 115 % -> 100 % overshoot as a stamp (lib.jsx slam)
+function slamIn(l, at) { slam(l, at); }
 // break apart (for "evaporated"): turbulent displacement + blur + fade
 function breakApart(l, at, dur) {
   var td = fx(l, "Turbulent Displace", {"Size": 60, "Complexity": 3});
@@ -47,7 +43,7 @@ function termBackdrop(c, red) {
   return bg;
 }
 
-// global finish: smoke drifting in light, organic grain, vignette (MagnatesMedia overlays)
+// global finish: smoke drifting in light, organic grain (Overlay 12 %), dust motes, vignette 18 %
 function finish(M) {
   var sm = solid(M, [0, 0, 0], "Smoke");
   fx(sm, "Fractal Noise", {"Contrast": 70, "Brightness": -18, "Transform/Scale": 700, "Complexity": 6});
@@ -59,8 +55,10 @@ function finish(M) {
   fx(gr, "Fractal Noise", {"Contrast": 160, "Transform/Scale": 6, "Complexity": 2});
   gr.property("Effects").property("Fractal Noise").property("Evolution").expression = "time * 2400";
   gr.blendingMode = BlendingMode.OVERLAY; T(gr).property("Opacity").setValue(12);
+  // floating dust motes in the light (the paste's atmosphere rule), additive, amber-warm
+  var dm = dust(M, 0.6); dm.name = "Dust motes";
   var vg = solid(M, [0, 0, 0], "Vignette"); vg.adjustmentLayer = true;
-  fx(vg, "CC Vignette", {"Amount": 35});
+  fx(vg, "CC Vignette", {"Amount": 18}); // lens vignette, edge falloff 15–20 %
 }
 
 // a document recreated as typeset paper (titles real; nothing invented), with the house shadow
@@ -71,3 +69,29 @@ function docComp(name, w, h, lines) {
   for (var i = 0; i < lines.length; i++) { var L = lines[i]; txt(c, L[0], L[1], L[2], L[3] || TERM.ink, [L[4], L[5]], ParagraphJustification.LEFT_JUSTIFY, L[6] || 0); }
   return c;
 }
+
+// A public-domain photo as three parallax layers (the paste's PhotoCraft rule; tools/photo_layers.py):
+// Layer 0 background plate (filled) at Z +400, Layer 1 midground subject at Z 0 (sharp), Layer 2 foreground
+// occlusion at Z -250 (soft, about 16 px of depth-of-field blur). Scales line the layers up through the
+// 35 mm lens at the start, so only the camera's move separates them. All three are 2400 x 1350.
+// opt: tint (0–100), redAt (comp time the highlights start turning red), pre (layer name prefix)
+function photoParallax(c, dir, opt) {
+  opt = opt || {};
+  var Z = {bg: 400, mid: 0, near: -250}, sBg = 110, out = {};
+  var names = ["bg", "mid", "near"];
+  for (var i = 0; i < 3; i++) {
+    var n = names[i], l = c.layers.add(img("layers/" + dir + "/" + n + ".png"));
+    l.name = (opt.pre || dir) + " " + n + " (Z" + (Z[n] >= 0 ? "+" : "") + Z[n] + ")"; l.threeDLayer = true;
+    var s = sBg * (ZOOM + Z[n]) / (ZOOM + Z.bg);
+    T(l).property("Position").setValue([W / 2, H / 2, Z[n]]);
+    T(l).property("Scale").setValue([s, s, 100]);
+    var tn = fx(l, "Tint", {"Map Black To": [0, 0, 0], "Map White To": [1, 0.8, 0.5], "Amount to Tint": opt.tint === undefined ? 70 : opt.tint});
+    if (opt.redAt !== undefined) keys(tn.property("Map White To"), [[0, [1, 0.8, 0.5]], [opt.redAt, [1, 0.8, 0.5]], [opt.redAt + 3, [1, 0.42, 0.34]]], 0);
+    // photo shots run the camera at a small aperture (PHOTO_APERTURE) so the plate stays readable; the
+    // foreground occlusion layer gets the rest of its 15–20 px depth-of-field blur here
+    if (n === "near") fx(l, "Fast Box Blur", {"Blur Radius": 12});
+    out[n] = l;
+  }
+  return out;
+}
+var PHOTO_APERTURE = 60;

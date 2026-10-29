@@ -172,17 +172,23 @@ function penFG(c, x, y, rot) {
 // i.e. 100 -> 106 % over 10 s) and a slow Dutch drift. opt: {x0,x1,y0,y1,d0,d1,push}
 function rig(c, dur, opt) {
   opt = opt || {};
-  var push = opt.push || (1 + 0.006 * dur);
+  // the paste: continuous push-in of 4–6 % over 8–10 s (0.4–0.75 % a second), Dutch drift of ±0.5° to 1.0°
+  var push = Math.min(Math.max(opt.push || (1 + 0.006 * dur), 1 + 0.004 * dur), 1 + 0.0075 * dur);
+  function dutch(v, sgn) { if (v === undefined || v === 0) v = 0.6 * sgn; var m = Math.min(1.0, Math.max(0.5, Math.abs(v))); return v < 0 ? -m : m; }
+  opt.d0 = dutch(opt.d0, -1); opt.d1 = dutch(opt.d1, 1);
+  if ((opt.d0 < 0) === (opt.d1 < 0)) opt.d1 = -opt.d1; // drift through level, not parked on one side
   var cam = c.layers.addCamera("Camera 35mm", [W / 2, H / 2]);
   cam.autoOrient = AutoOrientType.NO_AUTO_ORIENT;
   var co = cam.property("Camera Options");
   co.property("Zoom").setValue(ZOOM);
   co.property("Depth of Field").setValue(1);
-  co.property("Aperture").setValue(150);
+  co.property("Aperture").setValue(opt.aperture || 200); // foreground at Z -250 blurs about 16 px (paste: 15–20 px)
   co.property("Blur Level").setValue(100);
   co.property("Focus Distance").expression = "-transform.position[2]"; // keep Z = 0 sharp while the camera dollies
-  keys(T(cam).property("Position"), [[0, [W / 2 + (opt.x0 || 0), H / 2 + (opt.y0 || 0), -ZOOM]], [dur, [W / 2 + (opt.x1 || 0), H / 2 + (opt.y1 || 0), -ZOOM / push]]], 55);
-  keys(T(cam).property("Z Rotation"), [[0, opt.d0 === undefined ? -0.5 : opt.d0], [dur, opt.d1 === undefined ? 0.6 : opt.d1]], 50);
+  // opt.pull: the production file asks for a pull-back on some shots; same speed limits, reversed
+  var zA = opt.pull ? -ZOOM / push : -ZOOM, zB = opt.pull ? -ZOOM : -ZOOM / push;
+  keys(T(cam).property("Position"), [[0, [W / 2 + (opt.x0 || 0), H / 2 + (opt.y0 || 0), zA]], [dur, [W / 2 + (opt.x1 || 0), H / 2 + (opt.y1 || 0), zB]]], 55);
+  keys(T(cam).property("Z Rotation"), [[0, opt.d0], [dur, opt.d1]], 50);
   return cam;
 }
 
@@ -202,9 +208,9 @@ function stampComp(name, lines, size, w, h) {
   fx(adj, "Roughen Edges", {"Border": size > 80 ? 3 : 1.4, "Edge Sharpness": 1.6, "Scale": 60});
   return c;
 }
-// slam: 2-frame overshoot 115 % -> 100 %, opacity on impact
+// slam (the paste): stamps and red badges slam down with a 2-frame scale overshoot, 115 % -> 100 %
 function slam(l, at, baseScale) {
   var s = baseScale || 100, f = 1 / FPS;
-  keys(T(l).property("Scale"), [[at - 2 * f, [s * 1.45, s * 1.45, 100]], [at, [s * 1.15, s * 1.15, 100]], [at + 2 * f, [s, s, 100]]], 0);
-  keys(T(l).property("Opacity"), [[0, 0], [at - 2 * f - 0.001, 0], [at - 2 * f, 35], [at, 92]], 0);
+  keys(T(l).property("Scale"), [[at, [s * 1.15, s * 1.15, 100]], [at + 2 * f, [s, s, 100]]], 0);
+  keys(T(l).property("Opacity"), [[0, 0], [at - f, 0], [at, 100]], 0);
 }

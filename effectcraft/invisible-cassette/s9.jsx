@@ -38,10 +38,17 @@ var END = vo(88.10) + 3.0;
 // D · every light, every EV, every flight, every shipment: an invisible fabric of machine decisions
 (function () {
   var o = Shot("S9D Invisible fabric", vo(41.9), vo(59.2));
-  backdropPhoto(o, "nyc_night_iss53.jpg", o.a, {cover: 1.15, opacity: 0.75, caption: "New York City at night from the ISS (Expedition 53) · NASA"});
+  // the fabric: a mesh of decision nodes; pulses run along it faster and faster
+  var P = []; for (var i = 0; i < 44; i++) P.push([160 + rnd(i, 11) * 1600, 330 + rnd(i, 12) * 520]);
+  var tF = at("invisible");
+  for (var i = 0; i < P.length; i++) for (var j = i + 1; j < P.length; j++) {
+    var dx = P[i][0] - P[j][0], dy = P[i][1] - P[j][1];
+    if (dx * dx + dy * dy < 230 * 230) { var e = pathShape(o.c, [P[i], P[j]], TERM.amberDim, 2, "thread"); showAt(o, e.l, o.a + 0.3 + rnd(i * 50 + j, 13) * 2); }
+  }
+  for (var i = 0; i < P.length; i++) showAt(o, dot(o.c, P[i][0], P[i][1], 6, TERM.amber, "decision"), o.a + 0.2 + rnd(i, 14) * 2);
+  for (var k = 0; k < 16; k++) { var p0 = P[(k * 7) % P.length], p1 = P[(k * 7 + 5) % P.length]; shuttle(o, p0, p1, TERM.amber, tF, "0.8 + Math.max(0, time - " + o.t(at("millions")) + ") * 0.6", k / 5, 5); }
   var it = [["A LIGHT", at("light"), 560, 200], ["AN ELECTRIC VEHICLE", at("electric"), 1360, 200], ["A FLIGHT", at("flight"), 560, 280], ["GOODS FROM ACROSS THE GLOBE", at("goods"), 1360, 280]];
   for (var k = 0; k < it.length; k++) word(o, it[k][0], it[k][1], {size: 40, x: it[k][2], y: it[k][3], color: TERM.white, mode: "fade", font: TF.mono, track: 40});
-  bar(o, 560, at("invisible"));
   word(o, "AN INVISIBLE FABRIC OF MACHINE DECISIONS", at("invisible"), {size: 70, y: 585, color: TERM.amber, glow: true});
   word(o, "MILLIONS OF CALCULATIONS A SECOND", at("millions"), {size: 50, y: 900, font: TF.mono, track: 40});
   cam(o, {push: 1.1, x0: -40, x1: 40, d0: -0.2, d1: 0.3});

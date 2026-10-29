@@ -3,6 +3,7 @@
 // LEAD, so at("phrase") = that word's voiceover time + LEAD. Each shot converts to its own local time.
 #include "mm.jsx"
 #include "words.jsx"
+#include "maps.jsx"
 
 var LEAD = 1.0, F = 1 / FPS, SC = 0, SHOTS = [];
 var CENTER = ParagraphJustification.CENTER_JUSTIFY, LEFTJ = ParagraphJustification.LEFT_JUSTIFY, RIGHTJ = ParagraphJustification.RIGHT_JUSTIFY;
@@ -31,10 +32,8 @@ function vis(l, a, b, fi, fo, d) {
   if (b < d - 0.01) { k.push([b - Math.max(fo || 0, F), 100]); k.push([b, 0]); }
   keys(T(l).property("Opacity"), k, 0);
 }
-function pop(l, a, from) {
-  var s = from || 128;
-  keys(T(l).property("Scale"), [[a, [s, s, 100]], [a + 0.22, [100, 100, 100]]], 0);
-  setEase(T(l).property("Scale"), 70, 0.1);
+function pop(l, a) { // the paste's slam: 115 % -> 100 % over 2 frames
+  keys(T(l).property("Scale"), [[a, [115, 115, 100]], [a + 2 * F, [100, 100, 100]]], 0);
 }
 
 // a keyword / number / label. opt: x, y, z, size, color, font, mode ('slam'|'rise'|'type'|'fade'|'on'),
@@ -80,7 +79,8 @@ function tag(o, s, when, opt) {
   var l = c3(o.c, tc, [opt.x === undefined ? W / 2 : opt.x, opt.y === undefined ? H / 2 : opt.y, opt.z === undefined ? -20 : opt.z]);
   if (opt.rot) T(l).property("Z Rotation").setValue(opt.rot);
   var a = o.t(when);
-  pop(l, a, 140); vis(l, a, opt.until === undefined ? o.d : o.t(opt.until), 0, 0.3, o.d);
+  pop(l, a); vis(l, a, opt.until === undefined ? o.d : o.t(opt.until), 0, 0.3, o.d);
+  EVENTS.push([opt.color === TERM.red ? "stamp" : "tag", when]);
   return l;
 }
 function tagComp(name, s, rgb, size, w, h, font) {
@@ -179,6 +179,7 @@ function doc(o, lines, when, opt) {
   keysOut(T(l).property("Position"), [[a, [x + 1400, y + 40, opt.z || 0]], [a + 0.8, [x, y, opt.z || 0]]]);
   keysOut(T(l).property("Y Rotation"), [[a, -28], [a + 0.8, opt.ry === undefined ? -8 : opt.ry]]);
   vis(l, a, opt.until === undefined ? o.d : o.t(opt.until), 0, 0.3, o.d);
+  EVENTS.push(["slide", when]);
   return {l: l, comp: dc};
 }
 // highlighter wipe inside a doc comp (doc-local pixels); `when` is SCENE time, the doc comp shares the shot's clock
@@ -244,12 +245,24 @@ function fgTicker(c, y, red) {
 }
 
 // assemble a scene: shots in order, exposure (tension) curve, global finish
-function assemble(name, dur, expo) {
+// story-turn colour-temperature flip: on each turn the grade jumps cold ("cold") or back to the warm
+// amber ("warm") on the exact frame of the word, held until the next turn (Tint on an adjustment layer)
+function turnTint(M, turns) {
+  if (!turns || !turns.length) return;
+  var adj = solid(M, [1, 1, 1], "Turn tint (colour temperature)"); adj.adjustmentLayer = true;
+  var tn = fx(adj, "Tint", {"Map Black To": [0, 0, 0], "Map White To": [0.78, 0.86, 1.0], "Amount to Tint": 0});
+  var ts = [], vs = [];
+  for (var i = 0; i < turns.length; i++) { ts.push(Math.round(turns[i][0] * FPS) / FPS); vs.push(turns[i][1] === "cold" ? 22 : 0); }
+  tn.property("Amount to Tint").expression = "var T=[" + ts.join(",") + "],V=[" + vs.join(",") + "],a=0;for(var i=0;i<T.length;i++){if(time>=T[i])a=V[i];}a;";
+  for (var j = 0; j < turns.length; j++) EVENTS.push(["turn", +ts[j].toFixed(3), turns[j][1]]);
+}
+function assemble(name, dur, expo, turns) {
   var M = comp(name, dur); M.motionBlur = true;
   solid(M, [0, 0, 0], "black");
   for (var i = 0; i < SHOTS.length; i++) { var s = SHOTS[i], l = M.layers.add(s.c); l.startTime = s.a; l.inPoint = s.a; l.outPoint = s.b; }
   var ex = solid(M, [0, 0, 0], "Exposure (tension curve)");
   keys(T(ex).property("Opacity"), expo || [[0, 100], [0.6, 0], [dur - 0.8, 0], [dur, 100]], 0);
+  turnTint(M, turns);
   finish(M);
   writeLn(name + ": " + SHOTS.length + " shots, " + dur + " s");
   return M;
@@ -344,3 +357,112 @@ function backdropPhoto(o, file, when, opt) {
   if (opt.caption) label(o, opt.caption, when + 0.3, {x: W - 48, y: H - 36, just: RIGHTJ, size: 22, font: TF.headReg, track: 30, mode: "on", until: opt.until});
   return l;
 }
+// a 3-layer photo shot inside a Shot: layers visible from `from` to `until` (scene times), credit bottom right
+function photoShot(o, dir, opt) {
+  opt = opt || {};
+  var L = photoParallax(o.c, dir, {tint: opt.tint, redAt: opt.redAt === undefined ? undefined : o.t(opt.redAt)});
+  var a = opt.from === undefined ? 0 : o.t(opt.from), b = opt.until === undefined ? o.d : o.t(opt.until);
+  vis(L.bg, a, b, 0.5, 0.6, o.d); vis(L.mid, a, b, 0.5, 0.6, o.d); vis(L.near, a, b, 0.5, 0.6, o.d);
+  if (opt.caption) label(o, opt.caption, opt.from === undefined ? o.a : opt.from, {x: W - 48, y: H - 36, just: RIGHTJ, size: 22, font: TF.headReg, track: 30, mode: "on", until: opt.until});
+  return L;
+}
+
+// a real map (Natural Earth outlines, maps.jsx). opt: color, fill, width, only (region names), dim (names
+// drawn dim), when (scene time it draws on), scale/offset to reposition. Returns {name: {l, fill, stroke}}.
+function mapDraw(o, key, opt) {
+  opt = opt || {};
+  var m = MAPS[key], out = {}, sc = opt.scale || 1, dx = opt.dx || 0, dy = opt.dy || 0;
+  for (var name in m.regions) {
+    if (opt.only && opt.only.indexOf(name) < 0) continue;
+    var dim = opt.dim && opt.dim.indexOf(name) >= 0;
+    var l = o.c.layers.addShape(); l.name = "map " + name;
+    var g = l.property("Contents").addProperty("ADBE Vector Group");
+    var polys = m.regions[name];
+    for (var i = 0; i < polys.length; i++) {
+      var pts = []; for (var k = 0; k < polys[i].length; k++) pts.push([polys[i][k][0] * sc + dx, polys[i][k][1] * sc + dy]);
+      var p = g.property("Contents").addProperty("ADBE Vector Shape - Group"); var sh = new Shape(); sh.vertices = pts; sh.closed = true; p.property("Path").setValue(sh);
+    }
+    var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); st.property("Color").setValue(dim ? TERM.amberDim : (opt.color || TERM.amber)); st.property("Stroke Width").setValue(opt.width || 3);
+    var fl = g.property("Contents").addProperty("ADBE Vector Graphic - Fill"); fl.property("Color").setValue(opt.fill || TERM.panel);
+    l.threeDLayer = true; T(l).property("Position").setValue([0, 0, opt.z || 20]);
+    vis(l, o.t(opt.when === undefined ? o.a : opt.when), opt.until === undefined ? o.d : o.t(opt.until), 0.5, 0.4, o.d);
+    out[name] = {l: l, fill: fl, stroke: st};
+  }
+  return out;
+}
+function mapPoint(o, key, name, opt) { var m = MAPS[key], sc = (opt && opt.scale) || 1; return [m.points[name][0] * sc + ((opt && opt.dx) || 0), m.points[name][1] * sc + ((opt && opt.dy) || 0)]; }
+// a pin + label on a map point
+function pin(o, xy, text, when, opt) {
+  opt = opt || {};
+  var d = dot(o.c, xy[0], xy[1], 12, opt.color || TERM.red, "pin " + text, -5); showAt(o, d, when, opt.until);
+  var r = shapeAt(o.c, "pin ring", [xy[0], xy[1], -5]); addEllipse(r, 46, [0, 0], opt.color || TERM.red, 3, null); showAt(o, r, when, opt.until);
+  T(r).property("Scale").expression = "var t = (time % 1.2) / 1.2; [100 + t * 90, 100 + t * 90, 100];";
+  T(r).property("Opacity").expression = "value * (1 - (time % 1.2) / 1.2)";
+  label(o, text, when + 0.15, {x: xy[0] + (opt.lx || 0), y: xy[1] + (opt.ly === undefined ? -40 : opt.ly), size: opt.size || 30, color: opt.color || TERM.red, until: opt.until});
+  return d;
+}
+
+// ---- paper props (documents are the one place paper stock appears in the terminal palette) ----
+// archival ticker tape: a paper strip with symbols and arrows (no invented prices); scrolls inside its comp
+function tapeComp(name, up, speedExpr) {
+  var c = comp(name, 300, 3600, 120);
+  solid(c, TERM.paper, "tape paper");
+  var n = solid(c, [0.5, 0.5, 0.5], "tape grain"); fx(n, "Fractal Noise", {"Contrast": 120, "Transform/Scale": 3}); n.blendingMode = BlendingMode.MULTIPLY; T(n).property("Opacity").setValue(14);
+  var s = ""; for (var r = 0; r < 12; r++) for (var i = 0; i < SYMS.length; i++) s += SYMS[i] + (up ? " ▲" : " ▼") + "     ";
+  var t = txt(c, s, TF.mono, 58, up ? [0.05, 0.45, 0.25] : [0.62, 0.08, 0.06], [40, 80], LEFTJ, 20);
+  T(t).property("Position").expression = "[40 - (" + (speedExpr || "time * 300") + ") % 1800, 80];";
+  return c;
+}
+// a rubber stamp on paper: red outline and letters, roughened ink, multiply
+function stampComp2(name, lines, size, w, h) {
+  var c = comp(name, 60, w, h);
+  var bx = c.layers.addShape(); var g = bx.property("Contents").addProperty("ADBE Vector Group");
+  g.property("Contents").addProperty("ADBE Vector Shape - Rect").property("Size").setValue([w - 24, h - 24]);
+  var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); st.property("Color").setValue([0.72, 0.1, 0.08]); st.property("Stroke Width").setValue(Math.max(6, size / 9));
+  T(bx).property("Position").setValue([w / 2, h / 2]);
+  var lh = size * 1.1, y0 = h / 2 - (lines.length - 1) * lh / 2 + size * 0.36;
+  for (var i = 0; i < lines.length; i++) txt(c, lines[i], TF.head, size, [0.72, 0.1, 0.08], [w / 2, y0 + i * lh], CENTER, 50);
+  var adj = solid(c, [1, 1, 1], "ink"); adj.adjustmentLayer = true;
+  fx(adj, "Roughen Edges", {"Border": size > 80 ? 3 : 1.6, "Edge Sharpness": 1.6, "Scale": 60});
+  return c;
+}
+// a folder: paper back, tab and label (our own prop: no real letterhead)
+function folderComp(name, labelText, w, h) {
+  var c = comp(name, 60, w, h);
+  var f = c.layers.addShape(); var g = f.property("Contents").addProperty("ADBE Vector Group");
+  var tabW = Math.min(w * 0.62, 120 + (labelText ? labelText.length * 19 : 0));
+  g.property("Contents").addProperty("ADBE Vector Shape - Rect").property("Size").setValue([tabW, 70]);
+  g.property("Contents").property(1).property("Position").setValue([-w / 2 + 40 + tabW / 2, -h / 2 + 35]);
+  g.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue([0.80, 0.76, 0.66]);
+  var g2 = f.property("Contents").addProperty("ADBE Vector Group");
+  g2.property("Contents").addProperty("ADBE Vector Shape - Rect").property("Size").setValue([w, h - 60]);
+  g2.property("Contents").property(1).property("Position").setValue([0, 30]);
+  g2.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue([0.86, 0.82, 0.72]);
+  T(f).property("Position").setValue([w / 2, h / 2]);
+  var n = solid(c, [0.5, 0.5, 0.5], "paper grain"); fx(n, "Fractal Noise", {"Contrast": 110, "Transform/Scale": 3}); n.blendingMode = BlendingMode.MULTIPLY; T(n).property("Opacity").setValue(12);
+  if (labelText) txt(c, labelText, TF.mono, 26, TERM.ink, [100, 46], LEFTJ, 40);
+  return c;
+}
+// slide a 3D layer in with inertia (ease-out cubic) from a direction; paper props get the house drop shadow
+function slideIn(o, l, when, pos, from, ry) {
+  var a = o.t(when);
+  keysOut(T(l).property("Position"), [[a, [pos[0] + from[0], pos[1] + from[1], pos[2] || 0]], [a + 0.8, pos]]);
+  if (ry !== undefined) keysOut(T(l).property("Z Rotation"), [[a, ry * 2], [a + 0.8, ry]]);
+  vis(l, a, o.d, 0, 0.3, o.d);
+  EVENTS.push(["slide", when]);
+  return l;
+}
+// a folder or binder dropped onto the surface: falls with gravity (ease-in), lands with a 2-frame settle
+function dropIn(o, l, when, pos, rz) {
+  var a = o.t(when), z = pos[2] || 0;
+  keys(T(l).property("Position"), [[a, [pos[0], pos[1] - 40, z - 700]], [a + 0.32, [pos[0], pos[1], z]]], 0);
+  setEase(T(l).property("Position"), 0.1, 85);
+  keys(T(l).property("Scale"), [[a + 0.32, [101.5, 101.5, 100]], [a + 0.32 + 2 * F, [100, 100, 100]]], 0);
+  if (rz !== undefined) T(l).property("Z Rotation").setValue(rz);
+  vis(l, a, o.d, 0, 0.3, o.d);
+  EVENTS.push(["drop", when + 0.32]);
+  return l;
+}
+// events the mix reads (paper slides get friction, stamps a thump): printed at build time
+var EVENTS = [];
+function logEvents(scene) { var s = []; for (var i = 0; i < EVENTS.length; i++) s.push('["' + EVENTS[i][0] + '",' + Math.round(EVENTS[i][1] * 100) / 100 + ']'); writeLn("EVENTS " + scene + " [" + s.join(",") + "]"); }
