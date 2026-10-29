@@ -76,9 +76,10 @@ function txt(c, s, font, size, rgb, pos, just, tracking) {
   T(t).property("Position").setValue(pos);
   return t;
 }
-// typewriter: characters appear from `at` at `cps` per second
+// typewriter: characters appear from `at` at `cps` per second. EffectCraft's expressions have no substr()
+// (it silently shows the full text), and an empty result also falls back to the full text: use slice, return a space.
 function typeOn(t, s, at, cps) {
-  t.property("Source Text").expression = 'var s = "' + s.replace(/"/g, '\\"') + '"; s.substr(0, Math.max(0, Math.floor((time - ' + at + ') * ' + cps + ')));';
+  t.property("Source Text").expression = 'var s = "' + s.replace(/"/g, '\\"') + '"; var n = Math.floor((time - ' + at + ') * ' + cps + '); n > 0 ? s.slice(0, n) : " ";';
 }
 // letters rise into place left to right from `at` (opacity + position + blur animator)
 function rise(t, at, dur) {

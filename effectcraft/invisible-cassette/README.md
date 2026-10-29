@@ -18,13 +18,16 @@ Look: MagnatesMedia-style documentary (CLAUDE.md), one palette from the subject:
   effectcraft-cli s1.ecproj render --comp Scene1 --out "$PWD/render/s1-mm-half.mp4" --format h264 --resolution half --audio off --progress
   ```
 - Sound: `remotion/scripts/mix_ic.py remotion/src/invisible-cassette/cues_s1.json` (same film times).
-- Photos: the trading-floor shot is drawn and labelled "Illustration" until a public-domain or CC photo
-  can be downloaded (Wikimedia Commons is not reachable from this environment yet). Cut-outs then go
-  through PhotoCraft (`select.subject`, `select.refineEdge`, `edit.contentAwareFill`).
+- Photos: the trading-floor shot uses Carol M. Highsmith's public-domain NYSE photo (Library of Congress, via
+  Wikimedia Commons; `assets/nyse_floor_highsmith.jpg`, the 1920 px standard thumbnail, because Commons rate-limits
+  original files). Cut in PhotoCraft: Object Selection on the booth + lasso for the pillar, Refine Edge (radius 2,
+  feather 1) → `assets/nyse_fg.png`; the same selection expanded 10 px and Content-Aware Filled → `assets/nyse_bg.png`.
 
 Lessons:
 - A text layer created empty renders nothing even with a Source Text expression; create it with its full string.
 - Shape groups draw first-on-top.
 - The first opacity key holds backwards, so pin a 0 key at time 0 for anything that appears later.
+- Expressions have no `String.substr` and fail silently (the layer shows its full text); use `slice`. A Source Text
+  expression that returns "" also shows the full text, so `typeOn()` returns a space until the first character.
 - Keys snap to whole frames: two keys inside one frame merge and the later one wins, so `[t − 0.001, 0], [t, 100]`
   became a slow fade from 0 s. `keys()` and `keysOut()` now snap and push a colliding key one frame on.

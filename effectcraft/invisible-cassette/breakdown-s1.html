@@ -28,7 +28,7 @@ code,.k{font-family:var(--fm);font-size:.9em}
 </style>
 <div class="wrap">
 <header>
-  <div class="eyebrow">The Invisible Cassette · Act I · v3</div>
+  <div class="eyebrow">The Invisible Cassette · Act I · v3.1</div>
   <h1>Scene 1: The crash no human could see</h1>
   <p class="muted">Film 00:00–02:04.5 (cold open + title card) · 24 fps · MagnatesMedia-style documentary look · built in EffectCraft 0.18.0 · approved voiceover and mix unchanged</p>
 </header>
@@ -64,9 +64,9 @@ code,.k{font-family:var(--fm);font-size:.9em}
 </section>
 <section class="shot">
   <div class="head"><span class="tc">00:41.2–00:56.1</span><h2>D · The floor, then the machines</h2></div>
-  <ul><li>A wall of market boards (drawn, labelled "Illustration") turns red panel by panel; <span class="k">NEW YORK STOCK EXCHANGE</span> types on.</li>
-  <li>On "inside computers" the boards fade and orders become light streaks at three depths; <span class="k">FRACTIONS OF A SECOND</span> rises in.</li>
-  <li class="flag">Pending: a licensed NYSE floor photo as a three-layer cut-out (needs commons.wikimedia.org allowed).</li></ul>
+  <ul><li>Carol M. Highsmith's public-domain photo of the NYSE floor (Library of Congress), cut in PhotoCraft into two layers: the floor plate at Z +250 (the booth removed with Content-Aware Fill) and the foreground booth and pillar at Z −200. The camera trucks right and pushes in, so the soft booth slides past the sharp floor.</li>
+  <li>Graded amber to match the terminal; the highlights turn red from "most of the trading wasn't happening there". <span class="k">NEW YORK STOCK EXCHANGE</span> types on in a lower-third bar. Caption: "Archive photo · Carol M. Highsmith, Library of Congress" (the photo predates 2010).</li>
+  <li>On "inside computers" the floor fades and orders become light streaks at three depths; <span class="k">FRACTIONS OF A SECOND</span> rises in.</li></ul>
 </section>
 <section class="shot">
   <div class="head"><span class="tc">00:56.1–01:10.2</span><h2>E · Newswire</h2></div>
@@ -101,7 +101,7 @@ code,.k{font-family:var(--fm);font-size:.9em}
   <ul>
     <li>Every figure on screen is a documented figure (see <code>ASSETS.md</code>); counters only roll between two real values and show no invented in-between labels.</li>
     <li>Flash safety: one soft flash and a 1 Hz cursor; checked with <code>flash_check.py</code>.</li>
-    <li>Fixed in this build: keyframes inside one frame merged, so slammed words faded up early. Keys now snap to whole frames.</li>
+    <li>Fixed in this build: keyframes inside one frame merged, so slammed words faded up early (keys now snap to whole frames); and type-on text appeared in full because EffectCraft expressions lack <code>substr</code> (now <code>slice</code>).</li>
   </ul>
 </section>
 </div>

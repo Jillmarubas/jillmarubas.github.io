@@ -126,36 +126,29 @@ function shotQuotes() { // film 27.08 – 41.18: Accenture a cent, Sotheby's $10
   return c;
 }
 
-// wall of market boards, drawn (bars only, no invented figures); each panel turns red at its own moment
-function boardsComp() {
-  var c = comp("Boards", 30, 2700, 1180);
-  solid(c, TERM.black, "bg");
-  var cols = 10, rows = 6, pw = 240, ph = 160, gap = 24;
-  for (var i = 0; i < cols * rows; i++) {
-    var cx = 40 + (i % cols) * (pw + gap) + pw / 2, cy = 40 + Math.floor(i / cols) * (ph + gap) + ph / 2;
-    var l = c.layers.addShape(); l.name = "panel " + i;
-    for (var r = 0; r < 3; r++) {
-      var b = l.property("Contents").addProperty("ADBE Vector Group");
-      var w = 60 + ((i * 37 + r * 53) % 100);
-      var rr = b.property("Contents").addProperty("ADBE Vector Shape - Rect"); rr.property("Size").setValue([w, 20]); rr.property("Position").setValue([-pw / 2 + 18 + w / 2, -44 + r * 44]);
-      var f = b.property("Contents").addProperty("ADBE Vector Graphic - Fill");
-      f.property("Color").expression = "seedRandom(" + i + ", true); var th = 1 + random(7); var k = 0.8 + 0.2 * Math.sin(time * (6 + random(6)) + " + r + "); time > th ? [1.0 * k, 0.23 * k, 0.19 * k, 1] : [1.0 * k, 0.69 * k, 0.0, 1];";
-    }
-    var g = l.property("Contents").addProperty("ADBE Vector Group");
-    g.property("Contents").addProperty("ADBE Vector Shape - Rect").property("Size").setValue([pw, ph]);
-    var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); st.property("Color").setValue(TERM.amberDim); st.property("Stroke Width").setValue(2);
-    g.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue(TERM.panel);
-    T(l).property("Position").setValue([cx, cy]);
-  }
-  return c;
+// The NYSE floor: Carol M. Highsmith's public-domain photo (Library of Congress), cut in PhotoCraft into a
+// background plate (booth removed with Content-Aware Fill) and the foreground booth + pillar.
+// Graded into the terminal palette; the amber turns red as the crash runs, then the floor gives way to the machines.
+function photoLayer(c, file, z, scale, name) {
+  var l = c.layers.add(img(file)); l.name = name; l.threeDLayer = true;
+  T(l).property("Position").setValue([W / 2, H / 2, z]);
+  T(l).property("Scale").setValue([scale, scale, 100]);
+  var tn = fx(l, "Tint", {"Map Black To": [0, 0, 0], "Map White To": [1, 0.8, 0.5], "Amount to Tint": 70});
+  keys(tn.property("Map White To"), [[0, [1, 0.8, 0.5]], [6.4, [1, 0.8, 0.5]], [10.4, [1, 0.42, 0.34]]], 0);
+  keys(T(l).property("Opacity"), [[0, 100], [10.6, 100], [12.2, 0]], 40); // "inside computers"
+  return l;
 }
-function shotFloor() { // film 41.18 – 56.14: the NYSE floor (drawn until a licensed photo is in), then inside the machines
+function shotFloor() { // film 41.18 – 56.14: the NYSE floor (archive photo, parallax), then inside the machines
   var o = shot("S1D Floor → machines", S.floor, S.wire), c = o.c, d = o.d;
   solid(c, TERM.black, "void");
-  var bl = c.layers.add(boardsComp()); bl.threeDLayer = true;
-  T(bl).property("Position").setValue([W / 2, H / 2, 300]);
-  keys(T(bl).property("Opacity"), [[0, 100], [10.6, 100], [12.2, 0]], 40); // "inside computers"
-  var ny = txt(c, "NEW YORK STOCK EXCHANGE", TF.mono, 50, TERM.amber, [W / 2, H / 2 - 20, 0], null, 200);
+  // BG at Z +250, FG at Z -200; FG scale chosen so both line up through the lens at the start:
+  // s_fg = s_bg * (ZOOM - 200) / (ZOOM + 250)
+  var sBg = 128, sFg = sBg * (ZOOM - 200) / (ZOOM + 250);
+  photoLayer(c, "nyse_bg.png", 250, sBg, "BG floor plate (Z+250)");
+  photoLayer(c, "nyse_fg.png", -200, sFg, "FG booth + pillar (Z-200)");
+  var bar = solid(c, [0, 0, 0], "lower-third bar", 1920, 120); T(bar).property("Position").setValue([W / 2, H - 190]);
+  keys(T(bar).property("Opacity"), [[0, 0], [1.5, 0], [1.8, 70], [6.2, 70], [6.8, 0]], 0);
+  var ny = txt(c, "NEW YORK STOCK EXCHANGE", TF.mono, 50, TERM.amber, [W / 2, H - 172], null, 200);
   typeOn(ny, "NEW YORK STOCK EXCHANGE", 1.78, 18); phosphor(ny);
   keys(T(ny).property("Opacity"), [[0, 100], [6.2, 100], [6.8, 0]], 0);
   // orders as light streaks at three depths (the screen goes inside the computers)
@@ -167,11 +160,11 @@ function shotFloor() { // film 41.18 – 56.14: the NYSE floor (drawn until a li
   }
   var t = txt(c, "FRACTIONS OF A SECOND", TF.mono, 64, TERM.white, [W / 2, H / 2 + 22, 0], null, 240);
   rise(t, 12.98, 0.8); keys(T(t).property("Opacity"), [[0, 0], [12.95, 0], [12.98, 100]], 0);
-  var rail = solid(c, [0.04, 0.04, 0.05], "FG rail (Z-250)", 2600, 60); rail.threeDLayer = true; T(rail).property("Position").setValue([W / 2, H - 60, -250]);
-  var cam = rig(c, d, {y0: 40, y1: 0, d0: -0.6, d1: 0.7});
-  cam.property("Camera Options").property("Focus Distance").expression = "time < 11 ? 300 - transform.position[2] : -transform.position[2]";
-  var lab = txt(c, "Illustration", TF.headReg, 22, TERM.grey, [W - 48, H - 36], RIGHT, 40);
-  keys(T(lab).property("Opacity"), [[0, 70], [10.6, 70], [12.2, 0]], 0);
+  // camera trucks right and pushes in: the booth slides past the floor (parallax); floor sharp, booth soft
+  var cam = rig(c, d, {x0: -70, x1: 90, y0: 30, y1: 0, d0: -0.5, d1: 0.6});
+  cam.property("Camera Options").property("Focus Distance").expression = "time < 11 ? 250 - transform.position[2] : -transform.position[2]";
+  var lab = txt(c, "Archive photo: NYSE trading floor · Carol M. Highsmith, Library of Congress", TF.headReg, 22, TERM.grey, [W - 48, H - 36], RIGHT, 30);
+  keys(T(lab).property("Opacity"), [[0, 80], [10.6, 80], [12.2, 0]], 0);
   return c;
 }
 

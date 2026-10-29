@@ -25,7 +25,7 @@ Licence: the user's own generations; confirm the generator's commercial terms be
 |---|---|---|
 | Terminal backdrop, quote rows, boards, newswire, counters, tags, feedback-loop diagram | Drawn in EffectCraft (shapes and text; prices and index levels are the documented figures) | Original |
 | Smoke, grain, vignette overlays | Generated in EffectCraft (Fractal Noise, CC Vignette) | Original |
-| Trading-floor photo (Scene 1, shot C) | **Pending** — needs a public-domain or CC photo from Wikimedia Commons (domain not yet allowed in the session). Until then: drawn, labelled "Illustration" on screen | — |
+| NYSE trading floor photo (Scene 1, floor shot): "New York Stock Exchange trading floor on Wall Street, New York, New York", LCCN 2011634218 (1920 px standard thumbnail of File:New_York_Stock_Exchange_trading_floor_on_Wall_Street,_New_York,_New_York_LCCN2011634218.tif); cut into `nyse_fg.png` / `nyse_bg.png` in PhotoCraft | Carol M. Highsmith, Highsmith (Carol M.) Archive, Library of Congress Prints and Photographs Division, via Wikimedia Commons | Public domain (Highsmith dedicated the archive to the public); credited on screen. Note: the photo predates 2010 (board clocks read 11:28), so it is captioned "Archive photo", never as 6 May 2010 |
 
 ## Documents shown on screen
 | Asset | Source | Licence |
