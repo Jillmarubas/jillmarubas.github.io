@@ -1,0 +1,33 @@
+{
+ "duration": 15.0,
+ "cues": [
+  {
+   "f": "out/invisible-cassette/audio/music/C3.mp3",
+   "at": 0,
+   "bus": "music",
+   "trim": [
+    0,
+    15.0
+   ],
+   "fade_in": 1.0,
+   "fade_out": 2.5,
+   "gain": 4
+  },
+  {
+   "f": "public/sfx/whoosh7.mp3",
+   "at": 0,
+   "bus": "sfx",
+   "gain": -9
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/T2a.mp3",
+   "at": 3.3,
+   "bus": "sfx",
+   "gain": -8
+  }
+ ],
+ "rumble": [],
+ "silence": [],
+ "bassout": [],
+ "shepard": []
+}

@@ -1,0 +1,131 @@
+{
+ "duration": 156.49,
+ "cues": [
+  {
+   "f": "out/invisible-cassette/audio/vo/scene2.wav",
+   "at": 1.0,
+   "bus": "vo"
+  },
+  {
+   "f": "out/invisible-cassette/audio/music/M4.mp3",
+   "at": 0,
+   "bus": "music",
+   "trim": [
+    0,
+    156.49
+   ],
+   "fade_in": 2,
+   "fade_out": 3
+  },
+  {
+   "f": "public/sfx/whoosh7.mp3",
+   "at": 0,
+   "bus": "sfx",
+   "gain": -8
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F4a.mp3",
+   "at": 0.3,
+   "bus": "sfx",
+   "gain": -5
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K7a.mp3",
+   "at": 28.0,
+   "bus": "sfx",
+   "gain": -8
+  },
+  {
+   "f": "public/cc1003/sfx/typing-laptop.wav",
+   "at": 30.93,
+   "bus": "sfx",
+   "trim": [
+    0,
+    0.7
+   ],
+   "gain": -13,
+   "fade_out": 0.1
+  },
+  {
+   "f": "public/cc1003/sfx/typing-laptop.wav",
+   "at": 32.57,
+   "bus": "sfx",
+   "trim": [
+    1,
+    1.6
+   ],
+   "gain": -13,
+   "fade_out": 0.1
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/A3a.mp3",
+   "at": 42.28,
+   "bus": "amb",
+   "gain": -2,
+   "loop_to": 85.9,
+   "fade_in": 1.0,
+   "fade_out": 1.5
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K5a.mp3",
+   "at": 43.78,
+   "bus": "sfx",
+   "gain": -15,
+   "loop_to": 69.44,
+   "fade_in": 1.0,
+   "fade_out": 1.0
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/T3a.mp3",
+   "at": 107.1,
+   "bus": "sfx",
+   "gain": -6
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F1a.mp3",
+   "at": 124.0,
+   "bus": "sfx",
+   "gain": -3
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/T5a.mp3",
+   "at": 143.26,
+   "bus": "sfx",
+   "gain": -8
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/E4a.mp3",
+   "at": 143.66,
+   "bus": "amb",
+   "gain": -6,
+   "loop_to": 156.49,
+   "fade_in": 2.5,
+   "fade_out": 1.5
+  }
+ ],
+ "rumble": [
+  [
+   58.8,
+   96.0,
+   -20
+  ],
+  [
+   108.6,
+   130.16,
+   -22
+  ]
+ ],
+ "silence": [
+  [
+   108.25,
+   108.6
+  ]
+ ],
+ "bassout": [
+  [
+   108.6,
+   0.7
+  ]
+ ],
+ "shepard": []
+}

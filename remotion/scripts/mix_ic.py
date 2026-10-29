@@ -8,7 +8,8 @@ cues.json: {"duration": s, "cues": [
    "fade_in": s, "fade_out": s, "lowpass": Hz, "loop_to": film_s}, ...],
  "rumble": [[from_s, to_s, dB], ...],      # X1: 45 Hz + 90 Hz (phones can't play 45 Hz)
  "silence": [[from_s, to_s], ...],          # story-turn dips on the music bed only
- "bassout": [[at_s, dur_s], ...]}            # story-turn bass drop-out on the music bed (highpass 180 Hz)
+ "bassout": [[at_s, dur_s], ...],           # story-turn bass drop-out on the music bed (highpass 180 Hz)
+ "shepard": [[from_s, to_s, dB], ...]}      # X2: endlessly rising Shepard tone + ticking clock, cut dead at to_s
 Rules (video-research + SOP): sources are loudness-matched first; music is ducked under the voice
 with sidechain compression; every hit peaks well above the bed; master -14 LUFS / -1 dBTP, 48 kHz.
 """
@@ -67,6 +68,33 @@ for k, (a, b, db) in enumerate(cfg.get("rumble", [])):
     f = os.path.join(tmp, f"r{k}.wav")
     run(["ffmpeg", "-y", "-f", "lavfi", "-i", f"aevalsrc=0.6*sin(2*PI*45*t)+0.35*sin(2*PI*90*t)*(0.75+0.25*sin(2*PI*0.5*t)):s={SR}:d={b - a}",
          "-af", f"afade=t=in:d=2,afade=t=out:st={max(0, b - a - 2)}:d=2,volume={db}dB,adelay={int(a * 1000)}|{int(a * 1000)},apad=whole_dur={dur}", "-ac", "2", "-t", str(dur), f])
+    buses["amb"].append(f)
+
+# X2 Shepard tone: eight octave-spaced partials whose pitch rises forever (Gaussian loudness over the
+# octave position hides each wrap), with a soft 1 Hz clock tick; it ends dead (no fade-out) at `to`
+def shepard_wav(path, d, db):
+    import numpy as np, wave
+    n = int(d * SR); t = np.arange(n) / SR
+    y = np.zeros(n)
+    for i in range(8):
+        pos = np.mod(i + t / 10.0, 8.0)                 # octave position, rises one octave per 10 s
+        f = 30.0 * 2.0 ** pos
+        ph = 2 * np.pi * np.cumsum(f) / SR               # continuous phase: no clicks at the wrap
+        y += np.exp(-((pos - 4) ** 2) / 2.2) * np.sin(ph)
+    y *= 0.12
+    tm = np.mod(t, 1.0)
+    y += 0.5 * np.exp(-tm * 70) * np.sin(2 * np.pi * 1800 * t)
+    y *= np.minimum(1, t / 4.0) * 10 ** (db / 20)        # 4 s fade-in, hard stop at the end
+    y = np.clip(y, -1, 1)
+    pcm = (np.repeat(y[:, None], 2, axis=1) * 32767).astype("<i2")
+    with wave.open(path, "wb") as w:
+        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
+
+
+for k, (a, b, db) in enumerate(cfg.get("shepard", [])):
+    raw = os.path.join(tmp, f"shr{k}.wav"); f = os.path.join(tmp, f"sh{k}.wav")
+    shepard_wav(raw, b - a, db)
+    run(["ffmpeg", "-y", "-i", raw, "-af", f"adelay={int(a * 1000)}|{int(a * 1000)},apad=whole_dur={dur}", "-t", str(dur), f])
     buses["amb"].append(f)
 
 

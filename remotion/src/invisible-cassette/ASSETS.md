@@ -26,6 +26,12 @@ Licence: the user's own generations; confirm the generator's commercial terms be
 | Terminal backdrop, quote rows, boards, newswire, counters, tags, feedback-loop diagram | Drawn in EffectCraft (shapes and text; prices and index levels are the documented figures) | Original |
 | Smoke, grain, vignette overlays | Generated in EffectCraft (Fractal Noise, CC Vignette) | Original |
 | NYSE trading floor photo (Scene 1, floor shot): "New York Stock Exchange trading floor on Wall Street, New York, New York", LCCN 2011634218 (1920 px standard thumbnail of File:New_York_Stock_Exchange_trading_floor_on_Wall_Street,_New_York,_New_York_LCCN2011634218.tif); cut into `nyse_fg.png` / `nyse_bg.png` in PhotoCraft | Carol M. Highsmith, Highsmith (Carol M.) Archive, Library of Congress Prints and Photographs Division, via Wikimedia Commons | Public domain (Highsmith dedicated the archive to the public); credited on screen. Note: the photo predates 2010 (board clocks read 11:28), so it is captioned "Archive photo", never as 6 May 2010 |
+| TVA hydroelectric generator room, 1942 (Scene 3, turbine shot; `assets/tva_generators_1942.jpg`, film border cropped in PhotoCraft) | Alfred T. Palmer, Office of War Information, via Library of Congress (FSA/OWI colour, LC-DIG-fsac-1a35266) | Public domain (US government work) |
+| Power plant control room, Control Gorge Power Plant, Los Angeles Aqueduct, 2001 (Scene 3; `assets/control_room_haer.jpg`, cropped) | Jet Lowe, Historic American Engineering Record (HAER CA-3155), Library of Congress | Public domain (US government work) |
+| Hoover Dam switchyard and pylons (Scene 3 opening backdrop; `assets/hoover_switchyard_highsmith.jpg`) | Carol M. Highsmith, Library of Congress (LCCN 2018702479) | Public domain (Highsmith dedication); credited on screen |
+| New York City at night from the ISS, Expedition 53 (Scene 9; `assets/nyc_night_iss53.jpg`, 1920 px standard thumbnail) | NASA, via Wikimedia Commons ("ISS-53 New York City, Night Lights.jpg") | Public domain (NASA) |
+| Diagrams in Scenes 2–10 (order flows, hot-potato ring, order book, rotor, dials, inverter icons, shaft, network maps, neural net, block flip, container terminal, flight path, pipeline, dashboards, bars) | Drawn in EffectCraft; drawn or hypothetical material is flagged on screen ("Illustration", "Illustrative", "HYPOTHETICAL") | Original |
+| Shepard tone + clock (X2, Scene 8) | Synthesised in `scripts/mix_ic.py` (numpy) | Original |
 
 ## Documents shown on screen
 | Asset | Source | Licence |
@@ -34,6 +40,22 @@ Licence: the user's own generations; confirm the generator's commercial terms be
 
 ## Fonts (bundled; SIL Open Font License 1.1 via @fontsource, plus system JetBrains Mono, OFL)
 IBM Plex Sans Condensed, JetBrains Mono, Playfair Display (report cover). Courier Prime and Special Elite belonged to the retired Small Print look.
+
+## Quotes and figures shown on screen (Scenes 2–10)
+| Item | Source |
+|---|---|
+| "Between 2:45:13 and 2:45:27, HFTs traded over 27,000 contracts…" ; 104 pages; 75,000 E-mini contracts ≈ $4.1 billion; 14:32; > 5 hours vs 20 minutes; "hot potato" | CFTC–SEC report, 30 Sept 2010 |
+| 2015 charge, spoofing, guilty plea; DOJ: contributed to the fall | U.S. Department of Justice press releases (2015, 2016) |
+| South Australia blackout, 28 Sept 2016 (storm, wind-farm protection settings, separation, frequency collapse) | AEMO final report (2017) |
+| Mohave Generating Station shaft damage, 1970 and 1971 | Sub-synchronous resonance literature (IEEE) |
+| 14 Aug 2003, Ohio control room alarm failure, ≈ 50 million people | U.S.–Canada Power System Outage Task Force final report (2004) |
+| GB, 9 Aug 2019: Hornsea and Little Barford lost; ≈ 1.1 million customers disconnected | Ofgem / National Grid ESO reports (2019–20) |
+| RTE, Learning to Run a Power Network; blackout ends an episode (score 0) | RTE / L2RPN competition rules |
+| DeepMind specification-gaming definition and ≈ 60 examples; red-block flip | DeepMind blog and example list (2020) |
+| Rotterdam 1993, first automated container terminal | Port of Rotterdam / ECT history |
+| Trajectory-based operations, data link | FAA NextGen / ICAO TBO material |
+| One AC cycle at 60 Hz = 16.7 ms; human reaction ≈ 250 ms | Physics (1/60 s); reaction-time literature |
+| FAA SAFO 13002, "Manual Flight Operations" (2013) | FAA |
 
 ## Figures shown on screen
 | Figure | Source |
