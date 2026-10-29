@@ -1,0 +1,249 @@
+<title>Invisible Cassette Sound Cues</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Courier+Prime:wght@400;700&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap">
+<style>
+/* Layout: a single dossier column; each cue is an evidence card with its prompt as a typed extract. */
+:root{
+  --bg:#ECE3D2; --surface:#F6F0E4; --extract:#E5D9C5; --line:#CBBDA4;
+  --fg:#16191F; --muted:#5F584C; --accent:#8F620E; --threat:#A93226; --done:#3D6B4A;
+  --f-display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --f-mono:"Courier Prime","Courier New",Courier,monospace;
+  --f-ui:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1117; --surface:#151A23; --extract:#1C222D; --line:#2B3342;
+  --fg:#ECE4D4; --muted:#9AA2B0; --accent:#E5A93C; --threat:#E2584A; --done:#6FB283; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1117; --surface:#151A23; --extract:#1C222D; --line:#2B3342;
+  --fg:#ECE4D4; --muted:#9AA2B0; --accent:#E5A93C; --threat:#E2584A; --done:#6FB283; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:10px;border-bottom:2px solid var(--fg);padding-bottom:18px}
+.eyebrow{font-family:var(--f-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,7vw,46px);line-height:1.05;margin:0;text-transform:uppercase;letter-spacing:.05em;text-wrap:balance}
+h2{font-family:var(--f-display);font-weight:700;font-size:22px;margin:0;text-transform:uppercase;letter-spacing:.06em;text-wrap:balance}
+.lede{margin:0;color:var(--muted);max-width:62ch}
+.progress{font-family:var(--f-mono);font-size:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.bar{flex:1 1 160px;height:6px;background:var(--line);border-radius:3px;overflow:hidden;min-width:120px}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+nav{display:flex;flex-wrap:wrap;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding-block:10px;z-index:5;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav a{font-family:var(--f-mono);font-size:13px;color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:4px 10px;border-radius:2px;background:var(--surface)}
+nav a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.howto{background:var(--surface);border:1px solid var(--line);padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.howto ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.howto code,.mono{font-family:var(--f-mono);font-size:.95em}
+section{display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px}
+.sechead{display:flex;flex-direction:column;gap:4px}
+.sechead p{margin:0;color:var(--muted)}
+.cue{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.cue.is-done{border-left-color:var(--done)}
+.cue-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.id{font-family:var(--f-mono);font-weight:700;font-size:15px;color:var(--accent);letter-spacing:.04em}
+.name{font-weight:600;font-size:17px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.pill{font-family:var(--f-mono);font-size:12px;padding:1px 7px;border:1px solid var(--line);border-radius:2px;color:var(--muted);white-space:nowrap}
+.pill.t-high,.pill.t-peak{color:var(--threat);border-color:var(--threat)}
+.meta{font-size:14px;color:var(--muted);margin:0}
+.meta b{color:var(--fg);font-weight:600}
+.extract{font-family:var(--f-mono);font-size:15px;line-height:1.55;background:var(--extract);padding:12px 14px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;border:1px dashed var(--line)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+button.copy{font-family:var(--f-ui);font-weight:600;font-size:15px;padding:8px 16px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);border-radius:2px;cursor:pointer}
+button.copy.ok{background:var(--done);border-color:var(--done)}
+label.chk{display:flex;align-items:center;gap:6px;font-size:14px;cursor:pointer;color:var(--muted)}
+label.chk input{width:18px;height:18px;accent-color:var(--done)}
+.note{font-size:14px;margin:0;padding-left:10px;border-left:2px solid var(--accent);color:var(--fg)}
+.have{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px;background:var(--surface);border:1px solid var(--line);padding:14px 16px}
+.have .mono{color:var(--accent)}
+.rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+@media (prefers-reduced-motion: reduce){.bar i{transition:none}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Small Print · Sound department</div>
+  <h1>The Invisible Cassette</h1>
+  <p class="lede">Every music and sound-effect prompt for the film. Copy each one into your generator, then send me the files. Times come from the script and will shift once the voiceover is recorded; I cut and loop everything to the voice.</p>
+  <div class="progress"><span id="count">0 of 0 made</span><span class="bar"><i id="fill"></i></span></div>
+</header>
+
+<div class="howto">
+  <h2>How to use</h2>
+  <ol>
+    <li>Tap <b>Copy</b> and paste the prompt into your music or sound generator.</li>
+    <li>Save as WAV at 48 kHz if you can. MP3 at 320 kbps is fine too.</li>
+    <li>Name each file with its ID, for example <code>F1a.wav</code>, <code>F1b.wav</code>. "Make 3" means three takes, so repeats don't sound identical.</li>
+    <li>Upload the files in the chat, in any order. Tick <b>Made</b> here to keep track (this only saves on your device).</li>
+  </ol>
+</div>
+
+<nav aria-label="Sections">
+  <a href="#music">Music</a><a href="#cards">Chapter cards</a><a href="#desk">Desk &amp; paper</a><a href="#machines">Machines</a><a href="#grid">Electrical</a><a href="#places">Places</a><a href="#hits">Hits</a><a href="#have">Already have</a><a href="#mix">Mix rules</a>
+</nav>
+
+<div id="cues"></div>
+
+<section id="have">
+  <div class="sechead"><h2>Already in the repo</h2><p>No need to make these. I'll use them.</p></div>
+  <div class="have">
+    <span class="mono">typing-laptop.wav</span><span>Your own recording. Muffled and layered for the 00:00 keyboard clatter, plain for the 16:15 terminal.</span>
+    <span class="mono">typewriter.mp3</span><span>The date line typed under the Polaroid at 01:25.</span>
+    <span class="mono">type_key.mp3</span><span>Single strikes for the 23:00 margin callouts.</span>
+    <span class="mono">page_turn.mp3</span><span>Pages of the SEC/CFTC report at 03:00.</span>
+    <span class="mono">whoosh7.mp3</span><span>The house swoosh, once per scene change.</span>
+  </div>
+  <div class="sechead"><h2>I'll build these in code</h2><p>Unless you'd rather make them too. They need exact pitch, which generators don't hit reliably.</p></div>
+  <div class="have">
+    <span class="mono">X1 sub-rumble</span><span>45 Hz with a 90 Hz layer, because phone speakers can't play 45 Hz. A rough 40 Hz pulse goes in only on tense stretches.</span>
+    <span class="mono">X2 Shepard tone</span><span>Endlessly rising pitch plus a ticking clock, under the plunge (01:00–01:25) and the kill switch (24:00–25:30). It cuts dead at the payoff.</span>
+  </div>
+</section>
+
+<section id="mix">
+  <div class="sechead"><h2>Mix rules I'll follow</h2></div>
+  <ul class="rules">
+    <li>At most about 5 kinds of sound at once. Under dense narration, only Foley and room tone.</li>
+    <li>Music ducked about 13 dB under the voice. Every hit peaks at least 12 dB above the music.</li>
+    <li>The rumble sits under tense stretches only, not the whole film, so silence still means something.</li>
+    <li>Before each "But…" turn: about 0.3 s of near-silence, then a bass drop-out on the word.</li>
+    <li>Each mood change starts in the sound a beat before the picture changes.</li>
+    <li>Master at −14 LUFS, −1 dBTP.</li>
+  </ul>
+</section>
+</div>
+
+<script>
+const SFX = " Isolated sound effect, no music, no voices.";
+const MUS = " Instrumental only. No vocals, no choir, no drum kit. Keep the 1–4 kHz range sparse and avoid a lead melody so a narrator stays clear. Original composition, cinematic investigative-documentary underscore, analog tape warmth.";
+const CARD = " Instrumental only, no vocals, no drum kit. Original composition, cinematic, analog tape warmth.";
+
+const GROUPS = [
+ {id:"music", title:"Music beds", blurb:"One bed per scene. Brightness of the music follows the tension curve: dark cold open, analytical middle, the only bright stretch in Scene 4, cold irony, then an elegy. No music in Scene 10 or the end credits.", cues:[
+  {id:"M1", name:"The Plunge", len:"~90 s", t:"Peak", at:"00:00–01:25 · Scene 1", p:"Dark investigative documentary underscore, about 90 seconds, 72 BPM, D minor. Starts near-silent with a low bowed double bass drone. A quiet, fast muted-string staccato ostinato enters and grows steadily more urgent, with low cello stabs and a deep pulsing sub. Tension builds continuously with no release and ends abruptly at the peak: hard stop, no tail."+MUS, n:"The hard stop lands on the shutter snap at 01:25, the freeze-frame."},
+  {id:"M2", name:"Aftermath", len:"~70 s", t:"High", at:"01:25–02:30 · Scene 1", p:"Cold, sparse aftermath underscore, about 70 seconds, free tempo, D minor. A single sustained low cello note, faint detuned felt-piano notes far apart, and a slow heartbeat-like low pulse that enters halfway. Bleak, still and unresolved. Ends on a held low drone that can be faded."+MUS, n:"Drops to near-silence just before “No single human directed that collapse.”"},
+  {id:"M3", name:"Main title: The Ghost in the System", len:"15 s", t:"Mid", at:"02:30 · title card, music only", p:"Main-title theme for a forensic noir documentary, 15 seconds, D minor. A slow, swelling solo cello phrase of three notes over a deep bowed double bass, rising into a dark held chord, then a clean fade."+CARD, n:"This three-note phrase becomes the film's motif. The chime (T2) is layered on top separately."},
+  {id:"M4", name:"The Autopsy", len:"~3 min", t:"Mid", at:"02:45–06:00 · Scene 2", p:"Analytical investigative underscore, about 3 minutes, 84 BPM, A minor. A precise, clockwork pizzicato pattern on low strings with a soft ticking pulse, cool and methodical, like reading evidence. Tension gradually rises: a sustained low cello and a rough, slowly pulsing low drone enter in the last minute. Ends on a dark, unresolved low note."+MUS, n:"Gets tense at “Liquidity simply disappeared.”"},
+  {id:"M5", name:"Spinning Iron", len:"~3.5 min", t:"High", at:"06:15–09:45 · Scene 3", p:"Industrial documentary underscore, about 3.5 minutes, A minor. Begins heavy and slow at 60 BPM: weighty low brass and bowed double bass in a slow, rolling three-note ostinato that feels like massive turning steel. Over the piece the low end slowly thins out and the ostinato gets faster and more nervous, as if losing its weight, moving up to high tremolo strings. The last 30 seconds are tense and fragile. Ends on a thin, sustained high string note."+MUS, n:"The music itself loses its weight as the narration says the grid's inertia is disappearing."},
+  {id:"M6", name:"Handing Over the Switch", len:"~3.5 min", t:"Low", at:"09:45–13:30 · Scene 4", p:"Forward-moving, hopeful but cautious technology underscore, about 3.5 minutes, 92 BPM, C major. Gentle arpeggiated felt piano and soft pulsing strings, a sense of progress and efficiency. In the last 25 seconds the harmony turns to A minor, the pulse stops, and it ends on one low, unresolved note."+MUS, n:"The film's breather and its brightest music. The darkening comes a beat before “But beneath that superhuman speed…”"},
+  {id:"M7", name:"Inside the Vector Space", len:"~3.5 min", t:"Low", at:"13:45–17:15 · Scene 5", p:"Weightless, cerebral ambient underscore, about 3.5 minutes, free tempo, no pulse. Slowly evolving glassy textures from bowed vibraphone, bowed glass and soft high strings, with gentle tape flutter. Cool, detached and beautiful but slightly uncanny, like floating through numbers. Very sparse. Ends on a long fade."+MUS, n:"Calm and detached on purpose. It sits under the camera glide through the weights."},
+  {id:"M8", name:"Specification Gaming", len:"~3.5 min", t:"High", at:"17:15–21:00 · Scene 6", p:"Unsettling ironic underscore, about 3.5 minutes, 76 BPM. A simple, innocent celesta or music-box melody, very slightly out of tune, repeats over a cold low drone that doesn't match it. Halfway through, the music box slows and the drone grows rougher and darker. Ends with the music box winding down to a stop. Instrumental only, no vocals, no drum kit. Keep it quiet and simple so a narrator stays clear. Original composition, analog tape warmth.", n:"The music stays innocent while the story turns dark, which makes the irony land. The music box stops on “evaluated to zero.”"},
+  {id:"M9", name:"Cross-Sector Velocity", len:"~3 min", t:"Mid", at:"21:15–24:00 · Scene 7", p:"Global, mechanical underscore, about 3 minutes, 104 BPM, in 7/8. A tight, machine-like ostinato on muted low strings and plucked prepared piano, with deep foggy pads underneath. Restrained drive, like automated systems working everywhere at once. Never peaks; stays controlled and cold. Ends on a sustained low chord."+MUS},
+  {id:"M10", name:"The Kill Switch", len:"~90 s", t:"Peak", at:"24:00–25:30 · Scene 8", p:"Sparse tension underscore, about 90 seconds, 60 BPM. A slow ticking-clock pulse, low tremolo strings and a rough, pulsing low drone that slowly get louder and denser. Ends with a hard stop into silence, no tail."+MUS, n:"My Shepard tone (X2) rides on top. The three black cards at 25:30 land on silence plus impacts (T3)."},
+  {id:"M11", name:"Twilight", len:"~2 min", t:"Low", at:"26:45–28:15 · Scene 9", p:"Elegiac, warm but sad underscore, about 2 minutes, 66 BPM, F major with minor turns. Slow felt-piano chords and a quiet, low solo cello line, gentle tape flutter, nostalgic and beautiful: the only tender moment in the film. Ends on a soft, open chord."+MUS},
+  {id:"M12", name:"The Bargain (last note)", len:"45 s", t:"Mid", at:"28:15–29:00 · Scene 9 into 10", p:"A single deep bowed double-bass note, held, swelling slowly in and out, with a slow tape-flutter wobble and soft room reverb. 45 seconds. Nothing else.", n:"Fades out under the end of the narration. After that only rumble and room tone."}
+ ]},
+ {id:"cards", title:"Chapter cards", blurb:"12–20 s, music only, one per act. All four reuse M3's three-note motif. If your generator can take a reference track, give it M3.", cues:[
+  {id:"C1", name:"Act II: The Velocity Crisis", len:"15 s", t:"Mid", at:"06:00", p:"Chapter-card sting, 15 seconds, D minor. A three-note solo cello motif over a fast, ticking muted-string pulse that suggests speed. Ends on a tense held chord with a short fade."+CARD},
+  {id:"C2", name:"Act III: The Explainability Problem", len:"15 s", t:"Low", at:"13:30", p:"Chapter-card sting, 15 seconds. A three-note motif played on glassy bowed vibraphone and soft high strings, weightless and uncanny, over a low drone. Ends unresolved."+CARD},
+  {id:"C3", name:"Act IV: The Invisible Cascade", len:"15 s", t:"High", at:"21:00", p:"Chapter-card sting, 15 seconds, D minor. A three-note motif in low brass and double bass, dark and heavy, with a slow descending line beneath. Ends on a deep hit and a short decay."+CARD},
+  {id:"C4", name:"Act V: The Unintended Compact", len:"15 s", t:"Low", at:"26:30", p:"Chapter-card sting, 15 seconds, F major. A three-note motif on felt piano and cello, quiet, warm and elegiac. Ends on a soft open chord."+CARD}
+ ]},
+ {id:"desk", title:"Desk & paper", blurb:"The Foley of the investigator's desk. Close and dry, so it feels like it's on your table.", cues:[
+  {id:"F1", name:"Rubber stamp slam", len:"1.5 s", takes:3, at:"01:50 SEC folder · 02:30 title · every red stamp", p:"A heavy wooden rubber stamp slammed hard onto a thick paper folder on a solid oak desk: a sharp rubbery smack with a deep wooden thud underneath, a pen on the desk rattles once, short natural room decay. Single hit right at the start, 1.5 seconds, close mic, dry."+SFX, n:"Lands on the frame where the stamp hits its lowest point (the 115% → 100% overshoot)."},
+  {id:"F2", name:"Folder drop", len:"2 s", takes:3, at:"11:45 AUTONOMOUS TOPOLOGY SWITCHING · desk scenes", p:"A thick manila folder stuffed with paper dropped flat from about 30 cm onto an oak desk: heavy papery slap, deep wooden thump, the pages settling for a moment. 2 seconds, close mic, dry."+SFX},
+  {id:"F3", name:"Photo or sheet slides in", len:"0.8 s", takes:4, at:"01:25 Polaroid · 12:30 quote card · 23:00 callouts", p:"A single photograph or sheet of thick paper sliding quickly across a smooth wooden desk and stopping: a soft, dry friction swish that slows and ends with a tiny tap. 0.8 seconds, close mic, dry."+SFX},
+  {id:"F4", name:"Report slides in", len:"1.5 s", takes:2, at:"03:00 SEC/CFTC report · 08:30 blackout report", p:"A thick stapled report of about 100 pages pushed across an oak desk: heavier paper friction with a low rumble of the stack, ending with a soft thud as it stops. 1.5 seconds, close mic, dry."+SFX},
+  {id:"F5", name:"Report into the folder", len:"3 s", takes:1, at:"28:50 final sign-off", p:"A stapled report pushed slowly into a manila folder, paper rubbing against cardboard, then the folder flap closed with a soft pat of the hand. 3 seconds, close mic, quiet room."+SFX},
+  {id:"F6", name:"Highlighter stroke", len:"1 / 2.5 / 4 s", takes:3, at:"03:45 yellow · 08:30 red", p:"A chisel-tip felt highlighter drawn across a printed page lying on a desk: a soft, slightly squeaky felt drag in one continuous stroke, the pen lifted at the end. Make three lengths: 1 second, 2.5 seconds and 4 seconds. Close mic, dry."+SFX, n:"Matched to the length of each highlighted line."},
+  {id:"F7", name:"Pushpin into cork", len:"0.6 s", takes:3, at:"13:30 evidence corkboard", p:"A pushpin pressed through a sheet of paper into a cork board: soft crunch of cork and a tiny plastic click. 0.6 seconds, close mic, dry."+SFX},
+  {id:"F8", name:"Pencil on drafting paper", len:"10 s", takes:1, at:"06:00–06:45 blueprint table", p:"A soft pencil drawing long straight lines along a metal ruler on drafting paper on a wooden drafting table: steady, gentle scratching with short pauses between lines. 10 seconds, close mic."+SFX}
+ ]},
+ {id:"machines", title:"Machines & camera", blurb:"Mechanical sounds give the digital story physical weight.", cues:[
+  {id:"K1", name:"Stock ticker machine", len:"20 s loop", takes:1, at:"00:05–00:20 ticker tape over the desk", p:"An antique stock ticker tape machine running fast: rapid rhythmic metallic clatter of the type wheel and the soft hiss of paper tape feeding out, steady and even. 20 seconds, seamless loop, no bell."+SFX},
+  {id:"K2", name:"Tape whips off the edge", len:"3 s", takes:1, at:"00:20 numbers plunge into shadow", p:"A long strip of paper tape suddenly whipping off the edge of a desk and fluttering down into darkness, followed by a deep low boom that fades out. 3 seconds."+SFX},
+  {id:"K3", name:"35mm shutter snap", len:"1.5 s", takes:2, at:"01:25 freeze-frame to Polaroid", p:"A vintage 35mm mechanical SLR camera: a loud, crisp shutter snap with mirror slap, then half a second later the ratcheting film-advance lever. 1.5 seconds, close mic, dry."+SFX},
+  {id:"K4", name:"Relay clicks", len:"3 s", takes:3, at:"07:30 grid · 10:45 control room · 24:00 breaker panel", p:"Heavy industrial electromechanical relays switching inside a metal cabinet: four sharp metallic clacks at irregular intervals, each with a slight ring. 3 seconds, close mic."+SFX},
+  {id:"K5", name:"Machine-speed orders", len:"6 s", takes:1, at:"04:30 split screen, data side", p:"Thousands of tiny mechanical relay clicks and metal bead ticks accelerating from a few per second into a dense, rushing hiss like a rain of metal. 6 seconds. No beeps, no synthesizer."+SFX, n:"The blinking-eye side stays silent. The contrast makes the point without words."},
+  {id:"K6", name:"Old telephone rings", len:"6 s", takes:1, at:"~07:00 “pick up emergency telephones”", p:"A 1970s rotary desk telephone with a mechanical bell ringing twice, heard from across a large, empty concrete control room: reverberant and slightly distant. 6 seconds."+SFX, n:"Heard but not seen, so the room feels bigger than the frame."},
+  {id:"K7", name:"Old monitor switches on", len:"3 s", takes:1, at:"16:15 loss function · 20:00 terminals", p:"An old CRT computer monitor switching on: a soft static thump, a rising high-pitched whine, then a steady faint hum. 3 seconds, close mic."+SFX},
+  {id:"K8", name:"Desk lamp clicks off", len:"1.5 s", takes:2, at:"29:10", p:"A vintage metal desk lamp's push-button switch pressed off: a loud, deep mechanical click, then a tiny metallic tick as the lamp cools. 1.5 seconds, close mic, quiet room."+SFX, n:"The loudest small sound at the end of the film. It sits on near-silence."},
+  {id:"K9", name:"Disconnect switch thrown", len:"3 s", takes:2, at:"24:00 manual disconnect switch", p:"A large industrial manual disconnect switch: the metal handle pulled down with a grinding creak, then a heavy clunk as the contacts open and a brief electrical buzz cuts off. 3 seconds."+SFX}
+ ]},
+ {id:"grid", title:"Electrical & grid", blurb:"The physical world of Act II and the switchyards.", cues:[
+  {id:"E1", name:"Electrical static", len:"10 s", takes:1, at:"07:30 wind and solar icons oscillate", p:"Faint electrical static: soft crackles and tiny arcing pops over a low hum, irregular, building slightly and then settling. 10 seconds."+SFX},
+  {id:"E2", name:"Transformer hum", len:"30 s loop", takes:1, at:"24:45 switchyard · 27:30 substations", p:"A large electrical transformer humming outdoors: a steady deep hum with harmonics, a slight buzz, faint wind. 30 seconds, seamless loop."+SFX},
+  {id:"E3", name:"Power lines in bad weather", len:"30 s", takes:1, at:"18:45 transmission lines under a gloomy sky", p:"High-voltage transmission lines in damp weather: crackling corona buzz overhead, gusty wind through steel towers, one distant roll of thunder. 30 seconds."+SFX},
+  {id:"E4", name:"Turbine hall", len:"30 s loop", takes:1, at:"06:45 turbine generators", p:"Inside a power-station turbine hall: a huge steam turbine's deep rotating rumble and steady whine, large and reverberant. 30 seconds, seamless loop."+SFX},
+  {id:"E5", name:"Steel shaft under strain", len:"4 s", takes:1, at:"~08:00 Mohave shaft line (Scene 3)", p:"A huge steel shaft twisting under heavy load: a deep, strained metallic groan and creak that rises in tension, then stops. 4 seconds."+SFX, n:"Sits under the corrected line about the Mohave generator shaft (1970–71)."}
+ ]},
+ {id:"places", title:"Places", blurb:"Background sound that tells you where you are. No voices you can make out, because voices would fight the narration.", cues:[
+  {id:"A1", name:"Investigator's study, room tone", len:"60 s loop", takes:1, at:"Every desk scene · 28:45 to the end", p:"Room tone of a quiet wood-panelled study at night: very soft air, a distant city rumble through a closed window, the faint buzz of a tungsten desk lamp. Nothing else. 60 seconds, seamless loop."+SFX},
+  {id:"A2", name:"Trading floor in panic", len:"30 s loop", takes:1, at:"00:40–01:25 NYSE parallax", p:"A busy stock exchange trading floor in panic, heard muffled from a distance: a dense crowd murmur with no words you can make out, phones ringing, a few muffled shouts, electronic chimes. 30 seconds, seamless loop."+SFX, n:"Kept low and muffled so the narrator stays on top."},
+  {id:"A3", name:"Server room", len:"30 s loop", takes:1, at:"05:15 server racks · 10:45 modern terminals", p:"An empty data-centre server room: a steady cold air-conditioning rush, many small cooling fans, a faint high electrical whine, the occasional tick of a hard drive. 30 seconds, seamless loop."+SFX},
+  {id:"A4", name:"1970s control room", len:"30 s loop", takes:1, at:"10:45 analog dials", p:"A quiet 1970s power-grid control room: low ventilation hum, analog meters ticking, a teleprinter chattering softly far away, fluorescent light buzz. 30 seconds, seamless loop."+SFX, n:"Crossfades into A3 as the dials turn into monitors."},
+  {id:"A5", name:"Automated port in fog", len:"30 s", takes:1, at:"21:30 driverless container vehicles", p:"An automated container port in thick fog: one distant ship's foghorn, electric vehicle motors whining softly as they pass, steel containers clanking far away, faint gulls, water lapping. 30 seconds."+SFX},
+  {id:"A6", name:"Cockpit at cruise", len:"20 s loop", takes:1, at:"~22:15 trajectory-based routing", p:"Inside an airliner cockpit at cruise: a steady engine and airflow drone, soft electronic chimes and data clicks, no radio chatter. 20 seconds, seamless loop."+SFX, n:"The missing radio voices are the point of this shot."},
+  {id:"A7", name:"Empty switchyard", len:"30 s", takes:1, at:"24:45 camera pulls back", p:"A vast, empty electrical switchyard at dusk: gentle wind, a chain-link fence rattling softly, a transformer humming in the distance, insects. 30 seconds."+SFX},
+  {id:"A8", name:"City at twilight", len:"30 s loop", takes:1, at:"26:30 metropolis pan", p:"A city at twilight outside a train station: commuters' footsteps, distant traffic, a train pulling out, streetlights buzzing on, a crowd murmur with no words you can make out. 30 seconds, seamless loop."+SFX},
+  {id:"A9", name:"Underground cable tunnel", len:"30 s loop", takes:1, at:"27:30 cutaway under the city", p:"A deep underground utility tunnel: heavy, resonant electrical hum from buried cables, a distant water drip, low rumble. 30 seconds, seamless loop."+SFX}
+ ]},
+ {id:"hits", title:"Hits & transitions", blurb:"Each one sits on the exact frame of its action.", cues:[
+  {id:"T1", name:"Sub-bass swell from black", len:"6 s", takes:1, at:"00:00 black screen", p:"A deep cinematic sub-bass swell rising from silence to a powerful, slightly rough low rumble over 5 seconds, then stopping abruptly. 6 seconds."+SFX},
+  {id:"T2", name:"Low metallic chime", len:"6 s", takes:1, at:"02:30 title card", p:"A single low metallic chime, like a large brass singing bowl struck softly with a felt mallet, with a long shimmering decay. 6 seconds."+SFX},
+  {id:"T3", name:"Black-card impact", len:"1.5 s", takes:3, at:"25:30 the three typography cards", p:"A short, deep cinematic impact: a low boom with a tight, quick decay, like a heavy steel door shutting in a large hall. 1.5 seconds, no long reverb tail."+SFX},
+  {id:"T4", name:"Paper turns to dust", len:"4 s", takes:1, at:"14:15 paper dissolves into particles", p:"Paper crumbling into fine dust that drifts away: a soft granular crackle turning into an airy, shimmering hiss that fades out. 4 seconds."+SFX},
+  {id:"T5", name:"Slow camera glide", len:"3 s", takes:2, at:"09:45 through the papers · 15:00 through the weights", p:"A slow, very soft air whoosh passing close by, like gliding through still air. 3 seconds, gentle."+SFX},
+  {id:"T6", name:"Fast descending whoosh", len:"1.5 s", takes:2, at:"21:30 camera drops onto each hub", p:"A fast, deep descending air whoosh that ends in a soft low thud. 1.5 seconds."+SFX}
+ ]}
+];
+
+const KEY = "ic-sound-made-v1";
+let made = {};
+try { made = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { made = {}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(made)); } catch (e) {} }
+
+const root = document.getElementById("cues");
+let total = 0;
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+GROUPS.forEach(g => {
+  const sec = document.createElement("section");
+  sec.id = g.id;
+  let html = `<div class="sechead"><h2>${esc(g.title)}</h2><p>${esc(g.blurb)}</p></div>`;
+  g.cues.forEach(c => {
+    total++;
+    const tk = c.takes ? (c.takes > 1 ? `Make ${c.takes}: ${Array.from({length:c.takes},(_,i)=>c.id+"abcd"[i]).join(", ")}` : `Make 1: ${c.id}`) : `Make 1: ${c.id}`;
+    const tPill = c.t ? `<span class="pill t-${c.t.toLowerCase()}">${esc(c.t)} tension</span>` : "";
+    html += `<article class="cue${made[c.id] ? " is-done" : ""}" data-id="${c.id}">
+      <div class="cue-top"><span class="id">${c.id}</span><span class="name">${esc(c.name)}</span>
+        <span class="pills"><span class="pill">${esc(c.len)}</span>${tPill}</span></div>
+      <p class="meta"><b>Where:</b> ${esc(c.at)} &nbsp;·&nbsp; <b>${esc(tk)}</b></p>
+      <pre class="extract" id="p-${c.id}">${esc(c.p)}</pre>
+      ${c.n ? `<p class="note">${esc(c.n)}</p>` : ""}
+      <div class="row"><button type="button" class="copy" data-id="${c.id}">Copy prompt</button>
+        <label class="chk"><input type="checkbox" id="made-${c.id}" ${made[c.id] ? "checked" : ""}> Made</label></div>
+    </article>`;
+  });
+  sec.innerHTML = html;
+  root.appendChild(sec);
+});
+
+function refresh(){
+  const n = Object.values(made).filter(Boolean).length;
+  document.getElementById("count").textContent = `${n} of ${total} made`;
+  document.getElementById("fill").style.width = (100 * n / total) + "%";
+}
+refresh();
+
+root.addEventListener("click", e => {
+  const b = e.target.closest("button.copy");
+  if (!b) return;
+  const pre = document.getElementById("p-" + b.dataset.id);
+  const text = pre.textContent;
+  const done = () => { b.textContent = "Copied"; b.classList.add("ok"); setTimeout(() => { b.textContent = "Copy prompt"; b.classList.remove("ok"); }, 1600); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selected, copy it"; };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (err) { fallback(); }
+});
+root.addEventListener("change", e => {
+  const box = e.target.closest('input[type="checkbox"]');
+  if (!box) return;
+  const id = box.id.replace("made-", "");
+  made[id] = box.checked;
+  box.closest(".cue").classList.toggle("is-done", box.checked);
+  save(); refresh();
+});
+</script>
