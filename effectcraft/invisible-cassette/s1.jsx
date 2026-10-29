@@ -1,42 +1,135 @@
-// Scene 1, "The crash no human could see" + title card, built in EffectCraft.
+// Scene 1, "The crash no human could see" + title card. MagnatesMedia-style documentary look,
+// trading-terminal palette (black, amber phosphor, ticker green up, red down). Built in EffectCraft.
 // Run: effectcraft-cli script /abs/path/s1.jsx --empty --save-as /abs/path/s1.ecproj
-// Film times are voiceover times + 4.0 s (the cold open); they match ../../remotion/src/invisible-cassette/cues_s1.json.
-#include "lib.jsx"
+// Film times = voiceover times + 4.0 s; they match ../../remotion/src/invisible-cassette/cues_s1.json.
+// Keyword times inside each shot come from words.json (shot-relative seconds).
+#include "mm.jsx"
 
 var END = 124.5;
-var S = {desk: 4.0, cards: 27.08, floor: 41.18, wire: 56.14, back: 70.22, snap: 79.52, stamp: 92.08, loop: 95.0, dark: 108.3, title: 109.0};
-var SYMS = "ACN  PG  MMM  AAPL  JNJ  GE  XOM  KO  IBM  WMT  HPQ  CAT  MCD  DIS  BA  T  ";
+var S = {open: 4.0, stakes: 17.42, quotes: 27.08, floor: 41.18, wire: 56.14, back: 70.22, report: 79.52, turn: 92.08, loop: 95.0, title: 109.0};
+var LEFT = ParagraphJustification.LEFT_JUSTIFY, RIGHT = ParagraphJustification.RIGHT_JUSTIFY;
 
-/* -------------------------------------------------------------- precomps */
-// Ticker tape: manila strip with symbols and arrows (JetBrains Mono has the arrow glyphs)
-function tapeComp(name, up) {
-  var c = comp(name, 30, 3000, 96);
-  var bg = c.layers.add(img("manila.png"));
-  T(bg).property("Scale").setValue([3000 / 2400 * 100, 96 / 1600 * 100 * 1.0, 100]);
-  T(bg).property("Position").setValue([1500, 48]);
-  var s = "", arrow = up ? "▲" : "▼";
-  var parts = SYMS.split("  ");
-  for (var r = 0; r < 6; r++) for (var i = 0; i < parts.length; i++) if (parts[i]) s += parts[i] + " " + arrow + "   ";
-  var t = txt(c, s, FONT.glyph, 44, up ? COL.olive : COL.ink, [0, 64], ParagraphJustification.LEFT_JUSTIFY, 40);
-  return {comp: c, text: t};
+// effects whose parameter names may differ between EffectCraft builds: never fail the whole build on one
+function tryFx(l, name, v) { try { return fx(l, name, v); } catch (e) { writeLn("skipped " + name + ": " + e); return null; } }
+function phosphor(l) { return tryFx(l, "Glow", {"Glow Threshold": 40, "Glow Radius": 22, "Glow Intensity": 0.6}); }
+function shot(name, a, b) { var c = comp(name, b - a); c.motionBlur = true; return {c: c, d: b - a}; }
+
+// a terminal panel: thin amber outline over a dark fill (stroke added first so it draws on top)
+function panel(c, w, h, pos, stroke) {
+  var l = c.layers.addShape(); l.name = "panel";
+  var g = l.property("Contents").addProperty("ADBE Vector Group");
+  g.property("Contents").addProperty("ADBE Vector Shape - Rect").property("Size").setValue([w, h]);
+  var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke");
+  st.property("Color").setValue(stroke || TERM.amberDim); st.property("Stroke Width").setValue(2);
+  g.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue(TERM.panel);
+  l.threeDLayer = true; T(l).property("Position").setValue(pos);
+  return l;
+}
+// foreground parallax: big out-of-focus ticker symbols at Z -300 drifting left (no figures)
+function fgTicker(c, y, red) {
+  var s = "";
+  for (var k = 0; k < 16; k++) s += SYMS[(k * 7) % SYMS.length] + (red ? " ▼" : " ▲") + "      ";
+  var t = txt(c, s, TF.mono, 120, red ? TERM.red : TERM.amber, [-300, y, -300], LEFT, 20);
+  T(t).property("Opacity").setValue(28);
+  T(t).property("Position").expression = "value + [-time * 70, 0, 0];";
+  return t;
+}
+// boxed terminal tag (precomp) for slams: SEC, CFTC, TRADES CANCELLED, SELL ORDER, PROGRAM
+function tagComp(name, s, rgb, size, w, h, font) {
+  var c = comp(name, 30, w, h);
+  var box = c.layers.addShape();
+  var g = box.property("Contents").addProperty("ADBE Vector Group");
+  g.property("Contents").addProperty("ADBE Vector Shape - Rect").property("Size").setValue([w - 16, h - 16]);
+  var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke");
+  st.property("Color").setValue(rgb); st.property("Stroke Width").setValue(Math.max(4, size / 12));
+  g.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue(TERM.black);
+  T(box).property("Position").setValue([w / 2, h / 2]);
+  txt(c, s, font || TF.head, size, rgb, [w / 2, h / 2 + size * 0.36], null, 40);
+  return c;
+}
+function addAt(c, item, pos) { var l = c.layers.add(item); l.threeDLayer = true; T(l).property("Position").setValue(pos); return l; }
+// text that turns from one colour to another (Fill effect keyed)
+function recolor(l, a, b, t0, t1) { var f = fx(l, "Fill", {"Color": a}); keys(f.property("Color"), [[t0, a], [t1, b]], 0); return f; }
+function fadeOut(l, a, b) { keys(T(l).property("Opacity"), [[a, 100], [b, 0]], 0); }
+
+/* ------------------------------------------------------------------ shots */
+
+function shotOpen() { // film 4.0 – 17.42: the date, the time, the Dow falling
+  var o = shot("S1A Cold open · Dow", S.open, S.stakes), c = o.c, d = o.d;
+  termBackdrop(c, false);
+  panel(c, 1500, 640, [W / 2, H / 2 + 10, 40]);
+  var t1 = txt(c, "MAY 6, 2010", TF.mono, 84, TERM.amber, [W / 2, H / 2 - 190, 0], null, 60);
+  typeOn(t1, "MAY 6, 2010", 0.18, 14); phosphor(t1);
+  var clock = txt(c, "14:42:00 EDT", TF.monoReg, 46, TERM.white, [W / 2, H / 2 - 110, 0], null, 120);
+  clock.property("Source Text").expression = 'var s = Math.floor(Math.max(0, time - 2.48)); "14:42:" + (s < 10 ? "0" : "") + s + " EDT";';
+  keys(T(clock).property("Opacity"), [[0, 0], [2.47, 0], [2.48, 100]], 0);
+  var lab = txt(c, "DOW JONES INDUSTRIAL AVERAGE", TF.headReg, 34, TERM.grey, [W / 2, H / 2 - 10, 0], null, 160);
+  keys(T(lab).property("Opacity"), [[0, 0], [5.2, 0], [5.6, 100]], 0);
+  var dow = txt(c, "10,868.12", TF.mono, 190, TERM.amber, [W / 2, H / 2 + 170, 0], null, 0);
+  counter(dow, 10868.12, 9869.62, 6.0, 12.4, 2);
+  keys(T(dow).property("Opacity"), [[0, 0], [5.4, 0], [5.8, 100]], 0);
+  recolor(dow, TERM.amber, TERM.red, 6.6, 7.6); phosphor(dow);
+  var delta = txt(c, "▼ 998.50 POINTS", TF.mono, 56, TERM.red, [W / 2, H / 2 + 262, 0], null, 60);
+  slamIn(delta, 12.4);
+  fgTicker(c, H - 40, true);
+  rig(c, d, {d0: -0.4, d1: 0.6});
+  return c;
 }
 
-// A price card: company name, "TRADED AT", price
-function priceComp(name, company, price, rgb) {
-  var c = comp(name, 30, 660, 420);
-  var bg = c.layers.add(img("manila.png"));
-  T(bg).property("Scale").setValue([660 / 2400 * 100, 420 / 1600 * 100, 100]); T(bg).property("Position").setValue([330, 210]);
-  var rule = solid(c, [0.63, 0.24, 0.16], "rule", 660, 3); T(rule).property("Position").setValue([330, 30]); T(rule).property("Opacity").setValue(35);
-  txt(c, company, FONT.display, 64, COL.ink, [44, 120], ParagraphJustification.LEFT_JUSTIFY, 60);
-  txt(c, "TRADED AT", FONT.monoReg, 26, COL.inkSoft, [46, 190], ParagraphJustification.LEFT_JUSTIFY, 100);
-  var p = txt(c, price, FONT.mono, 108, rgb, [40, 330], ParagraphJustification.LEFT_JUSTIFY);
-  return {comp: c, price: p};
+function shotStakes() { // film 17.42 – 27.08: 36 minutes, nearly $1 trillion, evaporated
+  var o = shot("S1B Stakes · $1 trillion", S.stakes, S.quotes), c = o.c, d = o.d;
+  termBackdrop(c, true);
+  var m = txt(c, "36 MINUTES", TF.head, 210, TERM.white, [W / 2, H / 2 - 120, 0], null, 30); slamIn(m, 1.26);
+  var tr = txt(c, "≈ $1,000,000,000,000", TF.mono, 116, TERM.red, [W / 2, H / 2 + 70, 0], null, 0);
+  counter(tr, 0, 1e12, 3.42, 4.9, 0, "≈ $");
+  keys(T(tr).property("Opacity"), [[0, 0], [3.41, 0], [3.42, 100], [6.5, 100], [7.3, 0]], 0);
+  phosphor(tr);
+  var mv = txt(c, "IN MARKET VALUE", TF.headReg, 44, TERM.grey, [W / 2, H / 2 + 160, 0], null, 200);
+  keys(T(mv).property("Opacity"), [[0, 0], [5.4, 0], [5.7, 100], [6.8, 100], [7.6, 0]], 0);
+  breakApart(tr, 6.06, 1.0); breakApart(mv, 6.4, 1.0); // "evaporated"
+  fgTicker(c, H - 50, true);
+  rig(c, d, {d0: 0.5, d1: -0.6});
+  return c;
 }
 
-// Wall of market boards, drawn: bars and arrows only, no invented figures. Panels turn crimson.
+// one quote row (precomp): symbol, company, then the price lands on its spoken word
+function rowComp(name, sym, nm, price, prgb, pAt) {
+  var c = comp(name, 30, 1500, 150);
+  solid(c, TERM.panel, "row bg");
+  var edge = solid(c, prgb, "row edge", 10, 150); T(edge).property("Position").setValue([5, 75]);
+  txt(c, sym, TF.mono, 52, TERM.amber, [44, 94], LEFT, 40);
+  txt(c, nm, TF.head, 66, TERM.white, [250, 98], LEFT, 20);
+  var dash = txt(c, "- - -", TF.monoReg, 56, TERM.grey, [1460, 96], RIGHT);
+  keys(T(dash).property("Opacity"), [[0, 100], [pAt - 0.001, 100], [pAt, 0]], 0);
+  var p = txt(c, price, TF.mono, 92, prgb, [1460, 108], RIGHT);
+  keys(T(p).property("Opacity"), [[0, 0], [pAt - 0.001, 0], [pAt, 100]], 0);
+  keys(T(p).property("Scale"), [[pAt, [125, 125, 100]], [pAt + 0.2, [100, 100, 100]]], 0);
+  return c;
+}
+function shotQuotes() { // film 27.08 – 41.18: Accenture a cent, Sotheby's $100,000
+  var o = shot("S1C Quotes · ACN, BID", S.quotes, S.floor), c = o.c, d = o.d;
+  termBackdrop(c, false);
+  var hd = txt(c, "SYMBOL      COMPANY                                        LAST", TF.monoReg, 28, TERM.grey, [W / 2 - 750, H / 2 - 230, 0], LEFT, 60);
+  keys(T(hd).property("Opacity"), [[0, 0], [0.2, 0], [0.5, 100]], 0);
+  var rows = [["ACN", "ACCENTURE", "$0.01", TERM.red, 5.98, 0.32, -110], ["BID", "SOTHEBY'S", "$100,000", TERM.amber, 11.44, 8.32, 70]];
+  for (var i = 0; i < rows.length; i++) {
+    var r = rows[i], x = W / 2, y = H / 2 + r[6];
+    var l = addAt(c, rowComp("Row " + r[0], r[0], r[1], r[2], r[3], r[4]), [x, y, 0]);
+    keysOut(T(l).property("Position"), [[r[5], [x - 1700, y, 0]], [r[5] + 0.7, [x, y, 0]]]);
+    keys(T(l).property("Opacity"), [[0, 0], [r[5] - 0.001, 0], [r[5], 100]], 0);
+  }
+  var st = addAt(c, tagComp("Tag cancelled", "TRADES LATER CANCELLED", TERM.red, 54, 860, 110), [W / 2, H / 2 + 270, -20]);
+  T(st).property("Z Rotation").setValue(-3);
+  slam(st, 12.6);
+  fgTicker(c, 70, false);
+  rig(c, d, {x0: -50, x1: 50, d0: 0.4, d1: -0.4});
+  return c;
+}
+
+// wall of market boards, drawn (bars only, no invented figures); each panel turns red at its own moment
 function boardsComp() {
   var c = comp("Boards", 30, 2700, 1180);
-  var bg = solid(c, [0.02, 0.025, 0.03], "bg");
+  solid(c, TERM.black, "bg");
   var cols = 10, rows = 6, pw = 240, ph = 160, gap = 24;
   for (var i = 0; i < cols * rows; i++) {
     var cx = 40 + (i % cols) * (pw + gap) + pw / 2, cy = 40 + Math.floor(i / cols) * (ph + gap) + ph / 2;
@@ -46,267 +139,185 @@ function boardsComp() {
       var w = 60 + ((i * 37 + r * 53) % 100);
       var rr = b.property("Contents").addProperty("ADBE Vector Shape - Rect"); rr.property("Size").setValue([w, 20]); rr.property("Position").setValue([-pw / 2 + 18 + w / 2, -44 + r * 44]);
       var f = b.property("Contents").addProperty("ADBE Vector Graphic - Fill");
-      // amber, then crimson once this panel's turn comes (seeded per panel), flickering
-      f.property("Color").expression = "seedRandom(" + i + ", true); var th = 1 + random(9); var hot = time > th; var k = 0.78 + 0.22 * Math.sin(time * (8 + random(9)) + " + r + "); hot ? [0.75 * k, 0.22 * k, 0.17 * k, 1] : [0.96 * k, 0.62 * k, 0.04 * k, 1];";
+      f.property("Color").expression = "seedRandom(" + i + ", true); var th = 1 + random(7); var k = 0.8 + 0.2 * Math.sin(time * (6 + random(6)) + " + r + "); time > th ? [1.0 * k, 0.23 * k, 0.19 * k, 1] : [1.0 * k, 0.69 * k, 0.0, 1];";
     }
     var g = l.property("Contents").addProperty("ADBE Vector Group");
-    var fr = g.property("Contents").addProperty("ADBE Vector Shape - Rect"); fr.property("Size").setValue([pw, ph]);
-    g.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue([0.03, 0.035, 0.045]);
-    var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); st.property("Color").setValue([0.12, 0.14, 0.17]); st.property("Stroke Width").setValue(2);
+    g.property("Contents").addProperty("ADBE Vector Shape - Rect").property("Size").setValue([pw, ph]);
+    var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); st.property("Color").setValue(TERM.amberDim); st.property("Stroke Width").setValue(2);
+    g.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue(TERM.panel);
     T(l).property("Position").setValue([cx, cy]);
   }
   return c;
 }
-
-function folderComp() {
-  var c = comp("Report folder", 30, 1000, 660);
-  var bg = c.layers.add(img("manila.png"));
-  T(bg).property("Scale").setValue([1000 / 2400 * 100, 660 / 1600 * 100, 100]); T(bg).property("Position").setValue([500, 330]);
-  fx(bg, "Tint", {"Map White To": [0.92, 0.86, 0.74], "Amount to Tint": 30});
-  txt(c, "REPORT OF THE STAFFS OF THE CFTC AND SEC  ·  30 SEPT 2010", FONT.monoReg, 24, COL.inkSoft, [60, 90], ParagraphJustification.LEFT_JUSTIFY, 80);
-  txt(c, "Findings Regarding the Market\rEvents of May 6, 2010", "PlayfairDisplay-Bold", 58, COL.ink, [60, 190], ParagraphJustification.LEFT_JUSTIFY);
-  var rule = solid(c, [0.35, 0.3, 0.23], "rule", 880, 3); T(rule).property("Position").setValue([500, 600]); T(rule).property("Opacity").setValue(40);
-  return c;
-}
-
-function ticketComp() {
-  var c = comp("Sell ticket", 30, 400, 160);
-  var bg = c.layers.add(img("manila.png"));
-  T(bg).property("Scale").setValue([400 / 2400 * 100, 160 / 1600 * 100, 100]); T(bg).property("Position").setValue([200, 80]);
-  txt(c, "AUTOMATED ORDER", FONT.monoReg, 22, COL.inkSoft, [26, 42], ParagraphJustification.LEFT_JUSTIFY, 200);
-  txt(c, "SELL", FONT.mono, 46, COL.crimson, [26, 94], ParagraphJustification.LEFT_JUSTIFY);
-  txt(c, "E-MINI S&P 500 FUTURES", FONT.monoReg, 20, COL.ink, [26, 132], ParagraphJustification.LEFT_JUSTIFY, 60);
-  return c;
-}
-
-/* -------------------------------------------------------------- shots */
-var boards = boardsComp();
-var folder = folderComp();
-
-function shotDesk() { // film 4.0 – 27.08
-  var d = S.cards - S.desk, c = comp("S1A Desk", d);
-  desk(c); lamp(c, 130);
-  var tp = tapeComp("Tape down", false);
-  keys(T(tp.text).property("Position"), [[0, [0, 64]], [d, [-2600, 64]]], 0);
-  setEase(T(tp.text).property("Position"), 85, 5); // accelerating: the market speeds up
-  var tl = c.layers.add(tp.comp); tl.threeDLayer = true; shadow(tl);
-  var hit = 19.48; // "evaporated": the tape slides off the desk edge into shadow
-  keys(T(tl).property("Position"), [[0, [W / 2, H / 2 + 270, 0]], [hit, [W / 2, H / 2 + 270, 0]], [hit + 1.3, [W / 2 + 120, H / 2 + 1250, 120]]], 0);
-  setEase(T(tl).property("Position"), 0.1, 70);
-  keys(T(tl).property("Z Rotation"), [[hit, -7], [hit + 1.3, 14]], 60);
-  keys(T(tl).property("Opacity"), [[hit + 0.6, 100], [hit + 1.3, 0]], 0);
-  var t1 = txt(c, "MAY 6, 2010", FONT.mono, 92, COL.gold, [W / 2, H / 2 - 220, 0], null, 80); typeOn(t1, "MAY 6, 2010", 0.18, 16); win(t1, 0.15, 13.4, 0.1, 0.6);
-  var t2 = txt(c, "14:42 EDT", FONT.monoReg, 48, COL.mono, [W / 2, H / 2 - 130, 0], null, 120); typeOn(t2, "14:42 EDT", 2.48, 14); win(t2, 2.45, 13.4, 0.1, 0.6);
-  var t3 = txt(c, "36 MINUTES", FONT.display, 150, COL.manila, [W / 2, H / 2 - 120, 0], null, 60); rise(t3, 14.68); win(t3, 14.6, d - 0.1, 0.1, 0.5);
-  var t4 = txt(c, "~$1 TRILLION", FONT.display, 120, COL.gold, [W / 2, H / 2 + 40, 0], null, 60); rise(t4, 16.84); win(t4, 16.8, d - 0.1, 0.1, 0.5);
-  dust(c); penFG(c, W - 260, H - 60, -16);
-  rig(c, d, {d0: -0.5, d1: 0.8});
-  return c;
-}
-
-function shotCards() { // film 27.08 – 41.18
-  var d = S.floor - S.cards, c = comp("S1B Price cards", d);
-  desk(c); lamp(c, 120);
-  var a = priceComp("Card Accenture", "ACCENTURE", "$0.01", COL.crimson);
-  var b = priceComp("Card Sothebys", "SOTHEBY'S", "$100,000", COL.gold);
-  keys(T(a.price).property("Opacity"), [[5.98 - 0.001, 0], [6.2, 100]], 0);
-  keys(T(b.price).property("Opacity"), [[9.92 - 0.001, 0], [10.15, 100]], 0);
-  var la = c.layers.add(a.comp); la.threeDLayer = true; shadow(la);
-  keysOut(T(la).property("Position"), [[0.32, [-900, H / 2 - 20, 0]], [1.25, [W / 2 - 380, H / 2 - 20, 0]]]);
-  keysOut(T(la).property("Z Rotation"), [[0.32, -14], [1.25, -5]]);
-  var lb = c.layers.add(b.comp); lb.threeDLayer = true; shadow(lb);
-  keysOut(T(lb).property("Position"), [[8.44, [W + 900, H / 2 - 10, 0]], [9.37, [W / 2 + 380, H / 2 - 10, 0]]]);
-  keysOut(T(lb).property("Z Rotation"), [[8.44, 12], [9.37, 4]]);
-  T(lb).property("Opacity").setValue(100);
-  keys(T(lb).property("Opacity"), [[8.43, 0], [8.44, 100]], 0);
-  var n = txt(c, "Both trades were later cancelled.", FONT.monoReg, 30, COL.mono, [W / 2, H / 2 + 300, 0], null, 40); typeOn(n, "Both trades were later cancelled.", 11.52, 28); win(n, 11.5, d - 0.1, 0.1, 0.4);
-  dust(c); penFG(c, 220, H - 40, 12);
-  rig(c, d, {x0: -40, x1: 40, d0: 0.4, d1: -0.4});
-  return c;
-}
-
-function shotFloor() { // film 41.18 – 56.14 (illustration: the drawn boards stand in until an archive photo is licensed)
-  var d = S.wire - S.floor, c = comp("S1C Trading floor (drawn)", d);
-  solid(c, [0.02, 0.022, 0.03], "void");
-  var bl = c.layers.add(boards); bl.threeDLayer = true;
-  T(bl).property("Position").setValue([W / 2, H / 2, 350]);
-  keys(T(bl).property("Opacity"), [[11.2, 100], [12.8, 0]], 40); // "inside computers": the boards give way
-  // orders as light streaks, flying past at three depths
+function shotFloor() { // film 41.18 – 56.14: the NYSE floor (drawn until a licensed photo is in), then inside the machines
+  var o = shot("S1D Floor → machines", S.floor, S.wire), c = o.c, d = o.d;
+  solid(c, TERM.black, "void");
+  var bl = c.layers.add(boardsComp()); bl.threeDLayer = true;
+  T(bl).property("Position").setValue([W / 2, H / 2, 300]);
+  keys(T(bl).property("Opacity"), [[0, 100], [10.6, 100], [12.2, 0]], 40); // "inside computers"
+  var ny = txt(c, "NEW YORK STOCK EXCHANGE", TF.mono, 50, TERM.amber, [W / 2, H / 2 - 20, 0], null, 200);
+  typeOn(ny, "NEW YORK STOCK EXCHANGE", 1.78, 18); phosphor(ny);
+  keys(T(ny).property("Opacity"), [[0, 100], [6.2, 100], [6.8, 0]], 0);
+  // orders as light streaks at three depths (the screen goes inside the computers)
   for (var i = 0; i < 70; i++) {
-    var s = solid(c, i % 5 === 0 ? COL.crimson : COL.gold, "streak " + i, 300, 3);
-    s.threeDLayer = true;
-    s.blendingMode = BlendingMode.ADD;
-    T(s).property("Position").expression = "seedRandom(" + i + ", true); var sp = 2600 + random(2600); var z = -150 + random(500); var x = ((random(4200) + (time - 11.4) * sp) % 4200) - 1100; [x, random(-80, 1160), z];";
-    keys(T(s).property("Opacity"), [[11.3, 0], [12.4, 85]], 40);
-    fx(s, "Fast Box Blur", {"Blur Radius": 1});
+    var s = solid(c, i % 4 === 0 ? TERM.red : TERM.amber, "order " + i, 300, 3);
+    s.threeDLayer = true; s.blendingMode = BlendingMode.ADD;
+    T(s).property("Position").expression = "seedRandom(" + i + ", true); var sp = 2600 + random(2600); var z = -150 + random(500); var x = ((random(4200) + (time - 10.8) * sp) % 4200) - 1100; [x, random(-80, 1160), z];";
+    keys(T(s).property("Opacity"), [[0, 0], [10.9, 0], [12.0, 85]], 40);
   }
-  var t = txt(c, "FRACTIONS OF A SECOND", FONT.mono, 44, COL.mono, [W / 2, H / 2 + 14, 0], null, 300); rise(t, 12.98, 0.9); win(t, 12.9, d - 0.1, 0.1, 0.4);
-  // foreground occlusion: a dark railing across the bottom, out of focus at Z = -250
-  var rail = solid(c, [0.06, 0.05, 0.045], "FG railing (Z-250)", 2600, 60); rail.threeDLayer = true; T(rail).property("Position").setValue([W / 2, H - 70, -250]);
-  var fc = rig(c, d, {y0: 40, y1: 0, d0: -0.6, d1: 0.7});
-  fc.property("Camera Options").property("Focus Distance").expression = "350 - transform.position[2]"; // the boards are the subject here
-  var lab = txt(c, "Illustration", FONT.ui, 20, COL.mono, [W - 48, H - 36], ParagraphJustification.RIGHT_JUSTIFY, 40);
-  keys(T(lab).property("Opacity"), [[0, 55], [11.2, 55], [12.8, 0]], 0);
+  var t = txt(c, "FRACTIONS OF A SECOND", TF.mono, 64, TERM.white, [W / 2, H / 2 + 22, 0], null, 240);
+  rise(t, 12.98, 0.8); keys(T(t).property("Opacity"), [[0, 0], [12.95, 0], [12.98, 100]], 0);
+  var rail = solid(c, [0.04, 0.04, 0.05], "FG rail (Z-250)", 2600, 60); rail.threeDLayer = true; T(rail).property("Position").setValue([W / 2, H - 60, -250]);
+  var cam = rig(c, d, {y0: 40, y1: 0, d0: -0.6, d1: 0.7});
+  cam.property("Camera Options").property("Focus Distance").expression = "time < 11 ? 300 - transform.position[2] : -transform.position[2]";
+  var lab = txt(c, "Illustration", TF.headReg, 22, TERM.grey, [W - 48, H - 36], RIGHT, 40);
+  keys(T(lab).property("Opacity"), [[0, 70], [10.6, 70], [12.2, 0]], 0);
   return c;
 }
 
-function stripComp(name, s, rgb) {
-  var c = comp(name, 30, 1240, 128);
-  var bg = c.layers.add(img("manila.png"));
-  T(bg).property("Scale").setValue([1240 / 2400 * 100, 128 / 1600 * 100, 100]); T(bg).property("Position").setValue([620, 64]);
-  var t = txt(c, s, FONT.type, 60, rgb || COL.ink, [40, 86], ParagraphJustification.LEFT_JUSTIFY, 50);
-  return {comp: c, text: t, s: s};
-}
-function shotWire() { // film 56.14 – 70.22
-  var d = S.back - S.wire, c = comp("S1D Newswire", d);
-  desk(c); lamp(c, 110);
-  var rows = [["NO WAR DECLARED", 0.28, -170, -2, null], ["NO BANK COLLAPSE", 2.56, 10, 1.5, null], ["GREECE: DEBT FEARS", 7.32, 190, -1, COL.amberInk]];
+function shotWire() { // film 56.14 – 70.22: no war, no bank, only Greece; no explanation
+  var o = shot("S1E Newswire", S.wire, S.back), c = o.c, d = o.d;
+  termBackdrop(c, false);
+  panel(c, 1500, 560, [W / 2, H / 2 - 20, 30]);
+  var hd = txt(c, "NEWSWIRE  ·  MAY 6, 2010", TF.monoReg, 28, TERM.grey, [W / 2 - 700, H / 2 - 250, 0], LEFT, 120);
+  keys(T(hd).property("Opacity"), [[0, 0], [0.1, 0], [0.3, 100]], 0);
+  var rows = [["> NO WAR DECLARED", 0.0, -130, TERM.white], ["> NO BANK COLLAPSE", 2.26, 0, TERM.white], ["> GREECE: DEBT FEARS", 7.32, 130, TERM.amber]];
+  var dimAt = 11.16;
   for (var i = 0; i < rows.length; i++) {
-    var r = rows[i], sc = stripComp("Strip " + i, r[0], r[4]);
-    typeOn(sc.text, r[0], r[1], 20);
-    var l = c.layers.add(sc.comp); l.threeDLayer = true; shadow(l);
-    keysOut(T(l).property("Position"), [[r[1] - 0.3, [-700, H / 2 + r[2], 0]], [r[1] + 0.3, [W / 2, H / 2 + r[2], 0]]]);
-    T(l).property("Z Rotation").setValue(r[3]);
-    keys(T(l).property("Opacity"), [[r[1] - 0.31, 0], [r[1] - 0.3, 100], [11.86, 100], [13.0, 45]], 0);
+    var r = rows[i];
+    var t = txt(c, r[0], TF.mono, 72, r[3], [W / 2 - 700, H / 2 + r[2], 0], LEFT, 30);
+    typeOn(t, r[0], r[1], 22);
+    if (i === 2) phosphor(t);
+    keys(T(t).property("Opacity"), [[0, 100], [dimAt, 100], [dimAt + 0.4, 12]], 0);
   }
-  dust(c); penFG(c, W - 200, 120, 24);
+  var ne = txt(c, "NO EXPLANATION", TF.head, 190, TERM.red, [W / 2, H / 2 + 70, -60], null, 30);
+  slamIn(ne, dimAt); phosphor(ne);
+  fgTicker(c, H - 40, true);
   rig(c, d, {d0: -0.4, d1: 0.5});
   return c;
 }
 
-function shotBack() { // film 70.22 – 79.52: the recovery, a brighter beat
-  var d = S.snap - S.back, c = comp("S1E Recovery", d);
-  desk(c); lamp(c, 150);
-  var tp = tapeComp("Tape up", true);
-  keys(T(tp.text).property("Position"), [[0, [-2600, 64]], [d, [-200, 64]]], 0);
-  setEase(T(tp.text).property("Position"), 5, 85); // slowing as it steadies
-  var tl = c.layers.add(tp.comp); tl.threeDLayer = true; shadow(tl);
-  keysOut(T(tl).property("Position"), [[0, [W / 2, H + 500, 0]], [1.4, [W / 2, H / 2 + 220, 0]]]);
-  T(tl).property("Z Rotation").setValue(-5);
-  var t = txt(c, "RECOVERED", FONT.display, 130, COL.manila, [W / 2, H / 2 - 60, 0], null, 80); rise(t, 3.9); win(t, 3.85, d - 0.1, 0.1, 0.4);
-  dust(c); penFG(c, 240, H - 50, 10);
+function shotBack() { // film 70.22 – 79.52: the recovery, the brighter beat
+  var o = shot("S1F Recovery", S.back, S.report), c = o.c, d = o.d;
+  termBackdrop(c, false);
+  panel(c, 1500, 560, [W / 2, H / 2 + 10, 40], TERM.green);
+  var lab = txt(c, "DOW JONES INDUSTRIAL AVERAGE", TF.headReg, 34, TERM.grey, [W / 2, H / 2 - 150, 0], null, 160);
+  var dow = txt(c, "9,869.62", TF.mono, 190, TERM.green, [W / 2, H / 2 + 40, 0], null, 0);
+  counter(dow, 9869.62, 10520.32, 0.6, 5.0, 2); phosphor(dow);
+  var rec = txt(c, "RECOVERED MOST OF IT", TF.head, 80, TERM.white, [W / 2, H / 2 + 150, 0], null, 60);
+  rise(rec, 3.9, 0.6); keys(T(rec).property("Opacity"), [[0, 0], [3.85, 0], [3.9, 100]], 0);
+  var cl = txt(c, "CLOSE, MAY 6  ·  ▼ 347.80 ON THE DAY", TF.monoReg, 30, TERM.grey, [W / 2, H / 2 + 225, 0], null, 60);
+  keys(T(cl).property("Opacity"), [[0, 0], [5.0, 0], [5.4, 100]], 0);
+  fgTicker(c, 70, false);
   rig(c, d, {d0: 0.3, d1: -0.3});
   return c;
 }
 
-function polaroidComp() {
-  var c = comp("Polaroid", 30, 768, 900);
-  solid(c, [0.95, 0.93, 0.9], "frame");
-  var ph = c.layers.add(boards);
-  ph.startTime = -5.5; // freeze on the boards mid-plunge
-  ph.timeRemapEnabled = true;
-  ph.property("Time Remap").setValueAtTime(0, 5.5);
-  T(ph).property("Scale").setValue([44, 44, 100]); T(ph).property("Position").setValue([384, 300]);
-  fx(ph, "Hue/Saturation", {"Master Saturation": -45});
-  var mask = solid(c, [0.95, 0.93, 0.9], "border cover"); // keep the photo inside its 700 x 520 window
-  var m = mask.property("Masks").addProperty("Mask"); var sh = new Shape();
-  sh.vertices = [[34, 40], [734, 40], [734, 560], [34, 560]]; sh.closed = true; m.property("Mask Path").setValue(sh); m.inverted = true;
-  var cap = txt(c, "MAY 6, 2010 // 14:42:00 EDT", FONT.mono, 36, [0.16, 0.15, 0.12], [40, 830], ParagraphJustification.LEFT_JUSTIFY, 40);
-  typeOn(cap, "MAY 6, 2010 // 14:42:00 EDT", 0.6, 22);
-  return c;
-}
-function shotSnap() { // film 79.52 – 92.08
-  var d = S.stamp - S.snap, c = comp("S1F Polaroid and report", d);
-  desk(c); lamp(c, 105);
-  var pc = c.layers.add(polaroidComp()); pc.threeDLayer = true; shadow(pc);
-  keysOut(T(pc).property("Position"), [[0.15, [W / 2 - 300, H / 2 - 160, -60]], [0.85, [W / 2 - 300, H / 2 - 20, 0]]]);
-  keysOut(T(pc).property("Z Rotation"), [[0.15, -7], [0.85, -4]]);
-  T(pc).property("Scale").setValue([88, 88, 100]);
-  var fl = c.layers.add(folder); fl.threeDLayer = true; shadow(fl);
-  keysOut(T(fl).property("Position"), [[4.86, [W + 700, H / 2 + 40, 0]], [5.86, [W / 2 + 330, H / 2 + 40, 0]]]);
-  keysOut(T(fl).property("Z Rotation"), [[4.86, 6], [5.86, 2]]);
-  keys(T(fl).property("Opacity"), [[4.85, 0], [4.86, 100]], 0);
-  // shutter flash: one soft 3-frame pulse (flash-safe: a single flash)
-  var fsh = solid(c, [1, 0.96, 0.9], "Shutter flash");
-  keys(T(fsh).property("Opacity"), [[0, 0], [1 / FPS, 55], [3 / FPS, 0]], 0);
-  dust(c, 0.7);
-  var cam = rig(c, d, {x0: 0, x1: 300, d0: -0.5, d1: 0.4});
+function shotReport() { // film 79.52 – 92.08: the investigators and their report
+  var o = shot("S1G Investigators · report", S.report, S.turn), c = o.c, d = o.d;
+  termBackdrop(c, false);
+  var inv = txt(c, "INVESTIGATORS", TF.mono, 96, TERM.amber, [W / 2, H / 2, 0], null, 200);
+  typeOn(inv, "INVESTIGATORS", 0.26, 10); phosphor(inv); fadeOut(inv, 4.3, 4.8);
+  // the report cover, typeset from the real document (title, authors, date; nothing invented)
+  var doc = docComp("Report cover", 1000, 1300, [
+    ["FINDINGS REGARDING THE", TF.serif, 62, TERM.ink, 80, 300],
+    ["MARKET EVENTS OF", TF.serif, 62, TERM.ink, 80, 380],
+    ["MAY 6, 2010", TF.serif, 62, TERM.ink, 80, 460],
+    ["REPORT OF THE STAFFS OF THE CFTC AND SEC", TF.headReg, 30, TERM.ink, 80, 600, 40],
+    ["TO THE JOINT ADVISORY COMMITTEE", TF.headReg, 30, TERM.ink, 80, 645, 40],
+    ["ON EMERGING REGULATORY ISSUES", TF.headReg, 30, TERM.ink, 80, 690, 40],
+    ["SEPTEMBER 30, 2010", TF.headReg, 30, TERM.ink, 80, 1180, 100]
+  ]);
+  var hl = solid(doc, TERM.amber, "highlight", 900, 260); hl.blendingMode = BlendingMode.MULTIPLY;
+  T(hl).property("Anchor Point").setValue([0, 130]); T(hl).property("Position").setValue([66, 392]);
+  keys(T(hl).property("Scale"), [[0, [0, 100, 100]], [9.0, [0, 100, 100]], [9.5, [100, 100, 100]]], 0); // "trading records"
+  var dl = addAt(c, doc, [W / 2 + 300, H / 2, 0]);
+  T(dl).property("Scale").setValue([64, 64, 100]);
+  keysOut(T(dl).property("Position"), [[4.86, [W + 800, H / 2 + 40, 0]], [5.7, [W / 2 + 300, H / 2, 0]]]);
+  keysOut(T(dl).property("Y Rotation"), [[4.86, -30], [5.7, -10]]);
+  keys(T(dl).property("Opacity"), [[0, 0], [4.85, 0], [4.86, 100]], 0);
+  var sec = addAt(c, tagComp("Tag SEC", "SEC", TERM.amber, 90, 300, 140), [W / 2 - 480, H / 2 - 100, -40]); slamIn(sec, 4.9);
+  var cftc = addAt(c, tagComp("Tag CFTC", "CFTC", TERM.amber, 90, 300, 140), [W / 2 - 480, H / 2 + 80, -40]); slamIn(cftc, 6.46);
+  var flash = solid(c, [1, 0.95, 0.85], "freeze flash"); // one 3-frame pulse (flash-safe: single)
+  keys(T(flash).property("Opacity"), [[0, 0], [1 / FPS, 50], [3 / FPS, 0]], 0);
+  rig(c, d, {x0: 0, x1: 120, d0: -0.4, d1: 0.4});
   return c;
 }
 
-function shotStamp() { // film 92.08 – 95.0: "Nobody had decided to crash the market."
-  var d = S.loop - S.stamp, c = comp("S1G Stamp", d);
-  desk(c); lamp(c, 90);
-  var fl = c.layers.add(folder); fl.threeDLayer = true; shadow(fl);
-  T(fl).property("Position").setValue([W / 2, H / 2, 0]); T(fl).property("Z Rotation").setValue(2);
-  var st = c.layers.add(stampComp("Stamp erased", ["~$1 TRILLION ERASED", "36 MINUTES"], 54, 900, 270));
-  st.threeDLayer = true; st.blendingMode = BlendingMode.MULTIPLY;
-  T(st).property("Position").setValue([W / 2 - 40, H / 2 + 150, -1]); T(st).property("Z Rotation").setValue(-6);
-  slam(st, 1.54);
-  var cam = rig(c, d, {push: 1.04, d0: -0.5, d1: -0.2});
-  // impact shake, 3 frames
-  T(cam).property("Position").expression = "var h = 1.54; (time > h && time < h + 0.13) ? value + [0, Math.sin((time - h) * 180) * 6, 0] : value;";
+function shotTurn() { // film 92.08 – 95.0: "Nobody had decided to crash the market."
+  var o = shot("S1H Nobody", S.turn, S.loop), c = o.c, d = o.d;
+  solid(c, TERM.black, "black");
+  var a = txt(c, "NOBODY", TF.head, 240, TERM.white, [W / 2, H / 2 - 30, 0], null, 40); slamIn(a, 0.02);
+  var b = txt(c, "DECIDED TO CRASH IT", TF.head, 96, TERM.red, [W / 2, H / 2 + 100, 0], null, 60); slamIn(b, 1.54); phosphor(b);
+  var cam = rig(c, d, {push: 1.04, d0: -0.3, d1: 0});
+  T(cam).property("Position").expression = "var h = 1.54; (time > h && time < h + 0.13) ? value + [0, Math.sin((time - h) * 180) * 7, 0] : value;";
   return c;
 }
 
-function shotLoop() { // film 95.0 – 109.0
-  var d = S.title - S.loop, c = comp("S1H Feedback loop", d);
-  c.motionBlur = true;
-  var v = solid(c, COL.void, "void");
-  var glow = solid(c, [0, 0, 0], "glow pool"); glow.threeDLayer = true; T(glow).property("Position").setValue([W / 2, H / 2, 350]); T(glow).property("Scale").setValue([140, 140, 100]);
-  fx(glow, "Gradient Ramp", {"Start of Ramp": [W / 2, H / 2], "Start Color": [0.25, 0.17, 0.05], "End of Ramp": [W / 2 + 900, H / 2], "End Color": [0, 0, 0], "Ramp Shape": 2});
-  glow.blendingMode = BlendingMode.ADD;
-  var tk = ticketComp();
-  var ANG = "var t = time - 3.88; var a = Math.max(0, t) * 18 + Math.pow(Math.max(0, time - 8.94), 2) * 26;";
-  var RING = "var r = 400 * ease(time, 3.88, 5.48, 0, 1);";
-  for (var i = 0; i < 12; i++) {
-    var l = c.layers.add(tk); l.threeDLayer = true; l.motionBlur = true; shadow(l);
-    T(l).property("Position").expression = ANG + RING + " var th = (" + i + " / 12 * 360 + a) * Math.PI / 180; [" + (W / 2) + " + Math.cos(th) * r, " + (H / 2) + " + Math.sin(th) * r * 0.62, 0];";
-    T(l).property("Z Rotation").expression = ANG + " var th = (" + i + " / 12 * 360 + a) * Math.PI / 180; Math.cos(th) * 8;";
-    if (i === 0) keys(T(l).property("Opacity"), [[1.18, 0], [1.7, 100]], 40);
-    else keys(T(l).property("Opacity"), [[3.88, 0], [5.0, 100]], 40);
-  }
+function shotLoop() { // film 95.0 – 109.0: one sell order, programs reacting to each other, the loop
+  var o = shot("S1I Feedback loop", S.loop, S.title), c = o.c, d = o.d;
+  termBackdrop(c, true);
+  var RX = 600, RY = 340;
   var ring = c.layers.addShape(); ring.name = "loop path";
   var g = ring.property("Contents").addProperty("ADBE Vector Group");
-  var e = g.property("Contents").addProperty("ADBE Vector Shape - Ellipse"); e.property("Size").setValue([800, 496]);
-  var s = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); s.property("Color").setValue(COL.gold); s.property("Stroke Width").setValue(2);
-  T(ring).property("Position").setValue([W / 2, H / 2]); ring.threeDLayer = true;
-  keys(T(ring).property("Opacity"), [[3.88, 0], [5.48, 60]], 40);
-  rig(c, d, {d0: 0.4, d1: -0.9});
+  g.property("Contents").addProperty("ADBE Vector Shape - Ellipse").property("Size").setValue([RX * 2, RY * 2]);
+  var rs = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); rs.property("Stroke Width").setValue(3);
+  keys(rs.property("Color"), [[8.9, TERM.amberDim], [9.6, TERM.red]], 0);
+  ring.threeDLayer = true; T(ring).property("Position").setValue([W / 2, H / 2, 20]);
+  keys(T(ring).property("Opacity"), [[0, 0], [3.9, 0], [5.0, 80]], 40);
+  var core = addAt(c, tagComp("Sell order", "SELL ORDER", TERM.red, 66, 480, 130), [W / 2, H / 2 - 30, 0]); slamIn(core, 1.18);
+  var sub = txt(c, "AUTOMATED  ·  E-MINI S&P 500 FUTURES", TF.monoReg, 26, TERM.grey, [W / 2, H / 2 + 70, 0], null, 60);
+  keys(T(sub).property("Opacity"), [[0, 0], [1.86, 0], [2.2, 100]], 0);
+  var node = tagComp("Program", "PROGRAM", TERM.amber, 32, 220, 70, TF.mono);
+  for (var i = 0; i < 8; i++) {
+    var th = i / 8 * 2 * Math.PI - Math.PI / 2;
+    var n = addAt(c, node, [W / 2 + Math.cos(th) * RX, H / 2 + Math.sin(th) * RY, 0]);
+    keys(T(n).property("Opacity"), [[0, 0], [4.5 + i * 0.07, 0], [4.7 + i * 0.07, 100]], 0);
+  }
+  // orders racing round the loop, accelerating once the loop is named
+  for (var k = 0; k < 28; k++) {
+    var dot = solid(c, k % 3 ? TERM.amber : TERM.red, "order " + k, 16, 16); dot.threeDLayer = true; dot.motionBlur = true;
+    T(dot).property("Position").expression = "var t = Math.max(0, time - 3.9); var a = t * 0.7 + Math.pow(Math.max(0, time - 8.94), 2) * 0.9 + " + (k / 28 * 2 * Math.PI) + "; [" + (W / 2) + " + Math.cos(a) * " + RX + ", " + (H / 2) + " + Math.sin(a) * " + RY + ", 0];";
+    keys(T(dot).property("Opacity"), [[0, 0], [4.0, 0], [5.0, 100]], 0);
+  }
+  var fl = txt(c, "FEEDBACK LOOP", TF.head, 88, TERM.white, [W / 2, H / 2 + 165, -40], null, 60); slamIn(fl, 8.94);
+  rig(c, d, {x0: -60, x1: 60, d0: 0.4, d1: -0.9});
   return c;
 }
 
-function shotTitle() { // film 109.0 – 124.5
-  var d = END - S.title, c = comp("S1I Title card", d);
-  desk(c); lamp(c, 130);
-  var sh = card(c, 1400, 820, [W / 2, H / 2, 0], "Case file");
-  var k = txt(c, "SMALL PRINT  ·  CASE FILE 01", FONT.monoReg, 26, COL.inkSoft, [W / 2 - 620, H / 2 - 320, -1], ParagraphJustification.LEFT_JUSTIFY, 200);
-  var st = c.layers.add(stampComp("Stamp title", ["THE GHOST", "IN THE SYSTEM"], 110, 1160, 330));
-  st.threeDLayer = true; st.blendingMode = BlendingMode.MULTIPLY;
-  T(st).property("Position").setValue([W / 2, H / 2 - 20, -1]); T(st).property("Z Rotation").setValue(-4);
-  slam(st, 1.1);
-  var sub = txt(c, "AN INVESTIGATION", FONT.mono, 34, [0.23, 0.2, 0.15], [W / 2, H / 2 + 300, -1], null, 400); typeOn(sub, "AN INVESTIGATION", 3.2, 12);
-  dust(c); penFG(c, W - 230, H - 70, -14);
+function shotTitle() { // film 109.0 – 124.5: title card, music only
+  var o = shot("S1J Title card", S.title, END), c = o.c, d = o.d;
+  termBackdrop(c, false);
+  var a = txt(c, "THE GHOST", TF.head, 240, TERM.amber, [W / 2, H / 2 - 40, 0], null, 40); slamIn(a, 1.1); phosphor(a);
+  var b = txt(c, "IN THE SYSTEM", TF.head, 110, TERM.white, [W / 2, H / 2 + 100, 0], null, 260); slamIn(b, 1.5);
+  var s = txt(c, "AN INVESTIGATION", TF.mono, 36, TERM.grey, [W / 2, H / 2 + 200, 0], null, 400); typeOn(s, "AN INVESTIGATION", 3.2, 12);
+  var cur = solid(c, TERM.amber, "cursor", 22, 40); cur.threeDLayer = true; // steady 1 Hz blink, small: flash-safe
+  T(cur).property("Position").setValue([W / 2 + 250, H / 2 + 186, 0]);
+  T(cur).property("Opacity").expression = "time < 4.6 ? 0 : (Math.floor(time * 2) % 2 ? 0 : 100)";
+  fgTicker(c, H - 40, false);
   rig(c, d, {d0: 0.3, d1: -0.5});
   return c;
 }
 
-/* -------------------------------------------------------------- main timeline */
+/* ------------------------------------------------------------------ main timeline */
 var M = comp("Scene1", END);
 M.motionBlur = true;
 solid(M, [0, 0, 0], "black");
 function place(item, start, end) { var l = M.layers.add(item); l.startTime = start; l.inPoint = start; l.outPoint = end; return l; }
-place(shotDesk(), S.desk, S.cards);
-place(shotCards(), S.cards, S.floor);
+place(shotOpen(), S.open, S.stakes);
+place(shotStakes(), S.stakes, S.quotes);
+place(shotQuotes(), S.quotes, S.floor);
 place(shotFloor(), S.floor, S.wire);
 place(shotWire(), S.wire, S.back);
-place(shotBack(), S.back, S.snap);
-place(shotSnap(), S.snap, S.stamp);
-place(shotStamp(), S.stamp, S.loop);
+place(shotBack(), S.back, S.report);
+place(shotReport(), S.report, S.turn);
+place(shotTurn(), S.turn, S.loop);
 place(shotLoop(), S.loop, S.title);
 place(shotTitle(), S.title, END);
 
-// exposure curve: brightness follows tension (black open, darker into the plunge, lift on the recovery,
-// colder and darker into the loop, snap to black, title up, fade out)
+// exposure curve: brightness follows tension (dark through the plunge, lift on the recovery,
+// darker into the loop, snap to black, title up, fade out)
 var ex = solid(M, [0, 0, 0], "Exposure (tension curve)");
-keys(T(ex).property("Opacity"), [[0, 100], [4.0, 100], [4.6, 0], [17.4, 0], [70.2, 18], [70.4, 4], [79.5, 4], [79.6, 10], [108.3, 28], [108.6, 100], [109.0, 100], [109.8, 0], [123.7, 0], [124.5, 100]], 0);
-
-// global texture: organic film grain (overlay, 12 %) and a 18 % lens vignette
-var gr = solid(M, [0.5, 0.5, 0.5], "Film grain");
-fx(gr, "Fractal Noise", {"Contrast": 160, "Transform/Scale": 6, "Complexity": 2});
-gr.property("Effects").property("Fractal Noise").property("Evolution").expression = "time * 2400";
-gr.blendingMode = BlendingMode.OVERLAY;
-T(gr).property("Opacity").setValue(12);
-var vg = solid(M, [0, 0, 0], "Vignette"); vg.adjustmentLayer = true;
-fx(vg, "CC Vignette", {"Amount": 18});
+keys(T(ex).property("Opacity"), [[0, 100], [4.0, 100], [4.6, 0], [17.4, 0], [70.2, 15], [70.4, 0], [79.5, 0], [79.6, 8], [108.3, 25], [108.6, 100], [109.0, 100], [109.8, 0], [123.7, 0], [124.5, 100]], 0);
+finish(M); // smoke, grain, vignette
 writeLn("Scene1 layers: " + M.numLayers);

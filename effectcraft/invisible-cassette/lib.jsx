@@ -18,7 +18,20 @@ function solid(c, rgb, name, w, h) { return c.layers.addSolid(rgb, name, w || c.
 function T(l) { return l.property("Transform"); }
 
 // keyframes: ks = [[t, v], ...]; ease = influence % on every key (0 = linear)
+// EffectCraft snaps keys to whole frames, so two keys inside one frame would merge (the later wins)
+// and a cut like [t - 0.001, 0], [t, 100] became a slow fade from the previous key. Snap here and push
+// a colliding key one frame later instead.
+function snapTimes(ks) {
+  var out = [], prev = -1e9;
+  for (var i = 0; i < ks.length; i++) {
+    var f = Math.round(ks[i][0] * FPS);
+    if (f <= prev) f = prev + 1;
+    prev = f; out.push([f / FPS, ks[i][1]]);
+  }
+  return out;
+}
 function keys(prop, ks, ease) {
+  ks = snapTimes(ks);
   for (var i = 0; i < ks.length; i++) prop.setValueAtTime(ks[i][0], ks[i][1]);
   if (ease) setEase(prop, ease, ease);
 }
@@ -33,6 +46,7 @@ function setEase(prop, inInf, outInf) {
 }
 // ease-out cubic (documents arrive with inertia): fast start, long settle into the last key
 function keysOut(prop, ks) {
+  ks = snapTimes(ks);
   for (var i = 0; i < ks.length; i++) prop.setValueAtTime(ks[i][0], ks[i][1]);
   setEase(prop, 80, 0.1);
 }

@@ -1,6 +1,6 @@
 {
  "title": "Invisible Cassette Review",
- "version": "Scene 1 pilot v2 \u00b7 EffectCraft",
+ "version": "Scene 1 v3 \u00b7 MagnatesMedia look \u00b7 trading terminal",
  "shots": [
   {
    "name": "Cold open \u00b7 black",
@@ -8,22 +8,22 @@
    "end": 4.0
   },
   {
-   "name": "Desk \u00b7 ticker",
+   "name": "Date \u00b7 Dow counter",
    "start": 4.0,
    "end": 17.42
   },
   {
-   "name": "Stakes \u00b7 36 min",
+   "name": "36 min \u00b7 $1 trillion",
    "start": 17.42,
    "end": 27.08
   },
   {
-   "name": "Price cards",
+   "name": "Quotes \u00b7 ACN, BID",
    "start": 27.08,
    "end": 41.18
   },
   {
-   "name": "Trading floor (drawn)",
+   "name": "Floor (drawn) \u2192 machines",
    "start": 41.18,
    "end": 56.14
   },
@@ -38,12 +38,12 @@
    "end": 79.52
   },
   {
-   "name": "Polaroid \u00b7 report",
+   "name": "Investigators \u00b7 report",
    "start": 79.52,
    "end": 92.08
   },
   {
-   "name": "Stamp",
+   "name": "Nobody",
    "start": 92.08,
    "end": 95.0
   },

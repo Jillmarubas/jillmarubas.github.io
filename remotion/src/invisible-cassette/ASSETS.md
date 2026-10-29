@@ -23,14 +23,20 @@ Licence: the user's own generations; confirm the generator's commercial terms be
 ## Images and textures
 | Asset | Source | Licence |
 |---|---|---|
-| `effectcraft/invisible-cassette/assets/desk_oak.png`, `manila.png` | Made in PhotoCraft 0.17.0 (noise, motion blur, clouds, gradient map) | Original |
-| Board wall, ticker tape, tickets, stamps, folders | Drawn in EffectCraft (shapes and text) | Original |
+| Terminal backdrop, quote rows, boards, newswire, counters, tags, feedback-loop diagram | Drawn in EffectCraft (shapes and text; prices and index levels are the documented figures) | Original |
+| Smoke, grain, vignette overlays | Generated in EffectCraft (Fractal Noise, CC Vignette) | Original |
 | Trading-floor photo (Scene 1, shot C) | **Pending** — needs a public-domain or CC photo from Wikimedia Commons (domain not yet allowed in the session). Until then: drawn, labelled "Illustration" on screen | — |
 
 ## Documents shown on screen
 | Asset | Source | Licence |
 |---|---|---|
-| Report title "Findings Regarding the Market Events of May 6, 2010" | Staffs of the CFTC and SEC, 30 Sept 2010 | US government work, public domain |
+| Report cover recreated as type: "Findings Regarding the Market Events of May 6, 2010", Report of the Staffs of the CFTC and SEC to the Joint Advisory Committee on Emerging Regulatory Issues, September 30, 2010 | Staffs of the CFTC and SEC | US government work, public domain |
 
 ## Fonts (bundled; SIL Open Font License 1.1 via @fontsource, plus system JetBrains Mono, OFL)
-Playfair Display, Courier Prime, Special Elite, IBM Plex Sans Condensed, JetBrains Mono.
+IBM Plex Sans Condensed, JetBrains Mono, Playfair Display (report cover). Courier Prime and Special Elite belonged to the retired Small Print look.
+
+## Figures shown on screen
+| Figure | Source |
+|---|---|
+| DJIA prior close 10,868.12; intraday low 9,869.62 (−998.50); close 10,520.32 (−347.80), 6 May 2010 | CFTC–SEC report (30 Sept 2010) and contemporaneous market data, checked 29 Oct 2026 |
+| Accenture (ACN) $0.01; Sotheby's (BID) $100,000; trades later cancelled | CFTC–SEC report; exchange trade-break notices |

@@ -1,21 +1,30 @@
 # The Invisible Cassette — EffectCraft build
 
-Built with EffectCraft 0.18.0 (compositing, 3D camera, effects) and PhotoCraft 0.17.0 (texture and cut-out prep), per the Small Print brief.
+Built with EffectCraft 0.18.0 (compositing, 3D camera, effects) and PhotoCraft 0.17.0 (photo cut-out prep).
+Look: MagnatesMedia-style documentary (CLAUDE.md), one palette from the subject: the trading terminal
+(black, amber phosphor text, ticker green for up, red for down). The earlier Small Print design is retired.
 
-- `lib.jsx`: the rig (35 mm camera with DOF, Z +350 / 0 / −250, tungsten key, drop shadows, grain, vignette, dust, stamps, typewriter and rise text).
-- `s1.jsx`: Scene 1 (cold open + title card). `breakdown-s1.html`: the shot-by-shot breakdown.
-- Assets (git-ignored, regenerate with PhotoCraft):
-  ```bash
-  PC=photocraft-cli
-  $PC run --new '{"width":3840,"height":2160,"background":"#808080"}' --cmd filter.noise.addNoise --params '{"amount":200,"distribution":"gaussian","monochromatic":true,"seed":3}' --cmd filter.blur.motionBlur --params '{"angle":1.5,"distance":420}' --cmd image.autoContrast --cmd filter.distort.wave --params '{"generators":3,"wavelengthMin":400,"wavelengthMax":900,"amplitudeMin":4,"amplitudeMax":14,"seed":2}' --cmd image.adjustments.gradientMap --params '{"stops":[[0,"#04060A"],[0.35,"#0A0D12"],[0.55,"#11131A"],[0.72,"#1B1714"],[0.88,"#2A1F17"],[1,"#3B2B1D"]],"dither":true}' --out assets/desk_oak.png
-  $PC run --new '{"width":2400,"height":1600,"background":"white"}' --cmd filter.render.clouds --params '{"seed":11}' --cmd image.adjustments.gradientMap --params '{"stops":[[0,"#D5C5A6"],[0.6,"#E0D3BA"],[1,"#EBE2D0"]],"dither":true}' --cmd filter.noise.addNoise --params '{"amount":9,"distribution":"gaussian","monochromatic":true,"seed":5}' --out assets/manila.png
-  ```
-- Fonts: convert `remotion/public/fonts/*.woff2` to TTF in `~/.fonts` (fontTools) and run `fc-cache -f`; JetBrains Mono (system) supplies ▼ ▲.
+- `lib.jsx`: generic helpers (comps, keys with frame snapping, effects, text, type-on, rise, 35 mm camera rig with DOF).
+- `mm.jsx`: the MagnatesMedia kit: `TERM` palette, `TF` fonts, rolling counters, slam-in, break-apart,
+  terminal backdrop (grid + symbol columns at Z +350), document recreation, and the global finish
+  (smoke, grain, vignette).
+- `s1.jsx`: Scene 1 (cold open + title card), ten shots. Depth layers: backdrop Z +350, subject Z 0,
+  out-of-focus ticker Z −300; every shot has a slow camera move.
+- Fonts: convert `remotion/public/fonts/*.woff2` to TTF in `~/.fonts` (fontTools) and run `fc-cache -f`;
+  JetBrains Mono (system) supplies ▼ ▲.
 - Build and render (absolute paths):
   ```bash
   effectcraft-cli script "$PWD/s1.jsx" --empty --save-as "$PWD/s1.ecproj"
-  effectcraft-cli render --project "$PWD/s1.ecproj" --comp Scene1 --out "$PWD/render/s1-half.mp4" --format h264 --resolution half --audio off --progress
+  effectcraft-cli s1.ecproj render --comp Scene1 --out "$PWD/render/s1-mm-half.mp4" --format h264 --resolution half --audio off --progress
   ```
 - Sound: `remotion/scripts/mix_ic.py remotion/src/invisible-cassette/cues_s1.json` (same film times).
+- Photos: the trading-floor shot is drawn and labelled "Illustration" until a public-domain or CC photo
+  can be downloaded (Wikimedia Commons is not reachable from this environment yet). Cut-outs then go
+  through PhotoCraft (`select.subject`, `select.refineEdge`, `edit.contentAwareFill`).
 
-Lessons: a text layer created empty renders nothing even with a Source Text expression (create it with its full string); shape groups draw first-on-top; EffectCraft holds the first opacity key backwards, so pin a 0 key at time 0 for anything that appears later.
+Lessons:
+- A text layer created empty renders nothing even with a Source Text expression; create it with its full string.
+- Shape groups draw first-on-top.
+- The first opacity key holds backwards, so pin a 0 key at time 0 for anything that appears later.
+- Keys snap to whole frames: two keys inside one frame merge and the later one wins, so `[t − 0.001, 0], [t, 100]`
+  became a slow fade from 0 s. `keys()` and `keysOut()` now snap and push a colliding key one frame on.
