@@ -12,20 +12,21 @@ function tape(o, up, speed, pos, rot) {
   shadow(l); return l;
 }
 
-// review notes (0:21, 1:18): the strip becomes a background: the same tape, enlarged to fill the frame,
-// pushed back behind the words and blurred, still scrolling (so it reads as background video)
+// review notes (0:21, 1:18, then 0:04–0:20 and the green strip): the strip is a background: the same tape,
+// enlarged, set back behind the words and lightly blurred so the symbols still read, still scrolling
+var TAPE_BG = [W / 2, H / 2 + 60, 140];
 function tapeBg(o, up, speed) {
-  var l = c3(o.c, tapeComp("Tape bg " + o.name, up, speed), [W / 2, H / 2, 380]);
-  T(l).property("Scale").setValue([430, 430, 100]); T(l).property("Z Rotation").setValue(-4);
-  fx(l, "Fast Box Blur", {"Blur Radius": 22});
-  T(l).property("Opacity").setValue(55);
+  var l = c3(o.c, tapeComp("Tape bg " + o.name, up, speed), TAPE_BG);
+  T(l).property("Scale").setValue([170, 170, 100]); T(l).property("Z Rotation").setValue(-4);
+  fx(l, "Fast Box Blur", {"Blur Radius": 2});
+  T(l).property("Opacity").setValue(60);
   return l;
 }
 
 // A · 00:05 directive: top-down camera pan over the surface; an archival ticker tape scrolls, faster and faster
 (function () {
   var o = Shot("S1A Ticker tape", S.open, S.stakes);
-  tape(o, false, "time * 260 + time * time * 22", [W / 2, H / 2 + 200, 0], -5);
+  tapeBg(o, false, "time * 260 + time * time * 22");
   word(o, "MAY 6, 2010", at("may"), {font: TF.mono, size: 96, y: 330, color: TERM.amber, mode: "type", cps: 14, track: 60, glow: true});
   word(o, "14:42 EDT", at("42"), {font: TF.monoReg, size: 54, y: 430, mode: "type", cps: 12, track: 120});
   cam(o, {x0: -220, x1: 160, y0: -30, y1: 20, d0: -0.6, d1: 0.7});
@@ -37,9 +38,9 @@ function tapeBg(o, up, speed) {
   var tE = at("evaporated");
   var tl = tapeBg(o, false, "(time + 13.4) * 260 + (time + 13.4) * (time + 13.4) * 22");
   // on "evaporated" the background tape still plunges away (directive 00:20): it drops and sinks into black
-  keys(T(tl).property("Position"), [[0, [W / 2, H / 2, 380]], [o.t(tE), [W / 2, H / 2, 380]], [o.t(tE) + 1.4, [W / 2 + 200, H + 900, 700]]], 0);
+  keys(T(tl).property("Position"), [[0, TAPE_BG], [o.t(tE), TAPE_BG], [o.t(tE) + 1.4, [W / 2 + 200, H + 900, 700]]], 0);
   setEase(T(tl).property("Position"), 0.1, 70);
-  keys(T(tl).property("Opacity"), [[0, 55], [o.t(tE) + 0.4, 55], [o.t(tE) + 1.4, 0]], 0);
+  keys(T(tl).property("Opacity"), [[0, 60], [o.t(tE) + 0.4, 60], [o.t(tE) + 1.4, 0]], 0);
   word(o, "36 MINUTES", at("36"), {size: 190, y: 300});
   var tr = word(o, "≈ $1 TRILLION", at("$1"), {font: TF.mono, size: 120, y: 470, color: TERM.red, glow: true, until: tE + 1.2});
   label(o, "MARKET VALUE", at("market value"), {y: 550, size: 34, color: TERM.white, until: tE + 1.0});
