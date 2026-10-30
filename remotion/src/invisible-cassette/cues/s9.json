@@ -29,12 +29,6 @@
    "fade_out": 0.05
   },
   {
-   "f": "public/sfx/whoosh7.mp3",
-   "at": 0,
-   "bus": "sfx",
-   "gain": -8
-  },
-  {
    "f": "out/invisible-cassette/audio/sfx/A8a.mp3",
    "at": 42.4,
    "bus": "amb",

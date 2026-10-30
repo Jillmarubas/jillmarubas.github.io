@@ -12,6 +12,16 @@ function tape(o, up, speed, pos, rot) {
   shadow(l); return l;
 }
 
+// review notes (0:21, 1:18): the strip becomes a background: the same tape, enlarged to fill the frame,
+// pushed back behind the words and blurred, still scrolling (so it reads as background video)
+function tapeBg(o, up, speed) {
+  var l = c3(o.c, tapeComp("Tape bg " + o.name, up, speed), [W / 2, H / 2, 380]);
+  T(l).property("Scale").setValue([430, 430, 100]); T(l).property("Z Rotation").setValue(-4);
+  fx(l, "Fast Box Blur", {"Blur Radius": 22});
+  T(l).property("Opacity").setValue(55);
+  return l;
+}
+
 // A · 00:05 directive: top-down camera pan over the surface; an archival ticker tape scrolls, faster and faster
 (function () {
   var o = Shot("S1A Ticker tape", S.open, S.stakes);
@@ -25,12 +35,11 @@ function tape(o, up, speed, pos, rot) {
 (function () {
   var o = Shot("S1B Plunge", S.stakes, S.quotes);
   var tE = at("evaporated");
-  var tl = tape(o, false, "(time + 13.4) * 260 + (time + 13.4) * (time + 13.4) * 22", [W / 2, H / 2 + 200, 0], -5);
-  keys(T(tl).property("Position"), [[0, [W / 2, H / 2 + 200, 0]], [o.t(tE), [W / 2, H / 2 + 200, 0]], [o.t(tE) + 1.2, [W / 2 + 160, H + 700, 160]]], 0);
+  var tl = tapeBg(o, false, "(time + 13.4) * 260 + (time + 13.4) * (time + 13.4) * 22");
+  // on "evaporated" the background tape still plunges away (directive 00:20): it drops and sinks into black
+  keys(T(tl).property("Position"), [[0, [W / 2, H / 2, 380]], [o.t(tE), [W / 2, H / 2, 380]], [o.t(tE) + 1.4, [W / 2 + 200, H + 900, 700]]], 0);
   setEase(T(tl).property("Position"), 0.1, 70);
-  keys(T(tl).property("Z Rotation"), [[o.t(tE), -5], [o.t(tE) + 1.2, 18]], 0);
-  var shade = solid(o.c, [0, 0, 0], "edge shadow", 1920, 520); T(shade).property("Position").setValue([W / 2, H + 120]);
-  T(shade).property("Opacity").setValue(85);
+  keys(T(tl).property("Opacity"), [[0, 55], [o.t(tE) + 0.4, 55], [o.t(tE) + 1.4, 0]], 0);
   word(o, "36 MINUTES", at("36"), {size: 190, y: 300});
   var tr = word(o, "≈ $1 TRILLION", at("$1"), {font: TF.mono, size: 120, y: 470, color: TERM.red, glow: true, until: tE + 1.2});
   label(o, "MARKET VALUE", at("market value"), {y: 550, size: 34, color: TERM.white, until: tE + 1.0});
@@ -110,7 +119,7 @@ var tBrokers = at("brokers");
 // F · thirty-six minutes later: recovered (the release beat, brighter, green)
 (function () {
   var o = Shot("S1F Recovered", S.back, S.report);
-  tape(o, true, "time * 120", [W / 2, H / 2 + 220, 0], 4);
+  tapeBg(o, true, "time * 120");
   word(o, "+36 MINUTES", at("36", S.back), {font: TF.mono, size: 80, y: 300, color: TERM.white});
   word(o, "RECOVERED", at("recovered"), {size: 190, y: 480, color: TERM.green, glow: true});
   cam(o, {x0: 100, x1: -100, d0: 0.6, d1: -0.6});
@@ -174,17 +183,14 @@ var tSEC = at("sec", 80) - 0.15; // after 80 s: "second" earlier in the scene al
   cam(o, {x0: -50, x1: 50, d0: 0.6, d1: -0.9, aperture: PHOTO_APERTURE});
 })();
 
-// J · 02:30 directive: title stamped across aged paper (T2 chime, M3)
+// J · review note (2:03): the title as typography only, fading in slowly and out slowly (no stamp, no paper)
 (function () {
   var o = Shot("S1J Title", S.title, END);
-  var pc = docComp("Title paper", 1500, 900, []);
-  var age = solid(pc, [0.55, 0.42, 0.25], "age"); fx(age, "Fractal Noise", {"Contrast": 90, "Transform/Scale": 260}); age.blendingMode = BlendingMode.MULTIPLY; T(age).property("Opacity").setValue(35);
-  var vg = solid(pc, [0, 0, 0], "edge burn"); vg.adjustmentLayer = true; fx(vg, "CC Vignette", {"Amount": 60});
-  var card = c3(o.c, pc, [W / 2, H / 2, 0]); shadow(card); T(card).property("Z Rotation").setValue(-1.5);
-  var st = c3(o.c, stampComp2("Stamp title", ["THE GHOST IN THE SYSTEM", "INVESTIGATION"], 92, 1300, 330), [W / 2, H / 2 - 10, -2]);
-  st.blendingMode = BlendingMode.MULTIPLY; T(st).property("Z Rotation").setValue(-4);
-  slam(st, 1.1); EVENTS.push(["stamp", S.title + 1.1]);
-  cam(o, {d0: 0.6, d1: -0.6});
+  var t1 = word(o, "THE GHOST IN THE SYSTEM", S.title + 0.8, {size: 120, y: H / 2 - 20, color: TERM.white, mode: "on", track: 40});
+  var t2 = word(o, "AN INVESTIGATION", S.title + 2.6, {font: TF.mono, size: 44, y: H / 2 + 90, color: TERM.amber, mode: "on", track: 400});
+  keys(T(t1).property("Opacity"), [[0, 0], [0.8, 0], [4.3, 100], [o.d - 4.0, 100], [o.d - 1.2, 0]], 40);
+  keys(T(t2).property("Opacity"), [[0, 0], [2.6, 0], [5.8, 100], [o.d - 4.0, 100], [o.d - 1.2, 0]], 40);
+  cam(o, {push: 1.04, d0: -0.5, d1: 0.5});
 })();
 
 assemble("Scene1", END, [[0, 100], [4.0, 100], [4.6, 0], [S.stakes, 0], [S.back, 0], [S.report - 0.1, 0], [S.report, 8], [108.3, 25], [108.6, 100], [109.0, 100], [109.8, 0], [123.7, 0], [124.5, 100]],

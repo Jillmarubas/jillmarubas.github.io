@@ -79,6 +79,15 @@ def add_events(scene, cues, silence, bassout, slide_sfx=None):
 def write(name, dur, cues, rumble=(), silence=(), bassout=(), shepard=(), base_to=None):
     os.makedirs(OUT, exist_ok=True)
     # the constant bed: no fades at scene joins, so it runs unbroken through the assembled film
+    # review notes (30 Oct): no whooshes anywhere in the film (whoosh7, the T5 glide, the T6 dolly, the K2 tape whip);
+    # long scrape-like effects are trimmed to their action and softened (the highlighter sounded like a chainsaw)
+    cues = [x for x in cues if os.path.basename(x["f"]) != "whoosh7.mp3" and os.path.basename(x["f"])[:2] not in ("T5", "T6", "K2")]
+    for x in cues:
+        fam = os.path.basename(x["f"])[:2]
+        if fam == "F6": x.update(trim=[0, 0.55], fade_out=0.15, lowpass=2800, gain=min(x.get("gain", 0), -14))
+        if fam == "F8": x.update(trim=[0, 2.2], fade_out=0.5, lowpass=3500, gain=min(x.get("gain", 0), -16))
+        if fam == "K5": x.update(lowpass=4000)
+        if fam in ("A3", "E1"): x.update(lowpass=3000)
     dedupe = lambda xs, k: [x for i, x in enumerate(xs) if all(abs(x[k] - y[k]) > 0.15 for y in xs[:i])]
     silence, bassout = dedupe(list(silence), 1), dedupe(list(bassout), 0)
     rumble = [[0, round(base_to if base_to is not None else dur, 2), BASE_RUMBLE, 0.05]] + [list(r) for r in rumble]
@@ -116,7 +125,7 @@ def scene2():
         c(SX + "K7a.mp3", vo(26.9) + 0.1, gain=-8),
         c("public/cc1003/sfx/typing-laptop.wav", at(S, "volume") - 0.05, trim=[0, 0.7], gain=-13, fade_out=0.1),
         c("public/cc1003/sfx/typing-laptop.wav", at(S, "price") - 0.05, trim=[1, 1.6], gain=-13, fade_out=0.1),
-        c(SX + "A3a.mp3", vo(41.28), "amb", gain=-2, loop_to=vo(84.9), fade_in=1.0, fade_out=1.5),
+        c(SX + "A3a.mp3", vo(41.28), "amb", gain=-6, loop_to=vo(68.44), fade_in=1.0, fade_out=1.5),
         c(SX + "K5a.mp3", vo(41.28) + 1.5, gain=-15, loop_to=vo(68.44), fade_in=1.0, fade_out=1.0),
         c(SX + "T3a.mp3", at(S, "catastrophic"), gain=-6),
         c(SX + "F1a.mp3", tP, gain=-3),

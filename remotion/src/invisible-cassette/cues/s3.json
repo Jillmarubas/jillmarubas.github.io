@@ -18,16 +18,16 @@
    "fade_out": 3
   },
   {
-   "f": "public/sfx/whoosh7.mp3",
-   "at": 0,
-   "bus": "sfx",
-   "gain": -8
-  },
-  {
    "f": "out/invisible-cassette/audio/sfx/F8a.mp3",
    "at": 0.6,
    "bus": "sfx",
-   "gain": -9
+   "gain": -16,
+   "trim": [
+    0,
+    2.2
+   ],
+   "fade_out": 0.5,
+   "lowpass": 3500
   },
   {
    "f": "out/invisible-cassette/audio/sfx/E4a.mp3",
@@ -56,7 +56,8 @@
    "gain": -8,
    "loop_to": 61.78,
    "fade_in": 0.8,
-   "fade_out": 0.8
+   "fade_out": 0.8,
+   "lowpass": 3000
   },
   {
    "f": "out/invisible-cassette/audio/sfx/E3a.mp3",

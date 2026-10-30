@@ -49,12 +49,6 @@
    "fade_out": 0.6
   },
   {
-   "f": "out/invisible-cassette/audio/sfx/K2a.mp3",
-   "at": 23.3,
-   "bus": "sfx",
-   "gain": -6
-  },
-  {
    "f": "out/invisible-cassette/audio/sfx/A2a.mp3",
    "at": 41.18,
    "bus": "amb",
@@ -63,12 +57,6 @@
    "loop_to": 52.9,
    "fade_in": 0.4,
    "fade_out": 1.2
-  },
-  {
-   "f": "out/invisible-cassette/audio/sfx/T5a.mp3",
-   "at": 52.3,
-   "bus": "sfx",
-   "gain": -6
   },
   {
    "f": "public/sfx/typewriter.mp3",
@@ -173,7 +161,8 @@
     0,
     4.4
    ],
-   "fade_out": 0.08
+   "fade_out": 0.08,
+   "lowpass": 4000
   },
   {
    "f": "out/invisible-cassette/audio/music/M3.mp3",
@@ -242,12 +231,6 @@
   {
    "f": "out/invisible-cassette/audio/sfx/F1a.mp3",
    "at": 96.46,
-   "bus": "sfx",
-   "gain": -1
-  },
-  {
-   "f": "out/invisible-cassette/audio/sfx/F1a.mp3",
-   "at": 110.1,
    "bus": "sfx",
    "gain": -1
   }

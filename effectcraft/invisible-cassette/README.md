@@ -41,3 +41,10 @@ JetBrains Mono (system) supplies ▼ ▲.
   and push a colliding key one frame on.
 - A 3D layer scaled to exactly 0 under a camera crashes the renderer; use 0.5 %.
 - CC Sphere: set Offset to the layer's centre explicitly (it defaults to the comp centre in layer pixels).
+- 3D objects: the Advanced 3D renderer on a whole shot comp blurs text and tilted precomps through the camera's depth
+  of field and turns strokes into filled shapes. So each `Shot` draws its objects into its own "3D objects" comp
+  (Advanced 3D, depth of field off, lit by `lightObjects`), and the shot comp stays Classic 3D for text and photos.
+  Create shapes there directly with `newShape`: layers copied with `copyToComp` have no Geometry Options.
+- Full-frame background solids hide the "3D objects" layer; `raiseObjects` moves it above them. Props that must sit
+  between other layers (Scene 10's folder) stay flat in the shot comp.
+- A 3D photo behind a tilted, focused plane is softened by the depth of field: keep it within ~400 px of the plane.

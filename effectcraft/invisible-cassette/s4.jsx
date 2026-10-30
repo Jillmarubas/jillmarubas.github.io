@@ -66,12 +66,15 @@ var tAuto = at("automate");
     var d = dot(o.c, x, y, 6 + (i % 3) * 2, col, "device " + i, (i % 4) * 60 - 90);
     showAt(o, d, o.a + 0.1 + (t1 - o.a - 0.1) * rnd(i, 3));
   }
-  label(o, "ROOFTOP SOLAR", at("rooftop"), {x: 420, y: 230, size: 30, color: TERM.amber});
-  label(o, "EV CHARGERS", at("electric vehicle"), {x: 960, y: 230, size: 30, color: TERM.green});
-  label(o, "WIND TURBINES", at("wind turbines"), {x: 1500, y: 230, size: 30, color: TERM.white});
-  word(o, "MILLIONS", t0, {font: TF.mono, size: 120, y: H / 2 + 40, color: TERM.white, z: -80, until: t1 - 0.1});
+  // review note (8:33): an image per word, the device dots stay (rooftop solar and EV chargers AI-generated with
+  // Higgsfield; wind turbines NREL, public domain); the cards clear before "too dynamic"
+  photoCard(o, "hf/rooftop_solar.jpg", 420, 470, at("rooftop") - 0.2, "ROOFTOP SOLAR", {z: -60, until: t1 - 0.1});
+  photoCard(o, "hf/ev_chargers.jpg", 960, 470, at("electric vehicle") - 0.2, "EV CHARGERS", {z: -60, until: t1 - 0.1});
+  photoCard(o, "stock/wind_nrel.jpg", 1500, 470, at("wind turbines") - 0.2, "WIND TURBINES", {z: -60, until: t1 - 0.1});
+  flag(o, "Rooftop solar, EV chargers: AI-generated (Higgsfield) · Wind: NREL, public domain", {until: t1 - 0.1});
+  word(o, "MILLIONS", t0, {font: TF.mono, size: 120, y: H / 2 + 40, color: TERM.white, z: -80, until: at("rooftop") - 0.3});
   word(o, "TOO DYNAMIC", t1, {size: 130, y: H / 2 + 40, color: TERM.red, z: -80, glow: true});
-  flag(o, "Illustration");
+  flag(o, "Illustration", {at: t1});
   cam(o, {push: 1.08, d0: -0.4, d1: 0.5});
 })();
 

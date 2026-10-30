@@ -13,14 +13,16 @@ cues.json: {"duration": s, "cues": [
 Rules (video-research + SOP): sources are loudness-matched first; music is ducked under the voice
 with sidechain compression; every hit peaks well above the bed; master -14 LUFS / -1 dBTP, 48 kHz.
 """
-import json, subprocess, sys, tempfile, os
+import atexit, json, re, shutil, subprocess, sys, tempfile, os
 
 SR = 48000
 TARGET = {"vo": -18.0, "music": -27.0, "amb": -34.0}  # integrated LUFS per bus before gain
+SFX_MOMENTARY = -16.0  # momentary-max LUFS of a sound effect at gain 0 (gains in the cue lists are relative to this)
 cfg = json.load(open(sys.argv[1]))
 out = sys.argv[2]
 dur = cfg["duration"]
-tmp = tempfile.mkdtemp()
+tmp = tempfile.mkdtemp(prefix="mix_ic_")
+atexit.register(shutil.rmtree, tmp, True)  # its stems run to gigabytes over a film: never leave them behind
 
 
 def run(args):
@@ -52,8 +54,13 @@ def prep(i, c):
     bus = c["bus"]
     if bus in TARGET:
         norm = f"loudnorm=I={TARGET[bus] + c.get('gain', 0)}:TP=-2:LRA=20"
-    else:  # sfx: peak-normalise to -3 dBFS + gain, so hits stay punchy
-        norm = f"dynaudnorm=f=500:p=0.71:m=1,volume={c.get('gain', 0)}dB"
+    else:
+        # sfx (review notes, 30 Oct): measured by loudness, not peak. The cue's momentary-max loudness (EBU R128,
+        # 400 ms window) is set to SFX_MOMENTARY + gain, so every hit sits a known distance under the voice
+        # (which is -18 LUFS integrated) whatever its source level; a limiter catches stray peaks.
+        m = subprocess.run(["ffmpeg", "-i", pre, "-af", "ebur128=peak=true", "-f", "null", "-"], capture_output=True, text=True).stderr
+        mmax = max([float(x) for x in re.findall(r" M:\s*(-?[\d.]+)", m)] or [-30.0])
+        norm = f"volume={SFX_MOMENTARY + c.get('gain', 0) - mmax:.2f}dB,alimiter=limit=0.5:level=false"
     run(["ffmpeg", "-y", "-i", pre, "-af", f"{norm},aresample={SR},adelay={int(c['at'] * 1000)}|{int(c['at'] * 1000)},apad=whole_dur={dur}", "-t", str(dur), lvl])
     return bus, lvl
 
@@ -73,7 +80,7 @@ for k, r in enumerate(cfg.get("rumble", [])):
     buses["amb"].append(f)
 
 # X2 Shepard tone: eight octave-spaced partials whose pitch rises forever (Gaussian loudness over the
-# octave position hides each wrap), with a soft 1 Hz clock tick; it ends dead (no fade-out) at `to`
+# octave position hides each wrap), low-passed at ~1.5 kHz, with a low 1 Hz clock tock; it ends dead at `to`
 def shepard_wav(path, d, db):
     import numpy as np, wave
     n = int(d * SR); t = np.arange(n) / SR
@@ -82,10 +89,11 @@ def shepard_wav(path, d, db):
         pos = np.mod(i + t / 10.0, 8.0)                 # octave position, rises one octave per 10 s
         f = 30.0 * 2.0 ** pos
         ph = 2 * np.pi * np.cumsum(f) / SR               # continuous phase: no clicks at the wrap
-        y += np.exp(-((pos - 4) ** 2) / 2.2) * np.sin(ph)
+        lp = 1.0 / (1.0 + (f / 1400.0) ** 4)            # no partial above ~1.5 kHz: the review heard a high whine
+        y += np.exp(-((pos - 3.5) ** 2) / 2.2) * lp * np.sin(ph)
     y *= 0.12
     tm = np.mod(t, 1.0)
-    y += 0.5 * np.exp(-tm * 70) * np.sin(2 * np.pi * 1800 * t)
+    y += 0.22 * np.exp(-tm * 90) * np.sin(2 * np.pi * 620 * t)   # a low wooden tock, not a 1.8 kHz beep
     y *= np.minimum(1, t / 4.0) * 10 ** (db / 20)        # 4 s fade-in, hard stop at the end
     y = np.clip(y, -1, 1)
     pcm = (np.repeat(y[:, None], 2, axis=1) * 32767).astype("<i2")

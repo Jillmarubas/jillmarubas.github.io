@@ -12,6 +12,21 @@ function vo(t) { return t + LEAD; }
 function tryFx2(l, name, v) { try { return fx(l, name, v); } catch (e) { writeLn("skipped " + name + ": " + e); return null; } }
 function glow(l) { return tryFx2(l, "Glow", {"Glow Threshold": 40, "Glow Radius": 22, "Glow Intensity": 0.6}); }
 
+// shot comp name -> its 3D objects comp; newShape() draws objects there (extruded and lit), else in c itself
+var OC = {};
+var OBJ_DEPTH = [[/^map /, 30], [/line|thread|route|string|lead|fibre|street|interconnector|oscillation|path|city|connections|wave|ring|signal|table|arm|split/, 6],
+  [/node|bus|order|pin|status|neuron|decision|device|substation|current|dot|particle|leds|generator|window/, 12], [/panel/, 8]];
+function _objDepth(name) { for (var i = 0; i < OBJ_DEPTH.length; i++) if (OBJ_DEPTH[i][0].test(name)) return OBJ_DEPTH[i][1]; return 30; }
+function newShape(c, name) {
+  var t = OC[c.name] || c, l = t.layers.addShape(); l.name = name || "shape";
+  if (OC[c.name]) {
+    l.threeDLayer = true;
+    try { l.property("Geometry Options").property("Extrusion Depth").setValue(_objDepth(l.name.toLowerCase())); } catch (e) {}
+    try { var mo = l.property("Material Options"); mo.property("Specular Intensity").setValue(40); mo.property("Specular Shininess").setValue(30); } catch (e) {}
+  }
+  return l;
+}
+
 // one shot = one precomp from scene time a to b, with the terminal backdrop unless opt.bg === false
 function Shot(name, a, b, opt) {
   opt = opt || {};
@@ -19,11 +34,21 @@ function Shot(name, a, b, opt) {
   var o = {c: c, a: a, b: b, d: b - a, name: name};
   o.t = function (x) { return Math.max(0, x - a); };
   if (opt.bg !== false) termBackdrop(c, !!opt.red);
+  // the shot's drawn objects live in their own Advanced 3D comp (extruded, lit); it shares the shot's camera
+  // move (cam() rigs both) and sits as a flat layer above the backdrop, so text and photos keep Classic 3D
+  var oc = comp(name + " · 3D objects", b - a); oc.motionBlur = true; oc.renderer = "ADBE Advanced 3d";
+  var ol = c.layers.add(oc); ol.name = "3D objects"; OC[name] = oc; o.oc = oc;
   SHOTS.push(o);
   return o;
 }
 // camera last: a slow push (MagnatesMedia never sits still); opt as rig()
-function cam(o, opt) { return rig(o.c, o.d, opt || {}); }
+function cam(o, opt) {
+  opt = opt || {}; var o2 = {}; for (var k in opt) o2[k] = opt[k];
+  var c1 = rig(o.c, o.d, opt);
+  if (o.oc) { var c2 = rig(o.oc, o.d, o2); try { c2.property("Camera Options").property("Depth of Field").setValue(0); } catch (e) {}
+    if (c1.property("Position").expression) c2.property("Position").expression = c1.property("Position").expression; }
+  return c1;
+}
 
 // visibility window in LOCAL time: cut or fade in at a, fade out by b
 function vis(l, a, b, fi, fo, d) {
@@ -101,7 +126,7 @@ function flag(o, s, opt) { opt = opt || {}; return label(o, s, opt.at === undefi
 
 // a terminal panel (outline + fill)
 function box(o, w, h, x, y, z, stroke) {
-  var l = o.c.layers.addShape(); l.name = "panel";
+  var l = newShape(o.c, "panel");
   var g = l.property("Contents").addProperty("ADBE Vector Group");
   g.property("Contents").addProperty("ADBE Vector Shape - Rect").property("Size").setValue([w, h]);
   var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); st.property("Color").setValue(stroke || TERM.amberDim); st.property("Stroke Width").setValue(2);
@@ -134,7 +159,7 @@ function bars(o, items, when, opt) {
 
 // lines and nodes drawn in comp coordinates (shape contents live in layer space, so the layer sits at 0,0)
 function pathShape(c, pts, color, width, name, closed) {
-  var l = c.layers.addShape(); l.name = name || "line";
+  var l = newShape(c, name || "line");
   var g = l.property("Contents").addProperty("ADBE Vector Group");
   var p = g.property("Contents").addProperty("ADBE Vector Shape - Group");
   var sh = new Shape(); sh.vertices = pts; sh.closed = !!closed; p.property("Path").setValue(sh);
@@ -152,7 +177,7 @@ function drawOn(o, p, when, dur) {
   } catch (e) { writeLn("trim skipped: " + e); vis(p.l, o.t(when), o.d, 0.4, 0.3, o.d); }
 }
 function dot(c, x, y, r, color, name, z) {
-  var l = c.layers.addShape(); l.name = name || "node";
+  var l = newShape(c, name || "node");
   var g = l.property("Contents").addProperty("ADBE Vector Group");
   g.property("Contents").addProperty("ADBE Vector Shape - Ellipse").property("Size").setValue([r * 2, r * 2]);
   g.property("Contents").addProperty("ADBE Vector Graphic - Fill").property("Color").setValue(color);
@@ -244,6 +269,39 @@ function fgTicker(c, y, red) {
   return t;
 }
 
+// the objects layer goes just above the shot's own background (void, board, desk, ground…), so a full-frame
+// background added after the shot opened never hides the objects; text and photos stay above as before
+var BG_NAMES = /^(void|black|room|board|cork grain|desk|desk grain|ground|soil grain|night|floor|end wall)$/;
+function raiseObjects(c) {
+  var ol = null, top = null;
+  for (var i = 1; i <= c.numLayers; i++) { var l = c.layer(i); if (l.name === "3D objects") ol = l; else if (BG_NAMES.test(l.name) && !top) top = l; }
+  if (ol && top && top.index < ol.index) ol.moveBefore(top);
+}
+// ---- 3D objects (review note, 30 Oct: "instead of 2D illustration, 3D objects"; typography unchanged) ----
+// Lights for a shot's objects comp, and a slight turn on objects built around their own origin so the
+// extrusion reads (drawings laid out in comp pixels, like lines and maps, keep their place and get the light).
+function lightObjects(c) {
+  var n = c.numLayers, k = 0;
+  for (var i = 1; i <= n; i++) {
+    var l = c.layer(i); if (l.matchName !== "ADBE Vector Layer") continue; k++;
+    var P = T(l).property("Position"), local = !P.expression && (Math.abs(P.value[0]) > 1 || Math.abs(P.value[1]) > 1);
+    var flat = /^map |line|thread|route|string|fibre|street|path|wave|panel|ring|signal|oscillation|split/.test(l.name.toLowerCase());
+    if (local && !flat) {
+      var X = T(l).property("X Rotation"), Y = T(l).property("Y Rotation");
+      if (!X.numKeys && !X.expression) X.setValue(-24);
+      if (!Y.numKeys && !Y.expression) Y.expression = "value + 20 * Math.sin(time * 0.4 + " + (k * 0.9).toFixed(1) + ")";
+    }
+  }
+  if (!k) return;
+  var key = c.layers.addLight("Key light", [W / 2, H / 2]); key.lightType = LightType.POINT;
+  T(key).property("Position").setValue([W / 2 - 700, H / 2 - 650, -1300]);
+  key.property("Light Options").property("Intensity").setValue(100); key.property("Light Options").property("Color").setValue([1, 0.92, 0.8]);
+  var fill = c.layers.addLight("Fill light", [W / 2, H / 2]); fill.lightType = LightType.POINT;
+  T(fill).property("Position").setValue([W / 2 + 900, H / 2 + 200, -900]);
+  fill.property("Light Options").property("Intensity").setValue(35); fill.property("Light Options").property("Color").setValue([0.75, 0.82, 1]);
+  var amb = c.layers.addLight("Ambient", [W / 2, H / 2]); amb.lightType = LightType.AMBIENT; amb.property("Light Options").property("Intensity").setValue(45);
+}
+
 // assemble a scene: shots in order, exposure (tension) curve, global finish
 // story-turn colour-temperature flip: on each turn the grade jumps cold ("cold") or back to the warm
 // amber ("warm") on the exact frame of the word, held until the next turn (Tint on an adjustment layer)
@@ -259,6 +317,7 @@ function turnTint(M, turns) {
 function assemble(name, dur, expo, turns) {
   var M = comp(name, dur); M.motionBlur = true;
   solid(M, [0, 0, 0], "black");
+  for (var i = 0; i < SHOTS.length; i++) if (SHOTS[i].oc) { lightObjects(SHOTS[i].oc); raiseObjects(SHOTS[i].c); }
   for (var i = 0; i < SHOTS.length; i++) { var s = SHOTS[i], l = M.layers.add(s.c); l.startTime = s.a; l.inPoint = s.a; l.outPoint = s.b; }
   var ex = solid(M, [0, 0, 0], "Exposure (tension curve)");
   keys(T(ex).property("Opacity"), expo || [[0, 100], [0.6, 0], [dur - 0.8, 0], [dur, 100]], 0);
@@ -269,7 +328,7 @@ function assemble(name, dur, expo, turns) {
 }
 
 // ---- drawn diagrams: shapes built around the layer origin, the layer sits at pos ----
-function shapeAt(c, name, pos) { var l = c.layers.addShape(); l.name = name; l.threeDLayer = true; T(l).property("Position").setValue([pos[0], pos[1], pos[2] || 0]); return l; }
+function shapeAt(c, name, pos) { var l = newShape(c, name); l.threeDLayer = true; T(l).property("Position").setValue([pos[0], pos[1], pos[2] || 0]); return l; }
 function _grp(l) { return l.property("Contents").addProperty("ADBE Vector Group"); }
 function _paint(g, color, width, fill) {
   if (width) { var st = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); st.property("Color").setValue(color); st.property("Stroke Width").setValue(width); }
@@ -375,7 +434,7 @@ function mapDraw(o, key, opt) {
   for (var name in m.regions) {
     if (opt.only && opt.only.indexOf(name) < 0) continue;
     var dim = opt.dim && opt.dim.indexOf(name) >= 0;
-    var l = o.c.layers.addShape(); l.name = "map " + name;
+    var l = newShape(o.c, "map " + name);
     var g = l.property("Contents").addProperty("ADBE Vector Group");
     var polys = m.regions[name];
     for (var i = 0; i < polys.length; i++) {
@@ -512,9 +571,10 @@ function photoCard(o, file, x, y, when, labelText, opt) {
   fx(p, "Tint", {"Map Black To": [0, 0, 0], "Map White To": [1, 0.86, 0.66], "Amount to Tint": opt.tint === undefined ? 35 : opt.tint});
   var sl = cc.layers.add(img("overlays/scanlines.png")); sl.blendingMode = BlendingMode.MULTIPLY; T(sl).property("Opacity").setValue(35); T(sl).property("Position").setValue([300, 200]);
   var hb = cc.layers.add(img("overlays/hud_brackets.png")); fx(hb, "Tint", {"Map Black To": TERM.amber, "Map White To": TERM.amber, "Amount to Tint": 100});
-  var k = opt.scale || 86, l = c3(o.c, cc, [x, y, 0]); T(l).property("Scale").setValue([k, k, 100]); shadow(l);
-  slideIn(o, l, when, [x, y, 0], [0, 260]);
-  if (labelText) label(o, labelText, when + 0.3, {x: x, y: y + 200 * k / 100 + 45, size: 26, color: TERM.amber});
+  var k = opt.scale || 86, l = c3(o.c, cc, [x, y, opt.z || 0]); T(l).property("Scale").setValue([k, k, 100]); shadow(l);
+  if (opt.until === undefined) slideIn(o, l, when, [x, y, opt.z || 0], [0, 260]);
+  else { var a = o.t(when); keysOut(T(l).property("Position"), [[a, [x, y + 260, opt.z || 0]], [a + 0.8, [x, y, opt.z || 0]]]); vis(l, a, o.t(opt.until), 0, 0.5, o.d); EVENTS.push(["slide", when]); }
+  if (labelText) label(o, labelText, when + 0.3, {x: x, y: y + 200 * k / 100 + 45, size: 26, color: TERM.amber, until: opt.until});
   return l;
 }
 // events the mix reads (paper slides get friction, stamps a thump): printed at build time

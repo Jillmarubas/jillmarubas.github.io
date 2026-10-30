@@ -14,12 +14,6 @@
    "gain": 4
   },
   {
-   "f": "public/sfx/whoosh7.mp3",
-   "at": 0,
-   "bus": "sfx",
-   "gain": -9
-  },
-  {
    "f": "out/invisible-cassette/audio/sfx/T2a.mp3",
    "at": 3.3,
    "bus": "sfx",

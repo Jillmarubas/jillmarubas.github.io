@@ -9,21 +9,25 @@
 var END = 75, T_DOSSIER = 5, T_LAMP = 25, T_QUOTE = 30, T_CREDITS = 45, T_ENDSCREEN = 60;
 var FOLDER = [0.80, 0.74, 0.62], FOLDER_FRONT = [0.85, 0.79, 0.67];
 
+// desk props stay flat on the desk (the dossier must slide between the folder's back and front, and the lamp
+// pool needs its soft blur): drawn in the shot comp itself, not in the 3D objects layer
+function flatShape(c, name, pos) { var l = c.layers.addShape(); l.name = name; l.threeDLayer = true; T(l).property("Position").setValue([pos[0], pos[1], pos[2] || 0]); return l; }
+
 // A · the desk from above: folder, dossier, lamp pool
 (function () {
   var o = Shot("S10A Desk", 0, T_QUOTE, {bg: false});
   solid(o.c, [0.045, 0.04, 0.035], "desk");
   var gr = solid(o.c, [0.5, 0.5, 0.5], "desk grain"); fx(gr, "Fractal Noise", {"Contrast": 130, "Transform/Scale": 5, "Transform/Scale Width": 900}); gr.blendingMode = BlendingMode.MULTIPLY; T(gr).property("Opacity").setValue(40);
   // folder back panel
-  var back = shapeAt(o.c, "folder back", [W / 2, H / 2 + 20, 0]); addRect(back, [1000, 700], [0, 0], null, 0, FOLDER); addRect(back, [340, 60], [-300, -370], null, 0, FOLDER); shadow(back);
+  var back = flatShape(o.c, "folder back", [W / 2, H / 2 + 20, 0]); addRect(back, [1000, 700], [0, 0], null, 0, FOLDER); addRect(back, [340, 60], [-300, -370], null, 0, FOLDER); shadow(back);
   // the dossier slides in from the right, under the front flap (F5)
   var dc = docComp("Risk assessment dossier", 900, 640, [["AUTONOMOUS SYSTEMS // RISK ASSESSMENT", TF.mono, 34, TERM.ink, 60, 110, 20], ["CONFIDENTIAL WORKING FILE", TF.monoReg, 22, TERM.grey, 60, 160, 80]]);
   var d = c3(o.c, dc, [W / 2 + 20, H / 2 - 40, -2]); shadow(d);
   slideIn(o, d, T_DOSSIER, [W / 2 + 20, H / 2 - 40, -2], [1300, 30], -1.5);
   // folder front flap covers the lower part
-  var front = shapeAt(o.c, "folder front", [W / 2, H / 2 + 150, -4]); addRect(front, [1000, 440], [0, 0], [0.62, 0.56, 0.45], 2, FOLDER_FRONT); shadow(front);
+  var front = flatShape(o.c, "folder front", [W / 2, H / 2 + 150, -4]); addRect(front, [1000, 440], [0, 0], [0.62, 0.56, 0.45], 2, FOLDER_FRONT); shadow(front);
   // the lamp's warm pool of light; it clicks off at T_LAMP (one dark change, not a flash)
-  var lamp = shapeAt(o.c, "lamp light", [W / 2 - 260, H / 2 - 180, -6]); addEllipse(lamp, 1500, [0, 0], null, 0, [1, 0.78, 0.45]);
+  var lamp = flatShape(o.c, "lamp light", [W / 2 - 260, H / 2 - 180, -6]); addEllipse(lamp, 1500, [0, 0], null, 0, [1, 0.78, 0.45]);
   fx(lamp, "Fast Box Blur", {"Blur Radius": 260}); lamp.blendingMode = BlendingMode.SCREEN;
   keys(T(lamp).property("Opacity"), [[0, 22], [T_LAMP, 22], [T_LAMP + 1 / FPS, 0]], 0);
   var dark = solid(o.c, [0, 0, 0], "lamp off"); keys(T(dark).property("Opacity"), [[0, 0], [T_LAMP, 0], [T_LAMP + 1 / FPS, 78], [T_QUOTE - 0.8, 78], [T_QUOTE, 100]], 0);
@@ -52,6 +56,10 @@ var CREDITS = [
   ["Alfred T. Palmer: TVA generator room, 1942", TF.headReg, 30, TERM.white],
   ["Historic American Engineering Record: Los Angeles Aqueduct control room ·", TF.headReg, 30, TERM.white],
   ["Montana main control switchboard · Morony–Rainbow transmission line", TF.headReg, 30, TERM.white], ["", 0, 0],
+  ["MORE PHOTOGRAPHS (PUBLIC DOMAIN, VIA WIKIMEDIA COMMONS)", TF.monoReg, 24, TERM.grey],
+  ["U.S. National Archives: Charles O’Rear, Mohave Generating Plant, 1972", TF.headReg, 30, TERM.white],
+  ["NREL (Dennis Schroeder): solar and wind · Bureau of Land Management California: battery storage", TF.headReg, 30, TERM.white], ["", 0, 0],
+  ["ILLUSTRATIONS", TF.monoReg, 24, TERM.grey], ["AI-generated with Higgsfield, marked on screen", TF.headReg, 30, TERM.white], ["", 0, 0],
   ["MAPS", TF.monoReg, 24, TERM.grey], ["Natural Earth (public domain)", TF.headReg, 30, TERM.white], ["", 0, 0],
   ["SOURCES", TF.monoReg, 24, TERM.grey],
   ["CFTC–SEC staff report on the market events of May 6, 2010", TF.headReg, 30, TERM.white],
@@ -66,11 +74,12 @@ var CREDITS = [
 (function () {
   var o = Shot("S10C Credits", T_CREDITS, T_ENDSCREEN, {bg: false});
   solid(o.c, [0, 0, 0], "black");
-  var roll = comp("Credits roll", o.d, W, 1500);
+  var RH = 1900, roll = comp("Credits roll", o.d, W, RH);
   var y = 120;
   for (var i = 0; i < CREDITS.length; i++) { var c = CREDITS[i]; if (c[0]) txt(roll, c[0], c[1], c[2], c[3], [W / 2, y], CENTER, c[1] === TF.monoReg ? 120 : 10); y += c[2] ? c[2] * 1.7 : 30; }
   var l = o.c.layers.add(roll);
-  keys(T(l).property("Position"), [[0, [W / 2, H / 2 + 700]], [o.d, [W / 2, H / 2 - 160]]], 0);
+  // the title starts just below the frame; the roll stops with the last line near the bottom
+  keys(T(l).property("Position"), [[0, [W / 2, H + 40 - 120 + RH / 2]], [o.d, [W / 2, H - 160 - y + RH / 2]]], 0);
   keys(T(l).property("Opacity"), [[0, 0], [0.8, 100], [o.d - 0.8, 100], [o.d, 0]], 0);
 })();
 

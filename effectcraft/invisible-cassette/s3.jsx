@@ -24,6 +24,13 @@ function pulse(c, p0, p1, color, startLocal, period, phase) {
 // (F8 pencil), then gold current flows along the copper lines to the turbine generators
 (function () {
   var o = Shot("S3A Blueprint", 0, vo(16.5));
+  // review note (4:58): an electric grid photo behind the drafting table (HAER transmission line, public domain),
+  // behind the table, lightly blurred: the insulators and wires fill the top third above the sheet
+  var gp = o.c.layers.add(img("layers/powerlines/photo.png")); gp.threeDLayer = true;
+  T(gp).property("Position").setValue([W / 2, H / 2 + 90, 400]); T(gp).property("Scale").setValue([118, 118, 100]);
+  fx(gp, "Tint", {"Map Black To": [0, 0, 0], "Map White To": [0.42, 0.52, 0.68], "Amount to Tint": 100});
+  T(gp).property("Opacity").setValue(90);
+  label(o, "Background: Morony–Rainbow transmission line · HAER, Library of Congress", o.a, {x: 48, y: H - 36, just: LEFTJ, size: 20, font: TF.headReg, track: 30, mode: "on"});
   var bp = comp("Blueprint sheet", o.d, 1920, 1080);
   var po = {c: bp, a: o.a, b: o.b, d: o.d, t: o.t};
   solid(bp, BLUE_PAPER, "blueprint paper");
@@ -45,7 +52,7 @@ function pulse(c, p0, p1, color, startLocal, period, phase) {
   for (var e = 0; e < EDGES.length; e++) for (var q = 0; q < 2; q++)
     pulse(bp, NODES[EDGES[e][0]], NODES[EDGES[e][1]], GOLD, tTh + 0.4 + e * 0.08, 1.6 + rnd(e, q) * 0.8, q * 0.5 + rnd(e, 9) * 0.3);
   // the sheet lies on a drafting table, tilted away from the camera
-  var sheet = c3(o.c, bp, [W / 2, H / 2 + 40, 60]); T(sheet).property("X Rotation").setValue(-32); T(sheet).property("Scale").setValue([96, 96, 100]);
+  var sheet = c3(o.c, bp, [W / 2, H / 2 + 190, 60]); T(sheet).property("X Rotation").setValue(-32); T(sheet).property("Scale").setValue([80, 80, 100]);
   shadow(sheet);
   word(o, "THE GRID", at("electrical grid"), {size: 120, y: 190, mode: "rise", glow: true, until: at("for a century")});
   label(o, "PHYSICS", at("unforgiving"), {y: 280, color: TERM.white, size: 34, until: at("for a century")});
@@ -182,26 +189,43 @@ var tBlack = at("went black");
   cam(o, {push: 1.03});
 })();
 
-// I · ~08:00: Mohave, 1970 and 1971: oscillations twist a generator shaft (drawn shaft under strain, E5)
+// I · ~08:00: Mohave, 1970 and 1971. Review note (6:41): real images. The years and the oscillation first;
+// then the twisted shaft (AI-generated with Higgsfield: no photo of the damage is public), then the real plant
+// (U.S. National Archives, May 1972, public domain)
+var tShaft = at("twisted") - 0.3, tPlant = at("mojave") - 0.2;
 (function () {
-  var o = Shot("S3I Mohave shaft", vo(95.7), vo(113.64));
-  word(o, "1970", at("1970"), {font: TF.mono, size: 120, x: 760, y: 250, color: TERM.amber});
-  word(o, "1971", at("1971"), {font: TF.mono, size: 120, x: 1160, y: 250, color: TERM.amber});
-  var tO = o.t(at("oscillations"));
-  var sh = shapeAt(o.c, "shaft", [W / 2, 560, 0]);
-  addRect(sh, [1200, 130], [0, 0], TERM.amber, 4, TERM.panel);
-  for (var k = -11; k <= 11; k++) addPath(sh, [[k * 52 - 30, -60], [k * 52 + 30, 60]], TERM.amberDim, 4);
-  T(sh).property("Position").expression = "var a = ease(time, " + tO + ", " + (tO + 2) + ", 0, 9); value + [0, Math.sin(time * 34) * a, 0];";
-  T(sh).property("Z Rotation").expression = "var a = ease(time, " + tO + ", " + (tO + 2) + ", 0, 0.9); Math.sin(time * 21) * a;";
-  showAt(o, sh, o.a + 0.2);
-  var wv = []; for (var x = -600; x <= 600; x += 20) wv.push([W / 2 + x, 760 + Math.sin(x / 40) * 40]);
-  var wave = pathShape(o.c, wv, TERM.red, 4, "oscillation"); showAt(o, wave.l, at("oscillations"));
+  var o = Shot("S3I Mohave years", vo(95.7), tShaft);
+  word(o, "1970", at("1970"), {font: TF.mono, size: 120, x: 760, y: 360, color: TERM.amber});
+  word(o, "1971", at("1971"), {font: TF.mono, size: 120, x: 1160, y: 360, color: TERM.amber});
+  var wv = []; for (var x = -600; x <= 600; x += 20) wv.push([W / 2 + x, 640 + Math.sin(x / 40) * 40]);
+  var wave = pathShape(o.c, wv, TERM.red, 6, "oscillation"); showAt(o, wave.l, at("oscillations"));
   T(wave.l).property("Position").expression = "[ (time * 160) % 251 - 125, 0, 0 ]";
-  word(o, "OSCILLATIONS", at("oscillations"), {size: 80, y: 400, color: TERM.red});
-  label(o, "MOHAVE GENERATING STATION, NEVADA", at("mojave"), {y: 870, size: 32, color: TERM.white});
-  word(o, "REPAIRS: MONTHS", at("each repair"), {size: 72, y: 960, color: TERM.amber});
-  flag(o, "Illustration · Source: T&D World");
+  word(o, "OSCILLATIONS", at("oscillations"), {size: 80, y: 520, color: TERM.red});
   cam(o, {x0: -50, x1: 50, d0: -0.3, d1: 0.3});
+})();
+(function () {
+  var o = Shot("S3I Twisted shaft", tShaft, tPlant, {bg: false});
+  solid(o.c, TERM.black, "void");
+  photoShot(o, "mohave_shaft", {tint: 35});
+  bar(o, 880, o.a + 0.2);
+  word(o, "TWISTED SHAFT", o.a + 0.3, {size: 70, y: 895, color: TERM.red});
+  flag(o, "AI-generated illustration (Higgsfield)");
+  cam(o, {x0: -60, x1: 60, d0: 0.5, d1: -0.6, aperture: PHOTO_APERTURE});
+})();
+(function () {
+  var o = Shot("S3I Mohave plant", tPlant, vo(113.64), {bg: false});
+  solid(o.c, TERM.black, "void");
+  // framed on the smokestack, its smoke and the plant (left edge at the frame edge, plant at the bottom); the text sits in the hazy sky
+  var ph = o.c.layers.add(img("stock/mohave_nara_1972.jpg")); ph.threeDLayer = true;
+  var dw = 2200, sc = dw / ph.source.width * 100, dh = dw * ph.source.height / ph.source.width;
+  T(ph).property("Position").setValue([dw / 2 + 10, H + 40 - 0.485 * dh, 0]); T(ph).property("Scale").setValue([sc, sc, 100]);
+  fx(ph, "Tint", {"Map Black To": [0, 0, 0], "Map White To": [1, 0.86, 0.66], "Amount to Tint": 45});
+  vis(ph, 0, o.d, 0.4, 0.4, o.d);
+  bar(o, 170, o.a + 0.2);
+  label(o, "MOHAVE GENERATING STATION, NEVADA · 1972", o.a + 0.2, {y: 160, size: 30, color: TERM.white});
+  word(o, "REPAIRS: MONTHS", at("each repair"), {size: 72, y: 225, color: TERM.amber});
+  flag(o, "Photo: Charles O’Rear, U.S. National Archives (NARA 548968), May 1972, public domain · Source: T&D World");
+  cam(o, {steady: true});
 })();
 
 // J · people are slow; protection has been automatic for decades

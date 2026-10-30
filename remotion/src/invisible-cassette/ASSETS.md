@@ -60,7 +60,20 @@ account at their request. Every generated image is labelled on screen as an AI-g
 | `assets/hf/investigators.jpg`, investigators with trading records (Scene 1) | Generated with Higgsfield (GPT Image 2.5, 4K); fictional people | User's generation; labelled on screen |
 | `assets/hf/trader.jpg`, a trader at four screens (Scene 1) | Generated with Higgsfield (GPT Image 2.5, 4K); fictional person, no tickers or logos | User's generation; labelled on screen |
 | `assets/hf/servers.jpg`, an empty server aisle (Scene 2) | Generated with Higgsfield (GPT Image 2.5, 4K); the free real server-room photos found all carry brand logos | User's generation; labelled on screen |
+| `assets/stock/mohave_nara_1972.jpg`, Mohave Generating Plant near Bullhead City, May 1972 (Scene 3) | Charles O'Rear, U.S. National Archives (NARA 548968), via Wikimedia Commons | Public domain (US government work) |
+| `assets/hf/mohave_shaft.jpg`, a twisted turbine shaft under repair (Scene 3) | Generated with Higgsfield (GPT Image 2.5, 4K); no free photo of the 1970–71 shaft damage exists | User's generation; labelled "AI-generated illustration (Higgsfield)" |
+| `assets/hf/rooftop_solar.jpg`, rooftop solar (Scene 4) | Generated with Higgsfield (GPT Image 2.5, 4K); no logos | User's generation; labelled on screen |
+| `assets/hf/ev_chargers.jpg`, EV chargers (Scene 4) | Generated with Higgsfield (GPT Image 2.5, 4K); no logos | User's generation; labelled on screen |
+| Grid background behind the Scene 3 blueprint | Morony–Rainbow transmission line, HAER MT-0484, Library of Congress (already listed above), tinted slate blue | Public domain |
 | TV/CRT overlay (scanlines, rolling band, static, tube vignette), running-code overlay, HUD corner brackets | Drawn and generated in this repo (`assets/overlays/`, `kit2.jsx`) | Original |
+
+### Round 2 notes, 30 Oct 2026
+- Every drawn object (icons, maps, dials, boxes, lines, nodes) is now a lit 3D object: each shot draws its objects into
+  its own "3D objects" comp with the Advanced 3D renderer (extruded and bevelled shapes, a warm key light, a cool fill
+  and ambient, a slow sway). The typography is unchanged (the user asked for objects only), and the shot comp stays
+  Classic 3D so text and photos keep their look.
+- All whoosh effects are removed from the film. Every remaining effect is loudness-measured (EBU R128 momentary
+  maximum set to the same level, then its own gain), and the harsh ones are trimmed and low-passed.
 
 ## Documents shown on screen
 | Asset | Source | Licence |
