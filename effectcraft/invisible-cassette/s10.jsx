@@ -66,7 +66,7 @@ var CREDITS = [
   ["U.S. Department of Justice (2016) · NBC News · The Motley Fool · Better Markets", TF.headReg, 30, TERM.white],
   ["AEMO final report, South Australia (2017) · T&D World", TF.headReg, 30, TERM.white],
   ["U.S.–Canada Power System Outage Task Force (2004) · National Grid ESO / Ofgem", TF.headReg, 30, TERM.white],
-  ["RTE, Learning to Run a Power Network · Marot et al. (2020)", TF.headReg, 30, TERM.white],
+  ["RTE, Learning to Run a Power Network · Grid2Op (open source) · Marot et al. (2020)", TF.headReg, 30, TERM.white],
   ["van der Sar, Zocca, Bhulai (2025) · Lautenbacher et al. (2025)", TF.headReg, 30, TERM.white],
   ["DeepMind, Specification gaming (2020) · ECT Rotterdam · FAA", TF.headReg, 30, TERM.white],
   ["Medical News Today · reaction-time study (PMC)", TF.headReg, 30, TERM.white], ["", 0, 0],

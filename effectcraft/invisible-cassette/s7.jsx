@@ -34,31 +34,24 @@ var tToday = at("today");
   pin(o, mapPoint(o, "nl", "Rotterdam"), "ROTTERDAM", at("rotterdam"), {ly: -48});
   word(o, "1993", at("1993"), {font: TF.mono, size: 120, x: 1560, y: 420, color: TERM.amber, glow: true});
   label(o, "FIRST AUTOMATED TERMINAL", at("world's first"), {x: 1560, y: 500, size: 28, color: TERM.white});
-  flag(o, "Map: Natural Earth · Source: ECT, Rotterdam");
+  // review note (14:14): an automated terminal (labelled illustration)
+  photoCard(o, "hf/terminal.jpg", 1560, 760, at("world's first") + 0.6, null, {scale: 66});
+  flag(o, "Map: Natural Earth · Source: ECT, Rotterdam · Photo: AI-generated illustration (Higgsfield)");
   cam(o, {y0: -200, y1: 0, push: 1.05, d0: 0.5, d1: -0.6});
 })();
-// B2 · the yard: driverless vehicles through fog, directed by terminal software (drawn)
+// B2 · the yard (review note 14:20): driverless vehicles carrying containers under the cranes, a three-layer
+// photo (labelled illustration); the words sit on dark bars
 (function () {
-  var o = Shot("S7B AGV yard", tToday, vo(24.0));
-  for (var i = 0; i < 6; i++) for (var j = 0; j < 3; j++) { var b = shapeAt(o.c, "container", [380 + i * 230, 420 + j * 70, 20]); addRect(b, [200, 58], [0, 0], j % 2 ? TERM.amberDim : TERM.amber, 3, TERM.panel); showAt(o, b, o.a + (i + j) * 0.05); }
-  for (var k = 0; k < 7; k++) {
-    var v = shapeAt(o.c, "AGV", [0, 0, 0]); addRect(v, [120, 40], [0, 0], TERM.green, 3, [0.03, 0.12, 0.07]);
-    var lane = k % 2, sp = lane ? -260 : 300;
-    T(v).property("Position").expression = "var x = ((" + (k * 330) + " + time * " + sp + ") % 2200 + 2200) % 2200 - 140; [x, " + (lane ? 760 : 690) + ", 0];";
-    showAt(o, v, at("driverless"));
-  }
-  // fog drifting through the yard (near and far banks)
-  for (var f = 0; f < 2; f++) {
-    var fg = solid(o.c, [0.5, 0.5, 0.5], "fog " + f); fg.threeDLayer = true; T(fg).property("Position").setValue([W / 2, H / 2 + 80, f ? -120 : 160]);
-    fx(fg, "Fractal Noise", {"Contrast": 140, "Brightness": -30, "Transform/Scale": 900, "Transform/Scale Width": 1600});
-    fg.blendingMode = BlendingMode.SCREEN; T(fg).property("Opacity").setValue(f ? 10 : 14);
-    fg.property("Effects").property(1).property("Evolution").expression = "time * " + (f ? 14 : 9);
-  }
-  label(o, "DRIVERLESS", at("driverless"), {y: 880, size: 32, color: TERM.green});
-  label(o, "TERMINAL SOFTWARE", at("terminal software"), {y: 930, size: 26, color: TERM.white});
-  word(o, "PORTS · EUROPE · ASIA", at("ports"), {size: 70, y: 200, mode: "rise"});
-  flag(o, "Illustration");
-  cam(o, {y0: -200, y1: 20, x0: -50, x1: 50, push: 1.06, d0: -0.4, d1: 0.5});
+  var o = Shot("S7B AGV yard", tToday, vo(24.0), {bg: false});
+  solid(o.c, TERM.black, "void");
+  photoShot(o, "agv", {tint: 30, nearBlur: 0});
+  bar(o, 200, at("ports") - 0.2);
+  word(o, "PORTS · EUROPE · ASIA", at("ports"), {size: 70, y: 225, mode: "rise"});
+  bar(o, 905, at("driverless") - 0.2);
+  label(o, "DRIVERLESS", at("driverless"), {y: 890, size: 32, color: TERM.green});
+  label(o, "TERMINAL SOFTWARE", at("terminal software"), {y: 940, size: 26, color: TERM.white});
+  flag(o, "AI-generated illustration (Higgsfield)");
+  cam(o, {x0: -60, x1: 60, d0: -0.4, d1: 0.5, aperture: 12});
 })();
 
 // C1 · aviation: four-dimensional trajectories over data link

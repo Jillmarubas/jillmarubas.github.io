@@ -65,6 +65,11 @@ account at their request. Every generated image is labelled on screen as an AI-g
 | `assets/hf/rooftop_solar.jpg`, rooftop solar (Scene 4) | Generated with Higgsfield (GPT Image 2.5, 4K); no logos | User's generation; labelled on screen |
 | `assets/hf/ev_chargers.jpg`, EV chargers (Scene 4) | Generated with Higgsfield (GPT Image 2.5, 4K); no logos | User's generation; labelled on screen |
 | Grid background behind the Scene 3 blueprint | Morony–Rainbow transmission line, HAER MT-0484, Library of Congress (already listed above), tinted slate blue | Public domain |
+| `assets/hf/sa_towers.jpg`, toppled transmission towers (Scene 3, South Australia 2016) | Generated with Higgsfield (GPT Image 2.5, 4K), 30 Oct 2026; the real photos of the fallen towers are news-agency pictures | User's generation; labelled on screen |
+| `assets/hf/gb_station.jpg`, a station concourse in a power cut (Scene 3, Britain 2019) | Generated with Higgsfield (GPT Image 2.5, 4K); Wikimedia Commons was rate-limiting this network, so no real station photo could be fetched | User's generation; labelled on screen |
+| `assets/hf/terminal.jpg`, an automated container terminal (Scene 7) | Generated with Higgsfield (GPT Image 2.5, 4K); no logos | User's generation; labelled on screen |
+| `assets/hf/agv.jpg`, driverless vehicles carrying containers (Scene 7, three layers in `assets/layers/agv`) | Generated with Higgsfield (GPT Image 2.5, 4K); no logos | User's generation; labelled on screen |
+| L2RPN competition grid (Scene 4) | Layout and line loadings of `l2rpn_case14_sandbox` (first time step) exported from Grid2Op 1.12.6 (RTE, open source, MPL-2.0) and drawn in the film's style | Data from open-source software; credited on screen |
 | TV/CRT overlay (scanlines, rolling band, static, tube vignette), running-code overlay, HUD corner brackets | Drawn and generated in this repo (`assets/overlays/`, `kit2.jsx`) | Original |
 
 ### Round 2 notes, 30 Oct 2026
@@ -72,6 +77,7 @@ account at their request. Every generated image is labelled on screen as an AI-g
   its own "3D objects" comp with the Advanced 3D renderer (extruded and bevelled shapes, a warm key light, a cool fill
   and ambient, a slow sway). The typography is unchanged (the user asked for objects only), and the shot comp stays
   Classic 3D so text and photos keep their look.
+- The Shepard tone is removed from Scenes 1 and 8 (review notes 1:01 and 15:38 heard it as a high-frequency noise); the low rumble carries that tension.
 - All whoosh effects are removed from the film. Every remaining effect is loudness-measured (EBU R128 momentary
   maximum set to the same level, then its own gain), and the harsh ones are trimmed and low-passed.
 

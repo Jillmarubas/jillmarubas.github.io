@@ -159,7 +159,9 @@ var SA = function (n) { return mapPoint(null, "sa", n); };
   }
   word(o, "PROTECTION TRIPS", at("protection"), {size: 60, color: TERM.red, x: 1520, y: 520, mode: "rise"});
   label(o, "WIND OUTPUT CUT", tCut, {x: 1520, y: 600, size: 28, color: TERM.white});
-  flag(o, "Map: Natural Earth · Source: AEMO final report · positions schematic");
+  // review note (6:11): no free photo of the toppled towers exists (news-agency pictures only), so a labelled illustration
+  photoCard(o, "hf/sa_towers.jpg", 1610, 820, tS + 1.2, null, {scale: 60});
+  flag(o, "Map: Natural Earth · Source: AEMO final report · positions schematic · Photo: AI-generated illustration (Higgsfield)");
   cam(o, {d0: -0.5, d1: 0.6});
 })();
 // G2 · cut off from Victoria (the interconnector opens); frequency collapses in under a second
@@ -272,7 +274,9 @@ var tShaft = at("twisted") - 0.3, tPlant = at("mojave") - 0.2;
   word(o, "AUTOMATIC", tN, {size: 96, x: 1520, y: 420, glow: true});
   num(o, 0, 1.1, at("million", tN), at("million", tN) + 0.8, {dec: 1, pre: "≈ ", suf: " MILLION", size: 80, x: 1520, y: 580, color: TERM.amber});
   label(o, "CUSTOMERS CUT OFF", at("customers"), {x: 1520, y: 650, size: 28, color: TERM.white});
-  flag(o, "Map: Natural Earth · Source: National Grid ESO report via Ofgem");
+  // review note (7:31): a station in the dark during the cut (labelled illustration; no free photo of the day)
+  photoCard(o, "hf/gb_station.jpg", 380, 780, tN + 0.3, null, {scale: 66});
+  flag(o, "Map: Natural Earth · Source: National Grid ESO report via Ofgem · Photo: AI-generated illustration (Higgsfield)");
   cam(o, {d0: 0.4, d1: -0.4});
 })();
 

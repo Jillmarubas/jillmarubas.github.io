@@ -87,7 +87,29 @@ var tAuto = at("automate");
   tag(o, "RTE · FRANCE", tF, {y: 280, color: TERM.amber, size: 52});
   word(o, "LEARNING TO RUN A POWER NETWORK", at("learning to run"), {font: TF.mono, size: 56, y: 470, mode: "type", cps: 30, track: 40});
   label(o, "PUBLIC COMPETITION · AI AGENTS", at("public competition"), {y: 560, size: 32, color: TERM.white});
-  word(o, "SIMULATED GRID", at("simulated"), {size: 80, y: 720, color: TERM.amber});
+  // review note (8:55): the competition's own grid, drawn from its open-source simulator (Grid2Op,
+  // l2rpn_case14_sandbox, first time step): 14 substations, 20 lines coloured by loading, current flowing
+  var C14 = {"subs": [[-280.0, -81.0], [-100.0, -270.0], [366.0, -270.0], [366.0, -54.0], [-64.0, -54.0], [-64.0, 54.0], [450.0, 0.0], [550.0, 0.0], [326.0, 54.0], [222.0, 108.0], [79.0, 162.0], [-170.0, 270.0], [-64.0, 270.0], [222.0, 216.0]], "lines": [[0, 1, 0.34], [0, 4, 0.36], [1, 2, 0.272], [1, 3, 0.267], [1, 4, 0.828], [2, 3, 0.269], [3, 4, 0.343], [5, 10, 0.532], [5, 11, 0.495], [5, 12, 0.732], [8, 9, 0.289], [8, 13, 0.383], [9, 10, 0.289], [11, 12, 0.432], [12, 13, 0.396], [3, 6, 0.545], [3, 8, 0.533], [4, 5, 0.924], [6, 7, 0.453], [8, 6, 0.462]], "gen_subs": [1, 2, 5, 5, 7, 0]};
+  // Grid2Op's layout has y pointing up, the screen's points down: flip it so it matches the simulator's own plot
+  var gs = 0.6, gx = W / 2 - 135 * gs, gy = 790, tG = at("learning to run");
+  var P = []; for (var i = 0; i < C14.subs.length; i++) P.push([gx + C14.subs[i][0] * gs, gy - C14.subs[i][1] * gs]);
+  for (var k = 0; k < C14.lines.length; k++) {
+    var L = C14.lines[k], rho = L[2], col = rho > 0.8 ? TERM.red : (rho > 0.5 ? TERM.amber : TERM.green);
+    var ln = pathShape(o.c, [P[L[0]], P[L[1]]], col, 4, "grid line");
+    drawOn(o, ln, tG + k * 0.05, 0.5);
+    var pd = dot(o.c, P[L[0]][0], P[L[0]][1], 5, col, "current");
+    var st0 = o.t(tG) + 1.2 + k * 0.05, per = 1.6 + (k % 5) * 0.25;
+    T(pd).property("Position").expression = "var t = Math.max(0, time - " + st0 + "); var u = (t / " + per + ") % 1; [" +
+      P[L[0]][0] + " + (" + (P[L[1]][0] - P[L[0]][0]) + ") * u, " + P[L[0]][1] + " + (" + (P[L[1]][1] - P[L[0]][1]) + ") * u, 0];";
+    T(pd).property("Opacity").expression = "time < " + st0 + " ? 0 : 100";
+  }
+  var GEN = {}; for (var g = 0; g < C14.gen_subs.length; g++) GEN[C14.gen_subs[g]] = 1;
+  for (var m = 0; m < P.length; m++) {
+    var sd = dot(o.c, P[m][0], P[m][1], GEN[m] ? 13 : 10, GEN[m] ? TERM.amber : TERM.white, "substation");
+    vis(sd, o.t(tG) + m * 0.04, o.d, 0.3, 0.3, o.d);
+  }
+  label(o, "SIMULATED GRID · 14 SUBSTATIONS", at("simulated"), {y: 1022, size: 34, color: TERM.amber});
+  flag(o, "Grid: L2RPN case14 sandbox via Grid2Op (RTE, open source, MPL-2.0) · line colour = loading");
   cam(o, {d0: 0.3, d1: -0.3});
 })();
 

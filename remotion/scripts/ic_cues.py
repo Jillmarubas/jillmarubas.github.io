@@ -107,8 +107,9 @@ def scene1():
     cues = [x for x in base["cues"] if os.path.basename(x["f"])[:2] not in ("F1", "F2", "F3", "F4", "F5", "F7")]
     silence, bassout = [list(x) for x in base.get("silence", [])], [list(x) for x in base.get("bassout", [])]
     add_events(1, cues, silence, bassout)
-    write("s1", base["duration"], cues, rumble=base.get("rumble", []), silence=silence, bassout=bassout,
-          shepard=[[41.18, 70.22, -16]])
+    # review notes (1:01, 15:38): the Shepard tone read as a high-frequency noise, so it is gone from the film;
+    # the low rumble carries the tension instead
+    write("s1", base["duration"], cues, rumble=base.get("rumble", []), silence=silence, bassout=bassout)
 
 
 def scene2():
@@ -265,11 +266,11 @@ def scene8():
         c(SX + "T3a.mp3", c1, gain=-3), c(SX + "T3b.mp3", c2, gain=-3), c(SX + "T3c.mp3", c3, gain=-3),
         c(MU + "M10.mp3", c3 + 0.4, "music", trim=[70, 74], fade_in=0.5, fade_out=2.0, gain=-4),
     ]
-    # the Shepard tone builds under "human in the loop … paradox … latency" and cuts dead on the first
-    # black card (THE ILLUSION OF MANUAL OVERRIDE, directive 25:30)
+    # a low rumble builds under "human in the loop … paradox … latency" and cuts dead on the first black card
+    # (THE ILLUSION OF MANUAL OVERRIDE, directive 25:30); no Shepard tone (review note 15:38)
     sil, bo = [[c1 - 0.35, c1]], [[c1, 0.7]]
     add_events(S, cues, sil, bo)
-    write("s8", end, cues, rumble=[[vo(18.6), c1, -20]], shepard=[[0.5, vo(18.6), -16]], silence=sil, bassout=bo)
+    write("s8", end, cues, rumble=[[2.0, vo(18.6), -24], [vo(18.6), c1, -20]], silence=sil, bassout=bo)
 
 
 def scene9():
