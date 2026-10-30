@@ -54,6 +54,6 @@ open(lst, "w").write("".join(f"file '{f}'\n" for f in files))
 out = os.path.join(HERE, "render", "film-half.mp4")
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", lst, "-vf", "scale=960:540,fps=24", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
                 "-c:a", "aac", "-b:a", "192k", "-ar", "48000", out], check=True)
-tl = {"title": "Invisible Cassette Review", "version": "Full film v2 · production-file directives · trading terminal", "shots": shots, "lines": lines, "chapters": chapters}
+tl = {"title": "Invisible Cassette Review", "version": "Full film v3 · review notes 1–5 applied", "shots": shots, "lines": lines, "chapters": chapters}
 json.dump(tl, open(os.path.join(IC, "timeline_full.json"), "w"), indent=1)
 print(f"film {t:.1f} s ({t / 60:.1f} min) -> {out}; chapters at {chapters}")
