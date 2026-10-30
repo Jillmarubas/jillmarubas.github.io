@@ -176,29 +176,17 @@ var tRun = at("running"), tPhys = at("physical");
   word(o, "AUTONOMOUS LOGIC", at("autonomous"), {size: 110, y: 560, mode: "rise"});
   cam(o, {d0: -0.4, d1: 0.5});
 })();
-// K2 · directive 05:15: slow push into an empty server room, cold blue LEDs (drawn: no public-domain photo)
+// K2 · directive 05:15: slow push into an empty server room, cold blue LEDs. Review note (4:37, "very low"):
+// the drawn room was too dark, so a bright, clean aisle (AI-generated with Higgsfield: the free photos of real
+// server rooms all carry brand logos), three layers, with a light TV overlay
 (function () {
   var o = Shot("S2K Server room", tRun, tPhys, {bg: false});
-  solid(o.c, [0.01, 0.015, 0.03], "room");
-  var BLUE = [0.3, 0.6, 1.0];
-  for (var side = -1; side <= 1; side += 2) for (var k = 0; k < 7; k++) {
-    var z = -200 + k * 420, x = W / 2 + side * 520;
-    var r = shapeAt(o.c, "rack", [x, H / 2 + 60, z]);
-    for (var u = 0; u < 14; u++) addRect(r, [340, 5], [0, -440 + u * 66], null, 0, [0.12, 0.14, 0.19]);
-    addRect(r, [380, 980], [0, 0], [0.2, 0.24, 0.32], 4, [0.07, 0.08, 0.11]);
-    T(r).property("Y Rotation").setValue(side * 90);
-    var led = shapeAt(o.c, "leds", [x - side * 4, H / 2 + 60, z]);
-    for (var u = 0; u < 14; u++) for (var q = 0; q < 3; q++) if (rnd(k * 50 + u * 3 + q, side + 3) > 0.35) addEllipse(led, 14, [-150 + q * 22 + rnd(u, k) * 200, -420 + u * 66], null, 0, BLUE);
-    T(led).property("Y Rotation").setValue(side * 90);
-    T(led).property("Opacity").expression = "65 + 30 * Math.sin(time * " + (0.8 + rnd(k, side) * 0.9).toFixed(2) + " + " + (k * 1.7).toFixed(2) + ")"; // a slow breathing glow, never a flash
-    glow(led);
-  }
-  var fl = solid(o.c, [0.02, 0.03, 0.05], "floor", 1400, 3600); fl.threeDLayer = true;
-  T(fl).property("Position").setValue([W / 2, H / 2 + 550, 1400]); T(fl).property("X Rotation").setValue(90);
-  var wall = solid(o.c, [0.06, 0.11, 0.22], "end wall", 1400, 1200); wall.threeDLayer = true; T(wall).property("Position").setValue([W / 2, H / 2 + 60, 2900]);
-  label(o, "LATENCY", at("beyond"), {y: H / 2 - 20, color: [0.7, 0.82, 1.0], size: 34, track: 160});
-  flag(o, "Illustration");
-  cam(o, {push: 1.05, d0: 0.5, d1: -0.6});
+  solid(o.c, TERM.black, "void");
+  photoShot(o, "servers", {tint: 0});
+  var sl = o.c.layers.add(img("overlays/scanlines.png")); sl.blendingMode = BlendingMode.MULTIPLY; T(sl).property("Opacity").setValue(30);
+  label(o, "LATENCY", at("beyond"), {y: H / 2 - 20, color: [0.85, 0.92, 1.0], size: 40, track: 160});
+  flag(o, "AI-generated illustration (Higgsfield)");
+  cam(o, {push: 1.05, d0: 0.5, d1: -0.6, aperture: PHOTO_APERTURE});
 })();
 // K3 · the same logic moves into the physical world: a transmission network draws itself
 (function () {

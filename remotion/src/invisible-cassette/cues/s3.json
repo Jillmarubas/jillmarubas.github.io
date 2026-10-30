@@ -111,6 +111,24 @@
    "at": 174.88,
    "bus": "sfx",
    "gain": -7
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F4a.mp3",
+   "at": 49.12,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F3a.mp3",
+   "at": 50.66,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F4a.mp3",
+   "at": 51.94,
+   "bus": "sfx",
+   "gain": -4
   }
  ],
  "rumble": [

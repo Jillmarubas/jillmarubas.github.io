@@ -223,7 +223,7 @@
   },
   {
    "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
-   "at": 55.18,
+   "at": 84.38,
    "bus": "sfx",
    "gain": -12
   },
@@ -244,18 +244,6 @@
    "at": 96.46,
    "bus": "sfx",
    "gain": -1
-  },
-  {
-   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
-   "at": 100.0,
-   "bus": "sfx",
-   "gain": -12
-  },
-  {
-   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
-   "at": 100.42,
-   "bus": "sfx",
-   "gain": -12
   },
   {
    "f": "out/invisible-cassette/audio/sfx/F1a.mp3",

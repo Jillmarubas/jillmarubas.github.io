@@ -46,6 +46,22 @@ Congress masters (all wider than 2400 px after crop). Credited on screen in each
 | Diagrams in Scenes 2–10 (order flows, hot-potato ring, order book, rotor, dials, inverter icons, shaft, network maps, neural net, block flip, container terminal, flight path, pipeline, dashboards, bars) | Drawn in EffectCraft; drawn or hypothetical material is flagged on screen ("Illustration", "Illustrative", "HYPOTHETICAL") | Original |
 | Shepard tone + clock (X2, Scenes 1 and 8) | Synthesised in `scripts/mix_ic.py` (numpy) | Original |
 
+## Review notes, 30 Oct 2026: stock photos, generated images, overlays
+Free stock video sites (Pexels, Pixabay, Mixkit, Unsplash) are blocked by this environment's network policy, so the
+real photos come from Wikimedia Commons (public domain only) and the rest were generated on the user's Higgsfield
+account at their request. Every generated image is labelled on screen as an AI-generated illustration.
+
+| Asset (scene) | Source | Licence |
+|---|---|---|
+| `assets/stock/solar_nrel.jpg`, "Solar panels in the desert" (Scene 3) | Dennis Schroeder, NREL, via Wikimedia Commons | Public domain (US government work) |
+| `assets/stock/wind_nrel.jpg`, "Windmills in desert" (Scene 3) | Dennis Schroeder, NREL, via Wikimedia Commons | Public domain (US government work) |
+| `assets/stock/battery_blm.jpg`, "Desert Sunlight Battery Energy Storage System" (Scene 3) | Bureau of Land Management California, via Wikimedia Commons (Flickr 52945816430) | Public domain (US government work) |
+| `assets/hf/shocked.jpg`, traders in shock (Scene 1) | Generated with Higgsfield (GPT Image 2.5, 4K) on the user's account, 30 Oct 2026; fictional people | User's generation; labelled "AI-generated illustration, not a photo of May 6, 2010" |
+| `assets/hf/investigators.jpg`, investigators with trading records (Scene 1) | Generated with Higgsfield (GPT Image 2.5, 4K); fictional people | User's generation; labelled on screen |
+| `assets/hf/trader.jpg`, a trader at four screens (Scene 1) | Generated with Higgsfield (GPT Image 2.5, 4K); fictional person, no tickers or logos | User's generation; labelled on screen |
+| `assets/hf/servers.jpg`, an empty server aisle (Scene 2) | Generated with Higgsfield (GPT Image 2.5, 4K); the free real server-room photos found all carry brand logos | User's generation; labelled on screen |
+| TV/CRT overlay (scanlines, rolling band, static, tube vignette), running-code overlay, HUD corner brackets | Drawn and generated in this repo (`assets/overlays/`, `kit2.jsx`) | Original |
+
 ## Documents shown on screen
 | Asset | Source | Licence |
 |---|---|---|

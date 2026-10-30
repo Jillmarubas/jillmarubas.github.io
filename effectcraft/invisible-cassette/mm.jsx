@@ -89,7 +89,7 @@ function photoParallax(c, dir, opt) {
     if (opt.redAt !== undefined) keys(tn.property("Map White To"), [[0, [1, 0.8, 0.5]], [opt.redAt, [1, 0.8, 0.5]], [opt.redAt + 3, [1, 0.42, 0.34]]], 0);
     // photo shots run the camera at a small aperture (PHOTO_APERTURE) so the plate stays readable; the
     // foreground occlusion layer gets the rest of its 15–20 px depth-of-field blur here
-    if (n === "near") fx(l, "Fast Box Blur", {"Blur Radius": 12});
+    if (n === "near" && opt.nearBlur !== 0) fx(l, "Fast Box Blur", {"Blur Radius": opt.nearBlur || 12});
     out[n] = l;
   }
   return out;

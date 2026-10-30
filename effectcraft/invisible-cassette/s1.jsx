@@ -64,22 +64,27 @@ function rowComp(name, sym, nm, price, prgb, pAt) {
   cam(o, {x0: -50, x1: 50, d0: 0.6, d1: -0.6});
 })();
 
-// D · 00:40 directive: the NYSE floor in 2.5D parallax, the boards turning crimson; then inside the computers
+// D1 · 00:40 directive: the NYSE floor in 2.5D parallax, the boards turning crimson
+var tBrokers = at("brokers");
 (function () {
-  var o = Shot("S1D Floor", S.floor, S.wire, {bg: false});
+  var o = Shot("S1D Floor", S.floor, tBrokers, {bg: false});
   solid(o.c, TERM.black, "void");
-  var tC = at("inside computers");
-  photoShot(o, "nyse", {redAt: at("most of"), until: tC + 1.6, caption: "Archive photo: NYSE trading floor · Carol M. Highsmith, Library of Congress"});
-  bar(o, 890, at("new york") - 0.2, at("brokers") + 1.5);
-  word(o, "NEW YORK STOCK EXCHANGE", at("new york"), {font: TF.mono, size: 50, y: 908, color: TERM.amber, mode: "type", cps: 22, track: 160, until: at("brokers") + 1.5, glow: true});
-  for (var i = 0; i < 70; i++) {
-    var s = solid(o.c, i % 4 === 0 ? TERM.red : TERM.amber, "order " + i, 300, 3);
-    s.threeDLayer = true; s.blendingMode = BlendingMode.ADD;
-    T(s).property("Position").expression = "seedRandom(" + i + ", true); var sp = 2600 + random(2600); var z = -150 + random(500); var x = ((random(4200) + (time - " + o.t(tC) + ") * sp) % 4200) - 1100; [x, random(-80, 1160), z];";
-    vis(s, o.t(tC) + 0.2, o.d, 1.0, 0.3, o.d);
-  }
-  word(o, "< 1 SECOND", at("fractions"), {font: TF.mono, size: 110, y: H / 2, glow: true});
+  photoShot(o, "nyse", {redAt: S.floor + 0.8, caption: "Archive photo: NYSE trading floor · Carol M. Highsmith, Library of Congress"});
+  bar(o, 890, at("new york") - 0.2);
+  word(o, "NEW YORK STOCK EXCHANGE", at("new york"), {font: TF.mono, size: 50, y: 908, color: TERM.amber, mode: "type", cps: 22, track: 160, glow: true});
   cam(o, {x0: -70, x1: 90, y0: 30, y1: 0, d0: -0.5, d1: 0.6, aperture: PHOTO_APERTURE});
+})();
+// D2 · review note (0:53): no order streaks and no drift; a dramatic image of traders in shock, on a TV
+// (AI-generated with Higgsfield at the user's request, labelled on screen), three layers, steady push
+(function () {
+  var o = Shot("S1D Shocked traders", tBrokers, S.wire, {bg: false});
+  solid(o.c, TERM.black, "void");
+  // the people in front are the subject here: their layer stays sharp (no extra blur, a small aperture)
+  photoShot(o, "shocked", {tint: 30, nearBlur: 0});
+  tvOverlay(o);
+  word(o, "< 1 SECOND", at("fractions"), {font: TF.mono, size: 110, y: H / 2, glow: true});
+  flag(o, "AI-generated illustration (Higgsfield), not a photo of May 6, 2010");
+  cam(o, {steady: true, aperture: 12});
 })();
 
 // E1 · the newswire: no war, no bank collapse, only Greece
@@ -111,9 +116,10 @@ function rowComp(name, sym, nm, price, prgb, pAt) {
   cam(o, {x0: 100, x1: -100, d0: 0.6, d1: -0.6});
 })();
 
-// G · 01:25 directive: freeze-frame into a distressed Polaroid, shutter snap, typed caption; then the regulators
+var tSEC = at("sec", 80) - 0.15; // after 80 s: "second" earlier in the scene also starts with "sec"
+// G1 · 01:25 directive: freeze-frame into a distressed Polaroid, shutter snap, typed caption; then the regulators
 (function () {
-  var o = Shot("S1G Polaroid", S.report, S.turn);
+  var o = Shot("S1G Polaroid", S.report, tSEC);
   var pc = comp("Polaroid", 60, 900, 1040);
   solid(pc, TERM.paper, "frame");
   var ph = pc.layers.add(img("layers/nyse/photo.png")); T(ph).property("Scale").setValue([34.2, 34.2, 100]); T(ph).property("Position").setValue([450, 330]);
@@ -124,9 +130,22 @@ function rowComp(name, sym, nm, price, prgb, pAt) {
   var pl = c3(o.c, pc, [W / 2 - 330, H / 2, 0]); T(pl).property("Scale").setValue([80, 80, 100]); shadow(pl);
   slideIn(o, pl, S.report + 0.1, [W / 2 - 330, H / 2 + 10, 0], [0, -120], -4);
   var fl = solid(o.c, [1, 0.95, 0.85], "shutter flash"); keys(T(fl).property("Opacity"), [[0, 0], [F, 50], [3 * F, 0]], 0);
-  tag(o, "SEC", at("sec"), {x: W / 2 + 470, y: H / 2 - 90, color: TERM.amber, size: 90, w: 320, h: 150});
-  tag(o, "CFTC", at("cftc"), {x: W / 2 + 470, y: H / 2 + 100, color: TERM.amber, size: 90, w: 320, h: 150});
+  word(o, "INVESTIGATORS", at("investigators"), {size: 90, x: W / 2 + 470, y: H / 2, mode: "rise"});
   cam(o, {x0: -60, x1: 60, d0: -0.6, d1: 0.6});
+})();
+
+// G2 · review note (1:29): investigators at work (AI-generated with Higgsfield: no free stock reachable), on a TV,
+// the trading records scrolling over it; SEC and CFTC slam in on their names
+(function () {
+  var o = Shot("S1G Investigators", tSEC, S.turn, {bg: false});
+  solid(o.c, TERM.black, "void");
+  photoShot(o, "investigators", {tint: 45});
+  codeOverlay(o, at("trading records"), undefined, "6", TERM.amber);
+  tvOverlay(o);
+  tag(o, "SEC", at("sec", 80), {x: 1560, y: 330, color: TERM.amber, size: 80, w: 300, h: 130});
+  tag(o, "CFTC", at("cftc"), {x: 1560, y: 480, color: TERM.amber, size: 80, w: 300, h: 130});
+  flag(o, "AI-generated illustration (Higgsfield)");
+  cam(o, {x0: -40, x1: 40, d0: -0.5, d1: 0.5, aperture: PHOTO_APERTURE});
 })();
 
 // H · 01:50 directive: a red stamp slams onto the incident folder (fact-checked wording)
@@ -141,29 +160,18 @@ function rowComp(name, sym, nm, price, prgb, pAt) {
   T(cam1).property("Position").expression = "var h = " + o.t(tC) + "; (time > h && time < h + 0.13) ? value + [0, Math.sin((time - h) * 180) * 6, 0] : value;";
 })();
 
-// I · one automated sell order, programs reacting to each other: the feedback loop
+// I · review note (1:44): a person trading at a wall of screens (AI-generated with Higgsfield), with running code
+// over it that speeds up once the feedback loop is named; one sell order, programs reacting to each other
 (function () {
-  var o = Shot("S1I Feedback loop", S.loop, S.title, {red: true});
-  var RX = 600, RY = 340;
-  var ring = shapeAt(o.c, "loop path", [W / 2, H / 2, 20]);
-  var g = ring.property("Contents").addProperty("ADBE Vector Group");
-  g.property("Contents").addProperty("ADBE Vector Shape - Ellipse").property("Size").setValue([RX * 2, RY * 2]);
-  var rs = g.property("Contents").addProperty("ADBE Vector Graphic - Stroke"); rs.property("Stroke Width").setValue(3);
-  keys(rs.property("Color"), [[0, TERM.amberDim], [o.t(at("feedback")), TERM.amberDim], [o.t(at("feedback")) + 0.6, TERM.red]], 0);
-  showAt(o, ring, at("amplified"));
-  tag(o, "SELL ORDER", at("sell order") - 0.4, {y: H / 2 - 20, color: TERM.red, size: 66});
-  for (var i = 0; i < 8; i++) {
-    var th = i / 8 * 2 * Math.PI - Math.PI / 2;
-    tag(o, "PROGRAM", at("trading programs") + i * 0.07, {x: W / 2 + Math.cos(th) * RX, y: H / 2 + Math.sin(th) * RY, color: TERM.amber, size: 30, font: TF.mono, z: 0});
-  }
-  var tA = o.t(at("amplified")), tL = o.t(at("feedback"));
-  for (var k = 0; k < 28; k++) {
-    var d = dot(o.c, 0, 0, 8, k % 3 ? TERM.amber : TERM.red, "order " + k); d.motionBlur = true;
-    T(d).property("Position").expression = "var t = Math.max(0, time - " + tA + "); var a = t * 0.7 + Math.pow(Math.max(0, time - " + tL + "), 2) * 0.9 + " + (k / 28 * 2 * Math.PI) + "; [" + (W / 2) + " + Math.cos(a) * " + RX + ", " + (H / 2) + " + Math.sin(a) * " + RY + ", 0];";
-    vis(d, tA, o.d, 0.8, 0.3, o.d);
-  }
-  word(o, "FEEDBACK LOOP", at("feedback"), {size: 88, y: H / 2 + 150, z: -40});
-  cam(o, {x0: -60, x1: 60, d0: 0.6, d1: -0.9});
+  var o = Shot("S1I Feedback loop", S.loop, S.title, {red: true, bg: false});
+  solid(o.c, TERM.black, "void");
+  photoShot(o, "trader", {tint: 35});
+  codeOverlay(o, o.a + 0.3, undefined, "3 + Math.pow(Math.max(0, time - " + o.t(at("feedback")) + "), 2) * 6", TERM.green);
+  tag(o, "SELL ORDER", at("sell order") - 0.4, {x: 1500, y: 300, color: TERM.red, size: 60});
+  label(o, "PROGRAM ↔ PROGRAM", at("trading programs"), {x: 1500, y: 400, size: 32, color: TERM.amber});
+  word(o, "FEEDBACK LOOP", at("feedback"), {size: 100, y: 900, z: -40, color: TERM.red, glow: true});
+  flag(o, "AI-generated illustration (Higgsfield) · code illustrative");
+  cam(o, {x0: -50, x1: 50, d0: 0.6, d1: -0.9, aperture: PHOTO_APERTURE});
 })();
 
 // J · 02:30 directive: title stamped across aged paper (T2 chime, M3)

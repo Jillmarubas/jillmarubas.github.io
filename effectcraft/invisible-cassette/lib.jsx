@@ -177,6 +177,8 @@ function rig(c, dur, opt) {
   function dutch(v, sgn) { if (v === undefined || v === 0) v = 0.6 * sgn; var m = Math.min(1.0, Math.max(0.5, Math.abs(v))); return v < 0 ? -m : m; }
   opt.d0 = dutch(opt.d0, -1); opt.d1 = dutch(opt.d1, 1);
   if ((opt.d0 < 0) === (opt.d1 < 0)) opt.d1 = -opt.d1; // drift through level, not parked on one side
+  // opt.steady (the user's review note "stop the drifting"): a straight, slow push only; no Dutch, no track
+  if (opt.steady) { opt.d0 = 0; opt.d1 = 0; opt.x0 = opt.x1 = opt.y0 = opt.y1 = 0; push = 1 + 0.0015 * dur; }
   var cam = c.layers.addCamera("Camera 35mm", [W / 2, H / 2]);
   cam.autoOrient = AutoOrientType.NO_AUTO_ORIENT;
   var co = cam.property("Camera Options");

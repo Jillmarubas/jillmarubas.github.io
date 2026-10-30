@@ -360,7 +360,7 @@ function backdropPhoto(o, file, when, opt) {
 // a 3-layer photo shot inside a Shot: layers visible from `from` to `until` (scene times), credit bottom right
 function photoShot(o, dir, opt) {
   opt = opt || {};
-  var L = photoParallax(o.c, dir, {tint: opt.tint, redAt: opt.redAt === undefined ? undefined : o.t(opt.redAt)});
+  var L = photoParallax(o.c, dir, {tint: opt.tint, nearBlur: opt.nearBlur, redAt: opt.redAt === undefined ? undefined : o.t(opt.redAt)});
   var a = opt.from === undefined ? 0 : o.t(opt.from), b = opt.until === undefined ? o.d : o.t(opt.until);
   vis(L.bg, a, b, 0.5, 0.6, o.d); vis(L.mid, a, b, 0.5, 0.6, o.d); vis(L.near, a, b, 0.5, 0.6, o.d);
   if (opt.caption) label(o, opt.caption, opt.from === undefined ? o.a : opt.from, {x: W - 48, y: H - 36, just: RIGHTJ, size: 22, font: TF.headReg, track: 30, mode: "on", until: opt.until});
@@ -461,6 +461,60 @@ function dropIn(o, l, when, pos, rz) {
   if (rz !== undefined) T(l).property("Z Rotation").setValue(rz);
   vis(l, a, o.d, 0, 0.3, o.d);
   EVENTS.push(["drop", when + 0.32]);
+  return l;
+}
+// ---- overlays (review notes, 30 Oct 2026) -------------------------------------------------------------
+// TV / CRT overlay over a shot: scanlines, a slow rolling band, live static, tube vignette. 2D layers on top
+// (the camera ignores them). Soft and slow by design: no flashes (WCAG 2.3.1).
+function tvOverlay(o, from, until) {
+  var a = from === undefined ? 0 : o.t(from), b = until === undefined ? o.d : o.t(until);
+  var sl = o.c.layers.add(img("overlays/scanlines.png")); sl.name = "TV scanlines"; sl.blendingMode = BlendingMode.MULTIPLY;
+  T(sl).property("Opacity").setValue(55);
+  var band = solid(o.c, [1, 1, 1], "TV rolling band", 1920, 160); band.blendingMode = BlendingMode.SCREEN;
+  fx(band, "Fast Box Blur", {"Blur Radius": 70}); T(band).property("Opacity").setValue(7);
+  T(band).property("Position").expression = "[960, ((time * 110) % 1400) - 160]";
+  var st = solid(o.c, [0.5, 0.5, 0.5], "TV static"); fx(st, "Fractal Noise", {"Contrast": 220, "Transform/Scale": 6});
+  st.property("Effects").property(1).property("Evolution").expression = "time * 900"; st.blendingMode = BlendingMode.OVERLAY; T(st).property("Opacity").setValue(14);
+  var tube = o.c.layers.add(img("overlays/crt_vignette.png")); tube.name = "TV tube vignette";
+  var ls = [sl, band, st, tube];
+  for (var i = 0; i < ls.length; i++) { var keep = T(ls[i]).property("Opacity").value; vis(ls[i], a, b, 0.2, 0.2, o.d); if (keep !== 100) T(ls[i]).property("Opacity").expression = "value * " + (keep / 100); }
+  return ls;
+}
+// running code overlay: two columns of monospaced code scrolling upward, screen-blended over the picture.
+// speedExpr is lines per second as an expression of time (it can accelerate). Illustrative code, flagged on screen.
+var CODE = ["def on_tick(book, t):", "    vol = rolling_volume(book, window=60)", "    target = 0.09 * vol", "    if sold(t) < target:",
+  "        qty = min(LOT, target - sold(t))", "        send(SELL, 'FUT', qty)   # no price limit", "    else:", "        wait(0.001)",
+  "", "class Liquidity(Agent):", "    def react(self, order):", "        if order.side == SELL:", "            buy(order.qty, hold=0.4)",
+  "            sell_on(order.qty)", "        return self.pnl", "", "for agent in market.agents:", "    agent.react(stream.next())",
+  "# latency budget: 0.000350 s", "assert spread < MAX_SPREAD", "risk.check(position, limit=VAR_99)", "if volatility > 3 * baseline:",
+  "    widen_quotes(); pull_liquidity()", "log.write(t, side, qty, px)", ""];
+function codeOverlay(o, from, until, speedExpr, color) {
+  var a = o.t(from), b = until === undefined ? o.d : o.t(until), out = [];
+  for (var c = 0; c < 2; c++) {
+    var lines = []; for (var r = 0; r < 160; r++) lines.push(CODE[(r * (c ? 7 : 1) + c * 11) % CODE.length]);
+    var t = txt(o.c, lines.join("\r"), TF.monoReg, 26, color || TERM.green, [c ? 1010 : 90, 1100], LEFTJ, 0);
+    t.name = "code column " + c; t.blendingMode = BlendingMode.SCREEN;
+    // integrate the speed so it can accelerate smoothly: y = start - lineHeight * lines(t)
+    T(t).property("Position").expression = "var n = 0, dt = 1 / 24; for (var s = " + a + "; s < time; s += dt) { var time0 = s; n += (" + speedExpr.replace(/time/g, "time0") + ") * dt; } [" + (c ? 1010 : 90) + ", 1100 - n * 34];";
+    vis(t, a, b, 0.4, 0.3, o.d); T(t).property("Opacity").expression = "value * 0.42";
+    out.push(t);
+  }
+  return out;
+}
+// a real photo as a HUD card: the photo (cropped to 600 x 400), corner brackets, a label under it
+var _cards2 = 0;
+function photoCard(o, file, x, y, when, labelText, opt) {
+  opt = opt || {};
+  var cc = comp("Photo card " + (++_cards2), 60, 600, 400);
+  var p = cc.layers.add(img(file)); var sc = Math.max(600 / p.source.width, 400 / p.source.height) * 100 * (opt.zoom || 1);
+  T(p).property("Scale").setValue([sc, sc]); T(p).property("Position").setValue([300 + (opt.dx || 0), 200 + (opt.dy || 0)]);
+  T(p).property("Scale").expression = "value * (1 + time * 0.006)"; // a slow push inside the card
+  fx(p, "Tint", {"Map Black To": [0, 0, 0], "Map White To": [1, 0.86, 0.66], "Amount to Tint": opt.tint === undefined ? 35 : opt.tint});
+  var sl = cc.layers.add(img("overlays/scanlines.png")); sl.blendingMode = BlendingMode.MULTIPLY; T(sl).property("Opacity").setValue(35); T(sl).property("Position").setValue([300, 200]);
+  var hb = cc.layers.add(img("overlays/hud_brackets.png")); fx(hb, "Tint", {"Map Black To": TERM.amber, "Map White To": TERM.amber, "Amount to Tint": 100});
+  var k = opt.scale || 86, l = c3(o.c, cc, [x, y, 0]); T(l).property("Scale").setValue([k, k, 100]); shadow(l);
+  slideIn(o, l, when, [x, y, 0], [0, 260]);
+  if (labelText) label(o, labelText, when + 0.3, {x: x, y: y + 200 * k / 100 + 45, size: 26, color: TERM.amber});
   return l;
 }
 // events the mix reads (paper slides get friction, stamps a thump): printed at build time

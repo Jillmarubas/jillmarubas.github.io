@@ -92,17 +92,18 @@ var tAuto = at("automatic");
   cam(o, {push: 1.03, d0: -0.5, d1: 0.6});
 })();
 
-// E · inverter-based resources: power electronics, not rotating iron
+// E · inverter-based resources: power electronics, not rotating iron. Review note (5:51): real photographs
+// (public domain: NREL and the Bureau of Land Management) as HUD cards with scanlines and corner brackets
 (function () {
   var o = Shot("S3E Inverters", vo(43.3), vo(60.78));
-  label(o, "INVERTER-BASED", at("inverter"), {y: 220, size: 40, color: TERM.white});
-  showAt(o, solarIcon(o, 540, 500, 120, TERM.amber), at("solar"));
-  showAt(o, batteryIcon(o, 960, 520, 140, TERM.amber), at("battery"));
-  var w = windIcon(o, 1380, 440, 130, TERM.amber, "time * 60"); showAt(o, w.tower, at("wind farms")); showAt(o, w.blades, at("wind farms"));
-  label(o, "SOLAR", at("solar"), {x: 540, y: 690, size: 26}); label(o, "BATTERIES", at("battery"), {x: 960, y: 690, size: 26}); label(o, "WIND", at("wind farms"), {x: 1380, y: 690, size: 26});
-  word(o, "POWER ELECTRONICS", at("power electronics"), {size: 92, y: 820, color: TERM.amber, glow: true});
-  word(o, "ROTATING IRON", at("not heavy"), {size: 50, y: 920, color: TERM.grey, mode: "fade"});
-  strike(o, W / 2, 905, 420, at("rotating iron") + 0.2);
+  label(o, "INVERTER-BASED", at("inverter"), {y: 180, size: 40, color: TERM.white});
+  photoCard(o, "stock/solar_nrel.jpg", 400, 480, at("solar") - 0.2, "SOLAR");
+  photoCard(o, "stock/battery_blm.jpg", 960, 480, at("battery") - 0.2, "BATTERIES");
+  photoCard(o, "stock/wind_nrel.jpg", 1520, 480, at("wind farms") - 0.2, "WIND");
+  word(o, "POWER ELECTRONICS", at("power electronics"), {size: 92, y: 860, color: TERM.amber, glow: true});
+  word(o, "ROTATING IRON", at("not heavy"), {size: 50, y: 960, color: TERM.grey, mode: "fade"});
+  strike(o, W / 2, 945, 420, at("rotating iron") + 0.2);
+  flag(o, "Photos: Dennis Schroeder / NREL (public domain) · BLM California (public domain)");
   cam(o, {x0: -40, x1: 40, d0: -0.3, d1: 0.3});
 })();
 
