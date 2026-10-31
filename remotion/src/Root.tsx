@@ -22,9 +22,11 @@ import {DEMO_DURATION, TutorialDemo} from './tutorial/Demo';
 import {CC_DURATION, CC_PARTS, CCFilm, CCPart} from './cc1003/Film';
 import {CCThumbA, CCThumbB, CCThumbC, CCThumbD} from './cc1003/Thumbnail';
 import {BG_DURATION, BgDrafting, BgFizz, BgKinetic} from './cola/Backgrounds';
+import {S1, S1_DURATION} from './invisible-cassette/S1';
 
 export const Root: React.FC = () => (
   <>
+    <Composition id="InvisibleCassette-S1" component={S1} durationInFrames={S1_DURATION} fps={24} width={1920} height={1080} />
     <Composition
       id="BrandStory"
       component={Promo}

@@ -1,0 +1,113 @@
+{
+ "title": "Invisible Cassette Review",
+ "version": "Scene 1 v3.1 \u00b7 trading terminal \u00b7 NYSE photo",
+ "shots": [
+  {
+   "name": "Cold open \u00b7 black",
+   "start": 0,
+   "end": 4.0
+  },
+  {
+   "name": "Date \u00b7 Dow counter",
+   "start": 4.0,
+   "end": 17.42
+  },
+  {
+   "name": "36 min \u00b7 $1 trillion",
+   "start": 17.42,
+   "end": 27.08
+  },
+  {
+   "name": "Quotes \u00b7 ACN, BID",
+   "start": 27.08,
+   "end": 41.18
+  },
+  {
+   "name": "Floor (archive photo) \u2192 machines",
+   "start": 41.18,
+   "end": 56.14
+  },
+  {
+   "name": "Newswire",
+   "start": 56.14,
+   "end": 70.22
+  },
+  {
+   "name": "Recovery",
+   "start": 70.22,
+   "end": 79.52
+  },
+  {
+   "name": "Investigators \u00b7 report",
+   "start": 79.52,
+   "end": 92.08
+  },
+  {
+   "name": "Nobody",
+   "start": 92.08,
+   "end": 95.0
+  },
+  {
+   "name": "Feedback loop",
+   "start": 95.0,
+   "end": 108.3
+  },
+  {
+   "name": "Black",
+   "start": 108.3,
+   "end": 109.0
+  },
+  {
+   "name": "Title card",
+   "start": 109.0,
+   "end": 124.5
+  }
+ ],
+ "lines": [
+  {
+   "start": 4.0,
+   "end": 16.8,
+   "text": "On May 6th, 2010, at forty-two minutes past two in the afternoon, the modern financial world suffered an event that human biology was completely unequipped to perceive."
+  },
+  {
+   "start": 17.42,
+   "end": 26.04,
+   "text": "In the span of just thirty-six minutes, nearly one trillion dollars in market value evaporated into thin air."
+  },
+  {
+   "start": 27.08,
+   "end": 38.52,
+   "text": "Shares of Accenture, one of the largest consulting firms in the world, traded for a single cent. Shares of Sotheby's briefly changed hands at one hundred thousand dollars."
+  },
+  {
+   "start": 41.18,
+   "end": 55.54,
+   "text": "On the trading floor of the New York Stock Exchange, brokers stood and watched. Most of the trading wasn't happening there at all. It was happening inside computers, in fractions of a second."
+  },
+  {
+   "start": 56.14,
+   "end": 69.5,
+   "text": "No war had been declared. No bank had collapsed. Markets were already nervous that day about Greece's debt crisis, but nothing in the news could explain a fall this fast."
+  },
+  {
+   "start": 70.22,
+   "end": 79.1,
+   "text": "And thirty-six minutes after it began, the market had recovered most of what it lost, as if nothing had ever happened."
+  },
+  {
+   "start": 79.52,
+   "end": 91.4,
+   "text": "When investigators from America's two market regulators, the SEC and the CFTC, went through the trading records, they found something unsettling."
+  },
+  {
+   "start": 92.08,
+   "end": 94.46,
+   "text": "Nobody had decided to crash the market."
+  },
+  {
+   "start": 95.0,
+   "end": 108.26,
+   "text": "It began with one automated sell order. It was amplified by trading programs reacting to each other, in a feedback loop that ran faster than any human could step in."
+  }
+ ]
+}

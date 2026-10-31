@@ -1,0 +1,42 @@
+{
+ "duration": 75.0,
+ "cues": [
+  {
+   "f": "out/invisible-cassette/audio/sfx/A1a.mp3",
+   "at": 0,
+   "bus": "amb",
+   "gain": -4,
+   "loop_to": 30.0,
+   "fade_in": 1.0,
+   "fade_out": 1.5
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F5a.mp3",
+   "at": 5.0,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K8a.mp3",
+   "at": 25.0,
+   "bus": "sfx",
+   "gain": -3
+  }
+ ],
+ "rumble": [
+  [
+   0,
+   45.0,
+   -28,
+   0.05
+  ],
+  [
+   0,
+   30.0,
+   -24
+  ]
+ ],
+ "silence": [],
+ "bassout": [],
+ "shepard": []
+}
