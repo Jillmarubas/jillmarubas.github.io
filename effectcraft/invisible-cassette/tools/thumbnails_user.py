@@ -3,11 +3,11 @@
 
 Usage: python3 -I tools/thumbnails_user.py      (run from effectcraft/invisible-cassette)
 Three words or fewer each, in the film's type (IBM Plex Sans Condensed Bold) and colours, placed in each
-picture's dark empty side with a soft shadow gradient behind it; 1280x720 JPEG plus a 200 px mobile check.
+picture's empty side, which is blurred (not darkened) so the words sit on soft colour; 1280x720 JPEG plus a 200 px mobile check.
 """
 import os
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC, OUT = os.path.join(HERE, "thumbnails/user_src"), os.path.join(HERE, "thumbnails")
@@ -31,6 +31,25 @@ def shade(img, side, strength=0.55, width=0.5):
     return Image.fromarray(a.clip(0, 255).astype(np.uint8))
 
 
+def blur_side(img, side, width=0.5, fill=False, darken=0.18):
+    """the text side becomes a soft blur of the picture (review note: blurry, not black). With fill=True the
+    side is empty black in the source, so it is filled with an enlarged, heavily blurred copy of the subject half."""
+    if fill:
+        # the subject half, stretched across the frame and mirrored so its colours continue past the seam
+        half = img.crop((0, 0, W // 2, H)) if side == "right" else img.crop((W // 2, 0, W, H))
+        bg = half.resize((W, H), Image.LANCZOS)
+        if side == "right": bg = bg.transpose(Image.FLIP_LEFT_RIGHT)
+        bg = bg.filter(ImageFilter.GaussianBlur(45))
+    else:
+        bg = img.filter(ImageFilter.GaussianBlur(22))
+    x = np.linspace(0, 1, W)
+    edge = 1 - width                                     # where the blur starts, with a soft 18 % transition
+    m = np.clip((x - edge + 0.09) / 0.18, 0, 1) if side == "right" else np.clip((width + 0.09 - x) / 0.18, 0, 1)
+    m = m[None, :, None]
+    a = np.asarray(img, float) * (1 - m) + np.asarray(bg, float) * m * (1 - darken)
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8))
+
+
 def fit(text, size, maxw):
     while True:
         f = ImageFont.truetype(BOLD, size); bb = f.getbbox(text)
@@ -51,8 +70,8 @@ def words(img, lines, x, y_mid, align, maxw):
     return img
 
 
-def make(out, src, lines, side, y_mid, maxw, strength=0.55, src_dir=None):
-    img = shade(load(src, src_dir), side, strength)
+def make(out, src, lines, side, y_mid, maxw, strength=0.55, src_dir=None, fill=False, width=0.5):
+    img = blur_side(load(src, src_dir), side, width=width, fill=fill)
     x, align = (W - 44, "right") if side == "right" else (44, "left")
     img = words(img, lines, x, y_mid, align, maxw)
     p = os.path.join(OUT, out); img.save(p, quality=92, optimize=True)
@@ -62,8 +81,8 @@ def make(out, src, lines, side, y_mid, maxw, strength=0.55, src_dir=None):
 
 if __name__ == "__main__":
     # 1 · the hooded machine at the laptop: the words sit over the dark laptop lid, right of the hands
-    make("thumb_user1_nobody_decided.jpg", "idea1.jpg", [("NOBODY", 160, AMBER), ("DECIDED", 160, RED)], "right", 540, 520, 0.45)
+    make("thumb_user1_nobody_decided.jpg", "idea1.jpg", [("NOBODY", 160, AMBER), ("DECIDED", 160, RED)], "right", 540, 520, 0.45, width=0.38)
     # 2 · the machine at the breaker: the empty dark right half
-    make("thumb_user2_no_off_switch.jpg", "idea2.jpg", [("NO OFF", 170, WHITE), ("SWITCH", 170, RED)], "right", 360, 540)
+    make("thumb_user2_no_off_switch.jpg", "idea2.jpg", [("NO OFF", 170, WHITE), ("SWITCH", 170, RED)], "right", 360, 540, width=0.42)
     # 3 · the machine holding Earth: the starfield on the right
-    make("thumb_user3_too_slow.jpg", "idea3.jpg", [("HUMANS:", 150, WHITE), ("TOO SLOW", 150, RED)], "right", 360, 430)
+    make("thumb_user3_too_slow.jpg", "idea3.jpg", [("HUMANS:", 150, WHITE), ("TOO SLOW", 150, RED)], "right", 360, 430, width=0.36)
