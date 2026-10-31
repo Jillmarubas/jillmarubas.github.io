@@ -16,8 +16,8 @@ BLACK, AMBER, RED, WHITE = (6, 7, 10), (255, 176, 0), (255, 59, 48), (242, 240, 
 BOLD = os.path.expanduser("~/.fonts/IBMPlexSansCondensed-Bold.ttf")
 
 
-def load(name):
-    im = Image.open(os.path.join(SRC, name)).convert("RGB")
+def load(name, src_dir=None):
+    im = Image.open(os.path.join(src_dir or SRC, name)).convert("RGB")
     w, h = im.size; cw = min(w, round(h * 16 / 9)); ch = round(cw * 9 / 16)
     x0, y0 = (w - cw) // 2, (h - ch) // 2
     return im.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.LANCZOS)
@@ -51,8 +51,8 @@ def words(img, lines, x, y_mid, align, maxw):
     return img
 
 
-def make(out, src, lines, side, y_mid, maxw, strength=0.55):
-    img = shade(load(src), side, strength)
+def make(out, src, lines, side, y_mid, maxw, strength=0.55, src_dir=None):
+    img = shade(load(src, src_dir), side, strength)
     x, align = (W - 44, "right") if side == "right" else (44, "left")
     img = words(img, lines, x, y_mid, align, maxw)
     p = os.path.join(OUT, out); img.save(p, quality=92, optimize=True)
@@ -60,9 +60,10 @@ def make(out, src, lines, side, y_mid, maxw, strength=0.55):
     print(p, os.path.getsize(p) // 1024, "KB")
 
 
-# 1 · the hooded machine at the laptop: the words sit over the dark laptop lid, right of the hands
-make("thumb_user1_nobody_decided.jpg", "idea1.jpg", [("NOBODY", 160, AMBER), ("DECIDED", 160, RED)], "right", 540, 520, 0.45)
-# 2 · the machine at the breaker: the empty dark right half
-make("thumb_user2_no_off_switch.jpg", "idea2.jpg", [("NO OFF", 170, WHITE), ("SWITCH", 170, RED)], "right", 360, 540)
-# 3 · the machine holding Earth: the starfield on the right
-make("thumb_user3_too_slow.jpg", "idea3.jpg", [("HUMANS:", 150, WHITE), ("TOO SLOW", 150, RED)], "right", 360, 430)
+if __name__ == "__main__":
+    # 1 · the hooded machine at the laptop: the words sit over the dark laptop lid, right of the hands
+    make("thumb_user1_nobody_decided.jpg", "idea1.jpg", [("NOBODY", 160, AMBER), ("DECIDED", 160, RED)], "right", 540, 520, 0.45)
+    # 2 · the machine at the breaker: the empty dark right half
+    make("thumb_user2_no_off_switch.jpg", "idea2.jpg", [("NO OFF", 170, WHITE), ("SWITCH", 170, RED)], "right", 360, 540)
+    # 3 · the machine holding Earth: the starfield on the right
+    make("thumb_user3_too_slow.jpg", "idea3.jpg", [("HUMANS:", 150, WHITE), ("TOO SLOW", 150, RED)], "right", 360, 430)
