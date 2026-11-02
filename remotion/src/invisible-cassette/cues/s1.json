@@ -1,0 +1,282 @@
+{
+ "duration": 124.5,
+ "cues": [
+  {
+   "f": "public/cc1003/sfx/typing-laptop.wav",
+   "at": 0,
+   "bus": "sfx",
+   "gain": -9,
+   "lowpass": 2200,
+   "loop_to": 4.6,
+   "fade_out": 1.2
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/T1a.mp3",
+   "at": 0.2,
+   "bus": "sfx",
+   "gain": -5
+  },
+  {
+   "f": "out/invisible-cassette/audio/vo/scene1.wav",
+   "at": 4.0,
+   "bus": "vo"
+  },
+  {
+   "f": "out/invisible-cassette/audio/music/M1.mp3",
+   "at": 0,
+   "bus": "music",
+   "trim": [
+    7.3,
+    86.82
+   ],
+   "fade_in": 3
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/A1a.mp3",
+   "at": 4.0,
+   "bus": "amb",
+   "loop_to": 79.5,
+   "fade_in": 1,
+   "fade_out": 0.5
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K1a.mp3",
+   "at": 4.0,
+   "bus": "sfx",
+   "gain": -15,
+   "loop_to": 24.8,
+   "fade_in": 0.6,
+   "fade_out": 0.6
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/A2a.mp3",
+   "at": 41.18,
+   "bus": "amb",
+   "gain": 3,
+   "lowpass": 3000,
+   "loop_to": 52.9,
+   "fade_in": 0.4,
+   "fade_out": 1.2
+  },
+  {
+   "f": "public/sfx/typewriter.mp3",
+   "at": 56.42,
+   "bus": "sfx",
+   "gain": -9,
+   "trim": [
+    0,
+    0.85
+   ],
+   "fade_out": 0.1
+  },
+  {
+   "f": "public/sfx/typewriter.mp3",
+   "at": 58.7,
+   "bus": "sfx",
+   "gain": -9,
+   "trim": [
+    1.0,
+    1.9
+   ],
+   "fade_out": 0.1
+  },
+  {
+   "f": "public/sfx/typewriter.mp3",
+   "at": 63.46,
+   "bus": "sfx",
+   "gain": -9,
+   "trim": [
+    2.0,
+    3.0
+   ],
+   "fade_out": 0.1
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K1a.mp3",
+   "at": 70.2,
+   "bus": "sfx",
+   "gain": -17,
+   "loop_to": 79.4,
+   "fade_in": 0.5,
+   "fade_out": 0.3
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K3a.mp3",
+   "at": 79.5,
+   "bus": "sfx",
+   "gain": -2
+  },
+  {
+   "f": "public/sfx/type_key.mp3",
+   "at": 80.12,
+   "bus": "sfx",
+   "gain": -12
+  },
+  {
+   "f": "public/sfx/type_key.mp3",
+   "at": 80.6,
+   "bus": "sfx",
+   "gain": -12
+  },
+  {
+   "f": "public/sfx/type_key.mp3",
+   "at": 81.1,
+   "bus": "sfx",
+   "gain": -12
+  },
+  {
+   "f": "out/invisible-cassette/audio/music/M2.mp3",
+   "at": 79.52,
+   "bus": "music",
+   "trim": [
+    1.73,
+    30.5
+   ],
+   "fade_out": 3
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/T3a.mp3",
+   "at": 93.6,
+   "bus": "sfx",
+   "gain": -7
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
+   "at": 96.2,
+   "bus": "sfx",
+   "gain": -11
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K4b.mp3",
+   "at": 98.9,
+   "bus": "sfx",
+   "gain": -11
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K5a.mp3",
+   "at": 103.9,
+   "bus": "sfx",
+   "gain": -8,
+   "trim": [
+    0,
+    4.4
+   ],
+   "fade_out": 0.08,
+   "lowpass": 4000
+  },
+  {
+   "f": "out/invisible-cassette/audio/music/M3.mp3",
+   "at": 109.0,
+   "bus": "music",
+   "gain": 4,
+   "trim": [
+    0,
+    15.5
+   ],
+   "fade_out": 2.5
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/T2a.mp3",
+   "at": 109.3,
+   "bus": "sfx",
+   "gain": -5
+  },
+  {
+   "f": "public/sfx/typewriter.mp3",
+   "at": 112.2,
+   "bus": "sfx",
+   "gain": -10,
+   "trim": [
+    3.2,
+    4.6
+   ],
+   "fade_out": 0.1
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F4a.mp3",
+   "at": 27.3,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F3a.mp3",
+   "at": 35.42,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F4a.mp3",
+   "at": 79.62,
+   "bus": "sfx",
+   "gain": -4
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
+   "at": 84.38,
+   "bus": "sfx",
+   "gain": -12
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/K4a.mp3",
+   "at": 85.98,
+   "bus": "sfx",
+   "gain": -12
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F1a.mp3",
+   "at": 93.62,
+   "bus": "sfx",
+   "gain": -1
+  },
+  {
+   "f": "out/invisible-cassette/audio/sfx/F1a.mp3",
+   "at": 96.46,
+   "bus": "sfx",
+   "gain": -1
+  }
+ ],
+ "rumble": [
+  [
+   0,
+   124.5,
+   -28,
+   0.05
+  ],
+  [
+   17.4,
+   27.0,
+   -20
+  ],
+  [
+   41.2,
+   56.0,
+   -20
+  ],
+  [
+   92.1,
+   108.3,
+   -18
+  ]
+ ],
+ "silence": [
+  [
+   91.7,
+   92.08
+  ],
+  [
+   65.2,
+   65.5
+  ]
+ ],
+ "bassout": [
+  [
+   92.08,
+   0.7
+  ],
+  [
+   65.5,
+   0.7
+  ]
+ ],
+ "shepard": []
+}

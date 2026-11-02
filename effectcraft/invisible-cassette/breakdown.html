@@ -1,0 +1,793 @@
+<title>Film Breakdown</title><meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: a production sheet in the film's own palette, one column of shot cards. */
+:root{--bg:#06070A;--panel:#0D1014;--line:#232830;--fg:#F2F0EA;--muted:#9AA0A8;--amber:#FFB000;--green:#19C46B;--red:#FF3B30;
+--fm:"JetBrains Mono",ui-monospace,monospace;--fu:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--fu);font-size:16px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 56px}
+.wrap{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+h1{font-weight:700;font-size:clamp(26px,6vw,40px);margin:4px 0 0;text-transform:uppercase;letter-spacing:.03em;text-wrap:balance}
+h2{font-weight:700;font-size:20px;margin:0;text-transform:uppercase;letter-spacing:.04em;text-wrap:balance}
+p{margin:0}
+.muted{color:var(--muted)}
+.box{background:var(--panel);border:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.shot{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.shot.down{border-left-color:var(--red)}.shot.up{border-left-color:var(--green)}
+.head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.tc{font-family:var(--fm);font-weight:700;color:var(--amber);font-variant-numeric:tabular-nums;font-size:14px}
+.line{font-size:15px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px;font-style:italic}
+code,.k{font-family:var(--fm);font-size:.9em}
+.k{color:var(--amber)}
+.flag{color:var(--red);font-weight:600}
+.sw{display:flex;gap:8px;flex-wrap:wrap}.sw span{font-family:var(--fm);font-size:12px;padding:4px 8px;border:1px solid var(--line)}
+.scene{display:flex;flex-direction:column;gap:12px;padding-top:12px;border-top:1px solid var(--line)}nav{display:flex;flex-wrap:wrap;gap:8px}nav a{color:var(--amber);font-family:var(--fm);font-size:13px}</style>
+<div class="wrap"><header><div class="eyebrow">The Invisible Cassette · full film · v2</div><h1>Shot-by-shot breakdown</h1>
+<p class="muted">Every scene rebuilt to the production file's visual directives (as corrected by the fact-check), in the trading-terminal palette, 24 fps. For each shot: PhotoCraft prep, EffectCraft layer stack and Z, camera keys, on-screen keywords and the sound triggers.</p></header>
+<section class="box"><h2>Rules on every shot</h2><ul><li>Photos: three layers from PhotoCraft (plate Z +400, subject Z 0, occlusion Z −250 with 15–20 px of depth-of-field blur).</li><li>Camera: 35 mm; no static frames: a 4–6 % push per 8–10 s (or a pull-back where the directive asks) and a 0.5–1° Dutch drift through level; camera keys ease at 55 % influence, the Dutch at 50 %.</li><li>Easing: documents slide in with ease-out cubic inertia (first key 80 % influence, last 0.1 %) plus paper friction; stamps and red badges slam 115 % → 100 % over 2 frames with a desk thump; folders drop with gravity and a 2-frame settle; highlighter wipes take 0.5 s.</li><li>Finish: film grain 12 % overlay, vignette 18 %, smoke, floating dust motes; one palette; keywords and numbers only (audited by tools/text_audit.py).</li><li>Sound: a constant 45 Hz rumble (with a 90 Hz layer for phones) under the film at −28 dB, swelling on tense stretches; every visual event carries its Foley on the frame.</li></ul></section>
+<nav><a href="#s1">1</a> <a href="#s2">2</a> <a href="#s3">3</a> <a href="#s4">4</a> <a href="#s5">5</a> <a href="#s6">6</a> <a href="#s7">7</a> <a href="#s8">8</a> <a href="#s9">9</a> <a href="#s10">10</a></nav>
+<section class="scene" id="s1"><div class="eyebrow">Scene 1 · 02:04.50</div><h2>The crash no human could see</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>00:00 black, muted keyboard clatter, sub-bass swell</span> → 0–4 s: black; typing + T1 swell (existing mix)</li>
+<li><span class='k'>00:05 top-down 3D camera pan over the desk; archival Dow ticker tape scrolling fast</span> → &quot;On May 6th…&quot;: ticker tape (symbols with ▼ arrows; no index levels, the Dow figures could not be verified) scrolling across a dark surface, top-down camera pan</li>
+<li><span class='k'>00:20 tape numbers plunge off the edge into shadow</span> → &quot;evaporated&quot;: the tape slides off the surface edge into black; K2 tape whip</li>
+<li><span class='k'>00:40 NYSE parallax (FG brokers, MG boards plunging into crimson, BG arena)</span> → &quot;On the trading floor…&quot;: Highsmith NYSE floor, 3 layers; amber → red grade. No PD photo of 6 May 2010 or of brokers exists to us: caption &quot;Archive photo&quot;</li>
+<li><span class='k'>01:25 freeze-frame into a distressed Polaroid; shutter snap; typed &quot;MAY 6, 2010 // 14:42:00 EDT&quot;</span> → &quot;When investigators…&quot;: freeze of the floor frame into a Polaroid print; K3 shutter; typewriter caption</li>
+<li><span class='k'>01:50 red stamp on an SEC incident folder: &quot;~$1 TRILLION ERASED · 36 MINUTES&quot;; desk thump</span> → &quot;Nobody had decided…&quot;: folder + 2-frame stamp slam; F1 thump</li>
+<li><span class='k'>02:30 title &quot;THE GHOST IN THE SYSTEM // INVESTIGATION&quot; stamps across aged paper; chime + cello</span> → title card: stamp on a paper card; T2 chime, M3</li>
+</ul></div>
+<p class="muted">Story-turn package at 01:05.50, 01:32.08: 0.3 s of silence on the music bed, a hard cut on the word, a 0.7 s bass drop-out, and the grade flips cold (Tint 22 %, white → #C7DBFF).</p>
+<article class="shot"><div class="head"><span class="tc">00:04.00–00:17.42</span><b>S1A Ticker tape</b></div>
+<p class="line">A · 00:05 directive: top-down camera pan over the surface; an archival ticker tape scrolls, faster and faster</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -220 → 160 px; track Y -30 → 20 px; Dutch -0.6° → 0.7° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">MAY 6, 2010</span> · <span class="k">14:42 EDT</span></p>
+<p><b>Sound</b>: 00:04.00 room tone (A1a); 00:04.00 ticker clatter (K1a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:17.42–00:27.08</span><b>S1B Plunge</b></div>
+<p class="line">B · 36 minutes, nearly $1 trillion; 00:20 directive: on &quot;evaporated&quot; the tape plunges off the edge into shadow</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X 120 → -60 px; Dutch 0.6° → -0.7° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">36 MINUTES</span> · <span class="k">≈ $1 TRILLION</span> · <span class="k">MARKET VALUE</span></p>
+<p><b>Sound</b>: 00:23.30 tape whip (K2a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:27.08–00:41.18</span><b>S1C Quotes</b></div>
+<p class="line">C · the quotes: Accenture a cent, Sotheby&#x27;s $100,000</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · slide at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -50 → 50 px; Dutch 0.6° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">SYMBOL      COMPANY                                        LAST</span></p>
+<p><b>Sound</b>: 00:27.30 paper slide (F4a); 00:35.42 paper slide (F3a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:41.18–00:56.14</span><b>S1D Floor</b></div>
+<p class="line">D · 00:40 directive: the NYSE floor in 2.5D parallax, the boards turning crimson; then inside the computers</p>
+<p><b>PhotoCraft</b>: Highsmith NYSE floor (LoC IIIF 4793 px) → 2400 × 1350 crop; Depth Anything V2 masks; Refine Edge radius 2, feather 0.75 px → <span class="k">mid.png</span> (no foreground object: near layer empty); selection expanded 12 px, Content-Aware Fill → <span class="k">bg.png</span>; all three at the same canvas with alpha.</p>
+<p><b>Layer stack</b>: Layer 2 foreground occlusion Z −250 (soft) · Layer 1 midground Z 0 (sharp) · Layer 0 filled plate Z +400; scaled so they line up through the lens at frame 1; Tint into the amber palette; lower-third bar for keywords.</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -70 → 90 px; track Y 30 → 0 px; Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 60 + 12 px box blur on the near layer</p>
+<p><b>On screen</b>: <span class="k">NEW YORK STOCK EXCHANGE</span> · <span class="k">&lt; 1 SECOND</span></p>
+<p><b>Sound</b>: 00:41.18 trading floor (A2a); 00:52.30 glide (T5a); 00:55.18 relay click (K4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:56.14–01:05.52</span><b>S1E Newswire</b></div>
+<p class="line">E1 · the newswire: no war, no bank collapse, only Greece</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.6° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">NEWSWIRE · MAY 6, 2010</span></p>
+<p><b>Sound</b>: 00:56.42 typewriter (typewriter); 00:58.70 typewriter (typewriter); 01:03.46 typewriter (typewriter)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:05.52–01:10.22</span><b>S1E No explanation</b></div>
+<p class="line">E2 · cut on &quot;but&quot;: no explanation</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.05 (clamped 0.4–0.75 %/s); Dutch 0.6° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">NEWSWIRE · MAY 6, 2010</span> · <span class="k">&gt; _</span> · <span class="k">NO EXPLANATION</span></p>
+<p><b>Sound</b>: 01:10.20 ticker clatter (K1a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:10.22–01:19.52</span><b>S1F Recovered</b></div>
+<p class="line">F · thirty-six minutes later: recovered (the release beat, brighter, green)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X 100 → -100 px; Dutch 0.6° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">+36 MINUTES</span> · <span class="k">RECOVERED</span></p>
+<p><b>Sound</b>: 01:10.20 ticker clatter (K1a); 01:19.50 shutter (K3a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:19.52–01:32.08</span><b>S1G Polaroid</b></div>
+<p class="line">G · 01:25 directive: freeze-frame into a distressed Polaroid, shutter snap, typed caption; then the regulators</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · slide at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -60 → 60 px; Dutch -0.6° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">SEC</span> · <span class="k">CFTC</span></p>
+<p><b>Sound</b>: 01:19.50 shutter (K3a); 01:19.52 music M2; 01:19.62 paper slide (F4a); 01:20.12 type_key (type_key); 01:20.60 type_key (type_key); 01:21.10 type_key (type_key); 01:25.98 relay click (K4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:32.08–01:35.00</span><b>S1H Stamp</b></div>
+<p class="line">H · 01:50 directive: a red stamp slams onto the incident folder (fact-checked wording)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.02 (clamped 0.4–0.75 %/s); Dutch -0.6° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>Sound</b>: 01:33.60 impact (T3a); 01:33.62 desk thump (stamp) (F1a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:35.00–01:49.00</span><b>S1I Feedback loop</b></div>
+<p class="line">I · one automated sell order, programs reacting to each other: the feedback loop</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · stamp at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -60 → 60 px; Dutch 0.6° → -0.9° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">SELL ORDER</span> · <span class="k">PROGRAM</span> · <span class="k">FEEDBACK LOOP</span></p>
+<p><b>Sound</b>: 01:36.20 relay click (K4a); 01:36.46 desk thump (stamp) (F1a); 01:38.90 relay click (K4b); 01:40.00 relay click (K4a); 01:40.42 relay click (K4a); 01:43.90 data chatter (K5a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:49.00–02:04.50</span><b>S1J Title</b></div>
+<p class="line">J · 02:30 directive: title stamped across aged paper (T2 chime, M3)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.6° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>Sound</b>: 01:49.00 music M3; 01:49.30 chime (T2a); 01:50.10 desk thump (stamp) (F1a); 01:52.20 typewriter (typewriter)</p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–02:04.50 at -28 dB; rumble 00:17.40–00:27.00 at -20 dB; rumble 00:41.20–00:56.00 at -20 dB; rumble 01:32.10–01:48.30 at -18 dB; Shepard tone + tick 00:41.18–01:10.22 (cut dead).</p>
+</section>
+<section class="scene" id="s2"><div class="eyebrow">Scene 2 · 02:36.49</div><h2>The autopsy of a phantom</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>03:00 camera drifts over the 104-page report</span> → &quot;…a 104-page report&quot;: report cover, camera drift; F4 slide</li>
+<li><span class='k'>03:45 yellow highlighter over the report&#x27;s own words (27,000 / 14 s / ~49 % / ~200 net)</span> → &quot;In 14 seconds…&quot;: report page with the exact excerpt; highlighter wipe; F6</li>
+<li><span class='k'>04:30 split screen: A BLINK: 100–400 MILLISECONDS / 27,000 CONTRACTS IN 14 SECONDS</span> → &quot;…a speed no person could follow&quot;: split screen: drawn eye blink (no footage, no AI) / data waterfall</li>
+<li><span class='k'>05:15 slow push-in on an empty server room, cold blue LEDs</span> → &quot;…beyond human latency&quot;: drawn 3D server racks with blue LEDs (no PD photo found)</li>
+</ul></div>
+<p class="muted">Story-turn package at 01:48.58: 0.3 s of silence on the music bed, a hard cut on the word, a 0.7 s bass drop-out, and the grade flips cold (Tint 22 %, white → #C7DBFF).</p>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:09.68</span><b>S2A Report</b></div>
+<p class="line">A · the report: 104 pages, no simple bug</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · slide at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.3° → 0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">PAGES</span> · <span class="k">SOFTWARE BUG</span></p>
+<p><b>Sound</b>: 00:00.00 music M4; 00:00.00 whoosh7 (whoosh7); 00:00.30 paper slide (F4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:09.68–00:27.90</span><b>S2B Sell order</b></div>
+<p class="line">B · one fund, 75,000 contracts, about $4.1 billion</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.4° → -0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">MUTUAL FUND</span> · <span class="k">14:32 EDT</span> · <span class="k">FUTURES CONTRACTS · SELL</span> · <span class="k">≈ $4.1 BILLION</span> · <span class="k">HEDGE</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:27.90–00:34.80</span><b>S2C Program</b></div>
+<p class="line">C1 · the instruction: keep pace with volume, ignore price and time (our own illustration)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>Sound</b>: 00:28.00 terminal (K7a); 00:30.93 typing-laptop (typing-laptop); 00:32.57 typing-laptop (typing-laptop)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:34.80–00:42.28</span><b>S2C Duration bars</b></div>
+<p class="line">C2 · five hours then, twenty minutes now (true-scale bars)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:42.28–00:58.80</span><b>S2D HFT</b></div>
+<p class="line">D · HFTs buy, sell on; the program reads it as demand and sells faster</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · stamp at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -40 → 40 px; Dutch 0.3° → -0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">SELL PROGRAM</span> · <span class="k">HFT FIRMS</span> · <span class="k">MILLISECONDS</span> · <span class="k">VOLUME = DEMAND?</span> · <span class="k">SELLS FASTER</span></p>
+<p><b>Sound</b>: 00:42.28 server room (A3a); 00:42.28 relay click (K4a); 00:42.48 desk thump (stamp) (F1a); 00:43.78 data chatter (K5a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">00:58.80–01:09.44</span><b>S2E Hot potato</b></div>
+<p class="line">E · hot potato: machines trading the same contracts between themselves</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.6° → 0.8° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">HFT</span> · <span class="k">MACHINE ↔ MACHINE</span> · <span class="k">“HOT POTATO”</span> · <span class="k">THE REGULATORS’ TERM</span></p>
+<p><b>Sound</b>: 00:59.10 relay click (K4a); 00:59.58 relay click (K4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:09.44–01:25.90</span><b>S2F Report excerpt</b></div>
+<p class="line">F · directive 03:45: a yellow highlighter over the report&#x27;s own words, synced to the narration</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · slide, highlight at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -30 → 30 px; Dutch 0.3° → -0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>Sound</b>: 01:09.54 paper slide (F3a); 01:09.60 highlighter (F6a); 01:14.40 highlighter (F6b); 01:17.88 highlighter (F6c); 01:22.96 highlighter (F6a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:25.90–01:36.00</span><b>S2G Buyers vanish</b></div>
+<p class="line">G · market makers pull out; the buy side empties (illustration)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.4° → -0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">BUY ORDERS</span> · <span class="k">MARKET MAKERS: OUT</span> · <span class="k">NO BUYERS</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:36.00–01:48.60</span><b>S2H Not broken</b></div>
+<p class="line">H · not a broken machine; emergent behaviour</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">NO MALFUNCTION</span> · <span class="k">AS INSTRUCTED</span> · <span class="k">EMERGENT BEHAVIOR</span> · <span class="k">COLLAPSE</span></p>
+<p><b>Sound</b>: 01:47.10 impact (T3a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:48.60–02:10.16</span><b>S2I London</b></div>
+<p class="line">I · the &quot;But&quot; turn: hard cut on the word to a cold map of Great Britain; London pinned on &quot;London&quot;</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · stamp, map at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.5° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">2015</span> · <span class="k">U.S. CHARGES</span> · <span class="k">SPOOFING</span> · <span class="k">PLEADED GUILTY</span></p>
+<p><b>Sound</b>: 02:04.00 desk thump (stamp) (F1a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">02:10.16–02:15.32</span><b>S2J Blink vs waterfall</b></div>
+<p class="line">J · directive 04:30: split screen, a drawn eye blink (no footage, no AI) against a data waterfall</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">A BLINK: 100–400 MILLISECONDS</span> · <span class="k">27,000 CONTRACTS IN 14 SECONDS</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">02:15.32–02:27.34</span><b>S2K Warning shot</b></div>
+<p class="line">K1 · a warning shot; finance was the proving ground</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">2010</span> · <span class="k">WARNING SHOT</span> · <span class="k">PROVING GROUND</span> · <span class="k">TODAY</span> · <span class="k">AUTONOMOUS LOGIC</span></p>
+<p><b>Sound</b>: 02:23.26 glide (T5a); 02:23.66 turbine hall (E4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">02:27.34–02:33.34</span><b>S2K Server room</b></div>
+<p class="line">K2 · directive 05:15: slow push into an empty server room, cold blue LEDs (drawn: no public-domain photo)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.05 (clamped 0.4–0.75 %/s); Dutch 0.5° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">LATENCY</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">02:33.34–02:36.49</span><b>S2K Physical world</b></div>
+<p class="line">K3 · the same logic moves into the physical world: a transmission network draws itself</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track Y 30 → -10 px; Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">PHYSICAL WORLD</span></p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–02:36.49 at -28 dB; rumble 00:58.80–01:36.00 at -20 dB; rumble 01:48.60–02:10.16 at -22 dB.</p>
+</section>
+<section class="scene" id="s3"><div class="eyebrow">Scene 3 · 03:03.33</div><h2>The physics of the grid</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>06:00 2.5D blueprint drafting table of a transmission network</span> → scene start: blueprint sheet in 3D, network drawing itself; F8 pencil</li>
+<li><span class='k'>06:45 gold traces flow along copper wires to turbine generators</span> → &quot;…thermal and hydro turbines&quot;: gold pulses along the drawn wires to generator symbols; then the TVA generator hall (3 layers) on &quot;spinning steel&quot;</li>
+<li><span class='k'>~07:00 emergency telephones</span> → &quot;…pick up the phone&quot;: K6 ring under the control-room beat</li>
+<li><span class='k'>07:30 protection settings tripping (icons switching off), not unstable renewables</span> → &quot;…protection settings cut their output&quot;: wind icons stop and turn red; South Australia map</li>
+<li><span class='k'>~08:00 Mohave shaft</span> → &quot;1970… 1971&quot;: drawn shaft under strain; E5</li>
+<li><span class='k'>08:30 split-screen dossier: label card (no fake highlight) + cascade diagram, &quot;ABOUT 50 MILLION PEOPLE&quot; (task force)</span> → &quot;In 2003…&quot;: label card + map of the affected states going dark</li>
+</ul></div>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:17.50</span><b>S3A Blueprint</b></div>
+<p class="line">A · directive 06:00 + 06:45: a blueprint of the network on a drafting table; the network draws itself (F8 pencil), then gold current flows along the copper lines to the turbine generators</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track Y 60 → -10 px; Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">THE GRID</span> · <span class="k">PHYSICS</span></p>
+<p><b>Sound</b>: 00:00.00 music M5; 00:00.00 whoosh7 (whoosh7); 00:00.60 pencil (F8a); 00:08.96 turbine hall (E4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:17.50–00:25.20</span><b>S3B Inertia</b></div>
+<p class="line">B · spinning steel: mechanical inertia (TVA generator hall, 1942, three layers)</p>
+<p><b>PhotoCraft</b>: TVA generator room 1942 (LoC TIFF 9164 px) → 2400 × 1350 crop; Depth Anything V2 masks; Refine Edge radius 2, feather 0.75 px → <span class="k">mid.png</span> + <span class=k>near.png</span>; selection expanded 12 px, Content-Aware Fill → <span class="k">bg.png</span>; all three at the same canvas with alpha.</p>
+<p><b>Layer stack</b>: Layer 2 foreground occlusion Z −250 (soft) · Layer 1 midground Z 0 (sharp) · Layer 0 filled plate Z +400; scaled so they line up through the lens at frame 1; Tint into the amber palette; lower-third bar for keywords.</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -80 → 60 px; track Y 20 → -10 px; Dutch -0.6° → 0.6° (|0.5–1.0|°, through level); aperture 60 + 12 px box blur on the near layer</p>
+<p><b>On screen</b>: <span class="k">SPINNING STEEL</span> · <span class="k">MECHANICAL INERTIA</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:25.20–00:30.02</span><b>S3C Fall slowed</b></div>
+<p class="line">C1 · something fails: the spinning mass slows the fall (dial)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.6° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">FREQUENCY</span> · <span class="k">INERTIA: A SLOW FALL</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:30.02–00:40.74</span><b>S3C Control room</b></div>
+<p class="line">C2 · seconds for machines, minutes for people (control room, three layers; K6 phone ring on &quot;phone&quot;)</p>
+<p><b>PhotoCraft</b>: HAER CA-3155 control room → 2400 × 1350 crop; Depth Anything V2 masks; Refine Edge radius 2, feather 0.75 px → <span class="k">mid.png</span> + <span class=k>near.png</span>; selection expanded 12 px, Content-Aware Fill → <span class="k">bg.png</span>; all three at the same canvas with alpha.</p>
+<p><b>Layer stack</b>: Layer 2 foreground occlusion Z −250 (soft) · Layer 1 midground Z 0 (sharp) · Layer 0 filled plate Z +400; scaled so they line up through the lens at frame 1; Tint into the amber palette; lower-third bar for keywords.</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X 70 → -70 px; track Y -10 → 10 px; Dutch 0.6° → -0.6° (|0.5–1.0|°, through level); aperture 60 + 12 px box blur on the near layer</p>
+<p><b>On screen</b>: <span class="k">AUTOMATIC: SECONDS</span> · <span class="k">OPERATORS: MINUTES</span></p>
+<p><b>Sound</b>: 00:37.68 phone ring (K6a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">00:40.74–00:44.30</span><b>S3D Shrinking</b></div>
+<p class="line">D · today: inertia shrinking (the rotor spins down)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.03 (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">INERTIA ▼</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:44.30–01:01.78</span><b>S3E Inverters</b></div>
+<p class="line">E · inverter-based resources: power electronics, not rotating iron</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -40 → 40 px; Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">INVERTER-BASED</span> · <span class="k">SOLAR</span> · <span class="k">BATTERIES</span> · <span class="k">WIND</span> · <span class="k">POWER ELECTRONICS</span> · <span class="k">ROTATING IRON</span></p>
+<p><b>Sound</b>: 00:46.98 inverter hum (E1a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:01.78–01:07.60</span><b>S3F Faster fall</b></div>
+<p class="line">F · less inertia, faster fall (two dials, same fault)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.2° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">HIGH INERTIA</span> · <span class="k">LOW INERTIA</span> · <span class="k">LESS INERTIA → FASTER FALL</span></p>
+<p><b>Sound</b>: 01:07.10 wind on lines (E3a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:07.60–01:19.80</span><b>S3G South Australia storm</b></div>
+<p class="line">G1 · directive 07:30: South Australia, September 2016, on a real map. The storm brings lines down north of Adelaide; then the wind farms&#x27; protection settings trip (icons stop and turn red), not &quot;unstable renewables&quot;</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · map at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">SOUTH AUSTRALIA</span> · <span class="k">VICTORIA</span> · <span class="k">SEPTEMBER 2016</span> · <span class="k">STORM</span> · <span class="k">PROTECTION TRIPS</span> · <span class="k">WIND OUTPUT CUT</span></p>
+<p><b>Sound</b>: 01:07.10 wind on lines (E3a); 01:15.76 relay click (K4a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:19.80–01:30.60</span><b>S3G Collapse</b></div>
+<p class="line">G2 · cut off from Victoria (the interconnector opens); frequency collapses in under a second</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · map at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch 0.4° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">ISOLATED</span> · <span class="k">&lt; 1 SECOND</span></p>
+<p><b>Sound</b>: 01:20.54 relay click (K4b)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:30.60–01:36.70</span><b>S3H Black</b></div>
+<p class="line">H · the whole state went black (the map goes out, then the line about wrecked machines)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · map at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.03 (clamped 0.4–0.75 %/s); Dutch ±0.6° → ∓0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">BLACKOUT</span> · <span class="k">WRECKED</span> · <span class="k">BY THEIR OWN ELECTRICITY</span></p>
+<p><b>Sound</b>: 01:30.60 impact (T3b)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:36.70–01:54.64</span><b>S3I Mohave shaft</b></div>
+<p class="line">I · ~08:00: Mohave, 1970 and 1971: oscillations twist a generator shaft (drawn shaft under strain, E5)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -50 → 50 px; Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">1970</span> · <span class="k">1971</span> · <span class="k">OSCILLATIONS</span> · <span class="k">MOHAVE GENERATING STATION, NEVADA</span> · <span class="k">REPAIRS: MONTHS</span></p>
+<p><b>Sound</b>: 01:42.94 shaft strain (E5a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:54.64–02:07.32</span><b>S3J Human speed</b></div>
+<p class="line">J · people are slow; protection has been automatic for decades</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.2° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">ALARM → SECONDS</span> · <span class="k">UNDERSTANDING → LONGER</span> · <span class="k">AUTOMATIC PROTECTION</span> · <span class="k">DECADES</span></p>
+<p><b>Sound</b>: 02:07.14 control room (A4a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">02:07.32–02:27.00</span><b>S3K 2003 blackout</b></div>
+<p class="line">K · directive 08:30: 2003. A label card (no fake highlight) and the affected states going dark on a real map; about 50 million people (U.S.–Canada task force)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · map at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">2003</span> · <span class="k">SOFTWARE BUG · ALARMS SILENT</span> · <span class="k">PEOPLE</span></p>
+<p><b>Sound</b>: 02:07.14 control room (A4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">02:27.00–02:44.68</span><b>S3L Britain 2019</b></div>
+<p class="line">L · Britain, August 2019: two stations lost; automatic systems cut about 1.1 million customers</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · map at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.4° → -0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">AUGUST 2019</span> · <span class="k">LIGHTNING</span> · <span class="k">2 STATIONS LOST</span> · <span class="k">AUTOMATIC</span> · <span class="k">CUSTOMERS CUT OFF</span></p>
+<p><b>Sound</b>: 02:37.90 relay click (K4c)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">02:44.68–02:52.86</span><b>S3M Flicker or blackout</b></div>
+<p class="line">M · a few seconds: flicker or blackout</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch ±0.6° → ∓0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">LOW INERTIA · SECONDS</span> · <span class="k">FLICKER</span> · <span class="k">BLACKOUT</span> · <span class="k">OR</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">02:52.86–03:03.33</span><b>S3N Too slow</b></div>
+<p class="line">N · too slow (end of scene: hand-off to Scene 4)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch -0.2° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">HUMAN OPERATORS</span> · <span class="k">TOO SLOW</span></p>
+<p><b>Sound</b>: 02:54.88 impact (T3c)</p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–03:03.33 at -28 dB; rumble 01:07.60–01:30.60 at -19 dB; rumble 02:07.32–02:44.68 at -21 dB.</p>
+</section>
+<section class="scene" id="s4"><div class="eyebrow">Scene 4 · 01:54.98</div><h2>Handing over the switch</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>09:45 camera pushes through real public papers (title pages, no &quot;declassified&quot;)</span> → scene start: three verified title pages (L2RPN 2020; van der Sar et al. 2025; Lautenbacher et al. 2025) in 3D; T5 glide</li>
+<li><span class='k'>10:45 control-room consoles: analog dials → multi-monitor terminals (2.5D cut-out)</span> → &quot;Traditional industrial automation…&quot;: HAER control room, 3 layers, camera tracks from the analog panels to the monitors</li>
+<li><span class='k'>11:45 folder &quot;AUTONOMOUS TOPOLOGY SWITCHING&quot; drops</span> → &quot;…switch the grid&#x27;s layout&quot;: folder drop; F2</li>
+<li><span class='k'>12:30 source card (no quote marks): RTE, Learning to Run a Power Network</span> → &quot;…far too dangerous&quot;: source card slides in; F3</li>
+</ul></div>
+<p class="muted">Story-turn package at 00:21.08, 01:42.92: 0.3 s of silence on the music bed, a hard cut on the word, a 0.7 s bass drop-out, and the grade flips cold (Tint 22 %, white → #C7DBFF).</p>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:04.60</span><b>S4A Title pages</b></div>
+<p class="line">A1 · directive 09:45: the camera glides through three real title pages (T5 glide)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>Sound</b>: 00:00.00 music M6; 00:00.00 whoosh7 (whoosh7); 00:00.40 glide (T5a); 00:00.70 paper slide (F4a); 00:02.00 paper slide (F3a); 00:03.30 paper slide (F4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:04.60–00:10.60</span><b>S4A Hard choice</b></div>
+<p class="line">A2 · the hard choice</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · stamp at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">AUTOMATE MORE</span> · <span class="k">OR</span> · <span class="k">BLACKOUT RISK</span></p>
+<p><b>Sound</b>: 00:04.60 relay click (K4a); 00:08.48 desk thump (stamp) (F1a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:10.60–00:21.10</span><b>S4B Dials to monitors</b></div>
+<p class="line">B · directive 10:45: the HAER control room, the camera tracking from the analog panels to the monitors (three layers); the old rule typed in as an illustration</p>
+<p><b>PhotoCraft</b>: HAER CA-3155 control room → 2400 × 1350 crop; Depth Anything V2 masks; Refine Edge radius 2, feather 0.75 px → <span class="k">mid.png</span> + <span class=k>near.png</span>; selection expanded 12 px, Content-Aware Fill → <span class="k">bg.png</span>; all three at the same canvas with alpha.</p>
+<p><b>Layer stack</b>: Layer 2 foreground occlusion Z −250 (soft) · Layer 1 midground Z 0 (sharp) · Layer 0 filled plate Z +400; scaled so they line up through the lens at frame 1; Tint into the amber palette; lower-third bar for keywords.</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -110 → 110 px; track Y -10 → 10 px; Dutch -0.6° → 0.6° (|0.5–1.0|°, through level); aperture 60 + 12 px box blur on the near layer</p>
+<p><b>On screen</b>: <span class="k">DETERMINISTIC</span> · <span class="k">IF voltage &lt; LIMIT → OPEN breaker</span></p>
+<p><b>Sound</b>: 00:15.50 terminal (K7a); 00:15.90 typing-laptop (typing-laptop); 00:19.12 typing-laptop (typing-laptop)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">00:21.10–00:39.00</span><b>S4C Too dynamic</b></div>
+<p class="line">C · the &quot;But&quot; turn: hard cut on the word; millions of devices, too dynamic for static rules</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.08 (clamped 0.4–0.75 %/s); Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">ROOFTOP SOLAR</span> · <span class="k">EV CHARGERS</span> · <span class="k">WIND TURBINES</span> · <span class="k">MILLIONS</span> · <span class="k">TOO DYNAMIC</span></p>
+<p><b>Sound</b>: 00:21.10 inverter hum (E1a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:39.00–01:00.00</span><b>S4D Deep RL</b></div>
+<p class="line">D · deep reinforcement learning; RTE&#x27;s public competition</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">DEEP REINFORCEMENT LEARNING</span> · <span class="k">UNDER TEST</span> · <span class="k">RTE · FRANCE</span> · <span class="k">LEARNING TO RUN A POWER NETWORK</span> · <span class="k">PUBLIC COMPETITION · AI AGENTS</span> · <span class="k">SIMULATED GRID</span></p>
+<p><b>Sound</b>: 00:39.00 server room (A3a); 00:47.22 relay click (K4a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:00.00–01:06.42</span><b>S4E Not instructions</b></div>
+<p class="line">E1 · not step-by-step instructions</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">STEP-BY-STEP</span> · <span class="k">PROGRAMMER</span></p>
+<p><b>Sound</b>: 01:06.12 glide (T5b)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:06.42–01:22.70</span><b>S4E Trial and error</b></div>
+<p class="line">E2 · trial and error, in simulation only; directive 12:30: the source card slides in (F3), no quote marks</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · slide at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -40 → 40 px; Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">AGENT</span> · <span class="k">SIMULATED GRID</span> · <span class="k">ACTION</span> · <span class="k">RESULT</span> · <span class="k">TRIAL · ERROR · TRIAL · ERROR</span> · <span class="k">THOUSANDS OF SENSORS</span></p>
+<p><b>Sound</b>: 01:06.12 glide (T5b); 01:06.52 relay click (K4a); 01:14.74 paper slide (F3a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:22.70–01:26.86</span><b>S4F Folder</b></div>
+<p class="line">F1 · directive 11:45: the folder AUTONOMOUS TOPOLOGY SWITCHING drops onto the desk (F2)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drop at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.03 (clamped 0.4–0.75 %/s); Dutch 0.5° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">IN SIMULATION</span></p>
+<p><b>Sound</b>: 01:24.64 binder drop (F2a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:26.86–01:33.20</span><b>S4F Reroute</b></div>
+<p class="line">F2 · reroute power, adjust batteries (illustration)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.4° → -0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">OVERLOAD</span> · <span class="k">REROUTED</span> · <span class="k">FASTER THAN A CONTROL ROOM</span></p>
+<p><b>Sound</b>: 01:26.86 relay click (K4b)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:33.20–01:42.90</span><b>S4G Impressive</b></div>
+<p class="line">G · impressive in testing: the overload is headed off before a human sees the alarm</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.2° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">IN TESTING</span> · <span class="k">IMPRESSIVE</span> · <span class="k">OVERLOAD AVOIDED</span> · <span class="k">BEFORE THE ALARM</span></p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:42.90–01:54.98</span><b>S4H Explainability</b></div>
+<p class="line">H · the &quot;But&quot; turn: the explainability problem (end of Act II)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.06 (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">SUPERHUMAN SPEED</span> · <span class="k">EXPLAINABILITY PROBLEM</span></p>
+<p><b>Sound</b>: 01:50.84 impact (T3a)</p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–01:54.98 at -28 dB; rumble 01:42.90–01:54.98 at -20 dB.</p>
+</section>
+<section class="scene" id="s5"><div class="eyebrow">Scene 5 · 01:55.83</div><h2>Inside the vector space</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>13:30 evidence corkboard: camera pulls back; NN hidden-layer diagram pinned beside transformer schematics</span> → scene start: dark board, pinned cards; dolly back; F7 pins</li>
+<li><span class='k'>14:15 the paper dissolves into a 3D particle cloud of weights</span> → &quot;Deep reinforcement learning models operate…&quot;: card breaks into particles; T4</li>
+<li><span class='k'>15:00 camera glides through floating weights (W_12: −0.8419 …), &quot;illustrative&quot;</span> → &quot;…numbers called weights&quot;: weight labels at many depths, camera glides through; T5</li>
+<li><span class='k'>16:15 terminal: minimize: TRANSMISSION_LOSS + VOLTAGE_PENALTY + DAMAGE_RISK</span> → &quot;…its programmed objective function&quot;: terminal; K7</li>
+</ul></div>
+<p class="muted">Story-turn package at 01:40.83: 0.3 s of silence on the music bed, a hard cut on the word, a 0.7 s bass drop-out, and the grade flips cold (Tint 22 %, white → #C7DBFF).</p>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:21.90</span><b>S5A Evidence board</b></div>
+<p class="line">A · directive 13:30: the evidence board. The camera starts close on the hidden-layer diagram pinned beside the transformer schematic and pulls back as the forensic evidence is pinned around them</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · pin at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; pull-back ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X 160 → 0 px; track Y -110 → 0 px; Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">FORENSIC</span></p>
+<p><b>Sound</b>: 00:00.00 music M7; 00:00.00 whoosh7 (whoosh7); 00:00.15 pin (F7a); 00:06.60 pin (F7b); 00:12.02 shaft strain (E5a); 00:16.54 pin (F7c); 00:18.16 pin (F7a); 00:20.22 pin (F7b)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:21.90–00:33.90</span><b>S5B Logs</b></div>
+<p class="line">B · deterministic software: execution logs (illustration)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track Y 30 → -30 px; Dutch 0.2° → -0.2° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">DETERMINISTIC SOFTWARE · EXECUTION LOGS</span> · <span class="k">ERROR  corrupted pointer</span> · <span class="k">WARN   infinite loop</span></p>
+<p><b>Sound</b>: 00:21.90 terminal (K7a); 00:26.04 typing-laptop (typing-laptop)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:33.90–00:38.88</span><b>S5C Dissolve</b></div>
+<p class="line">C · directive 14:15: back on the board, the hidden-layer diagram dissolves into a 3D cloud of weights (T4)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · particles at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.03 (clamped 0.4–0.75 %/s); Dutch 0.5° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">DEEP REINFORCEMENT LEARNING</span></p>
+<p><b>Sound</b>: 00:35.80 particle dissolve (T4a); 00:38.68 glide (T5a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:38.88–00:52.80</span><b>S5D Weights</b></div>
+<p class="line">D · directive 15:00: the camera glides through floating weights (W_12: −0.8419 …), labelled illustrative (T5)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.08 (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">NO SENTENCES</span> · <span class="k">MILLIONS</span> · <span class="k">WEIGHTS</span></p>
+<p><b>Sound</b>: 00:38.68 glide (T5a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">00:52.80–01:04.10</span><b>S5E Matrix</b></div>
+<p class="line">E · high-dimensional matrix math, in milliseconds</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.06 (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">GRID INSTABILITY · SURGE</span> · <span class="k">0.000</span> · <span class="k">MATRIX MATH</span> · <span class="k">MILLISECONDS</span></p>
+<p><b>Sound</b>: 00:52.80 server room (A3a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:04.10–01:16.50</span><b>S5F Loss</b></div>
+<p class="line">F · no human sentence inside; directive 16:15: the &quot;minimize&quot; terminal (K7)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">SHED LOAD → SAVE SUBSTATION</span> · <span class="k">minimize:</span> · <span class="k">TRANSMISSION_LOSS + VOLTAGE_PENALTY + DAMAGE_RISK</span> · <span class="k">OBJECTIVE FUNCTION</span></p>
+<p><b>Sound</b>: 01:09.28 terminal (K7a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:16.50–01:40.84</span><b>S5G Black box</b></div>
+<p class="line">G · inputs visible, command visible; the pathway between is not (camera pushes into the box)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.12 (clamped 0.4–0.75 %/s); Dutch -0.2° → 0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">INPUTS</span> · <span class="k">VISIBLE</span> · <span class="k">CONTROL COMMAND</span> · <span class="k">VISIBLE</span> · <span class="k">?</span> · <span class="k">REASONING: NOT READABLE</span> · <span class="k">INTERPRETABILITY TOOLS</span></p>
+<p><b>Sound</b>: 01:20.12 relay click (K4a); 01:24.12 relay click (K4a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:40.84–01:55.83</span><b>S5H Why</b></div>
+<p class="line">H · the &quot;but&quot; turn (cut on the word): still no full answer; you can verify, you cannot ask why</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.06 (clamped 0.4–0.75 %/s); Dutch 0.5° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">NO FULL ANSWER</span> · <span class="k">VERIFY ✓</span> · <span class="k">WHY?</span></p>
+<p><b>Sound</b>: 01:49.36 impact (T3b)</p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–01:55.83 at -28 dB; rumble 01:27.20–01:55.83 at -21 dB.</p>
+</section>
+<section class="scene" id="s6"><div class="eyebrow">Scene 6 · 01:40.51</div><h2>Specification gaming</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>17:15 counter to ~60 + example cards (block flip); no line graph; DeepMind definition</span> → &quot;In 2020…&quot;: counter, block-flip card, definition card</li>
+<li><span class='k'>18:45 2.5D photo of transmission lines under a gloomy sky</span> → &quot;…keeping power lines from overheating during a chaotic storm&quot;: HAER Morony–Rainbow line, 3 layers; E3</li>
+<li><span class='k'>20:00 side by side: &quot;Human Priority: Maintain Continuous Power to Hospital / Metro Sectors&quot; / &quot;Objective Penalty = 0 (Achieved via Line De-energization)&quot; + HYPOTHETICAL</span> → &quot;Human dispatchers…&quot;: two terminals</li>
+</ul></div>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:10.70</span><b>S6A Spec gaming</b></div>
+<p class="line">A · a documented phenomenon: specification gaming</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.05 (clamped 0.4–0.75 %/s); Dutch -0.2° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">COMPUTER SCIENCE</span> · <span class="k">DOCUMENTED</span> · <span class="k">SPECIFICATION GAMING</span></p>
+<p><b>Sound</b>: 00:00.00 music M8; 00:00.00 whoosh7 (whoosh7)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:10.70–00:24.60</span><b>S6B Reward only</b></div>
+<p class="line">B · no ethics, no context, no common sense: only a reward function</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">OPTIMIZATION GOAL</span> · <span class="k">REWARD FUNCTION</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:24.60–00:31.50</span><b>S6C DeepMind list</b></div>
+<p class="line">C · DeepMind, 2020: about 60 real examples, and their definition</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · slide at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.2° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">DEEPMIND · 2020</span> · <span class="k">EXAMPLES</span></p>
+<p><b>Sound</b>: 00:24.96 relay click (K4a); 00:26.52 paper slide (F3a); 00:27.84 paper slide (F4a); 00:28.01 paper slide (F3a); 00:28.35 paper slide (F4a); 00:28.52 paper slide (F3a); 00:28.86 paper slide (F4a); 00:29.03 paper slide (F3a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:31.50–00:49.20</span><b>S6D Block flip</b></div>
+<p class="line">D · the red block: rewarded for height, it flips the block instead of stacking it</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -40 → 30 px; Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">REWARD: BLOCK HEIGHT</span> · <span class="k">INTENDED: STACK</span> · <span class="k">GOAL MET ✓</span> · <span class="k">PURPOSE ✗</span></p>
+<p><b>Sound</b>: 00:40.88 binder drop (F2a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:49.20–00:58.52</span><b>S6E Power lines</b></div>
+<p class="line">E1 · directive 18:45: power lines under a gloomy sky (HAER, three layers; E3), the hypothetical reward</p>
+<p><b>PhotoCraft</b>: HAER Morony–Rainbow line → 2400 × 1350 crop; Depth Anything V2 masks; Refine Edge radius 2, feather 0.75 px → <span class="k">mid.png</span> + <span class=k>near.png</span>; selection expanded 12 px, Content-Aware Fill → <span class="k">bg.png</span>; all three at the same canvas with alpha.</p>
+<p><b>Layer stack</b>: Layer 2 foreground occlusion Z −250 (soft) · Layer 1 midground Z 0 (sharp) · Layer 0 filled plate Z +400; scaled so they line up through the lens at frame 1; Tint into the amber palette; lower-third bar for keywords.</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X 60 → -60 px; track Y 20 → -10 px; Dutch -0.6° → 0.6° (|0.5–1.0|°, through level); aperture 60 + 12 px box blur on the near layer</p>
+<p><b>On screen</b>: <span class="k">HYPOTHETICAL</span> · <span class="k">REWARD: NO OVERHEATING</span></p>
+<p><b>Sound</b>: 00:49.20 wind on lines (E3a); 00:49.30 relay click (K4a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">00:58.52–01:06.40</span><b>S6E Hypothetical</b></div>
+<p class="line">E2 · the simplest way: switch off the customers (a city of lit windows goes dark)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">HYPOTHETICAL</span> · <span class="k">LINE TEMPERATURE</span> · <span class="k">CUSTOMERS</span> · <span class="k">POWER OFF</span> · <span class="k">LINES: COOL ✓</span></p>
+<p><b>Sound</b>: 00:58.52 relay click (K4a); 01:01.26 breaker (K9a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:06.40–01:17.00</span><b>S6F Score zero</b></div>
+<p class="line">F · the competition counted a blackout as failure: score zero</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · stamp at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.05 (clamped 0.4–0.75 %/s); Dutch ±0.6° → ∓0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">COMPETITION RULES · L2RPN</span> · <span class="k">BLACKOUT = FAILURE</span> · <span class="k">SCORE: 0</span></p>
+<p><b>Sound</b>: 01:11.04 desk thump (stamp) (F1a); 01:15.60 impact (T3c)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:17.00–01:27.00</span><b>S6G Two terminals</b></div>
+<p class="line">G · directive 20:00: side-by-side terminals, the human priority against the objective, HYPOTHETICAL</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">HYPOTHETICAL</span> · <span class="k">HUMAN DISPATCHER</span> · <span class="k">AGENT</span> · <span class="k">LAST RESORT</span></p>
+<p><b>Sound</b>: 01:17.10 relay click (K4a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:27.00–01:40.51</span><b>S6H Loss zero</b></div>
+<p class="line">H · an algorithm does not know what a city is; it only knows if the loss is zero (end of Act III)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.06 (clamped 0.4–0.75 %/s); Dutch -0.2° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">CITY?</span> · <span class="k">WINTER STORM?</span> · <span class="k">loss == 0 ?</span></p>
+<p><b>Sound</b>: 01:35.28 terminal (K7a)</p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–01:40.51 at -28 dB; rumble 00:49.20–01:06.40 at -21 dB; rumble 01:27.00–01:40.51 at -21 dB.</p>
+</section>
+<section class="scene" id="s7"><div class="eyebrow">Scene 7 · 01:34.84</div><h2>Cross-sector velocity</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>21:00 3D dark topography globe revolving</span> → scene start: Natural Earth world on a sphere (CC Sphere), turning</li>
+<li><span class='k'>21:30 fast downward 3D dolly onto hubs: Rotterdam AGVs through fog; trajectory-based routing</span> → &quot;In 1993 Rotterdam…&quot; / &quot;In aviation…&quot;: map of the Netherlands + Rotterdam pin, drawn AGV yard with fog; drawn 4D routes; T6</li>
+<li><span class='k'>23:00 monospace callouts slide into the margin: HUMAN SUPERVISOR: MONITORING // REACTION WINDOW: &lt; 1 SECOND</span> → &quot;…relegated to monitors&quot;: margin callout; type_key</li>
+</ul></div>
+<p class="muted">Story-turn package at 00:46.42, 01:29.88: 0.3 s of silence on the music bed, a hard cut on the word, a 0.7 s bass drop-out, and the grade flips cold (Tint 22 %, white → #C7DBFF).</p>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:07.70</span><b>S7A Globe</b></div>
+<p class="line">A · directive 21:00: a dark topographic globe revolving (Natural Earth countries, tools/make_world.py)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · globe at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">BEYOND THE GRID</span> · <span class="k">PORTS · AVIATION · PIPELINES</span></p>
+<p><b>Sound</b>: 00:00.00 music M9; 00:00.00 whoosh7 (whoosh7); 00:07.30 port (A5a); 00:07.40 dolly whoosh (T6a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:07.70–00:14.46</span><b>S7B Rotterdam map</b></div>
+<p class="line">B1 · directive 21:30: a fast downward dolly onto the hub: the Netherlands, Rotterdam pinned, 1993</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · map at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.05 (clamped 0.4–0.75 %/s); track Y -200 → 0 px; Dutch 0.5° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">1993</span> · <span class="k">FIRST AUTOMATED TERMINAL</span></p>
+<p><b>Sound</b>: 00:07.30 port (A5a); 00:07.40 dolly whoosh (T6a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:14.46–00:25.00</span><b>S7B AGV yard</b></div>
+<p class="line">B2 · the yard: driverless vehicles through fog, directed by terminal software (drawn)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.06 (clamped 0.4–0.75 %/s); track X -50 → 50 px; track Y -200 → 20 px; Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">DRIVERLESS</span> · <span class="k">TERMINAL SOFTWARE</span> · <span class="k">PORTS · EUROPE · ASIA</span></p>
+<p><b>Sound</b>: 00:24.60 airfield (A6a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:25.00–00:44.38</span><b>S7C Trajectory</b></div>
+<p class="line">C1 · aviation: four-dimensional trajectories over data link</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -60 → 60 px; Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">TRAJECTORY-BASED OPERATIONS</span> · <span class="k">LAT · LON · ALT · TIME</span> · <span class="k">GROUND SYSTEMS</span> · <span class="k">DATA LINK</span></p>
+<p><b>Sound</b>: 00:24.60 airfield (A6a); 00:32.36 relay click (K4a); 00:37.44 data chatter (K5a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:44.38–00:46.42</span><b>S7C Approve</b></div>
+<p class="line">C2 · controllers still approve the plans …</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.03 (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">APPROVED</span> · <span class="k">CONTROLLERS</span></p>
+<p><b>Sound</b>: 00:45.18 relay click (K4a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">00:46.42–00:50.50</span><b>S7C Machine to machine</b></div>
+<p class="line">C3 · … the &quot;but&quot; turn, cut on the word: machine to machine</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch 0.5° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">MACHINE</span> · <span class="k">MACHINE</span></p>
+<p><b>Sound</b>: 00:46.47 relay click (K4a); 00:50.10 underground (A9a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:50.50–01:02.30</span><b>S7D Pipeline</b></div>
+<p class="line">D · pipelines: fibre-optic sensors listen; machine learning picks out a leak</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · stamp at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -60 → 60 px; Dutch 0.2° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">PIPELINES</span> · <span class="k">FIBER-OPTIC SENSORS</span> · <span class="k">LEAK</span> · <span class="k">MACHINE LEARNING</span></p>
+<p><b>Sound</b>: 00:50.10 underground (A9a); 01:01.16 desk thump (stamp) (F1a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:02.30–01:13.10</span><b>S7E Dilemma</b></div>
+<p class="line">E · the same dilemma: no longer pilots</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.3° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">CRITICAL DOMAINS</span> · <span class="k">SAME DILEMMA</span> · <span class="k">ACTIVE PILOTS</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:13.10–01:29.88</span><b>S7F Monitors</b></div>
+<p class="line">F1 · relegated to monitors; directive 23:00: the monospace callouts slide into the margin (type_key)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · slide at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.1 (clamped 0.4–0.75 %/s); track Y -260 → 20 px; Dutch 0.6° → -0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">HUMAN SUPERVISOR: MONITORING</span> · <span class="k">REACTION WINDOW: &lt; 1 SECOND</span> · <span class="k">ALL SYSTEMS NORMAL</span> · <span class="k">SUPERVISORS</span></p>
+<p><b>Sound</b>: 01:13.10 server room (A3a); 01:13.88 type_key (type_key); 01:13.88 paper slide (F4a); 01:14.33 type_key (type_key); 01:14.78 type_key (type_key); 01:14.78 paper slide (F3a); 01:15.23 type_key (type_key)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:29.88–01:34.84</span><b>S7F Spectators</b></div>
+<p class="line">F2 · the &quot;but&quot; turn, cut on the word: spectators</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">SPECTATORS</span></p>
+<p><b>Sound</b>: 01:30.60 impact (T3a)</p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–01:34.84 at -28 dB; rumble 01:13.10–01:34.84 at -22 dB.</p>
+</section>
+<section class="scene" id="s8"><div class="eyebrow">Scene 8 · 01:20.22</div><h2>The reality of the kill switch</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>24:00 macro camera tracking across a manual disconnect switch / emergency breaker panel</span> → scene start: HAER main control switchboard, 3 layers, macro track; K9</li>
+<li><span class='k'>24:45 camera pulls back into a vast empty switchyard</span> → dependency beat: Highsmith Hoover switchyard, 3 layers, pull back; A7</li>
+<li><span class='k'>25:30 typography cards over black: THE ILLUSION OF MANUAL OVERRIDE · ONE AC CYCLE: 16.7 MILLISECONDS · HUMAN REACTION: ~250 MILLISECONDS</span> → latency beat: three black cards; T3 impacts</li>
+</ul></div>
+<p class="muted">Story-turn package at 00:16.79: 0.3 s of silence on the music bed, a hard cut on the word, a 0.7 s bass drop-out, and the grade flips cold (Tint 22 %, white → #C7DBFF).</p>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:14.10</span><b>S8A Switchboard</b></div>
+<p class="line">A · directive 24:00: a macro track across the main control switchboard (HAER, three layers; K9)</p>
+<p><b>PhotoCraft</b>: HAER MT main control switchboard → 2400 × 1350 crop; Depth Anything V2 masks; Refine Edge radius 2, feather 0.75 px → <span class="k">mid.png</span> + <span class=k>near.png</span>; selection expanded 12 px, Content-Aware Fill → <span class="k">bg.png</span>; all three at the same canvas with alpha.</p>
+<p><b>Layer stack</b>: Layer 2 foreground occlusion Z −250 (soft) · Layer 1 midground Z 0 (sharp) · Layer 0 filled plate Z +400; scaled so they line up through the lens at frame 1; Tint into the amber palette; lower-third bar for keywords.</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.06 (clamped 0.4–0.75 %/s); track X -130 → 130 px; Dutch -0.6° → 0.6° (|0.5–1.0|°, through level); aperture 60 + 12 px box blur on the near layer</p>
+<p><b>On screen</b>: <span class="k">SAFETY COMMISSIONS</span> · <span class="k">HUMAN-IN-THE-LOOP</span> · <span class="k">MANUAL OVERRIDE</span></p>
+<p><b>Sound</b>: 00:00.00 music M10; 00:00.00 whoosh7 (whoosh7); 00:00.30 breaker (K9a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:14.10–00:16.80</span><b>S8B Comforting</b></div>
+<p class="line">B1 · comforting …</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.03 (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">COMFORTING</span></p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">00:16.80–00:19.60</span><b>S8B Paradox</b></div>
+<p class="line">B2 · … the &quot;but&quot; turn, cut on the word: a paradox</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch 0.5° → -0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">PARADOX</span> · <span class="k">ENGINEERING</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">—–—</span><b>S8C Card </b></div>
+<p class="line">C · directive 25:30: typography cards over black (T3 impacts): the illusion, one AC cycle, human reaction</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch ±0.6° → ∓0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:38.00–00:51.40</span><b>S8D Switchyard</b></div>
+<p class="line">D · directive 24:45: the camera pulls back into the vast, empty switchyard (Highsmith, three layers; A7)</p>
+<p><b>PhotoCraft</b>: Highsmith Hoover switchyard → 2400 × 1350 crop; Depth Anything V2 masks; Refine Edge radius 2, feather 0.75 px → <span class="k">mid.png</span> (no foreground object: near layer empty); selection expanded 12 px, Content-Aware Fill → <span class="k">bg.png</span>; all three at the same canvas with alpha.</p>
+<p><b>Layer stack</b>: Layer 2 foreground occlusion Z −250 (soft) · Layer 1 midground Z 0 (sharp) · Layer 0 filled plate Z +400; scaled so they line up through the lens at frame 1; Tint into the amber palette; lower-third bar for keywords.</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; pull-back ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track Y 30 → 0 px; Dutch 0.6° → -0.6° (|0.5–1.0|°, through level); aperture 60 + 12 px box blur on the near layer</p>
+<p><b>On screen</b>: <span class="k">2 · DEPENDENCY</span> · <span class="k">AUTOMATION ▲</span> · <span class="k">MANUAL SKILL ▼</span></p>
+<p><b>Sound</b>: 00:37.96 relay click (K4a); 00:38.00 switchyard wind (A7a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:51.40–01:04.60</span><b>S8E Airlines</b></div>
+<p class="line">E · airlines know it: less hand-flying practice; regulators urge manual skills</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">AIRLINES</span> · <span class="k">AUTOPILOT → LESS HAND-FLYING</span> · <span class="k">REGULATORS: MANUAL SKILLS</span></p>
+<p><b>Sound</b>: 00:51.40 machine hum (E2a); 00:51.40 airfield (A6a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:04.60–01:11.10</span><b>S8F Off is the emergency</b></div>
+<p class="line">F · in some systems, switching off would itself be the emergency</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch -0.4° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">OFF</span> · <span class="k">= EMERGENCY</span></p>
+<p><b>Sound</b>: 01:07.56 breaker (K9b)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">—–—</span><b>S8G Card </b></div>
+<p class="line">G · three black cards (end of Act IV): keywords, not the narration</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.03 (clamped 0.4–0.75 %/s); Dutch ±0.6° → ∓0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–01:20.22 at -28 dB; rumble 00:19.60–01:11.14 at -20 dB; Shepard tone + tick 00:00.50–00:19.60 (cut dead).</p>
+</section>
+<section class="scene" id="s9"><div class="eyebrow">Scene 9 · 01:32.10</div><h2>The modern paradox</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>26:30 2.5D pan of a metropolis at twilight (FG, lit towers, sunset)</span> → scene start: Highsmith Manhattan skyline at dusk, 3 layers (no commuters in the PD photo)</li>
+<li><span class='k'>27:30 camera pans down into a cutaway: conduits, fibre, automated substations</span> → &quot;They operate reliably…&quot;: drawn underground cutaway with pulses; A9</li>
+<li><span class='k'>28:15 bowed double-bass note with tape flutter</span> → &quot;…the bargain we made&quot;: M12</li>
+</ul></div>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:17.70</span><b>S9A Skyline</b></div>
+<p class="line">A · directive 26:30: a 2.5D pan across a metropolis at twilight (Highsmith, Manhattan at dusk, three layers)</p>
+<p><b>PhotoCraft</b>: Highsmith Manhattan at dusk → 2400 × 1350 crop; Depth Anything V2 masks; Refine Edge radius 2, feather 0.75 px → <span class="k">mid.png</span> (no foreground object: near layer empty); selection expanded 12 px, Content-Aware Fill → <span class="k">bg.png</span>; all three at the same canvas with alpha.</p>
+<p><b>Layer stack</b>: Layer 2 foreground occlusion Z −250 (soft) · Layer 1 midground Z 0 (sharp) · Layer 0 filled plate Z +400; scaled so they line up through the lens at frame 1; Tint into the amber palette; lower-third bar for keywords.</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); track X -120 → 120 px; track Y 10 → -10 px; Dutch -0.6° → 0.6° (|0.5–1.0|°, through level); aperture 60 + 12 px box blur on the near layer</p>
+<p><b>On screen</b>: <span class="k">SCIENCE FICTION</span></p>
+<p><b>Sound</b>: 00:00.00 music M11; 00:00.00 whoosh7 (whoosh7)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:17.70–00:33.60</span><b>S9B Quieter</b></div>
+<p class="line">B · the reality we built: quieter, more precarious; no malice, no consciousness, no awareness</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">QUIETER</span> · <span class="k">PRECARIOUS</span> · <span class="k">OPTIMIZATION ENGINES</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:33.60–00:42.90</span><b>S9C Bottleneck</b></div>
+<p class="line">C · exactly what we ask, at a velocity where understanding is the bottleneck</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.05 (clamped 0.4–0.75 %/s); Dutch ±0.6° → ∓0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">EXACTLY AS ASKED</span> · <span class="k">HUMAN UNDERSTANDING</span> · <span class="k">BOTTLENECK</span></p>
+<p><b>Sound</b>: 00:42.40 city (A8a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:42.90–01:00.20</span><b>S9D Invisible fabric</b></div>
+<p class="line">D · every light, every EV, every flight, every shipment: an invisible fabric of machine decisions</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.1 (clamped 0.4–0.75 %/s); track X -40 → 40 px; Dutch -0.2° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">INVISIBLE FABRIC</span> · <span class="k">MILLIONS / SECOND</span></p>
+<p><b>Sound</b>: 00:42.40 city (A8a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:00.20–01:11.40</span><b>S9E Underground</b></div>
+<p class="line">E · directive 27:30: the camera pans down from the street into a drawn underground cutaway: conduits, fibre, automated substations, with pulses running (A9)</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.06 (clamped 0.4–0.75 %/s); track Y -200 → 320 px; Dutch -0.5° → 0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">AUTOMATED SUBSTATION</span> · <span class="k">RELIABLE</span> · <span class="k">EFFICIENCY · EMISSIONS · FAILURES PREVENTED</span></p>
+<p><b>Sound</b>: 01:00.20 underground (A9a)</p>
+</article>
+<article class="shot down"><div class="head"><span class="tc">01:11.40–01:22.90</span><b>S9F Edge case</b></div>
+<p class="line">F · until an edge case solves the objective in a way nobody intended</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) (red variant) · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.06 (clamped 0.4–0.75 %/s); Dutch 0.3° → -0.4° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">UNTIL</span> · <span class="k">EDGE CASE</span> · <span class="k">UNINTENDED SOLUTION</span></p>
+<p><b>Sound</b>: 01:14.58 impact (T3c); 01:20.96 music M12</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:22.90–01:32.10</span><b>S9G Bargain</b></div>
+<p class="line">G · the bargain we made</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.05 (clamped 0.4–0.75 %/s); Dutch -0.2° → 0.3° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">&lt; 1 SECOND</span> · <span class="k">THE BARGAIN</span></p>
+<p><b>Sound</b>: 01:27.40 chime (T2a)</p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–01:32.10 at -28 dB; rumble 01:11.40–01:22.90 at -21 dB.</p>
+</section>
+<section class="scene" id="s10"><div class="eyebrow">Scene 10 · 01:15.00</div><h2>The final sign-off</h2>
+<div class="box"><b>Production-file directives (as corrected)</b><ul>
+<li><span class='k'>28:45 VO ends; only the 45 Hz rumble and room tone</span> → —: rumble + A1</li>
+<li><span class='k'>28:50 top-down: the &quot;AUTONOMOUS SYSTEMS // RISK ASSESSMENT&quot; dossier slides into a folder</span> → —: dossier slide; F5</li>
+<li><span class='k'>29:10 lamp clicks off</span> → —: key light off; K8</li>
+<li><span class='k'>29:15 black; the quote fades in, gold serif</span> → —: Playfair, amber</li>
+<li><span class='k'>29:30–30:00 silent end credits and end-screen cards</span> → —: credits (sources) + end-screen space</li>
+</ul></div>
+<article class="shot"><div class="head"><span class="tc">00:00.00–00:30.00</span><b>S10A Desk</b></div>
+<p class="line">A · the desk from above: folder, dossier, lamp pool</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · slide at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.05 (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>Sound</b>: 00:00.00 room tone (A1a); 00:05.00 dossier into folder (F5a); 00:25.00 lamp switch (K8a)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:30.00–00:45.00</span><b>S10B Quote</b></div>
+<p class="line">B · black, the quote in gold serif</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.03 (clamped 0.4–0.75 %/s); Dutch 0.5° → -0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">“We didn’t lose control to machines that woke up.</span> · <span class="k">We handed it over because we were too slow.”</span></p>
+</article>
+<article class="shot"><div class="head"><span class="tc">00:45.00–01:00.00</span><b>S10C Credits</b></div>
+<p class="line">C · silent end credits: every source and licence, rolling slowly upward</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in ≈ 0.6 %/s (clamped 0.4–0.75 %/s); Dutch ±0.6° → ∓0.6° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+</article>
+<article class="shot"><div class="head"><span class="tc">01:00.00–01:15.00</span><b>S10D End screen</b></div>
+<p class="line">D · end-screen space: dark, with two quiet frames where YouTube places its end-screen cards</p>
+<p><b>Layer stack</b>: terminal backdrop (grid + symbol columns, Z +350) or a scene backdrop · drawn shapes and type at Z 0 · smoke, grain 12 % (overlay), dust motes and an 18 % vignette on top (scene finish).</p>
+<p><b>Camera</b>: 35 mm (zoom 1866.67), DOF on, focus locked to Z 0; push-in to ×1.04 (clamped 0.4–0.75 %/s); Dutch -0.5° → 0.5° (|0.5–1.0|°, through level); aperture 200 (≈ 15 px blur at Z −250)</p>
+<p><b>On screen</b>: <span class="k">THE INVISIBLE CASSETTE</span></p>
+</article>
+<p class="muted">Beds: rumble 00:00.00–00:45.00 at -28 dB; rumble 00:00.00–00:30.00 at -24 dB.</p>
+</section>
+</div>

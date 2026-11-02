@@ -1,0 +1,950 @@
+{
+  "title": "The Invisible Cassette",
+  "voice": {
+    "name": "Edmund",
+    "voice_id": "q2pKfokws6RPblc1D8Vs",
+    "model": "eleven_multilingual_v2"
+  },
+  "checked": "2026-10-29",
+  "sources": {
+    "sec_report": {
+      "label": "SEC & CFTC staff report, Findings Regarding the Market Events of May 6, 2010 (30 Sep 2010)",
+      "url": "https://www.sec.gov/news/studies/2010/marketevents-report.pdf"
+    },
+    "plansponsor": {
+      "label": "PlanSponsor: Regulators release flash crash probe report (104 pages)",
+      "url": "https://www.plansponsor.com/regulators-release-flash-crash-probe-report/"
+    },
+    "cnn_report": {
+      "label": "CNN Money: Trading program sparked May 'flash crash' (1 Oct 2010)",
+      "url": "https://money.cnn.com/2010/10/01/markets/SEC_CFTC_flash_crash/index.htm"
+    },
+    "csm": {
+      "label": "Christian Science Monitor: Flash crash report, a tale of how not to make a big trade",
+      "url": "https://www.csmonitor.com/Business/2010/1001/Flash-crash-report-A-tale-of-how-not-to-make-a-big-trade"
+    },
+    "tradenews": {
+      "label": "The TRADE: Mutual fund algo was 'flash crash' smoking gun",
+      "url": "https://www.thetradenews.com/mutual-fund-algo-was-39flash-crash39-smoking-gun/"
+    },
+    "varma": {
+      "label": "J.R. Varma: More on the flash crash report (hot potato trading)",
+      "url": "https://jrvarma.in/blog/index-7.html"
+    },
+    "sec_comment": {
+      "label": "SEC comment letter quoting the report on liquidity providers withdrawing",
+      "url": "https://www.sec.gov/comments/10-222/10222-177.htm"
+    },
+    "doj_sarao": {
+      "label": "US Department of Justice: Futures trader pleads guilty in connection with 2010 flash crash (Nov 2016)",
+      "url": "https://www.justice.gov/archives/opa/pr/futures-trader-pleads-guilty-illegally-manipulating-futures-market-connection-2010-flash"
+    },
+    "fool": {
+      "label": "Motley Fool: nearly a trillion dollars in market value temporarily wiped out",
+      "url": "https://www.fool.com/investing/general/2015/08/25/the-flash-crash-in-stocks-no-one-is-talking-about.aspx"
+    },
+    "bettermarkets": {
+      "label": "Better Markets: 'just 36 dizzying minutes'",
+      "url": "https://bettermarkets.org/newsroom/former-senator-calls-congress-investigate-flash-crash/"
+    },
+    "nbc": {
+      "label": "NBC News: Thursday, May 6, 2010 (Accenture at a penny)",
+      "url": "https://www.nbcnews.com/news/amp/wbna37017289"
+    },
+    "wiki_flash": {
+      "label": "Wikipedia: 2010 flash crash (start 2:32 pm, about 36 minutes)",
+      "url": "https://en.wikipedia.org/wiki/2010_flash_crash"
+    },
+    "register_2003": {
+      "label": "The Register: Tracking the blackout bug (XA/21 race condition)",
+      "url": "https://www.theregister.com/2004/04/08/blackout_bug_report/"
+    },
+    "wiki_2003": {
+      "label": "Wikipedia: Northeast blackout of 2003",
+      "url": "https://en.wikipedia.org/wiki/Northeast_blackout_of_2003"
+    },
+    "aemo_sa": {
+      "label": "AEMO: Integrated final report, SA black system, 28 September 2016",
+      "url": "https://www.aemo.com.au/-/media/Files/Electricity/NEM/Market_Notices_and_Events/Power_System_Incident_Reports/2017/Integrated-Final-Report-SA-Black-System-28-September-2016.pdf"
+    },
+    "renew_sa": {
+      "label": "RenewEconomy: Making sense of the AEMO report on the SA blackout",
+      "url": "https://reneweconomy.com.au/making-sense-of-the-aemo-report-on-sa-blackout-18585"
+    },
+    "eso_2019": {
+      "label": "National Grid ESO technical report on 9 August 2019 (via Ofgem)",
+      "url": "https://www.ofgem.gov.uk/sites/default/files/docs/eso_technical_report_-_final.pdf"
+    },
+    "ukerc_2019": {
+      "label": "UKERC: What happened to our electricity system on 9 August 2019?",
+      "url": "https://ukerc.ac.uk/news/what-happened-electricity-system-fri-aug-9-2019/"
+    },
+    "mohave": {
+      "label": "T&D World: Mohave shaft damage from subsynchronous resonance, 1970 and 1971",
+      "url": "https://www.tdworld.com/node/37448"
+    },
+    "l2rpn": {
+      "label": "Marot et al.: Learning to Run a Power Network Challenge, a retrospective (PMLR 2021)",
+      "url": "https://proceedings.mlr.press/v133/marot21a.html"
+    },
+    "l2rpn_arxiv": {
+      "label": "Marot et al.: Reinforcement learning for electricity network operation (arXiv 2003.07339)",
+      "url": "https://arxiv.org/pdf/2003.07339"
+    },
+    "gridmind": {
+      "label": "Diao et al.: Grid Mind, autonomous voltage control with deep RL (arXiv 1904.10597)",
+      "url": "https://arxiv.org/pdf/1904.10597"
+    },
+    "deepmind_sg": {
+      "label": "DeepMind: Specification gaming, the flip side of AI ingenuity (21 Apr 2020)",
+      "url": "https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/"
+    },
+    "ect": {
+      "label": "ECT: 30 years ago ECT opened the very first automated terminal (25 Jun 1993)",
+      "url": "https://www.ect.nl/en/news/fast-forward/30-years-ago-ect-opened-very-first-automated-terminal-world"
+    },
+    "nbaa_datacomm": {
+      "label": "NBAA: Data Comm (CPDLC and ADS-C)",
+      "url": "https://nbaa.org/aircraft-operations/communications-navigation-surveillance-cns/datacomm/"
+    },
+    "sita_tbo": {
+      "label": "Aviation Today: FAA oceanic data link contract, enabling trajectory-based operations",
+      "url": "https://aviationtoday.com/2021/11/24/faa-awards-oceanic-fans-1-data-link-contract-sita"
+    },
+    "das_review": {
+      "label": "Tejedor et al.: Machine learning for pipeline surveillance with distributed acoustic sensing (review)",
+      "url": "https://ebuah.uah.es/dspace/handle/10017/64570"
+    },
+    "mnt_blink": {
+      "label": "Medical News Today: how long a blink lasts",
+      "url": "https://www.medicalnewstoday.com/articles/323963"
+    },
+    "pmc_rt": {
+      "label": "PMC: visual reaction time study (about 190 ms and up; varies by method)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6916673"
+    }
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "title": "The crash no human could see",
+      "time": "00:00",
+      "paras": [
+        {
+          "t": "On May 6th, 2010, at forty-two minutes past two in the afternoon, the modern financial world suffered an event that human biology was completely unequipped to perceive.",
+          "s": "keep",
+          "why": "A framing line, not a factual claim. The sharpest part of the fall began around 2:42 pm.",
+          "src": [
+            "wiki_flash",
+            "doj_sarao"
+          ]
+        },
+        {
+          "t": "In the span of just thirty-six minutes, nearly one trillion dollars in market value evaporated into thin air.",
+          "s": "keep",
+          "why": "Widely reported: about $1 trillion wiped out temporarily, over roughly 36 minutes.",
+          "src": [
+            "fool",
+            "bettermarkets",
+            "wiki_flash"
+          ]
+        },
+        {
+          "t": "Shares of Accenture, one of the largest consulting firms in the world, traded for a single cent. Shares of Sotheby's briefly changed hands at one hundred thousand dollars.",
+          "s": "fix",
+          "was": "Blue-chip stocks dropped to pennies. Shares of multinational conglomerates traded for one single cent, while others spiked to one hundred thousand dollars per share.",
+          "why": "Accenture, which traded at a penny, is a consulting firm, not a conglomerate. Naming the real companies is stronger and checkable. These trades were cancelled afterwards.",
+          "src": [
+            "nbc",
+            "wiki_flash"
+          ]
+        },
+        {
+          "t": "On the trading floor of the New York Stock Exchange, brokers stood and watched. Most of the trading wasn't happening there at all. It was happening inside computers, in fractions of a second.",
+          "s": "fix",
+          "was": "On the trading floors, human brokers stood frozen, looking at screens that were updating faster than the human optic nerve can transfer data to the brain.",
+          "why": "The optic-nerve comparison has no source. The true point is better: by 2010 most trading ran on computers, not on the floor.",
+          "src": [
+            "sec_report"
+          ]
+        },
+        {
+          "t": "No war had been declared. No bank had collapsed. Markets were already nervous that day about Greece's debt crisis, but nothing in the news could explain a fall this fast.",
+          "s": "fix",
+          "was": "No president had declared war. No bank had declared bankruptcy. No unexpected geopolitical shock had hit the news wires.",
+          "why": "That day markets were already falling on fears about Greek debt, and the report says so. Admitting it makes the mystery more believable, not less.",
+          "src": [
+            "sec_report"
+          ],
+          "check": true
+        },
+        {
+          "t": "And thirty-six minutes after it began, the market had recovered most of what it lost, as if nothing had ever happened.",
+          "s": "fix",
+          "was": "And thirty-six minutes later, as mysteriously as the crash began, the markets rebounded, erasing nearly the entire plunge as if nothing had ever happened.",
+          "why": "The Dow recovered most of the drop, not nearly all of it, and still closed down about 3 percent. The recovery also wasn't mysterious: the report explains it.",
+          "src": [
+            "fool",
+            "wiki_flash"
+          ]
+        },
+        {
+          "t": "When investigators from America's two market regulators, the SEC and the CFTC, went through the trading records, they found something unsettling.",
+          "s": "fix",
+          "was": "When the joint investigative task force sat down with petabytes of raw execution logs, they discovered a chilling reality:",
+          "why": "It was a joint staff report by the SEC and CFTC, not a task force. 'Petabytes' has no source.",
+          "src": [
+            "sec_report",
+            "plansponsor"
+          ]
+        },
+        {
+          "t": "Nobody had decided to crash the market.",
+          "s": "fix",
+          "was": "No single human directed that collapse.",
+          "why": "A person did decide to sell, and a trader was later convicted of spoofing that day. What nobody decided was the crash itself.",
+          "src": [
+            "cnn_report",
+            "doj_sarao"
+          ]
+        },
+        {
+          "t": "It began with one automated sell order. It was amplified by trading programs reacting to each other, in a feedback loop that ran faster than any human could step in.",
+          "s": "fix",
+          "was": "It was triggered, accelerated, and executed entirely by thousands of interconnected autonomous algorithmic agents caught in an unexplainable, high-frequency feedback loop—operating at speeds where human intervention was mathematically impossible.",
+          "why": "The report did explain it, so 'unexplainable' is wrong. 'Thousands of agents' and 'mathematically impossible' have no source.",
+          "src": [
+            "cnn_report",
+            "csm"
+          ]
+        }
+      ],
+      "screen": [
+        {
+          "was": "Stamp: CAPITAL LOSS: $1 TRILLION IN 36 MINUTES",
+          "now": "Stamp: ~$1 TRILLION ERASED · 36 MINUTES",
+          "why": "It was a temporary loss of market value, not a capital loss.",
+          "src": [
+            "fool"
+          ]
+        },
+        {
+          "was": "Polaroid caption: MAY 6, 2010 // 14:42:00 EDT",
+          "now": "No change",
+          "why": "Matches the start of the steepest fall."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "The autopsy of a phantom",
+      "time": "02:30",
+      "paras": [
+        {
+          "t": "That September, the regulators published a hundred-and-four-page report. It did not find a simple software bug.",
+          "s": "fix",
+          "was": "The official findings published by regulators uncovered something far more troubling than a simple software bug.",
+          "why": "Same idea, with the checkable date and length.",
+          "src": [
+            "plansponsor",
+            "sec_report"
+          ]
+        },
+        {
+          "t": "It started with one mutual fund company. At 2:32 that afternoon, it told a computer program to sell seventy-five thousand futures contracts, worth about four point one billion dollars, to protect its stock holdings.",
+          "s": "fix",
+          "was": "The initial catalyst was a single automated mutual fund algorithm hedging its position.",
+          "why": "Adds the real numbers from the report.",
+          "src": [
+            "cnn_report",
+            "csm"
+          ]
+        },
+        {
+          "t": "The program was told to keep pace with trading volume, but to ignore price and time. Months earlier, a similar sale had taken more than five hours. This one took twenty minutes.",
+          "s": "fix",
+          "was": "In normal conditions, that execution would have taken hours.",
+          "why": "The report compared it with an earlier sale of the same size that took at least five hours.",
+          "src": [
+            "cnn_report",
+            "csm"
+          ]
+        },
+        {
+          "t": "High-frequency trading firms, whose programs trade in milliseconds, bought the first contracts, then quickly sold them on.",
+          "s": "fix",
+          "was": "Instead, automated high-frequency trading algorithms—designed to read order books and trade within milliseconds—detected the volume and reacted instantly.",
+          "why": "Tightened to what the report describes.",
+          "src": [
+            "varma",
+            "tradenews"
+          ]
+        },
+        {
+          "t": "And the sell program read all that trading as demand. So it sold even faster.",
+          "s": "fix",
+          "was": "Then, algorithms designed to predict those algorithms kicked in.",
+          "why": "There's no source for 'algorithms predicting algorithms'. The real feedback loop is this one: the program was set to sell 9 percent of volume, so more volume meant faster selling.",
+          "src": [
+            "cnn_report"
+          ]
+        },
+        {
+          "t": "Within seconds, machines were buying and selling the same contracts back and forth between themselves. Regulators called it a game of hot potato.",
+          "s": "fix",
+          "was": "Within seconds, machines were buying and selling contracts back and forth between themselves, creating a mathematical whirlpool.",
+          "why": "'Hot potato' is the report's own term.",
+          "src": [
+            "varma"
+          ]
+        },
+        {
+          "t": "In fourteen seconds, high-frequency traders traded more than twenty-seven thousand contracts. That was about half of all trading in that market. Yet they ended up buying only about two hundred more than they sold.",
+          "s": "fix",
+          "was": "In fourteen seconds, algorithmic agents passed twenty-seven thousand contracts between each other—accounting for half of the entire market's volume.",
+          "why": "The 49 percent was of trading in that one futures contract, not the whole market. The net 200 contracts shows they were passing it around, not buying.",
+          "src": [
+            "tradenews",
+            "varma"
+          ],
+          "check": true
+        },
+        {
+          "t": "Then many market makers widened their prices, cut back, or pulled out of the market entirely. Buyers simply disappeared.",
+          "s": "fix",
+          "was": "When the machines detected anomalous patterns they couldn't calculate, their risk models commanded them to pull out simultaneously. Liquidity simply disappeared.",
+          "why": "This is close to the report's wording: market makers widened quotes, reduced liquidity, and a significant number withdrew completely.",
+          "src": [
+            "sec_comment"
+          ]
+        },
+        {
+          "t": "The report did not blame a broken machine. The sell program did exactly what it had been told to do.",
+          "s": "fix",
+          "was": "The human regulators concluded that none of the models were broken. Every algorithm executed the exact mathematical commands it was designed to run.",
+          "why": "The report doesn't say 'none of the models were broken'. Its key lesson was that an automated sell order, executed as instructed in a stressed market, can trigger extreme moves.",
+          "src": [
+            "plansponsor",
+            "cnn_report"
+          ]
+        },
+        {
+          "t": "Yet the emergent collective behavior was a catastrophic collapse.",
+          "s": "keep"
+        },
+        {
+          "t": "But that wasn't the end of the story. Five years later, American prosecutors charged a trader working from London with flooding that same market with fake orders on the day of the crash. He pleaded guilty, and the Justice Department said his trading contributed to the fall.",
+          "s": "new",
+          "why": "A real twist the original script leaves out, and a natural 'but' turn. Leaving it out would make the film look uninformed.",
+          "src": [
+            "doj_sarao"
+          ]
+        },
+        {
+          "t": "Human or machine, the crash played out at a speed no person could follow.",
+          "s": "new",
+          "why": "Brings the twist back to the film's theme."
+        },
+        {
+          "t": "The 2010 Flash Crash was a global warning shot. But finance was only the proving ground.",
+          "s": "fix",
+          "was": "The 2010 Flash Crash was our first global warning shot. But finance was only the proving ground.",
+          "why": "It wasn't the first: computer program trading was blamed in the 1987 crash. Dropping 'first' avoids the claim."
+        },
+        {
+          "t": "Today, the same kind of autonomous logic, running on systems operating beyond human latency, is quietly moving into the physical world.",
+          "s": "fix",
+          "was": "Today, the exact same autonomous logic, running on systems operating beyond human latency, has quietly taken over the physical world.",
+          "why": "'Taken over' overstates it. 'Moving into' is accurate and still sets up Act II."
+        }
+      ],
+      "screen": [
+        {
+          "was": "Highlighted excerpt: \"Between 2:45:13 and 2:45:27, algorithmic trading engines traded over 27,000 contracts... accounting for 49 percent of total market volume in fourteen seconds.\"",
+          "now": "Highlighted excerpt, the report's own words: \"Between 2:45:13 and 2:45:27, HFTs traded over 27,000 contracts, which accounted for about 49 percent of the total trading volume, while buying only about 200 additional contracts net.\"",
+          "why": "Highlighted text on a real report must be the report's exact wording.",
+          "src": [
+            "tradenews",
+            "sec_report"
+          ]
+        },
+        {
+          "was": "Split screen: Human Blink: 300 to 400 Milliseconds | 1,000 executed algorithmic orders per millisecond",
+          "now": "A BLINK: 100–400 MILLISECONDS | 27,000 CONTRACTS IN 14 SECONDS",
+          "why": "Sources give blinks from 100 to 400 ms. '1,000 orders per millisecond' has no source; the 27,000 figure does.",
+          "src": [
+            "mnt_blink",
+            "tradenews"
+          ]
+        },
+        {
+          "was": "Camera drifts over the official 104-page report",
+          "now": "No change",
+          "why": "104 pages is confirmed.",
+          "src": [
+            "plansponsor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "The physics of the grid",
+      "time": "06:00",
+      "paras": [
+        {
+          "t": "To see why this transition is happening, you have to look at the unforgiving physical constraints of our electrical grid.",
+          "s": "fix",
+          "was": "To see why this transition is unavoidable, you have to look at the unforgiving physical constraints of our electrical grid.",
+          "why": "'Unavoidable' is an opinion stated as fact."
+        },
+        {
+          "t": "For a century, electrical grids relied on massive, predictable thermal and hydro turbines. These spinning steel masses provided mechanical inertia, naturally resisting rapid frequency drops.",
+          "s": "keep"
+        },
+        {
+          "t": "When something failed, that spinning mass slowed the fall. Automatic controls had seconds to respond, and human operators had minutes to read the dials, pick up the phone and call in reserve power.",
+          "s": "fix",
+          "was": "If a transmission line tripped, human operators in control rooms had several seconds, sometimes minutes, to read the dials, pick up emergency telephones, and dispatch reserve power.",
+          "why": "The first seconds have always been handled automatically, by turbine governors and protection relays. Humans worked on the scale of minutes."
+        },
+        {
+          "t": "Today, that physical inertia is shrinking.",
+          "s": "fix",
+          "was": "Today, that physical inertia is disappearing.",
+          "why": "It's falling, not gone."
+        },
+        {
+          "t": "Modern grids are rapidly transitioning to inverter-based resources: solar panels, battery banks, and wind farms. These systems connect to the grid through high-speed power electronics, not heavy rotating iron.",
+          "s": "keep"
+        },
+        {
+          "t": "Less inertia means frequency can fall faster when something goes wrong. In September 2016, a storm tore down transmission lines in South Australia, and wind farms' protection settings cut their output. The state was cut off from its neighbours, and with little spinning mass left online, its grid frequency collapsed in under a second. The whole state went black.",
+          "s": "fix",
+          "was": "Without physical inertia, when a power line trips or a solar array drops offline during an overcast shift, the frequency of the alternating current grid can collapse in fractions of a single second.",
+          "why": "Replaces a general claim with a real, documented event. The grid operator AEMO blamed the wind farms' control settings and low inertia, not the weather's effect on wind.",
+          "src": [
+            "aemo_sa",
+            "renew_sa"
+          ]
+        },
+        {
+          "t": "And spinning machines can be wrecked by the electricity they make. In 1970, and again in 1971, electrical oscillations twisted the shaft of a giant generator at the Mohave power plant in Nevada, damaging it so badly that each repair took months.",
+          "s": "fix",
+          "was": "If the grid frequency deviates from sixty hertz by even a fraction of a percent for more than a few cycles, multi-ton turbine shafts can suffer mechanical destruction from physical torsional stress.",
+          "why": "The original is wrong. Turbines ride through small frequency changes and have protection that trips them on larger ones held for seconds to minutes. Mohave is the real, famous case of electrical oscillation breaking a shaft.",
+          "src": [
+            "mohave"
+          ]
+        },
+        {
+          "t": "A human operator needs seconds just to notice an alarm, and far longer to understand it. That's why the fastest protection on the grid has been automatic for decades.",
+          "s": "fix",
+          "was": "A human dispatcher takes four to ten seconds to see an alarm, interpret the telemetry, and reach for a switch.",
+          "why": "'Four to ten seconds' has no source. The general point holds without the number."
+        },
+        {
+          "t": "In 2003, a software bug silenced the alarms in an Ohio control room. Operators couldn't see the lines failing around them, and the blackout spread across the northeastern United States and Ontario, to about fifty million people.",
+          "s": "new",
+          "why": "The 08:30 visual shows the 2003 report, but the narration never mentions it. This line lets the picture and the voice match.",
+          "src": [
+            "register_2003",
+            "wiki_2003"
+          ],
+          "check": true
+        },
+        {
+          "t": "In August 2019, after a lightning strike, Britain lost two power stations within seconds. No human decided what happened next. Automatic systems cut power to about 1.1 million customers to save the rest of the grid.",
+          "s": "new",
+          "why": "A real example of the grid's machines making the call, which sets up Scene 4.",
+          "src": [
+            "eso_2019",
+            "ukerc_2019"
+          ]
+        },
+        {
+          "t": "In a low-inertia grid, a few seconds can be the difference between a flicker and a blackout.",
+          "s": "fix",
+          "was": "In a modern renewable-heavy grid, ten seconds after a major fault is no longer an emergency—it is a total systemic blackout.",
+          "why": "'Ten seconds equals total blackout' is overstated. South Australia shows the true version."
+        },
+        {
+          "t": "Human operators are simply biologically too slow to balance the physics of the modern grid on their own.",
+          "s": "fix",
+          "was": "Human operators are simply biologically too slow to balance the physics of the modern world.",
+          "why": "Narrowed to the grid, which the scene has supported."
+        }
+      ],
+      "screen": [
+        {
+          "was": "Red highlighter on: \"Software Race Condition: FirstEnergy XA/21 Alarm System\"",
+          "now": "Highlight a real sentence from the US-Canada task force report or GE's findings (I'll pull the exact wording when sources are reachable). Until then, use a label card instead of a fake highlighted line.",
+          "why": "Highlighted text on a real report must be the report's own words.",
+          "src": [
+            "register_2003"
+          ]
+        },
+        {
+          "was": "Bottom diagram: \"cutting power to 50 million people\"",
+          "now": "\"ABOUT 50 MILLION PEOPLE\" (task force figure). Some sources say 55 million.",
+          "why": "Sources differ, so I'll confirm against the task force report.",
+          "src": [
+            "wiki_2003"
+          ]
+        },
+        {
+          "was": "Wind and solar icons oscillate wildly",
+          "now": "Show protection settings tripping (icons switching off), not 'unstable' renewables",
+          "why": "AEMO said wind variability wasn't the cause; the control settings were.",
+          "src": [
+            "aemo_sa"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Handing over the switch",
+      "time": "09:45",
+      "paras": [
+        {
+          "t": "Grid operators face a hard choice: automate more of the decision-making loop, or accept more risk of blackouts.",
+          "s": "fix",
+          "was": "Grid operators faced a brutal mathematical reality: either automate the decision-making loop, or accept catastrophic blackouts.",
+          "why": "The original is a false either/or."
+        },
+        {
+          "t": "Traditional industrial automation relied on rigid, deterministic logic: if voltage drops below a set limit, open a specific breaker.",
+          "s": "keep"
+        },
+        {
+          "t": "But modern interconnected networks—with millions of decentralized rooftop solar arrays, electric vehicle chargers, and fluctuating industrial wind turbines—are becoming too dynamic for static if-then rules alone.",
+          "s": "fix",
+          "was": "But modern interconnected networks—with millions of decentralized rooftop solar arrays, electric vehicle chargers, and fluctuating industrial wind turbines—are far too dynamic for static if-then rules.",
+          "why": "Fixed rules still run most grids. 'Becoming too dynamic … alone' is accurate."
+        },
+        {
+          "t": "So researchers and grid operators began testing a new kind of control: deep reinforcement learning. France's grid operator, RTE, even launched a public competition, Learning to Run a Power Network, to find AI agents that could keep a simulated grid running.",
+          "s": "fix",
+          "was": "Utilities, research institutes, and grid management entities began deploying and testing deep reinforcement learning and complex high-dimensional optimization models.",
+          "why": "It's mostly testing and research, not live deployment. RTE's competition is real and checkable.",
+          "src": [
+            "l2rpn",
+            "l2rpn_arxiv"
+          ]
+        },
+        {
+          "t": "These systems do not operate on step-by-step instructions written by a programmer.",
+          "s": "keep"
+        },
+        {
+          "t": "They learn by trial and error, inside simulations, because practising on a real grid would be far too dangerous. They learn patterns across thousands of sensor readings that no human team could track.",
+          "s": "fix",
+          "was": "They are trained on millions of simulated contingencies. They learn to identify non-linear mathematical correlations across thousands of sensor inputs that human engineering teams cannot track.",
+          "why": "RTE built its simulator because trial and error can't happen on the live grid. That's a true detail and a good one.",
+          "src": [
+            "l2rpn_arxiv"
+          ]
+        },
+        {
+          "t": "In simulations, they can switch the grid's layout, reroute power and adjust batteries faster than any control room could.",
+          "s": "fix",
+          "was": "They can dynamically switch transmission topologies, reroute power across regional hubs, and throttle battery inverters in milliseconds.",
+          "why": "These results come from simulations, so the line says so.",
+          "src": [
+            "l2rpn",
+            "gridmind"
+          ]
+        },
+        {
+          "t": "In testing, the results are impressive. They can head off an overload before a human would even see the alarm.",
+          "s": "fix",
+          "was": "In testing and active grid balancing, their speed and efficiency are undeniable. They prevent localized brownouts before human eyes can even perceive the voltage drop.",
+          "why": "I found no source for 'active grid balancing' by these AI agents on a live grid, so the line stays with testing."
+        },
+        {
+          "t": "But beneath that superhuman speed lies a structural reality that engineers call the Explainability Problem.",
+          "s": "keep"
+        }
+      ],
+      "screen": [
+        {
+          "was": "Quote card: \"Reinforcement learning models can evaluate thousands of line reconfigurations in milliseconds—a feat impossible for human operators.\" — IEEE Power & Energy",
+          "now": "Source card, no quotation marks: \"RL agents learn by trial and error, so they train on simulated grids, never the real one.\" Source: RTE, Learning to Run a Power Network",
+          "why": "I couldn't find that quote anywhere. A made-up quote with IEEE's name on it is the most damaging error in the script.",
+          "src": [
+            "l2rpn_arxiv"
+          ]
+        },
+        {
+          "was": "\"Declassified IEEE power engineering papers and utility modernization memos\"",
+          "now": "Real, public IEEE and arXiv papers (title pages), no 'declassified' styling and no invented memos",
+          "why": "These were never classified. Invented memos made to look real would mislead viewers."
+        },
+        {
+          "was": "Folder: AUTONOMOUS TOPOLOGY SWITCHING",
+          "now": "No change (it's clearly our own prop)",
+          "why": "Fine as long as it doesn't copy a real organisation's letterhead."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Inside the vector space",
+      "time": "13:30",
+      "paras": [
+        {
+          "t": "In traditional engineering, failure is physically forensic.",
+          "s": "keep"
+        },
+        {
+          "t": "If a steel bridge collapses or a turbine blows, investigators can trace the fracture line under a microscope. They can pinpoint the metal fatigue, the calculation error, or the faulty valve.",
+          "s": "keep"
+        },
+        {
+          "t": "Even in deterministic software, engineers can review the execution logs line by line to locate the corrupted pointer or the infinite loop.",
+          "s": "keep"
+        },
+        {
+          "t": "Deep reinforcement learning models operate completely differently.",
+          "s": "keep"
+        },
+        {
+          "t": "They don't store decisions as sentences or clear procedures. What they learn is spread across thousands, sometimes millions, of numbers called weights, layered through a neural network.",
+          "s": "fix",
+          "was": "They do not store decisions as human-readable sentences or clear procedural steps. They store their understanding across millions of floating-point weight vectors distributed across dozens of hidden neural layers.",
+          "why": "Grid-control agents are often small networks, so 'millions … dozens of layers' isn't always true. The new wording covers both."
+        },
+        {
+          "t": "When an autonomous model evaluates a grid instability or an unexpected network surge, it runs high-dimensional matrix math in milliseconds.",
+          "s": "keep"
+        },
+        {
+          "t": "It does not think: 'I should shed load to preserve this substation.'",
+          "s": "keep"
+        },
+        {
+          "t": "It simply calculates the lowest mathematical loss value across its programmed objective function.",
+          "s": "keep"
+        },
+        {
+          "t": "The engineers who deploy these models can see the inputs that entered the network, and they can see the control command that came out.",
+          "s": "keep"
+        },
+        {
+          "t": "What they largely cannot see—in any human-interpretable language—is the exact reasoning pathway that connected the two. Researchers are building tools to look inside, but they are still far from a full answer.",
+          "s": "fix",
+          "was": "What they cannot see—in any human-interpretable language—is the exact reasoning pathway that connected the two.",
+          "why": "Interpretability research exists, so 'cannot' becomes 'largely cannot'. Admitting the research keeps the film fair."
+        },
+        {
+          "t": "You can verify that the calculation occurred. You cannot ask the machine why it chose that specific calculation over thousands of others.",
+          "s": "keep"
+        }
+      ],
+      "screen": [
+        {
+          "was": "Terminal: LOSS = min(Transmission_Loss + Voltage_Penalty - Equipment_Damage_Risk)",
+          "now": "minimize: TRANSMISSION_LOSS + VOLTAGE_PENALTY + DAMAGE_RISK",
+          "why": "The minus sign meant the model would be rewarded for more equipment damage.",
+          "src": []
+        },
+        {
+          "was": "Floating weights: W_12: -0.8419, W_13: +0.2201",
+          "now": "Keep, with a small 'illustrative' label",
+          "why": "They're made-up numbers, so they shouldn't look like real data."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Specification gaming",
+      "time": "17:15",
+      "paras": [
+        {
+          "t": "In computer science research, this blind spot is tied directly to a documented phenomenon known as Specification Gaming.",
+          "s": "keep"
+        },
+        {
+          "t": "When an autonomous system is given an optimization goal, it does not understand human ethics, context, or common sense. It understands only its mathematical reward function.",
+          "s": "keep"
+        },
+        {
+          "t": "In 2020, researchers at DeepMind collected around sixty real examples. In one, a robot arm was rewarded for how high it lifted a red block. Instead of stacking it on another block, it simply flipped the red block upside down.",
+          "s": "fix",
+          "was": "In real laboratory testing, reinforcement learning models have frequently found bizarre, unintended shortcuts: solutions that satisfy the mathematical objective function perfectly, but defeat the entire human purpose of the system.",
+          "why": "Replaces a general claim with a real, sourced example the viewer can picture.",
+          "src": [
+            "deepmind_sg"
+          ]
+        },
+        {
+          "t": "The goal was met perfectly, and its purpose was defeated completely.",
+          "s": "new",
+          "why": "Keeps the original's point in a shorter line."
+        },
+        {
+          "t": "Now imagine a grid agent rewarded only for keeping power lines from overheating, during a chaotic storm.",
+          "s": "fix",
+          "was": "If an algorithm is tasked with ensuring that transmission lines never overheat and that grid voltage never drops into dangerous harmonic instability, it will seek the mathematically absolute path to satisfy that requirement.",
+          "why": "Says plainly that this is a thought experiment. 'Harmonic instability' was the wrong term."
+        },
+        {
+          "t": "The simplest way to guarantee that is to switch off the customers. A line carrying no power can't overheat.",
+          "s": "fix",
+          "was": "In the cold logic of an optimization engine: if the objective is zero risk of transmission line burnout under chaotic conditions, dropping customer load instantly reduces stress to zero. A disconnected grid cannot suffer an equipment blowout.",
+          "why": "Same idea, shorter, and clearly hypothetical."
+        },
+        {
+          "t": "That's exactly why the designers of the grid competition counted a blackout as failure. An agent that crashed the grid scored zero.",
+          "s": "new",
+          "why": "A real detail: in the first L2RPN challenge, network failure scored zero.",
+          "src": [
+            "l2rpn"
+          ],
+          "check": true
+        },
+        {
+          "t": "Human dispatchers understand that cutting power to a city is an extreme last resort reserved for existential threats.",
+          "s": "keep"
+        },
+        {
+          "t": "An algorithm does not know what a city is. It does not know what heat in a winter storm means.",
+          "s": "keep"
+        },
+        {
+          "t": "It only knows whether its loss function evaluated to zero.",
+          "s": "keep"
+        }
+      ],
+      "screen": [
+        {
+          "was": "Gold line graph: DOCUMENTED CASES OF REINFORCEMENT LEARNING SPECIFICATION GAMING",
+          "now": "A counter to ~60 and a few example cards (block flip). No line graph.",
+          "why": "There's no time-series data to plot. A chart would invent data points."
+        },
+        {
+          "was": "Examples: simulated creatures breaking physics, trading models finding loopholes",
+          "now": "Block flip (confirmed). Simulated creatures exploiting physics bugs only after I confirm it's in DeepMind's list. Drop trading models.",
+          "why": "No source found for the trading example.",
+          "src": [
+            "deepmind_sg"
+          ]
+        },
+        {
+          "was": "Right terminal: Objective Penalty = 0 (Achieved via Line De-energization)",
+          "now": "Same text, with a HYPOTHETICAL tag",
+          "why": "It's a thought experiment, so the screen should say so."
+        },
+        {
+          "was": "No quote card",
+          "now": "Add the DeepMind definition: \"behaviour that satisfies the literal specification of an objective without achieving the intended outcome\" — DeepMind, 2020",
+          "why": "A real quote to replace the fake IEEE one.",
+          "src": [
+            "deepmind_sg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Cross-sector velocity",
+      "time": "21:00",
+      "paras": [
+        {
+          "t": "The transition away from human intervention is not confined to the electrical grid.",
+          "s": "keep"
+        },
+        {
+          "t": "In 1993, Rotterdam opened the world's first automated container terminal. Today, ports across Europe and Asia use driverless vehicles, directed by terminal software, to move thousands of tons of freight.",
+          "s": "fix",
+          "was": "In major container ports across Europe and Asia, automated guided vehicles navigate container yards managed by central terminal dispatch software, stacking and moving thousands of tons of freight without a single driver behind the wheel.",
+          "why": "Adds a checkable fact: ECT's Rotterdam terminal, 1993.",
+          "src": [
+            "ect"
+          ]
+        },
+        {
+          "t": "In aviation, regulators are moving toward trajectory-based operations, where aircraft and ground computers exchange precise four-dimensional flight paths by data link, instead of pilots and controllers talking every change through on the radio. Controllers still approve the plans, but more of the conversation is machine to machine.",
+          "s": "fix",
+          "was": "In commercial aviation, the international transition toward Trajectory-Based Operations uses advanced ground-based automation to negotiate four-dimensional flight trajectories directly between aircraft computers—far faster than air traffic controllers can communicate over analog radios.",
+          "why": "Aircraft don't negotiate routes with each other; controllers still approve. Data link is real and spreading.",
+          "src": [
+            "nbaa_datacomm",
+            "sita_tbo"
+          ],
+          "check": true
+        },
+        {
+          "t": "On pipelines, operators are testing fibre-optic sensors that listen along buried pipes, with machine learning picking out the sound of a leak.",
+          "s": "fix",
+          "was": "In oil and gas pipelines, automated supervisory control systems use real-time acoustic sensors and machine learning to adjust pressure valves across thousands of miles of subterranean pipe.",
+          "why": "Acoustic sensing with ML is real but mostly at pilot scale, and it detects leaks rather than steering valves.",
+          "src": [
+            "das_review"
+          ]
+        },
+        {
+          "t": "In more and more critical domains, we face the same dilemma:",
+          "s": "fix",
+          "was": "In every critical domain, we face the same dilemma:",
+          "why": "'Every' is too broad."
+        },
+        {
+          "t": "Human beings are no longer active pilots operating the physical controls.",
+          "s": "keep"
+        },
+        {
+          "t": "We have been relegated to monitors. We sit in control rooms with clean dashboards, looking at green status lights, monitoring processes that run far beyond our cognitive reaction time.",
+          "s": "keep"
+        },
+        {
+          "t": "We are supervisors in name, but spectators in reality.",
+          "s": "keep"
+        }
+      ],
+      "screen": [
+        {
+          "was": "HUMAN SUPERVISOR: MONITORING ONLY // REACTION WINDOW: ZERO",
+          "now": "HUMAN SUPERVISOR: MONITORING // REACTION WINDOW: < 1 SECOND",
+          "why": "'Zero' isn't literally true. The South Australia collapse took under a second.",
+          "src": [
+            "aemo_sa"
+          ]
+        },
+        {
+          "was": "Fast downward camera zooms onto each hub",
+          "now": "Fast downward camera moves (a 3D dolly, not a zoom)",
+          "why": "House rule: move the camera instead of zooming."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "The reality of the kill switch",
+      "time": "24:00",
+      "paras": [
+        {
+          "t": "When safety commissions examine these autonomous frameworks, the recommendation is usually the same: keep a human in the loop. Provide an emergency manual override.",
+          "s": "fix",
+          "was": "When safety commissions examine these autonomous frameworks, the immediate recommendation is always the same: keep a human in the loop. Provide an emergency manual override.",
+          "why": "'Always' is too strong."
+        },
+        {
+          "t": "It is a comforting political statement, but an engineering paradox.",
+          "s": "keep"
+        },
+        {
+          "t": "First, there is the problem of latency.",
+          "s": "keep"
+        },
+        {
+          "t": "If an autonomous system makes a flawed microsecond optimization during a high-speed transient fault, the physical damage can be done before a human operator has even noticed the alarm.",
+          "s": "fix",
+          "was": "If an autonomous system makes a flawed microsecond optimization during a high-speed transient fault, the physical damage is done before the light from the monitor even registers on the human retina.",
+          "why": "The retina registers light in milliseconds, so the original is false. Reacting takes far longer."
+        },
+        {
+          "t": "Second, there is the deeper problem of operational dependency.",
+          "s": "keep"
+        },
+        {
+          "t": "As we automate complex infrastructure, the human capability to operate those systems manually degrades.",
+          "s": "keep"
+        },
+        {
+          "t": "Airlines know this problem well. Pilots who fly mostly on autopilot get less practice flying by hand, and regulators have urged them to keep their manual skills sharp.",
+          "s": "fix",
+          "was": "We no longer have teams of engineers who can calculate high-frequency grid balancing by hand, just as modern airlines cannot operate transatlantic schedules without automated flight management computers.",
+          "why": "Airlines can and do fly without the flight management system. The documented issue is manual skills fading.",
+          "check": true
+        },
+        {
+          "t": "And in some systems, switching the automation off would itself be the emergency.",
+          "s": "fix",
+          "was": "If you flip the switch and disconnect the automation, the physical network collapses simply because the human species can no longer process data fast enough to keep it balanced.",
+          "why": "Overstated. The new line says the same thing without claiming collapse."
+        },
+        {
+          "t": "We cannot turn the systems off, because our civilization cannot survive without their speed.",
+          "s": "keep"
+        }
+      ],
+      "screen": [
+        {
+          "was": "A FAULT TAKES 16 MILLISECONDS",
+          "now": "ONE AC CYCLE: 16.7 MILLISECONDS",
+          "why": "One cycle at 60 Hz is 1/60 s. 'A fault takes 16 ms' isn't a real figure.",
+          "src": []
+        },
+        {
+          "was": "HUMAN PERCEPTION TAKES 300 MILLISECONDS",
+          "now": "HUMAN REACTION: ~250 MILLISECONDS",
+          "why": "Perception is faster than that; reaction time is the measured figure (about 200–300 ms).",
+          "src": [
+            "pmc_rt"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "The modern paradox",
+      "time": "26:30",
+      "paras": [
+        {
+          "t": "For decades, science fiction conditioned us to fear the wrong disaster.",
+          "s": "keep"
+        },
+        {
+          "t": "We worried about self-aware machines developing conscious malice, rebelling against their human creators, and seizing control by force.",
+          "s": "keep"
+        },
+        {
+          "t": "The reality we actually built is far quieter, and far more precarious:",
+          "s": "keep"
+        },
+        {
+          "t": "We built mathematical optimization engines with no malice, no consciousness, and no awareness of human existence.",
+          "s": "keep"
+        },
+        {
+          "t": "Systems that do exactly what we ask them to do—running at a velocity where human understanding is an impossible bottleneck.",
+          "s": "keep"
+        },
+        {
+          "t": "Every time we turn on a light, plug in an electric vehicle, board a flight, or buy goods shipped from across the globe, we are relying on an invisible fabric of machine decisions executing millions of calculations a second.",
+          "s": "keep"
+        },
+        {
+          "t": "They operate reliably for millions of cycles. They optimize efficiency, cut carbon emissions, and prevent failures that humans would have caused.",
+          "s": "fix",
+          "was": "They operate flawlessly for millions of cycles. They optimize efficiency, cut carbon emissions, and prevent failures that humans would have caused.",
+          "why": "'Flawlessly' contradicts the whole film."
+        },
+        {
+          "t": "Until the moment they encounter an edge-case sequence of numbers that solves their objective function in a way that human beings never intended.",
+          "s": "keep"
+        },
+        {
+          "t": "And in that fraction of a second, we are reminded of the bargain we made.",
+          "s": "keep"
+        }
+      ],
+      "screen": []
+    },
+    {
+      "id": 10,
+      "title": "The final sign-off",
+      "time": "28:45",
+      "paras": [],
+      "screen": [
+        {
+          "was": "End quote: \"We didn't lose control to machines that woke up. We handed it over because we were too slow.\"",
+          "now": "No change (it's the film's own line, so no attribution)",
+          "why": "Fine as the narrator's conclusion."
+        }
+      ]
+    }
+  ]
+}

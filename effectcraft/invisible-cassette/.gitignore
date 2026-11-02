@@ -1,0 +1,5 @@
+render/
+stills/
+*.ecproj
+assets/*.png
+assets/layers/*/*.png
