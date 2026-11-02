@@ -29,3 +29,15 @@ your AI-water video's 87), AI PC/NPU (median 522), Wi-Fi, phones getting hot, Ga
 - Earlier picks were wrong on #4 (deleted photos) and partly on #1 (the ChatGPT journey): the data says the
   **data-centre angle** ("the building that answers you") is what breaks out, not the message's network route.
 - New #1 is a topic that wasn't in my earlier top three: **USB-C**.
+
+## Verification pass (same day)
+- **Channel depth:** Simple but Surprising (median 643 over 30 videos), Wild Imprint (248 over 30) and Bitwise
+  Explained (1K over 30) are real channels with long histories, so their ratios hold. **James Harrison has only 6
+  videos (median 57)**, so its 4,390× is unreliable: one fluke or a promoted video. Removed as evidence.
+- **Trend:** USB-C outliers fell from 11 of 14 (4–12 months ago) to 8 of 16 (last 4 months): still strong but cooling.
+  AI data centres rose from 3 of 9 to 9 of 18, but recent hits are mostly big channels (ColdFusion, Be Smart,
+  Maxinomics). Apple chips steady (6/17 → 9/22).
+- **New signal found:** [Silicon Up Close](https://youtu.be/oBKrR3i6jWM) "What Happens Inside an AI Chip When You Ask a Question",
+  10K subs, 9 videos (median 24K), **932K views (39×), 3 weeks old**: the AI-chip angle is breaking out for small channels right now.
+- **Not checkable:** like and comment counts (YouTube's automated-traffic check stopped video-page requests), so a
+  paid-promotion check on single videos wasn't possible.
