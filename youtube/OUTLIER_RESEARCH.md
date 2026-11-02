@@ -41,3 +41,19 @@ your AI-water video's 87), AI PC/NPU (median 522), Wi-Fi, phones getting hot, Ga
   10K subs, 9 videos (median 24K), **932K views (39×), 3 weeks old**: the AI-chip angle is breaking out for small channels right now.
 - **Not checkable:** like and comment counts (YouTube's automated-traffic check stopped video-page requests), so a
   paid-promotion check on single videos wasn't possible.
+
+## User's idea: "Why AI gets sloppy and how to avoid it" (same day)
+12 more searches (240 results, 205 channels), same method. Raw data: scratchpad `yt/slop.json`.
+
+| Angle | Best small-channel evidence (last 12 months) | Read |
+|---|---|---|
+| **Why AI gets worse in long chats** (the mechanism) | [Nate Codes AI](https://youtu.be/wgzpz13L35k) "Why ChatGPT Gets Dumber The Longer You Talk To It", 804 subs: 3.4K (22×); [AI CatchUp](https://youtu.be/d_H5FBOGsYk) context windows, 340 subs: 2.1K (median 9, unreliable) | Proven, but small ceilings |
+| **AI is getting dumber** (the news/opinion version) | [Pigeon Finance](https://youtu.be/46vJ2nhIBvc), 14K subs: 44K (9×); [Devsplainers](https://youtu.be/7usmtO_bJx8), 23K subs: 75K (3×) | Medium; ages with each model release |
+| **How to stop it** (fixes) | [Dylan Davis](https://youtu.be/EH8Mdx948Kw) "The 3-Rule Prompt That Stops ChatGPT, Gemini, and Claude From Guessing", 66K subs: **208K (21×)** | The strongest half of the idea |
+| AI flatters you (sycophancy) | [The Humans In The Loop](https://youtu.be/xU7zS8kfaV8), 841 subs: 10K (75×), 1 month ago | Rising, niche |
+| AI hallucinations explained | Best 1.6K views; one experiment video 162K | Weak as a pure explainer |
+| "AI slop" | Breakouts (vindalol 714K, the internet is eating itself 699K, Xám 71K) are culture commentary about AI junk content online | **Different meaning**: the word "sloppy" pulls in the wrong audience |
+
+**Verdict:** real, repeatable small-channel demand, but the ceilings are tens of thousands (one 208K tips video), against
+USB-C's 1.8M and 145K and the AI chip's 932K. The fix half carries the views; the "why" half alone tops out low.
+Packaging: drop "sloppy" (it reads as "AI slop"). Use the proven phrasing "gets dumber the longer you talk to it".
