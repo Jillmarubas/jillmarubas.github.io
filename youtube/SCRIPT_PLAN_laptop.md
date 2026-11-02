@@ -17,12 +17,11 @@ Planned with the user's guide **"How to Write a Million-View Explainer Script â€
 | Common belief to break | "Laptops wear out, or the company slows them down on purpose." |
 | One-sentence answer | Your laptop didn't get slower; it's carrying far more than it did on day one, and heat and an old battery make the load feel heavier. |
 
-## Characters (Step 4: a face that comes back)
-- **YOU**: today, waiting for the old laptop to open a browser.
-- **DAY-ONE YOU**: the same person on the day they unboxed it, delighted at how fast it was.
-
-Both appear in the hook and in the ending. Every comparison in the video is "day one vs today": the guide's
-then-vs-now pair.
+## Recurring pair (Step 4: a face that comes back)
+The video has no presenter and no drawn people: the AI avatar appears only in the thumbnail, and the video is motion
+graphics, typography, 2.5D/3D objects and effects (user, 2 Nov 2026). So the pair is two objects: **DAY ONE** (the
+laptop new, glossy, instant) and **TODAY** (the same laptop, dusty, slow). The narration still speaks to "you".
+The full script is in `SCRIPT_laptop.md` (about 5:50; the timings below were the first estimate).
 
 ## Beat sheet (â‰ˆ 8:40)
 
@@ -100,6 +99,5 @@ number; if a source says "about", the script says "about".
 
 ## Before writing the full script
 - Confirm the throttling-temperature figure (or replace that guess with another verified number).
-- Decide whether the video uses the presenter on camera (the channel's look) with these characters as animation,
-  or the stickman format from the guide's video 1. The beat sheet works for both.
+- Format settled: motion graphics, typography and 2.5D/3D objects; the AI avatar only in the thumbnail.
 - Then write the full script, run the guide's Step 8 checklist, and read it out loud once.

@@ -14,14 +14,14 @@ of the story, never as a test bench.
 | Video | Age | Views | Notes |
 |---|---|---|---|
 | The $1 Trillion Crash No Human Could See (documentary, 20 min, faceless) | 1 d 18 h | 18 | Rank 8 of 10 · CTR 1.4 % · AVD 2:45 (35 s above usual) · 2 likes |
-| Why the Laptop Architecture Just Chan… (presenter, laptops in hand) | 8 d 17 h | 189 | The channel's recent best: the internal outlier |
-| Your AI Answer Came From a River, a Mi… (presenter, "NEEDS MORE WATER") | 16 d 15 h | 87 | |
+| Why the Laptop Architecture Just Chan… (avatar thumbnail, laptops in hand) | 8 d 17 h | 189 | The channel's recent best: the internal outlier |
+| Your AI Answer Came From a River, a Mi… (avatar thumbnail, "NEEDS MORE WATER") | 16 d 15 h | 87 | |
 | Channel, last 28 days | | 1.1k views · 21.2 h watch time | |
 
 - **Floor and average** [G]: recent uploads land around 90–190 views; the documentary is below that floor.
-- **CCN** [G]: the core came for short presenter-led explainers about laptops and what tech really costs. The
+- **CCN** [G]: the core came for short motion-graphics explainers (avatar in the thumbnail) about laptops and what tech really costs. The
   documentary changed format, topic and length at once. [mine] Treat it as the 20 % experiment; go back to the lane.
-- **Repeat the winner** [G]: the laptop video wins on presenter + laptop + a clear "why" question. The next video
+- **Repeat the winner** [G]: the laptop video wins on avatar + laptop in the thumbnail and a clear "why" question. The next video
   copies that with a twist.
 
 ## 2. The documentary, now
@@ -71,7 +71,7 @@ way it does", presented on camera, explained with animation.
 ### Elimination criteria
 - **No hands-on testing** [user's rule]: research, sources and animation only.
 - **Strong title + thumbnail possible** [G] (kills most ideas).
-- **Feasible** [G]: one presenter, motion graphics, public sources.
+- **Feasible** [G]: motion graphics, 2.5D/3D objects, public sources.
 - **Can reach 1.5–2× the recent average** [G]: target 250–400 views.
 - **CCN fit and inside the 80 % lane** [G].
 - [mine] Every claim on screen can be sourced (the channel's fact-check rule).
@@ -92,7 +92,7 @@ Calibration [G: aim for ~10 survivors from 30–100]: 30 in → 10 out.
 
 ### Pick: #1, "Why Your Laptop Gets Slower Every Year (It's Not Age)"
 "If I had to bet my career on one" [G]:
-- **Repeats the internal winner** [G]: laptops, a presenter, and a clear "why" question, with a new twist.
+- **Repeats the internal winner** [G]: laptops, the avatar thumbnail, and a clear "why" question, with a new twist.
 - **CCN**: core (laptop viewers) · casual (anyone curious) · new (everyone whose laptop feels slow; most people).
 - **Glance test** [G]: a slow laptop and a "not why you think" twist. Understood in one second.
 - **Universal** [G]: a big tech creator and your mother both own a laptop that got slow.
@@ -128,21 +128,21 @@ Ladder on the top 3 [G]:
 
 ### Thumbnail brief: 5 click-to-unpause concepts [G]
 The title already says "it's not age", so the thumbnail must say something else [G: complement, never repeat].
-1. **The bin**: presenter mid-motion dropping the old laptop into a bin, frozen before it lands; text "WAIT".
-2. **The spinner**: presenter staring at the old laptop, a huge loading spinner over the screen, finger on the power button; text "NOT BROKEN".
+1. **The bin**: the avatar mid-motion dropping the old laptop into a bin, frozen before it lands; text "WAIT".
+2. **The spinner**: the avatar staring at the old laptop, a huge loading spinner over the screen, finger on the power button; text "NOT BROKEN".
 3. **The cutaway**: animated X-ray of a laptop, the fan clogged and glowing red, an arrow to it; text "THIS".
-4. **The receipt**: presenter holding a long receipt for a new laptop in one hand and the old laptop in the other, choosing; text "$1,200?".
+4. **The receipt**: the avatar holding a long receipt for a new laptop in one hand and the old laptop in the other, choosing; text "$1,200?".
 5. **Day one vs today**: the same laptop split down the middle, crisp on the left, cluttered and dim on the right; text "SAME CHIP".
 
 **Test these 3** (most different) [G: three genuinely different designs, not one shot in three colours]:
 1 (WAIT: stakes, a face), 3 (THIS: mystery, no face), 5 (SAME CHIP: contrast).
-Keep about 80 % of the channel's current presenter-plus-laptop look and change one element at a time [G].
-Make the concepts with an image model first [G: AI concepts before the shoot], then shoot 10–30 frames of the chosen
-ones with the presenter.
+Keep about 80 % of the channel's current avatar-plus-laptop look and change one element at a time [G].
+The thumbnail uses the channel's AI avatar. Generate 10–30 variations per chosen concept (poses, expressions,
+lighting) [G: 10–30 shots per concept].
 
 ## 5. Intro (under 45 s) [G: promise → intrigue → seamless flow]
 Fill the brackets with your laptop's real details.
-> (0:00, presenter holding the old laptop) "This is my laptop. It's [N] years old, and it takes [real time] to open a
+> (0:00, the old laptop in a dark void) "This is my laptop. It's [N] years old, and it takes [real time] to open a
 > browser. The day I bought it, that took seconds."
 > (0:08) "Here's the strange part: the chip inside is exactly as fast as it was on day one."
 > (0:13) "So something else is slowing it down. Actually, four things. And only one of them is age."
@@ -157,7 +157,7 @@ operating systems, browsers and apps need more memory over time; a nearly full S
 on screen.
 
 ## 6. Production notes [mine, from this repo's rules]
-- MacBook style (16:9, 60 fps, dark MacBook, After Effects-style motion) per the approved SOP; presenter on camera.
+- MacBook style (16:9, 60 fps, dark MacBook, After Effects-style motion) per the approved SOP. No presenter in the video: motion graphics, typography, 2.5D/3D objects and effects; the AI avatar only in the thumbnail.
 - Animated cutaway for the four causes; on-screen text only for keywords and numbers.
 - Length: 8–12 min (the channel's winners are short explainers).
 - End with what viewers can do about each cause, so the video satisfies as well as hooks [G: satisfaction feeds views].
